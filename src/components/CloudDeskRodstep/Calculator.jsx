@@ -60,7 +60,7 @@ const Calculator = ({
                       : "text-slate-500 hover:text-slate-700"
                   }`}
               >
-                I want to SELL
+                I want to BUY
               </button>
 
               <button
@@ -72,7 +72,7 @@ const Calculator = ({
                       : "text-slate-500 hover:text-slate-700"
                   }`}
               >
-                I want to BUY
+                I want to SELL
               </button>
             </div>
 
@@ -135,7 +135,6 @@ const Calculator = ({
                     {rates[calcScheme][calcType]}%
                   </span>
                 </div>
-
                 <div className="flex justify-between items-end">
                   <span className="text-slate-600 font-bold">Total Value</span>
                   <span className="text-3xl font-extrabold text-blue-700">

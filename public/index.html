@@ -4,12 +4,20 @@
     <meta charset="utf-8" />
 
     <!-- Responsive viewport - REQUIRED -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
 
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="EXIMINQ CloudDesk – DGFT, Customs & Compliance Helpdesk" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    <meta
+      name="description"
+      content="EXIMINQ CloudDesk – DGFT, Customs & Compliance Helpdesk"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
@@ -18,7 +26,27 @@
     <title>EXIMINQ - Cloud Desk</title>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WENV0R8KVK"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-WENV0R8KVK"
+    ></script>
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-G-NHDYH3L0V2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-G-NHDYH3L0V2", {
+        send_page_view: true,
+      });
+    </script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
