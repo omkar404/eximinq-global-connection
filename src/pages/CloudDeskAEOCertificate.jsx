@@ -1,7 +1,7 @@
-import TopBar from "../components/CloudDeskMoowr/TopBar";
-import Navbar from "../components/CloudDeskMoowr/Navbar";
-import Hero from "../components/CloudDeskMoowr/Hero";
-import Fees from "../components/CloudDeskMoowr/Fees";
+import TopBar from "../components/CloudDeskAeoCertification/TopBar";
+import Navbar from "../components/CloudDeskAeoCertification/Navbar";
+import Hero from "../components/CloudDeskAeoCertification/Hero";
+import Fees from "../components/CloudDeskAeoCertification/Fees";
 import {
   ChevronDown,
   Linkedin,
@@ -24,9 +24,9 @@ import {
   Building2,
   CircleCheckBig,
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskMoowr/MainNavbar";
+import { MainNavbar } from "../components/CloudDeskAeoCertification/MainNavbar";
 
-const CloudDeskMoowr = () => {
+const CloudDeskAeoCertification = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
@@ -494,4 +494,4 @@ const CloudDeskMoowr = () => {
   );
 };
 
-export default CloudDeskMoowr;
+export default CloudDeskAeoCertification;

@@ -50,6 +50,7 @@ import {
   Image,
   Barcode,
   IdCard,
+  Recycle,
 } from "lucide-react";
 // COMPONENTS
 import NavbarServices from "../components/CloudDeskServices/NavbarServices";
@@ -512,6 +513,16 @@ const CloudDeskServices = () => {
       icon: <Globe className="w-8 h-8 text-green-600" />,
       popular: false,
       link: "https://eximinq.in/services/free-sale-certificate",
+    },
+    {
+      id: 408,
+      category: "Incentives",
+      title: "Rodtep",
+      description:
+        "Remission of Duties and Taxes on Exported Products. Scrip generation and ledger transfer.",
+      icon: <Recycle className="w-8 h-8 text-green-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/rodtep-rosctl-trading",
     },
 
     // Compliance

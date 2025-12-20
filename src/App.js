@@ -136,7 +136,7 @@ function App() {
         <Route path="/services/duty-payment-ecl" element={<CloudDeskDutyPayment />} />
 
       {/* AEO Certificate */}
-        <Route path="/services/aeo-certificate" element={<CloudDeskAEOCertificate />} />
+        <Route path="/services/aeo-certification" element={<CloudDeskAEOCertificate />} />
 
       {/* Moowr */}
         <Route path="/services/moowr-scheme" element={<CloudDeskMoowr />} />
