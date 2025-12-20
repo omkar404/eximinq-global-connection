@@ -112,6 +112,7 @@ const ContactAEO = () => {
                 </label>
                 <input 
                   name="companyName"
+                  placeholder="Company Name"
                   value={form.companyName}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
@@ -124,6 +125,7 @@ const ContactAEO = () => {
                 </label>
                 <input 
                   name="contactPerson"
+                  placeholder="Contact Person"
                   value={form.contactPerson}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
@@ -136,6 +138,7 @@ const ContactAEO = () => {
                 </label>
                 <input 
                   name="email"
+                  placeholder="Email"
                   value={form.email}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
@@ -148,6 +151,7 @@ const ContactAEO = () => {
                 </label>
                 <input 
                   name="phone"
+                  placeholder="Phone Number"
                   value={form.phone}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 

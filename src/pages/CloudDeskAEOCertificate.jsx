@@ -1,4 +1,5 @@
-import TopBar from "../components/CloudDeskAeoCertification/TopBar";
+import { useState } from "react";
+// import TopBar from "../components/CloudDeskAeoCertification/TopBar";
 import Navbar from "../components/CloudDeskAeoCertification/Navbar";
 import Hero from "../components/CloudDeskAeoCertification/Hero";
 import Fees from "../components/CloudDeskAeoCertification/Fees";
@@ -25,15 +26,23 @@ import {
   CircleCheckBig,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskAeoCertification/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskAeoCertification/ModalEnroll";
 
 const CloudDeskAeoCertification = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState(false);
+    
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      {/* <TopBar /> */}
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal}/>
+
+      <ModalEnroll
+        show={showEnrollModal}
+        onClose={() => setShowEnrollModal(false)}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
