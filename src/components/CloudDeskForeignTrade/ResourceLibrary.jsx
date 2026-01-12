@@ -20,7 +20,7 @@ export function ResourceLibrary() {
           color="red"
         />
         <ResourceItem
-          label="ITC (HS) 2022 – Schedule 1"
+          label="CUSTOMS ACT - 1962"
           color="green"
         />
       </ul>

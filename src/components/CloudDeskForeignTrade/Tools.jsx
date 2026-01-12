@@ -60,20 +60,26 @@ export function Tools() {
                 className="w-full bg-slate-700 border border-slate-600 rounded-l px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition text-white"
               />
               <button className="bg-blue-600 hover:bg-blue-500 px-5 py-2.5 rounded-r transition font-semibold">
-                Search
+                {/* Search */}
+                <a
+                  href="https://eximinq.in/tools/hs-code-finder/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Search
+                </a>
               </button>
             </div>
 
             {/* Mock Suggestions */}
             {hsQuery && (
               <div className="absolute w-full bg-white text-slate-800 mt-1 rounded shadow-lg z-20">
-                <Suggestion code="84713010" label="Personal Computers (Laptops)" />
-                <Suggestion code="84713090" label="Tablets" />
                 <Suggestion
-                  code="84714190"
-                  label="Other ADP Machines"
-                  last
+                  code="84713010"
+                  label="Personal Computers (Laptops)"
                 />
+                <Suggestion code="84713090" label="Tablets" />
+                <Suggestion code="84714190" label="Other ADP Machines" last />
               </div>
             )}
           </div>
@@ -128,9 +134,7 @@ export function Tools() {
             <input
               type="checkbox"
               checked={values.sws}
-              onChange={(e) =>
-                setValues({ ...values, sws: e.target.checked })
-              }
+              onChange={(e) => setValues({ ...values, sws: e.target.checked })}
               className="w-4 h-4 text-blue-600 rounded border-gray-300"
             />
             <span className="ml-2 text-xs text-gray-700">
@@ -139,10 +143,17 @@ export function Tools() {
           </div>
 
           <button
-            onClick={calculateDuty}
+            // onClick={calculateDuty}
             className="w-full bg-gray-900 text-white font-bold py-2.5 rounded shadow hover:bg-gray-800 transition"
           >
-            Calculate Duty Liability
+            {/* Calculate Duty Liability */}
+            <a
+              href="https://eximinq.in/tools/duty-calculator-finder/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Search
+            </a>
           </button>
 
           {/* Result */}
@@ -202,9 +213,7 @@ function Input({ label, prefix, value, onChange }) {
       </label>
       <div className="relative">
         {prefix && (
-          <span className="absolute left-3 top-2 text-gray-400">
-            {prefix}
-          </span>
+          <span className="absolute left-3 top-2 text-gray-400">{prefix}</span>
         )}
         <input
           type="number"
@@ -223,9 +232,7 @@ function ResultRow({ label, value }) {
   return (
     <div className="flex justify-between text-sm mb-2">
       <span className="text-gray-600">{label}:</span>
-      <span className="font-bold">
-        ₹{value.toLocaleString("en-IN")}
-      </span>
+      <span className="font-bold">₹{value.toLocaleString("en-IN")}</span>
     </div>
   );
 }

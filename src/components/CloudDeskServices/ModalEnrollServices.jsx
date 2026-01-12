@@ -1,85 +1,125 @@
-import React from "react";
+import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
-const ModalEnrollServices = ({ show, onClose, selectedService, setAlert }) => {
+export const ModalEnrollServices = ({ show, onClose }) => {
+  const [form, setForm] = useState({
+    name: "",
+    mobile: "",
+    entity: "",
+    email: "",
+    role: "",
+    partner: false,
+  });
+
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const resetForm = () => {
+    setForm({
+      name: "",
+      mobile: "",
+      entity: "",
+      email: "",
+      role: "",
+      partner: false,
+    });
+    setErrors({});
+  };
+
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
   if (!show) return null;
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = "Name is required.";
+    if (!form.mobile.trim()) e.mobile = "Mobile number is required.";
+    if (!form.email.trim()) e.email = "Email is required.";
+    if (!form.role) e.role = "Please select your role.";
+    if (!form.partner) e.partner = "Please agree to the partnership terms.";
+    return e;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
 
-    const payload = {
-      name: formData.get("name"),
-      mobile: formData.get("mobile"),
-      entity: formData.get("entity"),
-      email: formData.get("email"),
-      role: formData.get("role"), // optional
-      partner: formData.get("partner") === "on",
-      context: `Services View - ${selectedService?.title || "General Enquiry"}`,
-    };
-
-    console.log("Submitting Services Payload:", payload);
+    const v = validate();
+    setErrors(v);
+    if (Object.keys(v).length > 0) return;
 
     try {
-      const res = await fetch("/api/enquiry/services", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      setLoading(true);
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error("API Error (Services):", errorText);
-        setAlert({
-          type: "error",
-          message: "Something went wrong. Please try again.",
-        });
-        return;
+      const payload = {
+        ...form,
+        type: "services_enroll",
+      };
+
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/main-enroll`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "API failed");
       }
 
-      setAlert({
-        type: "success",
-        message: "Your service enquiry has been submitted successfully!",
-      });
-
-      e.target.reset();
+      alert("Request submitted successfully");
+      resetForm();
       onClose();
     } catch (err) {
-      console.error("Request Failed (Services):", err);
-      setAlert({
-        type: "error",
-        message: "Unable to submit at the moment.",
-      });
+      console.error("Enroll error:", err);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-        {/* HEADER */}
+        {/* Header */}
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
           <div>
             <h2 className="text-2xl font-bold flex items-center">
               <Handshake className="mr-2 text-teal-400" /> Enroll Now
             </h2>
-            <p className="text-indigo-200 text-xs mt-1">
-              Services View — {selectedService?.title || "General Enquiry"}
+            <p className="text-indigo-200 text-sm mt-1">
+              Join the CloudDesk Network
             </p>
           </div>
 
           <button
-            onClick={onClose}
-            className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-1 transition"
+            onClick={handleClose}
+            className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 
+            rounded-full p-1 transition"
           >
             <X size={20} />
           </button>
         </div>
 
-        {/* FORM */}
+        {/* Body */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
             {/* Name + Mobile */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Name
@@ -87,9 +127,14 @@ const ModalEnrollServices = ({ show, onClose, selectedService, setAlert }) => {
                 <input
                   type="text"
                   name="name"
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
-                  required
+                  placeholder="Your Name"
+                  value={form.name}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-lg border border-gray-300"
                 />
+                {errors.name && (
+                  <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div>
@@ -99,13 +144,18 @@ const ModalEnrollServices = ({ show, onClose, selectedService, setAlert }) => {
                 <input
                   type="tel"
                   name="mobile"
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
-                  required
+                  placeholder="+91 XXXXX XXXXX"
+                  value={form.mobile}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-lg border border-gray-300"
                 />
+                {errors.mobile && (
+                  <p className="text-xs text-red-500 mt-1">{errors.mobile}</p>
+                )}
               </div>
             </div>
 
-            {/* Entity Name */}
+            {/* Entity */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                 Entity Name
@@ -118,8 +168,10 @@ const ModalEnrollServices = ({ show, onClose, selectedService, setAlert }) => {
                 <input
                   type="text"
                   name="entity"
-                  className="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
-                  required
+                  placeholder="Company / Firm Name"
+                  value={form.entity}
+                  onChange={handleChange}
+                  className="w-full pl-10 p-3 rounded-lg border border-gray-300"
                 />
               </div>
             </div>
@@ -137,56 +189,74 @@ const ModalEnrollServices = ({ show, onClose, selectedService, setAlert }) => {
                 <input
                   type="email"
                   name="email"
-                  className="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
-                  required
+                  placeholder="official@domain.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  className="w-full pl-10 p-3 rounded-lg border border-gray-300"
                 />
               </div>
+              {errors.email && (
+                <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+              )}
             </div>
 
-            {/* ROLE SELECTION (Optional) */}
+            {/* Role */}
             <div>
-              <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                I AM A:
+              <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
+                I am a:
               </label>
               <div className="grid grid-cols-2 gap-3">
                 {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
-                  (role) => (
-                    <label
-                      key={role}
-                      className="flex items-center gap-2 border p-3 rounded-lg cursor-pointer hover:bg-gray-50"
-                    >
-                      <input type="radio" name="role" value={role} />
-                      <span className="text-sm">{role}</span>
+                  (r) => (
+                    <label key={r} className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="role"
+                        value={r}
+                        checked={form.role === r}
+                        onChange={handleChange}
+                      />
+                      {r}
                     </label>
                   )
                 )}
               </div>
+              {errors.role && (
+                <p className="text-xs text-red-500 mt-2">{errors.role}</p>
+              )}
             </div>
 
-            {/* PARTNER CHECKBOX */}
             <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
               <label className="flex items-start cursor-pointer">
                 <input
                   type="checkbox"
                   name="partner"
-                  className="mt-1 w-5 h-5"
+                  checked={form.partner}
+                  onChange={handleChange}
+                  className="mt-1 w-5 h-5 text-teal-600 rounded border-gray-300 focus:ring-teal-500"
                 />
                 <span className="ml-3 text-sm text-gray-800">
                   I am interested in being a{" "}
-                  <strong className="text-teal-700">
+                  <span className="font-bold text-teal-700">
                     Partner with EXIMINQ CLOUDDESK
-                  </strong>
-                  .
+                  </span>{" "}
+                  and agree to the terms of enrollment.
                 </span>
               </label>
+              {errors.partner && (
+                <p className="text-xs text-red-500 mt-2">{errors.partner}</p>
+              )}
             </div>
 
-            {/* SUBMIT BUTTON */}
+            {/* Submit */}
             <button
               type="submit"
-              className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition text-lg"
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 
+              text-white font-bold rounded-xl shadow-lg hover:shadow-xl 
+              transform hover:-translate-y-0.5 transition flex items-center justify-center text-lg"
             >
-              Submit Enrollment
+              {loading ? "Submitting..." : "Submit Enrollment"}
             </button>
           </form>
         </div>
@@ -195,4 +265,3 @@ const ModalEnrollServices = ({ show, onClose, selectedService, setAlert }) => {
   );
 };
 
-export default ModalEnrollServices;

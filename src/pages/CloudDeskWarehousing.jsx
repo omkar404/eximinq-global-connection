@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import TopBar from "../components/CloudDeskWarehousing/TopBar";
 import Navbar from "../components/CloudDeskWarehousing/Navbar";
 import Hero from "../components/CloudDeskWarehousing/Hero";
@@ -25,15 +26,36 @@ import {
   Waves,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskWarehousing/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskWarehousing/ModalEnroll";
 
 const CloudDeskWarehousing = () => {
+    const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
+
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -194,7 +216,7 @@ const CloudDeskWarehousing = () => {
 
                 <div className="mt-8">
                   <a
-                    href="#contact"
+                    href="#hero"
                     className="block w-full bg-brand-600 text-white text-center font-bold py-3 rounded hover:bg-brand-700 transition"
                   >
                     Enquire Bonded Space
@@ -270,7 +292,7 @@ const CloudDeskWarehousing = () => {
 
                 <div className="mt-8">
                   <a
-                    href="#contact"
+                    href="#hero"
                     className="block w-full bg-accent-500 text-brand-900 text-center font-bold py-3 rounded hover:bg-accent-600 transition"
                   >
                     Enquire General Space

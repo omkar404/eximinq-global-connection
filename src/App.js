@@ -94,6 +94,19 @@ import CloudDeskUN from "./pages/CloudDeskUN";
 import CloudDeskCA from "./pages/CloudDeskCA";
 import CloudDeskEPCG from "./pages/CloudDeskEPCG"
 import CloudDeskRodstep from "./pages/CloudDeskRodstep";
+import EximinqPharma from "./pages/EximinqPharma";
+import EximinqEngineering from "./pages/EximinqEngineering";
+import EximinqElectronics from "./pages/EximinqElectronics";
+import EximinqChemicals from "./pages/EximinqChemicals";  
+import TradeSolutionsTextiles from "./pages/TradeSolutionsTextiles";
+import EximinqAgro from  "./pages/EximinqAgro";
+import EximinqSolar from "./pages/EximinqSolar";
+import EximinqDefense from  "./pages/EximinqDefense";
+import EximinqEcommerce from "./pages/EximinqEcommerce";
+import ComplianceCalendar from "./pages/ComplianceCalendar"
+import BisEprWpcLmpc from "./pages/BisEprWpcLmpc";
+import CloudDeskComplianceAudit from "./pages/CloudDeskComplianceAudit";
+import CloudDeskDemo from "./pages/CloudDeskDemo";
 
 function App() {
   return (
@@ -333,6 +346,48 @@ function App() {
 
         {/* rodtep-rosctl-trading */}
         <Route path="/services/rodtep-rosctl-trading" element={<CloudDeskRodstep />} />
+        
+        {/* Compliance Audit */}
+        <Route path="/services/compliance-audit" element={<CloudDeskComplianceAudit />} />
+
+
+        {/* ----------Home page inner page ---------------------- */}
+
+        {/* EximinqPharma */}
+        <Route path="/pharmaceuticals-industry-import-export" element={<EximinqPharma />} />
+
+        {/* EximinqEngineering */}
+        <Route path="/engineering-industry-import-export" element={<EximinqEngineering />} />
+
+        {/* EximinqElectronics */}
+        <Route path="/electronics-it-industry-import-export" element={<EximinqElectronics />} />
+
+        {/* EximinqChemicals */}
+        <Route path="/chemicals-industry-import-export" element={<EximinqChemicals />} />
+
+        {/* TradeSolutionsTextiles  */}
+        <Route path="/textiles-apparels-industry-import-export" element={<TradeSolutionsTextiles />} />
+
+        {/* EximinqAgro */}
+        <Route path="/food-agro-industry-import-export" element={<EximinqAgro />} />
+
+        {/* EximinqSolar */}
+        <Route path="/solar-and-renewables-industry-import-export" element={<EximinqSolar />} />
+
+        {/* EximinqDefense */}
+        <Route path="/defense-aerospace-industry-import-export" element={<EximinqDefense />} />
+
+        {/* EximinqEcommerce */}
+        <Route path="/ecommerce-industry-import-export" element={<EximinqEcommerce   />} />
+
+        {/* ComplianceCalendar.jsx */}
+        <Route path="/trade-compliance-calendar" element={<ComplianceCalendar />} /> 
+
+        {/*bis-epr-wpc-lmpc */}
+        <Route path="/bis-epr-wpc-lmpc" element={<BisEprWpcLmpc />} />
+
+        {/* Demo of Cloud Desk */}
+        <Route path="/demo-of-clouddesk" element={<CloudDeskDemo />} />
 
         {/* Cloud Desk Routes */}
         <Route path="/" element={<CloudDeskHome />} />

@@ -211,7 +211,7 @@ const CloudDeskNoDue = () => {
               </p>
 
               <a
-                href="#contact"
+                href="#home"
                 className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-700 transition"
               >
                 Start Surrender Process

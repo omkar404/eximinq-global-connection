@@ -2,7 +2,7 @@ import QuickForm from "./QuickForm";
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
+    <section id="home" className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
 
         {/* TEXT SECTION */}
@@ -17,7 +17,7 @@ const Hero = () => {
                     Refund scroll not generated? Facing SB005, SB006, or PFMS errors? We diagnose data mismatches and coordinate with Customs to release your funds.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#process" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Diagnose Error
                     </a>
                     <a href="#errors" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">

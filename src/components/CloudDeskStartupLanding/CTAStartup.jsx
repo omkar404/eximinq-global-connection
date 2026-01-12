@@ -1,7 +1,7 @@
 import React from "react";
 import { HelpCircle, Package } from "lucide-react";
 
-const CTAStartup = () => {
+const CTAStartup = ({setShowModal}) => {
   return (
     <section id="contact" className="py-24 bg-slate-950 relative overflow-hidden">
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
@@ -23,10 +23,14 @@ const CTAStartup = () => {
           </p>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            <button className="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg">
+            <button className="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg"
+            onClick={() => setShowModal(true)}
+            >
               Get Competitive Quote
             </button>
-            <button className="px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl flex items-center gap-2">
+            <button className="px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl flex items-center gap-2"
+            onClick={() => setShowModal(true)}
+            >
               <HelpCircle className="w-5 h-5" /> Talk to an Expert
             </button>
           </div>

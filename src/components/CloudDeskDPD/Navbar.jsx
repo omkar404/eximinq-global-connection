@@ -18,13 +18,21 @@ const Navbar = ({
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
+{/* <button
   onClick={() => setShowEnrollModal(true)}
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
   Register DPD
-</button>
+</button> */}
+
+
+        <a 
+          href="#contact"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Register DPD
+        </a>
 
 
         {/* MOBILE MENU BUTTON */}
@@ -44,12 +52,19 @@ const Navbar = ({
             <a href="#benefits" class="block py-2 text-slate-600">Benefits</a>
             <a href="#eligibility" class="block py-2 text-slate-600">Eligibility</a>
             <a href="#contact" class="block py-2 text-brand-600 font-bold">Register DPD</a>
-          <a 
+          {/* <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
              Check Eligibility
-          </a>
+          </a> */}
+
+                  <a 
+          href="#contact"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Register DPD
+        </a>
         </div>
       )}
     </header>

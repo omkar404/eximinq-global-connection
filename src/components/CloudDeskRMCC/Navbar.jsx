@@ -14,17 +14,24 @@ const Navbar = ({
              <a href="#about" class="hover:brand-600 transition">What is RMC?</a>
                 <a href="#reasons" class="hover:brand-600 transition">Why the Hold?</a>
                 <a href="#services" class="hover:brand-600 transition">Resolution Services</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Action Plan</a>
+                <a href="#pricing" class="hover:text-brand-600 transition">Action Plan</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
+{/* <button
   onClick={() => setShowEnrollModal(true)}
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
   Get Immediate Help
-</button>
+</button> */}
+
+        <a 
+          href="#pricing"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Get Immediate Help
+        </a>
 
 
         {/* MOBILE MENU BUTTON */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { FileText, Users } from "lucide-react";
 
-const CTACorp = () => {
+const CTACorp = ({setShowModal}) => {
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
 
@@ -21,10 +21,16 @@ const CTACorp = () => {
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-bold flex items-center justify-center">
+            <button 
+              className="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-bold flex items-center justify-center"
+              onClick={() => setShowModal(true)}
+            >
               <FileText size={18} className="mr-2" /> Get a Free Quote
             </button>
-            <button className="px-8 py-4 bg-slate-700 hover:bg-slate-600 rounded-xl text-white font-bold flex items-center justify-center">
+            <button 
+              className="px-8 py-4 bg-slate-700 hover:bg-slate-600 rounded-xl text-white font-bold flex items-center justify-center"
+              onClick={() => setShowModal(true)}
+            >
               <Users size={18} className="mr-2" /> Schedule Demo
             </button>
           </div>

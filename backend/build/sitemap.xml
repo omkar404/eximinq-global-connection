@@ -1,3 +1,0 @@
-location = /sitemap.xml {
-    try_files /sitemap.xml =404;
-}

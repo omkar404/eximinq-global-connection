@@ -1,7 +1,74 @@
-import React from "react";
+
+import React ,{ useState } from "react";
 import { Phone, Mail } from "lucide-react";
 
+
 const ContactCTA = () => {
+
+  const [form, setForm] = useState({
+    companyName: "",
+    mobile: "",
+    scripType: "RODTEP",
+    action: "Selling",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+    const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!form.companyName || !form.mobile) {
+    alert("Company name and mobile are required");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+const payload = {
+  companyName: form.companyName,
+  scheme: form.scripType,   // "RODTEP" | "RoSCTL"
+  action: form.action,      // "Selling" | "Buying"
+  mobile: form.mobile,
+};
+
+
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/rodtep-rosctl-trading`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || "API failed");
+    }
+
+    alert("Request submitted successfully");
+
+    setForm({
+      companyName: "",
+      mobile: "",
+      scripType: "RODTEP",
+      action: "Selling",
+    });
+
+  } catch (err) {
+    console.error("Submit error:", err);
+    alert("Submission failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
   return (
     <section
       id="contact"
@@ -45,10 +112,8 @@ const ContactCTA = () => {
 
         {/* Right side - form */}
         <div className="p-10 md:w-1/2 bg-white">
-          <form
-            className="space-y-4"
-            onSubmit={(e) => e.preventDefault()}
-          >
+<form className="space-y-4" onSubmit={handleSubmit}>
+
             <h3 className="text-xl font-bold text-slate-900 mb-4">
               Request Callback
             </h3>
@@ -57,24 +122,30 @@ const ContactCTA = () => {
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Company Name
               </label>
-              <input
-                type="text"
-                placeholder="Enter company name"
-                className="w-full px-4 py-2 rounded-lg border border-slate-300
-                focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              />
+<input
+  type="text"
+  name="companyName"
+  value={form.companyName}
+  onChange={handleChange}
+  placeholder="Enter company name"
+  className="w-full px-4 py-2 rounded-lg border"
+/>
+
             </div>
 
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Mobile Number
               </label>
-              <input
-                type="tel"
-                placeholder="+91"
-                className="w-full px-4 py-2 rounded-lg border border-slate-300
-                focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              />
+<input
+  type="tel"
+  name="mobile"
+  value={form.mobile}
+  onChange={handleChange}
+  placeholder="+91"
+  className="w-full px-4 py-2 rounded-lg border"
+/>
+
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -82,30 +153,43 @@ const ContactCTA = () => {
                 <label className="block text-sm font-medium text-slate-700 mb-1">
                   Scrip Type
                 </label>
-                <select className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none">
-                  <option>RODTEP</option>
-                  <option>RoSCTL</option>
-                </select>
+<select
+  name="scripType"
+  value={form.scripType}
+  onChange={handleChange}
+  className="w-full px-4 py-2 rounded-lg border"
+>
+  <option>RODTEP</option>
+  <option>RoSCTL</option>
+</select>
+
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
                   Action
                 </label>
-                <select className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none">
-                  <option>Selling</option>
-                  <option>Buying</option>
-                </select>
+<select
+  name="action"
+  value={form.action}
+  onChange={handleChange}
+  className="w-full px-4 py-2 rounded-lg border"
+>
+  <option>Selling</option>
+  <option>Buying</option>
+</select>
+
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-slate-900 text-white font-bold py-3 rounded-lg
-              hover:bg-slate-800 transition mt-2"
-            >
-              Submit Request
-            </button>
+<button
+  type="submit"
+  disabled={loading}
+  className="w-full bg-slate-900 text-white font-bold py-3 rounded-lg"
+>
+  {loading ? "Submitting..." : "Submit Request"}
+</button>
+
           </form>
         </div>
       </div>

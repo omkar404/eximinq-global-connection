@@ -1,7 +1,7 @@
 import React from "react";
 import { Search, Briefcase, BookOpen } from "lucide-react";
 
-export const Hero = ({ setShowModal }) => {
+export const Hero = ({ setShowEnrollModal }) => {
   return (
     <header className="relative bg-[#000000] text-white pt-28 pb-16 md:pt-40 md:pb-32 overflow-hidden">
       {/* Background Blobs */}
@@ -99,7 +99,7 @@ export const Hero = ({ setShowModal }) => {
 
           {/* Button */}
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowEnrollModal({ open: true, type: "home_enroll" })} 
             className="w-full md:w-auto bg-gradient-to-r from-indigo-700 to-red-800 
             text-white font-bold py-3 px-8 rounded-xl hover:shadow-lg transition"
           >

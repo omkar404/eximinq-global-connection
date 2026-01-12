@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose, onSubmit }) => {
+export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -10,6 +10,22 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
     role: "",
     partner: false,
   });
+
+  const isEOP = type === "EOP_MANAGEMENT";
+  const [eopLicense, setEopLicense] = useState("");
+
+  const resetForm = () => {
+    setForm({
+      name: "",
+      mobile: "",
+      entity: "",
+      email: "",
+      role: "",
+      partner: false,
+    });
+
+    setEopLicense("");
+  };
 
   const [errors, setErrors] = useState({});
 
@@ -23,36 +39,48 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
     }));
   };
 
+  const handleClose = () => {
+    resetForm(); // ✅ reset when modal is closed
+    onClose();
+  };
+
   const validate = () => {
-    const newErrors = {};
+    const errors = {};
 
-    if (!form.name.trim()) newErrors.name = "Name is required.";
-    if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
-    if (!form.email.trim()) newErrors.email = "Email is required.";
-    if (!form.role) newErrors.role = "Please select your role.";
+    if (!form.name.trim()) errors.name = "Name is required";
+    if (!form.mobile.trim()) errors.mobile = "Mobile is required";
+    if (!form.email.trim()) errors.email = "Email is required";
+    if (!form.role) errors.role = "Role is required";
 
-    return newErrors;
+    if (type === "EOP_MANAGEMENT" && !eopLicense) {
+      errors.eopLicense = "Select EOP license type";
+    }
+
+    return errors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const v = validate();
     setErrors(v);
-
     if (Object.keys(v).length > 0) return;
 
-    // Send data out if callback provided
     if (typeof onSubmit === "function") {
-      onSubmit(form);
+      onSubmit({
+        ...form,
+        type, // service type (EOP_MANAGEMENT, ICEGATE, etc.)
+        eopLicense: type === "EOP_MANAGEMENT" ? eopLicense : null,
+      });
     }
 
+    resetForm(); // clear all state (form + eopLicense)
     onClose();
   };
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-
         {/* Header */}
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
           <div>
@@ -65,7 +93,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
           </div>
 
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 
             rounded-full p-1 transition"
             aria-label="Close modal"
@@ -77,7 +105,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
         {/* Body */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
-
             {/* Name + Mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -91,7 +118,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                   value={form.name}
                   onChange={handleChange}
                   className={`w-full p-3 rounded-lg border text-sm outline-none
-                  ${errors.name ? "border-red-400" : "border-gray-300 focus:ring-2 focus:ring-teal-500"}`}
+                  ${
+                    errors.name
+                      ? "border-red-400"
+                      : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+                  }`}
                 />
                 {errors.name && (
                   <p className="text-xs text-red-500 mt-1">{errors.name}</p>
@@ -109,7 +140,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                   value={form.mobile}
                   onChange={handleChange}
                   className={`w-full p-3 rounded-lg border text-sm outline-none
-                  ${errors.mobile ? "border-red-400" : "border-gray-300 focus:ring-2 focus:ring-teal-500"}`}
+                  ${
+                    errors.mobile
+                      ? "border-red-400"
+                      : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+                  }`}
                 />
                 {errors.mobile && (
                   <p className="text-xs text-red-500 mt-1">{errors.mobile}</p>
@@ -123,7 +158,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                 Entity Name
               </label>
               <div className="relative">
-                <Building className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Building
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="text"
                   name="entity"
@@ -141,7 +179,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                 Email ID
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Mail
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="email"
                   name="email"
@@ -149,13 +190,45 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                   value={form.email}
                   onChange={handleChange}
                   className={`w-full pl-10 p-3 rounded-lg border text-sm outline-none
-                  ${errors.email ? "border-red-400" : "border-gray-300 focus:ring-2 focus:ring-teal-500"}`}
+                  ${
+                    errors.email
+                      ? "border-red-400"
+                      : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+                  }`}
                 />
               </div>
               {errors.email && (
                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
               )}
             </div>
+
+            {type === "EOP_MANAGEMENT" && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  EOP License Type
+                </label>
+
+                <select
+                  value={eopLicense}
+                  onChange={(e) => setEopLicense(e.target.value)}
+                  className="w-full p-3 rounded-lg border border-gray-300 
+                 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                  required
+                >
+                  <option value="" disabled>
+                    Select License
+                  </option>
+                  <option value="EPCG">EOP – EPCG License</option>
+                  <option value="AA">EOP – AA License</option>
+                </select>
+
+                {errors.eopLicense && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.eopLicense}
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Role Selection */}
             <div>
@@ -227,7 +300,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
             >
               Submit Enrollment
             </button>
-
           </form>
         </div>
       </div>

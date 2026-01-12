@@ -1,4 +1,4 @@
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
     <section id="process" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
@@ -44,12 +44,17 @@ const Fees = () => {
             </ul>
 
             {/* CTA */}
-            <a
-              href="#contact"
-              className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
-            >
-              Start Registration
-            </a>
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "IEC_PROFILE_UPDATE",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg mt-6 hover:bg-brand-700 transition"
+              >
+                Start Registration
+              </button>
           </div>
         </div>
 

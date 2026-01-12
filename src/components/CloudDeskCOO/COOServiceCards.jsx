@@ -1,7 +1,7 @@
 import React from "react";
 import { Award, Globe, CheckCircle } from "lucide-react";
 
-const COOServiceCards = ({ setShowModal }) => {
+const COOServiceCards = ({ onPreferentialEnroll, onNonPreferentialEnroll }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
 
@@ -32,7 +32,7 @@ const COOServiceCards = ({ setShowModal }) => {
         </ul>
 
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => onPreferentialEnroll({ open: true, type: "PREFERENTIAL" })}
           className="w-full py-3 border-2 border-teal-600 text-teal-700 font-bold rounded-lg hover:bg-teal-50 transition"
         >
           Enroll Now
@@ -66,7 +66,7 @@ const COOServiceCards = ({ setShowModal }) => {
         </ul>
 
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => onNonPreferentialEnroll({open: true, type: "NON_PREFERENTIAL" })}
           className="w-full py-3 border-2 border-indigo-600 text-indigo-700 font-bold rounded-lg hover:bg-indigo-50 transition"
         >
           Enroll Now

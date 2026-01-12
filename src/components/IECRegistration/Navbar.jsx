@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({setShowEnrollModal}) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm sticky top-32 z-30">
+    <header className="bg-white shadow-sm sticky top-24 z-30">
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
 
         {/* CENTERED MENU */}
@@ -17,13 +17,13 @@ const Navbar = () => {
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        <a 
-          href="#contact"
-          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
-        >
-          Apply Now
-        </a>
-
+<button
+  onClick={() => setShowEnrollModal({open: true, type: "ENROLL" })}
+  className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+>
+  Apply Now
+</button>
         {/* MOBILE MENU BUTTON */}
         <button
           className="md:hidden text-brand-900 text-2xl absolute right-4"
@@ -43,12 +43,13 @@ const Navbar = () => {
           <a href="#process" className="block py-2">Process</a>
           <a href="#fees" className="block py-2">Feesss</a>
 
-          <a 
-            href="#contact"
-            className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
-          >
-            Apply Now
-          </a>
+<button
+  onClick={() => setShowEnrollModal({open: true, type: "" })}
+  className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+>
+  Apply Now
+</button>
         </div>
       )}
     </header>

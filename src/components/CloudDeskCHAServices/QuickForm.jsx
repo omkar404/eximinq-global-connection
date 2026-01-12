@@ -22,11 +22,15 @@ const QuickForm = () => {
           <div className="relative">
             <select className="w-full border border-slate-300 rounded px-3 py-2 pl-10 
               focus:outline-none focus:border-brand-500">
+              <option>Select Options </option>
               <option>Import Clearance (Sea)</option>
               <option>Export Factory Stuffing</option>
               <option>Air Cargo Clearance</option>
               <option>Dock Stuffing</option>
               <option>Special Cargo (Reefer/ODC)</option>
+              <option>Export Clearance ( Sea )</option>
+              <option>Air Cargo Clearance ( Export )</option>
+              <option>Air Cargo Clearance ( Import )</option>
             </select>
             <ClipboardList
               size={18}
@@ -41,6 +45,7 @@ const QuickForm = () => {
           <div className="relative">
             <select className="w-full border border-slate-300 rounded px-3 py-2 pl-10
               focus:outline-none focus:border-brand-500">
+              <option>Select Port</option>
               <option>Nhava Sheva (JNPT)</option>
               <option>Mundra</option>
               <option>Chennai</option>

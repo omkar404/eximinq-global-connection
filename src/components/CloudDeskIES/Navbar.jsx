@@ -15,16 +15,24 @@ const Navbar = ({
                 <a href="#rates" class="hover:text-brand-600 transition">Rates & Eligibility</a>
                 <a href="#issues" class="hover:text-brand-600 transition">Common Issues</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#contact" class="hover:text-brand-600 transition font-bold">Verify Benefit</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
+{/* <button
   onClick={() => setShowEnrollModal(true)}
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
   Apply Now
-</button>
+</button> */}
+
+        <a 
+          href="#contact"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Apply Now
+        </a>
 
 
         {/* MOBILE MENU BUTTON */}

@@ -4,7 +4,7 @@ import GlobeBackground from "../CloudDeskCorpLanding/GlobeBackground";
 
 const HeroStartup = () => {
   return (
-    <header className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <header className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
       <GlobeBackground />
 
       <div className="relative z-10 container mx-auto px-6 text-center mt-16">

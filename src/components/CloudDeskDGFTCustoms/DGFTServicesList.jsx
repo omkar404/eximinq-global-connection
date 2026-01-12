@@ -5,9 +5,10 @@ const DGFTServicesList = ({ services, activeSubCategory, onStartProcess }) => {
   if (!services || services.length === 0) return null;
 
   // Filter based on sub-category
-  const filtered = activeSubCategory === "All"
-    ? services
-    : services.filter((s) => s.category === activeSubCategory);
+  const filtered =
+    activeSubCategory === "All"
+      ? services
+      : services.filter((s) => s.category === activeSubCategory);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -28,7 +29,17 @@ const DGFTServicesList = ({ services, activeSubCategory, onStartProcess }) => {
           </div>
 
           {/* Title */}
-          <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3>
+          {/* <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3> */}
+          <h3 className="text-xl font-bold mb-2">
+            <a
+              href={service.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-teal-600 transition"
+            >
+              {service.title}
+            </a>
+          </h3>
 
           {/* Description */}
           <p className="text-gray-600 text-sm mb-6 leading-relaxed min-h-[40px]">
@@ -44,7 +55,10 @@ const DGFTServicesList = ({ services, activeSubCategory, onStartProcess }) => {
 
             <div className="flex items-center justify-between">
               {service.steps.map((step, idx) => (
-                <div key={idx} className="flex flex-col items-center flex-1 relative">
+                <div
+                  key={idx}
+                  className="flex flex-col items-center flex-1 relative"
+                >
                   <div
                     className={`w-2 h-2 rounded-full mb-1 ${
                       idx === 0 ? "bg-teal-600" : "bg-gray-300"
@@ -64,8 +78,8 @@ const DGFTServicesList = ({ services, activeSubCategory, onStartProcess }) => {
           {/* Footer CTA */}
           <div className="mt-6 flex justify-end">
             <button
-              // onClick={openModal}
-              onClick={() => onStartProcess(service)}
+              // onClick={() => onStartProcess(service)}
+              onClick={() => window.open(service.link, "_blank")}
               className="text-teal-600 hover:text-teal-800 text-sm font-bold flex items-center"
             >
               Start Process

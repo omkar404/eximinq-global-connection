@@ -3,21 +3,56 @@ import TopBar from "../components/IECManagement/TopBar";
 import Navbar from "../components/IECManagement/Navbar";
 import Hero from "../components/IECManagement/Hero";
 import Fees from "../components/IECManagement/Fees";
-import { Check, User, Handshake, Building, CheckCircle, AlertTriangle, XCircle, ShieldUser, Landmark, HandHeart, ChevronDown, Linkedin, Twitter, Facebook, Phone, Mail, MapPin  } from "lucide-react";
+import {
+  Check,
+  User,
+  Handshake,
+  Building,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  ShieldUser,
+  Landmark,
+  HandHeart,
+  ChevronDown,
+  Linkedin,
+  Twitter,
+  Facebook,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
 import { MainNavbar } from "../components/IECManagement/MainNavbar";
 import { ModalEnroll } from "../components/IECManagement/ModalEnroll";
 
 const IECManagement = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
+
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      {/* <TopBar /> */}
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
-      <ModalEnroll show={showEnrollModal} onClose={() => setShowEnrollModal(false)} />
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: null })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -218,207 +253,214 @@ const IECManagement = () => {
       </section>
 
       {/* Mandatory Compliance Section */}
-   <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="bg-red-50 border-l-8 border-red-500 rounded-lg p-8 shadow-sm">
-          <div className="flex flex-col md:flex-row gap-6 items-start">
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="bg-red-50 border-l-8 border-red-500 rounded-lg p-8 shadow-sm">
+            <div className="flex flex-col md:flex-row gap-6 items-start">
+              {/* LEFT ICON */}
+              <div className="flex-shrink-0 text-red-500">
+                <AlertTriangle size={56} strokeWidth={1.5} />
+              </div>
 
-            {/* LEFT ICON */}
-            <div className="flex-shrink-0 text-red-500">
-              <AlertTriangle size={56} strokeWidth={1.5} />
-            </div>
+              {/* CONTENT */}
+              <div>
+                <h3 className="text-2xl font-bold text-red-700 mb-2">
+                  Mandatory Annual Update (April - June)
+                </h3>
 
-            {/* CONTENT */}
-            <div>
-              <h3 className="text-2xl font-bold text-red-700 mb-2">
-                Mandatory Annual Update (April - June)
-              </h3>
+                <p className="text-slate-700 mb-4">
+                  As per DGFT Notification No. 58/2015-2020, all IEC holders
+                  must ensure that details in their IEC is updated
+                  electronically every year during the{" "}
+                  <strong>April to June</strong> period.
+                </p>
 
-              <p className="text-slate-700 mb-4">
-                As per DGFT Notification No. 58/2015-2020, all IEC holders
-                must ensure that details in their IEC is updated electronically
-                every year during the <strong>April to June</strong> period.
-              </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex gap-2 items-center text-sm font-semibold text-red-800">
+                    <XCircle className="text-red-600" size={18} />
+                    Failure to update will result in IEC De-activation.
+                  </li>
 
-              <ul className="space-y-2 mb-6">
-                <li className="flex gap-2 items-center text-sm font-semibold text-red-800">
-                  <XCircle className="text-red-600" size={18} />
-                  Failure to update will result in IEC De-activation.
-                </li>
+                  <li className="flex gap-2 items-center text-sm font-semibold text-red-800">
+                    <XCircle className="text-red-600" size={18} />
+                    De-activated IECs cannot be used for import/export
+                    clearance.
+                  </li>
 
-                <li className="flex gap-2 items-center text-sm font-semibold text-red-800">
-                  <XCircle className="text-red-600" size={18} />
-                  De-activated IECs cannot be used for import/export clearance.
-                </li>
+                  <li className="flex gap-2 items-center text-sm font-semibold text-green-700">
+                    <CheckCircle className="text-green-600" size={18} />
+                    Even if there are no changes, you must simply confirm the
+                    details online.
+                  </li>
+                </ul>
 
-                <li className="flex gap-2 items-center text-sm font-semibold text-green-700">
-                  <CheckCircle className="text-green-600" size={18} />
-                  Even if there are no changes, you must simply confirm the details online.
-                </li>
-              </ul>
-
-              <a
-                href="#contact"
-                className="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded hover:bg-red-700 transition"
-              >
-                File Annual Update Now
-              </a>
-
+                <a
+                  href="#contact"
+                  className="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded hover:bg-red-700 transition"
+                >
+                  File Annual Update Now
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Exemptions */}
-    <section className="py-20 bg-slate-50">
-      <div className="container mx-auto px-4 max-w-4xl">
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-8">
+            Who is Exempted from IEC?
+          </h2>
 
-        <h2 className="text-3xl font-bold text-center text-slate-900 mb-8">
-          Who is Exempted from IEC?
-        </h2>
+          <div className="bg-white rounded-xl shadow p-8">
+            <p className="mb-6 text-slate-600 text-center">
+              While most importers and exporters require an IEC, the following
+              categories are exempted:
+            </p>
 
-        <div className="bg-white rounded-xl shadow p-8">
-          
-          <p className="mb-6 text-slate-600 text-center">
-            While most importers and exporters require an IEC, the following
-            categories are exempted:
-          </p>
-
-          <div className="space-y-4">
-
-            {/* Personal Use */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-brand-100 p-2 rounded text-brand-600">
-                <ShieldUser size={24} />
+            <div className="space-y-4">
+              {/* Personal Use */}
+              <div className="flex gap-4 items-start">
+                <div className="bg-brand-100 p-2 rounded text-brand-600">
+                  <ShieldUser size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800">Personal Use</h4>
+                  <p className="text-sm text-slate-600">
+                    Persons importing or exporting goods for personal use not
+                    connected with trade or manufacture or agriculture.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-slate-800">Personal Use</h4>
-                <p className="text-sm text-slate-600">
-                  Persons importing or exporting goods for personal use not
-                  connected with trade or manufacture or agriculture.
-                </p>
+
+              {/* Government Ministries */}
+              <div className="flex gap-4 items-start">
+                <div className="bg-brand-100 p-2 rounded text-brand-600">
+                  <Landmark size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800">
+                    Government Ministries
+                  </h4>
+                  <p className="text-sm text-slate-600">
+                    Ministries/Departments of Central or State Government.
+                  </p>
+                </div>
+              </div>
+
+              {/* Charitable Institutions */}
+              <div className="flex gap-4 items-start">
+                <div className="bg-brand-100 p-2 rounded text-brand-600">
+                  <HandHeart size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800">
+                    Charitable Institutions
+                  </h4>
+                  <p className="text-sm text-slate-600">
+                    Persons importing/exporting goods from/to Nepal, Myanmar
+                    through Indo-Myanmar border areas and China (through Gunji,
+                    Namgaya Shipkila and Nathula ports) provided CIF value of a
+                    single consignment does not exceed ₹25,000.
+                  </p>
+                </div>
               </div>
             </div>
-
-            {/* Government Ministries */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-brand-100 p-2 rounded text-brand-600">
-                <Landmark size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-800">Government Ministries</h4>
-                <p className="text-sm text-slate-600">
-                  Ministries/Departments of Central or State Government.
-                </p>
-              </div>
-            </div>
-
-            {/* Charitable Institutions */}
-            <div className="flex gap-4 items-start">
-              <div className="bg-brand-100 p-2 rounded text-brand-600">
-                <HandHeart size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-800">Charitable Institutions</h4>
-                <p className="text-sm text-slate-600">
-                  Persons importing/exporting goods from/to Nepal, Myanmar
-                  through Indo-Myanmar border areas and China (through Gunji,
-                  Namgaya Shipkila and Nathula ports) provided CIF value of a
-                  single consignment does not exceed ₹25,000.
-                </p>
-              </div>
-            </div>
-
           </div>
-
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Process Steps */}
-    <section id="process" className="py-20 bg-slate-900 text-white">
-      <div className="container mx-auto px-4">
+      <section id="process" className="py-20 bg-slate-900 text-white">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
+              Simple Workflow
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2">
+              Process for IEC Registration
+            </h2>
+          </div>
 
-        {/* Header */}
-        <div className="text-center mb-16">
-          <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
-            Simple Workflow
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2">
-            Process for IEC Registration
-          </h2>
+          {/* Steps */}
+          <div className="relative grid md:grid-cols-5 gap-8 step-connector">
+            {/* Step 1 */}
+            <div className="text-center relative z-10">
+              <div
+                className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center 
+                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800"
+              >
+                1
+              </div>
+              <h3 className="text-lg font-bold mb-2">Register</h3>
+              <p className="text-sm text-slate-400">
+                Create profile on DGFT portal with valid email and mobile.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="text-center relative z-10">
+              <div
+                className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center
+                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800"
+              >
+                2
+              </div>
+              <h3 className="text-lg font-bold mb-2">Documents</h3>
+              <p className="text-sm text-slate-400">
+                Prepare and upload scanned copies of required proofs.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="text-center relative z-10">
+              <div
+                className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center
+                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800"
+              >
+                3
+              </div>
+              <h3 className="text-lg font-bold mb-2">Apply (ANF 2A)</h3>
+              <p className="text-sm text-slate-400">
+                Fill the online application form (ANF 2A) & pay fees.
+              </p>
+            </div>
+
+            {/* Step 4 */}
+            <div className="text-center relative z-10">
+              <div
+                className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center
+                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800"
+              >
+                4
+              </div>
+              <h3 className="text-lg font-bold mb-2">Verification</h3>
+              <p className="text-sm text-slate-400">
+                DGFT verifies your details and documents electronically.
+              </p>
+            </div>
+
+            {/* Step 5 */}
+            <div className="text-center relative z-10">
+              <div
+                className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center
+                            text-2xl font-bold text-white mx-auto mb-4 border-4 border-slate-800"
+              >
+                <Check size={28} strokeWidth={3} />
+              </div>
+              <h3 className="text-lg font-bold mb-2">Issuance</h3>
+              <p className="text-sm text-slate-400">
+                Get your e-IEC certificate generated instantly upon approval.
+              </p>
+            </div>
+          </div>
         </div>
-
-        {/* Steps */}
-        <div className="relative grid md:grid-cols-5 gap-8 step-connector">
-
-          {/* Step 1 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center 
-                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800">
-              1
-            </div>
-            <h3 className="text-lg font-bold mb-2">Register</h3>
-            <p className="text-sm text-slate-400">
-              Create profile on DGFT portal with valid email and mobile.
-            </p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center
-                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800">
-              2
-            </div>
-            <h3 className="text-lg font-bold mb-2">Documents</h3>
-            <p className="text-sm text-slate-400">
-              Prepare and upload scanned copies of required proofs.
-            </p>
-          </div>
-
-          {/* Step 3 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center
-                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800">
-              3
-            </div>
-            <h3 className="text-lg font-bold mb-2">Apply (ANF 2A)</h3>
-            <p className="text-sm text-slate-400">
-              Fill the online application form (ANF 2A) & pay fees.
-            </p>
-          </div>
-
-          {/* Step 4 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center
-                            text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-slate-800">
-              4
-            </div>
-            <h3 className="text-lg font-bold mb-2">Verification</h3>
-            <p className="text-sm text-slate-400">
-              DGFT verifies your details and documents electronically.
-            </p>
-          </div>
-
-          {/* Step 5 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center
-                            text-2xl font-bold text-white mx-auto mb-4 border-4 border-slate-800">
-              <Check size={28} strokeWidth={3} />
-            </div>
-            <h3 className="text-lg font-bold mb-2">Issuance</h3>
-            <p className="text-sm text-slate-400">
-              Get your e-IEC certificate generated instantly upon approval.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
+      </section>
 
       {/* Dynamic Fees Section */}
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
 
       {/* <!-- Is IEC Sufficient Section --> */}
       <section class="py-20 bg-white">
@@ -455,165 +497,198 @@ const IECManagement = () => {
         </div>
       </section>
 
-    <section className="py-20 bg-slate-50">
-      <div className="container mx-auto px-4 max-w-3xl">
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
 
-        <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-          Frequently Asked Questions
-        </h2>
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is IEC Registration valid for a lifetime?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
 
-        <div className="space-y-4">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, IEC is valid for a lifetime and does not require renewal.
+                However, annual updation of details on the DGFT portal is
+                mandatory between April and June every year.
+              </p>
+            </details>
 
-          {/* FAQ 1 */}
-          <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-            <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              Is IEC Registration valid for a lifetime?
-              <ChevronDown
-                size={20}
-                className="text-brand-500 transition-transform group-open:rotate-180"
-              />
-            </summary>
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can an individual apply for IEC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
 
-            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-              Yes, IEC is valid for a lifetime and does not require renewal.
-              However, annual updation of details on the DGFT portal is
-              mandatory between April and June every year.
-            </p>
-          </details>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, individuals (Proprietors) can obtain an IEC code in their
+                name or their firm's name. It is equally applicable to
+                companies, LLPs, and partnerships.
+              </p>
+            </details>
 
-          {/* FAQ 2 */}
-          <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-            <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              Can an individual apply for IEC?
-              <ChevronDown
-                size={20}
-                className="text-brand-500 transition-transform group-open:rotate-180"
-              />
-            </summary>
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long does it take to get the certificate?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
 
-            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-              Yes, individuals (Proprietors) can obtain an IEC code in their
-              name or their firm's name. It is equally applicable to companies,
-              LLPs, and partnerships.
-            </p>
-          </details>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Generally, the IEC code is generated within 1 to 3 working days
+                after the successful submission of documents and fees. In many
+                cases, it is issued instantly.
+              </p>
+            </details>
 
-          {/* FAQ 3 */}
-          <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-            <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              How long does it take to get the certificate?
-              <ChevronDown
-                size={20}
-                className="text-brand-500 transition-transform group-open:rotate-180"
-              />
-            </summary>
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is digital signature (DSC) mandatory?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
 
-            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-              Generally, the IEC code is generated within 1 to 3 working days
-              after the successful submission of documents and fees. In many
-              cases, it is issued instantly.
-            </p>
-          </details>
-
-          {/* FAQ 4 */}
-          <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-            <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              Is digital signature (DSC) mandatory?
-              <ChevronDown
-                size={20}
-                className="text-brand-500 transition-transform group-open:rotate-180"
-              />
-            </summary>
-
-            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-              For companies and LLPs, a Digital Signature Certificate (DSC) is
-              mandatory. For proprietorships, the application can often be
-              validated using Aadhaar e-sign.
-            </p>
-          </details>
-
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                For companies and LLPs, a Digital Signature Certificate (DSC) is
+                mandatory. For proprietorships, the application can often be
+                validated using Aadhaar e-sign.
+              </p>
+            </details>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Footer */}
-    <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
-      <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+      <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
+        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+          {/* BRAND */}
+          <div>
+            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
-        {/* BRAND */}
-        <div>
-          <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <p className="text-sm mb-6">
+              EXIMINQ Cloud Desk: Your trusted partner for DGFT, Customs, and
+              Logistics compliance.
+            </p>
 
-          <p className="text-sm mb-6">
-            EXIMINQ Cloud Desk: Your trusted partner for DGFT, Customs, and
-            Logistics compliance.
-          </p>
+            <div className="flex gap-4">
+              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <Linkedin size={18} />
+              </a>
+<a
+  href="https://in.linkedin.com/in/eximinq-cloud-desk?trk=profile-badge"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Eximinq Cloud Desk on LinkedIn"
+  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+>
+  <Twitter size={18} />
+</a>
 
-          <div className="flex gap-4">
-            <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-              <Linkedin size={18} />
-            </a>
-            <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-              <Twitter size={18} />
-            </a>
-            <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-              <Facebook size={18} />
-            </a>
+              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <Facebook size={18} />
+              </a>
+            </div>
+          </div>
+
+          {/* QUICK LINKS */}
+          <div>
+            <h4 className="text-white font-bold mb-6">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="#about" className="hover:text-white">
+                  About IEC
+                </a>
+              </li>
+              <li>
+                <a href="#documents" className="hover:text-white">
+                  Documents
+                </a>
+              </li>
+              <li>
+                <a href="#process" className="hover:text-white">
+                  Process
+                </a>
+              </li>
+              <li>
+                <a href="#fees" className="hover:text-white">
+                  Fees
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* OTHER SERVICES */}
+          <div>
+            <h4 className="text-white font-bold mb-6">Other Services</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="#" className="hover:text-white">
+                  DGFT Consultancy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white">
+                  RCMC Registration
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white">
+                  AD Code Registration
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white">
+                  Export Incentives
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* CONTACT */}
+          <div>
+            <h4 className="text-white font-bold mb-6">Contact Us</h4>
+            <ul className="space-y-4 text-sm">
+              <li className="flex gap-3 items-center">
+                <Phone size={18} className="text-brand-500" />
+                +917400096950
+              </li>
+
+              <li className="flex gap-3 items-center">
+                <Mail size={18} className="text-brand-500" />
+                clouddesk@eximinq.in
+              </li>
+
+              <li className="flex gap-3 items-center">
+                <MapPin size={18} className="text-brand-500" />
+                Mumbai, India
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* QUICK LINKS */}
-        <div>
-          <h4 className="text-white font-bold mb-6">Quick Links</h4>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#about" className="hover:text-white">About IEC</a></li>
-            <li><a href="#documents" className="hover:text-white">Documents</a></li>
-            <li><a href="#process" className="hover:text-white">Process</a></li>
-            <li><a href="#fees" className="hover:text-white">Fees</a></li>
-          </ul>
+        {/* COPYRIGHT */}
+        <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
+          © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+          DGFT.
         </div>
-
-        {/* OTHER SERVICES */}
-        <div>
-          <h4 className="text-white font-bold mb-6">Other Services</h4>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-white">DGFT Consultancy</a></li>
-            <li><a href="#" className="hover:text-white">RCMC Registration</a></li>
-            <li><a href="#" className="hover:text-white">AD Code Registration</a></li>
-            <li><a href="#" className="hover:text-white">Export Incentives</a></li>
-          </ul>
-        </div>
-
-        {/* CONTACT */}
-        <div>
-          <h4 className="text-white font-bold mb-6">Contact Us</h4>
-          <ul className="space-y-4 text-sm">
-
-            <li className="flex gap-3 items-center">
-              <Phone size={18} className="text-brand-500" />
-              +917400096950
-            </li>
-
-            <li className="flex gap-3 items-center">
-              <Mail size={18} className="text-brand-500" />
-              clouddesk@eximinq.in
-            </li>
-
-            <li className="flex gap-3 items-center">
-              <MapPin size={18} className="text-brand-500" />
-              Mumbai, India
-            </li>
-
-          </ul>
-        </div>
-
-      </div>
-
-      {/* COPYRIGHT */}
-      <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-        © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with DGFT.
-      </div>
-    </footer>
+      </footer>
     </div>
   );
 };

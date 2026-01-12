@@ -1,12 +1,9 @@
 import QuickForm from "./QuickForm";
 
-const Hero = ({
-  setShowEnrollModal
-}) => {
+const Hero = ({ setShowEnrollModal }) => {
   return (
     <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-
         {/* TEXT SECTION */}
         <div>
           <span className="inline-block bg-brand-800 text-accent-400 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-brand-600">
@@ -22,13 +19,14 @@ const Hero = ({
           </h1>
 
           <p className="text-lg text-slate-200 mb-8 leading-relaxed">
-            Expand your business globally. Mandatory 10-digit code for Import/Export
-            issued by DGFT. Lifetime validity with no renewal fees.
+            Expand your business globally. Mandatory 10-digit code for
+            Import/Export issued by DGFT. Lifetime validity with no renewal
+            fees.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
             <button
-              onClick={() => setShowEnrollModal(true)}
+              onClick={() => setShowEnrollModal({ open: true, type: "hero" })}
               className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               Start Application
@@ -44,7 +42,6 @@ const Hero = ({
 
         {/* FORM SECTION */}
         <QuickForm />
-
       </div>
     </section>
   );

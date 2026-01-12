@@ -1,28 +1,46 @@
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ setShowEnrollModal }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm sticky top-32 z-30">
+    <header className="bg-white shadow-sm sticky top-24 z-30">
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
-
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#about" class="hover:text-brand-600 transition">About AD Code</a>
-                <a href="#benefits" class="hover:text-brand-600 transition">Why Mandatory?</a>
-                <a href="#documents" class="hover:text-brand-600 transition">Bank Letter</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
-                <a href="#pricing" class="hover:text-brand-600 transition">Fees</a>
+          <a href="#about" class="hover:text-brand-600 transition">
+            About AD Code
+          </a>
+          <a href="#benefits" class="hover:text-brand-600 transition">
+            Why Mandatory?
+          </a>
+          <a href="#documents" class="hover:text-brand-600 transition">
+            Bank Letter
+          </a>
+          <a href="#process" class="hover:text-brand-600 transition">
+            Process
+          </a>
+          <a href="#pricing" class="hover:text-brand-600 transition">
+            Fees
+          </a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        {/* <a 
-          href="#contact"
-          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        {/* <button
+  onClick={() => setShowEnrollModal({open: true, type: "" })}
+  className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+>
+  Apply Now
+</button> */}
+        <a
+          href="#documents"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md 
+             absolute right-4 transition"
         >
           Apply Now
-        </a> */}
+        </a>
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -31,23 +49,29 @@ const Navbar = () => {
         >
           ☰
         </button>
-
       </nav>
 
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">About AD Code</a>
-            <a href="#documents" class="block py-2 text-slate-600">Documents</a>
-            <a href="#process" class="block py-2 text-slate-600">Process</a>
-            {/* <a href="#contact" class="block py-2 text-brand-600 font-bold">Register Now</a> */}
+          <a href="#about" class="block py-2 text-slate-600">
+            About AD Code
+          </a>
+          <a href="#documents" class="block py-2 text-slate-600">
+            Documents
+          </a>
+          <a href="#process" class="block py-2 text-slate-600">
+            Process
+          </a>
+          {/* <a href="#contact" class="block py-2 text-brand-600 font-bold">Register Now</a> */}
 
-          {/* <a 
-            href="#contact"
-            className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
+          <button
+            onClick={() => setShowEnrollModal({ open: true, type: "" })}
+            className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
           >
             Apply Now
-          </a> */}
+          </button>
         </div>
       )}
     </header>

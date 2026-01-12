@@ -16,12 +16,12 @@ const Navbar = () => {
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        {/* <a 
-          href="#contact"
+        <a 
+          href="#home"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
-        </a> */}
+        </a>
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -40,12 +40,12 @@ const Navbar = () => {
             <a href="#brand-rate" class="block py-2 text-slate-600">Brand Rate</a>
             <a href="#section74" class="block py-2 text-slate-600">Section 74</a>
             <a href="#contact" class="block py-2 text-brand-600 font-bold">Claim Drawback</a>
-          {/* <a 
-            href="#contact"
+          <a 
+            href="#home"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now
-          </a> */}
+          </a>
         </div>
       )}
     </header>

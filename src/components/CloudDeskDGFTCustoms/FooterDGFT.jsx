@@ -1,9 +1,9 @@
 import React from "react";
 import { Phone, Mail } from "lucide-react";
 
-const FooterDGFT = ({ openModal }) => {
+const FooterDGFT = ({ setShowEnrollModal }) => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800 mt-auto">
+    <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800 mt-auto"> 
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
 
         {/* BRAND */}
@@ -47,7 +47,7 @@ const FooterDGFT = ({ openModal }) => {
           <h5 className="text-white font-bold mb-4">Support</h5>
 
           <button
-            onClick={openModal}
+            onClick={() => setShowEnrollModal({ open: true, type: "certificate_of_origin_enroll" })}
             className="w-full px-4 py-2 bg-teal-600 text-white text-sm font-bold rounded 
                        hover:bg-teal-500 transition"
           >

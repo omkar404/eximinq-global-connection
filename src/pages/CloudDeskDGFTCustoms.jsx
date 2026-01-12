@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // ---------------------- COMPONENTS ----------------------
 import NavbarDGFT from "../components/CloudDeskDGFTCustoms/NavbarDGFT";
 import MobileMenuDGFT from "../components/CloudDeskDGFTCustoms/MobileMenuDGFT";
-import ModalEnrollDGFT from "../components/CloudDeskDGFTCustoms/ModalEnrollDGFT";
+import {ModalEnrollDGFT} from "../components/CloudDeskDGFTCustoms/ModalEnrollDGFT";
 
 import NotificationTicker from "../components/CloudDeskDGFTCustoms/NotificationTicker";
 import HeroDGFT from "../components/CloudDeskDGFTCustoms/HeroDGFT";
@@ -24,6 +24,11 @@ import CustomAlert from "../Common/CustomAlert";
 
 // ---------------------- MAIN ----------------------
 const CloudDeskDGFTCustoms = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
+
   // UI States
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("DGFT"); // DGFT | Customs
@@ -40,6 +45,15 @@ const CloudDeskDGFTCustoms = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
 
   // Notifications
   const notifications = [
@@ -74,23 +88,24 @@ const CloudDeskDGFTCustoms = () => {
         scrolled={scrolled}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        setShowModal={setShowModal}
+        // setShowModal={setShowModal}
+        setShowEnrollModal={setShowEnrollModal}
       />
 
       {/* ---------------- MOBILE MENU ---------------- */}
       <MobileMenuDGFT
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        setShowModal={setShowModal}
+        // setShowModal={setShowModal}
+        setShowEnrollModal={setShowEnrollModal}
       />
 
       {/* ---------------- MODAL ---------------- */}
       <ModalEnrollDGFT
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        activeTab={activeTab}
-        selectedService={selectedService}
-        setAlert={setAlert}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: null })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------------- NOTIFICATION TICKER ---------------- */}
@@ -148,7 +163,10 @@ const CloudDeskDGFTCustoms = () => {
       </div>
 
       {/* ---------------- FOOTER ---------------- */}
-      <FooterDGFT openModal={() => setShowModal(true)} />
+      <FooterDGFT
+        openModal={() => setShowModal(true)}
+        setShowEnrollModal={setShowEnrollModal}
+      />
     </div>
   );
 };

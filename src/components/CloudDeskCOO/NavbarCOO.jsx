@@ -1,98 +1,3 @@
-// import React from "react";
-// import { Menu, X } from "lucide-react";
-// import BrandLogo from "../BrandLogo/BrandLogo";
-
-// const NavbarCOO = ({ scrolled, isMenuOpen, setIsMenuOpen, setShowModal }) => {
-//   return (
-//     <nav
-//       className={`fixed w-full z-50 transition-all duration-300 ${
-//         scrolled ? "bg-white shadow-md py-2" : "bg-white shadow-md py-2"
-//       }`}
-//     >
-//       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-//         {/* LOGO */}
-//         <div className="flex items-center space-x-2">
-//           <a href="https://eximinq.in/" className="cursor-pointer">
-//             <BrandLogo />
-//           </a>
-//         </div>
-
-//         {/* DESKTOP MENU */}
-//         <div
-//           className={`hidden md:flex space-x-8 font-medium ${
-//             scrolled ? "text-gray-700" : "text-gray-800"
-//           }`}
-//         >
-//           <a href="/" className="hover:text-teal-500 transition">
-//             Home
-//           </a>
-//           <a href="/services" className="hover:text-teal-500 transition">
-//             Services
-//           </a>
-//           <a
-//             href="/dgft-customs-consultancy"
-//             className="hover:text-teal-500 transition"
-//           >
-//             DGFT & Customs
-//           </a>
-//           <a
-//             href="/certificate-of-origin"
-//             className="text-teal-600 font-bold transition"
-//           >
-//             COO
-//           </a>
-//           <a
-//             href="/compliance-trade-india"
-//             className="hover:text-teal-500 transition"
-//           >
-//             Compliance
-//           </a>
-//           <a href="/contact-us" className="hover:text-teal-500 transition">
-//             Cloud Desk
-//           </a>
-//           <a href="/clouddesk-saas" className="hover:text-teal-500 transition">
-//             SAAS
-//           </a>
-//         </div>
-
-//         {/* DESKTOP ACTIONS */}
-//         <div className="hidden md:flex items-center space-x-4">
-//           {/* HELP DESK */}
-//           <div
-//             className={`hidden lg:flex flex-col text-right mr-2 ${
-//               scrolled ? "bg-white py-2" : "bg-white py-2"
-//             }`}
-//           >
-//             <span className="text-xs font-medium opacity-80">
-//               24/7 Helpdesk
-//             </span>
-//             <span className="text-sm font-bold font-mono">+917400096950</span>
-//           </div>
-
-//           {/* CTA BUTTON */}
-//           <button
-//             onClick={() => setShowModal(true)}
-//             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-0.5"
-//           >
-//             Enroll Now
-//           </button>
-//         </div>
-
-//         {/* MOBILE MENU BUTTON */}
-//         <button
-//           onClick={() => setIsMenuOpen(!isMenuOpen)}
-//           className={`md:hidden ${scrolled ? "text-gray-800" : "text-white"}`}
-//         >
-//           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-//         </button>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default NavbarCOO;
-
-
 import React from "react";
 import { Menu, X } from "lucide-react";
 import { Phone, Mail, MessageCircle } from "lucide-react";
@@ -102,7 +7,7 @@ const NavbarCOO = ({
   scrolled,
   isMenuOpen,
   setIsMenuOpen,
-  setShowModal,
+  onEnroll,
 }) => {
   return (
     <nav
@@ -209,7 +114,7 @@ const NavbarCOO = ({
           </div>
 
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => onEnroll({open: true, type: "NAVBAR" })}
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now

@@ -55,7 +55,7 @@ import {
 // COMPONENTS
 import NavbarServices from "../components/CloudDeskServices/NavbarServices";
 import MobileMenuServices from "../components/CloudDeskServices/MobileMenuServices";
-import ModalEnrollServices from "../components/CloudDeskServices/ModalEnrollServices";
+import {ModalEnrollServices} from "../components/CloudDeskServices/ModalEnrollServices";
 import HeroServices from "../components/CloudDeskServices/HeroServices";
 import CategoriesTabs from "../components/CloudDeskServices/CategoriesTabs";
 import ServicesGrid from "../components/CloudDeskServices/ServicesGrid";
@@ -65,6 +65,10 @@ import FooterServices from "../components/CloudDeskServices/FooterServices";
 import CustomAlert from "../Common/CustomAlert"; 
 
 const CloudDeskServices = () => {
+    const [showEnrollModal, setShowEnrollModal] = useState({
+      open: false,
+      type: null,
+    });
   // -------------------------
   // UI STATE
   // -------------------------
@@ -98,8 +102,8 @@ const CloudDeskServices = () => {
     "Logistics",
     "Incentives",
     "Compliance",
+    "ISO & Trademark",
     "Dispute Resolution",
-    "ISO & Trademark"
   ];
 
   const services = [
@@ -149,7 +153,7 @@ const CloudDeskServices = () => {
       category: "Registration",
       title: "Import Management",
       description:
-        "General registration services for managing import authorizations and compliance.",
+        "SIMS, PFIMS, NFMIMS General registration services for managing import authorizations and compliance.",
       icon: <ShoppingCart className="w-8 h-8 text-blue-600" />,
       popular: false,
       link: "https://eximinq.in/services/import-management-registration",
@@ -435,7 +439,7 @@ const CloudDeskServices = () => {
       category: "Licensing",
       title: "Customs License",
       description:
-        "Continuity Bond, EPCG Lic, Adv License, Bank Guarantee registration at customs.",
+        "LICENSES REGISTRATION AT CUSTOMS",
       icon: <FileText className="w-8 h-8 text-teal-600" />,
       popular: false,
       link: "https://eximinq.in/services/customs-license-registration",
@@ -517,9 +521,9 @@ const CloudDeskServices = () => {
     {
       id: 408,
       category: "Incentives",
-      title: "Rodtep",
+      title: "RODTEP / ROSCTL SCRIPT TRADING",
       description:
-        "Remission of Duties and Taxes on Exported Products. Scrip generation and ledger transfer.",
+        "Buying & Selling options for Scripts at Best Market Competitive rates",
       icon: <Recycle className="w-8 h-8 text-green-600" />,
       popular: false,
       link: "https://eximinq.in/services/rodtep-rosctl-trading",
@@ -551,7 +555,7 @@ const CloudDeskServices = () => {
       category: "Compliance",
       title: "FSSAI Licensing",
       description:
-        "Food Import Clearance System (FICS) and Central Licensing for food importers.",
+        "Food Import Clearance System (FICS) and Central Licensing for food importers ( FSSAI ).",
       icon: <Utensils className="w-8 h-8 text-orange-600" />,
       popular: false,
       link: "https://eximinq.in/services/fssai-licensing",
@@ -744,7 +748,7 @@ const CloudDeskServices = () => {
         "Compliance Audit to ensure compliance with regulatory requirements.",
       icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      // link: "https://eximinq.in/services/fssai-licensing",
+      link: "https://eximinq.in/services/compliance-audit",
     },
 
     // Dispute Resolution
@@ -858,6 +862,15 @@ const CloudDeskServices = () => {
     return matchCategory && matchQuery;
   });
 
+    const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
+
   // --------------------------------------------------
   // RENDER UI
   // --------------------------------------------------
@@ -879,7 +892,8 @@ const CloudDeskServices = () => {
         scrolled={scrolled}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        setShowModal={setShowModal}
+        // setShowModal={setShowModal}
+        setShowEnrollModal={setShowEnrollModal}
       />
 
       {/* MOBILE MENU */}
@@ -890,10 +904,10 @@ const CloudDeskServices = () => {
       />
 
       <ModalEnrollServices
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        selectedService={selectedService}
-        setAlert={setAlert}
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: null })}
+          onSubmit={handleEnrollmentSubmit}
       />
 
       {/* HERO */}

@@ -14,7 +14,7 @@ export function EximInqSupport() {
 
       {/* Phone */}
       <div className="bg-white text-blue-800 font-bold py-2 rounded-lg text-lg mb-2 mt-3">
-        +91-22-4567-8900
+        + 91 74000 96950
       </div>
 
       {/* Subtext */}

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import TopBar from "../components/CloudDeskERCMC/TopBar";
 import Navbar from "../components/CloudDeskERCMC/Navbar";
 import Hero from "../components/CloudDeskERCMC/Hero";
@@ -19,18 +20,35 @@ import {
   Laptop,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskERCMC/MainNavbar";
-
+import { ModalEnroll } from "../components/CloudDeskERCMC/ModalEnroll";
 const CloudDeskERCMC = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
 
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
-
       <section id="about" className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
@@ -61,7 +79,6 @@ const CloudDeskERCMC = () => {
           </div>
         </div>
       </section>
-
       <section id="panels" className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">
           {/* Header */}
@@ -601,115 +618,116 @@ const CloudDeskERCMC = () => {
           </div>
         </div>
       </section>
-
- (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-
-          {/* LEFT SIDE – DOCUMENT LIST */}
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">
-              Documents for E-RCMC
-            </h2>
-
-            <p className="text-slate-600 mb-8">
-              The documentation varies slightly by council, but the core
-              requirements on the DGFT portal remain consistent.
-            </p>
-
-            <ul className="space-y-4">
-
-              {/* IEC & PAN */}
-              <li className="flex items-start gap-3">
-                <CheckCircle className="text-green-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">IEC & PAN</strong>
-                  <span className="text-sm text-slate-500">
-                    Updated Import Export Code and Business PAN.
-                  </span>
-                </div>
-              </li>
-
-              {/* GST Certificate */}
-              <li className="flex items-start gap-3">
-                <CheckCircle className="text-green-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">GST Certificate</strong>
-                  <span className="text-sm text-slate-500">
-                    GST Registration certificate.
-                  </span>
-                </div>
-              </li>
-
-              {/* MSME */}
-              <li className="flex items-start gap-3">
-                <CheckCircle className="text-green-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">
-                    MSME / Udyam (Optional)
-                  </strong>
-                  <span className="text-sm text-slate-500">
-                    Helpful for getting concessional membership fees in some councils.
-                  </span>
-                </div>
-              </li>
-
-              {/* Financial Data */}
-              <li className="flex items-start gap-3">
-                <CheckCircle className="text-green-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">Financial Data</strong>
-                  <span className="text-sm text-slate-500">
-                    Export turnover of the preceding financial year (CA Certificate may be required).
-                  </span>
-                </div>
-              </li>
-
-              {/* Product List */}
-              <li className="flex items-start gap-3">
-                <CheckCircle className="text-green-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">Product List</strong>
-                  <span className="text-sm text-slate-500">
-                    List of major HS Codes you intend to export.
-                  </span>
-                </div>
-              </li>
-
-            </ul>
-          </div>
-
-          {/* RIGHT SIDE – ONLINE PROCESS BOX */}
-          <div className="bg-brand-50 rounded-2xl p-8 border border-brand-100 flex items-center justify-center text-center">
+      (
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* LEFT SIDE – DOCUMENT LIST */}
             <div>
-              <Laptop className="text-brand-300 mx-auto mb-4" size={60} />
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">
+                Documents for E-RCMC
+              </h2>
 
-              <h3 className="text-xl font-bold text-brand-900 mb-2">
-                100% Online Process
-              </h3>
-
-              <p className="text-slate-600 mb-6">
-                No physical file submission. Use your DGFT Digital Signature
-                to sign and submit the application.
+              <p className="text-slate-600 mb-8">
+                The documentation varies slightly by council, but the core
+                requirements on the DGFT portal remain consistent.
               </p>
 
-              <a
-                href="#contact"
-                className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
-              >
-                Get Assistance
-              </a>
+              <ul className="space-y-4">
+                {/* IEC & PAN */}
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-green-500 mt-1" size={22} />
+                  <div>
+                    <strong className="block text-slate-800">IEC & PAN</strong>
+                    <span className="text-sm text-slate-500">
+                      Updated Import Export Code and Business PAN.
+                    </span>
+                  </div>
+                </li>
+
+                {/* GST Certificate */}
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-green-500 mt-1" size={22} />
+                  <div>
+                    <strong className="block text-slate-800">
+                      GST Certificate
+                    </strong>
+                    <span className="text-sm text-slate-500">
+                      GST Registration certificate.
+                    </span>
+                  </div>
+                </li>
+
+                {/* MSME */}
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-green-500 mt-1" size={22} />
+                  <div>
+                    <strong className="block text-slate-800">
+                      MSME / Udyam (Optional)
+                    </strong>
+                    <span className="text-sm text-slate-500">
+                      Helpful for getting concessional membership fees in some
+                      councils.
+                    </span>
+                  </div>
+                </li>
+
+                {/* Financial Data */}
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-green-500 mt-1" size={22} />
+                  <div>
+                    <strong className="block text-slate-800">
+                      Financial Data
+                    </strong>
+                    <span className="text-sm text-slate-500">
+                      Export turnover of the preceding financial year (CA
+                      Certificate may be required).
+                    </span>
+                  </div>
+                </li>
+
+                {/* Product List */}
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-green-500 mt-1" size={22} />
+                  <div>
+                    <strong className="block text-slate-800">
+                      Product List
+                    </strong>
+                    <span className="text-sm text-slate-500">
+                      List of major HS Codes you intend to export.
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* RIGHT SIDE – ONLINE PROCESS BOX */}
+            <div className="bg-brand-50 rounded-2xl p-8 border border-brand-100 flex items-center justify-center text-center">
+              <div>
+                <Laptop className="text-brand-300 mx-auto mb-4" size={60} />
+
+                <h3 className="text-xl font-bold text-brand-900 mb-2">
+                  100% Online Process
+                </h3>
+
+                <p className="text-slate-600 mb-6">
+                  No physical file submission. Use your DGFT Digital Signature
+                  to sign and submit the application.
+                </p>
+
+                <a
+                  href="#contact"
+                  className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
+                >
+                  Get Assistance
+                </a>
+              </div>
             </div>
           </div>
-
         </div>
-      </div>
-    </section>
-
+      </section>
       {/* Dynamic Fees Section */}
-      <Fees />
-
+      <Fees setShowEnrollModal={setShowEnrollModal} />
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">

@@ -1,7 +1,65 @@
+import { useState } from "react";
+
 export default function QuickForm() {
-  const handleSubmit = (e) => {
+  const [form, setForm] = useState({
+    destinationCountry: "",
+    hsCode: "",
+    mobile: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("We will check the applicable FTA and duty benefit for you.");
+
+    if (!form.destinationCountry || !form.hsCode || !form.mobile) {
+      alert("All fields are required");
+      return;
+    }
+
+    if (form.hsCode.length !== 6) {
+      alert("HS Code must be exactly 6 digits");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/duty-check`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "API failed");
+      }
+
+      // ✅ SUCCESS
+      alert("Request submitted successfully");
+
+      // 🔁 RESET FORM — THIS IS THE ONLY RIGHT PLACE
+      setForm({
+        destinationCountry: "",
+        hsCode: "",
+        mobile: "",
+      });
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -15,7 +73,6 @@ export default function QuickForm() {
       </p>
 
       <form onSubmit={handleSubmit}>
-
         {/* Destination Country */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
@@ -23,8 +80,11 @@ export default function QuickForm() {
           </label>
           <input
             type="text"
+            name="destinationCountry"
+            value={form.destinationCountry}
+            onChange={handleChange}
             placeholder="e.g. Thailand / UAE / Australia"
-            className="w-full border border-slate-300 rounded px-3 py-2 
+            className="w-full border border-slate-300 rounded px-3 py-2
                        focus:outline-none focus:border-brand-500"
           />
         </div>
@@ -36,8 +96,11 @@ export default function QuickForm() {
           </label>
           <input
             type="text"
+            name="hsCode"
+            value={form.hsCode}
+            onChange={handleChange}
             placeholder="e.g. 870899"
-            className="w-full border border-slate-300 rounded px-3 py-2 
+            className="w-full border border-slate-300 rounded px-3 py-2
                        focus:outline-none focus:border-brand-500"
           />
         </div>
@@ -49,9 +112,11 @@ export default function QuickForm() {
           </label>
           <input
             type="tel"
-            required
+            name="mobile"
+            value={form.mobile}
+            onChange={handleChange}
             placeholder="+91 74000 96950"
-            className="w-full border border-slate-300 rounded px-3 py-2 
+            className="w-full border border-slate-300 rounded px-3 py-2
                        focus:outline-none focus:border-brand-500"
           />
         </div>
@@ -59,14 +124,13 @@ export default function QuickForm() {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white 
-                     font-bold py-3 rounded-lg transition"
+          disabled={loading}
+          className={`w-full text-white font-bold py-3 rounded-lg transition
+            ${loading ? "bg-slate-400" : "bg-brand-600 hover:bg-brand-700"}`}
         >
-          Check Benefit
+          {loading ? "Checking..." : "Check Benefit"}
         </button>
-
       </form>
     </div>
   );
 }
-

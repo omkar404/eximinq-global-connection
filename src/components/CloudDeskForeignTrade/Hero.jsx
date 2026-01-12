@@ -1,11 +1,12 @@
 import React from "react";
-import {
-  Search,
-  IdCard,
-  Receipt,
-  Package,
-  Globe,
-} from "lucide-react";
+import { Search, IdCard, Receipt, Package, Globe } from "lucide-react";
+
+const SERVICE_LINKS = {
+  "Apply for IEC": "https://eximinq.in/services/iec-registration",
+  "E-Scrip / RoDTEP": "https://eximinq.in/services/rodtep-scheme",
+  "Advance Authorization": "https://eximinq.in/services/advance-authorisation",
+  "Certificate of Origin": "https://eximinq.in/services/certificate-of-origin",
+};
 
 export function Hero() {
   return (
@@ -31,8 +32,8 @@ export function Hero() {
 
           {/* Description */}
           <p className="text-blue-100 text-lg mb-8 max-w-lg leading-relaxed">
-            India’s single window for Foreign Trade Policy, Customs
-            Procedures, and Digital Compliance.
+            India’s single window for Foreign Trade Policy, Customs Procedures,
+            and Digital Compliance.
           </p>
 
           {/* Search */}
@@ -51,9 +52,21 @@ export function Hero() {
           {/* Popular Links */}
           <div className="mt-6 flex items-center space-x-4 text-sm text-blue-200">
             <span>Popular:</span>
-            <HeroLink label="RoDTEP" />
-            <HeroLink label="Advance Auth" />
-            <HeroLink label="IEC Status" />
+
+            <HeroLink
+              label="RoDTEP"
+              href="https://eximinq.in/services/rodtep-scheme"
+            />
+
+            <HeroLink
+              label="Advance Auth"
+              href="https://eximinq.in/services/advance-authorisation"
+            />
+
+            <HeroLink
+              label="IEC"
+              href="https://eximinq.in/services/iec-registration"
+            />
           </div>
         </div>
 
@@ -91,9 +104,14 @@ export function Hero() {
 
 /* ---------------- Helpers ---------------- */
 
-function HeroLink({ label }) {
+function HeroLink({ label, href }) {
   return (
-    <a href="#" className="underline hover:text-white transition">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline hover:text-white transition"
+    >
       {label}
     </a>
   );
@@ -101,18 +119,23 @@ function HeroLink({ label }) {
 
 function ServiceCard({ icon: Icon, title, desc, color }) {
   return (
-    <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:bg-white/20 hover:border-white/30 transition group cursor-pointer shadow-lg">
+    <a
+      href={SERVICE_LINKS[title]}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:bg-white/20 hover:border-white/30 transition group cursor-pointer shadow-lg block"
+    >
       <div
         className={`bg-gradient-to-br ${color} w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition`}
       >
         <Icon className="text-white w-6 h-6" />
       </div>
+
       <h3 className="font-bold text-lg group-hover:text-blue-200 transition">
         {title}
       </h3>
-      <p className="text-xs text-blue-200 mt-2 leading-relaxed">
-        {desc}
-      </p>
-    </div>
+
+      <p className="text-xs text-blue-200 mt-2 leading-relaxed">{desc}</p>
+    </a>
   );
 }

@@ -36,7 +36,7 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
             <a
-              href="#contact"
+              href="#"
               className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               New Advance License Request

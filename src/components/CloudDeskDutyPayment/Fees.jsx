@@ -49,7 +49,7 @@ const Fees = () => {
 
             {/* CTA Button */}
             <a
-              href="#contact"
+              href="#home"
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Process Payment

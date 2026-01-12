@@ -1,4 +1,3 @@
-
 import { Calculator } from "lucide-react";
 
 const QuickForm = () => {
@@ -25,12 +24,15 @@ const QuickForm = () => {
         
         {/* HSN */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">HSN Code</label>
+          <label className="block text-sm font-semibold mb-1">
+            HSN Code
+          </label>
           <input
             type="text"
             placeholder="e.g. 8504"
             className="w-full border border-slate-300 rounded px-3 py-2 
                        focus:outline-none focus:border-brand-500"
+            required
           />
         </div>
 
@@ -44,6 +46,7 @@ const QuickForm = () => {
             placeholder="e.g. 1000000"
             className="w-full border border-slate-300 rounded px-3 py-2 
                        focus:outline-none focus:border-brand-500"
+            required
           />
         </div>
 
@@ -57,6 +60,21 @@ const QuickForm = () => {
             placeholder="e.g. China / Japan"
             className="w-full border border-slate-300 rounded px-3 py-2 
                        focus:outline-none focus:border-brand-500"
+            required
+          />
+        </div>
+
+        {/* MOBILE NUMBER */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number
+          </label>
+          <input
+            type="tel"
+            placeholder="+91 7400096950"
+            className="w-full border border-slate-300 rounded px-3 py-2 
+                       focus:outline-none focus:border-brand-500"
+            required
           />
         </div>
 
@@ -66,7 +84,7 @@ const QuickForm = () => {
           className="w-full bg-brand-600 hover:bg-brand-700 text-white 
                      font-bold py-3 rounded-lg transition"
         >
-          Calculate Now
+          Send Request
         </button>
       </form>
     </div>

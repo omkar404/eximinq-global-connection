@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 const Fees = () => {
   return (
     //    <!-- Pricing Section -->
-    <section id="pricing" className="py-20 bg-slate-50">
+    <section id="pricing" className="py-20 bg-slate-50"> 
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-slate-900 mb-8">
           Professional Consultancy
@@ -51,7 +51,7 @@ const Fees = () => {
 
             {/* CTA Button */}
             <a
-              href="#contact"
+              href="#home"
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Process Payment

@@ -5,11 +5,11 @@ export const MainNavbar = ({
   scrolled,
   isMenuOpen,
   setIsMenuOpen,
-  setShowModal,
+  setShowEnrollModal,
 }) => {
   return (
     <nav
-      className={`fixed w-full z-40 transition-all duration-300 top-8 ${
+      className={`fixed w-full z-40 transition-all duration-300 top-0 ${
         scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
       }`}
     >
@@ -54,7 +54,7 @@ export const MainNavbar = ({
           </div>
 
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowEnrollModal({ open: true, type: "" })}
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now

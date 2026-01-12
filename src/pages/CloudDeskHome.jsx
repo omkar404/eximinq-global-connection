@@ -10,15 +10,18 @@ import { ModalEnroll } from "../components/CloudDeskHome/ModalEnroll";
 import { StuckInCustoms } from "../components/CloudDeskHome/StuckInCustoms";
 import { SectionHeader } from "../components/CloudDeskHome/SectionHeader";
 import { Footer } from "../components/CloudDeskHome/Footer";
-import SegmentSection from '../components/CloudDeskHome/SegmentSection'
-import IndustrySection from "../components/CloudDeskHome/IndustriesSection"
+import SegmentSection from "../components/CloudDeskHome/SegmentSection";
+import IndustrySection from "../components/CloudDeskHome/IndustriesSection";
 import BentoGrid from "../components/CloudDeskHome/BentoGrid";
 
 const CloudDeskHome = () => {
+      const [showEnrollModal, setShowEnrollModal] = useState({
+        open: false,
+        type: null,
+      });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("dgft");
   const [scrolled, setScrolled] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   // ─────────────────────────────────────────────────────────────
   // Scroll Handler
@@ -28,7 +31,6 @@ const CloudDeskHome = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
 
   // ─────────────────────────────────────────────────────────────
   // Dummy API-like update data per tab
@@ -134,39 +136,36 @@ const CloudDeskHome = () => {
 
   return (
     <div className="min-h-screen font-sans text-gray-800 bg-gray-50 flex flex-col relative">
-
       {/* NAVIGATION */}
       <Navbar
         scrolled={scrolled}
-        setShowModal={setShowModal}
+        setShowEnrollModal={setShowEnrollModal}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
       />
 
       <MobileMenu
         isMenuOpen={isMenuOpen}
-        setShowModal={setShowModal}
+        setShowEnrollModal={setShowEnrollModal}
         setIsMenuOpen={setIsMenuOpen}
       />
 
       {/* HERO */}
-      <Hero setShowModal={setShowModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
 
       {/* STATS */}
       <StatsStrip />
 
       <BentoGrid />
 
-      <SegmentSection/>
+      <SegmentSection />
 
-<IndustrySection/>
+      <IndustrySection />
 
-  {/* <StuckInCustoms setShowModal={setShowModal} /> */}
+      {/* <StuckInCustoms setShowEnrollModal={setShowEnrollModal} /> */}
       {/* MAIN CONTENT */}
       <main className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-
-       
           <div className="lg:col-span-8">
             {/* <SectionHeader /> */}
 
@@ -174,25 +173,30 @@ const CloudDeskHome = () => {
 
             {/* <UpdatesList updates={updates} /> */}
 
-            <StuckInCustoms setShowModal={setShowModal} />
+            <StuckInCustoms setShowEnrollModal={setShowEnrollModal} />
           </div>
 
-      
           <div className="lg:col-span-4">
-            <Sidebar sectors={sectors} onEnrollClick={() => setShowModal(true)} />
+            <Sidebar
+              sectors={sectors}
+              // onEnrollClick={() => setShowEnrollModal(true)}
+              setShowEnrollModal={setShowEnrollModal}
+            />
           </div>
         </div>
       </main>
 
-
-
       {/* FOOTER */}
-      <Footer onEnrollClick={() => setShowModal(true)} />
+      <Footer 
+      setShowEnrollModal={setShowEnrollModal}
+      // onEnrollClick={() => setShowEnrollModal(true)}
+       />
 
       {/* MODAL */}
       <ModalEnroll
-        show={showModal}
-        onClose={() => setShowModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
         onSubmit={handleEnrollmentSubmit}
       />
     </div>

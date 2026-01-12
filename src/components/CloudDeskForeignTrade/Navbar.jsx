@@ -3,7 +3,7 @@ import { Phone, Mail, MessageCircle } from "lucide-react";
 import BrandLogo from "../BrandLogo/BrandLogo";
 // import { MobileMenu } from "./MobileMenu";
 
-export function Navbar() {
+export function Navbar({setShowEnrollModal}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -76,9 +76,12 @@ export function Navbar() {
             </div>
 
             {/* CTA */}
-            <button className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow hover:shadow-xl transition">
-              Enroll Now
-            </button>
+          <button
+             onClick={() => setShowEnrollModal({ open: true, type: "foreign_trade_policy_enroll" })}
+            className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
+          >
+            Enroll Now
+          </button>
           </div>
 
           {/* Mobile Hamburger */}

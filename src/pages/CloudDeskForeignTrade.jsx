@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
 import { MobileMenu } from "../components/CloudDeskForeignTrade/MobileMenu";
@@ -14,16 +14,37 @@ import { EximInqSupport } from "../components/CloudDeskForeignTrade/EximInqSuppo
 import { FTP2023 } from "../components/CloudDeskForeignTrade/FTP2023";
 import { ProceduresCompliance } from "../components/CloudDeskForeignTrade/ProceduresCompliance";
 import { Tools } from "../components/CloudDeskForeignTrade/Tools";
-
+import { ModalEnroll } from "../components/CloudDeskForeignTrade/ModalEnroll";
 
 export default function CloudDeskForeignTrade() {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-      <Navbar />
-       <div className="h-[30px]" />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <div className="h-[30px]" />
       <MobileMenu />
       <NewsTicker />
       <Hero />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: null })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       <main className="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* LEFT SIDE */}
@@ -40,12 +61,12 @@ export default function CloudDeskForeignTrade() {
           <ProceduresCompliance />
 
           <section className="grid grid-cols-1 md:grid-cols-1 gap-8 ">
-            <Tools/>
+            <Tools />
           </section>
         </section>
       </main>
 
-      <Footer />
+      <Footer setShowEnrollModal={setShowEnrollModal} />
     </div>
   );
 }

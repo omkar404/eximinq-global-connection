@@ -25,6 +25,7 @@ const CloudDeskRodstep = () => {
     calcScheme,
     setCalcScheme,
     calculateTotal,
+    appliedRate,
   } = useLiveRates();
 
   useEffect(() => {
@@ -54,6 +55,7 @@ const CloudDeskRodstep = () => {
         calcScheme={calcScheme}
         setCalcScheme={setCalcScheme}
         calculateTotal={calculateTotal}
+        appliedRate={appliedRate}
       />
       <InfoSection />
       <ContactCTA />

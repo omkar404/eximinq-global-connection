@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskFactoryStuffing/TopBar";
-import Navbar from "../components/CloudDeskFactoryStuffing/Navbar";
-import Hero from "../components/CloudDeskFactoryStuffing/Hero";
+import Navbar from "../components/CloudDeskCertifiedGovernment/Navbar";
+import Hero from "../components/CloudDeskCertifiedGovernment/Hero";
 import Fees from "../components/CloudDeskFactoryStuffing/Fees";
 import {
   Check,

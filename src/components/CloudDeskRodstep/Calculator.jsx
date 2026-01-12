@@ -1,6 +1,38 @@
 import React from "react";
 import { TrendingUp, CreditCard } from "lucide-react";
 
+/**
+ * Truthful, non-misleading note
+ * No deltas. No fake math.
+ */
+//
+
+const getSlabNote = (amount, type) => {
+  if (type === "sell") {
+    if (amount >= 1500000)
+      return "SELL slab: ₹15,00,000 and above (Live Rate applied)";
+    if (amount >= 100000)
+      return "SELL slab: ₹1,00,000 – ₹4,99,999 (Live Rate applied)";
+    if (amount >= 50000)
+      return "SELL slab: ₹50,000 – ₹99,999 (Live Rate applied)";
+    if (amount >= 10000)
+      return "SELL slab: ₹10,000 – ₹49,999 (Live Rate applied)";
+    return "SELL slab: ₹1,000 – ₹9,999 (Live Rate applied)";
+  }
+
+  // BUY
+  if (amount >= 500000)
+    return "BUY slab: ₹5,00,000 and above (Live Rate applied)";
+  if (amount >= 100000)
+    return "BUY slab: ₹1,00,000 – ₹4,99,999 (Live Rate applied)";
+  if (amount >= 50000) return "BUY slab: ₹50,000 – ₹99,999 (Live Rate applied)";
+  if (amount >= 10000) return "BUY slab: ₹10,000 – ₹49,999 (Live Rate applied)";
+  return "BUY slab: ₹1,000 – ₹9,999 (Live Rate applied)";
+};
+
+const formatRate = (value) =>
+  value === null || value === undefined ? "0.00" : Number(value).toFixed(2);
+
 const Calculator = ({
   rates,
   calcAmount,
@@ -10,7 +42,10 @@ const Calculator = ({
   calcScheme,
   setCalcScheme,
   calculateTotal,
+  appliedRate,
 }) => {
+  const slabNote = getSlabNote(calcAmount, calcType);
+
   return (
     <section
       id="calculator"
@@ -27,8 +62,8 @@ const Calculator = ({
               Calculate Your Scrip Value
             </h2>
             <p className="text-blue-200 text-lg mb-8 leading-relaxed">
-              Estimate your payout or purchase cost instantly using live market
-              rates. No hidden charges. No guesswork.
+              Estimate your payout or purchase cost instantly using slab-based
+              market rates. No hidden charges. No assumptions.
             </p>
 
             <ul className="space-y-4">
@@ -36,13 +71,15 @@ const Calculator = ({
                 <span className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center text-blue-900">
                   <TrendingUp size={14} />
                 </span>
-                <span className="text-blue-100">Live rate integration</span>
+                <span className="text-blue-100">Slab-based official rates</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center text-blue-900">
                   <CreditCard size={14} />
                 </span>
-                <span className="text-blue-100">No hidden transaction fees</span>
+                <span className="text-blue-100">
+                  Transparent buy & sell pricing
+                </span>
               </li>
             </ul>
           </div>
@@ -52,10 +89,10 @@ const Calculator = ({
             {/* Buy / Sell toggle */}
             <div className="flex bg-slate-100 rounded-lg p-1 mb-8">
               <button
-                onClick={() => setCalcType("sell")}
+                onClick={() => setCalcType("buy")}
                 className={`flex-1 py-3 rounded-md font-bold text-sm transition
                   ${
-                    calcType === "sell"
+                    calcType === "buy"
                       ? "bg-white shadow-sm text-blue-700"
                       : "text-slate-500 hover:text-slate-700"
                   }`}
@@ -64,10 +101,10 @@ const Calculator = ({
               </button>
 
               <button
-                onClick={() => setCalcType("buy")}
+                onClick={() => setCalcType("sell")}
                 className={`flex-1 py-3 rounded-md font-bold text-sm transition
                   ${
-                    calcType === "buy"
+                    calcType === "sell"
                       ? "bg-white shadow-sm text-blue-700"
                       : "text-slate-500 hover:text-slate-700"
                   }`}
@@ -118,7 +155,10 @@ const Calculator = ({
                 <input
                   type="number"
                   value={calcAmount}
-                  onChange={(e) => setCalcAmount(Number(e.target.value))}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setCalcAmount(value === "" ? "" : Number(value));
+                  }}
                   className="w-full px-4 py-3 rounded-xl border border-slate-300
                   focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none
                   text-lg font-medium"
@@ -132,14 +172,20 @@ const Calculator = ({
                     Applied Rate
                   </span>
                   <span className="font-bold text-slate-900">
-                    {rates[calcScheme][calcType]}%
+                    {formatRate(appliedRate)}%
                   </span>
                 </div>
+
                 <div className="flex justify-between items-end">
                   <span className="text-slate-600 font-bold">Total Value</span>
                   <span className="text-3xl font-extrabold text-blue-700">
                     {calculateTotal()}
                   </span>
+                </div>
+
+                <div className="mt-4 rounded-lg bg-blue-50 border border-blue-200 px-4 py-3">
+                  <p className="text-sm font-semibold text-blue-800">Note</p>
+                  <p className="text-sm text-blue-700 mt-1">{slabNote}</p>
                 </div>
               </div>
             </div>

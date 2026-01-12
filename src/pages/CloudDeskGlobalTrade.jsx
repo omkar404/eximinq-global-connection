@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import TopBar from "../components/CloudDeskGlobalTrade/TopBar";
 import Navbar from "../components/CloudDeskGlobalTrade/Navbar";
 import Hero from "../components/CloudDeskGlobalTrade/Hero";
@@ -31,15 +32,36 @@ import {
   Flag,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskGlobalTrade/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskGlobalTrade/ModalEnroll";
 
 const CloudDeskGlobalTrade = () => {
+    const [showEnrollModal, setShowEnrollModal] = useState({
+      open: false,
+      type: "",
+    });
+  
+    const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
+
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -147,7 +169,7 @@ const CloudDeskGlobalTrade = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-brand-900 text-white">
+      <section id = "features" className="py-20 bg-brand-900 text-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* LEFT SIDE */}
@@ -305,9 +327,9 @@ const CloudDeskGlobalTrade = () => {
         </div>
       </section>
 
-      <section id="comparison" className="py-20 bg-white">
+      {/* <section id="comparison" className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-5xl">
-          {/* HEADER */}
+  
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900">
               MOOWR vs Traditional Schemes
@@ -317,7 +339,7 @@ const CloudDeskGlobalTrade = () => {
             </p>
           </div>
 
-          {/* TABLE */}
+
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left text-slate-600 border border-slate-200">
               <thead className="text-xs text-slate-700 uppercase bg-slate-100">
@@ -332,7 +354,7 @@ const CloudDeskGlobalTrade = () => {
               </thead>
 
               <tbody>
-                {/* ROW 1 */}
+            
                 <tr className="border-b hover:bg-slate-50">
                   <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
                     <Banknote size={16} className="text-brand-600" />
@@ -345,7 +367,7 @@ const CloudDeskGlobalTrade = () => {
                   <td className="px-6 py-4">Zero (Inputs only)</td>
                 </tr>
 
-                {/* ROW 2 */}
+               
                 <tr className="border-b hover:bg-slate-50">
                   <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
                     <BadgeCheck size={16} className="text-brand-600" />
@@ -358,7 +380,7 @@ const CloudDeskGlobalTrade = () => {
                   <td className="px-6 py-4">Value Addition Required</td>
                 </tr>
 
-                {/* ROW 3 */}
+               
                 <tr className="border-b hover:bg-slate-50">
                   <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
                     <PackageOpen size={16} className="text-brand-600" />
@@ -369,7 +391,7 @@ const CloudDeskGlobalTrade = () => {
                   <td className="px-6 py-4">Not Allowed</td>
                 </tr>
 
-                {/* ROW 4 */}
+                
                 <tr className="border-b hover:bg-slate-50">
                   <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
                     <Scale size={16} className="text-brand-600" />
@@ -382,7 +404,7 @@ const CloudDeskGlobalTrade = () => {
                   <td className="px-6 py-4">Exempted</td>
                 </tr>
 
-                {/* ROW 5 */}
+                
                 <tr className="hover:bg-slate-50">
                   <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
                     <ArrowDownUp size={16} className="text-brand-600" />
@@ -398,7 +420,7 @@ const CloudDeskGlobalTrade = () => {
             </table>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section id="process" className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">

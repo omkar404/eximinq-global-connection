@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import TopBar from "../components/CloudDeskImporters/TopBar";
 import Navbar from "../components/CloudDeskImporters/Navbar";
 import Hero from "../components/CloudDeskImporters/Hero";
@@ -20,15 +21,35 @@ import {
   Headphones,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskImporters/MainNavbar";
-
+import { ModalEnroll } from "../components/CloudDeskImporters/ModalEnroll";
 const CloudDeskImporters = () => {
+    const [showEnrollModal, setShowEnrollModal] = useState({
+      open: false,
+      type: "",
+    });
+  
+    const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
+
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="ims" className="py-20 bg-slate-50">
@@ -188,7 +209,7 @@ const CloudDeskImporters = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

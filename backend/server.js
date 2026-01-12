@@ -4,6 +4,12 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const path = require("path");
+const dutyCheckRoutes = require("./routes/dutyCheck.routes");
+const cooEnrollRoutes = require("./routes/cooEnroll.routes");
+const enrollRoutes = require("./routes/enroll.routes");
+const industriesWePowerRoutes = require("./routes/industriesWePower.routes");
+const mainenrollRoutes = require("./routes/mainenroll.routes");
+const mainCooRoutes = require("./routes/maincoo.routes");
 
 const nowIST = new Date().toLocaleString("en-IN", {
   timeZone: "Asia/Kolkata",
@@ -79,7 +85,57 @@ const ServiceEnquiry = mongoose.model(
   })
 );
 
+
+const RodtepRosctlTradingSchema = new mongoose.Schema(
+  {
+    companyName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    scheme: {
+      type: String,
+      enum: ["RODTEP", "RoSCTL"],
+      required: true,
+    },
+
+    action: {
+      type: String,
+      enum: ["Selling", "Buying"],
+      required: true,
+    },
+
+    mobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    email: {
+      type: String,
+      default: null,
+      lowercase: true,
+      trim: true,
+    },
+
+    source: {
+      type: String,
+      default: "website",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const RodtepRosctlTrading = mongoose.model(
+  "RodtepRosctlTrading",
+  RodtepRosctlTradingSchema
+);
+
 // EMAIL TRANSPORTER
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
@@ -245,6 +301,65 @@ app.post("/api/enquiry/services", async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
+
+
+app.post("/api/rodtep-rosctl-trading", async (req, res) => {
+  try {
+    const { companyName, scheme, action, mobile, email } = req.body;
+
+    if (!companyName || !scheme || !action || !mobile) {
+      return res.status(400).json({
+        success: false,
+        error: "companyName, scheme, action and mobile are required",
+      });
+    }
+
+    const saved = await RodtepRosctlTrading.create({
+      companyName,
+      scheme,
+      action,
+      mobile,
+      email: email || null,
+    });
+
+    // ✅ EMAIL SEND (THIS WAS MISSING)
+    await transporter.sendMail({
+      from: `"Cloud Desk Trading" <${process.env.SMTP_USER}>`,
+      to: "crm@eximinq.com, omkarmhetar100@gmail.com",
+      subject: `New ${scheme} Trading Request`,
+      html: `
+        <h2>${scheme} Trading Request</h2>
+        <p><strong>Company:</strong> ${companyName}</p>
+        <p><strong>Action:</strong> ${action}</p>
+        <p><strong>Mobile:</strong> ${mobile}</p>
+        <p><strong>Email:</strong> ${email || "Not provided"}</p>
+        <p><strong>Submitted (IST):</strong> ${formattedDateTime}</p>
+      `,
+    });
+
+    res.json({ success: true, id: saved._id });
+
+  } catch (err) {
+    console.error("Trading API Error:", err);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+    });
+  }
+});
+
+// Routes
+app.use("/api/duty-check", dutyCheckRoutes);
+
+app.use("/api/coo-enroll", cooEnrollRoutes);
+
+app.use("/api/home-enroll", enrollRoutes);
+
+app.use("/api/individual-enroll", industriesWePowerRoutes);
+
+app.use("/api/main-enroll", mainenrollRoutes);
+
+app.use("/api/main-coo-enroll", mainCooRoutes);
 
 app.use(express.static(path.join(__dirname, "build")));
 

@@ -9,7 +9,7 @@ export const MainNavbar = ({
 }) => {
   return (
 <nav
-  className={`fixed w-full z-40 transition-all duration-300 top-8 ${
+  className={`fixed w-full z-40 transition-all duration-300 top-0 ${
     scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
   }`}
 >

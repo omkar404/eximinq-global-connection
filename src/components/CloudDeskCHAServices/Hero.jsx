@@ -23,7 +23,7 @@ const Hero = () => {
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a
-              href="#contact"
+              href="#"
               class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               Connect with Agent

@@ -4,7 +4,7 @@ import ArrowDownIcon from "./ArrowDownIcon";
 
 const HeroCorp = () => {
   return (
-    <header className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <header className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
       {/* 3D Globe Background */}
 
 <GlobeBackground />

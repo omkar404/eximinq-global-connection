@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import TopBar from "../components/CloudDeskCertificate/TopBar";
 import Navbar from "../components/CloudDeskCertificate/Navbar";
 import Hero from "../components/CloudDeskCertificate/Hero";
@@ -16,15 +17,35 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskCertificate/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskCertificate/ModalEnroll";
 
 const CloudDeskCertificate = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: null })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -303,7 +324,7 @@ const CloudDeskCertificate = () => {
         </div>
       </section>
 
-      <Fees />
+     <Fees setShowEnrollModal={setShowEnrollModal} />
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

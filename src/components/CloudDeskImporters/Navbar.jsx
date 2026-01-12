@@ -4,7 +4,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm sticky top-32 z-30">
+    <header className="bg-white shadow-sm sticky top-24 z-30">
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
 
         {/* CENTERED MENU */}
@@ -15,12 +15,12 @@ const Navbar = () => {
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        {/* <a 
+        <a 
           href="#contact"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
-        </a> */}
+        </a>
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -38,12 +38,12 @@ const Navbar = () => {
             <a href="#ims" class="block py-2 text-slate-600">Import Monitoring</a>
             <a href="#process" class="block py-2 text-slate-600">How it Works</a>
             <a href="#contact" class="block py-2 text-brand-600 font-bold">Get Quote</a>
-          {/* <a 
+          <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now
-          </a> */}
+          </a>
         </div>
       )}
     </header>

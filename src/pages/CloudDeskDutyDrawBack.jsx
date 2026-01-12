@@ -115,7 +115,7 @@ const CloudDeskDutyDrawBack = () => {
               </div>
 
               <a
-                href="#contact"
+                href="#home"
                 className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
               >
                 Apply for Brand Rate

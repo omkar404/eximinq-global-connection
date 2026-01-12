@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
@@ -35,12 +35,17 @@ const Fees = () => {
                 </li>
               </ul>
 
-              <a
-                href="tel:+917400096950"
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "PREFERENTIAL_COO",
+                  })
+                }
                 className="block w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
               >
                 Apply Preferential
-              </a>
+              </button>
             </div>
           </div>
 
@@ -70,12 +75,17 @@ const Fees = () => {
                 </li>
               </ul>
 
-              <a
-                href="tel:+917400096950"
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "NON_PREFERENTIAL_COO",
+                  })
+                }
                 className="block w-full bg-slate-600 text-white font-bold py-3 rounded-lg hover:bg-slate-700 transition"
               >
                 Apply Non-Preferential
-              </a>
+              </button>
             </div>
           </div>
 

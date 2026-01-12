@@ -22,15 +22,15 @@ const Hero = ({ setShowEnrollModal }) => {
             interest subsidy directly from banks.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            {/* <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+            <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Audit Bank Interest
-                    </a> */}
-            <button
+                    </a>
+            {/* <button
               onClick={() => setShowEnrollModal(true)}
               className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               Audit Bank Interest
-            </button>
+            </button> */}
             <a
               href="#rates"
               className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition"

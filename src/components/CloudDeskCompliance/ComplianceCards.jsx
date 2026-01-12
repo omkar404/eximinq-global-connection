@@ -12,7 +12,7 @@ import {
   FileCheck,
   BadgeCheck,
   Utensils,
-  ShieldCheck
+  ShieldCheck,
 } from "lucide-react";
 
 const iconMap = {
@@ -47,7 +47,9 @@ const ComplianceCards = ({ data, openModal }) => {
                 {iconMap[item.icon]}
               </div>
               <div className="ml-3">
-                <h3 className="font-bold text-gray-800 text-lg">{item.title}</h3>
+                <h3 className="font-bold text-gray-800 text-lg">
+                  {item.title}
+                </h3>
                 <span className="text-[10px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">
                   {item.act}
                 </span>
@@ -65,10 +67,19 @@ const ComplianceCards = ({ data, openModal }) => {
               </div>
 
               <button
-                onClick={openModal}
-                className="text-sm font-bold text-teal-600 hover:text-teal-800 flex items-center"
+              // onClick={openModal}
+              // className="text-sm font-bold text-teal-600 hover:text-teal-800 flex items-center"
               >
-                Enquire <ChevronRight size={16} />
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-bold text-teal-600 hover:text-teal-800 flex items-center"
+                >
+                  Enquire <ChevronRight size={16} />
+                </a>
+
+                {/* Enquire <ChevronRight size={16} /> */}
               </button>
             </div>
           </div>

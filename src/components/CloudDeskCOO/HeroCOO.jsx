@@ -1,7 +1,7 @@
 import React from "react";
 import { Stamp } from "lucide-react";
 
-const HeroCOO = ({ setShowModal }) => {
+const HeroCOO = ({ onEnroll  }) => {
   return (
     <header className="relative bg-[#000000] text-white pt-40 pb-24 relative overflow-hidden">
 
@@ -30,10 +30,10 @@ const HeroCOO = ({ setShowModal }) => {
         </p>
 
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => onEnroll({ open: true, type: "HERO" })}
           className="px-8 py-4 bg-teal-500 hover:bg-teal-400 text-white font-bold rounded-xl shadow-lg transition transform hover:-translate-y-1"
         >
-          Enroll Now
+          Enroll Now 
         </button>
       </div>
 

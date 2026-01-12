@@ -1,7 +1,9 @@
+import React, { useState } from "react";
 import TopBar from "../components/IECRegistration/TopBar";
 import Navbar from "../components/IECRegistration/Navbar";
 import Hero from "../components/IECRegistration/Hero";
 import Fees from "../components/IECRegistration/Fees";
+import { ModalEnroll } from "../components/IECRegistration/ModalEnroll";
 import {
   FileText,
   KeyRound,
@@ -20,18 +22,38 @@ import {
   Phone,
   Mail,
   MapPin,
-  Check
+  Check,
 } from "lucide-react";
 import { MainNavbar } from "../components/IECRegistration/MainNavbar";
 
 const IECRegistration = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <MainNavbar />
-      <TopBar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      {/* <TopBar /> */}
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: null })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -204,6 +226,17 @@ const IECRegistration = () => {
                   <h4 className="font-bold text-slate-800">SEZ</h4>
                 </div>
               </div>
+              <div className="flex justify-center">
+                <a
+                  href="https://eximinq.in/services/ad-code-registration"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="mt-6 bg-accent-500 hover:bg-accent-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition">
+                    Register AD Code Now
+                  </button>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -358,7 +391,7 @@ const IECRegistration = () => {
       </section>
 
       {/* Dynamic Fees Section */}
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">

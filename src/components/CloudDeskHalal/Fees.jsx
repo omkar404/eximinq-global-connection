@@ -1,16 +1,14 @@
 import { Check } from "lucide-react";
 
-const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
+const Fees = ({ setShowEnrollModal }) => {
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
-
         <h2 className="text-3xl font-bold text-slate-900 mb-8">
           Professional Consultancy
         </h2>
 
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
-
           {/* Header */}
           <div className="bg-green-600 text-white py-4">
             <h3 className="text-xl font-bold">Halal Certification</h3>
@@ -22,11 +20,9 @@ const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
             <div className="text-3xl font-bold text-slate-900 mb-2">
               Request Quote
             </div>
-
             <p className="text-slate-500 text-sm mb-6">
               Depends on Product Count & Facility
             </p>
-
             <ul className="text-left space-y-3 mb-8 text-sm text-slate-600 pl-6">
               {[
                 "Ingredient Verification",
@@ -41,7 +37,6 @@ const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
                 </li>
               ))}
             </ul>
-
             {/* CTA */}
             {/* <button
               onClick={() => {
@@ -49,15 +44,27 @@ const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
                 setShowEnrollModal(true);
               }}
               className="block w-full bg-brand-900 text-white font-bold py-3 
-                         rounded-lg hover:bg-brand-800 transition"
-            >
-              Start Application
-            </button> */}
-            <a href = "#Home" className="block w-full bg-brand-900 text-white font-bold py-3 
-                         rounded-lg hover:bg-brand-800 transition">Start Application</a>
+                          rounded-lg hover:bg-brand-800 transition"
+            />
+            Start Application
+               </button>  */}
+
+                             <button
+             onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "",
+                  })
+                }
+                className="block w-full bg-brand-900 text-white font-bold py-3 
+                          rounded-lg hover:bg-brand-800 transition"
+              >
+                Get Started
+              </button>
+            {/* <a href = "#Home" className="block w-full bg-brand-900 text-white font-bold py-3 
+                         rounded-lg hover:bg-brand-800 transition">Start Application</a> */}
           </div>
         </div>
-
       </div>
     </section>
   );

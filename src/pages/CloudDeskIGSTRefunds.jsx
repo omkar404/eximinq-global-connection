@@ -252,7 +252,7 @@ const CloudDeskIGSTRefunds = () => {
 
               <div className="mt-6 text-center">
                 <a
-                  href="#contact"
+                  href="#home"
                   className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
                 >
                   Start Recovery

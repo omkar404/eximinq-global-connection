@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import TopBar from "../components/ADCode/TopBar";
 import Navbar from "../components/ADCode/Navbar";
 import Hero from "../components/ADCode/Hero";
@@ -18,15 +19,35 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { MainNavbar } from "../components/ADCode/MainNavbar";
-
+import { ModalEnroll } from "../components/ADCode/ModalEnroll";
 const ADCode = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      {/* <TopBar /> */}
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -371,7 +392,7 @@ const ADCode = () => {
       </section>
 
       {/* Dynamic Fees Section */}
-      <Fees />
+     <Fees setShowEnrollModal={setShowEnrollModal} />
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
@@ -512,7 +533,7 @@ const ADCode = () => {
                   Delhi Air Cargo
                 </a>
               </li>
-            </ul>               
+            </ul>
           </div>
 
           {/* CONTACT */}

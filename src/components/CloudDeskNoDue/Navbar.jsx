@@ -12,15 +12,16 @@ const Navbar = () => {
                 <a href="#scenarios" class="hover:text-brand-600 transition">Scenarios</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
                 <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
+                <a href="#contact" class="hover:text-brand-600 transition">Start Process</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        {/* <a 
+        <a 
           href="#contact"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
-        </a> */}
+        </a>
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -34,16 +35,17 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-                      <a href="#about" class="block py-2 text-slate-600">Why Needed?</a>
-            <a href="#scenarios" class="block py-2 text-slate-600">Scenarios</a>
-            <a href="#process" class="block py-2 text-slate-600">Process</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Start Process</a>
-          {/* <a 
+                         <a href="#about" class="hover:text-brand-600 transition">Why Needed?</a>
+                <a href="#scenarios" class="hover:text-brand-600 transition">Scenarios</a>
+                <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
+                <a href="#contact" class="hover:text-brand-600 transition">Start Process</a>
+          <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now
-          </a> */}
+          </a>
         </div>
       )}
     </header>

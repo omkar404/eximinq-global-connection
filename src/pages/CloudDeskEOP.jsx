@@ -21,18 +21,32 @@ import { MainNavbar } from "../components/CloudDeskEOP/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskEOP/ModalEnroll";
 
 const CloudDeskEOP = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
+;
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      {/* <TopBar /> */}
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: null })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -292,7 +306,7 @@ const CloudDeskEOP = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal} />
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

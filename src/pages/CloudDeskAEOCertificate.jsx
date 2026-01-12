@@ -29,7 +29,19 @@ import { MainNavbar } from "../components/CloudDeskAeoCertification/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskAeoCertification/ModalEnroll";
 
 const CloudDeskAeoCertification = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+    const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
     
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -40,8 +52,10 @@ const CloudDeskAeoCertification = () => {
       <Hero setShowEnrollModal={setShowEnrollModal}/>
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -390,7 +404,7 @@ const CloudDeskAeoCertification = () => {
       </section>
 
       {/* Dynamic Fees Section */}
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

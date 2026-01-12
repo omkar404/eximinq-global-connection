@@ -1,7 +1,7 @@
 import React from "react";
 import { Phone, Mail } from "lucide-react";
 
-export const Footer = ({ onEnrollClick }) => {
+export const Footer = ({ setShowEnrollModal  }) => {
   return (
     <footer className="bg-gray-900 text-gray-300 pt-12 pb-8 border-t border-gray-800 mt-16">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -101,7 +101,7 @@ export const Footer = ({ onEnrollClick }) => {
           </ul>
 
           <button
-            onClick={onEnrollClick}
+            onClick={() => setShowEnrollModal({ open: true, type: "foreign_trade_policy_enroll" })}
             className="w-full px-4 py-2 bg-teal-600 text-white text-sm font-bold rounded 
             hover:bg-teal-500 transition flex items-center justify-center"
           >

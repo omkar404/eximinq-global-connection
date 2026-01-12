@@ -43,9 +43,17 @@ const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
             </ul>
 
             {/* CTA */}
-                    <a href="#Home" className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition">
-                        Extend Now
-                    </a>
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "EOP_MANAGEMENT",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg mt-6 hover:bg-brand-700 transition"
+              >
+                Extend Now
+              </button>
           </div>
         </div>
 

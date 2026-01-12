@@ -4,7 +4,7 @@ import { Phone, Mail, MessageCircle } from "lucide-react";
 
 import BrandLogo from "../BrandLogo/BrandLogo";
 
-const NavbarDGFT = ({ scrolled, isMenuOpen, setIsMenuOpen, setShowModal }) => {
+const NavbarDGFT = ({ scrolled, isMenuOpen, setIsMenuOpen, setShowEnrollModal }) => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 bg-white shadow-md ${
@@ -98,7 +98,7 @@ const NavbarDGFT = ({ scrolled, isMenuOpen, setIsMenuOpen, setShowModal }) => {
           </div>
 
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowEnrollModal({ open: true, type: "certificate_of_origin_enroll" })}
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now

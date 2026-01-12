@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 
-const CTASectionCOO = ({ setShowModal }) => {
+const CTASectionCOO = ({ openCTACOO }) => {
   return (
     <section className="bg-white border-t border-gray-100 py-16">
       <div className="container mx-auto px-4 text-center">
@@ -15,7 +15,7 @@ const CTASectionCOO = ({ setShowModal }) => {
         </p>
 
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => openCTACOO(true)}
           className="px-10 py-3 bg-indigo-900 text-white font-bold rounded-full shadow-lg hover:bg-indigo-800 transition flex items-center justify-center mx-auto"
         >
           Enroll Now <ArrowRight size={18} className="ml-2" />
