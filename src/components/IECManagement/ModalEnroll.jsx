@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose }) => {
+export const ModalEnroll = ({ show, onClose, type }) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -13,6 +13,24 @@ export const ModalEnroll = ({ show, onClose }) => {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+    const SERVICE_MAP = {
+    IEC_PROFILE_UPDATATION: {
+      label: "IEC Profile Updation",
+      service: "IEC Profile Updation",
+    },
+    IEC_REGISTRATION: {
+      label: "IEC Registration",
+      service: "IEC Registration",
+    },
+    IEC_ANNUAL_UPDATE: {
+      label: "IEC Annual Update",
+      service: "IEC Annual Update",
+    },
+  };
+
+  const serviceConfig = SERVICE_MAP[type];
+  const predefinedService = serviceConfig?.service;
 
   const resetForm = () => {
     setForm({
@@ -68,7 +86,7 @@ export const ModalEnroll = ({ show, onClose }) => {
       };
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/home-enroll`,
+        `${process.env.REACT_APP_API_URL}/api/import-export-code`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -200,6 +218,22 @@ export const ModalEnroll = ({ show, onClose }) => {
                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
               )}
             </div>
+
+                        {predefinedService && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Service Type
+                </label>
+
+                <input
+                  type="text"
+                  value={predefinedService}
+                  readOnly
+                  className="w-full p-3 rounded-lg border border-gray-300 
+                 bg-gray-100 text-gray-800 text-sm cursor-not-allowed"
+                />
+              </div>
+            )}
 
             {/* Role */}
             <div>

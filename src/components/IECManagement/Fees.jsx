@@ -36,7 +36,7 @@ const Fees = ({ setShowEnrollModal }) => {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "ICEGATE Registration",
+                    type: "IEC_PROFILE_UPDATATION",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg mt-6 hover:bg-brand-700 transition"
