@@ -18,7 +18,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const SERVICE_MAP = {
     ICEGATE_REGISTRATION: {
       label: "ICEGATE Registration",
-      service: "IEC Profile Updatation",
+      service: "ICEGATE Registration",
     },
     AD_CODE_REGISTRATION: {
       label: "AD Code Registration",

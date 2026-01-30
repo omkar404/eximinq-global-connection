@@ -1,120 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- ROOT -->
-  <url><loc>https://eximinq.in/</loc></url>
+<url>
+  <loc>https://eximinq.in/</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.0</priority>
+</url>
 
-  <!-- CORE / CLOUDDESK -->
-  <url><loc>https://eximinq.in/services</loc></url>
-  <url><loc>https://eximinq.in/foreign-trade-policy</loc></url>
-  <url><loc>https://eximinq.in/foreign-trade-policy/regulatory-updates</loc></url>
-  <url><loc>https://eximinq.in/foreign-trade-policy/exchange-rates</loc></url>
-  <url><loc>https://eximinq.in/dgft-customs-consultancy</loc></url>
-  <!-- <url><loc>https://eximinq.in/certificate-of-origin</loc></url> -->
-  <url><loc>https://eximinq.in/compliance-trade-india</loc></url>
-  <url><loc>https://eximinq.in/contact-us</loc></url>
-  <url><loc>https://eximinq.in/clouddesk-saas</loc></url>
+<url>
+  <loc>https://eximinq.in/services</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/foreign-trade-policy</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/dgft-customs-consultancy</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/compliance-trade-india</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/clouddesk-saas</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority> 
+</url>
 
-  <!-- BUSINESS --> 
-  <!-- <url><loc>https://eximinq.in/charates</loc></url>
-  <url><loc>https://eximinq.in/corp</loc></url>
-  <url><loc>https://eximinq.in/startup</loc></url>
-  <url><loc>https://eximinq.in/aeo</loc></url> -->
+<url><loc>https://eximinq.in/services/import-export-code</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/icegate-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/ad-code-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/e-rcmc-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/bill-of-entry-filing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/shipping-bill-filing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/e-sanchit-filing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/duty-payment-ecl</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/aeo-certification</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/moowr-scheme</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/freight-forwarding</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/cha-services</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/warehousing-solutions</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/inland-transportation</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/marine-insurance</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/project-cargo</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/advance-authorisation</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/epcg-scheme</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/scomet-licensing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/rodtep-scheme</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/igst-refund</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/duty-drawback</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/bis-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/epr-authorization</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/fssai-licensing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/wpc-license</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/lmpc-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/edpms-ebrc</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/aqcs-pqms</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/cdsco-compliance</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/certificate-of-origin</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/gst-lut-filing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/rex-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/customs-adjudication</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/prc-relaxation</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/dsc-services</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/import-management-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/no-due-certificate</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/no-incentive-certificate</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/interest-equalisation-scheme</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/eop-extension</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/halal-certification</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/igcr-returns</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/iso-certification</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/fertiliser-import-license</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/free-sale-certificate</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/dfia-license</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/star-export-house</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/defence-exim-license</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/iem-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/industrial-license</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/dpd-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/factory-license</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/factory-stuffing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/gem-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/gst-returns</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/horticulture</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/pollution-control</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/trademark-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/copyright-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/brand-copyright</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/logo-copyright</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/barcode-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/design-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/rmcc-alert-removal</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/svb-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/warehouse-license</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/un-iip-certification</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/ca-certification-export-import</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/customs-license-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/rodtep-rosctl-trading</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
 
-  <!-- SERVICES -->
-  <url><loc>https://eximinq.in/services/iec-registration</loc></url>
-  <url><loc>https://eximinq.in/services/ice-registration</loc></url>
-  <url><loc>https://eximinq.in/services/ad-code-registration</loc></url>
-  <url><loc>https://eximinq.in/services/e-rcmc-registration</loc></url>
-  <url><loc>https://eximinq.in/services/bill-of-entry-filing</loc></url>
-  <url><loc>https://eximinq.in/services/shipping-bill-filing</loc></url>
-  <url><loc>https://eximinq.in/services/e-sanchit-filing</loc></url>
-  <url><loc>https://eximinq.in/services/duty-payment-ecl</loc></url>
-  <url><loc>https://eximinq.in/services/aeo-certification</loc></url>
-  <url><loc>https://eximinq.in/services/moowr-scheme</loc></url>
-  <url><loc>https://eximinq.in/services/freight-forwarding</loc></url>
-  <url><loc>https://eximinq.in/services/cha-services</loc></url>
-  <url><loc>https://eximinq.in/services/warehousing-solutions</loc></url>
-  <url><loc>https://eximinq.in/services/inland-transportation</loc></url>
-  <url><loc>https://eximinq.in/services/marine-insurance</loc></url>
-  <url><loc>https://eximinq.in/services/project-cargo</loc></url>
-  <url><loc>https://eximinq.in/services/advance-authorisation</loc></url>
-  <url><loc>https://eximinq.in/services/epcg-scheme</loc></url>
-  <url><loc>https://eximinq.in/services/scomet-licensing</loc></url>
-  <url><loc>https://eximinq.in/services/rodtep-scheme</loc></url>
-  <url><loc>https://eximinq.in/services/igst-refund</loc></url>
-  <url><loc>https://eximinq.in/services/duty-drawback</loc></url>
-  <url><loc>https://eximinq.in/services/bis-registration</loc></url>
-  <url><loc>https://eximinq.in/services/epr-authorization</loc></url>
-  <url><loc>https://eximinq.in/services/fssai-licensing</loc></url>
-  <url><loc>https://eximinq.in/services/wpc-license</loc></url>
-  <url><loc>https://eximinq.in/services/lmpc-registration</loc></url>
-  <url><loc>https://eximinq.in/services/edpms-ebrc</loc></url>
-  <url><loc>https://eximinq.in/services/aqcs-pqms</loc></url>
-  <url><loc>https://eximinq.in/services/cdsco-compliance</loc></url>
-  <url><loc>https://eximinq.in/services/certificate-of-origin</loc></url>
-  <url><loc>https://eximinq.in/services/gst-lut-filing</loc></url>
-  <url><loc>https://eximinq.in/services/rex-registration</loc></url>
-  <url><loc>https://eximinq.in/services/customs-adjudication</loc></url>
-  <url><loc>https://eximinq.in/services/prc-relaxation</loc></url>
-  <url><loc>https://eximinq.in/services/dsc-services</loc></url>
-  <url><loc>https://eximinq.in/services/import-management-registration</loc></url>
-  <url><loc>https://eximinq.in/services/no-due-certificate</loc></url>
-  <url><loc>https://eximinq.in/services/no-incentive-certificate</loc></url>
-  <url><loc>https://eximinq.in/services/interest-equalisation-scheme</loc></url>
-  <url><loc>https://eximinq.in/services/eop-extension</loc></url>
-  <url><loc>https://eximinq.in/services/halal-certification</loc></url>
-  <url><loc>https://eximinq.in/services/igcr-returns</loc></url>
-  <url><loc>https://eximinq.in/services/iso-certification</loc></url>
-  <url><loc>https://eximinq.in/services/fertiliser-import-license</loc></url>
-  <url><loc>https://eximinq.in/services/free-sale-certificate</loc></url>
-  <url><loc>https://eximinq.in/services/dfia-license</loc></url>
-  <url><loc>https://eximinq.in/services/star-export-house</loc></url>
-  <url><loc>https://eximinq.in/services/defence-exim-license</loc></url>
-  <url><loc>https://eximinq.in/services/iem-registration</loc></url>
-  <url><loc>https://eximinq.in/services/industrial-license</loc></url>
-  <url><loc>https://eximinq.in/services/dpd-registration</loc></url>
-  <url><loc>https://eximinq.in/services/factory-license</loc></url>
-  <url><loc>https://eximinq.in/services/factory-stuffing</loc></url>
-  <url><loc>https://eximinq.in/services/gem-registration</loc></url>
-  <url><loc>https://eximinq.in/services/gst-returns</loc></url>
-  <url><loc>https://eximinq.in/services/horticulture</loc></url>
-  <url><loc>https://eximinq.in/services/pollution-control</loc></url>
-  <url><loc>https://eximinq.in/services/trademark-registration</loc></url>
-  <url><loc>https://eximinq.in/services/copyright-registration</loc></url>
-  <url><loc>https://eximinq.in/services/brand-copyright</loc></url>
-  <url><loc>https://eximinq.in/services/logo-copyright</loc></url>
-  <url><loc>https://eximinq.in/services/barcode-registration</loc></url>
-  <url><loc>https://eximinq.in/services/design-registration</loc></url>
-  <url><loc>https://eximinq.in/services/rmcc-alert-removal</loc></url>
-  <url><loc>https://eximinq.in/services/svb-registration</loc></url>
-  <url><loc>https://eximinq.in/services/warehouse-license</loc></url>
-  <url><loc>https://eximinq.in/services/un-iip-certification</loc></url>
-  <url><loc>https://eximinq.in/services/ca-certification-export-import</loc></url>
-  <url><loc>https://eximinq.in/services/customs-license-registration</loc></url>
-  <url><loc>https://eximinq.in/services/rodtep-rosctl-trading</loc></url>
+<url>
+  <loc>https://eximinq.in/foreign-trade-policy/regulatory-updates</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/foreign-trade-policy/exchange-rates</loc>
+  <lastmod>2026-01-30</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url><loc>https://eximinq.in/pharmaceuticals-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/engineering-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/electronics-it-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/chemicals-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/textiles-apparels-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/food-agro-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/solar-and-renewables-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/defense-aerospace-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/ecommerce-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/trade-compliance-calendar</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+<url><loc>https://eximinq.in/bis-epr-wpc-lmpc</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
 
-  <!-- Home page inner page -->
-  <url><loc>https://eximinq.in/pharmaceuticals-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/engineering-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/electronics-it-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/chemicals-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/textiles-apparels-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/food-agro-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/solar-and-renewables-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/defense-aerospace-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/ecommerce-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/trade-compliance-calendar</loc></url>
-  <url><loc>https://eximinq.in/bis-epr-wpc-lmpc</loc></url>
-
-  <!-- TOOLS -->
-  <!-- <url><loc>https://eximinq.in/tools/hs-code-finder</loc></url>
-  <url><loc>https://eximinq.in/tools/duty-calculator-finder</loc></url> -->
-
-  <!-- LEGAL -->
-  <url><loc>https://eximinq.in/disclaimer</loc></url>
-  <url><loc>https://eximinq.in/privacy-policy</loc></url>
-  <url><loc>https://eximinq.in/terms-of-service</loc></url>
-
+<url>
+  <loc>https://eximinq.in/contact-us</loc>
+  <lastmod>2026-01-30</lastmod>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/disclaimer</loc>
+  <lastmod>2026-01-30</lastmod>
+  <priority>0.3</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/privacy-policy</loc>
+  <lastmod>2026-01-30</lastmod>
+  <priority>0.3</priority>
+</url>
+<url>
+  <loc>https://eximinq.in/terms-of-service</loc>
+  <lastmod>2026-01-30</lastmod>
+  <priority>0.3</priority>
+</url>
 
 </urlset>

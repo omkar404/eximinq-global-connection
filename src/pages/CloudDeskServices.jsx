@@ -115,7 +115,7 @@ const CloudDeskServices = () => {
       description:
         "New Importer-Exporter Code (IEC) application, modification, annual updates, and Aadhaar linking services.",
       icon: <UserCheck className="w-8 h-8 text-blue-600" />,
-      link: "https://eximinq.in/services/iec-registration",
+      link: "https://eximinq.in/services/import-export-code",
       popular: true,
     },
     {
@@ -126,7 +126,7 @@ const CloudDeskServices = () => {
         "Complete profile setup on ICEGATE, DSC (Digital Signature) registration, and PAN-Aadhaar linking for e-filing.",
       icon: <Database className="w-8 h-8 text-blue-600" />,
       popular: true,
-      link: "https://eximinq.in/services/ice-registration",
+      link: "https://eximinq.in/services/icegate-registration",
     },
     {
       id: 103,

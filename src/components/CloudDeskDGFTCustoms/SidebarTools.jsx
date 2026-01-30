@@ -32,7 +32,7 @@ const SidebarTools = () => {
   ];
 
   const TOOL_LINKS = {
-    "Verify IEC Details": "https://eximinq.in/services/iec-registration",
+    "Verify IEC Details": "https://eximinq.in/services/import-export-code",
     "Import Duty Calculator": "https://eximinq.in/tools/duty-calculator-finder",
     "HSN Code Finder": "https://eximinq.in/tools/hs-code-finder",
     "Exchange Rates": "https://eximinq.in/foreign-trade-policy/exchange-rates",

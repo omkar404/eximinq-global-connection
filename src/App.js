@@ -129,10 +129,10 @@ function App() {
         <Route path="/aeo" element={<CloudDeskAEOLanding />} />
 
         {/*ICE Management */}
-        <Route path="/services/iec-registration" element={<CloudDeskIceManagement />} />
+        <Route path="/services/import-export-code" element={<CloudDeskIceManagement />} />
 
         {/*ICE Registration */}
-        <Route path="/services/ice-registration" element={<CloudDeskICERegistration />} />
+        <Route path="/services/icegate-registration" element={<CloudDeskICERegistration />} />
 
         {/* AD CODE */}
         <Route path="/services/ad-code-registration" element={<CloudDeskADCode />} />
