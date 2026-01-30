@@ -43,7 +43,7 @@ const HeroAEO = () => {
             href="tel:+917400096950"
             className="flex items-center text-white border border-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition"
           >
-            <Phone size={20} className="mr-2" /> Call Cloud Desk
+            <Phone size={20} className="mr-2" /> Call Contact
           </a>
         </div>
 

@@ -67,7 +67,7 @@ const DisclaimerPage = () => {
               Compliance
             </a>
             <a className="hover:text-teal-500" href="/contact-us">
-              Cloud Desk
+              Contact
             </a>
             <a className="hover:text-teal-500" href="/clouddesk-saas">
               SAAS
@@ -96,7 +96,7 @@ const DisclaimerPage = () => {
                       Connect with us for legal assistance
                     </p>
                     <a
-                      href="tel:+919121230280"
+                      href="tel:+917400096950"
                       className="text-blue-600 font-medium text-sm hover:underline"
                     >
                       +917400096950 →
@@ -128,7 +128,7 @@ const DisclaimerPage = () => {
                       Need a quick help? Leave a message
                     </p>
                     <a
-                      href="https://wa.me/919121230280"
+                      href="https://wa.me/917400096950"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 font-medium text-sm hover:underline"
@@ -169,7 +169,7 @@ const DisclaimerPage = () => {
             </h1>
             <p className="text-blue-100 text-lg max-w-2xl mx-auto">
               Please read these terms carefully before using our trade
-              compliance and cloud desk services.
+              compliance and Contact services.
             </p>
           </div>
         </header>
@@ -216,7 +216,7 @@ const DisclaimerPage = () => {
                   2. Non-Government Affiliation
                 </h2>
                 <p className="text-slate-700 leading-relaxed">
-                  Eximinq is a private consultancy and cloud desk service
+                  Eximinq is a private consultancy and Contact service
                   provider. We are <strong>not</strong> a government entity, nor
                   are we directly affiliated with the Directorate General of
                   Foreign Trade (DGFT), Central Board of Indirect Taxes and

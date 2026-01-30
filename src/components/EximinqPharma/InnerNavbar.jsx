@@ -21,7 +21,7 @@ const InnerNavbar = ({ scrolled, isMenuOpen, setShowEnrollModal }) => {
             Services
           </a>
           <a href="#clouddesk" className="hover:text-teal-600 transition">
-            Cloud Desk
+            Contact
           </a>
         </div>
 

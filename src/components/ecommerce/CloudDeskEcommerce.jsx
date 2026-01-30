@@ -16,7 +16,7 @@ const CloudDeskEcommerce = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="lg:w-1/2">
               <div className="inline-block bg-violet-600 text-white font-bold px-4 py-1.5 rounded-full text-xs mb-8 tracking-widest uppercase shadow-[0_0_20px_rgba(124,58,237,0.5)]">
-                EXIMINQ CLOUD DESK
+                EXIMINQ Contact
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
                 Parcel Intelligence <span className="text-violet-400">Hub</span>

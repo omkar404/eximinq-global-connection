@@ -40,7 +40,7 @@ const NavbarCOO = ({
             Compliance
           </a>
           <a href="/contact-us" className="hover:text-teal-600">
-            Cloud Desk
+            Contact
           </a>
           <a href="/clouddesk-saas" className="hover:text-teal-600">
             SAAS
@@ -69,7 +69,7 @@ const NavbarCOO = ({
                     Connect with us for legal assistance
                   </p>
                   <a
-                    href="tel:+919121230280"
+                    href="tel:+917400096950"
                     className="text-blue-600 font-medium text-sm hover:underline"
                   >
                     +917400096950 →
@@ -101,7 +101,7 @@ const NavbarCOO = ({
                     Need a quick help? Leave a message
                   </p>
                   <a
-                    href="https://wa.me/919121230280"
+                    href="https://wa.me/917400096950"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 font-medium text-sm hover:underline"

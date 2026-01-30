@@ -19,7 +19,7 @@ const CloudDeskEngineering = () => {
           {/* LEFT CONTENT */}
           <div className="lg:w-1/2">
             <div className="inline-block bg-blue-600 text-white font-bold px-4 py-1 rounded-sm text-sm mb-6 tracking-wider">
-              EXIMINQ CLOUD DESK
+              EXIMINQ Contact
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">

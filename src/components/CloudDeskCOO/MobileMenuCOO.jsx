@@ -10,7 +10,7 @@ export const MobileMenuCOO = ({ isMenuOpen, setIsMenuOpen, setShowModal }) => {
         <a href="/dgft-customs-consultancy" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">DGFT & Customs</a>
         <a href="/certificate-of-origin" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">COO</a>
         <a href="/compliance-trade-india" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Compliance</a>
-        <a href="/contact-us" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Cloud Desk</a>
+        <a href="/contact-us" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Contact</a>
         <a href="/clouddesk-saas" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">SAAS</a>
 
         <div className="w-full border-t border-gray-200"></div>

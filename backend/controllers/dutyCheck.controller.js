@@ -59,7 +59,7 @@ exports.createDutyCheck = async (req, res) => {
     });
 
     await transporter.sendMail({
-      from: `"Cloud Desk – Duty Benefit" <${process.env.SMTP_USER}>`,
+      from: `"Contact – Duty Benefit" <${process.env.SMTP_USER}>`,
       to: "crm@eximinq.com, omkarmhetar100@gmail.com",
       subject: "New Duty Benefit Check Request",
       html: `

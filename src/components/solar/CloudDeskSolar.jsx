@@ -18,7 +18,7 @@ const CloudDeskSolar = () => {
           {/* Left */}
           <div className="lg:w-1/2">
             <div className="inline-block bg-sky-600 text-white font-bold px-4 py-1 rounded-full text-sm mb-6 tracking-wide">
-              EXIMINQ CLOUD DESK
+              EXIMINQ Contact
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">

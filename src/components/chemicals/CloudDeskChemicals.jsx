@@ -15,7 +15,7 @@ const CloudDeskChemicals = () => {
           {/* Left */}
           <div className="lg:w-1/2">
             <div className="inline-block bg-emerald-600 px-4 py-1 rounded-sm text-sm font-bold mb-6">
-              EXIMINQ CLOUD DESK
+              EXIMINQ Contact
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold mb-6">

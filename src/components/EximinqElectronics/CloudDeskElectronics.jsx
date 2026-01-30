@@ -7,7 +7,7 @@ const CloudDeskElectronics = () => {
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2">
               <div className="inline-block bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 text-cyan-400 border border-cyan-500/20 font-bold px-4 py-1 rounded-full text-sm mb-6">
-                EXIMINQ CLOUD DESK
+                EXIMINQ Contact
               </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight text-white">
                 Compliance <br/>

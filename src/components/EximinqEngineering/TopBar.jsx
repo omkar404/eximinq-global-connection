@@ -32,7 +32,7 @@ const TopBar = ({ setShowEnrollModal }) => {
             Compliance
           </a>
           <a className="hover:text-teal-500" href="/contact-us">
-            Cloud Desk
+            Contact
           </a>
           <a className="hover:text-teal-500" href="/clouddesk-saas">
             SAAS
@@ -60,7 +60,7 @@ const TopBar = ({ setShowEnrollModal }) => {
                     Connect with us for legal assistance
                   </p>
                   <a
-                    href="tel:+919121230280"
+                    href="tel:+917400096950"
                     className="text-blue-600 font-medium text-sm hover:underline"
                   >
                     +917400096950 →
@@ -92,7 +92,7 @@ const TopBar = ({ setShowEnrollModal }) => {
                     Need a quick help? Leave a message
                   </p>
                   <a
-                    href="https://wa.me/919121230280"
+                    href="https://wa.me/917400096950"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 font-medium text-sm hover:underline"

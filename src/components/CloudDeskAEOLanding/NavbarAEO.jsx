@@ -48,7 +48,7 @@ const NavbarAEO = ({ isMenuOpen, setIsMenuOpen }) => {
             className="hover:text-teal-500 whitespace-nowrap"
             href="/contact-us"
           >
-            Cloud Desk
+            Contact
           </a>
           <a
             className="hover:text-teal-500 whitespace-nowrap"

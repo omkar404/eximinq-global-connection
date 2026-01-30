@@ -180,7 +180,7 @@ const CloudDeskGlobalTrade = () => {
 
               <p className="text-slate-300 mb-8 leading-relaxed">
                 Logistics is not just about moving goods; it's about timing and
-                cost. Our "Cloud Desk" model aggregates volumes to negotiate
+                cost. Our "Contact" model aggregates volumes to negotiate
                 rates that individual shippers simply cannot get.
               </p>
 
@@ -520,7 +520,7 @@ const CloudDeskGlobalTrade = () => {
             <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
-              EXIMINQ Cloud Desk: Your trusted partner for DGFT, Customs, and
+              EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
               Logistics compliance.
             </p>
 

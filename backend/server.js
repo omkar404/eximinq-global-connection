@@ -152,7 +152,7 @@ app.post("/api/support", async (req, res) => {
 
     // Email content
     const mailOptions = {
-      from: `"Cloud Desk" <${process.env.SMTP_USER}>`,
+      from: `"Contact" <${process.env.SMTP_USER}>`,
       to: "crm@eximinq.com, omkarmhetar100@gmail.com",
       subject: "New CHA Enrollment Request Submitted",
       html: `
@@ -183,7 +183,7 @@ app.post("/api/aeo-support", async (req, res) => {
     console.log("BODY:", req.body);
 
     const mailOptions = {
-      from: `"Cloud Desk AEO" <${process.env.SMTP_USER}>`,
+      from: `"Contact AEO" <${process.env.SMTP_USER}>`,
       to: "crm@eximinq.com, omkarmhetar100@gmail.com",
       subject: "Aeo renewal Callback Request",
       html: `
@@ -246,7 +246,7 @@ app.post("/api/enquiry/customs", async (req, res) => {
     const { name, mobile, entity, email, iam, partner, context } = req.body;
 
     const mailOptions = {
-      from: `"Cloud Desk Customs" <${process.env.SMTP_USER}>`,
+      from: `"Contact Customs" <${process.env.SMTP_USER}>`,
       to: "crm@eximinq.com, omkarmhetar100@gmail.com",
       subject: `New Customs Enquiry - ${context}`,
       html: `
@@ -277,7 +277,7 @@ app.post("/api/enquiry/services", async (req, res) => {
     const saved = await ServiceEnquiry.create(req.body);
 
     const mailOptions = {
-      from: `"Cloud Desk Services" <${process.env.SMTP_USER}>`,
+      from: `"Contact Services" <${process.env.SMTP_USER}>`,
       to: "crm@eximinq.com, omkarmhetar100@gmail.com",
       subject: `New Services Enquiry — ${req.body.context || "CloudDesk Services"}`,
       html: `
@@ -324,7 +324,7 @@ app.post("/api/rodtep-rosctl-trading", async (req, res) => {
 
     // ✅ EMAIL SEND (THIS WAS MISSING)
     await transporter.sendMail({
-      from: `"Cloud Desk Trading" <${process.env.SMTP_USER}>`,
+      from: `"Contact Trading" <${process.env.SMTP_USER}>`,
       to: "crm@eximinq.com, omkarmhetar100@gmail.com",
       subject: `New ${scheme} Trading Request`,
       html: `

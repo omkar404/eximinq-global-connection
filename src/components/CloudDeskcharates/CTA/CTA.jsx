@@ -8,7 +8,7 @@ export default function CTA ({ setOpenSupport }) {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-900/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
             <h2 className="text-3xl font-bold mb-4 relative z-10">Ready to Optimize Your Logistics?</h2>
-            <p className="text-blue-100 mb-8 relative z-10">Get started with Eximinq Cloud Desk today and experience the difference in efficiency and cost.</p>
+            <p className="text-blue-100 mb-8 relative z-10">Get started with Eximinq Contact today and experience the difference in efficiency and cost.</p>
             
             <button 
             onClick={() => setOpenSupport(true)}

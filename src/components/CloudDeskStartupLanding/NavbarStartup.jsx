@@ -89,7 +89,7 @@ export const NavbarStartup = ({
           <a className="hover:text-teal-500" href="/dgft-customs-consultancy">DGFT & Customs</a>
           <a className="hover:text-teal-500" href="/certificate-of-origin">COO</a>
           <a className="hover:text-teal-500" href="/compliance-trade-india">Compliance</a>
-          <a className="hover:text-teal-500" href="/contact-us">Cloud Desk</a>
+          <a className="hover:text-teal-500" href="/contact-us">Contact</a>
           <a className="hover:text-teal-500" href="/clouddesk-saas">SAAS</a>
         </div>
 
@@ -115,7 +115,7 @@ export const NavbarStartup = ({
                     Connect with us for legal assistance
                   </p>
                   <a
-                    href="tel:+919121230280"
+                    href="tel:+917400096950"
                     className="text-blue-600 font-medium text-sm hover:underline"
                   >
                     +917400096950 →
@@ -147,7 +147,7 @@ export const NavbarStartup = ({
                     Need a quick help? Leave a message
                   </p>
                   <a
-                    href="https://wa.me/919121230280"
+                    href="https://wa.me/917400096950"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 font-medium text-sm hover:underline"

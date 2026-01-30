@@ -240,7 +240,7 @@ const CloudDeskDFIA = () => {
             <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
-              EXIMINQ Cloud Desk: Your trusted partner for DGFT, Customs, and
+              EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
               Logistics compliance.
             </p>
 
@@ -383,7 +383,7 @@ export default CloudDeskDFIA;
 //           </div>
 //           <div className="flex flex-col">
 //             <span className="text-white font-bold text-xl tracking-tight leading-none">EXIMINQ</span>
-//             <span className="text-cyan-400 text-xs font-medium tracking-widest uppercase">Cloud Desk</span>
+//             <span className="text-cyan-400 text-xs font-medium tracking-widest uppercase">Contact</span>
 //           </div>
 //         </div>
 

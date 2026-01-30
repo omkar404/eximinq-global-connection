@@ -26,7 +26,7 @@ const MainNavbar = ({ scrolled, isMenuOpen, setIsMenuOpen }) => {
             href="#clouddesk"
             className="hover:text-blue-700 transition-colors"
           >
-            Cloud Desk
+            Contact
           </a>
         </div>
 

@@ -61,7 +61,7 @@ const TermsOfServicePage = () => {
               Compliance
             </a>
             <a className="hover:text-teal-500" href="/contact-us">
-              Cloud Desk
+              Contact
             </a>
             <a className="hover:text-teal-500" href="/clouddesk-saas">
               SAAS
@@ -90,7 +90,7 @@ const TermsOfServicePage = () => {
                       Connect with us for legal assistance
                     </p>
                     <a
-                      href="tel:+919121230280"
+                      href="tel:+917400096950"
                       className="text-blue-600 font-medium text-sm hover:underline"
                     >
                       +917400096950 →
@@ -122,7 +122,7 @@ const TermsOfServicePage = () => {
                       Need a quick help? Leave a message
                     </p>
                     <a
-                      href="https://wa.me/919121230280"
+                      href="https://wa.me/917400096950"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 font-medium text-sm hover:underline"
@@ -162,7 +162,7 @@ const TermsOfServicePage = () => {
               Terms and Conditions
             </h1>
             <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-              These terms govern your use of Eximinq's Cloud Desk and trade compliance services.
+              These terms govern your use of Eximinq's Contact and trade compliance services.
             </p>
           </div>
         </header>
@@ -223,7 +223,7 @@ const TermsOfServicePage = () => {
                 <ul className="list-disc pl-5 mt-2 space-y-2 text-slate-600">
                   <li>Provide accurate, current, and complete documents (Invoices, IEC, Shipping Bills).</li>
                   <li>Ensure your business activities comply with the Foreign Trade Policy of India.</li>
-                  <li>Maintain the confidentiality of your Cloud Desk login credentials.</li>
+                  <li>Maintain the confidentiality of your Contact login credentials.</li>
                   <li>Not use our services for any illegal import/export activities or restricted items without proper authorization.</li>
                 </ul>
               </div>
@@ -250,7 +250,7 @@ const TermsOfServicePage = () => {
               <div>
                 <h2 className="text-xl font-bold text-slate-900 mb-2">5. Termination</h2>
                 <p className="text-slate-600 leading-relaxed">
-                  We reserve the right to terminate or suspend your access to our Cloud Desk immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. Upon termination, your right to use the Service will cease immediately.
+                  We reserve the right to terminate or suspend your access to our Contact immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. Upon termination, your right to use the Service will cease immediately.
                 </p>
               </div>
             </div>

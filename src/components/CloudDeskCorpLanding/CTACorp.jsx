@@ -13,7 +13,7 @@ const CTACorp = ({setShowModal}) => {
                         p-12 rounded-3xl border border-slate-700 shadow-2xl">
 
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Partner with Eximinq Cloud Desk
+            Partner with Eximinq Contact
           </h2>
 
           <p className="text-slate-400 mb-10 text-lg">

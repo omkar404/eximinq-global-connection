@@ -13,7 +13,7 @@
 //             <BrandLogo />
 //           </a>
 //             <p className="text-slate-400 max-w-sm leading-relaxed mt-6">
-//               Eximinq Cloud Desk: Your partner in global trade.  
+//               Eximinq Contact: Your partner in global trade.  
 //               We simplify compliance for new Indian entities venturing into exports.
 //             </p>
 //           </div>

@@ -329,7 +329,7 @@ const CloudDeskHalal = () => {
             <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
-              EXIMINQ Cloud Desk: Your trusted partner for DGFT, Customs, and
+              EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
               Logistics compliance.
             </p>
 
@@ -341,7 +341,7 @@ const CloudDeskHalal = () => {
                 href="https://in.linkedin.com/in/eximinq-cloud-desk?trk=profile-badge"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Eximinq Cloud Desk on LinkedIn"
+                aria-label="Eximinq Contact on LinkedIn"
                 className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
               >
                 <Twitter size={18} />

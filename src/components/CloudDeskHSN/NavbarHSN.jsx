@@ -22,7 +22,7 @@ const NavbarHSN = ({ setShowModal }) => {
               EXIMINQ
             </span>
             <span className={`text-sm font-semibold uppercase tracking-widest ${scrolled ? "text-gray-600" : "lg:text-gray-200"}`}>
-              Cloud Desk
+              Contact
             </span>
           </div>
         </div>

@@ -54,7 +54,7 @@ const Navbar = ({ onEnrollClick }) => {
             Compliance
           </a>
           <a href="/contact-us" className="hover:text-teal-600 transition">
-            Cloud Desk
+            Contact
           </a>
           <a href="/clouddesk-saas" className="hover:text-teal-600 transition">
             SAAS

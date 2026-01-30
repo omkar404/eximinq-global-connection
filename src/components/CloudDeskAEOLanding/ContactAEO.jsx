@@ -70,7 +70,7 @@ const ContactAEO = () => {
 
           {/* LEFT */}
           <div className="p-10 md:w-1/2 flex flex-col justify-center">
-            <h2 className="text-3xl font-bold mb-6">Contact Cloud Desk</h2>
+            <h2 className="text-3xl font-bold mb-6">Contact Contact</h2>
             <p className="text-blue-200 mb-8">
               Secure your AEO status today.
             </p>

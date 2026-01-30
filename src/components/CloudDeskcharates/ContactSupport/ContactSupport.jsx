@@ -147,7 +147,7 @@ const ContactSupportModal = ({ open, onClose }) => {
         </text>
       </svg> */}
 
-              {/* Cloud Desk */}
+              {/* Contact */}
               <div className="flex items-center space-x-3">
                 {/* <svg viewBox="0 0 100 100" className="h-8 w-8 text-indigo-400" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="rgba(99, 102, 241, 0.1)"/>

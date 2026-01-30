@@ -30,7 +30,7 @@ const WhyCloudDesk = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Why Choose Cloud Desk?
+            Why Choose Contact?
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
             We combine deep regulatory expertise with digital efficiency to ensure your business remains compliant and cost-effective.

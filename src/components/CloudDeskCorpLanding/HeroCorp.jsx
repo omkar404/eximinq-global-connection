@@ -31,7 +31,7 @@ const HeroCorp = () => {
 
         {/* Subtext */}
         <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-          Navigate the complexities of international trade with Cloud Desk.  
+          Navigate the complexities of international trade with Contact.  
           From licensing to compliance and duty optimization, we provide  
           end-to-end solutions for modern businesses.
         </p>

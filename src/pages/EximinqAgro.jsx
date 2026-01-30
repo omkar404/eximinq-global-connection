@@ -42,7 +42,7 @@ const EximinqAgro = () => {
     { label: "Home", href: "#home" },
     { label: "Solutions", href: "#solutions" },
     { label: "Services", href: "#services" },
-    { label: "Cloud Desk", href: "#clouddesk" },
+    { label: "Contact", href: "#clouddesk" },
   ];
 
   return (

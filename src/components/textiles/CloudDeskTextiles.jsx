@@ -18,7 +18,7 @@ const CloudDeskTextiles = () => {
           {/* Left */}
           <div className="lg:w-1/2">
             <div className="inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-4 py-1.5 rounded-full text-xs mb-8 tracking-widest uppercase">
-              EXIMINQ CLOUD DESK
+              EXIMINQ Contact
             </div>
 
             <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight font-serif">

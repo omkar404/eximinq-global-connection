@@ -107,11 +107,13 @@ import ComplianceCalendar from "./pages/ComplianceCalendar"
 import BisEprWpcLmpc from "./pages/BisEprWpcLmpc";
 import CloudDeskComplianceAudit from "./pages/CloudDeskComplianceAudit";
 import CloudDeskDemo from "./pages/CloudDeskDemo";
+import SEOManager from "./components/SEOManager";
 
 function App() {
   return (
     <BrowserRouter>
     <AnalyticsTracker />
+    <SEOManager/>
       <Routes>
         {/* Charates Routes */}
         <Route path="/charates" element={<Home />} />
@@ -124,7 +126,7 @@ function App() {
         <Route path="/startup" element={<CloudDeskStartupLanding />} />
 
         {/*AEO Routes */}
-        <Route path="/AEO" element={<CloudDeskAEOLanding />} />
+        <Route path="/aeo" element={<CloudDeskAEOLanding />} />
 
         {/*ICE Management */}
         <Route path="/services/iec-registration" element={<CloudDeskIceManagement />} />
@@ -386,10 +388,10 @@ function App() {
         {/*bis-epr-wpc-lmpc */}
         <Route path="/bis-epr-wpc-lmpc" element={<BisEprWpcLmpc />} />
 
-        {/* Demo of Cloud Desk */}
+        {/* Demo of Contact */}
         <Route path="/demo-of-clouddesk" element={<CloudDeskDemo />} />
 
-        {/* Cloud Desk Routes */}
+        {/* Contact Routes */}
         <Route path="/" element={<CloudDeskHome />} />
         <Route path="/services" element={<CloudDeskServices />} />
         <Route path="/foreign-trade-policy" element={<CloudDeskForeignTrade />} />

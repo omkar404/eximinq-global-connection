@@ -277,7 +277,7 @@ const CloudDeskInlandTransport = () => {
               <h3 className="font-bold text-lg mb-2">Live GPS Tracking</h3>
               <p className="text-sm text-slate-600">
                 Know exactly where your cargo is. Real-time updates via our
-                Cloud Desk portal.
+                Contact portal.
               </p>
             </div>
 
@@ -312,7 +312,7 @@ const CloudDeskInlandTransport = () => {
             <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
-              EXIMINQ Cloud Desk: Your trusted partner for DGFT, Customs, and
+              EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
               Logistics compliance.
             </p>
 

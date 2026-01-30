@@ -39,7 +39,7 @@ export const MainNavbar = ({
             Compliance
           </a>
           <a className="hover:text-teal-500" href="/contact-us">
-            Cloud Desk
+            Contact
           </a>
           <a className="hover:text-teal-500" href="/clouddesk-saas">
             SAAS

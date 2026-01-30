@@ -17,7 +17,7 @@ const CloudDesk = () => {
           {/* LEFT CONTENT */}
           <div className="lg:w-1/2">
             <div className="inline-block bg-teal-500/20 text-teal-400 font-bold px-4 py-1 rounded-full text-sm mb-6">
-              EXIMINQ CLOUD DESK
+              EXIMINQ Contact
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
@@ -27,7 +27,7 @@ const CloudDesk = () => {
 
             <p className="text-slate-300 text-lg mb-10 leading-relaxed">
               Track licenses, manage regulatory documents, and monitor
-              shipments in real-time. Cloud Desk ensures you never miss a
+              shipments in real-time. Contact ensures you never miss a
               compliance deadline again.
             </p>
 

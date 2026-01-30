@@ -30,7 +30,7 @@ export const Footer = ({ setShowEnrollModal }) => {
               href="#"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit Eximinq Cloud Desk on LinkedIn"
+              aria-label="Visit Eximinq Contact on LinkedIn"
               className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center 
              hover:bg-teal-600 transition text-xs font-bold text-white"
             >

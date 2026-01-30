@@ -10,16 +10,16 @@
   <url><loc>https://eximinq.in/foreign-trade-policy/regulatory-updates</loc></url>
   <url><loc>https://eximinq.in/foreign-trade-policy/exchange-rates</loc></url>
   <url><loc>https://eximinq.in/dgft-customs-consultancy</loc></url>
-  <url><loc>https://eximinq.in/certificate-of-origin</loc></url>
+  <!-- <url><loc>https://eximinq.in/certificate-of-origin</loc></url> -->
   <url><loc>https://eximinq.in/compliance-trade-india</loc></url>
   <url><loc>https://eximinq.in/contact-us</loc></url>
   <url><loc>https://eximinq.in/clouddesk-saas</loc></url>
 
-  <!-- BUSINESS -->
-  <url><loc>https://eximinq.in/charates</loc></url>
+  <!-- BUSINESS --> 
+  <!-- <url><loc>https://eximinq.in/charates</loc></url>
   <url><loc>https://eximinq.in/corp</loc></url>
   <url><loc>https://eximinq.in/startup</loc></url>
-  <url><loc>https://eximinq.in/AEO</loc></url>
+  <url><loc>https://eximinq.in/aeo</loc></url> -->
 
   <!-- SERVICES -->
   <url><loc>https://eximinq.in/services/iec-registration</loc></url>
@@ -95,21 +95,21 @@
   <url><loc>https://eximinq.in/services/rodtep-rosctl-trading</loc></url>
 
   <!-- Home page inner page -->
-  <url><loc>https://eximinq.in/services/pharmaceuticals-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/engineering-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/electronics-it-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/chemicals-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/textiles-apparels-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/food-agro-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/solar-and-renewables-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/defense-aerospace-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/ecommerce-industry-import-export</loc></url>
-  <url><loc>https://eximinq.in/services/trade-compliance-calendar</loc></url>
-  <url><loc>https://eximinq.in/services/bis-epr-wpc-lmpc</loc></url>
+  <url><loc>https://eximinq.in/pharmaceuticals-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/engineering-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/electronics-it-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/chemicals-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/textiles-apparels-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/food-agro-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/solar-and-renewables-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/defense-aerospace-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/ecommerce-industry-import-export</loc></url>
+  <url><loc>https://eximinq.in/trade-compliance-calendar</loc></url>
+  <url><loc>https://eximinq.in/bis-epr-wpc-lmpc</loc></url>
 
   <!-- TOOLS -->
-  <url><loc>https://eximinq.in/tools/hs-code-finder</loc></url>
-  <url><loc>https://eximinq.in/tools/duty-calculator-finder</loc></url>
+  <!-- <url><loc>https://eximinq.in/tools/hs-code-finder</loc></url>
+  <url><loc>https://eximinq.in/tools/duty-calculator-finder</loc></url> -->
 
   <!-- LEGAL -->
   <url><loc>https://eximinq.in/disclaimer</loc></url>

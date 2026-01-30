@@ -70,7 +70,7 @@ const Footer = () => {
           links={[
             { label: "Disclaimer", href: "/disclaimer" },
             { label: "Privacy Policy", href: "/privacy-policy" },
-            { label: "Terms & Conditions", href: "/privacy-policy" },
+            { label: "Terms & Conditions", href: "/terms-of-service" },
           ]}
         />
       </div>

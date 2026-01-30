@@ -43,7 +43,7 @@ export function MobileMenu({ open, onClose }) {
             onClose={onClose}
           />
           <MobileLink
-            label="Cloud Desk"
+            label="Contact"
             href="/contact-us"
             onClose={onClose}
           />

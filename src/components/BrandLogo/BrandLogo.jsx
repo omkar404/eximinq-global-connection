@@ -6,7 +6,7 @@ const BrandLogo = () => {
     <div className="flex flex-col items-start">
       <img
         src={brandLogo}
-        alt="EXIMINQ - Global Connections Cloud Desk"
+        alt="EXIMINQ - Global Connections Contact"
         className="w-[190px] h-auto"
       />
     </div>

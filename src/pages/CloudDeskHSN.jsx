@@ -220,7 +220,7 @@ const CloudDeskHSN = () => {
           <a href="/dgft-customs-consultancy" className="hover:text-teal-600">DGFT & Customs</a>
           <a href="/certificate-of-origin" className="hover:text-teal-600">COO</a>
           <a href="/compliance-trade-india" className="hover:text-teal-600">Compliance</a>
-          <a href="/contact-us" className="hover:text-teal-600">Cloud Desk</a>  
+          <a href="/contact-us" className="hover:text-teal-600">Contact</a>  
           <a href="/clouddesk-saas" className="hover:text-teal-500 transition">SAAS</a>
           </div>
           {/* CTA */}
