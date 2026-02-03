@@ -12,58 +12,130 @@ import {
   Globe,
 } from "lucide-react";
 
+// Assuming these exist in your project structure
 import TopBar from "../Common/TopBar";
 import { Footer } from "../Common/Footer";
 
-/* ---------------- MOCK DATA ---------------- */
-
-const generateMockEvents = (currentDate) => {
-  const year = currentDate.getFullYear();
-  const currentMonthIdx = new Date().getMonth();
-
-  const events = [];
-
-  for (let m = 0; m < 12; m++) {
-    events.push(
-      {
-        id: Number(`10${m}1`),
-        title: "GSTR-1 (Outward Supplies)",
-        date: new Date(year, m, 11),
-        type: "filing",
-        risk: "high",
-        region: "India",
-        status: m < currentMonthIdx ? "completed" : "pending",
-        authority: "GST",
-      },
-      {
-        id: Number(`10${m}2`),
-        title: "GSTR-3B (Summary Return)",
-        date: new Date(year, m, 20),
-        type: "filing",
-        risk: "high",
-        region: "India",
-        status: m < currentMonthIdx ? "completed" : "pending",
-        authority: "GST",
-      }
-    );
-  }
-
-  const taxMonths = [5, 8, 11, 2];
-  taxMonths.forEach((m, idx) => {
-    events.push({
-      id: 200 + idx,
-      title: `Advance Tax Installment #${idx + 1}`,
-      date: new Date(m === 2 ? year + 1 : year, m, 15),
-      type: "payment",
-      risk: "high",
-      region: "India",
-      status: "pending",
-      authority: "Income Tax",
-    });
-  });
-
-  return events;
-};
+/* ---------------- RAW DATA FROM EXCEL ---------------- */
+const rawComplianceData = [
+ { "Date": "2026-01-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-01-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-01-31", "Event": "EPR Plastic Annual Return - FY 24-25(Extended)" },
+  { "Date": "2026-02-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-02-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-03-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-03-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-03-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2026-03-31", "Event": "GST Letter of Undertaking (LUT) Renewal" },
+  { "Date": "2026-03-31", "Event": "RODTEP Annual Claim Review" },
+  { "Date": "2026-04-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-04-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-04-30", "Event": "EPR E-waste Annual Return - FY 25-26" },
+  { "Date": "2026-04-30", "Event": "EPR TYRE Annual Return - FY 25-26" },
+  { "Date": "2026-04-30", "Event": "FSSAI Form D2 (Half-Yearly Return) (Milk & Milk Products)" },
+  { "Date": "2026-04-30", "Event": "Form MSME (outstanding payments to MSME’s)" },
+  { "Date": "2026-04-30", "Event": "e-RCMC Annual Subscription Renewal" },
+  { "Date": "2026-05-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-05-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-05-30", "Event": "Form 11(Annual returns of an LLP)" },
+  { "Date": "2026-05-30", "Event": "PAS-6 (Filed half-yearly)" },
+  { "Date": "2026-05-31", "Event": "FSSAI Annual Return (Form D-1)" },
+  { "Date": "2026-06-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-06-15", "Event": "Advance Tax Installment #1" },
+  { "Date": "2026-06-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-06-30", "Event": "DGFT IEC Annual Profile Update" },
+  { "Date": "2026-06-30", "Event": "DPT-3" },
+  { "Date": "2026-06-30", "Event": "EPR Battery Annual Return - FY 25-26" },
+  { "Date": "2026-06-30", "Event": "EPR Plastic Annual Return - FY 25-26" },
+  { "Date": "2026-06-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2026-07-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-07-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-08-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-08-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-09-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-09-15", "Event": "Advance Tax Installment #2" },
+  { "Date": "2026-09-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-09-30", "Event": "DIR-3 KYC" },
+  { "Date": "2026-09-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2026-10-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-10-14", "Event": "Form ADT-1 (Appointment of auditor)" },
+  { "Date": "2026-10-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-10-29", "Event": "MCA Form AOC-4 (Financials)" },
+  { "Date": "2026-10-30", "Event": "Form 8 (Financial Reports of an LLP)" },
+  { "Date": "2026-10-30", "Event": "Form AOC-4 (Filing of annual accounts)" },
+  { "Date": "2026-10-30", "Event": "MGT-14 (Filing of resolution with MCA)" },
+  { "Date": "2026-10-31", "Event": "FSSAI Form D2 (Half-Yearly Return) (Milk & Milk Products)" },
+  { "Date": "2026-10-31", "Event": "Form MSME (outstanding payments to MSME’s)" },
+  { "Date": "2026-10-31", "Event": "Income Tax Return (ITR-6) Filing" },
+  { "Date": "2026-11-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-11-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-11-29", "Event": "MCA Form MGT-7 (Annual Return)" },
+  { "Date": "2026-11-29", "Event": "MGT-7 (Filing of annual returns)" },
+  { "Date": "2026-11-29", "Event": "PAS-6 (Filed half-yearly)" },
+  { "Date": "2026-12-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2026-12-15", "Event": "Advance Tax Installment #3" },
+  { "Date": "2026-12-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2026-12-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2026-12-31", "Event": "AEO Annual Declaration FY 25-26" },
+  { "Date": "2027-01-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-01-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-02-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-02-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-03-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-03-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-03-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2027-03-31", "Event": "GST Letter of Undertaking (LUT) Renewal" },
+  { "Date": "2027-03-31", "Event": "RODTEP Annual Claim Review" },
+  { "Date": "2027-04-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-04-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-04-30", "Event": "EPR E-waste Annual Return - FY 26-27" },
+  { "Date": "2027-04-30", "Event": "EPR TYRE Annual Return - FY 26-27" },
+  { "Date": "2027-04-30", "Event": "FSSAI Form D2 (Half-Yearly Return) (Milk & Milk Products)" },
+  { "Date": "2027-04-30", "Event": "Form MSME (outstanding payments to MSME’s)" },
+  { "Date": "2027-04-30", "Event": "e-RCMC Annual Subscription Renewal" },
+  { "Date": "2027-05-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-05-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-05-30", "Event": "Form 11(Annual returns of an LLP)" },
+  { "Date": "2027-05-30", "Event": "PAS-6 (Filed half-yearly)" },
+  { "Date": "2027-05-31", "Event": "FSSAI Annual Return (Form D-1)" },
+  { "Date": "2027-06-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-06-15", "Event": "Advance Tax Installment #1" },
+  { "Date": "2027-06-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-06-30", "Event": "DGFT IEC Annual Profile Update" },
+  { "Date": "2027-06-30", "Event": "DPT-3" },
+  { "Date": "2027-06-30", "Event": "EPR Battery Annual Return - FY 26-27" },
+  { "Date": "2027-06-30", "Event": "EPR Plastic Annual Return - FY 26-27" },
+  { "Date": "2027-06-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2027-07-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-07-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-08-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-08-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-09-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-09-15", "Event": "Advance Tax Installment #2" },
+  { "Date": "2027-09-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-09-30", "Event": "DIR-3 KYC" },
+  { "Date": "2027-09-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2027-10-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-10-14", "Event": "Form ADT-1 (Appointment of auditor)" },
+  { "Date": "2027-10-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-10-29", "Event": "MCA Form AOC-4 (Financials)" },
+  { "Date": "2027-10-30", "Event": "Form 8 (Financial Reports of an LLP)" },
+  { "Date": "2027-10-30", "Event": "Form AOC-4 (Filing of annual accounts)" },
+  { "Date": "2027-10-30", "Event": "MGT-14 (Filing of resolution with MCA)" },
+  { "Date": "2027-10-31", "Event": "FSSAI Form D2 (Half-Yearly Return) (Milk & Milk Products)" },
+  { "Date": "2027-10-31", "Event": "Form MSME (outstanding payments to MSME’s)" },
+  { "Date": "2027-10-31", "Event": "Income Tax Return (ITR-6) Filing" },
+  { "Date": "2027-11-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-11-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-11-29", "Event": "MCA Form MGT-7 (Annual Return)" },
+  { "Date": "2027-11-29", "Event": "MGT-7 (Filing of annual returns)" },
+  { "Date": "2027-11-29", "Event": "PAS-6 (Filed half-yearly)" },
+  { "Date": "2027-12-11", "Event": "GSTR-1 (Outward Supplies)" },
+  { "Date": "2027-12-15", "Event": "Advance Tax Installment #3" },
+  { "Date": "2027-12-20", "Event": "GSTR-3B (Summary Return)" },
+  { "Date": "2027-12-30", "Event": "FSSAI Quarterly Return (Exporters)" },
+  { "Date": "2027-12-31", "Event": "AEO Annual Declaration FY 26-27" }
+];
 
 /* ---------------- HELPERS ---------------- */
 
@@ -86,16 +158,59 @@ const getDaysInMonth = (date) => {
   return days;
 };
 
+// Helper to determine authority based on event name
+const getAuthority = (title) => {
+  if (title.includes("GSTR")) return "GST";
+  if (title.includes("Advance Tax") || title.includes("Income Tax")) return "Income Tax";
+  if (title.includes("FSSAI")) return "FSSAI";
+  if (title.includes("Form") || title.includes("DPT") || title.includes("DIR") || title.includes("MGT") || title.includes("MCA")) return "MCA";
+  return "General";
+};
+
+// Helper to determine risk level
+const getRisk = (title, authority) => {
+  if (authority === "GST" || authority === "Income Tax") return "high";
+  return "medium";
+};
+
+// Transform raw data into the format the UI expects
+const processEvents = () => {
+  const today = new Date();
+  
+  return rawComplianceData.map((item, index) => {
+    const date = new Date(item.Date);
+    const authority = getAuthority(item.Event);
+    
+    // Determine status based on today's date
+    let status = "pending";
+    if (date < today) {
+        status = "completed"; // Assuming past dates are filed
+    }
+
+    return {
+      id: index,
+      title: item.Event,
+      date: date,
+      type: item.Event.includes("Payment") || item.Event.includes("Installment") ? "payment" : "filing",
+      risk: getRisk(item.Event, authority),
+      region: "India",
+      status: status,
+      authority: authority,
+    };
+  });
+};
+
 /* ---------------- COMPONENT ---------------- */
 
 export default function ComplianceCalendar() {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // Initialize to Jan 2026 since that's where the data starts
+  const [currentDate, setCurrentDate] = useState(new Date("2026-01-01")); 
+  const [selectedDate, setSelectedDate] = useState(new Date("2026-01-01"));
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    setEvents(generateMockEvents(currentDate));
-  }, [currentDate]);
+    setEvents(processEvents());
+  }, []);
 
   const days = getDaysInMonth(currentDate);
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -107,12 +222,12 @@ export default function ComplianceCalendar() {
 
   const prevMonth = () =>
     setCurrentDate(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1),
     );
 
   const nextMonth = () =>
     setCurrentDate(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1),
     );
 
   const Badge = ({ children, className = "" }) => (
@@ -131,9 +246,10 @@ export default function ComplianceCalendar() {
       "Income Tax": "bg-green-100 text-green-700",
       MCA: "bg-orange-100 text-orange-700",
       FSSAI: "bg-rose-100 text-rose-700",
+      General: "bg-gray-100 text-gray-700",
     };
 
-    return <Badge className={styles[name]}>{name}</Badge>;
+    return <Badge className={styles[name] || styles.General}>{name}</Badge>;
   };
 
   return (
@@ -238,7 +354,7 @@ export default function ComplianceCalendar() {
                       selectedDate && isSameDay(date, selectedDate);
                     const isToday = isSameDay(date, new Date());
                     const hasHighRisk = dayEvents.some(
-                      (e) => e.risk === "high"
+                      (e) => e.risk === "high",
                     );
 
                     return (
@@ -251,8 +367,8 @@ export default function ComplianceCalendar() {
                             isSelected
                               ? "border-blue-500 ring-1 ring-blue-500 bg-blue-50/50"
                               : isToday
-                              ? "border-blue-200 bg-white shadow-sm ring-1 ring-blue-200"
-                              : "border-slate-100 hover:border-blue-300 hover:shadow-md bg-white"
+                                ? "border-blue-200 bg-white shadow-sm ring-1 ring-blue-200"
+                                : "border-slate-100 hover:border-blue-300 hover:shadow-md bg-white"
                           }
                         `}
                       >
@@ -284,10 +400,10 @@ export default function ComplianceCalendar() {
                                   event.status === "completed"
                                     ? "bg-emerald-50 text-emerald-700 line-through decoration-emerald-700/50"
                                     : event.risk === "high"
-                                    ? "bg-red-50 text-red-700"
-                                    : "bg-slate-100 text-slate-700"
+                                      ? "bg-red-50 text-red-700"
+                                      : "bg-slate-100 text-slate-700"
                                 }
-                            `}
+                              `}
                             >
                               {event.title}
                             </div>
@@ -361,8 +477,8 @@ export default function ComplianceCalendar() {
                           event.risk === "high"
                             ? "border-l-red-500 bg-red-50/30"
                             : event.risk === "medium"
-                            ? "border-l-amber-500 bg-amber-50/30"
-                            : "border-l-blue-500 bg-blue-50/30"
+                              ? "border-l-amber-500 bg-amber-50/30"
+                              : "border-l-blue-500 bg-blue-50/30"
                         }
                         border-t border-r border-b border-slate-100
                       `}

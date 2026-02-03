@@ -1,48 +1,40 @@
 import BrandLogo from "../components/BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 
-const TopBar = ({ setShowEnrollModal }) => {
+const TopBar = ({ setShowEnrollModal, scrolled,
+  isMenuOpen,
+  setIsMenuOpen, }) => {
   return (
-    <div className="bg-white border-b">
-      <div className="container mx-auto px-4 md:px-8 flex justify-between items-center h-23">
-        
-        {/* Logo */}
-        <a href="https://eximinq.in/">
-          <BrandLogo />
-        </a>
+    <nav
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
+        }`}
+    >
+      <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
 
-                {/* Desktop menu */}
-        <div className="hidden md:flex items-center space-x-4 font-smedium text-gray-800">
-          <a className="hover:text-teal-500" href="/">
-            Home
-          </a>
-          <a className="hover:text-teal-500" href="/services">
-            Services
-          </a>
-          <a className="hover:text-teal-500" href="/foreign-trade-policy">
-            Foreign Trade Policy
-          </a>
-          <a className="hover:text-teal-500" href="/dgft-customs-consultancy">
-            DGFT & Customs
-          </a>
-          <a className="hover:text-teal-500" href="/certificate-of-origin">
-            COO
-          </a>
-          <a className="hover:text-teal-500" href="/compliance-trade-india">
-            Compliance
-          </a>
-          <a className="hover:text-teal-500" href="/contact-us">
-            Contact
-          </a>
-          <a className="hover:text-teal-500" href="/clouddesk-saas">
-            SAAS
+        {/* Logo */}
+        <div className="flex items-center">
+          <a href="https://eximinq.in/" className="cursor-pointer">
+            <BrandLogo />
           </a>
         </div>
 
-        {/* Right actions */}
+        {/* Desktop menu */}
+        <div className="hidden md:flex items-center space-x-4 font-smedium text-gray-800">
+          <a className="hover:text-teal-500" href="/">Home</a>
+          <a className="hover:text-teal-500" href="/services">Services</a>
+          <a className="hover:text-teal-500" href="/foreign-trade-policy">Foreign Trade Policy</a >
+          <a className="hover:text-teal-500" href="/dgft-customs-consultancy">DGFT & Customs</a>
+          <a className="hover:text-teal-500" href="/certificate-of-origin">COO</a>
+          <a className="hover:text-teal-500" href="/compliance-trade-india">Compliance</a>
+          <a className="hover:text-teal-500" href="/contact-us">Contact</a>
+          <a className="hover:text-teal-500" href="/clouddesk-saas">SAAS</a>
+        </div>
+
+        {/* Desktop buttons */}
+
         <div className="hidden md:flex items-center space-x-6">
           {/* Contact Dropdown */}
-          <div className="relative group hidden md:block"> 
+          <div className="relative group hidden md:block">
             <div className="flex items-center gap-3 px-4 py-2 border border-blue-400 rounded-full cursor-pointer hover:bg-blue-50 transition">
               <Phone size={18} className="text-blue-600" />
               <Mail size={18} className="text-blue-600" />
@@ -60,10 +52,10 @@ const TopBar = ({ setShowEnrollModal }) => {
                     Connect with us for legal assistance
                   </p>
                   <a
-                    href="tel:+917400096950"
+                    href="tel:+91 74000 96950"
                     className="text-blue-600 font-medium text-sm hover:underline"
                   >
-                    +917400096950 →
+                    +91 74000 96950 →
                   </a>
                 </div>
 
@@ -105,14 +97,25 @@ const TopBar = ({ setShowEnrollModal }) => {
           </div>
 
           <button
-            onClick={() => setShowEnrollModal({ open: true, type: "food_agro_industry_import_export" })}
+            onClick={() => setShowEnrollModal({ open: true, type: "home_enroll" })}
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now
           </button>
-        </div> 
+        </div>
+
+
+
+        {/* Hamburger */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className={`md:hidden text-3xl font-bold ${scrolled ? "text-gray-800" : "text-gray-800"
+            }`}
+        >
+          {isMenuOpen ? "✕" : "☰"}
+        </button>
       </div>
-    </div>
+    </nav>
   );
 };
 

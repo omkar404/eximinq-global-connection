@@ -59,7 +59,7 @@ const HeroCompliance = ({ setShowModal, upcomingDeadlines = [] }) => {
                 <h3 className="font-bold flex items-center">
                   <Calendar className="mr-2 text-teal-400" /> Upcoming Due Dates
                 </h3>
-                <span className="text-xs text-gray-400">Dec 2025</span>
+                <span className="text-xs text-gray-400">Feb 2026</span>
               </div>
 
               <div className="space-y-4">

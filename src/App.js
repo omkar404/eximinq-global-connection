@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AnalyticsTracker from "./AnalyticsTracker";
 import Home from "./pages/Home";
 import ContactSupport from "./components/CloudDeskcharates/ContactSupport/ContactSupport";
@@ -11,7 +11,7 @@ import CloudDeskContact from "./pages/CloudDeskContact";
 import CloudDeskSaasLanding from "./pages/CloudDeskSaasLanding";
 import CloudDeskCorpLanding from "./pages/CloudDeskCorpLanding";
 import CloudDeskStartupLanding from "./pages/CloudDeskStartupLanding";
-import CloudDeskThankYou from "./pages/CloudDeskThankYou";
+import PageNotFound from "./pages/PageNotFound";
 import CloudDeskAEOLanding from "./pages/CloudDeskAEOLanding"
 import CloudDeskHSN from "./pages/CloudDeskHSN";
 import DutyCalculator from "./components/CloudDeskDutyCalculator/DutyCalculator";
@@ -97,11 +97,11 @@ import CloudDeskRodstep from "./pages/CloudDeskRodstep";
 import EximinqPharma from "./pages/EximinqPharma";
 import EximinqEngineering from "./pages/EximinqEngineering";
 import EximinqElectronics from "./pages/EximinqElectronics";
-import EximinqChemicals from "./pages/EximinqChemicals";  
+import EximinqChemicals from "./pages/EximinqChemicals";
 import TradeSolutionsTextiles from "./pages/TradeSolutionsTextiles";
-import EximinqAgro from  "./pages/EximinqAgro";
+import EximinqAgro from "./pages/EximinqAgro";
 import EximinqSolar from "./pages/EximinqSolar";
-import EximinqDefense from  "./pages/EximinqDefense";
+import EximinqDefense from "./pages/EximinqDefense";
 import EximinqEcommerce from "./pages/EximinqEcommerce";
 import ComplianceCalendar from "./pages/ComplianceCalendar"
 import BisEprWpcLmpc from "./pages/BisEprWpcLmpc";
@@ -112,8 +112,8 @@ import SEOManager from "./components/SEOManager";
 function App() {
   return (
     <BrowserRouter>
-    <AnalyticsTracker />
-    <SEOManager/>
+      <AnalyticsTracker />
+      <SEOManager />
       <Routes>
         {/* Charates Routes */}
         <Route path="/charates" element={<Home />} />
@@ -128,17 +128,28 @@ function App() {
         {/*AEO Routes */}
         <Route path="/aeo" element={<CloudDeskAEOLanding />} />
 
-        {/*ICE Management */}
+        {/* ICE Management */}
         <Route path="/services/import-export-code" element={<CloudDeskIceManagement />} />
 
         {/*ICE Registration */}
         <Route path="/services/icegate-registration" element={<CloudDeskICERegistration />} />
 
+      {/* OLD URL REDIRECTS */}
+        <Route
+          path="/services/iec-registration"
+          element={<Navigate to="/services/import-export-code" replace />}
+        />
+
+        <Route
+          path="/services/ice-registration"
+          element={<Navigate to="/services/icegate-registration" replace />}
+        />
+
         {/* AD CODE */}
         <Route path="/services/ad-code-registration" element={<CloudDeskADCode />} />
 
         {/* E-RCMC */}
-        <Route path="/services/e-rcmc-registration" element={<CloudDeskERCMC />} />
+        <Route path="/services/epcg-scheme" element={<CloudDeskERCMC />} />
 
         {/* {Bill of Entry} */}
         <Route path="/services/bill-of-entry-filing" element={<CloudDeskBankEntry />} />
@@ -149,13 +160,13 @@ function App() {
         {/* E-Sanchit */}
         <Route path="/services/e-sanchit-filing" element={<CloudDeskESANCHIT />} />
 
-      {/* Duty Payment */}
+        {/* Duty Payment */}
         <Route path="/services/duty-payment-ecl" element={<CloudDeskDutyPayment />} />
 
-      {/* AEO Certificate */}
+        {/* AEO Certificate */}
         <Route path="/services/aeo-certification" element={<CloudDeskAEOCertificate />} />
 
-      {/* Moowr */}
+        {/* Moowr */}
         <Route path="/services/moowr-scheme" element={<CloudDeskMoowr />} />
 
         {/* Global Trade */}
@@ -180,7 +191,7 @@ function App() {
         <Route path="/services/advance-authorisation" element={<CloudDeskAdvanceAuthority />} />
 
         {/* Zero Duty */}
-        <Route path="/services/epcg-scheme" element={<CloudDeskZeroDuty />} />
+        <Route path="/services/e-rcmc-registration" element={<CloudDeskZeroDuty />} />
 
         {/* SCOMET Licensing */}
         <Route path="/services/scomet-licensing" element={<CloudDeskSCOMET />} />
@@ -200,7 +211,7 @@ function App() {
         {/* EPR Authorization */}
         <Route path="/services/epr-authorization" element={<CloudDeskEPRAuthorization />} />
 
-        {/* FSSAI Licensing */}   
+        {/* FSSAI Licensing */}
         <Route path="/services/fssai-licensing" element={<CloudDeskFSSAILicensing />} />
 
         {/* WPC (ETA) */}
@@ -239,7 +250,7 @@ function App() {
         <Route path="/invoice" element={<CloudDeskInvoice />} />
 
 
-      {/* ----------------------------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------------------------- */}
 
         {/* Digital Signatures */}
         <Route path="/services/dsc-services" element={<CloudDeskDigitalSignatures />} />
@@ -338,7 +349,7 @@ function App() {
         <Route path="/services/warehouse-license" element={<CloudDeskWarehouse />} />
 
         {/* UN IIP Certification */}
-        <Route path="/services/un-iip-certification" element={<CloudDeskUN />} /> 
+        <Route path="/services/un-iip-certification" element={<CloudDeskUN />} />
 
         {/* ca-certification-export-import */}
         <Route path="/services/ca-certification-export-import" element={<CloudDeskCA />} />
@@ -348,7 +359,7 @@ function App() {
 
         {/* rodtep-rosctl-trading */}
         <Route path="/services/rodtep-rosctl-trading" element={<CloudDeskRodstep />} />
-        
+
         {/* Compliance Audit */}
         <Route path="/services/compliance-audit" element={<CloudDeskComplianceAudit />} />
 
@@ -380,10 +391,10 @@ function App() {
         <Route path="/defense-aerospace-industry-import-export" element={<EximinqDefense />} />
 
         {/* EximinqEcommerce */}
-        <Route path="/ecommerce-industry-import-export" element={<EximinqEcommerce   />} />
+        <Route path="/ecommerce-industry-import-export" element={<EximinqEcommerce />} />
 
         {/* ComplianceCalendar.jsx */}
-        <Route path="/trade-compliance-calendar" element={<ComplianceCalendar />} /> 
+        <Route path="/trade-compliance-calendar" element={<ComplianceCalendar />} />
 
         {/*bis-epr-wpc-lmpc */}
         <Route path="/bis-epr-wpc-lmpc" element={<BisEprWpcLmpc />} />
@@ -395,8 +406,8 @@ function App() {
         <Route path="/" element={<CloudDeskHome />} />
         <Route path="/services" element={<CloudDeskServices />} />
         <Route path="/foreign-trade-policy" element={<CloudDeskForeignTrade />} />
-          <Route path="/foreign-trade-policy/regulatory-updates" element={<RegulatoryUpdates />} />
-          <Route path="/foreign-trade-policy/exchange-rates" element={<ExchangeRates />} />
+        <Route path="/foreign-trade-policy/regulatory-updates" element={<RegulatoryUpdates />} />
+        <Route path="/foreign-trade-policy/exchange-rates" element={<ExchangeRates />} />
         <Route path="/dgft-customs-consultancy" element={<CloudDeskDGFTCustoms />} />
         <Route path="/certificate-of-origin" element={<CloudDeskCoo />} />
         <Route path="/compliance-trade-india" element={<CloudDeskCompliance />} />
@@ -404,7 +415,7 @@ function App() {
         <Route path="/clouddesk-saas" element={<CloudDeskSaasLanding />} />
 
         {/* Footer Routes */}
-        <Route path="/tools/hs-code-finder" element={<CloudDeskHSN/>} />
+        <Route path="/tools/hs-code-finder" element={<CloudDeskHSN />} />
         {/* Disclaimer */}
         <Route path="/disclaimer" element={<CloudDeskDisclaimer />} />
         {/* Privacy Policy */}
@@ -417,7 +428,7 @@ function App() {
         <Route path="/tools/duty-calculator-finder" element={<CloudDeskDutyCalculator />} />
 
         {/* Thank You Page */}
-        <Route path="/thank-you" element={<CloudDeskThankYou />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

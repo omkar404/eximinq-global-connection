@@ -29,10 +29,10 @@ const CloudDeskCompliance = () => {
 
   // ---------------- UPCOMING DEADLINES ----------------
   const upcomingDeadlines = [
-    { date: "10 Dec", event: "GSTR-1 Filing", type: "Tax" },
-    { date: "15 Dec", event: "Advance Tax Installment", type: "Finance" },
-    { date: "31 Dec", event: "AEO Periodic Return", type: "Customs" },
-    { date: "31 Dec", event: "EPR Annual Return", type: "Regulatory" },
+    { date: "11 Dec", event: "GSTR-1 (Outward Supplies)", type: "GST" },
+    { date: "20 Dec", event: "GSTR-3B (Summary Return)", type: "GST" },
+    // { date: "31 Dec", event: "AEO Periodic Return", type: "Customs" },
+    // { date: "31 Dec", event: "EPR Annual Return", type: "Regulatory" },
   ];
 
   // ---------------- COMPLIANCE DATA ----------------

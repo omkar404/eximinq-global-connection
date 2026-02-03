@@ -36,11 +36,12 @@
   <loc>https://eximinq.in/clouddesk-saas</loc>
   <lastmod>2026-01-30</lastmod>
   <changefreq>weekly</changefreq>
-  <priority>0.8</priority> 
+  <priority>0.8</priority>
 </url>
 
-<url><loc>https://eximinq.in/services/import-export-code</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
-<url><loc>https://eximinq.in/services/icegate-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<!-- SERVICES -->
+<url><loc>https://eximinq.in/services/iec-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
+<url><loc>https://eximinq.in/services/ice-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
 <url><loc>https://eximinq.in/services/ad-code-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
 <url><loc>https://eximinq.in/services/e-rcmc-registration</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
 <url><loc>https://eximinq.in/services/bill-of-entry-filing</loc><lastmod>2026-01-30</lastmod><priority>0.8</priority></url>
@@ -123,6 +124,8 @@
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
+
+<!-- Home page inner page -->
 <url><loc>https://eximinq.in/pharmaceuticals-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
 <url><loc>https://eximinq.in/engineering-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
 <url><loc>https://eximinq.in/electronics-it-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
@@ -134,6 +137,15 @@
 <url><loc>https://eximinq.in/ecommerce-industry-import-export</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
 <url><loc>https://eximinq.in/trade-compliance-calendar</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
 <url><loc>https://eximinq.in/bis-epr-wpc-lmpc</loc><lastmod>2026-01-30</lastmod><priority>0.6</priority></url>
+
+ <!-- TOOLS -->
+  <!-- <url><loc>https://eximinq.in/tools/hs-code-finder</loc></url>
+  <url><loc>https://eximinq.in/tools/duty-calculator-finder</loc></url> -->
+
+  <!-- LEGAL -->
+  <url><loc>https://eximinq.in/disclaimer</loc></url>
+  <url><loc>https://eximinq.in/privacy-policy</loc></url>
+  <url><loc>https://eximinq.in/terms-of-service</loc></url>
 
 <url>
   <loc>https://eximinq.in/contact-us</loc>
