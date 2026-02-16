@@ -7,7 +7,10 @@ import ModalEnrollSaas from "../components/CloudDeskSaasLanding/ModalEnrollSaas"
 import HeroSaas from "../components/CloudDeskSaasLanding/HeroSaas";
 import FeaturesGrid from "../components/CloudDeskSaasLanding/FeaturesGrid";
 import CTASaas from "../components/CloudDeskSaasLanding/CTASaas";
+import TranparentrequestTracking from "../components/CloudDeskSaasLanding/TranparentrequestTracking";
+import TransparentPricing from "../components/CloudDeskSaasLanding/TransparentPricing";
 import FooterSaas from "../components/CloudDeskSaasLanding/FooterSaas";
+import SecureSaas from "../components/CloudDeskSaasLanding/secureSaas";
 
 const CloudDeskSaasLanding = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,6 +53,15 @@ const CloudDeskSaasLanding = () => {
 
       {/* ---------------- CTA SECTION ---------------- */}
       <CTASaas setShowModal={setShowModal} />
+
+      {/* Transparent Request Tracking */}
+      <TranparentrequestTracking />
+
+      {/* Transparent Pricing */}
+      <TransparentPricing />
+
+      {/* secure your lauch offer */}
+      <SecureSaas setShowModal={setShowModal}/>
 
       {/* ---------------- FOOTER ---------------- */}
       <FooterSaas setShowModal={setShowModal} />

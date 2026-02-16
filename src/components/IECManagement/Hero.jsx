@@ -26,7 +26,7 @@ const Hero = ({ setShowEnrollModal }) => {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <button
-              onClick={() => setShowEnrollModal({ open: true, type: "hero" })}
+              onClick={() => setShowEnrollModal({ open: true, type: "Apply" })}
               className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               Start Application

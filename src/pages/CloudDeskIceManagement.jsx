@@ -60,9 +60,9 @@ const IECManagement = () => {
       <section id="about" class="py-20 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
           <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">
+            <h1 class="text-3xl font-bold text-slate-900 mb-4">
               What is the Import Export Code (IEC)?
-            </h2>
+            </h1>
             <div class="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
           </div>
           <div class="prose lg:prose-lg mx-auto text-slate-600 text-justify">
@@ -497,6 +497,75 @@ const IECManagement = () => {
         </div>
       </section>
 
+      {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for IEC Management?</h2>
+            <p className="text-slate-500">Eliminate compliance risks with automated DGFT & Customs monitoring.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Feature 1 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                <AlertTriangle size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">1. Elimination of "The July Surprise"</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Every year on July 1st, thousands of exporters realize their <strong>IEC is deactivated</strong> because they missed the June 30th update deadline.
+                  <strong>CloudDesk</strong> eliminates this. Our system syncs with the DGFT server API to monitor your "Last Updated" timestamp. We start automated reminders
+                  on April 1st and can auto-file your "No-Change" confirmation in seconds.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                <CheckCircle size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">2. Cross-Platform Data Harmony</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  <strong>Customs (ICEGATE)</strong> and <strong>DGFT</strong> are two different systems. Often, an update on DGFT doesn't "push" to ICEGATE, causing a "PAN Not Found" error at the port. CloudDesk’s Technical Bridge verifies that your update has successfully transitioned to the Customs server before you ship your next container.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                <Building size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">3. Entity-Level Document Hierarchy</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  If you have <strong>multiple branches</strong>, keeping track of which address proof is linked to which branch in the DGFT records is a nightmare.
+                  CloudDesk organizes your IEC data by Branch Code, allowing you to update specific locations without messing up the primary registration.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                <ShieldUser size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">4. Security & Permission Control</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Stop giving your master <strong>DGFT password</strong> to every junior accountant or external consultant.
+                  CloudDesk allows you to manage your compliance without sharing sensitive login credentials,
+                  protecting your business from unauthorized changes or data theft.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
@@ -571,6 +640,173 @@ const IECManagement = () => {
                 validated using Aadhaar e-sign.
               </p>
             </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group ">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is IEC Registration valid for a lifetime?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, IEC is valid for a lifetime and does not require renewal.
+                However, annual updation of details on the DGFT portal is
+                mandatory between April and June every year.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can an individual apply for IEC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, individuals (Proprietors) can obtain an IEC code in their
+                name or their firm's name. It is equally applicable to
+                companies, LLPs, and partnerships.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long does it take to get the certificate?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Generally, the IEC code is generated within 1 to 3 working days
+                after the successful submission of documents and fees. In many
+                cases, it is issued instantly.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is digital signature (DSC) mandatory?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                For companies and LLPs, a Digital Signature Certificate (DSC) is
+                mandatory. For proprietorships, the application can often be
+                validated using Aadhaar e-sign.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                I have made no changes to my company this year. Do I still need
+                to update my IEC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. The DGFT regulation states that even if there are no
+                changes, the IEC holder must "confirm" that the details are
+                correct on the portal every year between April and June. Think
+                of it as a mandatory annual "Check-in."
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the exact "effective date" for deactivation if I miss
+                the deadline?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Usually, the DGFT issues a public notice extending it slightly,
+                but legally, deactivation begins on July 1st. Once deactivated,
+                you cannot even generate a draft Shipping Bill.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                My IEC is linked to an old Director's mobile number/email. How do I recover it?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                This is a high-risk situation. CloudDesk assists in the "Email/Mobile Change"
+                process, which involves validating the new signatory via a Class 3 DSC and updating
+                the profile. We ensure you don't lose access to your digital trade identity.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I have two IECs for the same PAN?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Strictly No. One PAN, One IEC. If you have inadvertently obtained two,
+                you must surrender one immediately. Holding dual IECs is a violation of the
+                Foreign Trade Policy and can lead to your PAN being blacklisted.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                We are changing our firm from a Proprietorship to a Private Limited. Can we keep the same IEC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, but it requires a "Constitution Change" modification. You must update the PAN associated with the IEC.
+                This is a complex process because it involves migrating your history and benefits to the new entity.
+                CloudDesk handles the legal drafting for this transition.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does my Bank need to do anything once my IEC is updated?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                In most cases, the bank's system (AD Bank) should automatically pick up the update via the EDPMS (Export Data Processing and Monitoring System).
+                However, we recommend sending the updated IEC profile to your bank's Forex department to ensure there are no delays in realizing export proceeds.
+              </p>
+            </details>
+
+            <details className="bg-white p-6 rounded shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                The DGFT portal says "Data Mismatch with PAN." What do I do?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                This happens when the name on your PAN card (even a single dot or space) doesn't exactly
+                match the name entered in the DGFT system. CloudDesk performs a Character-by-Character Audit to fix
+                these discrepancies so your application gets approved instantly.
+              </p>
+            </details>
           </div>
         </div>
       </section>
@@ -591,15 +827,15 @@ const IECManagement = () => {
               <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-<a
-  href="https://in.linkedin.com/in/eximinq-cloud-desk?trk=profile-badge"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="Eximinq Contact on LinkedIn"
-  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
->
-  <Twitter size={18} />
-</a>
+              <a
+                href="https://in.linkedin.com/in/eximinq-cloud-desk?trk=profile-badge"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Eximinq Contact on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
+                <Twitter size={18} />
+              </a>
 
               <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />

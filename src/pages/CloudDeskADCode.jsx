@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TopBar from "../components/ADCode/TopBar";
+import TopBar from "../components/ADCode/TopBar"; 
 import Navbar from "../components/ADCode/Navbar";
 import Hero from "../components/ADCode/Hero";
 import Fees from "../components/ADCode/Fees";
@@ -485,24 +485,24 @@ const ADCode = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   AD Code Registration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   ICEGATE ID Creation
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   IFSC Update
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   IGST Refund Help
                 </a>
               </li>
@@ -512,24 +512,24 @@ const ADCode = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Nhava Sheva (JNPT)
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Mundra Port
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Chennai Sea/Air
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Delhi Air Cargo
                 </a>
               </li>

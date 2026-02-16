@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({setShowEnrollModal}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,12 +23,19 @@ const Navbar = () => {
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        <a 
+        {/* <a 
           href="#"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
-        </a>
+        </a> */}
+
+        <button
+  onClick={() => setShowEnrollModal({open: true, type: "ENROLL" })}
+  className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+>
+  Apply Now
+</button>
 
         {/* MOBILE MENU BUTTON */}
         <button

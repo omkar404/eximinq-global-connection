@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import BrandLogo from "../BrandLogo/BrandLogo";
@@ -21,9 +22,12 @@ const Navbar = ({ onEnrollClick }) => {
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* LOGO */}
         <div className="flex items-center">
-                             <a href="https://eximinq.in/" className="cursor-pointer">
+                             {/* <a href="https://eximinq.in/" className="cursor-pointer">
             <BrandLogo />
-          </a>
+          </a> */}
+                    <Link to="/" className="cursor-pointer">
+            <BrandLogo />
+          </Link>
         </div>
 
         {/* DESKTOP NAV */}

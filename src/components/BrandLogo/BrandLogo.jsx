@@ -1,5 +1,5 @@
 import React from "react";
-import brandLogo from "../../assets/images/logo.png"; // adjust relative path
+import brandLogo from "../../assets/images/logo.png"; // adjust relative path 
 
 const BrandLogo = () => {
   return (

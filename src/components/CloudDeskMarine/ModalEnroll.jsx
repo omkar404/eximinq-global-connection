@@ -15,7 +15,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
 
-  const isEnroll = type === "ENROLL";
+  const EPCG_MANAGEMENT = type === "EPCG_MANAGEMENT";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
@@ -34,10 +34,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   };
 
   const IEC_OPTIONS = [
-    "NEW IEC REGISTRATION",
-    "IEC PROFILE UPDATATION",
-    "IEC ANNUAL UPDATE",
-    "IEC SUSPENSION",
+    "New EPCG License",
+    "Installation Certificate - Chartered Engineer",
+    "Clubing of Licenses",
+    "EO Period Extention",
+    "EODC / Redemption (Closure)",
   ];
 
   const PROFILE_UPDATE_OPTIONS = [
@@ -86,7 +87,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       onSubmit({
         ...form,
         type,
-        category: isEnroll ? category : null,
+        category: PROFILE_UPDATE_OPTIONS ? category : null,
         issue: isProfileUpdate ? issue : null,
       });
     }
@@ -242,7 +243,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             )}
 
-            {isEnroll && (
+            {EPCG_MANAGEMENT && (
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>

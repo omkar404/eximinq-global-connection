@@ -42,6 +42,7 @@ const CloudDeskImporters = () => {
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
+      
 
       <ModalEnroll
         show={showEnrollModal.open}
@@ -239,25 +240,25 @@ const CloudDeskImporters = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
-              <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#" className="hover:text-white transition">
                     SIMS Registration
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#" className="hover:text-white transition">
                     NFMIMS Registration
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#" className="hover:text-white transition">
                     CIMS Registration
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#" className="hover:text-white transition">
                     PIMS Registration
                   </a>
                 </li>
@@ -268,24 +269,24 @@ const CloudDeskImporters = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Fee Calculator
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   HSN Code List
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   DGFT Notifications
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   IMS FAQs
                 </a>
               </li>

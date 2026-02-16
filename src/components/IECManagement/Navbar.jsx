@@ -29,7 +29,7 @@ const Navbar = ({
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
 <button
-  onClick={() => setShowEnrollModal({open: true, type: "Apply" })}
+  onClick={() => setShowEnrollModal({open: true, type: "import-export-code-Apply" })}
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >

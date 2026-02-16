@@ -1,7 +1,9 @@
 // import TopBar from "../components/CloudDeskMarine/TopBar";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskMarine/Navbar";
-import Hero from "../components/CloudDeskERCMC/Hero";
+import Hero from "../components/CloudDeskMarine/Hero";
 import Fees from "../components/CloudDeskMarine/Fees";
+import { ModalEnroll } from "../components/CloudDeskMarine/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -27,13 +29,33 @@ import {
 import { MainNavbar } from "../components/CloudDeskMarine/MainNavbar";
 
 const CloudDeskMarine = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -366,7 +388,7 @@ const CloudDeskMarine = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
@@ -447,7 +469,7 @@ const CloudDeskMarine = () => {
           </div>
 
           {/* CONTACT */}
-<div>
+          <div>
             <h4 className="text-white font-bold mb-6">Contact Us</h4>
             <ul className="space-y-4 text-sm">
               <li className="flex gap-3 items-center">

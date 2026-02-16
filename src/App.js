@@ -149,7 +149,7 @@ function App() {
         <Route path="/services/ad-code-registration" element={<CloudDeskADCode />} />
 
         {/* E-RCMC */}
-        <Route path="/services/epcg-scheme" element={<CloudDeskERCMC />} />
+        <Route path="/services/e-rcmc-registration" element={<CloudDeskERCMC />} />
 
         {/* {Bill of Entry} */}
         <Route path="/services/bill-of-entry-filing" element={<CloudDeskBankEntry />} />
@@ -173,7 +173,7 @@ function App() {
         <Route path="/services/freight-forwarding" element={<CloudDeskGlobalTrade />} />
 
         {/* CHA Services */}
-        <Route path="/services/cha-services" element={<CloudDeskCHAServices />} />\
+        <Route path="/services/cha-services" element={<CloudDeskCHAServices />} />
 
         {/* Inland Transportation */}
         <Route path="/services/warehousing-solutions" element={<CloudDeskWarehousing />} />
@@ -191,7 +191,7 @@ function App() {
         <Route path="/services/advance-authorisation" element={<CloudDeskAdvanceAuthority />} />
 
         {/* Zero Duty */}
-        <Route path="/services/e-rcmc-registration" element={<CloudDeskZeroDuty />} />
+        <Route path="/services/epcg-scheme" element={<CloudDeskZeroDuty />} />
 
         {/* SCOMET Licensing */}
         <Route path="/services/scomet-licensing" element={<CloudDeskSCOMET />} />
@@ -407,6 +407,8 @@ function App() {
         <Route path="/services" element={<CloudDeskServices />} />
         <Route path="/foreign-trade-policy" element={<CloudDeskForeignTrade />} />
         <Route path="/foreign-trade-policy/regulatory-updates" element={<RegulatoryUpdates />} />
+            
+
         <Route path="/foreign-trade-policy/exchange-rates" element={<ExchangeRates />} />
         <Route path="/dgft-customs-consultancy" element={<CloudDeskDGFTCustoms />} />
         <Route path="/certificate-of-origin" element={<CloudDeskCoo />} />

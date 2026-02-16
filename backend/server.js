@@ -10,6 +10,10 @@ const enrollRoutes = require("./routes/enroll.routes");
 const industriesWePowerRoutes = require("./routes/industriesWePower.routes");
 const mainenrollRoutes = require("./routes/mainenroll.routes");
 const mainCooRoutes = require("./routes/maincoo.routes");
+// const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes")
+const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
+
+// const pdfPath = findPDFFile(noticeNo);
 
 const nowIST = new Date().toLocaleString("en-IN", {
   timeZone: "Asia/Kolkata",
@@ -348,6 +352,45 @@ app.post("/api/rodtep-rosctl-trading", async (req, res) => {
   }
 });
 
+// Get all notices
+app.get("/api/dgft/notices", (req, res) => {
+  const data = getExcelData();
+
+  if (!data.data.length) {
+    return res.status(404).json({
+      success: false,
+      message: "No DGFT data loaded",
+    });
+  }
+
+  res.json({
+    success: true,
+    ...data,
+  });
+});
+
+app.get("/api/dgft/pdf-download", (req, res) => {
+  const { noticeNo } = req.query;
+
+  if (!noticeNo) {
+    return res.status(400).json({
+      success: false,
+      message: "noticeNo is required",
+    });
+  }
+
+  const pdfPath = findPDFFile(noticeNo); // ✅ define it here
+
+  if (!pdfPath) {
+    return res.status(404).json({
+      success: false,
+      message: "PDF not found",
+    });
+  }
+
+  res.download(pdfPath);
+});
+
 // Routes
 app.use("/api/duty-check", dutyCheckRoutes);
 
@@ -360,6 +403,10 @@ app.use("/api/individual-enroll", industriesWePowerRoutes);
 app.use("/api/main-enroll", mainenrollRoutes);
 
 app.use("/api/main-coo-enroll", mainCooRoutes);
+
+// app.use("/api/import-export-code", importExportCodeRoutes);
+
+startWatcher();
 
 app.use(express.static(path.join(__dirname, "build")));
 

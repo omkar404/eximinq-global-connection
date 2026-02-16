@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import { useState, useEffect } from "react";
 import { ScrollText, CheckCircle, CreditCard, Users, AlertOctagon, Gavel, HelpCircle } from 'lucide-react';
@@ -38,9 +39,12 @@ const TermsOfServicePage = () => {
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="https://eximinq.in/" className="cursor-pointer">
+            {/* <a href="https://eximinq.in/" className="cursor-pointer">
               <BrandLogo />
-            </a>
+            </a> */}
+                                <Link to="/" className="cursor-pointer">
+            <BrandLogo />
+          </Link>
           </div>
 
           {/* Desktop menu */}

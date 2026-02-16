@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import { Menu, X } from "lucide-react";
 import { Phone, Mail, MessageCircle } from "lucide-react";
@@ -19,9 +20,12 @@ const NavbarCompliance = ({
     >
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
         {/* Logo */}
-        <a href="https://eximinq.in/" className="cursor-pointer">
+        {/* <a href="https://eximinq.in/" className="cursor-pointer">
           <BrandLogo />
-        </a>
+        </a> */}
+                  <Link to="/" className="cursor-pointer">
+            <BrandLogo />
+          </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4 font-smedium text-gray-700">

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import BrandLogo from "../components/BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 
@@ -13,9 +14,12 @@ const TopBar = ({ setShowEnrollModal, scrolled,
 
         {/* Logo */}
         <div className="flex items-center">
-          <a href="https://eximinq.in/" className="cursor-pointer">
+          {/* <a href="https://eximinq.in/" className="cursor-pointer">
             <BrandLogo />
-          </a>
+          </a> */}
+          <Link to="/" className="cursor-pointer">
+            <BrandLogo />
+          </Link>
         </div>
 
         {/* Desktop menu */}

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose, type }) => {
+export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -11,10 +11,19 @@ export const ModalEnroll = ({ show, onClose, type }) => {
     partner: false,
   });
 
+  useEffect(() => {
+    if (type === "IEC_PROFILE_UPDATATION") {
+      setCategory("IEC PROFILE UPDATATION");
+    }
+  }, [type]);
+
+  const [category, setCategory] = useState("");
+  const [issue, setIssue] = useState("");
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-    const SERVICE_MAP = {
+  const SERVICE_MAP = {
     IEC_PROFILE_UPDATATION: {
       label: "IEC Profile Updation",
       service: "IEC Profile Updation",
@@ -29,6 +38,31 @@ export const ModalEnroll = ({ show, onClose, type }) => {
     },
   };
 
+  const IEC_OPTIONS = [
+    "NEW IEC REGISTRATION",
+    "IEC PROFILE UPDATATION",
+    "IEC ANNUAL UPDATE",
+    "IEC SUSPENSION",
+  ];
+
+  const iceprofileupdation = [
+    "Change in address",
+    "Change in Directors / Partners",
+    "Addition / Deletion of Branch Address",
+    "Change in Bank Account",
+    "Change in Prefered Sectors"
+  ];
+
+  const isEnroll = type === "import-export-code-Apply";
+
+  const showProfileUpdateDropdown =
+    isEnroll && category === "IEC PROFILE UPDATATION";
+
+  const isProfileUpdate = type === "IEC_PROFILE_UPDATATION";
+
+  // const isRegistration = type === "IEC_REGISTRATION";
+  // const isAnnualUpdate = type === "IEC_ANNUAL_UPDATE";
+
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
 
@@ -39,9 +73,14 @@ export const ModalEnroll = ({ show, onClose, type }) => {
       entity: "",
       email: "",
       role: "",
+      category: "",
+      issue: "",
       partner: false,
     });
+    setCategory("");
+    setIssue("");
     setErrors({});
+    setLoading(false);
   };
 
   const handleClose = () => {
@@ -50,6 +89,7 @@ export const ModalEnroll = ({ show, onClose, type }) => {
   };
 
   if (!show) return null;
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -76,14 +116,36 @@ export const ModalEnroll = ({ show, onClose, type }) => {
     setErrors(v);
     if (Object.keys(v).length > 0) return;
 
+    if (typeof onSubmit === "function") {
+      onSubmit({
+        ...form,
+        type,
+        category: isEnroll ? category : null,
+        issue: isProfileUpdate ? issue : null,
+      });
+    }
+
     try {
       setLoading(true);
 
+      const finalType = type || "ENROLL_NOW";
+
       const payload = {
         ...form,
-        type: "ENROLL",
-        source: "(IEC) Registration",
+        type: finalType,
+        source: finalType,
       };
+
+      if (category) {
+        payload.category = category;
+      }
+
+      if (issue) {
+        payload.issue = issue;
+      }
+
+
+      console.log("final payload", payload);
 
       const res = await fetch(
         `${process.env.REACT_APP_API_URL}/api/import-export-code`,
@@ -219,7 +281,74 @@ export const ModalEnroll = ({ show, onClose, type }) => {
               )}
             </div>
 
-                        {predefinedService && (
+            {isEnroll && (
+              <>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                    Category
+                  </label>
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                  >
+                    <option value="" disabled>
+                      Select Category
+                    </option>
+                    {IEC_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            )}
+            {showProfileUpdateDropdown && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Update Type
+                </label>
+                <select
+                  value={issue}
+                  onChange={(e) => setIssue(e.target.value)}
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                >
+                  <option value="" disabled>
+                    Select Update Type
+                  </option>
+                  {iceprofileupdation.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {isProfileUpdate && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Update Type
+                </label>
+                <select
+                  value={issue}
+                  onChange={(e) => setIssue(e.target.value)}
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                >
+                  <option value="" disabled>
+                    Select Update Type
+                  </option>
+                  {iceprofileupdation.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {predefinedService && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Service Type

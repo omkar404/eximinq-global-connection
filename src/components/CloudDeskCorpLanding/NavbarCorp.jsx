@@ -52,6 +52,7 @@
 
 // export default NavbarCorp;
 
+import { Link } from "react-router-dom";
 import React from "react";
 import BrandLogo from "../BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
@@ -72,9 +73,12 @@ export const NavbarCorp = ({
 
         {/* Logo */}
         <div className="flex items-center">
-                              <a href="https://eximinq.in/" className="cursor-pointer">
+                              {/* <a href="https://eximinq.in/" className="cursor-pointer">
             <BrandLogo />
-          </a>
+          </a> */}
+                    <Link to="/" className="cursor-pointer">
+            <BrandLogo />
+          </Link>
         </div>
 
         {/* Desktop menu */}

@@ -116,7 +116,17 @@
       "/solar-and-renewables-industry-import-export",
       "/defense-aerospace-industry-import-export",
       "/ecommerce-industry-import-export"
-    ]
+    ],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "pageConfig": {
+      "waitUntil": "networkidle0",
+      "timeout": 0
+    },
+    "concurrency": 1,
+    "fixWebpackChunksIssue": "true"
   },
   "eslintConfig": {
     "extends": [

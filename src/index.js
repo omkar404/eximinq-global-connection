@@ -11,6 +11,35 @@
 // );
 
 
+// import React from "react";
+// import { createRoot, hydrateRoot } from "react-dom/client";
+// import { HelmetProvider } from "react-helmet-async";
+// import "./index.css";
+// import App from "./App";
+
+// const container = document.getElementById("root");
+
+// if (container.hasChildNodes()) {
+//   hydrateRoot(
+//     container,
+//     <React.StrictMode>
+//       <HelmetProvider>
+//         <App />
+//       </HelmetProvider>
+//     </React.StrictMode>
+//   );
+// } else {
+//   const root = createRoot(container);
+//   root.render(
+//     <React.StrictMode>
+//       <HelmetProvider>
+//         <App />
+//       </HelmetProvider>
+//     </React.StrictMode>
+//   );
+// }
+
+
 import React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
@@ -19,24 +48,16 @@ import App from "./App";
 
 const container = document.getElementById("root");
 
+const AppTree = (
+  <React.StrictMode>
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
+  </React.StrictMode>
+);
+
 if (container.hasChildNodes()) {
-  hydrateRoot(
-    container,
-    <React.StrictMode>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </React.StrictMode>
-  );
+  hydrateRoot(container, AppTree);
 } else {
-  const root = createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </React.StrictMode>
-  );
+  createRoot(container).render(AppTree);
 }
-
-

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import {
   Menu,
@@ -205,9 +206,12 @@ const CloudDeskHSN = () => {
         }`}
       >
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-                              <a href="https://eximinq.in/" className="cursor-pointer">
+                              {/* <a href="https://eximinq.in/" className="cursor-pointer">
             <BrandLogo />
-          </a>
+          </a> */}
+                              <Link to="/" className="cursor-pointer">
+            <BrandLogo />
+          </Link>
 
           {/* Desktop Menu */}
         <div

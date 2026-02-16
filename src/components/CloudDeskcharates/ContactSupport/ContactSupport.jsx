@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import React, { useState } from "react";
 import {
   Send,
@@ -105,9 +106,12 @@ const ContactSupportModal = ({ open, onClose }) => {
           <div className="relative z-10 flex flex-col space-y-8">
             {/* LOGO (Proper alignment fix) */}
             <div className="flex flex-col items-start space-y-3 -mt-2">
-                       <a href="https://eximinq.in/" className="cursor-pointer">
+                       {/* <a href="https://eximinq.in/" className="cursor-pointer">
             <BrandLogo />
-          </a>
+          </a> */}
+                    <Link to="/" className="cursor-pointer">
+            <BrandLogo />
+          </Link>
               {/* EXIMINQ + Global Connections */}
               {/* <svg
         viewBox="0 0 300 60"

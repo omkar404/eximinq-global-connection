@@ -7,10 +7,10 @@ export const defaultSEO = {
 
 export const seoRoutes = {
   // --- CORE PAGES ---
-  "/": {
-    title: "EXIMINQ - DGFT Consultant & Export CloudDesk Mumbai",
-    description: "India's first SaaS CloudDesk for Exporters. Automate Advance Authorisation, run RoDTEP audits, and buy expert DGFT services in Mumbai."
-  },
+  // "/": {
+  //   title: "EXIMINQ - DGFT Consultant & Export CloudDesk Mumbai",
+  //   description: "India's first SaaS CloudDesk for Exporters. Automate Advance Authorisation, run RoDTEP audits, and buy expert DGFT services in Mumbai."
+  // },
   "/about-us": {
     title: "About EXIMINQ - DGFT Experts & CloudDesk Team Mumbai",
     description: "Meet the team behind India's first Export CloudDesk. Combining 15+ years of DGFT consultancy expertise with modern SaaS technology."
@@ -22,6 +22,17 @@ export const seoRoutes = {
   "/refund-policy": {
     title: "Refund & Cancellation Policy | EXIMINQ",
     description: "Read the Refund Policy for Consultancy Services and CloudDesk SaaS subscriptions. Includes cancellation terms for government fee payments."
+  },
+
+  // homepage 
+  "/compliance-trade-india": {
+    title: "Compliance & Trade Consultancy India | EXIMINQ",
+    description: "Comprehensive Export-Import compliance services. Expert consultancy for DGFT, Customs, FSSAI, BIS, WPC, and more to ensure smooth trade operations.",
+  },
+
+  "/clouddesk-saas": {
+    title: "CloudDesk SaaS - Export Compliance Software | EXIMINQ",
+    description: "India's first SaaS CloudDesk for Exporters. Automate Advance Authorisation, run RoDTEP audits, and buy expert DGFT services in Mumbai.",
   },
 
   // --- SAAS FEATURES ---
@@ -39,6 +50,10 @@ export const seoRoutes = {
   },
 
   // --- DGFT SERVICES ---
+    "/services/import-export-code": {
+    title: "IEC Profile Deactivation & KYC Update | DGFT Helpdesk Mumbai",
+    description: "Fix IEC Profile Deactivation, Duplicate IEC issues, and IEC Surrender Process. Expert help for IEC KYC Update and Merger and Acquisition IEC transfer."
+  },
   "/services/advance-authorisation": {
     title: "Advance Authorisation Consultant Mumbai | EXIMINQ",
     description: "Zero Duty Import of raw materials. Handle SION Norms, License issuance, and Redemption (EODC) to close files without penalties."
@@ -113,6 +128,10 @@ export const seoRoutes = {
     title: "AD Code Registration at Customs & ICEGATE Mumbai | EXIMINQ",
     description: "Mandatory AD Code Registration for Exporters. Register Bank AD Code at Nhava Sheva, Mundra, & Air Cargo. Fix 'AD Code Not Found' errors instantly."
   },
+  "/import-management-registration":{
+    title: "Import Management Registration Consultant Mumbai | EXIMINQ",
+    description: "Stuck with Import Management Registration? Handle Simplified Registration, DSC Mapping, and AD Code Registration for Mumbai exporters. Fix Java errors instantly."
+  },
   "/services/aeo-certification": {
     title: "AEO T1, T2, T3 Certification Consultant Mumbai | EXIMINQ",
     description: "Get AEO Status for faster Customs clearance. Handle AEO T1, T2 & LO Application, Annexure filling, and Physical Verification support."
@@ -168,10 +187,6 @@ export const seoRoutes = {
   "/services/non-availment-certificate": {
     title: "Non-Availment Certificate (Re-Import) Consultant | EXIMINQ",
     description: "Re-importing rejected goods? Issue Non-Availment Certificates to prove no incentives were claimed, saving payment of Import Duty."
-  },
-  "/services/customs-adjudication": {
-    title: "Customs Adjudication & Appeal Consultant Mumbai | EXIMINQ",
-    description: "Received a Show Cause Notice (SCN)? Draft legal replies, attend Personal Hearings (PH), and handle appeals at Commissioner (Appeals) & CESTAT."
   },
 
   // --- LOGISTICS SERVICES ---
