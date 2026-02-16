@@ -10,6 +10,7 @@ const PDF_FOLDER = path.join(__dirname, "../PDF_DOC/PDF_FILES");
 let excelData = [];
 let lastFileName = "";
 
+// right now what i wanted 
 
 // 🔹 Create folders if they don't exist
 if (!fs.existsSync(EXCEL_FOLDER)) {
@@ -47,6 +48,16 @@ function formatDate(value) {
   return value;
 }
 
+function normalizeString(str) {
+  if (!str) return "";
+
+  return str
+    .toString()
+    .toLowerCase()
+    .replace(/[\/\\\-\_\s]/g, ""); 
+}
+
+
 function normalizeSheetType(sheetName) {
   const name = sheetName.toLowerCase();
 
@@ -59,7 +70,83 @@ function normalizeSheetType(sheetName) {
   return "";
 }
 
+// function findPDFFile(noticeNo) {
+
+//   if (!noticeNo) return null;
+
+//   noticeNo = noticeNo.toString().trim();
+
+//   console.log(`\n🔍 Searching for PDF with Notice No: "${noticeNo}"`);
+  
+//   try {
+//     const files = fs.readdirSync(PDF_FOLDER);
+//     console.log(`📂 Total files in PDF folder: ${files.length}`);
+    
+//     if (files.length === 0) {
+//       console.log('⚠️  PDF folder is empty!');
+//       return null;
+//     }
+    
+//     const pdfFiles = files.filter(f => path.extname(f).toLowerCase() === '.pdf');
+//     console.log(`📄 PDF files found: ${pdfFiles.length}`);
+    
+//     if (pdfFiles.length > 0) {
+//       console.log(`📄 Available PDF files:`);
+//       pdfFiles.forEach((file, index) => {
+//         console.log(`   ${index + 1}. ${file}`);
+//       });
+//     }
+    
+//     const normalizedNotice = normalizeString(noticeNo);
+//     console.log(`🔤 Normalized Notice No: "${noticeNo}" → "${normalizedNotice}"`);
+    
+//     // Try exact match first
+//     let pdfFile = pdfFiles.find(file => {
+//       const fileNameWithoutExt = path.parse(file).name;
+//       return fileNameWithoutExt === noticeNo;
+//     });
+    
+//     if (pdfFile) {
+//       console.log(`✅ Exact match found: ${pdfFile}`);
+//       return path.join(PDF_FOLDER, pdfFile);
+//     }
+    
+//     // Try normalized match
+//     pdfFile = pdfFiles.find(file => {
+//       const fileNameWithoutExt = path.parse(file).name;
+//       const normalizedFileName = normalizeString(fileNameWithoutExt);
+      
+//       console.log(`   Checking "${file}"`);
+//       console.log(`     File normalized: "${normalizedFileName}"`);
+//       console.log(`     Match: ${normalizedFileName === normalizedNotice || normalizedFileName.includes(normalizedNotice)}`);
+      
+//       return normalizedFileName === normalizedNotice || 
+//              normalizedFileName.includes(normalizedNotice);
+//     });
+
+//     if (pdfFile) {
+//       const fullPath = path.join(PDF_FOLDER, pdfFile);
+//       console.log(`✅ Match found: ${pdfFile}`);
+//       console.log(`📍 Full path: ${fullPath}\n`);
+//       return fullPath;
+//     }
+    
+//     console.log(`❌ No matching PDF found for Notice No: "${noticeNo}"\n`);
+//     return null;
+    
+//   } catch (error) {
+//     console.error('❌ Error finding PDF:', error);
+//     return null;
+//   }
+// }
+
 function findPDFFile(noticeNo) {
+
+  if (!noticeNo) return null;
+
+  // 🔥 TRIM HERE
+  noticeNo = noticeNo.toString().trim();
+
   console.log(`\n🔍 Searching for PDF with Notice No: "${noticeNo}"`);
   
   try {
@@ -74,48 +161,32 @@ function findPDFFile(noticeNo) {
     const pdfFiles = files.filter(f => path.extname(f).toLowerCase() === '.pdf');
     console.log(`📄 PDF files found: ${pdfFiles.length}`);
     
-    if (pdfFiles.length > 0) {
-      console.log(`📄 Available PDF files:`);
-      pdfFiles.forEach((file, index) => {
-        console.log(`   ${index + 1}. ${file}`);
-      });
-    }
-    
     const normalizedNotice = normalizeString(noticeNo);
     console.log(`🔤 Normalized Notice No: "${noticeNo}" → "${normalizedNotice}"`);
     
-    // Try exact match first
+    // Exact match
     let pdfFile = pdfFiles.find(file => {
-      const fileNameWithoutExt = path.parse(file).name;
+      const fileNameWithoutExt = path.parse(file).name.trim();
       return fileNameWithoutExt === noticeNo;
     });
     
     if (pdfFile) {
-      console.log(`✅ Exact match found: ${pdfFile}`);
       return path.join(PDF_FOLDER, pdfFile);
     }
     
-    // Try normalized match
+    // Normalized match
     pdfFile = pdfFiles.find(file => {
-      const fileNameWithoutExt = path.parse(file).name;
+      const fileNameWithoutExt = path.parse(file).name.trim();
       const normalizedFileName = normalizeString(fileNameWithoutExt);
-      
-      console.log(`   Checking "${file}"`);
-      console.log(`     File normalized: "${normalizedFileName}"`);
-      console.log(`     Match: ${normalizedFileName === normalizedNotice || normalizedFileName.includes(normalizedNotice)}`);
-      
+
       return normalizedFileName === normalizedNotice || 
              normalizedFileName.includes(normalizedNotice);
     });
 
     if (pdfFile) {
-      const fullPath = path.join(PDF_FOLDER, pdfFile);
-      console.log(`✅ Match found: ${pdfFile}`);
-      console.log(`📍 Full path: ${fullPath}\n`);
-      return fullPath;
+      return path.join(PDF_FOLDER, pdfFile);
     }
     
-    console.log(`❌ No matching PDF found for Notice No: "${noticeNo}"\n`);
     return null;
     
   } catch (error) {
@@ -123,6 +194,7 @@ function findPDFFile(noticeNo) {
     return null;
   }
 }
+
 
 function startWatcher() {
   console.log("📂 Watching folder:", EXCEL_FOLDER);
@@ -212,4 +284,5 @@ function getExcelData() {
 module.exports = {
   startWatcher,
   getExcelData,
+  findPDFFile
 };
