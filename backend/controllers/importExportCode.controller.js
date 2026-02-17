@@ -1,5 +1,5 @@
 const ImportExportCode = require("../models/importExportCode.model.js");
-const nodemailer = require("nodemailer"); 
+const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 //   getISTTimestamp,
 // } from "../utils/dateTime.js";
 
-const{   getISTTime,
+const { getISTTime,
   getISTDateString,
   getISTTimestamp, } = require("../utils/dateTime");
 
@@ -31,10 +31,28 @@ exports.createImportExportCode = async (req, res) => {
       role,
       partner,
       type,
-      source,
       category,
       issue,
     } = req.body;
+
+    // ---------- NORMALIZE TYPE ----------
+    const TYPE_MAP = {
+      "enroll": "ENROLL_NOW",
+      "import-export-code-apply": "ENROLL_NOW",
+      "iec_profile_updation": "IEC_PROFILE_UPDATATION",
+      "iec_registration": "IEC_REGISTRATION",
+      "iec_annual_update": "IEC_ANNUAL_UPDATE",
+    };
+
+    const cleanedType = String(type).trim().toLowerCase();
+    const normalizedType = TYPE_MAP[cleanedType];
+
+    if (!normalizedType) {
+      return res.status(400).json({
+        success: false,
+        error: `Invalid type value: ${type}`,
+      });
+    }
 
     // ---------- BASIC VALIDATION ----------
     if (!name || !mobile || !email || !role || partner !== true) {
@@ -44,15 +62,8 @@ exports.createImportExportCode = async (req, res) => {
       });
     }
 
-    if (!type) {
-      return res.status(400).json({
-        success: false,
-        error: "Type is required",
-      });
-    }
-
     // ---------- BUSINESS VALIDATION ----------
-    if (type === "IEC_PROFILE_UPDATATION") {
+    if (normalizedType === "IEC_PROFILE_UPDATATION") {
       if (category !== "IEC PROFILE UPDATATION") {
         return res.status(400).json({
           success: false,
@@ -72,7 +83,7 @@ exports.createImportExportCode = async (req, res) => {
     const istDate = getISTDateString();
     const istTimestamp = getISTTimestamp();
 
-    // ---------- SAVE ONLY ONCE ----------
+    // ---------- SAVE ----------
     const newEntry = await ImportExportCode.create({
       name,
       mobile,
@@ -80,8 +91,7 @@ exports.createImportExportCode = async (req, res) => {
       email,
       role,
       partner,
-      type,
-      source,
+      type: normalizedType, // <-- IMPORTANT FIX
       category: category || null,
       issue: issue || null,
       submittedAt: istTimestamp,
@@ -99,8 +109,7 @@ exports.createImportExportCode = async (req, res) => {
         <p><strong>Mobile:</strong> ${mobile}</p>
         <p><strong>Role:</strong> ${role}</p>
         <p><strong>Partner:</strong> ${partner}</p>
-        <p><strong>Type:</strong> ${type}</p>
-        <p><strong>Source:</strong> ${source}</p>
+        <p><strong>Type:</strong> ${normalizedType}</p>
         <p><strong>Category:</strong> ${category || "-"}</p>
         <p><strong>Issue:</strong> ${issue || "-"}</p>
         <p><strong>Submitted (IST):</strong> ${istTime}, ${istDate}</p>
@@ -112,6 +121,7 @@ exports.createImportExportCode = async (req, res) => {
       message: "Import Export request submitted successfully",
       data: newEntry,
     });
+
   } catch (error) {
     console.error("ImportExportCode Error:", error);
 

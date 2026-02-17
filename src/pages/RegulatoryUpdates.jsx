@@ -98,7 +98,7 @@
 //         </div>
 
 //         {/* <div className="grid lg:grid-cols-12 gap-8">
-
+   
 //           <aside className="lg:col-span-3 space-y-6">
 //             <Filter title="Authority">
 //               <FilterRow label="DGFT" count="142" />
@@ -580,7 +580,7 @@ export default function RegulatoryUpdates() {
 
         const res = await fetch(
           // `${process.env.REACT_APP_API_URL}/api/dgft/notices?type=${activeTab}`,
-          `http://localhost:5000/api/dgft/notices?type=${activeTab}`,
+           `http://localhost:5000/api/dgft/notices?type=${activeTab}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -683,7 +683,7 @@ export default function RegulatoryUpdates() {
               <Checkbox label="Trade Notice" />
             </Filter>
 
-            <Filter title="Financial Year">
+                        <Filter title="Financial Year">
               <div className="flex gap-2 flex-wrap">
                 <Year active>2025-26</Year>
                 <Year>2024-25</Year>

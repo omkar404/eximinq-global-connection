@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    createEnroll,
+    createImportExportCode,
 } = require("../controllers/importExportCode.controller");
 
-router.post("/", createEnroll);
+router.post("/", createImportExportCode);
 
 module.exports = router;

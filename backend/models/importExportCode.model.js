@@ -43,11 +43,6 @@ const importExportCodeSchema = new mongoose.Schema(
       ],
     },
 
-    source: {
-      type: String,
-      required: true,
-    },
-
     category: {
       type: String,
       default: null,

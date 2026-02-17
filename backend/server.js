@@ -10,7 +10,7 @@ const enrollRoutes = require("./routes/enroll.routes");
 const industriesWePowerRoutes = require("./routes/industriesWePower.routes");
 const mainenrollRoutes = require("./routes/mainenroll.routes");
 const mainCooRoutes = require("./routes/maincoo.routes");
-// const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes")
+const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes")
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 
 // const pdfPath = findPDFFile(noticeNo);
@@ -404,7 +404,7 @@ app.use("/api/main-enroll", mainenrollRoutes);
 
 app.use("/api/main-coo-enroll", mainCooRoutes);
 
-// app.use("/api/import-export-code", importExportCodeRoutes);
+app.use("/api/import-export-code", importExportCodeRoutes);
 
 startWatcher();
 
