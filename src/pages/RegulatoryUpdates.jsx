@@ -579,8 +579,8 @@ export default function RegulatoryUpdates() {
         setLoading(true);
 
         const res = await fetch(
-          // `${process.env.REACT_APP_API_URL}/api/dgft/notices?type=${activeTab}`,
-           `http://localhost:5000/api/dgft/notices?type=${activeTab}`,
+          `${process.env.REACT_APP_API_URL}/api/dgft/notices?type=${activeTab}`,
+          //  `http://localhost:5000/api/dgft/notices?type=${activeTab}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
