@@ -125,7 +125,7 @@ function App() {
         {/* startup Routes */}
         <Route path="/startup" element={<CloudDeskStartupLanding />} />
 
-        {/*AEO Routes */}
+        {/*AEO Routes  */}
         <Route path="/aeo" element={<CloudDeskAEOLanding />} />
 
         {/*ICE Management */}
