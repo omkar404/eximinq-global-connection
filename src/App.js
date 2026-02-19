@@ -408,9 +408,9 @@ function App() {
         <Route path="/foreign-trade-policy" element={<CloudDeskForeignTrade />} />
           <Route path="/foreign-trade-policy/regulatory-updates" element={<RegulatoryUpdates />} />
           <Route path="/foreign-trade-policy/exchange-rates" element={<ExchangeRates />} />
-        <Route path="/dgft-customs-consultancy" element={<CloudDeskDGFTCustoms />} />
-        <Route path="/certificate-of-origin" element={<CloudDeskCoo />} />
-        <Route path="/compliance-trade-india" element={<CloudDeskCompliance />} />
+          <Route path="/dgft-customs-consultancy" element={<CloudDeskDGFTCustoms />} />
+          <Route path="/certificate-of-origin" element={<CloudDeskCoo />} />
+          <Route path="/compliance-trade-india" element={<CloudDeskCompliance />} />
         <Route path="/contact-us" element={<CloudDeskContact />} />
         <Route path="/clouddesk-saas" element={<CloudDeskSaasLanding />} />
 

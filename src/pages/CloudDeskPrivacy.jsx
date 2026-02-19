@@ -5,6 +5,7 @@ import { ScrollText, CheckCircle, CreditCard, Users, AlertOctagon, Gavel, Buildi
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import BrandLogo from "../components/BrandLogo/BrandLogo";
 import { ModalEnroll } from "../components/CloudDeskHome/ModalEnroll";
+import { navLinks } from "../Common/navLinks";
 
 const TermsOfServicePage = () => {
   const lastUpdated = "October 24, 2025"; // Update as needed
@@ -32,9 +33,8 @@ const TermsOfServicePage = () => {
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
       {/* Navigation Mockup */}
       <nav
-        className={`fixed w-full z-50 transition-all duration-300 ${
-          scrolled ? "bg-white shadow-md py-2" : "bg-white py-2"
-        }`}
+        className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md py-2" : "bg-white py-2"
+          }`}
       >
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
           {/* Logo */}
@@ -42,35 +42,55 @@ const TermsOfServicePage = () => {
             {/* <a href="https://eximinq.in/" className="cursor-pointer">
               <BrandLogo />
             </a> */}
-                                <Link to="/" className="cursor-pointer">
-            <BrandLogo />
-          </Link>
+            <Link to="/" className="cursor-pointer">
+              <BrandLogo />
+            </Link>
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-8 font-medium text-gray-800">
-            <a className="hover:text-teal-500" href="/">
-              Home
-            </a>
-            <a className="hover:text-teal-500" href="/services">
-              Services
-            </a>
-            <a className="hover:text-teal-500" href="/dgft-customs-consultancy">
-              DGFT & Customs
-            </a>
-            <a className="hover:text-teal-500" href="/certificate-of-origin">
-              COO
-            </a>
-            <a className="hover:text-teal-500" href="/compliance-trade-india">
-              Compliance
-            </a>
-            <a className="hover:text-teal-500" href="/contact-us">
-              Contact
-            </a>
-            <a className="hover:text-teal-500" href="/clouddesk-saas">
-              SAAS
-            </a>
+          <div className="hidden md:flex items-center gap-8 font-smedium text-gray-800">
+            {navLinks.map((link) =>
+              link.isDropdown ? (
+                <div key={link.name} className="relative group">
+                  <span className="cursor-pointer hover:text-teal-500">
+                    {link.name}
+                  </span>
+
+                  {/* Dropdown */}
+                  <div className="absolute left-0 mt-4 w-72 
+                      bg-gray-100 rounded-2xl shadow-xl 
+                      opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible 
+                      transition-all duration-200 
+                      p-6 z-50">
+
+                    <div className="flex flex-col space-y-6">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.path}
+                          to={child.path}
+                          className="text-gray-600 text-lg hover:text-teal-600 transition"
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
+
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="hover:text-teal-500"
+                >
+                  {link.name}
+                </Link>
+              )
+            )}
+
           </div>
+
 
           {/* Desktop buttons */}
 
@@ -149,9 +169,8 @@ const TermsOfServicePage = () => {
           {/* Hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden text-3xl font-bold ${
-              scrolled ? "text-gray-800" : "text-gray-800"
-            }`}
+            className={`md:hidden text-3xl font-bold ${scrolled ? "text-gray-800" : "text-gray-800"
+              }`}
           >
             {isMenuOpen ? "✕" : "☰"}
           </button>
@@ -175,7 +194,7 @@ const TermsOfServicePage = () => {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8">
         <div className="bg-white rounded-xl shadow-lg border border-slate-100 p-8 md:p-12 space-y-10">
-          
+
           {/* Last Updated */}
           <div className="border-b border-slate-100 pb-6 text-sm text-slate-500 italic">
             Last Updated: {lastUpdated}
@@ -297,8 +316,8 @@ const TermsOfServicePage = () => {
                 EXIMINQ <span className="text-blue-500">CloudDesk </span>
               </span>
               <p className="text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
-          Your 24/7 dedicated Helpdesk for Importers, Exporters, CHA & Logistics.
-            Simplifying DGFT, Customs & Compliance.
+                Your 24/7 dedicated Helpdesk for Importers, Exporters, CHA & Logistics.
+                Simplifying DGFT, Customs & Compliance.
               </p>
             </div>
             <div>
@@ -330,11 +349,11 @@ const TermsOfServicePage = () => {
               </ul>
             </div>
           </div>
-      <div className="container mx-auto px-4 mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} EXIMINQ CloudDesk. All Rights Reserved.
-        <br />
-        Disclaimer: Information provided is for guidance purposes only.
-      </div>
+          <div className="container mx-auto px-4 mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
+            © {new Date().getFullYear()} EXIMINQ CloudDesk. All Rights Reserved.
+            <br />
+            Disclaimer: Information provided is for guidance purposes only.
+          </div>
         </div>
       </footer>
 
