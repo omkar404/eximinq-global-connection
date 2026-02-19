@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
-import { MobileMenu } from "../components/CloudDeskForeignTrade/MobileMenu";
+import MobileMenu from "../components/CloudDeskForeignTrade/MobileMenu";
 import { Hero } from "../components/CloudDeskForeignTrade/Hero";
 import { NewsTicker } from "../components/CloudDeskForeignTrade/NewsTicker";
 import { Footer } from "../components/CloudDeskForeignTrade/Footer";
@@ -22,6 +22,9 @@ export default function CloudDeskForeignTrade() {
     type: null,
   });
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
 
@@ -32,10 +35,18 @@ export default function CloudDeskForeignTrade() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
-      <Navbar setShowEnrollModal={setShowEnrollModal} />
+    <div className="min-h-screen font-sans text-gray-800 bg-gray-50 flex flex-col relative">
+      <Navbar 
+      setShowEnrollModal={setShowEnrollModal}
+      setIsMenuOpen={setIsMenuOpen} 
+      />
+
       <div className="h-[30px]" />
-      <MobileMenu />
+      <MobileMenu
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        setShowModal={setShowModal}
+      />
       <NewsTicker />
       <Hero />
 

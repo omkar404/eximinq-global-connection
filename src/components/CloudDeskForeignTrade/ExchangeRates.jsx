@@ -17,7 +17,7 @@ export function ExchangeRates() {
           Exchange Rates
         </h3>
         <span className="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded border border-slate-600">
-          Dec 2025
+          Feb 2026
         </span>
       </div>
 
@@ -34,26 +34,26 @@ export function ExchangeRates() {
           <RateRow
             icon={DollarSign}
             code="USD"
-            importRate="84.50"
-            exportRate="83.20"
+            importRate="91.2"
+            exportRate="89.5"
           />
           <RateRow
             icon={Euro}
             code="EUR"
-            importRate="91.15"
-            exportRate="89.45"
+            importRate="107.00"
+            exportRate="103.35"
           />
           <RateRow
             icon={PoundSterling}
             code="GBP"
-            importRate="106.80"
-            exportRate="104.50"
+            importRate="123.35"
+            exportRate="119.35"
           />
           <RateRow
             icon={JapaneseYen}
             code="JPY"
-            importRate="56.20"
-            exportRate="54.80"
+            importRate="60.95"
+            exportRate="59.00"
           />
         </tbody>
       </table>

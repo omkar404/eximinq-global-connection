@@ -55,6 +55,8 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
 
   const isEnroll = type === "import-export-code-Apply";
 
+  const icehoursform = type === "Get IEC in 24 Hours(IEC Registration";
+
   const showProfileUpdateDropdown =
     isEnroll && category === "IEC PROFILE UPDATATION";
 

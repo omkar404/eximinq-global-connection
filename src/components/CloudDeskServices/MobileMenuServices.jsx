@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { navLinks } from "../../Common/navLinks";
+
 const MobileMenuServices = ({ isMenuOpen, setIsMenuOpen, setShowModal }) => {
   if (!isMenuOpen) return null;
 
@@ -5,13 +8,37 @@ const MobileMenuServices = ({ isMenuOpen, setIsMenuOpen, setShowModal }) => {
     <div className="absolute top-[69px] left-0 w-full bg-white shadow-xl border-t z-40 animate-slideDown">
       <div className="flex flex-col items-center py-6 space-y-4 text-gray-800 font-medium">
 
-        <a href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Home</a>
-        <a href="/services" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Services</a>
-        <a href="/dgft-customs-consultancy" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">DGFT & Customs</a>
-        <a href="/certificate-of-origin" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">COO</a>
-        <a href="/compliance-trade-india" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Compliance</a>
-        <a href="/contact-us" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Contact</a>
-        <a href="/clouddesk-saas" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">SAAS</a>
+        {navLinks.map((link) =>
+          link.isDropdown ? (
+            <div key={link.name} className="flex flex-col items-center gap-4">
+
+              <span className="text-base font-semibold">
+                {link.name}
+              </span>
+
+              {link.children.map((child) => (
+                <Link
+                  key={child.path}
+                  to={child.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-gray-600 hover:text-teal-500 text-sm"
+                >
+                  {child.name}
+                </Link>
+              ))}
+
+            </div>
+          ) : (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setIsMenuOpen(false)}
+              className="hover:text-teal-500 text-base"
+            >
+              {link.name}
+            </Link>
+          )
+        )}
 
         <div className="w-full border-t border-gray-200"></div>
 
@@ -33,6 +60,5 @@ const MobileMenuServices = ({ isMenuOpen, setIsMenuOpen, setShowModal }) => {
     </div>
   );
 };
-
 
 export default MobileMenuServices;

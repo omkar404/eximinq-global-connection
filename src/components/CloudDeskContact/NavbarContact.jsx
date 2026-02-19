@@ -2,6 +2,8 @@ import React from "react";
 import { Menu, X } from "lucide-react";
 import BrandLogo from "../BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { navLinks } from "../../Common/navLinks";
 
 
 const NavbarContact = ({ scrolled, isMenuOpen, setIsMenuOpen, setShowModal }) => {
@@ -21,15 +23,47 @@ const NavbarContact = ({ scrolled, isMenuOpen, setIsMenuOpen, setShowModal }) =>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-4 font-smedium text-gray-700">
-          <a href="/" className="hover:text-teal-600">Home</a>
-          <a href="/services" className="hover:text-teal-600">Services</a>
-          <a className="hover:text-teal-500" href="/foreign-trade-policy">Foreign Trade Policy</a > 
-          <a href="/dgft-customs-consultancy" className="hover:text-teal-600">DGFT & Customs</a>
-          <a href="/certificate-of-origin" className="hover:text-teal-600">COO</a>
-          <a href="/compliance-trade-india" className="hover:text-teal-600">Compliance</a>
-          <a href="/contact-us" className="text-teal-600 font-bold">Contact</a>
-          <a href="/clouddesk-saas" className="hover:text-teal-500 transition">SAAS</a>
+        <div className="hidden md:flex items-center gap-8 font-smedium text-gray-800">
+          {navLinks.map((link) =>
+            link.isDropdown ? (
+              <div key={link.name} className="relative group">
+                <span className="cursor-pointer hover:text-teal-500">
+                  {link.name}
+                </span>
+
+                {/* Dropdown */}
+                <div className="absolute left-0 mt-4 w-72 
+                      bg-gray-100 rounded-2xl shadow-xl 
+                      opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible 
+                      transition-all duration-200 
+                      p-6 z-50">
+
+                  <div className="flex flex-col space-y-6">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.path}
+                        to={child.path}
+                        className="text-gray-600 text-lg hover:text-teal-600 transition"
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="hover:text-teal-500"
+              >
+                {link.name}
+              </Link>
+            )
+          )}
+
         </div>
 
         {/* Enroll Button */}
