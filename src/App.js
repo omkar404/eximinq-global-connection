@@ -1,3 +1,4 @@
+// By ritesh
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AnalyticsTracker from "./AnalyticsTracker";
 import Home from "./pages/Home";
