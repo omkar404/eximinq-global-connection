@@ -8,6 +8,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -212,6 +216,216 @@ const CloudDeskImporters = () => {
 
       <Fees setShowEnrollModal={setShowEnrollModal} />
 
+              {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Importing is no longer "Free." It is "Free with Conditions." CloudDesk manages those conditions.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "Pre-Shipment" Sentinel</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Systems like <strong>REEIMS</strong> (Renewable Energy) now require registration 5 days before sea arrival and 2 days before air arrival. 
+                          <strong>CloudDesk’s</strong> Logistics-Linked Timer looks at your Bill of Lading date and alerts you the exact second you need to file to avoid "Entry Denied" errors at Customs.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. MIP (Minimum Import Price) Guard</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          As of 2026, many items (like Paper Board and certain APIs) have a Minimum Import Price. If your invoice is even ₹1 below the threshold, the item becomes <strong>"Restricted."</strong> 
+                          <strong>CloudDesk’s</strong> Price-Audit Tool scans your proforma invoice against current <strong>DGFT notifications </strong>to flag potential "Restricted" status before you open your Letter of Credit (LC).
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. HSN-Logic Mapping</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Import Monitoring Systems are <strong>HS-Code specific.</strong> 
+                          One wrong digit in a Steel HS code means your<strong> SIMS registration</strong> is invalid. 
+                          <strong>CloudDesk’s Technical </strong>Cataloging ensures your product description matches the exact ITC(HS) requirements for SIMS, PIMS, or NFMIMS.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Auto-Approval Speed</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Monitoring systems are usually auto-approved, but the registration number must be quoted in the Bill of Entry. 
+                          <strong>CloudDesk </strong> API-Connects your registration numbers directly to your filing drafts, ensuring your CHA doesn't have to wait for an email from you to clear the cargo.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+        <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What happens if I file my SIMS registration after the goods have arrived?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                In 2026, the policy is strict. If you file after arrival, Customs considers it a "Policy Violation." 
+                You may be subject to a redemption fine and penalty under the Customs Act, and your cargo will not be cleared until the "Prior Registration" condition is met (even if filed late).
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long is an Import Monitoring Registration (like PIMS or REEIMS) valid?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• SIMS/PIMS: Usually valid for 75 days.
+                 • REEIMS: Valid for 3 months for a specific port.
+                 • NFMIMS (Non-Ferrous): Valid for 75 days.
+                CloudDesk tracks these expiry dates for you."
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can one registration cover multiple consignments?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                For REEIMS, yes—a single registration can cover multiple consignments for the same port within the validity period. However, for SIMS, each registration is typically per consignment/invoice.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                My item is listed as "Restricted." Can I still import it?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes, but you need a Restricted Import Authorization from the DGFT. This involves an application to the Exim Facilitation Committee (EFC). 
+               CloudDesk specializes in drafting these "Need-Based" justifications to increase your chances of approval.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the Minimum Import Price (MIP) for Paper?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               As per the 2026 notifications, certain Virgin Multi-layer Paper Boards have an MIP (e.g., $800/MT). 
+               Imports below this value are "Restricted." CloudDesk keeps an updated database of all items currently under MIP to prevent your goods from being seized.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the fee for these registrations? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   "• SIMS: ₹1 per thousand of CIF value (Min ₹500, Max ₹1 Lakh).
+                    • PIMS/REEIMS: Currently ₹0 (Free), but mandatory.
+                    • NFMIMS: ₹500 fixed."
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Do I need a Digital Signature (DSC) for Import Monitoring?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. You must log in to the DGFT portal using your linked DSC or Aadhaar e-Sign to verify the authenticity of the importer.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What documents are required for REEIMS (Solar/Wind) registration?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               You need the (1) Technical Specifications of the components, (2) Expected Port of Entry, (3) Expected Date of Arrival, and (4) End-use declaration (stating that the items are for renewable energy projects).
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>       
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
@@ -265,6 +479,9 @@ const CloudDeskImporters = () => {
               </ul>
             </ul>
           </div>
+
+
+          
 
           {/* OTHER SERVICES */}
           <div>

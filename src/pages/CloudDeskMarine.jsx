@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle, 
   Check,
   Ship,
   Waves,
@@ -315,6 +319,76 @@ const CloudDeskMarine = () => {
         </div>
       </section>
 
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Getting the 14-digit code from your bank is only 20% of the job. The remaining 80% is mapping it correctly to the Customs EDI system.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Multi-Port Mapping Engine</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Exporters often believe they only need to register at one port. In reality, you need registration at every port you ship from<strong> (Nhava Sheva, Mundra, Sahar Air Cargo, etc.). </strong>
+                          <strong>CloudDesk’s</strong> One-Click Port Expansion feature allows you to push your bank's AD Code to multiple ports simultaneously, saving weeks of manual filing.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. IFSC-Drawback Synchronization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The AD Code is for shipping, but the <strong>IFSC registration </strong>is for money. If your IFSC is not mapped correctly, your Duty Drawback and <strong>RoDTEP refunds</strong> will be rejected by the system. 
+                          <strong>CloudDesk</strong> performs a <strong>"Financial Handshake" </strong>test to ensure your bank's IFSC is active in the Customs "Drawback Ledger."
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Bank Letter Format Validator</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Customs is notoriously strict about the Bank’s AD Code Letter format <strong>(Annexure-A).</strong>
+                          If a single sentence is missing or the bank official's signature isn't stamped properly, the EDI officer will reject it. 
+                          <strong>CloudDesk </strong> provides a Pre-Filled Template for you to give your bank manager, ensuring a 100% acceptance rate on the first upload.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Real-Time Approval Tracking</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Once submitted, AD Code approval can take 24 hours or 10 days depending on the port. 
+                          <strong>CloudDesk’s </strong>Status Pulse monitors the <strong>ICEGATE </strong>"Bank Management" dashboard and alerts you the second your status moves from "Pending" to "Customs Approved."
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
@@ -378,6 +452,9 @@ const CloudDeskMarine = () => {
           </div>
         </div>
       </section>
+
+
+      
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

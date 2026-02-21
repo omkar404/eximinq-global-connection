@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
   FileSignature,
   Ship,
   Landmark,
@@ -262,6 +266,77 @@ const CloudDeskIGSTRefunds = () => {
           </div>
         </div>
       </section>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">An automated system is only fast if your data is flawless. CloudDesk is the 'Quality Control' before you hit 'Submit'.</h2>
+                    {/* <p className="text-slate-500">"               • Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                                   • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Triple-Data Reconciliation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The refund depends on three systems talking to each other: Your<strong> Invoice, GST Portal (GSTR-1/3B), and Customs (ICEGATE).</strong> 
+                          <strong>CloudDesk’s</strong> Recon-Bot checks all three. If your invoice says<strong> "INV-01" </strong>but your shipping bill says<strong> "INV/01",</strong> the refund will fail.
+                          We catch these formatting errors before they hit the portal.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. The "SB000 to SB006" Error Decoder</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Customs uses cryptic codes to reject refunds<strong> (e.g., SB003 for GSTIN mismatch, SB005 for Invoice mismatch).</strong> 
+                          <strong>CloudDesk </strong>provides a Real-Time Error Dashboard that not only tells you what the error is but exactly how to fix it<strong> (via an amendment or a clerical correction).</strong>
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Service Export Specialization (RFD-01)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Unlike goods<strong> (where the Shipping Bill is the application),</strong> Service Exports require a manual filing of Form RFD-01. 
+                          <strong>CloudDesk </strong>manages the collection of<strong> FIRC (Foreign Inward Remittance Certificates)</strong> or BRC, maps them to your service invoices, and files the application within the 2-year statutory limit.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Export Ledger Balance Tracking</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The <strong>GST </strong>portal now uses a<strong> "Ledger Based Approach." </strong>If the <strong>IGST</strong> you paid in GSTR-3B is even ₹1 less than what you claimed in<strong> GSTR-1,</strong> the portal won't transmit your data to Customs. 
+                          <strong>CloudDesk </strong>monitors your Export Ledger balance to ensure you are always in the "Green" for transmission.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
       <section id="faq" className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
@@ -310,6 +385,109 @@ const CloudDeskIGSTRefunds = () => {
                 there is no separate time limit if the bill was filed on time.
                 However, resolving errors should be done promptly, ideally
                 within 2 years.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What are the two ways to export under GST?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "1. With Payment of IGST: You pay tax upfront and get it back as a refund. (Best for goods to keep capital moving).
+                 2. Without Payment of IGST (under LUT): You don't pay tax; you only claim a refund of your Input Tax Credit (ITC). (Best for services and SaaS)."
+
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long does the refund take in 2026?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               For goods (with payment), it’s usually 15–30 days after the ship leaves (EGM filed). For services (via RFD-01), it takes 30–60 days after the officer approves the application.
+
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there a minimum amount for a refund?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               In 2026, the government has removed the minimum threshold for export refunds. You can claim a refund even for small amounts to ensure every rupee counts.
+
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is the most common reason for a refund delay?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              "Data Mismatch. Common culprits are:
+               • Wrong Port Code in GSTR-1.
+               • Invoice Number format difference.
+               • EGM (Export General Manifest) not filed by the shipping line."
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is error code SB005?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              This means "Invalid Invoice Number." It happens when the invoice number in your GST return doesn't match the one on your Shipping Bill. CloudDesk helps you file an Officer Interface request to fix this.
+              </p>
+            </details>
+
+            {/* FAQ 9 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What if my Bank Account is not validated?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Your refund will fail at the final step (PFMS). You must ensure your bank account is "Validated" on both the GST Portal and ICEGATE. CloudDesk checks your PFMS Status monthly.
+              </p>
+            </details>
+
+            {/* FAQ 10 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Do I need a Shipping Bill for service exports?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              No. For services, the "Proof of Export" is the FIRC/BRC showing payment received in convertible foreign exchange.
+              </p>
+            </details>
+
+            {/* FAQ 11 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Can I claim a refund for SEZ supplies?
+                <ChevronDown className="w-5 h-5 text-brand-500 transition-transform group-open:rotate-180" />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Yes. Supplies to SEZ (Special Economic Zones) are treated as "Zero-Rated." You can claim a refund just like a physical export, provided you have the "Authorized Operations" endorsement from the SEZ officer.
               </p>
             </details>
           </div>

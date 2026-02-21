@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -328,6 +332,219 @@ const CloudDeskFactoryStuffing = () => {
     </section>
 
     <Fees/>
+
+            {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+                  <section className="py-20 bg-white">
+                    <div className="container mx-auto px-4 max-w-5xl">
+                      <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-2">Registering is easy getting verified and staying compliant is where most businesses fail. CloudDesk acts as your "Portal Pilot."</h2>
+                        {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                        • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                        </p> */}
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        {/* Feature 1 */}
+                        <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                          <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                            <AlertTriangle size={24} />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-slate-900 mb-2">1. "Caution Money" Management</h4>
+                            <p className="text-sm text-slate-600 leading-relaxed">
+                              Since late 2024, GeM requires a <strong>"Caution Money" deposit (security deposit)</strong> to activate your account. 
+                              <strong>CloudDesk</strong> handles the E-Banking Integration, ensuring your deposit is correctly mapped to your profile so you don't get stuck in the <strong>"Verification Pending" </strong>loop for weeks.
+                            </p>
+                          </div>
+                        </div>
+            
+                        {/* Feature 2 */}
+                        <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                          <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                            <CheckCircle size={24} />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-slate-900 mb-2">2. The OEM vs. Reseller Strategy</h4>
+                            <p className="text-sm text-slate-600 leading-relaxed">
+                             Are you a manufacturer or a trader? If you register as an <strong>OEM (Original Equipment Manufacturer),</strong> you get <strong>"Brand Ownership"</strong> and the 
+                             power to authorize other resellers. <strong>CloudDesk manages the Vendor Assessment (QCI/RITES)</strong> process required for OEMs, ensuring your factory audit passes the first time.
+                            </p>
+                          </div>
+                        </div>
+            
+                        {/* Feature 3 */}
+                        <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                          <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                            <Building size={24} />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-slate-900 mb-2">3. L1 Bidding & Reverse Auction (RA) Shield</h4>
+                            <p className="text-sm text-slate-600 leading-relaxed">
+                             GeM is famous for the <strong>"L1" (Lowest Bidder) rule.</strong> 
+                             <strong>CloudDesk’s Pricing Intelligence </strong>Tool tracks historical L1 prices in your category, helping you set a<strong> "Walk-away Price" </strong>so you don't win a contract only to realize you’re losing money on every unit.
+                            </p>
+                          </div>
+                        </div>
+            
+                        {/* Feature 4 */}
+                        <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                          <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                            <ShieldUser size={24} />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-slate-900 mb-2">4. Real-Time Tax-Sync Audit</h4>
+                            <p className="text-sm text-slate-600 leading-relaxed">
+                              In 2026, GeM syncs directly with <strong>GSTN and Income Tax servers.</strong> If your turnover in your ITR doesn't match your GeM declaration, your account is auto-suspended. 
+                              <strong>CloudDesk </strong>performs a Pre-Submission Data Match to ensure 100% consistency across all government databases.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+    
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 max-w-3xl">
+              {/* Heading */}
+              <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+                Frequently Asked Questions
+              </h2>
+    
+              {/* FAQ Items */}
+              <div className="space-y-4">
+                {/* Question 1 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    Is GeM registration really free?
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   <p>
+                     "The registration process is free, but to participate in bids and accept orders, you must pay Caution Money.
+                   <br />
+                    • Turnover &lt; ₹1 Cr: ₹5,000
+                   <br />
+                   • Turnover ₹1 Cr – ₹10 Cr: ₹10,000
+                    <br />
+                   • Turnover &gt; ₹10 Cr: ₹25,000
+                   <br />
+                   CloudDesk helps you process this through the official GeM Pool Account."
+                 </p>
+                  </p>
+                </details>
+    
+                {/* Question 2 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    Can I register as a seller if I don't have a GST number?
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                 Technically, some categories (like small artisans or exempt services) can register without GST. However, for 99% of business categories, a GSTIN is mandatory to accept any order above ₹2.5 Lakhs.
+                  </p>
+                </details>
+    
+                {/* Question 3 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    What is a "Primary User" vs. "Secondary User"?
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    The Primary User (typically the Director/Owner) has the legal authority and must use their Aadhaar/PAN for KYC. They can then create Secondary Users (Sales Managers) to handle daily tasks like uploading catalogs or bidding, without sharing sensitive login credentials.
+                  </p>
+                </details>
+    
+                {/* Question 4 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    What is the difference between "Direct Purchase" and "L1 Bidding"?
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  "• Direct Purchase: For orders up to ₹25,000, a buyer can buy directly from any seller.
+                   • L1 (Comparison): For orders ₹25,000 – ₹5,00,000, the buyer must compare at least 3 different OEMs/Sellers and pick the lowest price.
+                   • Bidding/RA: Above ₹5,00,000, a formal electronic bid or reverse auction is mandatory."
+                  </p>
+                </details>
+    
+                {/* Question 5 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    Do MSMEs get any special treatment on GeM?
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   Yes. If you have a Udyam Certificate, you are entitled to: (1) Exemption from Earnest Money Deposit (EMD), (2) A 25% purchase preference (if you are within L1+15% price band), and (3) Free Vendor Assessment in many categories.
+                  </p>
+                </details>
+    
+                {/* Question 6 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                     What is "Vendor Assessment"? 
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    It is a mandatory check for OEMs to verify their manufacturing capacity. It is conducted by third parties like QCI. CloudDesk provides a Mock Audit Checklist to ensure your premises are ready for the physical or desktop assessment.
+                  </p>
+                </details>
+    
+                {/* Question 7 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                   How do I get paid on GeM?
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   GeM uses the i-GPMS (Integrated Government Payment Management System). Once you upload the "Consignee Receipt and Acceptance Certificate" (CRAC), the system triggers the payment. CloudDesk tracks your CRAC timelines to ensure you aren't waiting 90 days for a 10-day payment cycle.
+                  </p>
+                </details>
+    
+                {/* Question 8 */}
+                <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can my account be blacklisted?
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+    
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   Yes, for "Incident Management" violations like: (1) Failing to deliver after accepting an order, (2) Supplying sub-standard goods, or (3) Pricing your product higher on GeM than on other platforms (Amazon/Flipkart). CloudDesk’s Compliance Monitor flags these risks before they become "Incidents."
+                  </p>
+                </details>
+              </div>
+            </div>
+          </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

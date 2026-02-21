@@ -7,6 +7,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -248,6 +251,78 @@ const CloudDeskESANCHIT = () => {
       {/* Dynamic Fees Section */}
       <Fees />
 
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">e-Sanchit is where "Technical Glitches" meet "Customs Delays." CloudDesk is the filter that ensures only perfect data reaches the officer.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "Format-First" Auto-Optimizer</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          <strong>ICEGATE </strong>is incredibly picky: PDFs must be under 1MB, no special characters in filenames, and specific DPI settings. 
+                          <strong>CloudDesk’s</strong> Auto-Formatter takes your raw scans and <strong>instantly compresses, renames, and optimizes</strong> them to meet the exact ICEGATE 2026 specifications. 
+                          No more <strong>"File Size Exceeded" or "Invalid Format" </strong>rejections.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Universal Signer Bridge</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The most common failure point is the <strong>Digital Signature (DSC) mapping.</strong> 
+                          <strong>CloudDesk </strong>provides a custom-built Signer Utility that works across all browsers <strong>(Chrome, Edge, Firefox). </strong>
+                          It ensures your DSC is detected and the document is "Hard-Signed" before the upload even begins.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. IRN Ledger & Auto-Population</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Manually copying 16-digit <strong>Image Reference Numbers (IRN)</strong> into your <strong>Shipping Bill or BoE</strong>
+                          is an invitation for typos.<strong> CloudDesk</strong> maintains a Digital IRN Vault. 
+                          Once a document is uploaded, the IRN is automatically pulled into your filing draft, eliminating the risk of "Invalid IRN" queries.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Multi-Document Batch Processing</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Instead of uploading one document at a time and waiting for the <strong>"Success" message, CloudDesk</strong> allows for Batch Uploads. 
+                          Drag and drop your <strong>Invoice, Packing List, and Certificate </strong>of Origin; <strong>CloudDesk</strong> handles the sequential upload and gathers all your IRNs in one go.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           {/* Heading */}
@@ -307,6 +382,126 @@ const CloudDeskESANCHIT = () => {
                 Yes — use the <strong>e-Sanchit (Post Filing)</strong> option.
                 You must provide the Job Number and Date to link the additional
                 documents to the existing Bill of Entry.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What are the exact file specifications for e-Sanchit in 2026?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Documents must be in PDF format, preferably in black and white (to save space). Each file must be less than 1 MB. The filename should not contain spaces or special characters (e.g., use Invoice_123.pdf instead of Invoice #123.pdf).
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is a Digital Signature mandatory for every upload?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. Every document uploaded to e-Sanchit must be digitally signed by the person registered on the ICEGATE profile (either the Importer/Exporter or the authorized CHA).
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I upload a photograph of a document?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. Photographs (JPEG/PNG) are not accepted. You must scan the document and convert it to a clear, legible PDF. CloudDesk’s mobile app includes a "Customs-Grade Scanner" that does this automatically.
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an IRN, and how long does it take to generate?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                An Image Reference Number (IRN) is a unique 16-digit number generated by the system for every successful upload. Usually, it is generated instantly. If it’s "Pending," CloudDesk’s Ping-Bot monitors the status and alerts you the moment it’s ready
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Once I have an IRN, is the document permanently saved?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, the document is stored in the ICEGATE repository. However, an IRN is typically linked to a specific job. If you need to use the same document (like an Annual Insurance Policy) for multiple shipments, CloudDesk helps you re-use the IRN, saving you from redundant uploads.
+              </p>
+            </details>
+
+            {/* FAQ 9 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What should I do if the system says "Signature Verification Failed"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                This usually happens if the DSC used for signing is not the same as the one mapped to the ICEGATE ID. CloudDesk’s DSC-Verify Tool checks the mapping before you sign to prevent this error.
+              </p>
+            </details>
+
+          {/* FAQ 10 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I delete a document after generating an IRN?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No, you cannot delete it from the Customs server once the IRN is generated. If you uploaded the wrong file, you must upload the correct one, generate a new IRN, and use the new one in your filing.
+              </p>
+            </details>
+
+            {/* FAQ 11 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How many documents can I link to a single Bill of Entry?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                There is no hard limit, but you must upload all "Mandatory Documents" (Invoice, PL, BL) plus any "Supportive Documents" required for duty exemptions. CloudDesk provides a Checklist per HSN so you know exactly which documents need an IRN.
               </p>
             </details>
           </div>

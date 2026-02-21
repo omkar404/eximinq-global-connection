@@ -9,6 +9,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -320,6 +323,211 @@ const CloudDeskHalal = () => {
       </section>
 
       <Fees setShowEnrollModal={setShowEnrollModal} />
+
+              {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+                    <section className="py-20 bg-white">
+                      <div className="container mx-auto px-4 max-w-5xl">
+                        <div className="text-center mb-12">
+                          <h2 className="text-3xl font-bold text-slate-900 mb-2">The transition from "Private Halal" to "Government-Regulated Halal" is a minefield. CloudDesk is your bridge.</h2>
+                          {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                          • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                          </p> */}
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          {/* Feature 1 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                              <AlertTriangle size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">1. I-CAS Readiness Audit</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                                The new DGFT mandate requires facilities to be certified by agencies accredited by the <strong>NABCB (National Accreditation Board for Certification Bodies).</strong>
+                                <strong>CloudDesk </strong>performs a Pre-Assessment Audit to ensure your plant meets the <strong>I-CAS</strong> standards before the official auditors arrive, saving you from expensive re-audit fees.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 2 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                              <CheckCircle size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">2. Ingredient & Cross-Contamination Filter.</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                                Halal isn't just about slaughter; it’s about the entire supply chain <strong>(e.g., no alcohol-based cleaners or porcine-derived lubricants). </strong>
+                                <strong>CloudDesk’s </strong>Supply Chain Scanner reviews your raw material MSDS sheets to ensure every single additive is 100% compliant with GSO 2055-1 and OIC/SMIIC standards.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 3 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                              <Building size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">3. Country-Specific Mapping (BPJPH, JAKIM, SFDA):</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                               A certificate for the UAE might not work for <strong> (BPJPH) </strong>or <strong>Malaysia (JAKIM)</strong> due to differing national standards. CloudDesk’s Global Recognition Engine identifies which certification body is recognized by your target country, ensuring your "Halal Passport" is valid at the port of destination.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 4 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                              <ShieldUser size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">4. The "Consignment Certificate" Bridge:</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                               For meat exports, you need a <strong>certificate for every shipment.</strong> 
+                               <strong>CloudDesk integrates</strong> with your shipping workflow to generate and verify these Consignment Certificates instantly, 
+                               ensuring your container doesn't get rejected in Dubai or Doha due to a missing QR code.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+      
+            <section className="py-20 bg-white">
+              <div className="container mx-auto px-4 max-w-3xl">
+                {/* Heading */}
+                <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+                  Frequently Asked Questions
+                </h2>
+      
+                {/* FAQ Items */}
+                <div className="space-y-4">
+                  {/* Question 1 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      Is Halal certification mandatory for all food exports?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     No. As of 2026, it is mandatory only for specified meat and meat products being exported to 15 specific countries (Bahrain, Bangladesh, Indonesia, Iran, Iraq, Jordan, Kuwait, Malaysia, Oman, Philippines, Qatar, Saudi Arabia, Singapore, Turkey, and UAE). For other products like cosmetics or plant-based foods, it is optional but highly recommended for market access.
+                    </p>
+                  </details>
+      
+                  {/* Question 2 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      What is "I-CAS Halal"?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     I-CAS stands for India Conformity Assessment Scheme. Developed by the Quality Council of India (QCI), it is the government-recognized framework that streamlines the Halal process. To export meat as "Halal," your facility must be certified under this specific scheme by an NABCB-accredited body.
+                    </p>
+                  </details>
+      
+                  {/* Question 3 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      Can I still use my local Jamat or private Halal certificate?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                      For the 15 specified countries, a private certificate is no longer sufficient for meat exports. It must be a certificate issued under the I-CAS framework. However, for non-notified countries or non-meat products, private certifications are still accepted.
+                    </p>
+                  </details>
+      
+                  {/* Question 4 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                        Do cosmetics and pharmaceuticals need Halal certification?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     While not mandated by India's DGFT yet, countries like Indonesia have made Halal certification mandatory for all consumer goods (including cosmetics and fashion) starting in October 2026. CloudDesk helps you get ahead of this curve.
+                    </p>
+                  </details>
+      
+                  {/* Question 5 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      What are the "Haram" (prohibited) elements in non-meat products?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   Common issues include alcohol (used in perfumes/sanitizers), gelatin (in capsules), and glycerin or stearic acid (if derived from non-Halal animal fats). CloudDesk helps you reformulate or find certified-Halal suppliers for these ingredients.
+                    </p>
+                  </details>
+      
+                  {/* Question 6 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      How much does Halal certification cost in 2026? 
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     "• 1-Year Cycle: Approx. ₹25,000 + ₹500 per product.
+                      • 3-Year Cycle: Approx. ₹60,000 + ₹1,500 per product.
+                      • Logo Usage: Often carries an additional annual fee (approx. ₹20,000).
+                      • Note: Exporting meat also requires a 'Consignment Fee' of approx. ₹800–₹1,000 per shipment."
+
+                    </p>
+                  </details>
+      
+                  {/* Question 7 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      How long does the process take?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     Typically 6 to 8 weeks. This includes document review, an on-site audit of your facility, and the final decision by the certification committee. CloudDesk’s "Fast-Track" service can reduce this to 4 weeks by ensuring "First-Time-Right" documentation.
+                    </p>
+                  </details>
+      
+                  {/* Question 8 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    What happens if I export "Halal" meat without the I-CAS certificate?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     Your shipment will be flagged as a Policy Violation at the Indian port. Even if it leaves India, it will be rejected or seized by the importing country’s Customs, leading to a 100% loss of cargo value and potential blacklisting of your IEC.
+                    </p>
+                  </details>
+                 </div>
+              </div>
+            </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

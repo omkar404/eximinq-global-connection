@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -130,6 +134,209 @@ const CloudDeskDigitalSignatures = () => {
       </section>
 
       <Fees />
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Your DSC is a legal power of attorney in a USB stick. If you lose the token or the password, your business stops.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "One-Token" Solution</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          We provide Class 3 Combo<strong> (Signing + Encryption) DSCs. </strong>While <strong>"Signing" </strong>is enough for<strong> GST/ITR, "Encryption"</strong> is mandatory for e-Tenders and <strong>ICEGATE.</strong> 
+                          <strong>CloudDesk </strong>ensures you get the <strong>"Combo" </strong>so you never have to buy a second token when you decide to bid for a government contract.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Specialized DGFT & Customs Mapping</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          A common mistake in 2026: Buying a generic <strong>DSC </strong>and expecting it to work on<strong> DGFT.</strong> For exporters, the DSC must be mapped to your<strong> IEC (Import Export Code) and PAN.</strong> 
+                          <strong>CloudDesk </strong>handles the <strong>Aadhaar-based eKYC </strong>and Video Verification to ensure your DSC is<strong> "DGFT-Ready" and "ICEGATE-Active" </strong>within 24 hours.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. FIPS-Compliant Hardware</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026,<strong> cheap, non-branded USB </strong>tokens are often blocked by<strong> government firewalls.</strong> 
+                          We provide only FIPS 140-2 Level 2 compliant crypto-tokens<strong> (like ProxKey or HyperPKI),</strong> which are mandatory for all high-security Indian portals.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Remote Identity Validation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          You don't need to visit our office. Our <strong>Cloud-Verify </strong>system allows you to complete your mandatory 30-second video recording and <strong>mobile OTP verification </strong>from your smartphone, even if you are traveling.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is Class 2 DSC still valid in 2026?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. All Class 2 certificates have expired or been discontinued. You must upgrade to Class 3 for all government portals, including GST, Income Tax, MCA, and DGFT.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the difference between "Signing" and "Encryption" DSC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• Signing: Proves who signed the document (Authenticity). Used for GST, ITR, and MCA.
+                 • Encryption: Scrambles the data so only the intended recipient can read it (Confidentiality). Mandatory for e-Tenders and certain Customs filings."
+
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I use the same DSC for my personal ITR and my company’s GST?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, if you are the Authorized Signatory for both. A Class 3 DSC is issued to an individual (linked to their PAN), and that individual can use it across multiple roles (Director, Proprietor, Individual).
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long does it take to get a Class 3 DSC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               With CloudDesk’s Paperless eKYC, it takes approximately 30 to 60 minutes to get the certificate approved. The physical USB token is then couriered to you or can be downloaded onto an existing token you own.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the validity of a DSC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              You can choose a validity of 1, 2, or 3 years. CloudDesk recommends the 2-year option as it offers the best balance between cost and the administrative burden of renewal.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What documents are required for a DSC in 2026?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               For an Individual DSC: Just your PAN and Aadhaar (linked to your mobile). For an Organization DSC: Board Resolution, GST Cert, and the Authorised Signatory's ID proofs.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                I lost my DSC USB Token. Can I get a duplicate?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               No. For security reasons, a DSC cannot be "copied." If you lose the token, you must Revoke the old certificate and apply for a Fresh DSC.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I renew my DSC without a new video verification?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              In 2026, the CCA requires fresh video verification for every renewal to prevent identity theft. CloudDesk makes this "One-Click" via our mobile app.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

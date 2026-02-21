@@ -8,18 +8,22 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
   FileSignature,
   FileCode2,
   ShoppingCart,
   IdCard,
   FileSearch, 
   FileCheck,
-   FileText, 
-   Users2, 
-   CheckCheck,
-   MapPin,
-   Phone,
-   Mail
+  FileText, 
+  Users2, 
+  CheckCheck,
+  MapPin,
+  Phone,
+  Mail
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskSCOMET/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskSCOMET/ModalEnroll";
@@ -116,7 +120,7 @@ const CloudDeskSCOMET = () => {
             {/* <!-- Cat 0 & 1 --> */}
             <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-slate-700 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Category 0 & 1
+                                Category 0 & 1
               </h3>
               <div className="text-xs font-bold text-slate-500 uppercase mb-4">
                 Nuclear & Chemicals
@@ -131,7 +135,7 @@ const CloudDeskSCOMET = () => {
             {/* <!-- Cat 2 --> */}
             <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-600 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Category 2
+                                Category 2
               </h3>
               <div className="text-xs font-bold text-slate-500 uppercase mb-4">
                 Biological
@@ -146,7 +150,7 @@ const CloudDeskSCOMET = () => {
             {/* <!-- Cat 3 --> */}
             <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-600 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Category 3
+                                Category 3
               </h3>
               <div className="text-xs font-bold text-slate-500 uppercase mb-4">
                 Materials
@@ -161,7 +165,7 @@ const CloudDeskSCOMET = () => {
             {/* <!-- Cat 4 & 5 --> */}
             <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Category 4 & 5
+                                Category 4 & 5
               </h3>
               <div className="text-xs font-bold text-slate-500 uppercase mb-4">
                 Nuclear Related & Aerospace
@@ -176,7 +180,7 @@ const CloudDeskSCOMET = () => {
             {/* <!-- Cat 6 --> */}
             <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-500 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Category 6
+                                Category 6
               </h3>
               <div className="text-xs font-bold text-slate-500 uppercase mb-4">
                 Munitions List
@@ -192,7 +196,7 @@ const CloudDeskSCOMET = () => {
             {/* <!-- Cat 8 --> */}
             <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-purple-500 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Category 8
+                                Category 8
               </h3>
               <div className="text-xs font-bold text-slate-500 uppercase mb-4">
                 Special Materials
@@ -391,6 +395,214 @@ const CloudDeskSCOMET = () => {
           </div>
         </div>
       </section>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">SCOMET isn't just paperwork; it’s a security clearance. CloudDesk ensures you don't end up on a global 'Denied Persons List'.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Technical Classification (The SCOMET Filter)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Many exporters don't even know their product is restricted<strong> (e.g., certain high-grade chemicals, drones, or specialized software).</strong> 
+                          <strong>CloudDesk </strong>performs a Deep-Technical Audit of your product specifications against the<strong> 8 SCOMET categories </strong>to determine if you need a license.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. End-User Credibility Check</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Customs doesn't just look at the product; they look at the Buyer.<strong> CloudDesk </strong>conducts a Global Denied Party Screening.
+                          We check your foreign buyer against<strong> UN, US, and Indian </strong>watchlists before you sign the contract, protecting you from<strong> "Accidental Proliferation."</strong>
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. IMWG Inter-Ministerial Coordination</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          SCOMET licenses aren't issued by<strong> DGFT </strong>alone. They are vetted by the<strong> Inter-Ministerial Working Group (IMWG), </strong>including representatives from<strong> Defence, Space, and Atomic Energy.</strong>
+                          <strong>CloudDesk </strong>manages the high-level technical representations needed to convince these agencies that your export is for peaceful use.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. GAEC (Global Authorization) Optimization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          For regular exporters of certain<strong> SCOMET items (like chemicals or electronics)</strong> to friendly nations, we help you secure the<strong> Global Authorisation for Intra-Company Transfers (GAEC).</strong> 
+                          This allows you to export multiple times to pre-approved entities without applying for a fresh license every time.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What are the main SCOMET Categories?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "There are 9 categories (0 to 8) covering:
+                • Category 0: Nuclear materials.
+                • Category 1: Toxic chemicals and agents.
+                • Category 2: Micro-organisms/Toxins.
+                • Category 3: Materials/Material Processing.
+                • Category 5: Aerospace/Avionics.
+                • Category 8: Special Electronics and Computers (The most common category for tech startups)."
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                My product is a simple commercial drone. Why is it under SCOMET?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Because the same drone can be modified for surveillance or payload delivery. In 2026, any hardware or software with "strategic encryption" or "precision navigation" likely falls under Category 5 or 8.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is software or technology also covered?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. SCOMET isn't just for physical goods. If you are "Transferring Technology" (via email, cloud, or training) to a foreign entity that falls under the SCOMET description, you need a license.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an End-User Certificate (EUC)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               This is the most critical document. Your foreign buyer must provide an Appendix 10B (EUC), legally promising that they will not use the item for weapons and will not re-export it without Indian government permission.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I export SCOMET items to "Conflict Zones"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is extremely difficult. The IMWG rarely approves licenses for regions under UN embargo or active conflict. CloudDesk provides a Country-Risk Report before you begin the application.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What happens if I export a SCOMET item without a license?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Under the Foreign Trade (Development & Regulation) Act and the WMD Act, 2005, the penalties include: (1) Heavy fines (into crores), (2) Imprisonment (up to life in some cases), and (3) Permanent cancellation of your IEC.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long does it take to get a SCOMET license?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Because of the inter-ministerial vetting, it takes 45 to 90 days. CloudDesk’s "Filing-Accuracy" protocol ensures your application isn't returned for queries, which is the #1 cause of further delays.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is "Catch-All" control?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Even if your item is NOT on the SCOMET list, if the government suspects it is intended for a WMD program, they can stop the shipment under "Catch-All" controls. CloudDesk helps you document the "Peaceful End-Use" to mitigate this risk.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

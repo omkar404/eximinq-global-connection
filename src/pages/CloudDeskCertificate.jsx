@@ -8,6 +8,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
   Phone,
   Mail,
   MapPin,
@@ -325,6 +328,220 @@ const CloudDeskCertificate = () => {
       </section>
 
      <Fees setShowEnrollModal={setShowEnrollModal} />
+
+{/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">
+        Most exporters treat CoO as a formality. We treat it as a profit-margin protector.
+      </h2>
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-8">
+
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">
+            1. Preferential Tariff Strategy
+          </h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Under 2026 <strong>FTAs (like India-EU, India-UK, and India-Australia ECTA)</strong>,
+            your buyer can save millions in duties.
+            <strong> CloudDesk</strong> analyzes your product’s
+            <strong> Rules of Origin (RoO)</strong>—calculating the
+            <strong> Value Addition (VA)</strong> and
+            <strong> Change in Tariff Sub-Heading (CTSH)</strong>—to ensure
+            you qualify for a Preferential CoO.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">
+            2. e-CoO 2.0 Integration
+          </h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            As of early 2025/2026, all CoO applications are 100% digital via the
+            <strong> Common Digital Platform (CDP)</strong>.
+            <strong> CloudDesk</strong> manages your DSC-based login,
+            mapping your <strong> IEC</strong> to the correct issuing agencies
+            (<strong>EIC, MPEDA, or Chamber of Commerce</strong>),
+            ensuring 24-hour turnaround times.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">
+            3. Origin Verification Audit
+          </h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If your buyer claims a duty benefit, foreign Customs may initiate an
+            <strong> "Origin Audit."</strong> We maintain your Production Records
+            and Costing Sheets (<strong>showing raw material sources</strong>)
+            to defend your "Made in India" status against international scrutiny.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the difference between Preferential and Non-Preferential CoO?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• Preferential: Used when India has a trade treaty (FTA/PTA) with the destination country. It allows the buyer to pay lower or zero duty.
+                 • Non-Preferential: A general certificate used for countries with no treaty. It simply proves the goods are Indian to satisfy their local import laws."
+
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               How do I know if my product qualifies for an FTA?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "You must meet the Rules of Origin (RoO). Usually, this means:
+                 1. Wholly Obtained: Everything was grown/mined in India.
+                 2. Substantial Transformation: Imported parts were used, but the final product has a different HSN Code and at least 35-40% Value Addition in India."
+
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I apply for a CoO after the ship has sailed?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes (Retrospective Issuance). In 2026, you can apply for a CoO retrospectively, but it must be clearly marked as "ISSUED RETROSPECTIVELY" and usually requires an explanation for the delay.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is a physical copy of the CoO required in 2026?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Generally, No. Most 2026 treaties allow for Digital CoOs with a QR code for verification. However, for some countries (like those in the Middle East or Latin America), a physical "Wet-Ink" stamp from the Chamber of Commerce may still be requested by the bank.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What are the government fees for e-CoO?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Fees vary by agency. Generally, it is ₹500 to ₹1,200 per certificate. CloudDesk handles the wallet management on the DGFT portal to ensure no delays in issuance.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                My buyer is asking for "Self-Certification." What is that?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Under the India-UK and India-EU agreements, "Approved Exporters" can self-certify the origin on their commercial invoice without going to a government agency. CloudDesk helps you get the Approved Exporter Status if you meet the turnover criteria.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the penalty for a "False Declaration" of origin?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              In 2026, a false claim for FTA benefits is treated as Customs Fraud. Penalties include heavy fines (up to 5x the duty evaded) and the permanent blacklisting of your IEC from future FTA benefits.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does the CoO need to match the Bill of Lading exactly? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. The vessel name, container number, weight, and HSN code must be a 100% match. CloudDesk’s Document Verification Tool flags any discrepancy before you hit "Submit."
+              </p>
+            </details>
+
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
