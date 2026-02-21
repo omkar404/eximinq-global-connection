@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskLegalMetrology/TopBar";
+// import TopBar from "../components/CloudDeskLegalMetrology/TopBar";
 import Navbar from "../components/CloudDeskLegalMetrology/Navbar";
 import Hero from "../components/CloudDeskLegalMetrology/Hero";
 import Fees from "../components/CloudDeskLegalMetrology/Fees";
@@ -26,7 +26,7 @@ const CloudDeskLegalMetrology = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

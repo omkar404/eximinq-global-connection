@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskEDPMS/TopBar";
+// import TopBar from "../components/CloudDeskEDPMS/TopBar";
 import Navbar from "../components/CloudDeskEDPMS/Navbar";
 import Hero from "../components/CloudDeskEDPMS/Hero";
 import Fees from "../components/CloudDeskEDPMS/Fees";
@@ -34,7 +34,7 @@ const CloudDeskEDPMS = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

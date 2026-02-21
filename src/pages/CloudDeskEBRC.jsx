@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskEBRC/TopBar";
+// import TopBar from "../components/CloudDeskEBRC/TopBar";
 import Navbar from "../components/CloudDeskEBRC/Navbar";
 import Hero from "../components/CloudDeskEBRC/Hero";
 import Fees from "../components/CloudDeskEBRC/Fees";
@@ -27,7 +27,7 @@ const CloudDeskEBRC = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

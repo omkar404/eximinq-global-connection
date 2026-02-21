@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskRodtep/TopBar";
+// import TopBar from "../components/CloudDeskRodtep/TopBar";
 import Navbar from "../components/CloudDeskRodtep/Navbar";
 import Hero from "../components/CloudDeskRodtep/Hero";
 import Fees from "../components/CloudDeskRodtep/Fees";
@@ -30,7 +30,7 @@ const CloudDeskRodtep = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

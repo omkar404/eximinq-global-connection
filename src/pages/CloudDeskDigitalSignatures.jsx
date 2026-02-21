@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
+// import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
 import Navbar from "../components/CloudDeskDigitalSignatures/Navbar";
 import Hero from "../components/CloudDeskDigitalSignatures/Hero";
 import Fees from "../components/CloudDeskDigitalSignatures/Fees";
@@ -21,7 +21,7 @@ const CloudDeskDigitalSignatures = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

@@ -1,65 +1,8 @@
-// import React, { useState, useEffect } from "react";
-// import BrandLogo from "../BrandLogo/BrandLogo";
-
-// const NavbarStartup = () => {
-//   const [scrolled, setScrolled] = useState(false);
-
-//   useEffect(() => {
-//     const handleScroll = () => setScrolled(window.scrollY > 50);
-//     window.addEventListener("scroll", handleScroll);
-//     return () => window.removeEventListener("scroll", handleScroll);
-//   }, []);
-
-//   return (
-//     <nav
-//       className={`fixed w-full z-50 transition-all duration-300 ${
-//         scrolled
-//           ? "bg-slate-900/95 backdrop-blur-md shadow-lg py-3"
-//           : "bg-transparent py-6"
-//       }`}
-//     >
-//       <div className="container mx-auto px-6 flex justify-between items-center">
-//                             <a href="https://eximinq.in/" className="cursor-pointer">
-//             <BrandLogo />
-//           </a>
-
-//         <div className="hidden md:flex items-center space-x-8">
-//           <a
-//             href="#process"
-//             className="text-slate-300 hover:text-sky-400 transition text-sm font-medium"
-//           >
-//             Process
-//           </a>
-//           <a
-//             href="#make-in-india"
-//             className="text-slate-300 hover:text-sky-400 transition text-sm font-medium"
-//           >
-//             Benefits
-//           </a>
-//           <a
-//             href="#solutions"
-//             className="text-slate-300 hover:text-sky-400 transition text-sm font-medium"
-//           >
-//             Services
-//           </a>
-//           <a
-//             href="#contact"
-//             className="px-6 py-2 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white rounded-full text-sm font-bold transition shadow-lg shadow-sky-900/50"
-//           >
-//             Start Exporting
-//           </a>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default NavbarStartup;
-
 import { Link } from "react-router-dom";
 import React from "react";
 import BrandLogo from "../BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
+import { navLinks } from "../../Common/navLinks";
 
 export const NavbarStartup = ({
   scrolled,
@@ -86,15 +29,46 @@ export const NavbarStartup = ({
         </div>
 
         {/* Desktop menu */}
-        <div className="hidden md:flex items-center space-x-4 font-smedium text-gray-800">
-          <a className="hover:text-teal-500" href="/">Home</a>
-          <a className="hover:text-teal-500" href="/services">Services</a>
-          <a className="hover:text-teal-500" href="/foreign-trade-policy">Foreign Trade Policy</a > 
-          <a className="hover:text-teal-500" href="/dgft-customs-consultancy">DGFT & Customs</a>
-          <a className="hover:text-teal-500" href="/certificate-of-origin">COO</a>
-          <a className="hover:text-teal-500" href="/compliance-trade-india">Compliance</a>
-          <a className="hover:text-teal-500" href="/contact-us">Contact</a>
-          <a className="hover:text-teal-500" href="/clouddesk-saas">SAAS</a>
+        <div className="hidden md:flex items-center gap-8 font-smedium text-gray-800">
+          {navLinks.map((link) =>
+            link.isDropdown ? (
+              <div key={link.name} className="relative group">
+                <span className="cursor-pointer hover:text-teal-500">
+                  {link.name}
+                </span>
+
+                {/* Dropdown */}
+                <div className="absolute left-0 mt-4 w-72 
+                      bg-gray-100 rounded-2xl shadow-xl 
+                      opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible 
+                      transition-all duration-200 
+                      p-6 z-50">
+
+                  <div className="flex flex-col space-y-6">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.path}
+                        to={child.path}
+                        className="text-gray-600 text-lg hover:text-teal-600 transition"
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="hover:text-teal-500"
+              >
+                {link.name}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Desktop buttons */}

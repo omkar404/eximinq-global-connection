@@ -10,8 +10,8 @@ const SLABS = [
     min: 1500000,
     max: null,
     rates: {
-      rodtep: { buy: 98.25, sell: 98.75 },
-      rosctl: { buy: 98.1, sell: 98.6 },
+      rodtep: { buy: 98.15, sell: 98.75 },
+      rosctl: { buy: 98.10, sell: 98.60 },
     },
   },
   {
@@ -19,8 +19,8 @@ const SLABS = [
     min: 1000000,
     max: 1499999,
     rates: {
-      rodtep: { buy: 98.0, sell: 98.5 },
-      rosctl: { buy: 97.85, sell: 98.35 },
+      rodtep: { buy: 97.65, sell: 98.50 },
+      rosctl: { buy: 97.60, sell: 98.35 },
     },
   },
   {
@@ -28,8 +28,8 @@ const SLABS = [
     min: 500000,
     max: 999999,
     rates: {
-      rodtep: { buy: 97.5, sell: 98.35 },
-      rosctl: { buy: 97.5, sell: 98.15 },
+      rodtep: { buy: 97.15, sell: 98.25 },
+      rosctl: { buy: 97.10, sell: 98.10 },
     },
   },
   {
@@ -37,8 +37,8 @@ const SLABS = [
     min: 100000,
     max: 499999,
     rates: {
-      rodtep: { buy: 97.0, sell: 98.1 },
-      rosctl: { buy: 97.0, sell: 97.85 },
+      rodtep: { buy: 96.65, sell: 98.00 },
+      rosctl: { buy: 96.60, sell: 97.85 },
     },
   },
   {
@@ -46,8 +46,8 @@ const SLABS = [
     min: 10000,
     max: 99999,
     rates: {
-      rodtep: { buy: 96.5, sell: 97.85 },
-      rosctl: { buy: 96.5, sell: 97.35 },
+      rodtep: { buy: 96.15, sell: 97.75 },
+      rosctl: { buy: 96.10, sell: 97.60 },
     },
   },
 ];
@@ -167,17 +167,15 @@ const LiveRates = ({ onSellClick }) => {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* ACTION TOGGLE */}
-            <select
+            {/* <select
               className="border rounded-lg px-3 py-1 text-sm bg-white"
               value={actionType}
               onChange={(e) => setActionType(e.target.value)}
             >
               <option value="SELL">Sell Scrip</option>
               <option value="BUY">Buy Scrip</option>
-            </select>
+            </select> */}
 
-            {/* SLAB */}
             <select
               className="border rounded-lg px-3 py-1 text-sm bg-white"
               value={selectedSlab.min}
