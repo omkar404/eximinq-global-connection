@@ -8,6 +8,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle, 
   Phone,
   Mail,
   MapPin,
@@ -328,6 +332,210 @@ const CloudDeskAEOCertificate = () => {
 
       {/* Dynamic Fees Section */}
       <Fees />
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">MOOWR turns your factory into a 'Legal Customs Vault.' CloudDesk ensures the keys always turn smoothly.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. "Infinite" Duty Deferral Setup</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Unlike Advance Authorisation, <strong>MOOWR </strong>has no fixed export obligation and no time limit for duty deferral. 
+                          <strong>CloudDesk</strong> architects your licensing so that you only pay duty if and when you sell to the <strong>domestic market (DTA).</strong> If you export, the duty is waived forever.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. The Single-Point Approval Engine</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Getting a <strong>MOOWR license </strong>involves both a Bonded <strong>Warehouse License </strong>(Sec 58) and Permission for Manufacturing (Sec 65). <strong>CloudDesk</strong> handles the dual-application process, ensuring your factory layout, security protocols, and bond execution are approved by the Commissioner in one go.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Digital Inventory-Bond Sync</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The biggest compliance hurdle is the <strong>Triple-Column Ledger (Input, Process, Output).</strong>
+                          <strong>CloudDesk’s </strong>Bonded-Inventory Module automates this ledger, ensuring your raw material consumption matches your <strong>export/domestic sales perfectly,</strong> making your monthly returns "Audit-Proof."
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. GST-Customs Financial Mapping</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          While Customs duty is deferred, <strong>IGST rules are complex under MOOWR.</strong>
+                         <strong>CloudDesk </strong>performs a Tax-Optimization Audit to ensure you aren't accidentally blocking your GST credits while trying to save on Customs duty.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What exactly is the MOOWR Scheme?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It allows you to import capital goods and raw materials into a bonded warehouse (your factory) without paying BCD (Basic Customs Duty) or IGST. You only pay these taxes when you clear the finished goods into the Indian domestic market. If you export the finished goods, you pay zero duty.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How is MOOWR better than an EOU (Export Oriented Unit) or SEZ?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• No Export Obligation: Unlike EOUs, there is no ""Net Foreign Exchange"" (NFE) requirement.
+                 • No Location Restriction: Unlike SEZs, you can set up a MOOWR unit anywhere in India.
+                 • Ease of Exit: Exiting MOOWR is significantly simpler than exiting an SEZ or EOU."
+
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there a time limit for keeping goods in the MOOWR warehouse?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. You can keep raw materials or capital goods in the bonded premises indefinitely without paying duty until they are "cleared" for domestic consumption.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Who can apply for a MOOWR license?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Any person (Proprietorship, Partnership, or Company) who has been granted a license under Section 58 of the Customs Act for a bonded warehouse and intends to carry out manufacturing or other operations under Section 65.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What are the "Security" requirements for a MOOWR factory?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Your premises must be secure. Requirements include: (1) Strong physical boundaries, (2) 24/7 CCTV surveillance with a 30-day backup, and (3) Digital record-keeping of all entry and exit. CloudDesk provides a Security Checklist to ensure you meet these before the inspector arrives.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Do I need a separate IEC for MOOWR? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               No. You use your existing IEC. However, your ICEGATE ID must be mapped to the specific Bonded Warehouse Code generated after your license is approved.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What happens when I sell my product in India (DTA)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               You must file an Ex-Bond Bill of Entry and pay the deferred BCD and IGST on the raw materials used in that product. There is no interest charged on the deferred duty if paid at the time of clearance.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I transfer goods from one MOOWR unit to another?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. Inter-unit transfers are permitted without payment of duty, making it an excellent scheme for companies with multiple manufacturing stages across different locations.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>      
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

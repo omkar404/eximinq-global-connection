@@ -9,6 +9,10 @@ import {
   KeyRound,
   IndianRupee,
   CheckCircle2,
+  AlertTriangle,
+  CheckCircle,
+  Building,
+  ShieldUser,
   Ship,
   PlaneTakeoff,
   Truck,
@@ -392,7 +396,77 @@ const IECRegistration = () => {
 
       {/* Dynamic Fees Section */}
       <Fees setShowEnrollModal={setShowEnrollModal} />
-
+              
+              {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">ICEGATE is not just a website it’s a secure gateway that requires specific local system configurations.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "Signer Utility" Specialist</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The most common reason <strong>ICEGATE registration </strong>fails is the <strong>Digital Signature</strong> (DSC) Utility. 
+                          It requires specific versions of Java and browser permissions.<strong> CloudDesk </strong> provides a System Compatibility Check that pre-configures your computer to ensure your 
+                          DSC is "seen" by the ICEGATE server on the first try.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. 2FA & Profile Security</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          <strong>ICEGATE 2.0 </strong> has introduced Two-Factor Authentication (2FA). If you lose your linked mobile or email access, 
+                          recovering an <strong>ICEGATE ID </strong>is a multi-week manual process involving the <strong>New Delhi Helpdesk.</strong> 
+                          <strong>CloudDesk</strong>manages your Credential Health, ensuring your recovery paths are always active.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. e-Sanchit Optimized Uploads</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          You cannot complete your profile without uploading documents to e-Sanchit to get an 
+                          <strong>IRN (Image Reference Number).</strong> <strong>CloudDesk’s</strong> engine auto-formats your PAN, GST, and Authorization letters to meet the 
+                          exact 1MB, DPI, and naming conventions required by Customs, eliminating "File Corrupt" or "Format Not Supported" errors.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Transaction-Ready Setup </h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Getting an ID is useless if you can't file. <strong>CloudDesk</strong> goes beyond registration to ensure your Roles and <strong>Permissions (Importer, Exporter, or both) </strong>are correctly mapped so that your <strong>ICEGATE ID</strong> is "Transaction Ready" the moment you log in.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           {/* HEADER */}
@@ -410,7 +484,6 @@ const IECRegistration = () => {
                   className="text-brand-500 transition-transform group-open:rotate-180"
                 />
               </summary>
-
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 Yes, if you intend to export from multiple ports (e.g., Nhava
                 Sheva and Air Cargo Delhi), you must register the AD Code
@@ -418,7 +491,7 @@ const IECRegistration = () => {
               </p>
             </details>
 
-            {/* FAQ 2 */}
+              {/* FAQ 2 */}
             <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
               <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
                 Does ICEGATE registration expire?
@@ -427,7 +500,6 @@ const IECRegistration = () => {
                   className="text-brand-500 transition-transform group-open:rotate-180"
                 />
               </summary>
-
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 The ICEGATE ID itself does not expire, but the password expires
                 every few months and must be reset. Also, the linked Digital
@@ -445,13 +517,132 @@ const IECRegistration = () => {
                   className="text-brand-500 transition-transform group-open:rotate-180"
                 />
               </summary>
-
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 e-Sanchit is a paperless processing initiative by Indian
                 Customs. It allows traders to upload all supporting documents
                 (like invoices, certificates) digitally to obtain an Image
                 Reference Number (IRN), which is quoted in the Bill of Entry or
                 Shipping Bill.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the difference between "Simplified Registration" and "Full Registration"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                 Simplified registration is mostly for tracking and checking status. 
+                 To file documents (Bill of Entry/Shipping Bill), 
+                 you need a Full Registration (Partnership Registration) using a Class 3 DSC. 
+                 CloudDesk only does Full Registrations to ensure you are never restricted in your trade operations.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I use one ICEGATE ID for multiple companies?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. An ICEGATE ID is tied to a specific PAN and IEC. Each legal entity must have its own unique ICEGATE ID. 
+                  However, CloudDesk’s dashboard allows you to manage all your company IDs from a single master view.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is a Class 3 DSC mandatory for ICEGATE?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes. For Full Registration and for signing documents on e-Sanchit, a Class 3 Digital Signature Certificate (signing + encryption) is mandatory. 
+                  Without it, you cannot clear cargo.
+              </p>
+            </details>
+                        
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                I am getting a "Signer Not Started" error. How do I fix it?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   This is usually due to a Java Runtime Environment (JRE) mismatch or a blocked port on your browser. 
+                   CloudDesk provides a dedicated Signer Support Tool that restarts the utility and clears the cache, fixing 99% of these errors instantly.
+              </p>
+            </details>
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "IRN" and why do I need it for registration?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   IRN stands for Image Reference Number. Every document you upload (like your Authorization Letter) must first be uploaded to the e-Sanchit module. 
+                   e-Sanchit gives you an IRN for that document, which you then "link" to your registration form. 
+                   Without an IRN, you cannot submit your profile.
+              </p>
+            </details>
+            {/* FAQ 9 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does my ICEGATE ID expire?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  The ID itself doesn't expire, but the linked DSC usually has a 2-year validity. If your DSC expires, your ability to file stops. 
+                  CloudDesk tracks your DSC expiry and sends alerts 30 days in advance to ensure a seamless transition to the new certificate.
+              </p>
+            </details>
+            {/* FAQ 10 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How do I add a "Customs Port" to my existing ICEGATE ID?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              In ICEGATE 2.0, you don't necessarily "add" ports for filing, but you must register your AD Code for each specific port. 
+              Your ICEGATE ID allows you to interact with all EDI ports in India by default, provided your bank details are mapped correctly.
+              </p>
+            </details>
+            {/* FAQ 11 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What should I do if my ICEGATE account is "Locked"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Accounts usually lock after 3 failed login attempts. 
+              You can use the "Forgot Password" feature, which requires your secret question or DSC authentication. 
+              If both fail, CloudDesk assists in the manual reset process with the DGFT/Customs technical team.
               </p>
             </details>
           </div>

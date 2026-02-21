@@ -8,6 +8,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -511,6 +515,216 @@ const CloudDeskGlobalTrade = () => {
           </div>
         </div>
       </section>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Most forwarders give you a quote and disappear. CloudDesk provides a 'Control Tower' for your cargo.</h2>
+                    {/* <p className="text-slate-500">"                • Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. AI-Powered Rate Discovery</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Freight rates change by the hour.<strong> CloudDesk’s </strong>Rate-Sense Engine aggregates data from over 50 global shipping lines and airlines to give you a<strong> "Spot Quote" </strong>that is guaranteed for 48 hours, protecting you from sudden <strong>"Peak Season Surcharges" </strong>(PSS).
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. The "LCL-to-FCL" Efficiency Audit</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Are you wasting money on<strong>Less-than-Container Load (LCL) </strong> when you have enough volume for a<strong> Full Container Load (FCL)? CloudDesk’s </strong>
+                          Volume Optimizer analyzes your packing list and suggests the most cost-effective container type (20ft, 40ft, or HC), often saving exporters up to 15% on freight costs.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. End-to-End Visibility (MIL)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                        <strong>  "Where is my container?" </strong>is a question of the past. <strong>CloudDesk </strong>provides <strong>Milestone Integrated Logistics (MIL) </strong>tracking. 
+                        You get automated alerts when your cargo is: <strong>Picked up - Gate-in at Port - Loaded on Vessel - Transshipment - Arrival </strong>at Destination Port.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Incoterm Advisory & Risk Mapping</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Should you sell on <strong>FOB, CIF, or DDP? </strong>Most exporters get stuck with<strong> "Demurrage" </strong>because they chose the wrong Incoterm.<strong> CloudDesk </strong>consults on the best 
+                          <strong>legal-logistical</strong> framework to ensure your liability ends exactly where it should, and your costs are predictable.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                When should I choose Air Freight over Sea Freight?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Use Air Freight if: (1) Your cargo is high-value and low-volume (e.g., electronics, pharma), (2) The shelf life is short (e.g., horticulture), or (3) The "Stock-out" cost is higher than the freight premium. For everything else, Sea Freight is 80% cheaper but takes 4–6 weeks longer.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the difference between LCL and FCL?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "                • FCL (Full Container Load): You rent the entire container. It's faster and has a lower risk of damage.
+                                 • LCL (Less-than-Container Load): Your cargo shares a container with other exporters. It’s cheaper for small shipments but involves ""Stuffing"" and ""De-stuffing"" delays at the warehouse."
+
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What are "Incoterms 2020"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "These are international rules that define who pays for what.
+                • FOB (Free on Board): You pay until the goods are on the ship.
+                • CIF (Cost, Insurance, Freight): You pay for everything until the destination port.
+                • DDP (Delivered Duty Paid): You pay for everything, including the buyer's import taxes."
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Demurrage" and "Detention"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "• Demurrage: The penalty you pay to the Port for keeping your container inside the terminal for too long.
+                • Detention: The penalty you pay to the Shipping Line for keeping their container outside the port for too long.
+                CloudDesk’s Buffer-Management helps you avoid these by pre-clearing all paperwork."
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Are there hidden "Local Charges" at the destination?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. Every port has Terminal Handling Charges (THC), documentation fees, and CFS charges. CloudDesk provides an All-In Quote so you aren't surprised by a $500 bill at the destination port.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Freight Collect" vs. "Freight Pre-paid"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "• Pre-paid: You pay the forwarder in India.
+                • Collect: Your buyer pays the forwarder in their country.
+                Note: Some countries and commodities do not allow 'Freight Collect'—CloudDesk checks these regulations for you."
+
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is a "Bill of Lading" (BL)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              The BL is the "Title to the Goods." Whoever holds the original BL owns the cargo. CloudDesk manages the HBL (House Bill of Lading) and MBL (Master Bill of Lading) reconciliation to ensure your payment is secure before you release the documents.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Do I need Marine Insurance?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Absolutely. Standard carrier liability is very limited (often based on weight, not value). For a fraction of the cargo cost, CloudDesk provides All-Risk Marine Insurance to cover theft, damage, or loss at sea.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>      
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

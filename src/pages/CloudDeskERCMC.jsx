@@ -8,6 +8,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -728,6 +731,215 @@ const CloudDeskERCMC = () => {
       </section>
       {/* Dynamic Fees Section */}
       <Fees setShowEnrollModal={setShowEnrollModal} />
+
+              {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+                    <section className="py-20 bg-white">
+                      <div className="container mx-auto px-4 max-w-5xl">
+                        <div className="text-center mb-12">
+                          <h2 className="text-3xl font-bold text-slate-900 mb-2">Most exporters pick the wrong council or fail the technical DGFT-EPC sync. CloudDesk ensures you are mapped to the council that gives you the most benefits.</h2>
+                          {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                          • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                          </p> */}
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          {/* Feature 1 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                              <AlertTriangle size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">1. Strategic EPC Mapping</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                                There are over <strong>35 Export Promotion Councils (EPCs)</strong> and Commodity Boards. 
+                                Picking the wrong one (e.g., registering with FIEO when you should be with APEDA) can disqualify you from product-specific subsidies. 
+                                <strong>CloudDesk’s</strong> "Council-Match" Algorithm analyzes your HSN codes and recommends the specific EPC that maximizes your ROI.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 2 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                              <CheckCircle size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">2. The "Unified Profile" Sync</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                                The <strong>e-RCMC </strong>is filed on the DGFT portal but approved by the individual EPC. This "cross-talk" often fails due to digital signature mismatches. 
+                                <strong>CloudDesk</strong> acts as the Technical Liaison, ensuring your DGFT profile data perfectly aligns with the EPC’s internal membership requirements before you pay the fee.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 3 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                              <Building size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">3. Automatic Benefit Trigger</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                                Obtaining the RCMC is just Step 1. <strong>CloudDesk’s </strong> dashboard automatically alerts you to the Incentive Schemes (like RoDTEP, Advance Authorisation, or MAI) that your specific RCMC now unlocks. 
+                                We don't just give you the certificate; we show you how to use it.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 4 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                              <ShieldUser size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">4. Membership Ledger Management</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                                EPC fees vary based on your export turnover. Many exporters overpay. <strong>CloudDesk’s </strong>Fee Auditor calculates your exact subscription slab based on your past year’s shipping bills, ensuring you pay the minimum required membership fee.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-3xl">
+                  {/* Heading */}
+                  <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+                    Frequently Asked Questions
+                  </h2>
+        
+                  {/* FAQ Items */}
+                  <div className="space-y-4">
+                    {/* Question 1 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                        Is RCMC mandatory for every exporter?
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                        Technically, you can export without an RCMC. However, it is mandatory if you want to claim any benefit under the Foreign Trade Policy (FTP), 
+                        such as duty remissions (RoDTEP), duty-free imports (Advance Auth), or even just to participate in an international trade fair at a subsidized rate.
+                      </p>
+                    </details>
+        
+                    {/* Question 2 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                            I export both Spices and Engineering goods. Do I need two RCMCs?
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                       You have two options: (1) Obtain separate RCMCs from the Spices Board and EEPC, or 
+                       (2) Obtain a single "Multi-Product" RCMC from FIEO (Federation of Indian Export Organisations). CloudDesk evaluates your volume in each category to advise which path is more cost-effective.
+                      </p>
+                    </details>
+        
+                    {/* Question 3 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                        What is the validity of an e-RCMC?
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                        An RCMC is typically valid for 5 financial years. It begins on April 1st of the year it was issued and ends on March 31st of the fifth year. 
+                        Note: You must still pay the "Annual Membership Subscription" to the council to keep it active.
+                      </p>
+                    </details>
+        
+                    {/* Question 4 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                        Can I apply for RCMC without an IEC?
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                       No. An active and updated IEC (Import-Export Code) is the absolute prerequisite. 
+                       The e-RCMC application pulls all your company data directly from your IEC profile.
+                      </p>
+                    </details>
+        
+                    {/* Question 5 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                        What is the "ANF 2C" form?
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                       ANF 2C is the specific application form for RCMC. Under the new "e-RCMC" system, this form is completely digital on the DGFT portal. 
+                       You no longer need to send physical papers to the council offices.
+                      </p>
+                    </details>
+        
+                    {/* Question 6 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                        What documents are required for e-RCMC in 2026? 
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                       (1) Digital Signature (Class 3), (2) Updated IEC Profile, (3) GST Registration, (4) CA Certificate certifying your export turnover for the previous year (if you are an existing exporter).
+                      </p>
+                    </details>
+        
+                    {/* Question 7 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                        How much does it cost?
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                       The fee consists of two parts: a one-time Admission Fee (usually ₹2,000 - ₹5,000) and an Annual Subscription based on your turnover (ranging from ₹6,000 to ₹75,000+). 
+                       CloudDesk provides a fee-calculator based on your last year's FOB value.
+                      </p>
+                    </details>
+        
+                    {/* Question 8 */}
+                    <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                      <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      What happens if my RCMC expires while my cargo is at sea?
+                        <ChevronDown
+                          size={20}
+                          className="text-brand-500 transition-transform group-open:rotate-180"
+                        />
+                      </summary>
+        
+                      <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                       You can still clear the goods, but you will not be able to claim the incentives (like RoDTEP) for that specific Shipping Bill. The system checks for a "Valid RCMC" at the time the Shipping Bill is generated. 
+                       CloudDesk’s Expiry Shield prevents this by alerting you 60 days before the 5-year term ends.
+                      </p>
+                    </details>
+                  </div>
+                </div>
+              </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">

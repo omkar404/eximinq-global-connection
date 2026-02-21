@@ -8,6 +8,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -405,6 +408,223 @@ const CloudDeskAeoCertification = () => {
 
       {/* Dynamic Fees Section */}
       <Fees setShowEnrollModal={setShowEnrollModal} />
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">AEO is a 100-page audit of your company’s soul. CloudDesk ensures there are zero "Red Flags" before the Customs team arrives.</h2>
+                    {/* <p className="text-slate-500">"       Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                           Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "Pre-Audit" Diagnostic</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                        <strong> AEO rejection</strong> blacklists you from re-applying for a year. 
+                        <strong>CloudDesk</strong> performs a Gap Analysis of your <strong>financial solvency, safety standards, and cargo security. </strong>
+                         We identify weaknesses—like an expired fire <strong>NOC or a missing CCTV</strong> angle—and fix them before we submit the application to the <strong>AEO Cell.</strong>
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Tier-Advancement Roadmap</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Most companies stop at Tier <strong>1. CloudDesk creates a Progression Path.</strong> 
+                          We help you move from <strong>T1 (Document-based) to T2 (Physical-site verification) and finally T3 (3 years of T2 status),</strong> 
+                          unlocking progressively higher benefits like 100% bank guarantee waivers and deferred duty payments.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Global MRA Integration</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          India has <strong>Mutual Recognition Agreements (MRAs)</strong> with countries like the<strong> US, Korea, and UAE. </strong>
+                          <strong>CloudDesk ensures your AEO status</strong> is mapped to these international partners, so your cargo gets <strong>"VIP Treatment" </strong>at the foreign port, not just in India.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Real-Time Compliance Monitoring</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                        <strong>  AEO </strong>status can be revoked for a single legal violation. <strong>CloudDesk’s </strong>Compliance Shield monitors your <strong>IEC, GST, and ICEGATE 24/7.</strong>
+                          If a show-cause notice is issued, we alert you instantly to resolve it before it compromises your AEO standing.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the difference between AEO Tier 1, 2, and 3?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "Tier 1 (T1): Document-based. No physical site visit. Best for SMEs.
+                Tier 2 (T2): Requires a physical site audit by Customs. Higher benefits.
+                Tier 3 (T3): The highest level. Only for those who have held T2 for 3 years (or 2 years for T2 holders who are also T1).
+                AEO-LO: For ChAs, Logistics Providers, and Warehouse Owners."
+
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long do I need to be in business to apply for AEO?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                You must have handled at least 25 documents (Bills of Entry or Shipping Bills) in the last financial year and have been in business for at least 3 financial years.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there a fee for AEO certification?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                The government does not charge a fee for AEO certification. However, the costs involved are related to upgrading your security (CCTV, Fencing) and hiring consultants like CloudDesk to manage the complex documentation.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Bank Guarantee (BG) Waiver" benefit?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              "This is the #1 reason to get AEO.
+               AEO T1: 50% BG waiver.
+               AEO T2: 100% BG waiver.
+               AEO T3: 100% BG waiver.
+               This saves you lakhs in bank commission and blocked capital."
+
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Deferred Duty Payment"? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Reserved for AEO T2 and T3 holders. You don't pay duty for every shipment. Instead, you pay in batches twice a month. It’s like a 15-day interest-free loan from the government on every import.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does AEO status speed up my clearance?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. AEO holders are granted "Direct Port Delivery" (DPD) and "Direct Port Entry" (DPE) by default. Your cargo moves through the Green Channel, meaning minimal physical examination and immediate "Out of Charge.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long is the AEO certificate valid?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "• AEO T1 & T2: Valid for 3 years.
+                  AEO T3: Valid for 5 years.
+                  AEO LO: Valid for 3 years.
+                  CloudDesk manages your AEO Renewal 6 months before expiry to ensure zero downtime in your benefits."
+
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can my AEO status be suspended?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, if you are involved in a Customs offense (smuggling, mis-declaration) or if your financial solvency fails. CloudDesk’s Solvency Tracker ensures your balance sheets meet the AEO criteria year after year.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -9,6 +9,8 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -307,6 +309,210 @@ const CloudDeskEOP = () => {
     </section>
 
     <Fees setShowEnrollModal={setShowEnrollModal} />
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Missing a deadline by one day can cost you years of profit. CloudDesk manages the 'Clock' so you don't have to.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Strategic "Reason-for-Delay" Drafting</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The <strong>DGFT </strong>doesn't grant extensions just because you asked. You need a Compelling Legal Justification<strong> (e.g., force majeure, policy changes, or genuine hardship).</strong> 
+                          <strong>CloudDesk’s </strong>legal team drafts the representation to the<strong> Regional Authority (RA) or the Policy Relaxation Committee (PRC)</strong> to ensure your case is viewed favorably.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Composition Fee Optimization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Extensions aren't free; they come with a Composition Fee (usually a % of the duty saved).<strong> CloudDesk </strong>performs a Cost-Benefit Analysis. 
+                          We calculate if it’s cheaper to pay the fee for an extension or to<strong> "Regularize"(pay duty + interest) </strong>based on your current order book.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. PRC (Policy Relaxation Committee) Representation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          When your extension request falls outside the standard rules of the<strong> Hand Book of Procedures (HBP),</strong> it goes to the<strong> PRC at DGFT Headquarters, New Delhi.</strong> 
+                          <strong>CloudDesk </strong>manages the high-level representation, providing the necessary data and<strong> "Public Interest" </strong>arguments to secure an out-of-turn extension.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Automatic "Deadline Sentinel"</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         Exporters often realize their<strong> EOP </strong>has expired after it’s too late.<strong> CloudDesk’s </strong>Compliance Clock starts a countdown<strong> 6 months before your EOP expires.</strong> 
+                         If your <strong>exports are below 70% </strong>of the target, we automatically initiate the extension process to avoid<strong> "Ex-post-facto" penalties.</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the standard Export Obligation Period (EOP)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• Advance Authorisation: Generally 18 months from the date of license issue.
+                 • EPCG: Generally 6 years from the date of license issue."
+
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I get an extension if my EOP has already expired?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, but it's expensive. This is called "Ex-post-facto" extension. You will have to pay a much higher composition fee and may face a "Show Cause Notice" from the DGFT. CloudDesk specializes in resolving these "Expired License" crises.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How many extensions can I get?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Under the 2023-2026 Policy, you can typically get two extensions of 6 months each for Advance Authorisation, and two extensions of 1 year each for EPCG, subject to payment of composition fees. Anything beyond this requires PRC approval.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How is the "Composition Fee" calculated?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               In 2026, the fee is usually a tiered percentage of the Duty Saved (e.g., 0.5% for the first extension, 1% for the second). CloudDesk ensures you are charged correctly—DGFT officers often over-calculate these fees manually.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is interest also charged for the extension period?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               No. If you get a valid EOP extension, you do not pay interest for that period. This is why getting an extension is always better than defaulting.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What documents are required for an EOP extension?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               (1) A formal application via the DGFT portal, (2) A self-declaration of exports made so far, (3) Evidence of "Genuine Hardship" (like a fire report, strike notice, or bank letter), and (4) Proof of payment of the Composition Fee.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What happens to my Bank Guarantee (BG) during the extension?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               You must extend the validity of your Bank Guarantee at Customs to match the new EOP. CloudDesk coordinates with your bank and the Customs department to ensure the BG remains active, preventing a "BG Forfeiture" action.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I get an extension for "Deemed Exports"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. If you are supplying to SEZs or EOU units in India (Deemed Exports), the same EOP rules and extension procedures apply as they do for physical exports.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>   
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

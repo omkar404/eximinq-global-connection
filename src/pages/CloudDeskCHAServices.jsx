@@ -7,6 +7,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -414,6 +417,259 @@ const CloudDeskCHAServices = () => {
           </div>
         </div>
       </section>
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">A bad CHA fills forms; a CloudDesk CHA protects your license.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Faceless Assessment Liaison</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026, your<strong> "Officer" </strong>could be thousands of miles away.<strong> CloudDesk’s</strong> CHA team specializes in Online Query Resolution.
+                          When an officer in a different state flags your shipment,<strong> we provide the technical justification </strong>and digital documentation immediately to prevent the<strong> "Query Loop" </strong>that delays cargo by weeks.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Examination Desk Representation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          If the <strong>Risk Management System (RMS)</strong> marks your cargo for<strong> "Physical Examination," </strong>
+                          our on-ground personnel at the port<strong> (Nhava Sheva, Mundra, Delhi, etc.)</strong> manage the Container De-stuffing & Inspection. 
+                          We ensure the officer sees exactly what is<strong> declared, preventing unnecessary "Re-valuation" or "Mis-declaration" </strong>notes.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. HSN Interpretive Expertise</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Customs duty depends entirely on the<strong> 8-digit HSN code.</strong> Our CHAs don't just take your word for it; we perform a Technical Mapping of your product specs to the Customs Tariff.
+                          This prevents the #1 cause of penalties:<strong> "Wrongful Claim of Exemption."</strong>
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. KYC & Authorization Management</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         Customs now requires a rigorous KYC (Know Your Customer) process for every importer. CloudDesk manages your CHA Authorization on the ICEGATE portal, ensuring your "Form-N" and other legal authorizations are always updated and compliant with CBIC circulars.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does a CHA handle transport?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Strictly speaking, a CHA's role ends at customs clearance. However, at EXIMINQ, we offer integrated services, meaning we can arrange the transporter to pick up goods once our CHA team clears them.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is physical presence mandatory for all shipments?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                If your shipment is routed through the Green Channel (RMS), physical examination is waived. However, a CHA is still needed to register the goods at the shed and generate the OOC/Gate Pass.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is Factory Stuffing Permission?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is a permission granted by Customs allowing exporters to pack containers at their own factory under the supervision of a Central Excise officer, rather than at the port. We help obtain this permission.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is the difference between a Freight Forwarder and a CHA?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "• Freight Forwarder: Manages the transportation (booking the ship/plane).
+                • CHA: Manages the legal clearance (filing the Bill of Entry/Shipping Bill and dealing with Customs Officers).
+                CloudDesk provides both, ensuring your transport and clearance never clash."
+
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is it mandatory to hire a CHA?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Technically, an importer can clear their own goods if they pass the "Rule 6" exam, but 99% of businesses hire a licensed CHA because of the legal complexity and the requirement for a valid Customs Broker License.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can one CHA work at all ports in India?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               A CHA holds a license for a specific "Customs Station" but can operate at other ports through "Form-C" registration. CloudDesk’s network covers all major Sea Ports, ICDs, and Airports in India.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               How does a CHA charge for their services?
+ 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Fees are usually structured as: (1) An Agency Commission (fixed or % of value), (2) Documentation Charges, and (3) Statutory Reimbursements (like port charges and duty). CloudDesk provides a transparent fee schedule with zero hidden markups on port expenses.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is "Examination" and why does the CHA need to be there?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               If Customs suspects the cargo doesn't match the documents, they order a physical check. The CHA must be present to open the packages, show the goods to the Inspector, and answer technical questions to get the "Out of Charge" (OOC).
+              </p>
+            </details>
+
+            {/* Question 9 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What happens if the CHA makes a mistake in filing?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Under the Customs Broker Licensing Regulations (CBLR), the CHA can lose their license for negligence. However, the Importer/Exporter is still legally responsible for the data filed. CloudDesk uses a "Double-Verification" system to ensure no filing happens without client approval.
+              </p>
+            </details>
+
+            {/* Question 10 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               How do I authorize a CHA to work for me?
+
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               You must log in to your ICEGATE profile and "Add" the CHA’s license number to your authorized list. This digital handshake is mandatory for them to file any documents on your behalf.
+              </p>
+            </details>
+
+            {/* Question 11 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can a CHA help with "Refunds" and "Drawbacks"? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. A good CHA (like CloudDesk) handles the post-clearance work, including following up on Duty Drawback status, IGST Refunds, and Refund of Security Deposits (like Special Additional Duty - SAD).
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

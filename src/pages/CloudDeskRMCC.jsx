@@ -9,6 +9,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
   Phone,
   Mail,
   MapPin,
@@ -16,7 +19,7 @@ import {
   Barcode,
   FileSpreadsheet,
   ShieldAlert,
-    Terminal,
+  Terminal,
   UserCheck,
   CheckCircle,
 } from "lucide-react";
@@ -206,6 +209,204 @@ const CloudDeskRMCC = () => {
 
     <Fees/>
 
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Most consultants just wait for the system to clear. CloudDesk aggressively targets the source of the alert.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "Alert-Source" Diagnostic</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          An alert can come from various wings: <strong>SIIB (Special Intelligence & Investigation Branch),</strong> <strong>DRI (Directorate of Revenue Intelligence), </strong>or the Valuation Cell. 
+                          <strong>CloudDesk</strong> identifies exactly which agency placed the alert so we don't waste time talking to the wrong department.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Evidence-Backed Representation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Alerts are often triggered by <strong>"Data Outliers"</strong>—like a sudden spike in import value or a mismatch in HSN.
+                          We prepare a Comprehensive Technical Rebuttal, backed by <strong>CA-certified financial</strong> statements and manufacturer price lists, to prove your transaction is legitimate.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Direct Nodal Liaison</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Removing an RMCC alert requires interacting with the <strong>Risk Management Division (RMD)</strong> in Mumbai or the local Commissionerate. <strong>CloudDesk’s</strong> legal team handles the physical and digital representation, ensuring your file doesn't sit on a desk for months.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Future-Proofing (RMS Optimization)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Once an alert is removed, you remain<strong> "High Risk" </strong>in the system for 6–12 months.<strong> CloudDesk implements</strong> a Compliance Recovery Plan, ensuring your next 5 shipments are 100% error-free to restore your<strong> "Green Channel" </strong>status with the AI-driven <strong>Risk Management System (RMS).</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How do I know if I have an RMCC Alert on my IEC?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                You will notice it when your Bill of Entry/Shipping Bill status on ICEGATE says "Referral to RMS" and subsequently mandates "100% Examination." In severe cases, you will see an "Alert Flag" on the ICEGATE dashboard preventing any filing.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Why did the RMCC place an alert on my business?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Common triggers in 2026 include: (1) Undervaluation of goods compared to the NIDB (National Import Database) average, (2) Mis-declaration of HSN codes to bypass restrictions, (3) Linkage with a blacklisted supplier/buyer, or (4) Outstanding "Show Cause Notices" (SCN) that were ignored.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can an alert be placed automatically by the system?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. The Customs RMS uses AI to spot patterns. If your business profile suddenly changes (e.g., a leather exporter suddenly starts importing high-end electronics), the system flags it for "Profile Divergence."
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long does it take to remove an RMCC alert?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               A standard alert based on data clarification takes 7 to 15 working days. However, if the alert is from the DRI or involves an investigation into fraud, it can take several months. CloudDesk focuses on "Administrative Alerts" that can be resolved via documentation.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What documents are required for alert removal?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              It depends on the trigger, but usually: (1) Proof of transaction value (Bank Swift/LC), (2) Manufacturer’s Invoice and Price List, (3) Last 3 years' ITR and Audit Reports, and (4) A formal undertaking of future compliance.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does removing the alert clear my past mistakes? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               No. Removing the alert allows you to resume trade. Any past duty short-payments or penalties discovered during the alert period must still be settled.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I still clear my goods while the alert is active?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes, but expect extreme delays. Every single box will be opened, and every document scrutinized. This usually leads to heavy Demurrage and Detention charges. CloudDesk’s goal is to remove the alert to stop these daily losses.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Will an RMCC alert affect my AEO status?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Yes. An active alert is a "Fatal Error" for AEO certification. If you are an AEO holder, your status will be suspended immediately until the alert is cleared.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

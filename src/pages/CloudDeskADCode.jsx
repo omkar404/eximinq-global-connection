@@ -8,6 +8,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -394,6 +397,76 @@ const ADCode = () => {
       {/* Dynamic Fees Section */}
      <Fees setShowEnrollModal={setShowEnrollModal} />
 
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Getting the 14-digit code from your bank is only 20% of the job. The remaining 80% is mapping it correctly to the Customs EDI system.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Multi-Port Mapping Engine</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Exporters often believe they only need to register at one port. In reality, you need registration at every port you ship from<strong> (Nhava Sheva, Mundra, Sahar Air Cargo, etc.). </strong>
+                          <strong>CloudDesk’s</strong> One-Click Port Expansion feature allows you to push your bank's AD Code to multiple ports simultaneously, saving weeks of manual filing.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. IFSC-Drawback Synchronization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The AD Code is for shipping, but the <strong>IFSC registration </strong>is for money. If your IFSC is not mapped correctly, your Duty Drawback and <strong>RoDTEP refunds</strong> will be rejected by the system. 
+                          <strong>CloudDesk</strong> performs a <strong>"Financial Handshake" </strong>test to ensure your bank's IFSC is active in the Customs "Drawback Ledger."
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Bank Letter Format Validator</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Customs is notoriously strict about the Bank’s AD Code Letter format <strong>(Annexure-A).</strong>
+                          If a single sentence is missing or the bank official's signature isn't stamped properly, the EDI officer will reject it. 
+                          <strong>CloudDesk </strong> provides a Pre-Filled Template for you to give your bank manager, ensuring a 100% acceptance rate on the first upload.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Real-Time Approval Tracking</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Once submitted, AD Code approval can take 24 hours or 10 days depending on the port. 
+                          <strong>CloudDesk’s </strong>Status Pulse monitors the <strong>ICEGATE </strong>"Bank Management" dashboard and alerts you the second your status moves from "Pending" to "Customs Approved."
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           {/* Heading */}
@@ -451,6 +524,135 @@ const ADCode = () => {
                 Once the application is submitted successfully online, it
                 usually takes 3–5 working days for Customs to approve, provided
                 there are no queries or document discrepancies.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an AD Code, and why is it 14 digits?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               An Authorized Dealer (AD) Code is a unique 14-digit identifier assigned by the RBI to bank branches authorized to deal in foreign exchange. 
+               It links your bank account to your Import-Export Code (IEC) in the Customs database.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is AD Code registration required for Importers? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. While it is most critical for Exporters (for Shipping Bill generation), 
+               Importers need it to ensure that their foreign remittances (Bill of Entry payments) are tracked correctly under FEMA guidelines.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there a government fee for AD Code registration? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               ICEGATE does not charge a fee for AD Code registration. However, some banks may charge a nominal "Processing Fee" (ranging from ₹500 to ₹2,000) for issuing the AD Code letter on their letterhead.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                If I register my AD Code at Nhava Sheva (JNPT), can I export from Mundra?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               No. As of 2026, you still need to map your bank account to the specific "Port Location Code" (e.g., INNSA1 for Nhava Sheva, INMUN1 for Mundra) on the ICEGATE portal. 
+               You don't need a new code, but you do need a new registration for that location.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What happens if I change my bank account?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               You must obtain a new AD Code letter from your new bank and perform a "Modify Bank Account" request on ICEGATE. 
+               Note: Your existing shipping bills will still be tied to the old account until the new one is approved.
+              </p>
+            </details>
+
+            {/* Question 9 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Why was my AD Code rejected with the error "Invalid IRN"? 
+
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               This happens when the documents uploaded on e-Sanchit are not digitally signed or the IRN (Image Reference Number) was incorrectly entered in the form. 
+               CloudDesk’s automation ensures the IRN is "Live" before we hit submit.
+              </p>
+            </details>
+
+            {/* Question 10 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               The Customs officer is asking for a "Physical Set" of documents after I filed online. Is this normal? 
+
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Occasionally, certain ports (like smaller ICDs) require a physical copy of the bank letter and self-attested documents for "one-time verification." 
+               CloudDesk’s local agents can assist in these physical submissions to avoid travel for the exporter.
+              </p>
+            </details>
+
+            {/* Question 11 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Can one IEC have multiple AD Codes? 
+
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. If you use one bank for exports and another for imports, or different banks for different product lines, you can register multiple AD Codes under the same IEC.
               </p>
             </details>
           </div>

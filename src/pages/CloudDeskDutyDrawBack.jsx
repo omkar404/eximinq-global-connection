@@ -7,6 +7,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   FileSignature,
   SearchCheck,
   Table,
@@ -332,6 +335,213 @@ const CloudDeskDutyDrawBack = () => {
                 with ICEGATE.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Standard drawbacks are easy. Specialized drawbacks are a battle. CloudDesk is your 'Special Ops' for stuck funds.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Section 74: The 98% Refund Strategy</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         If you imported<strong> goods, paid duty, </strong>and are now re-exporting them<strong> (because they were defective or the order was cancelled), </strong>you are entitled to a 98% refund of the original duty under Section 74. 
+                         <strong>CloudDesk </strong>manages the<strong> "Identity Correlation"—proving </strong>to Customs that the goods going out are the exact same ones that came in.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Brand Rate Fixation (Section 75)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          If the<strong> "All Industry Rate" (AIR) </strong>for your product is 1%, but your actual <strong>duty paid on raw materials is 5%,</strong> you are losing money. <strong>CloudDesk </strong>handles Brand Rate Fixation. 
+                          We file the <strong>application within 90 days </strong>of export, providing the<strong> cost-data </strong>and consumption sheets to secure a customized,<strong> higher drawback rate </strong>for your specific brand.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. The "Stuck Drawback" Rescue</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          "Is your drawback showing as<strong>""Pending at EGM"" or ""Query Raised""?</strong> 
+                          <strong> CloudDesk’s Drawback </strong>Recovery Unit performs a <strong>""Status Audit."" </strong>We find the specific officer holding the file and resolve queries like:
+                           o Non-receipt of <strong>BRC/e-BRC.</strong>
+                           o Weight/Value Mismatch.
+                           o <strong>EGM (Export General Manifest) </strong>errors."
+
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Identity Verification for Re-exports</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The #1 reason Section<strong> 74 claims </strong>fail is<strong> "Lack of Identification." </strong>
+                          <strong>CloudDesk </strong>ensures that at the time of import, the goods are<strong> "examined for re-export," </strong>and 
+                          we manage the Customs Supervision during the re-export stuffing to ensure your 98% refund is undisputed.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is Section 74 Duty Drawback?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is a refund of 98% of the import duty paid if the goods are re-exported. The goods must be identifiable and exported within 2 years of payment of duty (extensions are possible but difficult).
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I get a refund if I used the goods in India?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes, but the rate drops. If the goods were "used" before being re-exported, the 98% refund is reduced based on a sliding scale (e.g., if used for 3–6 months, you might only get 75% back).
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What if I re-export only a part of the shipment?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                You can claim a "Pro-rata" drawback. CloudDesk helps you map the specific serial numbers or batch numbers from the original Bill of Entry to the new Shipping Bill.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               When should I apply for a Brand Rate?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Apply if the All Industry Rate (AIR) is less than 80% of the actual duty you paid on inputs. It's essentially a request for a "Fair Refund" based on your actual costs.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              How long does it take to fix a Brand Rate?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              It usually takes 3 to 6 months as it involves verification by the Central Excise/Customs Commissioner. However, you can claim the "Provisional Drawback" in the meantime.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Why is my drawback stuck at "Scroll Generation"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               This usually means the system is waiting for the Bank Account Validation or the EGM to be filed by the shipping line. CloudDesk triggers a "Scroll Push" request once the technical errors are fixed.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is a "Drawback Query"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               An officer can flag your shipment if they suspect the "Export Value" is artificially inflated to get more drawback. We provide the Market Value Justification to close these queries.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I claim drawback if I am an EOU or SEZ unit?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              No. Since these units don't pay duty on inputs, they aren't entitled to a "drawback" of duty. They must rely on other schemes like RoDTEP.
+              </p>
+            </details>
           </div>
         </div>
       </section>

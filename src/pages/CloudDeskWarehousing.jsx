@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,  
   Phone,
   Mail,
   MapPin,
@@ -378,6 +382,210 @@ const CloudDeskWarehousing = () => {
                 </span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">A warehouse is where capital goes to sleep. CloudDesk keeps it awake and moving</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "Duty-Free" Buffer (FTWZ)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          If you are<strong> re-exporting goods </strong>or waiting for a better market price, <strong>CloudDesk’s FTWZ (Free Trade Warehousing Zone) </strong>
+                          network allows you to store goods in India without paying any<strong> import duty or GST.</strong> You only pay when the goods enter the domestic market. This is "Legal Offshore Storage" on Indian soil.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Section 58 Bonded Management</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          We provide access to <strong>Public and Private Bonded Warehouses.</strong><strong> CloudDesk </strong>handles the 
+                          Double-Bond Execution and the filing of<strong> "Into-Bond" (Yellow) and "Ex-Bond" (Green) Bills </strong>of Entry. 
+                          You can store raw materials for years, paying duty only on the quantity you actually withdraw for production.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Climate-Controlled Precision</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          For <strong>pharma, horticulture, and specialized chemicals, "Temperature Excursions" </strong>mean total loss. 
+                          <strong>CloudDesk’s </strong>Cold-Chain Warehousing features 24/7 IoT monitoring, providing you with a<strong> "Temperature Certificate" </strong>for every batch, essential for international quality compliance.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Value-Added Services (VAS) at the Port</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026, a warehouse must do more than hold boxes. Our<strong> facilities offer Labelling, Kitting, and Repackaging </strong>inside the bonded area. 
+                          You can <strong>import bulk, repackage </strong>into retail units with<strong> LMPC-compliant stickers,</strong> and ship 
+                          directly to your customers without the goods ever leaving the "Customs-controlled" zone.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is a "Customs Bonded Warehouse"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is a secured area where you can store imported goods without paying duty immediately. The duty is "deferred" until you take the goods out for sale in India. If you re-export them from the warehouse, you never pay the duty.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an FTWZ and how is it different?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                An FTWZ (Free Trade Warehousing Zone) is a category of SEZ. It offers even more flexibility than a standard bonded warehouse, including the ability to hold foreign currency transactions and simplified "Trading" operations without paying GST on the storage services.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I perform manufacturing in a warehouse?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Only if you have a MOOWR (Section 65) license. A standard warehouse is for storage and basic "Value Addition" (labelling/packing). For full manufacturing, CloudDesk helps you convert your storage space into a MOOWR unit.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               How are warehousing charges calculated?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Usually based on: (1) Area (Sq. Ft.) or Volume (CBM), (2) Duration (Per Week/Month), and (3) Handling (Inward/Outward movements). CloudDesk provides a "Pay-as-you-use" model for startups to keep overheads low.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Cross-Docking"? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               This is when goods are moved directly from an incoming truck/container to an outgoing one with little to no storage time. CloudDesk uses cross-docking at port-side warehouses to slash your "Port-to-Customer" delivery time by 48 hours
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is my cargo insured in the warehouse?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Standard insurance only covers the building. You must take out a "Marine-cum-Storage" or "Fire & Allied Perils" policy for your specific stock. CloudDesk’s integrated platform allows you to add insurance coverage with a single click during the "Inward" process.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How do I track my inventory in a bonded warehouse?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              You get access to the CloudDesk WMS (Warehouse Management System). It gives you a real-time view of your "Bonded vs. Non-Bonded" stock levels, batch numbers, and expiry dates, synced directly with your ICEGATE records.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can Customs seize goods from a warehouse?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes, if the goods are prohibited, mis-declared, or if the "Bond Validity" has expired. CloudDesk’s Bond-Sentinel alerts you 30 days before your storage permission expires to ensure you either clear the goods or extend the bond.
+              </p>
+            </details>
           </div>
         </div>
       </section>

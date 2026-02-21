@@ -9,6 +9,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
   Phone,
   Mail,
   MapPin,
@@ -307,6 +310,211 @@ const CloudDeskSVB = () => {
     </section>
 
 <Fees/>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">SVB is where 'Accountancy' meets 'Customs Law.' CloudDesk ensures your global transfer pricing stands up to local scrutiny.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "Annexure A" Precision Audit</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The <strong>SVB </strong>process starts with a massive questionnaire <strong>(Annexure A).</strong>
+                          One wrong answer about <strong>"Royalty" or "License Fees" </strong>can trigger a 100% investigation. 
+                          <strong>CloudDesk </strong>performs a Financial Review of your Inter-Company Agreements to ensure your answers are consistent with your <strong>Income Tax (TP)</strong> filings and Customs laws.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. EDD (Extra Duty Deposit) Mitigation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Historically, <strong>SVB cases led to a 1%–5% Extra Duty Deposit (EDD)</strong> on every shipment while the case was pending. 
+                          <strong>CloudDesk’s "Early-Resolution" </strong>Strategy aims to get a "No-EDD" order by providing a robust data set at the time of <strong>registration, </strong>keeping your working capital free.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Transfer Pricing Study (TPS) Alignment</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Customs officers often look for contradictions between your Income Tax TP Report and your Customs Valuation. 
+                          <strong>CloudDesk’s </strong>experts align these two perspectives, creating a<strong> "Unified Valuation Defense" </strong>that proves your <strong>"Arm’s Length" </strong>price is valid for both departments.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Continuance & Renewal Management</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         <strong> SVB </strong>orders are no longer valid indefinitely. 
+                         You must file a Renewal Declaration every year/period. <strong>CloudDesk’s </strong>Compliance Clock tracks your SVB order expiry and files the necessary <strong>"No Change" </strong>declarations to ensure your imports continue under <strong>"Final Assessment" status.</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Who needs to register with the SVB?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Any importer who is "Related" to their foreign supplier under Rule 2(2) of the Customs Valuation Rules. This includes: (1) Subsidiaries/Parent companies, (2) Companies with common Directors, (3) Partners in business, or (4) If one company controls the other.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is SVB registration mandatory for every related party transaction?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. You don't need SVB if: (1) The import is a one-time gift, (2) The total value is small (as per local limits), or (3) The goods are duty-free and there's no incentive involved. CloudDesk provides an SVB Applicability Test to see if you can skip the process entirely.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Circular 5/2016" procedure?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                This is the current governing law that simplified the SVB process. It replaced the old, endless investigations with a time-bound registration and a "Risk-Based" approach to investigation.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Annexure A" and "Annexure B"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "• Annexure A: The initial questionnaire you file at the port of entry to register your relationship.
+                • Annexure B: The detailed follow-up questionnaire filed if the SVB decides a full investigation is needed."
+
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long does an SVB investigation take? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Legally, the SVB should finalize the investigation within 4 to 6 months from the date of receiving all documents. However, without proactive follow-up (which CloudDesk provides), these cases can drag on for a year.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Provisional Assessment" in SVB cases? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Until the SVB issues a final "Order," your Bill of Entry is assessed "Provisionally." This means the duty you pay is not final, and you may be asked to pay an Extra Duty Deposit (EDD). CloudDesk works to minimize or eliminate this EDD.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there a government fee for SVB?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               There is no "Registration Fee" charged by Customs. The costs are purely professional (for experts like CloudDesk) and potential EDD if your case is deemed high-risk.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What happens if there is a "Change in Circumstances"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              If you sign a new agreement with your parent company or change your transfer pricing formula, you must inform the SVB immediately. Failure to do so can lead to heavy penalties and a retrospective duty demand
+              </p>
+            </details>
+           </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

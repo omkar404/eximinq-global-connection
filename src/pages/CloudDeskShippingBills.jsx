@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -360,6 +364,215 @@ const CloudDeskShippingBills = () => {
 
       {/* Dynamic Fees Section */}
       <Fees />
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">A Shipping Bill filed without "Incentive Strategy" is a direct loss of 3%–7% of your profit margin.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Incentive "Auto-Optimizer"</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Most exporters miss out on<strong> RoDTEP or Drawback </strong>because they use the wrong Scheme Code 
+                          <strong>(e.g., filing under "Free" instead of "Drawback").
+                          CloudDesk’s</strong> Incentive Engine maps your HSN code to every available government benefit, 
+                          ensuring all claimable amounts are declared before the Let Export Order (LEO) is generated.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. GSTN-E-Way Bill Integration</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         For the first time in 2026, the <strong>"System Validation" </strong>between your <strong>E-Way Bill, GST Invoice, and Shipping Bill </strong>is instantaneous. 
+                         <strong>CloudDesk</strong> performs a Triple-Check Sync to ensure values, quantity, and <strong>HSN codes </strong>match perfectly, preventing the dreaded "SB005" error that blocks IGST refunds.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Real-Time LEO Tracker</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The moment the Customs officer grants the <strong>Let Export Order (LEO),</strong> your cargo is legally exported. 
+                          <strong>CloudDesk </strong>provides a Live Milestones Dashboard—from Goods Arrival to Examination to LEO and finally <strong>EGM (Export General Manifest)</strong>—so you can tell your buyer exactly when the ship is sailing.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Digital EGM Automation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Your export is only "Complete" in the eyes of the law when the shipping line files the EGM. 
+                          If the <strong>EGM is not filed or has errors,</strong> your incentives are blocked. 
+                          <strong>CloudDesk </strong>Monitors EGM Status and automatically triggers a follow-up with the shipping line if it’s not filed within 48 hours of vessel sailing.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                When should a Shipping Bill be filed?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Under Section 50, it must be filed before the goods are brought into the Customs Area (Port/Airport). In practice, it is usually filed 24–48 hours before the truck arrives at the gate to ensure smooth entry.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "LEO" (Let Export Order)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                LEO is the final approval from the Customs Officer that allows the goods to be loaded onto the ship or aircraft. Once LEO is granted, the Shipping Bill cannot be easily edited. CloudDesk ensures all your data is 100% accurate before it reaches the officer's screen.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How do I ensure I get my RoDTEP and Duty Drawback?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "You must mention the Scheme Code in the Shipping Bill.
+               • RoDTEP: Use the specific code for the Remission of Duties and Taxes on Exported Products.
+               • Drawback: Mention the DBK Schedule number and ""Brand Rate"" or ""All Industry Rate.""
+               CloudDesk’s Scheme Validator does this for you automatically based on your product."
+
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Can I claim IGST refund and Duty Drawback together?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. You can claim the refund of the IGST paid on exports and also claim the "All Industry Rate" of Duty Drawback (for the Customs portion). CloudDesk ensures your declaration is set up to receive both without manual intervention.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "SB005" error, and how does CloudDesk fix it? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               This is a "Data Mismatch" error between ICEGATE and GSTN. It is the #1 reason IGST refunds are delayed. CloudDesk’s Pre-Filing Sync catches these mismatches (like a missing 'dot' in the address or a 1-paise difference in value) before you hit submit.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I amend a Shipping Bill after the ship has sailed?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes, but it requires a Section 149 Amendment and usually a physical hearing at the Customs house. It is time-consuming and can involve penalties. CloudDesk handles the drafting and follow-up for these "Post-LEO" amendments.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an EGM, and why is it important for me?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               The Export General Manifest (EGM) is filed by the carrier (Shipping Line/Airline). It is the final proof that the goods have actually left India. Without a "Clean EGM" status, the GST department will not release your refund.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is a "Checklist"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Before the final Shipping Bill is generated, a "Checklist" is created. This is your last chance to verify all details. CloudDesk sends this checklist to your phone for a one-click "Approved" or "Edit" signal, ensuring no data is filed without your consent.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

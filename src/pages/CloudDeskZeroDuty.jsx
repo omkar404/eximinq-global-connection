@@ -9,6 +9,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   CheckCheck,
   Factory,
   Cog,
@@ -389,6 +392,208 @@ const CloudDeskMarine = () => {
       </section>
 
       <Fees setShowEnrollModal={setShowEnrollModal} />
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">An EPCG license is a 6-year marriage with the DGFT. CloudDesk ensures you don't end up in a messy divorce.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. "Capital-Saved" Valuation Audit</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The export obligation is directly proportional to the duty you save.<strong> CloudDesk </strong>performs a <strong>Pre-Import Duty Mapping </strong>to calculate exactly how much export growth you need. 
+                          If the obligation is too high for your business plan, we advise on alternative schemes like<strong> MOOWR </strong>to save you from future legal traps.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Nexus & Technical Certificate Management</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          To import a machine duty-free, you must prove a<strong> "Nexus"</strong>—that the machine actually helps produce the goods you export. 
+                          We handle the<strong> Chartered Engineer (CE)</strong> <strong>Certification, ensuring </strong>the technical description of your machinery is bulletproof for DGFT and Customs.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. The 6-Year "Obligation" Radar</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         You have 6 years to complete your<strong> Export Obligation (EO).</strong><strong> CloudDesk’s EO-Dashboard</strong> tracks your progress year-by-year.
+                         We ensure you meet the<strong> "Block-wise" </strong>requirements <strong>(50% in the first 4 years, 50% in the next 2),</strong> so you don't lose your license halfway through. 
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Redemption & BG Release</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         The final hurdle is the<strong> Export Obligation Discharge Certificate (EODC).</strong> We manage the reconciliation of Shipping<strong> Bills and Bank Realization Certificates (e-BRC).</strong>
+                         Once the<strong> EODC </strong>is issued, we coordinate with Customs to release your<strong> Bank Guarantee (BG),</strong> putting your collateral back into your bank account.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What can I import under the EPCG Scheme?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Capital goods required for pre-production, production, and post-production. This includes machinery, spare parts, tools, jigs, and even specialized software (for service exporters). It also covers "Second-hand" machinery, though with stricter conditions.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Who is eligible for EPCG?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Manufacturer exporters (with or without supporting manufacturers), merchant exporters tied to a manufacturer, and Service Providers (like Hotels, Hospitals, or IT firms) who earn foreign exchange.  
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is the Export Obligation (EO)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                You must export goods/services worth 6 times the duty saved within 6 years. This is in addition to your "Average Export Level"—meaning you must maintain your past performance and add the new obligation on top.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What happens if I can't meet the Export Obligation?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               You must pay the saved duty plus 15% annual interest. CloudDesk’s primary value is identifying "Shortfalls" early and applying for EO Extensions or "Clubbing of Licenses" to avoid these penalties.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Can I sell the machinery after importing it?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              No. The machinery is subject to "Actual User Condition" until the EODC is issued. You cannot shift, sell, or lease the machine without prior permission. CloudDesk helps with Installation Certificates to prove the machine is in your factory.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Average Export Level"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               This is the average of your exports in the 3 years preceding the license. You must maintain this average every year while the EPCG license is active. CloudDesk helps you track this "Invisible Obligation" so you don't default.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Is there any relief for "Green Technology" or "North East" units?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes. In 2026, units producing Green Energy equipment or units located in the North East/Hilly regions have a reduced Export Obligation (often 75% of the normal rate). CloudDesk checks your eligibility for these "Bonus Benefits."
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is "Post-Export EPCG"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              If you don't want to take the risk of future obligations, you pay the duty upfront, do the exports, and then claim the duty back as a "Duty Credit Scrip." CloudDesk manages the scrip application to ensure you get your cash back.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">

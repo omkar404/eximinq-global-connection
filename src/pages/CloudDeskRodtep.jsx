@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle, 
   FileSignature,
   FileText,
   Handshake,
@@ -264,6 +268,75 @@ const CloudDeskRodtep = () => {
       </section>
 
       <Fees />
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Most exporters lose 1-2% of their turnover because they don't know how to claim their scrips. CloudDesk ensures no rupee is left behind.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1.  The "Shipping Bill Declaration" Guard</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          You must claim<strong> RoDTEP </strong>at the time of filing the Shipping Bill. If you miss the<strong> "Intent" </strong>declaration on<strong> ICEGATE,</strong> the benefit is gone forever. 
+                          <strong>CloudDesk’s</strong> Audit Engine scans every Shipping Bill before submission to ensure the correct<strong> "Scheme Code" </strong>is selected for your HSN.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Digital Scrip Ledger Management</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Unlike old physical papers, these benefits are issued as Electronic Duty Credit Scrips in your ICEGATE ledger.
+                          <strong>CloudDesk</strong> monitors your<strong> "Scrip Management Module,"</strong> tracks the generation of credits, and ensures they are<strong> "notarized" </strong>in the system so they don't expire.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Monetization & Transfer (Cash Conversion)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         If you don't have an <strong>import duty liability,</strong> these scrips are<strong> "Dead Capital."</strong> 
+                         <strong>CloudDesk </strong>acts as your Scrip Broker. We help you transfer these scrips to other <strong>importers at a market premium, </strong>converting your tax credits into immediate cash flow.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. RoSCTL Specialization for Apparel</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          For the textile and garment<strong> sector, RoSCTL </strong>offers much higher rates than<strong> RoDTEP.</strong> 
+                          We manage the specialized<strong> RoSCTL Ledger, </strong>ensuring that your garment exports are mapped to the correct<strong> "Apparel Category" </strong>for maximum rebate.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>      
       
       <section id="faq" className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
@@ -310,6 +383,95 @@ const CloudDeskRodtep = () => {
                 RoDTEP scrips can be used to pay{" "}
                 <strong>Basic Customs Duty (BCD)</strong> only. They cannot be
                 used to pay IGST, Compensation Cess, or other surcharges.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is the main difference between RoDTEP and RoSCTL?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• RoDTEP: Covers almost all sectors (Engineering, Chemicals, Agriculture, etc.).
+                 • RoSCTL: Specifically for Apparel, Garments, and Made-ups (Chapters 61, 62, and 63). It provides a higher rebate because the textile sector has more embedded taxes."
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is a "Duty Credit Scrip"?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is a digital currency issued by Customs. You can use it to pay Basic Customs Duty (BCD) on your future imports, or you can sell it to someone else who needs to pay duty.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I claim RoDTEP if I am also using Advance Authorisation?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, but at a lower rate. In 2026, the government has enabled RoDTEP for AA/EPCG/EOU units, but the "RoDTEP for AA" rates are typically lower than the "Normal RoDTEP" rates. CloudDesk calculates which combination gives you the highest net saving.
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              How do I claim the benefit?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                There is no separate application. You must declare your intent in the Shipping Bill (using specific codes for RoDTEP or RoSCTL). Once the EGM (Export General Manifest) is filed, the credit is automatically processed into your ICEGATE Ledger.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is the validity of the Scrip?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Typically, the scrips are valid for 1 or 2 years from the date of generation. If you don't use or sell them within this window, the value becomes zero. CloudDesk’s Expiry Alert ensures you never lose a scrip.
+              </p>
+            </details>
+
+            {/* FAQ 9 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I use RoDTEP to pay IGST?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. RoDTEP and RoSCTL scrips can only be used to pay Basic Customs Duty (BCD). They cannot be used for IGST, Compensation Cess, or Antidumping Duty.
+              </p>
+            </details>
+
+            {/* FAQ 10 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Is it legal to sell RoDTEP scrips?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. These scrips are "Freely Transferable." You can transfer them to any other IEC holder via the ICEGATE portal.
+              </p>
+            </details>
+
+            {/* FAQ 11 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              How much "Cash" will I get if I sell my scrip?
+                <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Scrips usually sell at a discount. For example, a ₹100 scrip might sell for ₹97 or ₹98 in the market. CloudDesk finds the buyer with the lowest discount (highest premium) for you.
               </p>
             </details>
           </div>

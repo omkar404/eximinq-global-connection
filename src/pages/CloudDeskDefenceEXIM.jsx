@@ -9,10 +9,13 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
-Star, 
+  Star, 
   FileText,
   FileCode,
   ShoppingCart,
@@ -239,6 +242,208 @@ const CloudDeskDefenceEXIM = () => {
     </section>
     
     <Fees/>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Defence trade is 10% product and 90% documentation. CloudDesk ensures the 90% is bulletproof.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. SCOMET Classification Engine</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Is your product <strong>"Dual-Use" or "Munitions"?</strong> The line is blurry. 
+                          <strong>CloudDesk’s </strong>Technical Matrix analyzes your product specs against the latest SCOMET Appendices to determine if you fall under <strong>Category 6 </strong>(Defence) or other restricted categories, preventing "Unauthorized Export" flags.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. EUC (End-Use Certificate) Authenticator</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The #1 reason for defence license rejection is a faulty <strong>EUC from the foreign buyer. </strong>
+                          <strong>CloudDesk </strong>provides Global Standard Templates for <strong></strong>EUCs that meet both Indian (MoD) and International (Wassenaar Arrangement) standards,<strong></strong> ensuring your buyer's declaration is legally tight.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Multi-Agency Workflow Tracking</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         A defence license travels through the <strong>Inter-Ministerial Working Group (IMWG).</strong> 
+                        <strong>CloudDesk </strong>provides a Parallel Tracking Dashboard that shows you exactly which department <strong>(MoD, MEA, or ISRO/DRDO) </strong>currently has your file, so you can manage your buyer's expectations with real data.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Post-Export Compliance Vault</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Defence licenses come with <strong>"Post-Shipment Reporting" mandates.</strong> Failure to report how the item was used can lead to blacklisting. 
+                          <strong>CloudDesk </strong>Automates Compliance Reminders, 
+                          prompting you to upload Proof of Delivery and End-Use <strong>Verification</strong> as per the license conditions.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is SCOMET and how does Category 6 differ?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               SCOMET stands for Special Chemicals, Organisms, Materials, Equipment and Technologies. Category 6 is the "Munitions List," which covers strictly military-grade hardware, ammunition, and specialized components. While other SCOMET items are "Dual-Use," Category 6 is for "Lethal/Combat" items.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does a "Part" or "Component" of a tank require a Defence License?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Yes. Even if it’s just a specialized screw or a circuit board, if it is designed specifically for a military platform listed in SCOMET Category 6, it requires a Defence Export Authorization from the Department of Defence Production (DDP).
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is OGEL (Open General Export License)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                OGEL is a "Bulk License" for specified items and destinations (usually friendly nations). If you qualify for OGEL, you don't need an individual license for every shipment. CloudDesk helps you apply for OGEL to drastically reduce your lead times.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Who issues the Defence Export License: DGFT or MoD?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              While the DGFT manages the portal, for Category 6 (Defence), the primary "Subject Matter Expert" and approving authority is the Department of Defence Production (DDP) under the Ministry of Defence.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "End-Use Certificate" (EUC) requirement? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               An EUC is a legal undertaking by the foreign government or the end-user that the item will not be diverted, re-exported, or used for weapons of mass destruction. It must be signed by a high-ranking official or an authorized representative of the buyer.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I export Defence items for "Testing and Evaluation" without a license?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               No. Even for "Demo" or "Testing" purposes, you need a temporary export authorization. CloudDesk manages these "Returnable Export" licenses to ensure your equipment comes back to India safely.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How long is a Defence Export Authorization valid?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Typically, an authorization is valid for 2 years. However, for large projects, it can be extended based on the delivery schedule.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+             What are the reporting requirements after the export?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               You must submit a Delivery Verification Certificate (DVC) or equivalent document within 90 days of export to prove the goods reached the intended destination. CloudDesk’s Compliance Sentinel ensures you never miss these critical filings.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

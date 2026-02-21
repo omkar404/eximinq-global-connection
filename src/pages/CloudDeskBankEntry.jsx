@@ -7,6 +7,8 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  Building,
+  ShieldUser,
   Phone,
   Mail,
   MapPin,
@@ -352,6 +354,211 @@ const CloudDeskBankEntry = () => {
 
       {/* Dynamic Fees Section */}
       <Fees />
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Filing a BoE is easy filing a BoE that passes Faceless Assessment without a query is an art. CloudDesk is the artist.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. "Prior Filing" Optimization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                           Customs law now allows <strong>(and encourages) </strong>filing a BoE before the goods arrive. <strong>CloudDesk’s</strong> ETA-Sync monitors your vessel/flight and triggers a <strong>"Prior Bill of Entry" </strong>filing 48 hours before arrival. 
+                           This ensures your assessment is done while the ship is still at sea, allowing for<strong> Direct Port Delivery (DPD) </strong>the moment it berths.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. HSN & Notification Logic</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          With thousands of exemption notifications<strong> (like IGCR or FTA benefits),</strong> most importers overpay duty. 
+                          <strong>CloudDesk’s Duty-Logic </strong>Engine scans your HSN and Country of Origin to automatically suggest the most beneficial notification, ensuring you pay the Lowest Legal Duty.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. The "Query Pre-emptor"</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Faceless Assessment officers often raise queries regarding<strong> "Value" or "Technical Specs." CloudDesk’s </strong>Pre-Filing Audit identifies "High-Risk" declarations (e.g., related party transactions or low-value items) and prompts you to upload supporting 
+                          <strong>"Literature/Catalogues" </strong>on e-Sanchit before the officer asks, cutting clearance time by 50%.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Automatic IGST & Credit Sync</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Errors in the BoE often lead to mismatched <strong>IGST credits </strong>on your GSTR-2B. 
+                          <strong>CloudDesk performs a GSTN-ICEGATE </strong>Cross-Check, ensuring your GSTIN and Invoice details are perfectly mapped so your input tax credit flows seamlessly into your books.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                IWhat is the mandatory timeline for filing a Bill of Entry?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "Under Section 46, you must file the BoE before the end of the next day (excluding holidays) following the day on which the aircraft/vessel/vehicle carrying the goods arrives.
+               • The Penalty: If you fail to meet this deadline, a ""Late Fee"" is charged (typically ₹5,000 per day for the first 3 days, and ₹10,000 per day thereafter). CloudDesk’s Timer Alert ensures you never pay a single rupee in late fees."
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I file a Bill of Entry without a Bill of Lading (BL)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                You can file a "Prior" BoE using a Master BL/AWB number. However, for the final assessment and "Out of Charge," the House BL and final invoice must be uploaded.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the difference between a White, Yellow, and Green Bill of Entry?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• White (Home Consumption): When you want to pay the duty and take the goods directly to your factory/shop.
+                 • Yellow (Into-Bond/Warehouse): When you want to store the goods in a Customs Warehouse without paying duty immediately (Duty is deferred).
+                 • Green (Ex-Bond): When you want to take goods out of the warehouse for consumption (you pay the duty at this stage)."
+
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an "Advance Bill of Entry"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              It is a BoE filed up to 30 days before the expected arrival of the goods. This is the gold standard for high-volume importers who want zero port-dwell time.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is "Faceless Assessment"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Your BoE is no longer assessed by an officer at the port of arrival. It could be assessed by an officer in Bangalore even if your goods are at Nhava Sheva. This makes e-Sanchit documentation critical. If your digital documents aren't clear, your cargo gets stuck.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               How can I check if my duty payment has been reflected? 
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              You can check the "Challan Status" on ICEGATE. CloudDesk provides a Payment Verification Tracker that notifies you the moment the "Duty Paid" status is updated, triggering the next step: "Examination" or "Out of Charge."
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                I made a mistake in the HSN code after filing. Can I change it?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes, but it requires a Section 149 Amendment. If the "Out of Charge" hasn't been given, it's easier. Once "OOC" is granted, you have to go through a formal "Re-assessment" process. CloudDesk manages these amendments to minimize delays.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is "RMS" (Risk Management System)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                RMS is an AI-driven system that decides which BoE needs to be checked and which can be cleared immediately ("Green Channel"). CloudDesk helps you maintain a "High Compliance Score" to increase your chances of 100% Green Channel clearances.
+              </p>
+            </details>
+            </div>
+        </div>
+      </section>      
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

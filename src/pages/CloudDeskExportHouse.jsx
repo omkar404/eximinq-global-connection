@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -303,6 +307,216 @@ const CloudDeskExportHouse = () => {
       </section>
 
       <Fees />
+
+              {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+                    <section className="py-20 bg-white">
+                      <div className="container mx-auto px-4 max-w-5xl">
+                        <div className="text-center mb-12">
+                          <h2 className="text-3xl font-bold text-slate-900 mb-2">Reaching $3 Million is only half the battle. Proving it to the DGFT's automated system is where the errors happen.</h2>
+                          {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                          • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                          </p> */}
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          {/* Feature 1 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                              <AlertTriangle size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">1. The "Double Weightage" Optimization</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                               If you are an MSME, a Manufacturing unit with <strong>ISO/BIS,</strong> or located in the North East, your exports count as 2x for the 1-Star Status. 
+                               <strong>CloudDesk’s</strong>Weightage Calculator automatically identifies these <strong>"Bonus Points," </strong>
+                               helping you achieve 1-Star Status with just $1.5 Million in actual exports instead of $3 Million.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 2 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                              <CheckCircle size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">2. Automated Export Data Scrubbing</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                               The <strong>DGFT portal</strong> auto-populates data from your <strong>Shipping Bills,</strong> but it often misses Service Exports or Deemed Exports. 
+                               <strong>CloudDesk </strong>performs a Manual vs. System Audit to ensure every dollar of your foreign exchange is counted, preventing you from missing a star category by a <strong>few thousand dollars.</strong>
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 3 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                              <Building size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">3. Bank Guarantee (BG) Waiver Lock</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                               The biggest benefit of Star Status is the 100% exemption from Bank Guarantees for <strong>DGFT schemes (EPCG, Advance Auth).</strong>
+                               <strong>CloudDesk’s </strong>dashboard links your Status Certificate directly to your license applications, ensuring the "BG Waiver" is applied automatically so your capital stays in your bank, not blocked in a FD.
+                              </p>
+                            </div>
+                          </div>
+              
+                          {/* Feature 4 */}
+                          <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                              <ShieldUser size={24} />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-slate-900 mb-2">4. Self-Certification Empowerment</h4>
+                              <p className="text-sm text-slate-600 leading-relaxed">
+                               For 3-Star Houses and above, you can self-certify your <strong>Certificate of Origin. </strong>
+                               CloudDesk provides the digital template and compliance log for this, allowing you to ship goods without waiting for a Chamber of Commerce stamp.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+      
+            <section className="py-20 bg-white">
+              <div className="container mx-auto px-4 max-w-3xl">
+                {/* Heading */}
+                <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+                  Frequently Asked Questions
+                </h2>
+      
+                {/* FAQ Items */}
+                <div className="space-y-4">
+                  {/* Question 1 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      What are the new 2026 thresholds for Star Status?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                      "• One Star: US$ 3 Million
+                       • Two Star: US$ 15 Million
+                       • Three Star: US$ 50 Million
+                       • Four Star: US$ 200 Million
+                       • Five Star: US$ 800 Million"
+
+                    </p>
+                  </details>
+      
+                  {/* Question 2 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      Can I use my export performance from 5 years ago?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                      No. You must show performance in at least 2 out of the last 4 years (including the current year). 
+                      CloudDesk helps you pick the "Best 2 Years" to maximize your chances.
+                    </p>
+                  </details>
+      
+                  {/* Question 3 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      Does "Double Weightage" apply to all Star categories?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     No. Double weightage (counting $1 as $2) is strictly for achieving the One Star status. 
+                     For Two Star and above, only actual FOB value is counted.
+                    </p>
+                  </details>
+      
+                  {/* Question 4 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      What is the "Bank Guarantee" benefit exactly?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     Normally, for schemes like EPCG, you must give the government a Bank Guarantee (100% of the duty saved). Status Holders are exempted 100% from this requirement (unless specifically flagged as a risk), saving you lakhs in bank commissions and blocked margins.
+                    </p>
+                  </details>
+      
+                  {/* Question 5 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                     Can a Star Export House establish its own Warehouse?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     Two Star Houses and above are permitted to establish export warehouses as per Dept. of Revenue guidelines. This is a game-changer for managing global supply chains.
+                    </p>
+                  </details>
+      
+                  {/* Question 6 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      What is the "Skilling & Mentorship" obligation?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     In 2026, Status Holders are expected to mentor new entrepreneurs. 
+                     A 2-Star House must train 5 candidates annually, while a 5-Star House must train 50. CloudDesk helps you document this training to ensure your status remains valid during renewal.
+                    </p>
+                  </details>
+      
+                  {/* Question 7 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                      How long is the certificate valid?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                      It is valid for 5 years or until the end of the current Foreign Trade Policy, whichever is earlier. CloudDesk monitors the "Policy Sunset" dates so you don't lose your status during a policy transition.
+                    </p>
+                  </details>
+      
+                  {/* Question 8 */}
+                  <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                    <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    What can lead to the cancellation of my Star Status?
+                      <ChevronDown
+                        size={20}
+                        className="text-brand-500 transition-transform group-open:rotate-180"
+                      />
+                    </summary>
+      
+                    <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                     (1) Defaulting on an Export Obligation (EPCG/Advance Auth), (2) Mis-declaration of export values, (3) Fraudulent CA certificates. CloudDesk’s Audit Log keeps your records clean so you never face a "Show Cause Notice."
+                    </p>
+                  </details>
+                  </div>
+              </div>
+            </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -7,6 +7,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,  
   CheckCheck,
   MapPin,
   Percent,
@@ -375,6 +378,208 @@ const CloudDeskAdvanceAuthority = () => {
                 Get Help Now
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">An AA license is a legal contract with the government. If you don't fulfill the 'Export Obligation,' the penalties are crushing. CloudDesk acts as your Compliance Shield.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. SION & Ad-hoc Norms Optimization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Customs allows you to import based on <strong>SION (Standard Input-Output Norms). </strong>
+                          But what if your product is new?<strong> CloudDesk</strong> specializes in Fixation of Ad-hoc Norms with the Norms Committee at <strong>DGFT,</strong> ensuring you get the maximum import entitlement for your specific manufacturing process.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. The "Pre-Import" Condition Management</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026, the <strong>"Pre-import" rule for IGST </strong>exemption is a minefield. 
+                          <strong>CloudDesk </strong>ensures your import and export timelines are perfectly synced so you don't get hit with retrospective 
+                          <strong>IGST </strong>demands and interest years later.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Real-Time "Obligation" Tracker</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         The biggest failure in AA is missing the<strong> Export Obligation (EO)</strong> deadline. <strong>CloudDesk </strong>provides a Live Consumption Ledger.
+                         We track every gram of raw material imported against every unit exported, alerting you<strong> 6 months </strong>before the deadline if your EO is lagging.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. End-to-End Redemption (EODC)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Getting the<strong> license is only 10% </strong>of the work. The real battle is getting the <strong>Export Obligation Discharge Certificate (EODC).</strong>
+                          We manage the entire redemption process—linking<strong> Shipping Bills to Bills </strong>of Entry—to ensure your bond is cancelled and your bank guarantee is released.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Who can apply for Advance Authorisation?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Manufacturer exporters or merchant exporters tied up with supporting manufacturers. You must have a minimum 15% Value Addition (positive value addition for certain sectors like electronics).
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What can I import under this scheme?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Raw materials, components, catalysts, consumables, and packing materials physically incorporated in the export product. You cannot import capital goods (machinery) under this—that requires an EPCG license.
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Advance Authorisation for Annual Requirement"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                If you have been exporting for the last two financial years, you can get a single license for your entire year's import needs based on your past performance, rather than applying for a new license for every order.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How much time do I have to export the finished goods?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               The standard period is 18 months from the date of issue of the license. For defense, software, or specialized projects, this can be longer.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What happens if I fail to export?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               This is the brutal part. You must pay all the exempted Customs duties plus 15% interest from the date of import. CloudDesk’s primary job is to ensure you never fall into this trap.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I sell the imported raw materials in the domestic market?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Absolutely not. Materials imported under AA are subject to "Actual User Condition." They cannot be transferred or sold even after the export obligation is completed (though the finished goods can be sold domestically after EO is met).
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is a "Consumption Register" (Appendix-4H)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               It is a mandatory logbook showing exactly how much raw material was used for each export batch. In 2026, DGFT audits these digitally. CloudDesk’s Auto-Ledger generates this report for you with one click.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I use Advance Authorisation and Duty Drawback together?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              No. Since you didn't pay duty on imports, you can't claim a "Drawback" of that duty. However, you can claim the "Customs portion" of drawback if you used some domestic duty-paid inputs. CloudDesk calculates the most profitable path for you.
+              </p>
+            </details>
           </div>
         </div>
       </section>

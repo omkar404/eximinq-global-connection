@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,  
   Phone,
   Mail,
   MapPin,
@@ -303,6 +307,208 @@ const CloudDeskInlandTransport = () => {
           </div>
         </div>
       </section>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">A truck is a black box unless it’s connected to your dashboard. CloudDesk brings transparency to the road.</h2>
+                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
+                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
+                    </p> */}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. GPS-Locked Security (Live Tracking)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         In 2026, "I'll call the driver" is not a status update. Every<strong> CloudDesk-partnered vehicle </strong>is equipped with<strong> GPS and E-Lock integration.</strong> 
+                         You can see exactly where your container is on the highway, with automated alerts for unauthorized stops or route deviations, critical for high-value cargo.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2.Multimodal Rail-Road Optimization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          For long-distance inland movement<strong> (e.g., Ludhiana to Mundra),</strong> road transport can be 30% more expensive than rail.<strong> CloudDesk’s </strong>Multimodal Planner compares road vs. <strong>CONCOR (Rail) </strong>schedules and costs, giving you the fastest and cheapest route to the coast.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. The "Empty-Return" Strategy</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          One of the biggest hidden costs is the<strong> "Empty Repositioning" </strong>fee for containers. <strong>CloudDesk </strong>uses a<strong> Circular Logistics Network, matching </strong>your export container needs with incoming imports in your<strong>area, slashing "Empty Container" </strong> transport costs by up to 20%.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. E-Way Bill & Fastag Automation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          We eliminate the paperwork at the<strong> checkpost. CloudDesk Auto-Generates </strong>E-Way Bills and manages Fastag balances for your fleet, 
+                          ensuring your trucks move through toll plazas and state borders without stopping for manual payments or document checks.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {/* Question 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Inland Haulage" (IHC)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is the cost and process of moving a container from an Inland Container Depot (ICD) to a Gateway Sea Port (or vice versa) via rail or road.
+              </p>
+            </details>
+
+            {/* Question 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the difference between a "Trailer" and a "Truck"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• Trucks: Used for ""Loose Cargo"" (LCL or domestic).
+                 • Trailers: Specialized vehicles (20ft/40ft) designed specifically to carry international shipping containers. CloudDesk only uses certified trailers for FCL movement to ensure cargo safety."
+
+              </p>
+            </details>
+
+            {/* Question 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I use my own transport for export/import?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes, provided the vehicle is registered and the driver has a valid "Gate Pass" for the Port or ICD. However, most exporters use CloudDesk’s Verified Fleet because our drivers are pre-vetted for Port-Security protocols.
+              </p>
+            </details>
+
+            {/* Question 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is GST applicable on inland transportation for exports?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              No. As of 2026, under GST law, the service of transporting goods from India to a place outside India (and the inland leg thereof) is exempt/zero-rated, provided specific conditions are met. CloudDesk ensures your transporters issue "Zero-Rated" invoices correctly.
+              </p>
+            </details>
+
+            {/* Question 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What are "Detention Charges" in inland transport?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               If your factory takes too long to load/unload a truck (typically more than 6–12 hours), the transporter charges a "Waiting Fee" per day. CloudDesk’s Loading-Dock Manager helps you track these times to avoid unnecessary penalties.
+              </p>
+            </details>
+
+            {/* Question 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does the "Per Ton" rate include toll and parking?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Usually, no. Tolls (Fastag) and Green Taxes are charged on actuals. CloudDesk provides an "All-Inclusive" Quote that covers freight, tolls, and documentation to give you a final landed cost.
+              </p>
+            </details>
+
+            {/* Question 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is "Transit Insurance"?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               While your marine insurance covers the sea leg, you need Inland Transit Insurance (Road/Rail) to cover accidents, theft, or fire during the land journey. CloudDesk bundles this with your transport booking for peace of mind.
+              </p>
+            </details>
+
+            {/* Question 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is "Direct Port Entry" (DPE)?
+                <ChevronDown
+                  size={20}
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               DPE allows factory-stuffed containers to go directly to the port without stopping at a CFS (Container Freight Station). CloudDesk’s DPE-Certified Fleet saves you 24–48 hours in the export cycle.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
