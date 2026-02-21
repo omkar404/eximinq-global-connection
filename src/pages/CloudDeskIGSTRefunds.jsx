@@ -271,10 +271,10 @@ const CloudDeskIGSTRefunds = () => {
               <section className="py-20 bg-white">
                 <div className="container mx-auto px-4 max-w-5xl">
                   <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">An automated system is only fast if your data is flawless. CloudDesk is the 'Quality Control' before you hit 'Submit'.</h2>
-                    {/* <p className="text-slate-500">"               • Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
-                                   • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
-                    </p> */}
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Igst-Refund?</h2>
+                    <p className="text-slate-500">
+                      An automated system is only fast if your data is flawless. CloudDesk is the 'Quality Control' before you hit 'Submit'.
+                    </p>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     {/* Feature 1 */}

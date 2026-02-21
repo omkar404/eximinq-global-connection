@@ -335,8 +335,11 @@ const CloudDeskCertificate = () => {
     
     <div className="text-center mb-12">
       <h2 className="text-3xl font-bold text-slate-900 mb-2">
-        Most exporters treat CoO as a formality. We treat it as a profit-margin protector.
+        Why CloudDesk for Certificate-Of-Origin?
       </h2>
+      <p className="text-slate-500">
+            Most exporters treat CoO as a formality. We treat it as a profit-margin protector.
+        </p>
     </div>
 
     <div className="grid md:grid-cols-2 gap-8">
