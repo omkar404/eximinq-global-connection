@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import BrandLogo from "../components/BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
+import { navLinks } from "../Common/navLinks";
 
 const TopBar = ({ setShowEnrollModal, scrolled,
   isMenuOpen,
@@ -23,15 +24,46 @@ const TopBar = ({ setShowEnrollModal, scrolled,
         </div>
 
         {/* Desktop menu */}
-        <div className="hidden md:flex items-center space-x-4 font-smedium text-gray-800">
-          <a className="hover:text-teal-500" href="/">Home</a>
-          <a className="hover:text-teal-500" href="/services">Services</a>
-          <a className="hover:text-teal-500" href="/foreign-trade-policy">Foreign Trade Policy</a >
-          <a className="hover:text-teal-500" href="/dgft-customs-consultancy">DGFT & Customs</a>
-          <a className="hover:text-teal-500" href="/certificate-of-origin">COO</a>
-          <a className="hover:text-teal-500" href="/compliance-trade-india">Compliance</a>
-          <a className="hover:text-teal-500" href="/contact-us">Contact</a>
-          <a className="hover:text-teal-500" href="/clouddesk-saas">SAAS</a>
+        <div className="hidden md:flex items-center gap-8 font-smedium text-gray-800">
+          {navLinks.map((link) =>
+            link.isDropdown ? (
+              <div key={link.name} className="relative group">
+                <span className="cursor-pointer hover:text-teal-500">
+                  {link.name}
+                </span>
+
+                {/* Dropdown */}
+                <div className="absolute left-0 mt-4 w-72 
+                      bg-gray-100 rounded-2xl shadow-xl 
+                      opacity-0 invisible 
+                      group-hover:opacity-100 group-hover:visible 
+                      transition-all duration-200 
+                      p-6 z-50">
+
+                  <div className="flex flex-col space-y-6">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.path}
+                        to={child.path}
+                        className="text-gray-600 text-lg hover:text-teal-600 transition"
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="hover:text-teal-500"
+              >
+                {link.name}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Desktop buttons */}

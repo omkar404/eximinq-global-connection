@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskGSTLUT/TopBar";
+// import TopBar from "../components/CloudDeskGSTLUT/TopBar";
 import Navbar from "../components/CloudDeskGSTLUT/Navbar";
 import Hero from "../components/CloudDeskGSTLUT/Hero";
 import Fees from "../components/CloudDeskGSTLUT/Fees";
@@ -25,7 +25,7 @@ const CloudDeskGSTLUT = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

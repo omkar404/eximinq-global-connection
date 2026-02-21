@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskCustomsAdjudication/TopBar";
+// import TopBar from "../components/CloudDeskCustomsAdjudication/TopBar";
 import Navbar from "../components/CloudDeskCustomsAdjudication/Navbar";
 import Hero from "../components/CloudDeskCustomsAdjudication/Hero";
 import Fees from "../components/CloudDeskCustomsAdjudication/Fees";
@@ -25,7 +25,7 @@ const CloudDeskCustomsAdjudication = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

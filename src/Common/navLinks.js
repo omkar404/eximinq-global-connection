@@ -5,12 +5,14 @@ export const navLinks = [
 
   { name: "About Us", path: "/about-us" },
 
+  { name: "Strategic Solutions", path: "/strategic-solutions" },
+
   {
     name: "Services",
     path: "/services",
     isDropdown: true,
     children: [
-      { name: "Strategic Solutions", path: "/services" },
+      { name: "Service Directory", path: "/services" },
       { name: "Foreign Trade Policy", path: "/foreign-trade-policy" },
       { name: "DGFT & Customs", path: "/dgft-customs-consultancy" },
       { name: "COO (Cert. of Origin)", path: "/certificate-of-origin" },

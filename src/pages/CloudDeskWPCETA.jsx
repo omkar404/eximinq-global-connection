@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskWPCETA/TopBar";
+// import TopBar from "../components/CloudDeskWPCETA/TopBar";
 import Navbar from "../components/CloudDeskWPCETA/Navbar";
 import Hero from "../components/CloudDeskWPCETA/Hero";
 import Fees from "../components/CloudDeskWPCETA/Fees";
@@ -28,7 +28,7 @@ const CloudDeskWPCETA = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

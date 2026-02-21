@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskIGSTRefunds/TopBar";
+// import TopBar from "../components/CloudDeskIGSTRefunds/TopBar";
 import Navbar from "../components/CloudDeskIGSTRefunds/Navbar";
 import Hero from "../components/CloudDeskIGSTRefunds/Hero";
 import Fees from "../components/CloudDeskIGSTRefunds/Fees";
@@ -29,7 +29,7 @@ const CloudDeskIGSTRefunds = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

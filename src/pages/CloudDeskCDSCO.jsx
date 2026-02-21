@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskCDSCO/TopBar";
+// import TopBar from "../components/CloudDeskCDSCO/TopBar";
 import Navbar from "../components/CloudDeskCDSCO/Navbar";
 import Hero from "../components/CloudDeskCDSCO/Hero";
 import Fees from "../components/CloudDeskCDSCO/Fees";
@@ -26,7 +26,7 @@ const CloudDeskCDSCO = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

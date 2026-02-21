@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskESANCHIT/TopBar";
+// import TopBar from "../components/CloudDeskESANCHIT/TopBar";
 import Navbar from "../components/CloudDeskESANCHIT/Navbar";
 import Hero from "../components/CloudDeskESANCHIT/Hero";
 import Fees from "../components/CloudDeskESANCHIT/Fees";
@@ -30,7 +30,7 @@ const CloudDeskESANCHIT = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

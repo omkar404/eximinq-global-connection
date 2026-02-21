@@ -108,6 +108,9 @@ import BisEprWpcLmpc from "./pages/BisEprWpcLmpc";
 import CloudDeskComplianceAudit from "./pages/CloudDeskComplianceAudit";
 import CloudDeskDemo from "./pages/CloudDeskDemo";
 import SEOManager from "./components/SEOManager";
+import CloudDeskAbout from "./pages/CloudDeskAbout";
+import CloudDeskStrategic from "./pages/CloudDeskStrategic";
+import CloudDeskRefund from "./pages/CloudDeskRefund";
 
 function App() {
   return (
@@ -404,6 +407,8 @@ function App() {
 
         {/* Contact Routes */}
         <Route path="/" element={<CloudDeskHome />} />
+        <Route path="/about-us" element={<CloudDeskAbout />} />
+        <Route path="/strategic-solutions" element={<CloudDeskStrategic />} />
         <Route path="/services" element={<CloudDeskServices />} />
         <Route path="/foreign-trade-policy" element={<CloudDeskForeignTrade />} />
           <Route path="/foreign-trade-policy/regulatory-updates" element={<RegulatoryUpdates />} />
@@ -426,6 +431,8 @@ function App() {
 
         {/* {DutyCalculator} */}
         <Route path="/tools/duty-calculator-finder" element={<CloudDeskDutyCalculator />} />
+
+        <Route path="/rodtep-refund-recovery" element={<CloudDeskRefund />} />
 
         {/* Thank You Page */}
         <Route path="*" element={<PageNotFound />} />

@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskREX/TopBar";
+// import TopBar from "../components/CloudDeskREX/TopBar";
 import Navbar from "../components/CloudDeskREX/Navbar";
 import Hero from "../components/CloudDeskREX/Hero";
 import Fees from "../components/CloudDeskREX/Fees";
@@ -33,7 +33,7 @@ const CloudDeskREX = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />

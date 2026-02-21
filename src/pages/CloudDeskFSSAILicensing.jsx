@@ -1,4 +1,4 @@
-import TopBar from "../components/CloudDeskFSSAILicensing/TopBar";
+// import TopBar from "../components/CloudDeskFSSAILicensing/TopBar";
 import Navbar from "../components/CloudDeskFSSAILicensing/Navbar";
 import Hero from "../components/CloudDeskFSSAILicensing/Hero";
 import Fees from "../components/CloudDeskFSSAILicensing/Fees";
@@ -27,7 +27,7 @@ const CloudDeskFSSAILicensing = () => {
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      <TopBar />
+      {/* <TopBar /> */}
       <MainNavbar />
       <Navbar />
       <Hero />
