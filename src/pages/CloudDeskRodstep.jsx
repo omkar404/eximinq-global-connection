@@ -71,10 +71,10 @@ const CloudDeskRodstep = () => {
               <section className="py-20 bg-white">
                 <div className="container mx-auto px-4 max-w-5xl">
                   <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Scrips are like stocks; their value fluctuates based on import demand. CloudDesk ensures you sell at the peak 'Premium' and never at a 'Fire Sale' price.</h2>
-                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
-                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
-                    </p> */}
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Rodtep-Rosctl-Trading?</h2>
+                    <p className="text-slate-500">
+                      Scrips are like stocks; their value fluctuates based on import demand. CloudDesk ensures you sell at the peak 'Premium' and never at a 'Fire Sale' price.
+                    </p>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     {/* Feature 1 */}
