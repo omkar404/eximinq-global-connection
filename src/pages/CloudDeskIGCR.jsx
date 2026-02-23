@@ -9,6 +9,8 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  Building,
+  ShieldUser, 
   Phone,
   Mail,
   MapPin,
@@ -235,6 +237,195 @@ const CloudDeskIGCR = () => {
     </section>
 
     <Fees/>
+
+
+{/* --- WHY CLOUDDESK SECTION (IGCR) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for IGCR Returns?</h2>
+      <p className="text-slate-500">
+        Concessional duty is a 'Loan' from the government. The IGCR-3 is your repayment schedule in terms of proof of use.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Automated Bond Re-Credit</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In 2026, every time you file a return showing consumption, the system <strong>auto-credits your Continuity Bond</strong>. CloudDesk ensures your consumption data is uploaded accurately so your bond balance is always <strong>"High,"</strong> allowing for seamless back-to-back imports <strong>without fresh Bank Guarantees</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. The "6-Month Utilization" Watchdog</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            By law, goods imported under IGCR must be used within <strong>6 months</strong>. If they aren't, you must pay the <strong>full duty plus 15% interest</strong>. CloudDesk's <strong>Aging Report</strong> flags any inventory reaching the 5-month mark, giving you time to use it, re-export it, or seek an extension from the Commissioner.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Job-Work & Unit Transfer Management</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Are you sending goods to a third-party manufacturer? In 2026, the <strong>Form IGCR-2</strong> (Intimation of receipt/short-receipt) and tracking of goods at job-worker premises are strictly monitored. CloudDesk manages the <strong>digital trail from your warehouse to the job-worker and back</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Error-Free Excel Utility Filing</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The ICEGATE 2.0 portal is sensitive to data formatting. We use the <strong>official DG Systems Excel Utility</strong> to map your Bills of Entry (BE) to consumption, ensuring that <strong>BCD, IGST, and Cess values</strong> match the auto-populated backend data to avoid <strong>"Upload Rejections."</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (IGCR) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the deadline for filing IGCR returns?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must submit the <strong>Form IGCR-3 monthly statement by the 10th day of the following month</strong>. For example, February 2026 consumption must be filed by March 10, 2026.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need to file a return if I didn't import or use anything this month?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Filing a <strong>NIL Return is mandatory</strong>. Failure to file even a NIL return will result in the <strong>suspension of your IIN (IGCR Identification Number)</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I file intra-quarterly returns?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, the portal allows <strong>Form IGCR-3A</strong> for intra-quarterly updates, which is useful for <strong>immediate bond re-credit</strong> if you have high-frequency imports.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if I can't use the goods within 6 months?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must pay the <strong>differential duty (the amount saved) along with interest</strong>. However, in 2026, the Jurisdictional Commissioner has the power to grant a <strong>3-month extension</strong> if the delay is beyond your control.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I re-export unutilized IGCR goods?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. You can re-export defective or unutilized goods under <strong>Rule 7</strong>, but you must <strong>record this in your monthly statement</strong> to close the entry in the system.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is IIN (IGCR Identification Number) a one-time thing?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Once generated, the IIN is <strong>valid across all ports in India</strong>. However, you must update your <strong>Form IGCR-1 (Prior Intimation)</strong> if you add new items or change your manufacturing address.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the penalty for late filing of IGCR-3?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Apart from the system blocking your bond, you face penalties under the <strong>Customs Act, 1962</strong>. Repeated delays can lead to the <strong>permanent withdrawal of concessional benefits</strong> and a <strong>100% audit of your past five years</strong> of imports.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How does Customs verify my "Consumption"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, Customs uses <strong>Risk-Based Data Analytics</strong>. If your <strong>"Output" (finished goods)</strong> doesn't logically match the <strong>"Input" (IGCR imports)</strong>, the system triggers a <strong>Physical Audit of your factory records</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle, 
   Phone,
   Mail,
   MapPin,
@@ -236,6 +240,195 @@ const CloudDeskCA = () => {
     </section>
 
     <Fees/>
+
+
+{/* --- WHY CLOUDDESK SECTION (CA CERTIFICATION) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for CA Certification?</h2>
+      <p className="text-slate-500">
+        Most CAs are generalists. We provide "Exim-Specialist" CAs who understand SION, Appendix formats, and e-BRC mapping.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Redemption & Closure Specialists</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Closing an EPCG or Advance Authorization requires specific annexures <strong>(Appendix 5C or 4H)</strong>. Our CAs don't just sign; they perform a <strong>"Pre-Audit"</strong> of your Shipping Bills and e-BRCs to ensure the <strong>Export Obligation (EO) is actually met</strong> before filing.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Remittance Compliance (15CA/15CB)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If you are paying a foreign supplier, agent, or service provider more than <strong>₹5 Lakh</strong>, you need a <strong>Form 15CB</strong>. We determine the correct <strong>DTAA (Double Taxation Avoidance Agreement)</strong> benefit so you don't overpay TDS (Tax Deducted at Source).
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Star Export House Benchmarking</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            To get "Star Status," your turnover must be certified over a <strong>3-year period (Appendix 3C)</strong>. We reconcile your <strong>GSTR-1 sales with your Bank Realizations</strong> to ensure your application isn't rejected for data mismatch.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Instant UDIN Generation</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In 2026, the gap between certification and government portal upload is critical. We provide <strong>real-time UDIN-enabled digital certificates</strong> that are instantly verifiable by DGFT and Customs, preventing <strong>"pending" status</strong> on your applications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (CA CERTIFICATION) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Why do I need a CA for EPCG closure?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must prove you installed the machinery (<strong>Installation Certificate</strong>) and used it to export (<strong>Appendix 5C</strong>). A CA verifies that the specific Shipping Bills used for EO haven't been <strong>"double-counted"</strong> for other licenses.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is an "Average Export Performance" certificate?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          When applying for a new license, DGFT often asks for your <strong>average exports over the last 3 years</strong>. A CA certifies this so the government knows you have the capacity to <strong>fulfill future obligations</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can my internal company accountant sign these?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. It must be a <strong>Practicing Chartered Accountant</strong> (holding a Certificate of Practice) who is <strong>independent of the firm</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          When is Form 15CB mandatory in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is mandatory if the remittance to a non-resident exceeds <strong>₹5 Lakh in a financial year</strong> AND the payment is <strong>taxable in India</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the penalty for a wrong CA Certificate?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If a CA provides false data, both the exporter and the CA face penalties under the <strong>FTDR Act and Customs Act</strong>, including <strong>blacklisting (DEL)</strong> and <strong>professional misconduct proceedings by ICAI</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does a CA need to verify my "Consumption of Inputs"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. For Advance Authorization, a CA (or a Chartered Engineer) must certify that the <strong>raw materials imported duty-free were actually consumed</strong> in the final export product as per <strong>SION norms</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How do I verify if my CA's certificate is genuine?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Go to the <strong>ICAI UDIN Portal</strong> and enter the <strong>18-digit number</strong> printed on the document. It will show you the CA's name and the specific values they certified (e.g., Turnover amount).
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What if my CA forgot to generate a UDIN?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the CA has <strong>15 days to update the UDIN</strong>. If they fail, the document becomes <strong>"Invalid"</strong> and your DGFT application will be <strong>automatically rejected by the system</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>    
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

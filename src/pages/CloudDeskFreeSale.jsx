@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -17,7 +21,7 @@ import {
   FlaskConical,
   Package,
   Info,
-    FileText,
+  FileText,
   ListChecks,
   Factory,
   Receipt,
@@ -346,6 +350,194 @@ const CloudDeskFreeSale = () => {
 </section>
 
 <Fees/>
+
+{/* --- WHY CLOUDDESK SECTION (FSC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Free-Sale-Certificates?</h2>
+      <p className="text-slate-500">
+        An FSC isn't just a letter; it's a verification of your domestic compliance. CloudDesk ensures your Indian licenses are the foundation for your global sales.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Dual-Authority Navigation (DGFT vs. CDSCO)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Exporters often apply to the wrong department. If it's a <strong>Medical Device or Drug</strong>, you need <strong>CDSCO</strong> (Central Drugs Standard Control Organization). If it's an <strong>Engineering or General Item</strong>, you need <strong>DGFT</strong>. CloudDesk routes your application to the correct authority, preventing months of jurisdictional delays.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Product-to-License Mapping</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            To get an FSC, you must prove you have a <strong>Manufacturing License</strong> or an <strong>FSSAI/LMPC license</strong> for that specific product in India. CloudDesk performs a <strong>Compliance Audit</strong> to ensure your domestic licenses cover the exact technical name and specifications mentioned in your export order.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Authentication & Apostille Services</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Many countries (like those in the <strong>Hague Convention</strong>) won't accept a simple FSC; they need it <strong>Apostilled by the Ministry of External Affairs (MEA)</strong>. CloudDesk provides the <strong>FSC + Apostille combo</strong>, handling the physical movement of documents between departments.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. "Commerce Certificate" for Non-Regulated Items</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            For items that don't fall under a specific regulatory body (like <strong>textiles or furniture</strong>), we obtain a <strong>Certificate of Commerce from the DGFT</strong>. This serves as the equivalent of an FSC, reassuring your foreign buyer that the product is a standard "article of commerce" in India.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (FSC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is a Free Sale Certificate (FSC)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is a government-issued certificate confirming that the product is manufactured in India and is "free to be sold" in the Indian domestic market. It's proof that the product is safe and legally compliant at its source.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Which products definitely need an FSC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Medical Devices, Pharmaceuticals, Cosmetics, and Food products are the most common. However, some countries now require it for <strong>Pesticides, Toys, and Electronics</strong> as well.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is a Certificate of Origin (COO) the same as an FSC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. A COO only says <em>where</em> the product was made. An FSC says the product is <em>safe/legal for sale</em> in the country of origin. You usually need both for high-stakes exports.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long is an FSC valid?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, an FSC is typically valid for <strong>2 years from the date of issue</strong>, or until the expiry of your manufacturing license—whichever is earlier.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can a "Merchant Exporter" apply for an FSC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, but with a catch. You must provide a <strong>No Objection Certificate (NOC)</strong> and a copy of the manufacturing license from the actual manufacturer. CloudDesk manages this tripartite documentation.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What documents are needed for a DGFT FSC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          (1) Valid IEC, (2) Manufacturing License from a State/Central authority, (3) List of products to be certified, and (4) Self-declaration that the product is not banned or restricted in India.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          My buyer is asking for an FSC for "Medical Devices." Where do I go?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must apply to the <strong>CDSCO (Sugam Portal)</strong>. Under the Medical Device Rules (MDR) 2017/2026, this requires a valid <strong>"Form MD-5" or "MD-9"</strong> manufacturing license.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I get one FSC for 100 different products?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. You can list multiple products in a single application, provided they fall under the <strong>same manufacturing license</strong>. This saves you significant application fees.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
 
       {/* Footer */}

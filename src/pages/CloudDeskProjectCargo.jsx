@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,  
   Ship,
   CheckCheck,
   MapPin,
@@ -20,7 +24,7 @@ import {
   Car,
   Projector,
   FlagIcon,
-    Phone,
+  Phone,
   Mail,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskMarine/MainNavbar";
@@ -357,6 +361,206 @@ const CloudDeskMarine = () => {
           </div>
         </div>
       </section>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Project-Cargo?</h2>
+                    <p className="text-slate-500">
+                          General logistics moves boxes; Project Cargo moves the infrastructure of nations. CloudDesk provides the blueprint.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Feasibility & Route Survey (Digital Mapping)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          A 5-meter wide cargo cannot pass through a<strong> 4.8-meter wide tunnel.</strong> <strong>CloudDesk </strong>performs a Physical & Digital Route Survey before the cargo even leaves the factory. 
+                          We identify<strong> low-hanging wires, weak bridges, </strong>and sharp turns,<strong>creating a "Route Clearance Protocol" </strong> that ensures zero mid-way bottlenecks.
+                         </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Multimodal "Sync" (Sea-Rail-Road)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         Project cargo often requires specialized<strong> Breakbulk vessels,</strong>
+                         followed by heavy-duty Hydraulic Axle Trailers. <strong>CloudDesk </strong>coordinates the 
+                         <strong>"Crane-to-Axle" </strong>transfer at the port, ensuring that specialized lifting equipment is standing by the moment the ship berths to avoid massive port-stay penalties.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Specialized Customs "Project Imports"</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Under Heading 98.01 of the Customs<strong> Tariff, entire projects </strong>can be imported at a concessional duty rate. 
+                          <strong>CloudDesk </strong>manages the Project <strong>Import Registration, </strong>ensuring all individual shipments—from nuts and bolts to giant reactors—are assessed under a single project umbrella for maximum tax savings.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. On-Site Engineering Support</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          We don't just "drop and go.<strong>" CloudDesk </strong>provides <strong>Loading/Unloading Supervision.</strong> Our engineers oversee the<strong> "Lashing and Securing" </strong>of the cargo to ensure it survives high-seas turbulence and bumpy inland roads without shifting an inch.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What qualifies as "Project Cargo"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Any cargo that is too big or too heavy to fit into a standard 20ft or 40ft container. This includes "Over-Dimensional" (width/height) and "Over-Weight" (tonnage) shipments that require Flat Racks, Open Tops, or Breakbulk vessels.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              What is "Breakbulk" shipping?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is a method of shipping where cargo is loaded individually onto the ship's deck or hold, rather than inside a container. It’s the standard for massive pipes, boilers, and heavy machinery.
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What are "Hydraulic Axles"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                For extremely heavy cargo (over 50–100 tons), standard trucks fail. We use Multi-Axle Hydraulic Trailers that can distribute weight evenly and tilt to navigate uneven terrain, ensuring the cargo stays level.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Do I need special permits for ODC movement in India?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. You need "Over Dimensional" permits from the Ministry of Road Transport and Highways (MoRTH) and often state-level police clearances. CloudDesk’s Compliance Team handles these permits for every state the cargo traverses.
+
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can Project Cargo be imported under "Zero Duty"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                 Yes, if the project falls under specific government schemes like EPCG or if it is a "Mega Power Project" or "Infrastructure Project" with a valid Essentiality Certificate. CloudDesk helps you secure these certificates.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Escort Vehicle" requirement?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  For cargo exceeding specific width/length limits, an escort vehicle with warning lights is mandatory to guide traffic. CloudDesk provides Pilot Cars to ensure public safety and legal compliance during transit.
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is standard Marine Insurance enough for Project Cargo?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Usually, no. You need a "Loading & Unloading" add-on and often a "Marine Warranty Survey" (MWS). CloudDesk works with specialized underwriters to provide tailored project insurance that covers the high risks of heavy lifting.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is a "Lashing Certificate"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  It is a document issued by a certified surveyor confirming that the cargo has been secured (lashed) properly to the vessel or trailer. Without this, most insurance claims for transit damage will be rejected.              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

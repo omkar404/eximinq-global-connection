@@ -9,6 +9,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,  
   Phone,
   Mail,
   MapPin,
@@ -296,6 +299,208 @@ const CloudDeskDPD = () => {
     </section>
 
     <Fees/>
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Dpd-Registration"?</h2>
+                    <p className="text-slate-500">
+                          DPD is about speed, but one documentation error can send your cargo back to the expensive CFS lane. CloudDesk ensures you stay in the fast lane.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. "First-Time Right" Registration</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Getting <strong>DPD </strong>permission requires a clean track record and specific volume commitments<strong> (or AEO status).</strong>
+                          <strong>CloudDesk </strong>manages the DPD Application with the<strong> Commissioner of Customs, </strong>ensuring your<strong> "Financial Solvency" and "Compliance History" </strong>are presented flawlessly for immediate approval.
+                         </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Terminal-Specific "DPD Code" Setup</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          <strong>DPD </strong>isn't universal; you need to be registered at specific terminals<strong> (like JNPCT, GTI, or NSIGT).</strong>
+                          <strong> CloudDesk </strong>handles the Terminal-Level Registration and ensures your IEC is mapped to the port’s<strong> "DPD Directory," </strong>allowing the cranes to move your container to the DPD area automatically.
+
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. The 48-Hour Clearance Sprint</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          <strong>DPD cargo </strong>must be cleared within 48 hours, or it is forcefully moved to a <strong>CFS, </strong>incurring double charges. 
+                          <strong>CloudDesk’s DPD </strong>Control Tower tracks your vessel's arrival and ensures your<strong> "Advanced Bill of Entry" and "Duty Payment" </strong>are completed before the ship berths.
+
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Integrated DPD Transportation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                              Traditional transporters often struggle with <strong>port-terminal pickups.</strong> 
+                              <strong>CloudDesk </strong>provides a <strong>DPD-Authorized </strong>Fleet that is pre-registered with the terminal gate systems, ensuring your container moves from the<strong> "Hook to the Hook-up" </strong>without waiting for manual gate-passes.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    Who is eligible for DPD registration?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               In 2026, eligibility is primarily based on: (1) AEO (T1, T2, or T3) status holders, or (2) Importers with a minimum volume of 25-50 TEUs (containers) per year at a specific port. CloudDesk helps SMEs get DPD by leveraging their AEO T1 certification.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is DPD available at all Indian ports?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is most active at major ports like Nhava Sheva (JNPT), Mundra, Hazira, and Chennai. Each port has its own "DPD Cell" which CloudDesk liaises with on your behalf.
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does DPD registration expire?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                DPD permission is typically valid as long as your IEC and AEO status are active. However, you must file a "DPD Renewal/Continuance" declaration annually to confirm your volume and compliance.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How much money can I save with DPD?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                On average, DPD saves between ₹8,000 to ₹20,000 per container by eliminating CFS handling charges, ground rent, and secondary transportation costs. For a company importing 10 containers a month, that’s over ₹1.5 Lakhs in pure profit saved.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "72-Hour Rule"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  If you do not pick up your container from the port terminal within 48 to 72 hours (depending on the port), the terminal "evacuates" it to a designated CFS. You then lose the DPD benefit and pay full CFS charges. CloudDesk’s Alert System prevents this evacuation.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              Can I use DPD for LCL (Less than Container Load) shipments?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. DPD is only for FCL (Full Container Load) shipments because the entire container is delivered to a single importer. LCL cargo must go to a CFS for "de-stuffing" and sorting.
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is a "DPD Code"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  It is a unique identification number assigned to your company by the Port Terminal. You must mention this code in your Bill of Entry to inform Customs and the Terminal that the container is meant for Direct Delivery.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What if my cargo needs "Physical Examination"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Even DPD cargo can be marked for examination by the RMS. In such cases, the examination is done at a special DPD Area within the port or at a nearby "DPD-Speed" facility, rather than a general CFS, maintaining the speed of delivery.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>   
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

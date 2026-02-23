@@ -323,10 +323,10 @@ const CloudDeskMarine = () => {
               <section className="py-20 bg-white">
                 <div className="container mx-auto px-4 max-w-5xl">
                   <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Getting the 14-digit code from your bank is only 20% of the job. The remaining 80% is mapping it correctly to the Customs EDI system.</h2>
-                    {/* <p className="text-slate-500">"• Primary: ICEGATE 2.0 Registration, Indian Customs EDI Gateway, ICEGATE ID Creation, DSC Mapping on ICEGATE, e-Sanchit Document Upload.
-                    • Long-Tail: Fix ICEGATE signer utility error 2026, mandatory documents for ICEGATE registration, how to link DSC to ICEGATE 2.0, ICEGATE 2FA setup guide, register as importer/exporter on ICEGATE."
-                    </p> */}
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Marine-Insurance?</h2>
+                    <p className="text-slate-500">
+                          Insurance is a promise; CloudDesk ensures the promise is kept.
+                    </p>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     {/* Feature 1 */}
@@ -335,11 +335,11 @@ const CloudDeskMarine = () => {
                         <AlertTriangle size={24} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-slate-900 mb-2">1. Multi-Port Mapping Engine</h4>
+                        <h4 className="font-bold text-slate-900 mb-2">1. "All-Risk" ICC-A Standard</h4>
                         <p className="text-sm text-slate-600 leading-relaxed">
-                          Exporters often believe they only need to register at one port. In reality, you need registration at every port you ship from<strong> (Nhava Sheva, Mundra, Sahar Air Cargo, etc.). </strong>
-                          <strong>CloudDesk’s</strong> One-Click Port Expansion feature allows you to push your bank's AD Code to multiple ports simultaneously, saving weeks of manual filing.
-                        </p>
+                          Most cheap policies only cover<strong> "Total Loss" (the ship sinking). CloudDesk </strong>defaults to Institute <strong>Cargo Clauses (</strong>A)—the highest level of<strong> "All-Risk" </strong>coverage. 
+                          Whether it’s water <strong>damage, theft, or rough handling </strong>during customs examination, your capital is protected.
+                         </p>
                       </div>
                     </div>
         
@@ -349,10 +349,10 @@ const CloudDeskMarine = () => {
                         <CheckCircle size={24} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-slate-900 mb-2">2. IFSC-Drawback Synchronization</h4>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Instant Digital Certificate (COI)</h4>
                         <p className="text-sm text-slate-600 leading-relaxed">
-                          The AD Code is for shipping, but the <strong>IFSC registration </strong>is for money. If your IFSC is not mapped correctly, your Duty Drawback and <strong>RoDTEP refunds</strong> will be rejected by the system. 
-                          <strong>CloudDesk</strong> performs a <strong>"Financial Handshake" </strong>test to ensure your bank's IFSC is active in the Customs "Drawback Ledger."
+                          Waiting 24 hours for an insurance cover note can delay your<strong> Letter of Credit (LC) </strong>negotiation. 
+                          <strong>CloudDesk’s </strong>Instant-Policy Engine generates your<strong> Certificate of Insurance (COI) </strong>the moment you upload your invoice, ensuring your documents are ready for the bank in seconds.
                         </p>
                       </div>
                     </div>
@@ -363,11 +363,10 @@ const CloudDeskMarine = () => {
                         <Building size={24} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-slate-900 mb-2">3. Bank Letter Format Validator</h4>
+                        <h4 className="font-bold text-slate-900 mb-2">3. The "General Average" Shield</h4>
                         <p className="text-sm text-slate-600 leading-relaxed">
-                          Customs is notoriously strict about the Bank’s AD Code Letter format <strong>(Annexure-A).</strong>
-                          If a single sentence is missing or the bank official's signature isn't stamped properly, the EDI officer will reject it. 
-                          <strong>CloudDesk </strong> provides a Pre-Filled Template for you to give your bank manager, ensuring a 100% acceptance rate on the first upload.
+                          Few exporters understand<strong> "General Average"</strong>—where you must pay for other people's lost cargo if the ship is saved during an emergency. 
+                          <strong>CloudDesk’s </strong>policies include <strong>General Average Protection,</strong> ensuring you aren't hit with a massive bill for an accident you didn't cause.
                         </p>
                       </div>
                     </div>
@@ -378,10 +377,11 @@ const CloudDeskMarine = () => {
                         <ShieldUser size={24} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-slate-900 mb-2">4. Real-Time Approval Tracking</h4>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Integrated Claims Concierge</h4>
                         <p className="text-sm text-slate-600 leading-relaxed">
-                          Once submitted, AD Code approval can take 24 hours or 10 days depending on the port. 
-                          <strong>CloudDesk’s </strong>Status Pulse monitors the <strong>ICEGATE </strong>"Bank Management" dashboard and alerts you the second your status moves from "Pending" to "Customs Approved."
+                          The real test of insurance is the claim. If your cargo arrives damaged, 
+                          <strong>CloudDesk’s </strong>Claims Assistant helps you file the<strong> "Notice of Loss," </strong>appoints a surveyor at the destination port, 
+                          and tracks the payout process, so you aren't stuck fighting an insurance company alone.
                         </p>
                       </div>
                     </div>
@@ -447,6 +447,130 @@ const CloudDeskMarine = () => {
                 all your shipments automatically for a year (up to a limit). You
                 only need to declare shipments periodically instead of obtaining
                 individual certificates each time.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What are ICC-A, B, and C?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• ICC (C): The most basic. Covers only major ""Accidents"" (sinking, fire, collision).
+                 • ICC (B): Mid-level. Covers (C) plus ""Natural Calamities"" (earthquakes, lightning, water entry).
+                 • ICC (A): The ""All-Risk"" policy. Covers everything except specific exclusions (like war or inherent vice). CloudDesk recommends ICC (A) for 99% of shipments."
+
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does Marine Insurance cover War and Strikes?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Standard policies do not. However, CloudDesk allows you to add "War & SRCC" (Strikes, Riots, and Civil Commotions) covers as an add-on, which is essential in 2026 for routes through volatile regions.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Duty Insurance"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                For importers, if the goods are damaged after you paid the Customs duty, you lose the duty amount too. CloudDesk offers Duty Insurance to ensure you are reimbursed for the tax paid on damaged goods.
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How much does Marine Insurance cost?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    The premium is usually a tiny fraction of the cargo value (typically 0.05% to 0.20%). The cost is influenced by the commodity, the destination, and the mode of transport.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What value should I insure my goods for?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    The standard is CIF + 10% (Cost, Insurance, Freight + 10%). The extra 10% is to cover the "Imaginary Profit" and administrative costs incurred due to the loss.
+              </p>
+            </details>
+
+            {/* FAQ 9 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an "Open Cover" vs. "Single Voyage" policy?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    "• Single Voyage: For one-off shipments.
+                     • Open Cover: A one-year ""blanket"" policy for regular exporters. You just ""declare"" each shipment as it happens. CloudDesk manages your Open Cover Balance automatically."
+              </p>
+            </details>
+
+            {/* FAQ 10 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                My cargo arrived damaged. What is the first thing I should do?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    Do not give a "Clean Receipt" to the transporter. Mark the delivery note as "Received in Damaged Condition" and contact CloudDesk immediately to appoint a surveyor.
+              </p>
+            </details>
+
+            {/* FAQ 11 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Inherent Vice" in insurance terms?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    It refers to damage caused by the nature of the product itself (e.g., fruit rotting naturally or iron rusting). This is never covered by insurance. CloudDesk helps you document "External Damage" to prove the loss wasn't an inherent vice.
               </p>
             </details>
           </div>

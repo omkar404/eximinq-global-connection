@@ -7,6 +7,8 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  ShieldUser,   
   CheckCircle,
   Phone,
   Mail,
@@ -354,69 +356,236 @@ const CloudDeskFSSAILicensing = () => {
 
       <Fees />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
 
-          <div className="space-y-4">
-            {/* 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What if the sample fails the lab test?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                If a sample fails, you can apply for a re-test at a referral
-                lab. If that also fails, the shipment gets a Non-Conformance
-                Report (NCR) and must be re-exported or destroyed. It cannot be
-                cleared for consumption.
-              </p>
-            </details>
-
-            {/* 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is FSSAI required for 100% Export Oriented Units (EOU)?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes, even 100% Export Oriented Units must obtain a Central
-                License under the category of "Exporting FBO". However, import
-                clearance procedures may be simplified if the goods are for
-                re-export.
-              </p>
-            </details>
-
-            {/* 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Can I stick labels after the goods arrive in India?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Generally, labels should be affixed before shipment. However,
-                FSSAI allows rectification of labeling deficiencies (like adding
-                Importer details or Veg/Non-Veg logo) at the Customs Bonded
-                Warehouse under officer supervision for a fee.
-              </p>
-            </details>
-          </div>
+{/* --- WHY CLOUDDESK SECTION (FSSAI) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Fssai-Licensing?</h2>
+      <p className="text-slate-500">
+        Food is "Perishable" and "High-Risk." Every day stuck in Customs isn't just a storage cost; it's a threat to your product's shelf life.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
         </div>
-      </section>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. SWIFT 2.0 Integration (The "Auto-Match")</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In 2026, the Unified Dashboard on ICEGATE pulls your FSSAI license data in real-time. CloudDesk ensures your <strong>Kind of Business (KoB)</strong> on FoSCoS is perfectly synced with your <strong>DGFT IEC</strong>. We prevent the <strong>"Data Mismatch" errors</strong> that currently block 15% of food imports at the port.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Product Categorization (FSS Act 2006/2026)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Is your product <strong>"Proprietary Food," "Health Supplement,"</strong> or <strong>"Novel Food"</strong>? Each has a different approval path. CloudDesk performs a <strong>Technical Screening</strong> of your ingredients against the FSS (Food Product Standards) Regulations to ensure you apply for the correct category, avoiding the dreaded <strong>"Non-Specified Food" trap</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Labelling & Shelf-Life Audit</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Imported food must have a minimum <strong>60% residual shelf life</strong> at the time of import. CloudDesk reviews your artwork to ensure mandatory declarations (<strong>Veg/Non-Veg logo, FSSAI number, Batch No., Expiry</strong>) are in the correct font size and contrast as per the <strong>2026 Labelling & Display Rules</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. NOC & Visual Inspection Management</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Once the cargo arrives, we manage the <strong>Food Import Clearance System (FICS)</strong> workflow. This includes scheduling the <strong>Visual Inspection</strong>, coordinating with <strong>Authorized Officers (AO)</strong>, and managing the <strong>NABL Lab Sampling</strong> process to get your No Objection Certificate (NOC) faster.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (FSSAI) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What if the sample fails the lab test?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If a sample fails, you can apply for a re-test at a referral lab. If that also fails, the shipment gets a <strong>Non-Conformance Report (NCR)</strong> and must be re-exported or destroyed. It cannot be cleared for consumption.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is FSSAI required for 100% Export Oriented Units (EOU)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, even 100% Export Oriented Units must obtain a <strong>Central License</strong> under the category of "Exporting FBO". However, import clearance procedures may be simplified if the goods are for re-export.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I stick labels after the goods arrive in India?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Generally, labels should be affixed before shipment. However, FSSAI allows rectification of labeling deficiencies (like adding Importer details or Veg/Non-Veg logo) at the <strong>Customs Bonded Warehouse</strong> under officer supervision for a fee.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need a State or Central License?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, all <strong>Importers and Exporters must obtain a Central License</strong>, regardless of turnover. State Licenses are only for domestic-only traders/manufacturers with turnover between <strong>₹12 Lakh and ₹20 Crore</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the cost of an FSSAI Central License in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The government fee is <strong>₹7,500 per year</strong>. You can apply for up to 5 years (<strong>₹37,500</strong>) to avoid annual renewal hassles.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I use one license for multiple locations?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. FSSAI is <strong>Premise-Based</strong>. You can have a "Head Office" license to manage the brand, but every <strong>warehouse or cold storage facility</strong> must have its own license/registration.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How do I link my FSSAI license to my Bill of Entry?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Under <strong>SWIFT 2.0</strong>, this is automatic. When you file your BE on ICEGATE, the system fetches your FSSAI details using your IEC. CloudDesk ensures this mapping is active before you ship your first container.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if my product fails the lab test?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If the sample is non-conforming, a <strong>Non-Conforming Report (NCR)</strong> is issued. You have the right to appeal for a <strong>"Second Referral"</strong> to a Referral Lab. CloudDesk manages this appeal process <strong>(Form 6)</strong> to save your shipment.
+        </p>
+      </details>
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Are "Rectifiable Labels" allowed?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, for certain missing details like the <strong>FSSAI Logo, Importer Name/Address,</strong> or <strong>Veg/Non-Veg symbol</strong>. You can fix these in a Customs Bonded Warehouse before the NOC is issued. However, <strong>"Date of Manufacture" or "Expiry" are NOT rectifiable</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 10 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          When is the FSSAI Annual Return (Form D1) due?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Every licensed manufacturer and importer must file the annual return by <strong>May 31st</strong> for the previous financial year.
+        </p>
+      </details>
+
+      {/* FAQ 11 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the penalty for late renewal?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the late fee is <strong>₹100 per day</strong> from the date of expiry. If you don't renew within <strong>30 days of expiry</strong>, the license is permanently terminated and you must apply for a fresh one.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

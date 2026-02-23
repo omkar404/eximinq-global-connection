@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -221,67 +225,240 @@ const CloudDeskCustomsAdjudication = () => {
 
       <Fees />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4">
-            {/* FAQ 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is the PRC decision final?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Generally, yes. The decision of the Policy Relaxation Committee
-                is communicated to the RA for implementation. If rejected,
-                further legal recourse may involve filing a Writ Petition in the
-                High Court, but administrative remedies within DGFT are usually
-                exhausted at this stage.
-              </p>
-            </details>
-
-            {/* FAQ 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What constitutes "Genuine Hardship"?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                It refers to situations beyond the control of the exporter, such
-                as natural calamities, sudden policy changes by foreign
-                governments, or financial insolvency of the buyer. Mere
-                negligence or ignorance of law is usually not considered genuine
-                hardship.
-              </p>
-            </details>
-
-            {/* FAQ 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                How long does it take for a decision?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                The PRC typically meets once a month. Once the application is
-                complete and filed, it may take 1–3 months to get listed for a
-                meeting and receive the minutes.
-              </p>
-            </details>
-          </div>
+{/* --- WHY CLOUDDESK SECTION (PRC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Policy Relaxation ?</h2>
+      <p className="text-slate-500">
+        The PRC is a discretionary committee. You don't win on 'requests'; you win on 'Justification' and 'Public Interest'.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
         </div>
-      </section>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Drafting the "Genuine Hardship" Narrative</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The committee only acts if you prove that following the policy would cause <strong>"Genuine Hardship"</strong> due to reasons beyond your control (e.g., pandemic, war, sudden policy change, or massive system glitches). CloudDesk drafts a <strong>high-impact Statement of Facts</strong> that connects your struggle to the broader <strong>"Public Interest."</strong>
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. ANF-2D Precision Filing</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The application is filed via <strong>Ayaat Niryaat Form 2D</strong>. We ensure every Shipping Bill, e-BRC, and previous rejection letter is mapped. In 2026, the portal allows up to 10 attachments; we prioritize the most <strong>"lethal" evidence</strong> to ensure the committee sees the core issue first.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Personal Hearing (PH) Representation</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If the case is complex, we request a Personal Hearing. In 2026, these are mostly conducted via <strong>video conferencing</strong>. We prepare your technical representative to answer the <strong>"Why should we break the rule for you?"</strong> question from the Director General.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Liaison with the "Policy-Z" Section</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Once the PRC minutes are published and your case is <strong>"Recommended,"</strong> the battle isn't over. We follow up with the <strong>Policy-Z section at DGFT HQ</strong> to ensure the formal <strong>"Policy Relaxation Order"</strong> is sent to your Regional RA so they can finally issue your license or EODC.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (PRC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is the PRC decision final?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Generally, yes. The decision of the Policy Relaxation Committee is communicated to the RA for implementation. If rejected, further legal recourse may involve filing a <strong>Writ Petition in the High Court</strong>, but administrative remedies within DGFT are usually exhausted at this stage.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What constitutes "Genuine Hardship"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It refers to situations <strong>beyond the control of the exporter</strong>, such as natural calamities, sudden policy changes by foreign governments, or financial insolvency of the buyer. <strong>Mere negligence or ignorance of law</strong> is usually not considered genuine hardship.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does it take for a decision?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The PRC typically <strong>meets once a month</strong>. Once the application is complete and filed, it may take <strong>1–3 months</strong> to get listed for a meeting and receive the minutes.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What kind of cases does the PRC handle?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Common cases include:<br />
+          • <strong>Extension of Export Obligation (EO) period</strong> after all regular extensions are exhausted.<br />
+          • <strong>Revalidation of expired Duty Credit Scrips</strong> (MEIS/SEIS/RoDTEP).<br />
+          • Acceptance of Shipping Bills where the <strong>"Intent to claim benefits"</strong> was marked "No" by mistake.<br />
+          • <strong>Clubbing of licenses</strong> that don't meet the standard "same HSN" criteria.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is "Public Interest" in a PRC context?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If your failure to export causes <strong>massive job losses</strong>, or if a government system (like ICEGATE) was <strong>down during your deadline</strong>, the PRC considers relaxation to be in the "Public Interest."
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I apply to the PRC if I just forgot the deadline?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. <strong>Mere negligence is not "Genuine Hardship."</strong> You must show a reason that a "reasonable person" could not have avoided.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the fee for a PRC application in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>Fresh Application:</strong> ₹2,000.<br />
+          • <strong>Review Application</strong> (if rejected once): ₹5,000.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does a PRC decision take?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The committee usually meets <strong>once or twice a month</strong>. From filing to the publication of Minutes of the Meeting (MoM), it typically takes <strong>45 to 90 days</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I track my PRC case online?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Under <strong>"Submitted Applications"</strong> on the DGFT portal, you can see the <strong>"Life Cycle"</strong> of your PRC file.
+        </p>
+      </details>
+
+      {/* FAQ 10 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          My case was "Deferred." What does that mean?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It means the committee wants <strong>more data or a clarification</strong>. You will receive a <strong>Deficiency Letter</strong>. You must respond within the stipulated time, or the case will be <strong>"Rejected"</strong> in the next meeting.
+        </p>
+      </details>
+
+      {/* FAQ 11 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          If the PRC rejects my case, is it over?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You can file a <strong>Review Application</strong> (with the ₹5,000 fee) if you have <strong>new evidence</strong> that wasn't presented the first time. If the Review is also rejected, your only remaining option is a <strong>Writ Petition in the High Court</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

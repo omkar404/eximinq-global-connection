@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -250,6 +254,196 @@ const CloudDeskWarehouse = () => {
     </section>
 
 <Fees/>
+
+
+{/* --- WHY CLOUDDESK SECTION (WAREHOUSE LICENSE) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Warehouse Licensing?</h2>
+      <p className="text-slate-500">
+        A warehouse is more than a shed; in 2026, it is a "Tax-Free Zone" if licensed correctly.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Duty Deferment (Section 58 - Private Bonded)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We help you set up a <strong>Private Bonded Warehouse</strong>. This allows you to import bulk cargo and keep it in your facility <strong>without paying 100% Import Duty upfront</strong>. You only pay duty as and when you remove goods for sale. CloudDesk manages the <strong>Double Duty Bond</strong> and the digital ledger required by Customs.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. WDRA Accreditation (For Agri & Commodity)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If you deal in commodities, we register you with the <strong>Warehousing Development and Regulatory Authority (WDRA)</strong>. This turns your warehouse receipts into <strong>Negotiable Instruments (e-NWRs)</strong>, allowing you to get instant bank funding against your stored inventory.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Manufacturing and Other Operations in Warehouse (MOOWR)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The <strong>MOOWR 2019/2026 scheme</strong> is a game-changer. CloudDesk licenses your warehouse as a <strong>"Manufacturing Unit"</strong> where you can import raw materials duty-free, manufacture, and only pay duty on the final product if sold in India — or <strong>zero duty if exported</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Hazardous & Temperature-Controlled Compliance</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            For chemicals or pharma, a standard license isn't enough. We manage the <strong>Fire Department NOC, Pollution Board CTE/CTO,</strong> and <strong>Industrial Safety (DISH) approvals</strong> specifically for specialized storage, ensuring you meet the 2026 safety mandates for <strong>"High-Risk Storage."</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (WAREHOUSE LICENSE) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the difference between Section 57 and Section 58 warehouses?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>Section 57 (Public):</strong> Operated by the government or authorized agencies (like CWC). Anyone can store goods here.<br />
+          • <strong>Section 58 (Private):</strong> Your own facility licensed to store your imported goods without immediate duty payment.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long can I keep goods in a Bonded Warehouse?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the initial period is <strong>one year, extendable by the Commissioner</strong>. However, for capital goods (machinery), you can often store them until they are cleared for home consumption.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is GST applicable on Bonded Warehouse storage charges?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Storage and handling charges attract <strong>18% GST</strong>. However, the sale of goods within a bonded warehouse to another buyer is treated as a <strong>"no-supply" under Schedule III (Tax-Free)</strong> until the goods are cleared for home consumption.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need a separate FSSAI license for a warehouse?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. If you store food items, you must have an FSSAI Registration/License specifically for the <strong>"Storage/Warehouse" category</strong>. A manufacturing license is <strong>not enough</strong> for a standalone storage site.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Insurance" requirement for a license?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Customs and WDRA mandate that the warehouse must be insured for <strong>Fire, Flood, Theft, and Burglary</strong>. In 2026, the policy must also cover the <strong>Duty Amount of the stored goods</strong>, not just their value.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I perform "Value Addition" like labeling in a warehouse?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, under <strong>Section 64 (Owner's Right)</strong>. You can sort, pack, or relabel goods in a bonded warehouse <strong>under Customs supervision</strong>. This is ideal for meeting <strong>LMPC (Legal Metrology)</strong> labeling requirements before final clearance.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if I lose goods in a Bonded Warehouse?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You are liable to pay <strong>Full Duty + Interest + Penalties</strong>. The <strong>"Warehouse Keeper"</strong> is personally responsible for any shortage in the digital stock ledger.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Digital Bonded Ledger" in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, manual registers are illegal. You must maintain a <strong>Cloud-Based Inventory System</strong> that is accessible by Customs officers for <strong>real-time audits</strong>. CloudDesk provides the software integration for this ledger.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -244,6 +248,197 @@ const CloudDeskIndustrial = () => {
     </section>
 
     <Fees/>
+
+
+
+{/* --- WHY CLOUDDESK SECTION (INDUSTRIAL LICENSE) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Industrial Licensing?</h2>
+      <p className="text-slate-500">
+        An IL involves scrutiny from the Ministry of Home Affairs, Ministry of Defence, and State Governments. CloudDesk manages this 'High-Stakes' liaison.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Mandatory Sector Filtering</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We identify if your product falls under the <strong>"Compulsory Licensing" list</strong>. In 2026, this includes: <strong>Defense Aerospace and Warships, Industrial Explosives, Hazardous Chemicals, Distillation/Brewing of Alcoholic Drinks,</strong> and <strong>Tobacco/Cigars/Cigarettes</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Security Clearance Management</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            For Defense and Explosives, the <strong>Ministry of Home Affairs (MHA)</strong> conducts a rigorous security check on your directors and investors. CloudDesk prepares your <strong>"Security Dossier,"</strong> ensuring no red flags in your corporate structure or funding sources (especially under <strong>FDI Press Note 3</strong> rules).
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Application on G2B / National Single Window (NSWS)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The application for IL is filed through the <strong>National Single Window System (NSWS)</strong>. We handle the complex technical descriptions, capacity projections, and the filing of the <strong>Form IL to the DPIIT</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Inter-Ministerial Committee (IMC) Follow-up</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Applications are reviewed by a Licensing Committee. We monitor the status, address <strong>"Queries" or "Clarifications"</strong> raised by the Technical Authorities, and represent your case until the <strong>Letter of Intent (LOI)</strong> is issued.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (INDUSTRIAL LICENSE) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the difference between an IEM and an Industrial License?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>IEM:</strong> For "Non-Licensed" sectors (e.g., textiles, cars, food). It is a declaration of starting a business.<br />
+          • <strong>Industrial License:</strong> For "Sensitive" sectors. It is an explicit permission granted by the government after security and technical audits.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does an MSME need an Industrial License?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. If an MSME manufactures a product on the <strong>"Compulsory Licensing" list</strong> (like defense components), they must obtain an IL, <strong>regardless of their size or investment</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is the "Alcoholic Drinks" license for retail shops?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. This IL is for the <strong>manufacturing (Distillation and Brewing)</strong> of alcohol. Retail and wholesale licenses are governed separately by <strong>State Excise departments</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long is an Industrial License valid?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, an IL is typically valid for <strong>15 years</strong>, provided you commence production within the period specified in the license (usually <strong>3 years, extendable by 2</strong>).
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the main grounds for rejection of an IL?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The most common reasons are (1) <strong>Adverse security reports from MHA</strong>, (2) <strong>Environmental concerns</strong> in "Red Category" zones, and (3) <strong>Location restrictions</strong> (being too close to an urban area or a sensitive ecological zone).
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can an Industrial License be transferred?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, but only with <strong>prior government approval</strong>. If you sell the company or change the majority shareholding, you must apply for a <strong>"Change in Ownership" amendment</strong> to the IL.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need an IL for "Dual-Use" items?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Items that have both civilian and military applications (Dual-Use) are governed by the <strong>SCOMET list</strong>. You may not need an IL for manufacturing, but you will definitely need an <strong>Export Authorization</strong> to ship them abroad.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Letter of Intent" (LOI)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The government first issues an <strong>LOI</strong>. Once you fulfill the conditions (like getting environmental clearance or setting up the plant), the LOI is converted into a <strong>formal Industrial License</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

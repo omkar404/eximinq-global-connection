@@ -7,6 +7,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
   CheckCircle,
   HardHat,
   FlaskConical,
@@ -439,6 +442,126 @@ const CloudDeskEPRAuthorization = () => {
           </div>
         </div>
       </section>
+
+
+{/* --- WHY CLOUDDESK SECTION (EPR) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Epr-Authorization?</h2>
+      <p className="text-slate-500">
+        
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Plastic Waste EPR (PIBOs)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Under the <strong>Plastic Waste Management (Amendment) Rules, 2024/2026</strong>, all Producers, Importers, and Brand Owners (PIBOs) must register across four categories: <strong>Rigid plastics, Flexible packaging, Multi-layered plastic packaging,</strong> and <strong>Compostable plastics</strong>. CloudDesk manages the <strong>"Plastic Credit" purchases</strong> from authorized recyclers on the CPCB portal to offset your import weight, ensuring you hit your <strong>100% collection targets</strong> before the June 30th return deadline.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. E-Waste & Electronics EPR</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Applicable to all <strong>Electrical and Electronic Equipment (EEE)</strong> listed in Schedule I — covering IT, Telecom, Consumer Electronics, and now Medical Devices. A <strong>RoHS self-declaration</strong> is mandatory alongside the EPR plan. In 2026, collection targets have risen to <strong>70% of average life-cycle sales</strong>. CloudDesk calculates these complex targets so you don't over-purchase credits.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Battery Waste EPR</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Covers all battery types — <strong>Lead-acid, Lithium-ion, Nickel-cadmium</strong> — regardless of shape, volume, or use (EVs, Portables, Industrial). The 2026 rules mandate recovery of specific materials like <strong>Lithium, Cobalt, and Lead</strong>. CloudDesk verifies that your recycling partner is <strong>CPCB-authorized for your specific battery chemistry</strong> — a common mistake that leads to certificate rejection.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (EPR) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Who needs EPR?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Any entity <strong>Importing, Manufacturing, or Selling</strong> products under their own brand that generate plastic, electronic, or battery waste. If you import a laptop, you need <strong>E-Waste EPR</strong> (for the device) and <strong>Plastic EPR</strong> (for the packaging).
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I clear Customs without EPR in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. Customs authorities now verify EPR registration numbers in real-time. Missing EPR leads to <strong>"Environmental Compensation" (EC)</strong> fines starting at <strong>₹1 Lakh</strong> and scaling to <strong>₹1 Crore</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long is the registration valid?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Initial registration is typically valid for <strong>5 years</strong>, with mandatory <strong>annual returns</strong> and <strong>quarterly data updates</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I have to physically collect the waste?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. Most importers fulfill their "Responsibility" by buying <strong>EPR Certificates (Credits)</strong> from CPCB-registered recyclers. CloudDesk facilitates these trades on the official portal.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

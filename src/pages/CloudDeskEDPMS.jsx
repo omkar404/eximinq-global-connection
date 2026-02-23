@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -304,69 +308,236 @@ const CloudDeskEDPMS = () => {
 
       <Fees />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4">
-            {/* FAQ 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Does the new e-BRC system require bank intervention?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Under the new DGFT system (2023), the process is self-certified.
-                The bank issues the IRM, and the exporter can self-generate the
-                e-BRC on the DGFT portal by linking the IRM to the Shipping
-                Bill. However, closing the entry in EDPMS still requires bank
-                action.
-              </p>
-            </details>
-
-            {/* FAQ 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What if my payment came with a deduction (Bank Charges)?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Small deductions ("Bank Charges") are allowed. You must instruct
-                the bank to close the Shipping Bill fully by accounting for the
-                "Bank Charges" component separately in the EDPMS system.
-              </p>
-            </details>
-
-            {/* FAQ 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Can I get removed from Caution List instantly?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                It is not instant. Once the AD Bank marks the bills as
-                "Realized" or "Extension Granted" in the EDPMS, the system
-                updates the status overnight or within a few days, removing the
-                caution flag.
-              </p>
-            </details>
-          </div>
+{/* --- WHY CLOUDDESK SECTION (EDPMS / e-BRC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for EDPMS & e-BRC?</h2>
+      <p className="text-slate-500">
+        Banks are notorious for 'forgetting' to map your inward remittance to your shipping bills. CloudDesk ensures your ledger is always zeroed out.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
         </div>
-      </section>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. IRM-to-Shipping Bill Mapping</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            When you receive foreign exchange, the bank creates an <strong>IRM (Inward Remittance Message)</strong> in EDPMS. If this isn't mapped to your Shipping Bill (SB), the bill stays <strong>"Open."</strong> CloudDesk performs a <strong>Weekly EDPMS Audit</strong>, identifying unmapped bills and forcing your AD Bank to close them before the <strong>15-month deadline</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. The New "Self-Certification" e-BRC</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In late 2025/2026, the DGFT shifted from Bank-issued e-BRCs to <strong>Exporter Self-Certification</strong>. CloudDesk manages this digital filing on the DGFT portal, using your bank's transaction data to "Self-Certify" realization, which instantly unlocks your <strong>RoDTEP, Drawback, and AA/EPCG redemption</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Caution List Rescue</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If you have "Open" bills older than 15 months, the RBI's automated system places your IEC on the <strong>Caution List</strong> — meaning you cannot ship without 100% advance payment or a Bank Guarantee. CloudDesk manages the <strong>Extension of Time (EOT)</strong> applications and coordinates with the <strong>RBI's Regional Office</strong> to delist your firm.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Write-off & Extension Management</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Sometimes buyers don't pay. In 2026, you can self-write off up to <strong>10% of your total annual realization</strong>. CloudDesk calculates your <strong>"Write-off Eligibility"</strong> and files the necessary <strong>"V-Form"</strong> with the bank to ensure your EDPMS reflects a <strong>"Closed" status</strong> even for bad debts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (EDPMS / e-BRC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does the new e-BRC system require bank intervention?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Under the new DGFT system (2023), the process is self-certified. The bank issues the IRM, and the exporter can <strong>self-generate the e-BRC</strong> on the DGFT portal by linking the IRM to the Shipping Bill. However, closing the entry in <strong>EDPMS still requires bank action</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What if my payment came with a deduction (Bank Charges)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Small deductions ("Bank Charges") are allowed. You must instruct the bank to close the Shipping Bill fully by accounting for the <strong>"Bank Charges" component separately</strong> in the EDPMS system.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I get removed from the Caution List instantly?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is not instant. Once the AD Bank marks the bills as <strong>"Realized" or "Extension Granted"</strong> in the EDPMS, the system updates the status <strong>overnight or within a few days</strong>, removing the caution flag.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the difference between EDPMS and e-BRC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>EDPMS:</strong> An RBI system where the Shipping Bill (money expected) and IRM (money received) are matched.<br />
+          • <strong>e-BRC:</strong> A DGFT certificate that proves the money was received, used to claim government incentives.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the time limit to realize export proceeds in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The standard window is <strong>15 months from the date of export</strong>. For "Status Holders" and specific "INR-Invoiced" exports, this can be extended up to <strong>18 months</strong> with prior bank approval.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does EDPMS apply to Service Exports?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Service exports are monitored via the <strong>Unified EDF (Export Declaration Form)</strong>. In 2026, your <strong>FIRC (Foreign Inward Remittance Certificate)</strong> must be mapped to the EDF in the bank's portal to avoid a FEMA violation.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Why is my Shipping Bill still "Open" despite receiving payment?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The bank likely hasn't updated the <strong>"Object Code"</strong> or the <strong>"SB Mapping"</strong> in the EDPMS server. This is a common manual error by bank staff. CloudDesk provides the <strong>Reconciliation Report</strong> you need to send to your bank manager to fix this.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if I receive payment in a different currency?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          EDPMS can handle currency fluctuations within a <strong>5% tolerance</strong>. If the difference is higher (due to bank charges or FX moves), you must provide a <strong>"Reason for Short-Realization"</strong> to the bank.
+        </p>
+      </details>
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I get an e-BRC for a "Third-Party" payment?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, but it's complex. You must mention the third-party details in the Shipping Bill and have a <strong>"Tripartite Agreement."</strong> Without this, the bank will refuse to issue the e-BRC and you'll <strong>lose your incentives</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 10 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the penalties for not closing EDPMS entries?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Under <strong>FEMA 1999/2026</strong>, non-realization is a serious offense. Penalties can be up to <strong>3x the amount not realized</strong>. More practically, your bank will stop issuing <strong>"Forward Contracts"</strong> and <strong>"PCFC" (Pre-shipment Credit)</strong> for your future orders.
+        </p>
+      </details>
+
+      {/* FAQ 11 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How does the new e-BRC system affect GST refunds?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the GST portal is <strong>directly linked to the DGFT's e-BRC server</strong>. If your e-BRC isn't generated within the time limit, the GST department can issue a <strong>"Demand"</strong> to recover the IGST refund they previously paid you.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
