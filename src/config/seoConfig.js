@@ -121,8 +121,8 @@ export const seoRoutes = {
 
   // --- CUSTOMS SERVICES ---
   "/services/icegate-registration": {
-    title: "ICEGATE Registration & AD Code Consultant Mumbai | EXIMINQ",
-    description: "Stuck with ICEGATE registration? Handle Simplified Registration, DSC Mapping, and AD Code Registration for Mumbai exporters. Fix Java errors instantly."
+    title: "ICEGATE Registration Process, Fees & Documents (2026 Guide) | Eximinq",
+    description: "Learn how to complete ICEGATE registration online. Get the step-by-step portal process, exact document checklist, and professional fees for fast customs clearance."
   },
   "/services/ad-code-registration": {
     title: "AD Code Registration at Customs & ICEGATE Mumbai | EXIMINQ",
