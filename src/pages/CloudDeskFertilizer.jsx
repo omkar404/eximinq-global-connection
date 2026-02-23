@@ -9,6 +9,8 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  Building,
+  ShieldUser, 
   Phone,
   Mail,
   MapPin,
@@ -354,6 +356,206 @@ const CloudDeskFertilizer = () => {
     </section>
 
     <Fees/>
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Fertiliser-Import-License?</h2>
+                    <p className="text-slate-500">
+                        Fertiliser import is a 'Chemical Audit' by the government. CloudDesk ensures your technical specs match the Indian National Standards.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. FCO Specification Mapping</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          India only allows fertilisers that meet the exact specifications listed in the<strong> Fertiliser Control Order (FCO).</strong>
+                          <strong>CloudDesk </strong>performs a Pre-Import Lab Analysis of your product's <strong>chemical composition (Nitrogen, Phosphorus, Potassium levels) </strong>to ensure it doesn't get rejected and destroyed at the port for being<strong> "Non-Standard."</strong>                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. State Trading Enterprise (STE) Liaison</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Major fertilisers like Urea can only be imported through<strong> STEs (like MMTC, STC, or IPL).</strong> For 
+                          <strong>"Non-Urea" fertilisers (DAP, MOP, NPK), CloudDesk </strong>handles the Industrial Entrepreneur Memorandum<strong> (IEM) </strong>and the necessary registrations with the DoF to ensure you are recognized as an authorized importer.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Mandatory Port Sampling & Lab Testing</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Every shipment of fertiliser is sampled by a<strong> Fertiliser Inspector </strong>at the port. 
+                          <strong>CloudDesk’s </strong>on-ground team coordinates with the <strong>Central Fertiliser Quality </strong>Control and Training Institute (CFQC&TI) labs to fast-track testing, preventing heavy demurrage while waiting for "Pass" certificates.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Specialized "Bio & Organic" Fast-Track</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026, there is a massive push for<strong> Organic and Bio-fertilisers.</strong> 
+                          <strong>CloudDesk </strong>manages the specialized registration for<strong>Bio-stimulants and Organic Manures, </strong>which require different<strong> safety data sheets (SDS) </strong>and toxicological reports compared to chemical fertilisers.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can any company import fertilisers into India?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. You must be registered under the Fertiliser Control Order (FCO). You need a Certificate of Manufacture/Registration from the State Agriculture Department or the Central Government, depending on the type of fertiliser.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What is the difference between "Restricted" and "Free" fertiliser imports?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               "• Urea: Restricted. Can only be imported through designated State Trading Enterprises.
+                • Complex Fertilisers (DAP/MOP/NPK): Generally ""Free"" but subject to strict FCO specifications and mandatory registration with the Department of Fertilisers."
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Do I need a license for "Growth Regulators" or "Bio-stimulants"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. As per the 2021 amendment to the FCO, all bio-stimulants must be registered. You cannot import them as "Plant Growth Promoters" anymore without a valid FCO registration number.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               What happens if the fertiliser fails the lab test at the port?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               It is declared "Non-Standard." You will be forced to either re-export the entire cargo at your own cost or it will be seized and destroyed. CloudDesk’s Technical Verification service is designed specifically to prevent this.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Are there restrictions on the heavy metal content?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. The FCO has strict limits on Lead (Pb), Cadmium (Cd), and Arsenic (As). If your fertiliser exceeds these parts-per-million (PPM) limits, it is banned.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there a Customs Duty on fertilisers?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Most fertilisers attract a 5% Basic Customs Duty (BCD) and 5% GST. However, rates can vary for specialized organic fertilisers.
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can an importer claim the government subsidy?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Generally, subsidies are paid to manufacturers/importers who are registered under the Nutrient Based Subsidy (NBS) scheme. To claim this, you must have your own storage godowns and a point-of-sale (POS) tracking system. CloudDesk helps you set up the iFMS (Integrated Fertiliser Management System) for subsidy tracking.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What documents are needed for Customs clearance?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                (1) FCO Registration Certificate, (2) Analysis Report from the supplier, (3) Bill of Lading, (4) Commercial Invoice, and (5) Pre-shipment Inspection Certificate (for certain types).
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

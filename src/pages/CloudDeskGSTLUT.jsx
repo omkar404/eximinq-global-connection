@@ -7,6 +7,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,   
   Phone,
   Mail,
   MapPin,
@@ -314,55 +317,237 @@ const CloudDeskGSTLUT = () => {
 
       <Fees />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4">
-            {/* FAQ 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is LUT valid for a lifetime?
-                <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                No. The LUT is valid only for{" "}
-                <strong>one Financial Year</strong>
-                (1st April to 31st March). It must be renewed at the start of
-                every new year.
-              </p>
-            </details>
-
-            {/* FAQ 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What is the difference between LUT and Bond?
-                <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                An <em>LUT</em> is a simple undertaking used by eligible
-                exporters. A <em>Bond</em> with a Bank Guarantee is required
-                only when the exporter is not eligible for LUT or has been
-                prosecuted for tax evasion above ₹ 2.5 Crores.
-              </p>
-            </details>
-
-            {/* FAQ 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is LUT required for Service Exports?
-                <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes. Service exporters (IT, Consultancy, BPO, SaaS, etc.) must
-                file LUT to issue export invoices without charging IGST.
-              </p>
-            </details>
-          </div>
+{/* --- WHY CLOUDDESK SECTION (GST LUT) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for GST LUT Filing?</h2>
+      <p className="text-slate-500">
+        An LUT is a promise to the President of India. If you break it, the interest penalties are brutal.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
         </div>
-      </section>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Zero-Tax Invoicing</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The LUT converts your exports into <strong>"Zero-Rated Supplies."</strong> This means you don't charge a single rupee of GST to your foreign client, making your quotes <strong>18% more competitive instantly</strong>. CloudDesk ensures your LUT is filed before your first April shipment to avoid <strong>"Tax-Traps."</strong>
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Working Capital Protection</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Without an LUT, you pay IGST from your pocket and wait <strong>60–90 days for a refund</strong>. For a ₹1 Crore export, that's <strong>₹18 Lakhs blocked</strong>. CloudDesk's <strong>Same-Day Filing</strong> keeps that cash in your bank account, not the government's.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Witness & Signatory Compliance</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The GST portal requires details of <strong>two independent witnesses</strong>. We ensure these details are legally sound and that the <strong>Authorized Signatory</strong> (Director/Partner/Proprietor) signs via <strong>DSC or EVC</strong> without technical glitches.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. The "12-Month Rule" Monitoring</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Filing the LUT is step one. Step two is <strong>Realizing the Payment</strong>. If you don't receive foreign exchange within <strong>1 year</strong>, you must pay back the IGST with <strong>18% interest</strong>. CloudDesk's <strong>EDPMS-GST Link</strong> alerts you 90 days before this deadline.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (GST LUT) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is LUT valid for a lifetime?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. The LUT is valid only for <strong>one Financial Year (1st April to 31st March)</strong>. It must be renewed at the start of every new year.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the difference between LUT and Bond?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          An <strong>LUT</strong> is a simple undertaking used by eligible exporters. A <strong>Bond with a Bank Guarantee</strong> is required only when the exporter is not eligible for LUT or has been prosecuted for tax evasion above <strong>₹2.5 Crores</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is LUT required for Service Exports?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. <strong>Service exporters</strong> (IT, Consultancy, BPO, SaaS, etc.) must file LUT to issue export invoices <strong>without charging IGST</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the validity of a GST LUT?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          An LUT is valid for <strong>one financial year only (April 1 to March 31)</strong>. You must file a <strong>fresh renewal for FY 2026-27</strong> immediately after the current year ends.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Who is eligible to file an LUT?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Any registered GST taxpayer who has <strong>not been prosecuted for tax evasion exceeding ₹2.5 Crore</strong>. If you are under investigation or have a history of major fraud, you must furnish a <strong>Bond (on Stamp Paper)</strong> instead of an LUT.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I file an LUT mid-year?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. But it only applies to exports made <strong>after the filing date</strong>. You cannot apply it retroactively to shipments already dispatched.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need to upload any documents on the GST portal?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the process is mostly <strong>self-declaration</strong>. You don't need to upload the IEC or GST cert, but you must have the <strong>Previous Year's LUT ARN</strong> handy if you are renewing.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can a Service Exporter (SaaS/Freelancer) file an LUT?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Absolutely. Whether you export <strong>software, consulting, or car parts</strong>, the LUT route is the standard way to avoid IGST.
+        </p>
+      </details>
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if I forget to mention the LUT ARN on my export invoice?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Customs may reject the shipping bill, or the GST department may treat it as a <strong>"Taxable Supply,"</strong> demanding IGST. CloudDesk provides a <strong>Standard Invoice Template</strong> that includes the mandatory <strong>"Export under LUT"</strong> declaration.
+        </p>
+      </details>
+
+      {/* FAQ 10 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Export Timeline" I agree to in the LUT?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You undertake to:<br />
+          1. Export the goods within <strong>3 months of the invoice date</strong>.<br />
+          2. Realize the payment in foreign currency within <strong>1 year</strong> (or as per RBI rules).
+        </p>
+      </details>
+
+      {/* FAQ 11 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          If I fail to export within 3 months, what happens?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must pay the applicable <strong>IGST plus 18% interest</strong> within <strong>15 days</strong> of the expiry of the 3-month period. If you don't, your <strong>LUT facility can be withdrawn</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

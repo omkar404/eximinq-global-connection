@@ -4,14 +4,18 @@ import Navbar from "../components/CloudDeskGSTFiling/Navbar";
 import Hero from "../components/CloudDeskGSTFiling/Hero";
 import Fees from "../components/CloudDeskGSTFiling/Fees";
 import {
-  Check,
-  ChevronDown,
-  Linkedin,
-  Twitter,
-  Facebook,
-  Phone,
-  Mail,
-  MapPin,
+Check,
+ChevronDown,
+Linkedin,
+Twitter,
+Facebook,
+AlertTriangle,
+Building,
+ShieldUser, 
+CheckCircle, 
+Phone,
+Mail,
+MapPin,
 FileText, 
 Calculator, 
 RefreshCw, 
@@ -213,55 +217,238 @@ const CloudDeskGSTFiling = () => {
 
 <Fees/>
 
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-          Frequently Asked Questions
-        </h2>
 
-        <div className="space-y-4">
-          {/* FAQ 1 */}
-          <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-            <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              What is the due date for GSTR-1 for exporters?
-              <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" />
-            </summary>
-            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-              For monthly filers, the due date is the{" "}
-              <strong>11th</strong> of the following month. We strongly recommend
-              filing by this date because the export data is pushed to ICEGATE
-              only after GSTR-1 is filed.
-            </p>
-          </details>
-
-          {/* FAQ 2 */}
-          <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-            <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              Should I select &quot;Export with Payment&quot; or &quot;Without
-              Payment&quot;?
-              <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" />
-            </summary>
-            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-              If you paid IGST on the invoice to claim a refund later, select
-              &quot;Export with Payment of Tax&quot;. If you are exporting under
-              LUT (Bond), select &quot;Export Without Payment of Tax&quot;.
-            </p>
-          </details>
-
-          {/* FAQ 3 */}
-          <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-            <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              Is GSTR-9 (Annual Return) mandatory?
-              <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" />
-            </summary>
-            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-              Yes, for businesses with a turnover above ₹ 2 Crores. It
-              consolidates all monthly returns filed during the financial year.
-            </p>
-          </details>
+{/* --- WHY CLOUDDESK SECTION (GST RETURNS) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for GST Returns?</h2>
+      <p className="text-slate-500">
+        Generic CAs often miss the "Export-Specific" fields that cause port-level blocks. We bridge the gap between Tax and Customs.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. The "Shipping Bill" Validation</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In 2026, GSTR-1 requires the <strong>Shipping Bill Number, Port Code, and Date</strong> for every export invoice. CloudDesk's <strong>Auto-Reconciler</strong> cross-checks your ICEGATE data before you hit "File," ensuring that the data in your tax return matches your port documents <strong>100%</strong>.
+          </p>
         </div>
       </div>
-    </section>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. ITC (Input Tax Credit) Optimization</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            For exporters, ITC isn't just a set-off; it's a <strong>Refund Asset</strong>. We ensure your purchase invoices are correctly tagged as <strong>"Eligible for Refund"</strong> and that your suppliers have filed their GSTR-1. We manage the <strong>Supplier Follow-up</strong> so your cash isn't stuck because of someone else's mistake.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Zero-Rated vs. Exempt Handling</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Many exporters confuse <strong>"Exempt" goods</strong> with <strong>"Zero-Rated" exports</strong>. If you mark it as exempt, you lose your ITC. CloudDesk ensures all exports are filed as <strong>Zero-Rated</strong> (either with or without payment of tax), protecting your right to claim every rupee of GST paid on raw materials and services.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. SEZ & EOU Specialized Filings</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Supplying to an SEZ unit is a <strong>"Deemed Export."</strong> This requires a specific <strong>DTA-to-SEZ filing</strong> and an <strong>End-Use Certificate</strong>. CloudDesk manages the complex documentation required to ensure these domestic sales are treated as <strong>tax-free exports</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (GST RETURNS) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the due date for GSTR-1 for exporters?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          For monthly filers, the due date is the <strong>11th of the following month</strong>. We strongly recommend filing by this date because the export data is pushed to ICEGATE <strong>only after GSTR-1 is filed</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Should I select "Export with Payment" or "Without Payment"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If you paid IGST on the invoice to claim a refund later, select <strong>"Export with Payment of Tax"</strong>. If you are exporting under LUT (Bond), select <strong>"Export Without Payment of Tax"</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is GSTR-9 (Annual Return) mandatory?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, for businesses with a turnover above <strong>₹2 Crores</strong>. It consolidates all monthly returns filed during the financial year.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if I forget to mention the Port Code in GSTR-1?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the GST portal will allow you to file, but <strong>Customs will never trigger your refund</strong>. You will have to file an <strong>Amendment (Table 9A)</strong> in the next month, delaying your cash flow by <strong>30–60 days</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I file GSTR-1 after the deadline?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, but with a <strong>Late Fee of ₹50 per day</strong>. More importantly, late filing delays the <strong>"Invoice Matching"</strong> for your foreign buyer (if they are a GST-registered Indian subsidiary), straining your business relationship.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How do I report exports made via Courier (e-commerce)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must use the <strong>CSB-V (Courier Shipping Bill)</strong> details. Even for small value exports, the <strong>HSN code and the courier tracking number</strong> must be mapped to the invoice in GSTR-1.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Rule 96" Refund?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          This is the <strong>Automatic IGST Refund</strong>. If you pay IGST on export and your GSTR-1 matches your Shipping Bill, Customs will <strong>credit the refund to your bank account automatically</strong> without any separate application.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "RFD-01" Refund?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          This is for <strong>Unutilized ITC</strong> (for those exporting under LUT). This is <strong>NOT automatic</strong>. You must file a separate application on the GST portal. CloudDesk specializes in RFD-01 filing, achieving a <strong>95% "No-Deficiency" rate</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Why is my refund stuck with "Error SB006"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          SB006 means a <strong>"Gateway EGM Error."</strong> Your goods have left the port, but the carrier (airline/shipping line) hasn't filed the <strong>Export General Manifest</strong> correctly. CloudDesk liaisons with the shipping lines to fix this.
+        </p>
+      </details>
+
+      {/* FAQ 10 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is GSTR-9 (Annual Return) mandatory for exporters?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, it is mandatory if your <strong>aggregate turnover exceeds ₹2 Crore</strong>. For exporters, this is a <strong>"Reconciliation Statement"</strong> where we prove that all exported goods actually left the country.
+        </p>
+      </details>
+
+      {/* FAQ 11 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "GST Audit" threshold in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Self-certification of <strong>GSTR-9C (Reconciliation Statement)</strong> is required for turnover above <strong>₹5 Crore</strong>. CloudDesk provides the <strong>Certification Assistance</strong> to ensure your export data stands up to department scrutiny.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

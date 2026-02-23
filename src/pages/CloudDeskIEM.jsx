@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,  
   Phone,
   Mail,
   MapPin,
@@ -228,6 +232,195 @@ const CloudDeskIEM = () => {
         </div>
       </div>
     </section>
+
+
+{/* --- WHY CLOUDDESK SECTION (IEM) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for IEM Registration?</h2>
+      <p className="text-slate-500">
+        IEM is a 'Declaration' that becomes a 'Permission.' If your NIC codes are wrong, your future expansions will be blocked.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Strategic NIC Code Mapping</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Your IEM is linked to specific <strong>NIC (National Industrial Classification) Codes</strong>. CloudDesk ensures your codes are perfectly aligned with your actual production and the <strong>Foreign Direct Investment (FDI) Policy</strong>. A mismatch here can block <strong>foreign funding or export incentives</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Two-Phase Compliance (Part A & B)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We manage the full lifecycle. <strong>Part A</strong> is filed when you intend to set up the unit (the "Planning" phase). <strong>Part B</strong> is filed once you commence commercial production (the "Execution" phase). CloudDesk ensures Part B is filed within the mandatory <strong>6-month window</strong> of starting production.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Industrial License (IL) Filter</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Some industries (defense, hazardous chemicals, tobacco) still require a <strong>mandatory Industrial License</strong>. CloudDesk performs a <strong>Regulatory Filter</strong> to see if you can use the simple IEM route or if you must go through the rigorous <strong>IL Licensing process</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. G2B Portal Mastery</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The <strong>DPIIT's G2B (Government to Business) portal</strong> is the only way to file in 2026. We handle the digital signatures, document uploads (MoA/AoA, Land docs), and the tracking of the <strong>Acknowledgment Number</strong> — which is your de-facto license number.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (IEM) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Who needs to file an IEM?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Any industrial undertaking that: (1) is <strong>NOT an MSME</strong> (i.e., investment in plant/machinery &gt; ₹50 Crore), (2) is in the <strong>"Non-Licensed" sector</strong> (most manufacturing), and (3) is not covered under the MSMED Act.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can an MSME file an IEM?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. MSMEs must register under <strong>Udyam</strong>. If an MSME grows and crosses the <strong>₹50Cr/₹250Cr limit</strong>, they must transition from Udyam to IEM.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is IEM required for Service-based industries?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. IEM is strictly for <strong>Industrial Undertakings (Manufacturing/Processing)</strong>. Services usually fall under Shop &amp; Establishment or Udyam (for service MSMEs).
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          When should I file IEM Part A?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          As soon as you have <strong>"Taken Effective Steps"</strong> to set up the unit — this means you have acquired land, placed orders for machinery, or secured financing.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the deadline for filing Part B?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must file Part B (Commencement of Production) within <strong>6 months of starting commercial operations</strong>. Failure to do so can lead to the <strong>cancellation of your Part A acknowledgment</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What if my investment amount changes from Part A to Part B?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          This is common. Part B allows you to report the <strong>actual final investment and employment figures</strong>. CloudDesk manages the <strong>"Variation Analysis"</strong> to ensure the deviation is within acceptable limits.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is IEM a "Certificate of Origin"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. IEM is an <strong>industrial license</strong>. However, a copy of your IEM is often required by the DGFT when you apply for a <strong>Certificate of Origin or Export Incentives</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the fees for IEM registration in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The government fee is currently <strong>₹1,000 for Part A</strong>. There is <strong>no fee for Part B</strong>, but professional management is key to ensuring the data matches your GST and Income Tax filings.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>    
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

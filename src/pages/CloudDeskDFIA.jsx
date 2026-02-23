@@ -9,10 +9,14 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
-    HandCoins,
+  HandCoins,
   ShieldCheck,
   Boxes,
   AlertCircle,
@@ -231,6 +235,209 @@ const CloudDeskDFIA = () => {
     </section>
 
 <Fees/>
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Dfia-License?</h2>
+                    <p className="text-slate-500">
+                          A DFIA license is only as valuable as its 'Transferability.' CloudDesk ensures your license is market-ready and high-value.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. High-Precision SION Mapping</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          DFIA is only available for products listed under<strong> SION (Standard Input-Output Norms).</strong> You cannot use Ad-hoc norms here. 
+                          <strong>CloudDesk </strong>performs a SION-Match Audit to ensure your export product fits perfectly into a predefined<strong> norm, guaranteeing </strong>the license will be issued without technical disputes.
+                         </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. The "20% Value Addition" Shield</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          While Advance Authorisation requires 15% value addition,<strong> DFIA</strong> mandates a minimum of 20%. 
+                          <strong>CloudDesk’s Financial </strong>Modeller calculates your input-output ratios before you export, ensuring you don't fall short by<strong> 1% and disqualify</strong> your entire claim for transferability.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. End-to-End Redemption & Transfer</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The magic happens after the export.<strong> We handle the Redemption (EODC) at DGFT. </strong>
+                          Once the <strong>"Transferable Endorsement" </strong>is received, we help you navigate the secondary market to find the best premium, 
+                          <strong>turning your </strong>duty-free entitlement into immediate liquidity.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Post-Export IGST/BCD Optimization</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026, DFIA only exempts<strong> Basic Customs Duty (BCD).</strong> 
+                          <strong>CloudDesk </strong>advises on how to handle the<strong> IGST portion </strong>(via ITC or Drawback) so you don't lose your tax benefits while trying to trade the license.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the main difference between DFIA and Advance Authorisation (AA)?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• Advance Authorisation: Pre-import (mostly), non-transferable, subject to ""Actual User"" condition.
+                 • DFIA: Post-export (mostly), freely transferable (you can sell it), no ""Actual User"" condition after transfer."
+
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Which sectors benefit most from DFIA?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is highly popular in sectors with stable SION norms like Chemicals, Textiles, Leather, and Food products (like biscuits or processed foods).
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I apply for DFIA before exporting?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               Yes, you apply for the "Authorisation" before export. However, the transferability is only granted after you have completed the exports and the bank has realized the foreign exchange.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Value Addition" requirement for DFIA?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                You must achieve at least 20% Value Addition. For example, if you import raw materials worth ₹100, you must export the finished product for at least ₹120.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Are there any items excluded from DFIA?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. Items that don't have a SION norm or items that fall under specific restricted categories (like certain high-risk chemicals) cannot be imported under DFIA.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does DFIA cover IGST and GST?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. As of 2026, DFIA only provides exemption from Basic Customs Duty (BCD). IGST must be paid at the time of import (though it can be claimed as Input Tax Credit).
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+              How do I "Sell" my DFIA license?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Once the DGFT makes the license "Transferable," it becomes a negotiable instrument. You can sell it to another importer through a simple letter of transfer. CloudDesk’s License Exchange network connects you with verified buyers.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Market Premium" for DFIA?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                The premium varies based on the demand for the raw materials listed in your license. Typically, you can sell a license for a percentage of the duty-saved value. CloudDesk tracks daily market rates to get you the best deal.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -8,6 +8,10 @@ import {
   Twitter,
   Facebook,
   Phone,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Mail,
   MapPin,
   Check,
@@ -353,6 +357,197 @@ const CloudDeskWPCETA = () => {
       </section>
 
       <Fees />
+
+
+{/* --- WHY CLOUDDESK SECTION (WPC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for WPC Licensing?</h2>
+      <p className="text-slate-500">
+        WPC compliance isn't just about the certificate; it's about ensuring your device doesn't interfere with India's defense or telecom networks.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. ETA Self-Declaration (ETA-SD) Mastery</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            For standard consumer electronics (laptops, phones, wearables), the 2026 process allows Self-Declaration. CloudDesk manages the <strong>Saral Sanchar filing</strong>, ensuring your RF Test Report matches the <strong>"De-licensed" frequency bands</strong> (like 2.4 GHz or 5 GHz) exactly. One wrong decimal in your frequency range leads to an immediate <strong>"Show Cause Notice."</strong>
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. NABL / ILAC Test Report Validation</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            WPC only accepts reports from <strong>NABL-accredited (Indian)</strong> or <strong>ILAC-recognized (International)</strong> labs. CloudDesk audits your technical files to ensure the test report covers: <strong>Occupied Bandwidth, Peak Power Output,</strong> and <strong>Signal Modulation</strong> as per Indian Gazette notifications.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. The "Import License" Double-Check</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            A common 2026 mistake: Thinking ETA is enough. For commercial imports, you often need an <strong>Import License in addition to the ETA</strong>. CloudDesk manages this two-step process — securing the ETA first, then using it to get the <strong>Customs-clearance Import License</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Authorized Indian Representative (AIR)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Foreign manufacturers cannot apply directly on the Saral Sanchar portal. As your <strong>AIR</strong>, CloudDesk takes <strong>legal responsibility</strong> for your device's RF compliance in India, providing the necessary <strong>Power of Attorney</strong> and local representation for WPC audits.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (WPC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does every Bluetooth device need WPC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Any device using <strong>Bluetooth, Wi-Fi, RFID, NFC, or Zigbee</strong> must have an ETA. In 2026, even "Passive" RFID tags in high volumes are being scrutinized at major ports.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the difference between ETA and a WPC Import License?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>ETA (Equipment Type Approval):</strong> Certifies the product design is safe for Indian frequencies.<br />
+          • <strong>Import License:</strong> A permission to bring a specific quantity or model into the country. You usually need the ETA to apply for the Import License.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Which products are under the "Self-Declaration" (ETA-SD) route?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Consumer electronics like <strong>Mobile phones, Laptops, Tablets, Smartwatches,</strong> and <strong>Wireless Peripherals</strong> (mouse/keyboard). Items like <strong>Drones, Radars, and Jammers</strong> are strictly under the "Scrutiny" route (manual review).
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I use my FCC or CE test reports for WPC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, if they are from an <strong>ILAC-accredited lab</strong> and the testing parameters match the Indian de-licensed frequency bands. CloudDesk provides a <strong>Report Gap-Analysis</strong> to see if your global reports are sufficient or if fresh testing is needed.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does the WPC ETA process take?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>Self-Declaration (ETA-SD):</strong> 1–3 working days.<br />
+          • <strong>Scrutiny-Based ETA:</strong> 4–8 weeks (requires manual officer review).
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the validity of a WPC ETA?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is valid for the <strong>lifetime of that specific product model</strong>. If you change the wireless module or the frequency parameters in a newer version, you must apply for a <strong>fresh ETA</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can Customs seize my goods for a WPC error?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Under the <strong>Indian Telegraph Act</strong>, Customs can seize "Unauthorized Wireless Apparatus." In 2026, fines can reach up to <strong>₹50 Lakh</strong> for large commercial shipments lacking ETA.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Red Channel" flag for WPC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If your HSN code identifies the product as "Wireless" but no ETA number is mentioned in the Bill of Entry, the <strong>Risk Management System (RMS)</strong> will divert the cargo for <strong>100% inspection</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

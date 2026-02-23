@@ -7,6 +7,8 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  Building,
+  ShieldUser,  
   Phone,
   Mail,
   MapPin,
@@ -285,63 +287,241 @@ const CloudDeskLegalMetrology = () => {
 
       <Fees />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4">
-            {/* FAQ 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Can I stick labels after importing?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes, if the goods arrive without proper labels, you can apply
-                for permission to carry out labeling in a Customs Bonded
-                Warehouse. However, goods cannot be cleared for home consumption
-                without compliance.
-              </p>
-            </details>
-
-            {/* FAQ 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is LMPC required for industrial raw materials?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                No. Goods meant for industrial or institutional consumers (who
-                buy directly for use and not for resale) are exempt from LMPC
-                rules, provided the package is marked "Not for Retail Sale".
-              </p>
-            </details>
-
-            {/* FAQ 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                How long does it take to get the certificate?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                It typically takes 7 to 20 working days depending on the state
-                department's workload and query response time.
-              </p>
-            </details>
-          </div>
+{/* --- WHY CLOUDDESK SECTION (LMPC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for LMPC Registration?</h2>
+      <p className="text-slate-500">
+        A missing MRP or a font size error can lead to a 100% seizure of your shipment. CloudDesk ensures your packaging is "Customs-Proof."
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
         </div>
-      </section>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Label Artwork Audit (Rule 6 Compliance)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The most common reason for detention is non-compliant labels. CloudDesk's <strong>Visual Compliance Engine</strong> reviews your digital artwork to ensure the <strong>"Seven Mandatory Declarations"</strong> are in the prescribed font size (<strong>minimum 1mm to 6mm</strong> based on area) and placed in the <strong>"Principal Display Panel."</strong>
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Central vs. State Jurisdictional Routing</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If you import and sell in more than one state, you need a <strong>Director (Central) Registration</strong>. If you are a local manufacturer/packer for one state, you need a <strong>Controller (State) License</strong>. CloudDesk routes your application to the correct authority via the <strong>LM Portal (version 2.0)</strong>, preventing jurisdictional rejection.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. The "Pre-Arrival" Registration Strategy</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Under the 2026 rules, you must apply for LMPC registration within <strong>90 days of starting imports</strong>, but Customs will not clear your goods without it. CloudDesk handles your registration <strong>before your cargo hits the port</strong>, avoiding high demurrage and detention charges.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Model Approval & Verification (For Weights/Measures)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If your product is a weighing or measuring instrument (e.g., electronic scales, thermometers), you need <strong>Model Approval from the Ministry</strong>. CloudDesk manages the sample submission to the <strong>RRSL (Regional Reference Standards Laboratory)</strong> and the subsequent <strong>"Verification" stamping</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (LMPC) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I stick labels after importing?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, if the goods arrive without proper labels, you can apply for permission to carry out labeling in a <strong>Customs Bonded Warehouse</strong>. However, goods cannot be cleared for home consumption without compliance.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is LMPC required for industrial raw materials?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. Goods meant for <strong>industrial or institutional consumers</strong> (who buy directly for use and not for resale) are exempt from LMPC rules, provided the package is marked <strong>"Not for Retail Sale"</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does it take to get the certificate?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It typically takes <strong>7 to 20 working days</strong> depending on the state department's workload and query response time.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is a "Pre-Packaged Commodity"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Any commodity placed in a package of whatever nature, <strong>without the purchaser being present</strong>, such that the quantity has a predetermined value. If you sell it in a box, tin, or bottle with a weight/volume/number on it, you need LMPC.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Who is exempt from LMPC registration?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, exemptions are narrow: (1) Packages over <strong>25kg or 25L</strong> (except cement/fertilizer), (2) <strong>Institutional/Industrial consumers</strong> who buy directly for their own use (not for retail), and (3) Packages weighing <strong>10g/10ml or less</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I stick a "Correction Sticker" at the port?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Only for specific fields. You can fix the <strong>Importer's address, MRP,</strong> and the <strong>Veg/Non-Veg logo</strong> in a Customs Bonded Warehouse. However, you cannot "sticker over" an incorrect <strong>Net Quantity or Date of Import/Manufacture</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What MUST be on every retail label in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          1. <strong>Name and Address</strong> of the Manufacturer/Packer/Importer.<br />
+          2. <strong>Common/Generic Name</strong> of the commodity.<br />
+          3. <strong>Net Quantity</strong> (Standard units only: kg, l, m, or number).<br />
+          4. <strong>Month and Year</strong> of Manufacture/Import.<br />
+          5. <strong>Maximum Retail Price (MRP)</strong> (Inclusive of all taxes).<br />
+          6. <strong>Country of Origin</strong> (Mandatory for imports).<br />
+          7. <strong>Consumer Care Details</strong> (Name, address, phone, and email).
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Are "MRP Stickers" allowed?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. In 2026, the MRP must be <strong>printed on the package</strong>. Stickers are generally considered a violation and are only allowed in very specific, pre-authorized scenarios (like price changes due to GST revisions).
+        </p>
+      </details>
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the government fees for LMPC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The registration fee is generally <strong>₹500</strong>, but varies slightly by state. However, the true cost of non-compliance is the penalty — starting at <strong>₹10,000 for the first offense</strong> and scaling to <strong>₹50,000 or imprisonment</strong> for repeat violations.
+        </p>
+      </details>
+
+      {/* FAQ 10 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long is the certificate valid?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Usually between <strong>1 to 5 years</strong>. CloudDesk recommends the <strong>5-year option</strong> to minimize the administrative burden of frequent renewals.
+        </p>
+      </details>
+
+      {/* FAQ 11 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is "Section 36" of the Legal Metrology Act?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          This is the most "feared" section by importers. It empowers officials to <strong>seize non-standard packages</strong> and impose <strong>heavy fines for misleading declarations</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -8,6 +8,11 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,
+  ChevronDown,
   Phone,
   Mail,
   MapPin,
@@ -326,6 +331,206 @@ const CloudDeskIES = () => {
       </section>
 
       <Fees />
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Interest-Equalisation-scheme?</h2>
+                    <p className="text-slate-500">
+                          Banks won't give you the discount unless you give them the UIN. CloudDesk ensures your finance is 'Subvention-Ready' before you sign the loan.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. The "UIN-First" Compliance</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026, you cannot walk into a bank and ask for a subvention. You must first file an<strong> "Intent to Avail" </strong>on the DGFT portal to generate a<strong> Unique Identification Number (UIN).</strong> 
+                          <strong>CloudDesk </strong>handles this digital filing, ensuring your HSN codes match the<strong> "Positive List" (which covers ~75% of tariff lines).</strong>
+                         </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. The ₹50 Lakh Cap Sentinel</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The subvention is now capped at<strong> ₹50 Lakh per IEC per financial year.</strong> 
+                          <strong>CloudDesk’s Finance </strong>Tracker monitors your aggregate claims across multiple banks. 
+                          We alert you when you are nearing the cap so you don't over-claim, which now triggers a mandatory<strong> "Voluntary Surrender" </strong>and potential penalties.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. HSN Positive List Validation</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Not all products qualify anymore. The 2026 scheme excludes<strong> Waste/Scrap, PLI-covered products, and Restricted items.</strong> 
+                          We perform a <strong>Product-Subvention Audit </strong>to confirm your HSN is on the current<strong> "Positive List" </strong>before you commit to an export order.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Bank Liaison & Auditor Certification</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Banks require a specific External Auditor Certification to claim the reimbursement from<strong> RBI. </strong>
+                          <strong>CloudDesk </strong>coordinates with your auditors and the bank’s trade finance desk to ensure the<strong> "Interest-Relief" </strong>is passed on upfront—so you pay less interest from Day 1, rather than waiting for a refund.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the current interest subvention rate in 2026?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               The base rate is 2.75% per annum for all eligible MSME (Micro, Small, and Medium) manufacturer exporters.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Are Merchant Exporters still eligible?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. As of the 2026 revamp, the scheme is exclusively for MSME Manufacturers. Non-MSME and Merchant exporters have been moved out of the fresh claim cycle to focus resources on small-scale manufacturing.
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there a limit on how much I can save?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. The fiscal benefit is capped at ₹50 Lakh per exporting firm per financial year.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Do I need a new UIN for every loan?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                You need a UIN to be shared with your bank. The UIN is generally valid for one year. If you deal with multiple banks, you must ensure the total subvention across all banks stays under the ₹50 Lakh cap.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Positive List"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  The government now maintains a list of HSN 6-digit codes that are eligible for the 2.75% subvention. If your product is not on this list (e.g., certain steel or chemical lines), you cannot claim the benefit.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What documents are needed for the DGFT UIN?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  You need an Active IEC, Udyam Registration, and a valid Digital Signature (DSC). CloudDesk handles the portal navigation and document attachment (Export Orders, etc.).
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I claim Interest Subvention if I am also in a PLI Scheme?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. Products covered under any Production Linked Incentive (PLI) scheme are specifically excluded from interest subvention in 2026 to prevent "Incentive Overlap."
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What happens if I over-claim?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  If you exceed the ₹50 Lakh cap, you must voluntarily surrender the excess within the same financial year. Failure to do so renders you liable for the amount plus interest/penalties from the DGFT.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

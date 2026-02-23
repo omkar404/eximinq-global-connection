@@ -4,14 +4,18 @@ import Navbar from "../components/CloudDeskEPCG/Navbar";
 import Hero from "../components/CloudDeskEPCG/Hero";
 import Fees from "../components/CloudDeskEPCG/Fees";
 import {
-  Check,
-  ChevronDown,
-  Linkedin,
-  Twitter,
-  Facebook,
-  Phone,
-  Mail,
-  MapPin,
+Check,
+ChevronDown,
+Linkedin,
+Twitter,
+Facebook,
+AlertTriangle,
+Building,
+ShieldUser, 
+CheckCircle, 
+Phone,
+Mail,
+MapPin,
 FileText, 
 Building2, 
 Download,
@@ -204,6 +208,205 @@ const CloudDeskEPCG = () => {
 
     <Fees/>
 
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Customs-License-Registration?</h2>
+                    <p className="text-slate-500">
+                          Digital doesn't mean easy it means precision. A single data mismatch between your Bank and ICEGATE will freeze your registration.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Bank-to-NeSL-to-ICEGATE Sync</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The e-BG flows from your bank to<strong> NeSL (National E-Governance Services Ltd) and then to ICEGATE.</strong> 
+                          <strong>CloudDesk </strong>coordinates this <strong>"Triple-Sync." </strong>If your bank hasn't pushed the data correctly or the<strong> SFMS message is stuck, </strong>we intervene at the nodal level to ensure the<strong> e-BG appears in your ICEGATE </strong>dashboard.
+                         </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Paperless e-Bond Execution</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          No more stamp papers. We manage the<strong> e-Bond (electronic bond) </strong>creation through the ICEGATE portal. 
+                          We ensure the bond category<strong> (e.g., AA, EPCG, or Warehouse) </strong>is selected correctly and digitally signed using your <strong>DSC (Digital Signature Certificate), </strong>making it legally binding in minutes, not days.
+
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. Real-Time "BG-Credit" Monitoring</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Under the new system, your e-BG works like a<strong> "Digital Wallet." </strong>As you clear shipments, your BG limit is blocked and then released. 
+                          <strong>CloudDesk’s </strong>BG-Sentinel monitors your available limit in real-time, alerting you to increase your e-BG value before your next shipment hits the port.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Error-Free Schema Mapping</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                         The most common reason for e-BG rejection is a mismatch in the<strong> "Beneficiary" or "Expiry Date" fields.</strong> 
+                         <strong>CloudDesk </strong>provides the Exact Schema to your bank's trade finance department, ensuring the e-BG they issue is 100% compatible with the ICEGATE XML format.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an e-BG?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is a digital version of a bank guarantee. In 2026, banks issue these via the NeSL platform. Once issued, it is automatically transmitted to the Customs system (ICEGATE), eliminating the need for physical submission at the port.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an e-Bond?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               An e-Bond is the electronic equivalent of the indemnity bond you used to sign on stamp paper. It is created and digitally signed on the ICEGATE website.
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Do I still need to visit the Customs House License Cell?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. For ports that are 100% digital, the entire process of e-Bond and e-BG registration is "Faceless." Your digital approval appears on your dashboard.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How do I link my e-BG to my Advance Authorisation license?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Once the e-BG is visible in your ICEGATE "Financial" module, you must perform the "License-BG Mapping" operation. CloudDesk handles this step, ensuring the specific DGFT license is legally tied to the correct e-BG.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can one e-BG be used for multiple licenses?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes. Unlike physical BGs, a single "Global e-BG" can be used for multiple licenses or schemes, provided the value is sufficient. This is a massive improvement in capital efficiency.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the "Acknowledgment Number" (IRN)?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  When your bank issues an e-BG, NeSL generates a Information Reference Number (IRN). You need this IRN to track the status of your guarantee on the ICEGATE portal.
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How much time does e-Bond/e-BG registration save?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  The old process took 3–7 days. The e-registration process takes less than 24 hours (often just a few hours) if the data sync is successful.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Are there any extra costs for e-BG?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    Banks may charge a small processing fee for e-BG issuance via NeSL, but you save significantly on Stamp Duty, Courier, and Professional Fees for physical port visits.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

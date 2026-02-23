@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -312,68 +316,194 @@ const CloudDeskEBRC = () => {
 
       <Fees />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4">
-            {/* FAQ 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is Fumigation mandatory for all wood packaging?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes, under ISPM-15 standards, all wooden pallets and crates must
-                be fumigated and marked with the IPPC logo at the country of
-                origin. If not, Indian PQ authorities will order fumigation at
-                the port (with penalty) or deportation.
-              </p>
-            </details>
-
-            {/* FAQ 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Can I bring my pet dog to India as cargo?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes, but it requires a DGFT Import License unless you are
-                transferring residence to India (in which case, up to 2 pets are
-                allowed as baggage with an AQCS NOC).
-              </p>
-            </details>
-
-            {/* FAQ 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What happens if pests are found during inspection?
-                <ChevronDown
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                  size={20}
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                If quarantine pests are found, the consignment may be subjected
-                to fumigation/treatment. If the pest is a critical quarantine
-                species not present in India, the shipment will be destroyed or
-                deported.
-              </p>
-            </details>
-          </div>
+{/* --- WHY CLOUDDESK SECTION (AQCS / PQMS) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for AQCS & PQMS </h2>
+      <p className="text-slate-500">
+        A single beetle in a timber shipment or a missing virus-test in a pet's health report will lead to immediate deportation of the cargo.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
         </div>
-      </section>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Pre-Arrival Document Audit</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We perform a <strong>"Biosecurity Scrub"</strong> of your documents. If your <strong>Phytosanitary Certificate</strong> lacks the "Fumigation Date" or your <strong>Animal Health Certificate</strong> misses a specific vaccination, we fix it at the source <strong>before the ship sails</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. SWIFT 2.0 Digital Mapping</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We ensure your <strong>PQMS/AQCS application is linked to your Bill of Entry (BOE)</strong>. In 2026, the NOC from these authorities flows <strong>directly to Customs</strong> — no more manual letter submissions.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Fumigation & Treatment Supervision</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If the PQ Officer orders "In-transit" or "At-port" fumigation (e.g., using <strong>Methyl Bromide</strong>), CloudDesk coordinates with <strong>DPQS-approved fumigation agencies</strong> to ensure the treatment is done safely and the certificate is uploaded instantly.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (AQCS / PQMS) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is Fumigation mandatory for all wood packaging?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, under <strong>ISPM-15 standards</strong>, all wooden pallets and crates must be fumigated and marked with the <strong>IPPC logo</strong> at the country of origin. If not, Indian PQ authorities will order fumigation at the port (with penalty) or deportation.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I bring my pet dog to India as cargo?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, but it requires a <strong>DGFT Import License</strong> unless you are transferring residence to India (in which case, up to 2 pets are allowed as baggage with an <strong>AQCS NOC</strong>).
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if pests are found during inspection?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If quarantine pests are found, the consignment may be subjected to <strong>fumigation/treatment</strong>. If the pest is a <strong>critical quarantine species not present in India</strong>, the shipment will be destroyed or deported.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does my wooden furniture import need PQMS?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Any timber or wood-based product (including pallets/crates used for packing) must be either <strong>Heat Treated (HT)</strong> or <strong>Fumigated with Methyl Bromide (MB)</strong> as per ISPM-15 standards.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is a "Post-Entry Quarantine" (PEQ)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          For high-risk items like <strong>live plants or seeds</strong>, the government may require you to grow them in a <strong>"PEQ Facility" (monitored greenhouse)</strong> for a specific period to ensure no dormant diseases emerge. CloudDesk helps set up and get approval for your PEQ site.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I import "Prohibited" plants for research?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, but you need a specialized <strong>Import Permit for Research/Scientific Purposes</strong> and clearance from the <strong>Directorate of Plant Protection</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I bring my dog/cat to India as a "Tourist"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, you can bring up to <strong>two pets as "Accompanied Baggage"</strong> provided you have stayed abroad for at least two years. You still need an <strong>AQCS ANOC</strong>. Commercial pet import (for sale) is strictly prohibited.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Which animal products are under the "Restricted" category?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Items like <strong>Raw Hides, Skins,</strong> and certain <strong>Dairy products</strong>. These require a <strong>Sanitary Import Permit (SIP)</strong> issued by the Ministry of Fisheries, Animal Husbandry, and Dairying.
+        </p>
+      </details>
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if AQCS rejects my shipment?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The shipment must be either <strong>re-exported or incinerated (destroyed)</strong> at the importer's cost. There is <strong>no "Repair/Rectification" allowed</strong> for failed animal health standards.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

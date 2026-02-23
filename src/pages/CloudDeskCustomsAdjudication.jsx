@@ -7,12 +7,19 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  FileSearch, 
+  Scale, 
+  Users, 
+  Shield,  
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
   FileText,
   Gavel,
-  Scale,
   Clock,
   Tag,
   Calculator,
@@ -200,58 +207,248 @@ const CloudDeskCustomsAdjudication = () => {
 
       <Fees />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
+{/* --- WHY CLOUDDESK FOR CUSTOMS ADJUDICATION --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">
+        Why CloudDesk for Customs Adjudication?
+      </h2>
+      <p className="text-slate-500">
+        Adjudication is won on facts and case laws — not emotional requests.
+        CloudDesk provides the legal shield for your cargo.
+      </p>
+    </div>
 
-          <div className="space-y-4">
-            {/* FAQ 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Can I attend the Personal Hearing myself?
-                <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180 w-5 h-5" />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes, you can. However, Customs Law is complex. Having a
-                professional consultant or lawyer who understands the nuances of
-                the Customs Act, Valuation Rules, and case precedents
-                significantly improves your chances of a favorable outcome.
-              </p>
-            </details>
+    <div className="grid md:grid-cols-2 gap-8">
 
-            {/* FAQ 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What happens if I ignore the SCN?
-                <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180 w-5 h-5" />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                If you fail to reply or appear for hearings (usually 3
-                opportunities are given), the officer will pass an{" "}
-                <strong>Ex-Parte Order</strong> based on available records,
-                likely confirming the demand for duty and imposing maximum
-                penalties.
-              </p>
-            </details>
-
-            {/* FAQ 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Can penalties be reduced?
-                <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180 w-5 h-5" />
-              </summary>
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes. Under Section 28 of the Customs Act, if you pay the duty
-                along with interest and a reduced penalty (15% or 25%) within 30
-                days of the SCN/Order, the proceedings can be concluded. We
-                advise on whether to opt for this or contest the case.
-              </p>
-            </details>
-          </div>
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <FileSearch size={24} />
         </div>
-      </section>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">
+            1. SCN Surgical Analysis
+          </h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The <strong>Show Cause Notice (SCN)</strong> is the department’s
+            charge sheet. CloudDesk performs a surgical breakdown of
+            allegations — whether it is <strong>misclassification</strong>,
+            <strong> undervaluation</strong>, or misuse of exemptions.
+            We identify the “weak links” in the department’s argument before
+            drafting your defense.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <Scale size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">
+            2. Strategic Reply Drafting
+          </h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We don’t just deny allegations — we draft a comprehensive
+            <strong> point-wise rebuttal</strong> backed by:
+            <br />• Supreme Court / CESTAT Judgments  
+            <br />• Technical literature for classification  
+            <br />• Valuation evidence (LME prices, NIDB data)  
+            <br />
+            ensuring your reply is legally fortified.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Users size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">
+            3. Personal Hearing (PH) Mastery
+          </h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We represent you before the Adjudicating Authority
+            (Assistant / Joint / Additional Commissioner).  
+            Your oral submissions are properly recorded in the
+            <strong> Record of Personal Hearing</strong> — the most
+            critical document if the matter proceeds to appeal.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <Shield size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">
+            4. Penalty & Fine Mitigation
+          </h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If violation is established, we fight to convert
+            <strong> Absolute Confiscation</strong> into a
+            <strong> Redemption Fine</strong>.  
+            We argue for minimum penalties under Sections 112 / 114,
+            citing <strong>No Mens Rea</strong> (no criminal intent) or
+            bona-fide procedural errors.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{/* --- CUSTOMS ADJUDICATION FAQ SECTION --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I attend the Personal Hearing myself?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, you can. However, Customs Law is complex. Having a professional consultant or lawyer who understands the nuances of the Customs Act, Valuation Rules, and case precedents significantly improves your chances of a favorable outcome.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens if I ignore the SCN?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If you fail to reply or appear for hearings (usually 3 opportunities are given), the officer will pass an Ex-Parte Order based on available records, likely confirming the demand for duty and imposing maximum penalties.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can penalties be reduced?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Under Section 28 of the Customs Act, if you pay the duty along with interest and a reduced penalty (15% or 25%) within 30 days of the SCN/Order, the proceedings can be concluded. We advise on whether to opt for this or contest the case.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is a Show Cause Notice (SCN)?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is a formal notice informing you of the grounds on which the department proposes to confiscate your goods or impose a penalty. You are typically given 30 days to respond.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+         What happens if I ignore an SCN?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The Adjudicator will pass an "Ex-Parte Order" (an order in your absence). This usually results in the highest possible penalties and absolute confiscation because your side of the story was never heard.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I ask for more time to reply?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. You can request an extension. Under Section 122A, you are generally allowed up to three adjournments if you can show sufficient cause.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is an Order-in-Original (O-I-O)?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+            It is the final written decision of the Adjudicating Authority. It contains the facts, your submissions, the officer’s findings, and the final "Operating Order" (Duty + Fine + Penalty).
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the limits of the Adjudicators?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          "• Assistant/Deputy Commissioner: Cases where the value of goods is up to ₹5 Lakh.
+           • Joint/Additional Commissioner: Cases up to ₹50 Lakh.
+           • Commissioner: Cases with no value limit."
+
+        </p>
+      </details>
+
+
+      {/* FAQ 9 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is a "Redemption Fine"?
+
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If your goods are confiscated, the officer may give you an "option to pay a fine in lieu of confiscation" (Section 125). Once you pay this fine (and the duty), you can take your goods home.
+
+        </p>
+      </details>  
+
+
+      {/* FAQ 10 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          I am unhappy with the O-I-O. What is the next step?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must file an appeal with the Commissioner of Customs (Appeals) within 60 days of receiving the order.
+        </p>
+      </details>  
+
+
+      {/* FAQ 11 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I have to pay the penalty before appealing?
+          <ChevronDown className="text-brand-500 transition-transform group-open:rotate-180" size={20} />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+            In 2026, you must make a Pre-Deposit of 7.5% of the disputed duty or penalty (Section 129E) to stay the recovery and have your appeal heard.
+        </p>
+      </details>               
+
+    </div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
