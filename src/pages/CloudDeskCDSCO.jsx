@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -401,6 +405,156 @@ const CloudDeskCDSCO = () => {
       </section>
 
       <Fees />
+
+{/* --- WHY CLOUDDESK SECTION (CDSCO) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for CDSCO Compliance?</h2>
+      <p className="text-slate-500">
+        Pharma and Medical imports are 'Zero-Error' zones. A single typo in a chemical formula or a missing stability report will freeze your supply chain.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. SUGAM Portal Mastery</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We manage your entire profile on the <strong>SUGAM Portal</strong>. In 2026, this portal is linked to <strong>ICEGATE SWIFT 2.0</strong>. When you file a Bill of Entry, the Customs system checks the CDSCO database for your specific <strong>Batch Number and Expiry Date</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Authorized Agent (AA) Services</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Foreign manufacturers must appoint a local <strong>Authorized Agent</strong> with a valid wholesale drug license. CloudDesk provides this <strong>legal representation</strong>, ensuring that you can enter the Indian market without setting up a full subsidiary.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Post-Import Compliance</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            CDSCO isn't over at the port. We manage the <strong>Post-Market Surveillance (PMS)</strong> reports, <strong>Adverse Event reporting</strong>, and the mandatory <strong>Retention of Samples</strong> for every batch imported.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (CDSCO) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the risk-based classification for Medical Devices in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>Class A:</strong> Low Risk (e.g., Absorbent cotton, Surgical tape).<br />
+          • <strong>Class B:</strong> Low-Moderate Risk (e.g., Needles, Catheters).<br />
+          • <strong>Class C:</strong> Moderate-High Risk (e.g., Bone bolts, Lenses).<br />
+          • <strong>Class D:</strong> High Risk (e.g., Heart valves, Pacemakers).
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I import "Unapproved" drugs for personal use?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes, via <strong>Form 12A</strong>. You can import small quantities for personal use with a valid doctor's prescription, but this is restricted to <strong>non-commercial use</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need a CDSCO license for "Diagnostic Kits"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. <strong>In-Vitro Diagnostics (IVD)</strong> are treated as medical devices. Depending on the disease they detect (e.g., HIV/Malaria), they are usually <strong>Class C or D</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long is a CDSCO Registration Certificate (RC) valid?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the RC is valid <strong>perpetually</strong>, provided the <strong>Retention Fee is paid every five years</strong>. CloudDesk's "Compliance Calendar" manages these fee payments for you.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the government fees for Medical Device Import?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It varies by class. For <strong>Class A</strong>, it's approximately <strong>$1,000</strong>, scaling up significantly for <strong>Class D</strong>. CloudDesk provides an exact <strong>Fee Estimator</strong> based on your product specs.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is a "Dual-Use" NOC?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If you import a chemical that could be used as a drug but you are using it for <strong>industrial purposes</strong>, you need a <strong>Dual-Use NOC from the CDSCO</strong> to clear Customs.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle, 
   Phone,
   Mail,
   MapPin,
@@ -314,6 +318,196 @@ const CloudDeskPollution = () => {
     </section>
 
     <Fees/>
+
+
+{/* --- WHY CLOUDDESK SECTION (POLLUTION CONTROL) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Pollution Control?</h2>
+      <p className="text-slate-500">
+        Pollution compliance is now digital and data-driven. A single bad effluent sample can trigger a National Green Tribunal (NGT) fine of Crores.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Strategic Categorization (The 5-Color Rule)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We don't just apply; we strategically classify your unit based on the <strong>Pollution Index (PI)</strong>: <strong>Red (PI ≥ 60)</strong> for heavy industries needing strict CTE/CTO, <strong>Orange (PI 41–59)</strong> for moderate units, <strong>Green (PI 21–40)</strong> for simplified "Auto-Grant," <strong>White (PI &lt; 20)</strong> requiring only online intimation, and the new <strong>Blue category</strong> (2026) for Essential Environmental Services.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. The "2026 Long-Term Framework"</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Following the <strong>2026 Air Pollution Grant of Consent Amendments</strong>, we help you opt for the <strong>25-year Extended Consent</strong> by paying a one-time fee. This eliminates the headache of <strong>recurring renewals and administrative red tape</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Registered Environment Auditor Liaison</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The 2026 rules empower <strong>Private Environment Auditors</strong> to verify site assessments. CloudDesk partners with certified auditors to fast-track your application, ensuring your <strong>Effluent Treatment Plant (ETP) and Air Scrubbers</strong> are certified without waiting for a busy government inspector.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Deemed Consent for MSMEs</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If you are a Micro or Small unit in a notified industrial area, CloudDesk utilizes the <strong>"Deemed CTE" mechanism</strong>. We file your self-certified application and get your project moving instantly, <strong>skipping the 60-day waiting period</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (POLLUTION CONTROL) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is Consent to Establish (CTE)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is the <strong>"Permission to Build."</strong> You must get this <strong>before you lay a single brick or install any machinery</strong>. It validates that your location and pollution control plans are legal.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is Consent to Operate (CTO)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is the <strong>"Permission to Run."</strong> Once the factory is built, we apply for CTO. An inspector (or auditor) verifies that you actually installed the <strong>ETP/STP you promised in the CTE</strong>. You cannot start commercial production without this.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I skip CTE if I am moving into an existing building?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. If the <strong>"Process" or "Capacity" changes</strong>, a fresh CTE (or an Amendment) is required.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is the "Periodic Renewal" of CTO really gone?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Under the 2026 framework, once granted, the CTO stays valid for the chosen period (up to <strong>25 years</strong>) as long as you pay the <strong>annual fee</strong> and don't violate the pollution norms.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "One-Time Fee" system?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          State boards now allow you to pay the consent fee for a block of <strong>5, 10, or 25 years upfront</strong>. CloudDesk calculates the most <strong>tax-efficient block</strong> for your business scale.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does the "White Category" really need zero paperwork?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Not zero. You must submit an <strong>Online Intimation and a Self-Declaration</strong>. If you fail to do this and are caught, you are treated as an <strong>"Unregistered Unit."</strong>
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Polluter Pays" fine in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If you exceed discharge limits, the PCB calculates <strong>Environmental Compensation</strong> based on the duration of the violation. For a medium-scale Orange unit, this can easily reach <strong>₹5,000 to ₹10,000 per day</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can my CEO be imprisoned for pollution?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Under the Water and Air Acts, the <strong>"Person in Charge"</strong> can face <strong>1.5 to 6 years of imprisonment</strong> for continued non-compliance or operating without consent.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

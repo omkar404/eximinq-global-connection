@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -317,6 +321,207 @@ const CloudDeskFactoryStuffing = () => {
     </section>
 
     <Fees/>
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Factory-Stuffing?</h2>
+                    <p className="text-slate-500">
+                          Stuffing at the factory is a privilege, not a right. CloudDesk ensures your facility meets the high-security standards Customs demands.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Self-Sealing Authorization</h4> 
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          In 2026,<strong> physical Customs </strong>supervision during stuffing is rare.<strong> It has been replaced by Self-Sealing. </strong>
+                          <strong>CloudDesk </strong>manages the application to the jurisdictional Principal<strong> Commissioner/Commissioner </strong>of Customs, ensuring your factory is "authorized" for self-sealing under the latest CBIC circulars.
+                         </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. RFID e-Seal Integration</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Once authorized, you cannot use a simple lead seal. You must use an<strong> ISO 17712 compliant RFID e-Seal.</strong> 
+                          <strong>CloudDesk </strong>provides an integrated portal to<strong> buy, register, </strong>and activate these <strong>seals, ensuring the "Seal Number" and "Time Stamp" </strong>are automatically pushed to the ICEGATE Shipping Bill.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. The "Zero-Examination" Protocol</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Factory-stuffed containers are less likely to be opened at the port if the digital data is clean. 
+                          <strong>CloudDesk’s Stuffing </strong>Checklist ensures your<strong> "Container Load Plan" and "Weight Declaration" </strong>match your invoice perfectly, helping you secure<strong> Direct Port Entry (DPE).</strong>
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Logistics Sync (Empty-to-Gate)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          The biggest headache is timing the arrival of the empty container with your production schedule. 
+                          <strong>CloudDesk’s </strong>Trailer Tracker coordinates the pick-up of the empty box from the yard and its timely arrival at your<strong> factory, minimizing "Trailer Standing Charges."</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is "Factory Stuffing"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+               It is the process where the exporter brings an empty shipping container to their own premises (factory or warehouse), loads the cargo, and seals it there. The container then goes directly to the port for loading onto the ship.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+               Who is eligible for Self-Sealing/Factory Stuffing?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                In 2026, eligibility is open to: (1) AEO Status Holders, (2) Exporters who were previously granted factory stuffing permission under the old Excise regime, and (3) New exporters who obtain a one-time permission from the Customs Commissioner based on their factory's security and volume.
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does a Customs Officer need to be present?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. Under the "Self-Sealing" initiative, the exporter is responsible for stuffing and sealing. However, the data from the RFID e-Seal must be transmitted to Customs electronically.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is an RFID e-Seal?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                It is a high-security bolt seal with a built-in RFID chip. It stores the Shipping Bill number, Date/Time of sealing, and Container number. CloudDesk’s software allows you to "Write" this data onto the seal using a simple mobile app.
+
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I buy any RFID seal from the market?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. You must use seals from Customs-approved vendors only. Using an unapproved seal will lead to the container being diverted to a CFS for 100% examination at the port.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How much can I save by stuffing at my factory?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              You save on: (1) CFS Handling Charges (₹5,000–₹12,000 per container), (2) Double handling of goods, and (3) Transit damage (since the goods are packed once and stay undisturbed).
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What is the biggest risk of Factory Stuffing?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  If the container is marked for "Examination" at the port (due to an RMS alert), the port officers will cut your seal. You then have to pay for a new seal and port-side handling. CloudDesk’s Risk-Profiler identifies "High-Risk" shipments before they leave your factory to minimize this.
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can LCL cargo be factory stuffed?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. Factory stuffing is strictly for FCL (Full Container Load). If you have less than a container load, your goods must go to a CFS to be consolidated with other exporters' cargo.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -350,6 +354,195 @@ const CloudDeskISO = () => {
     </section>
 
     <Fees/>
+
+
+{/* --- WHY CLOUDDESK SECTION (ISO CERTIFICATION) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for ISO Certification?</h2>
+      <p className="text-slate-500">
+        Many vendors sell "fake" non-IAF certificates that are rejected by foreign buyers. We only provide globally recognized, accredited certifications.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. IAF & NABCB Accreditation Only</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In 2026, customs and global tenders only accept certificates with the <strong>IAF (International Accreditation Forum)</strong> or <strong>NABCB (National Accreditation Board for Certification Bodies)</strong> marks. CloudDesk ensures your certificate is <strong>globally verifiable</strong>, protecting you from "blacklisting" by international clients.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Specialized Industry Mapping</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We map you to the standards that matter for your 2026 growth: <strong>ISO 14001</strong> for "Green" export compliance (crucial for EU/USA), <strong>ISO 45001</strong> for Factory Safety, <strong>ISO 27001</strong> for data security, and <strong>ISO 22000</strong> — mandatory for food exporters (HACCP).
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Documentation & Audit Preparation</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Most businesses fail the audit because of poor paperwork. CloudDesk provides the <strong>Quality Manuals, SOPs (Standard Operating Procedures),</strong> and <strong>Internal Audit Reports</strong> required to pass the certification audit on the <strong>first attempt</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Zero-Disturbance Certification</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            We manage the <strong>"Stage 1" (Document Review)</strong> and <strong>"Stage 2" (On-site/Virtual Audit)</strong> logistics, ensuring the certification process <strong>doesn't halt your production or launch timeline</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (ISO CERTIFICATION) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the most important ISO for an exporter?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          <strong>ISO 9001:2015 (Quality Management System)</strong>. It is the universal language of business. Without it, you cannot apply for <strong>"Star Export House" status</strong> or bid for most international tenders.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How do I know if an ISO certificate is "fake" or "non-accredited"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Check for the <strong>IAF logo</strong>. In 2026, you can verify any genuine certificate on the <strong>IAF CertSearch global database</strong>. If it's not there, it's just a piece of paper with no legal standing in international trade.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does ISO certification expire?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. It is valid for <strong>3 years</strong>, but you must undergo a <strong>Surveillance Audit every year</strong> to keep it active. CloudDesk manages these annual audits so your status never lapses.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does it take to get certified?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          For a small to medium unit, the process takes <strong>4 to 6 weeks</strong>. This includes the time for system implementation and the two-stage audit.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the cost of ISO 9001 in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          For a single-site SME, the total cost (including audit fees) typically ranges from <strong>₹25,000 to ₹45,000</strong> for a 3-year cycle.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I get ISO for my software?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. You should aim for <strong>ISO 27001 (Information Security)</strong>. This proves to your SaaS clients that their data is protected by <strong>global security standards</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How does ISO help in getting "Star Export House" status?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Under the <strong>FTP 2023-2026</strong>, holding an ISO certificate is a mandatory <strong>"support document"</strong> for the application. It signifies that the exporter has a standardized process, reducing the <strong>"risk profile"</strong> in the eyes of the DGFT.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Are there government subsidies for ISO certification?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. Under the <strong>MSME Champions Scheme</strong>, small businesses can get a reimbursement of up to <strong>75% of the certification costs</strong>. CloudDesk helps you file the reimbursement claim after your certificate is issued.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>    
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

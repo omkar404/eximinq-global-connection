@@ -7,6 +7,8 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  Building,
+  ShieldUser, 
   Phone,
   Mail,
   MapPin,
@@ -313,6 +315,196 @@ const CloudDeskREX = () => {
       </section>
 
       <Fees />
+
+
+{/* --- WHY CLOUDDESK SECTION (REX) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for REX Registration?</h2>
+      <p className="text-slate-500">
+        REX replaces the old 'Form A' with a Statement on Origin. If your statement is wrong, the EU Customs will seize the cargo.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Transition to Self-Certification</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The old days of getting a "Form A" stamped by an agency for every shipment are over. Once you have a REX number, you simply type a specific <strong>Statement on Origin</strong> on your commercial invoice. CloudDesk provides the <strong>Exact Legal Text</strong> required for 2026 compliance, ensuring your buyer's duty benefit is never rejected.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Pre-Registration Audit</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            To get a REX number, you must prove you understand the <strong>Rules of Origin (RoO)</strong>. CloudDesk performs a <strong>"GSP Compliance Check"</strong> on your manufacturing process to ensure your product actually qualifies as "Indian" under the EU's <strong>2026 value-addition norms</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Local Administrator Liaison</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In India, REX is administered by agencies like the <strong>Export Inspection Council (EIC)</strong> and DGFT. CloudDesk manages the application on the <strong>EU's REX Portal</strong> and coordinates with the local Indian office for physical verification (if required) to ensure your number is issued within <strong>7 days</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. The "REX Database" Sync</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Your REX number must be <strong>"Active"</strong> in the EU's central database. If it's <strong>"Pending" or "Suspended,"</strong> your shipment will be blocked. CloudDesk monitors your <strong>REX Status</strong> and ensures your profile is updated with the latest HSN codes and production details.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (REX) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the REX System?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is a system of certification of origin based on a principle of <strong>Self-Certification</strong>. Exporters who are "Registered" can certify the origin of their goods themselves via a <strong>"Statement on Origin"</strong> on the invoice.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is REX mandatory for all exports to the EU?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is mandatory for shipments where you want to claim <strong>GSP (Preferential) duty benefits</strong> and the value exceeds <strong>€6,000</strong>. For shipments below €6,000, any exporter can self-certify without a REX number.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does REX apply to the UK?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, the UK uses the <strong>DCTS (Developing Countries Trading Scheme)</strong>. While similar to REX, it has its own registration requirements. CloudDesk manages both <strong>REX (EU/Switzerland/Norway)</strong> and <strong>DCTS (UK)</strong> registrations.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does it take to get a REX number?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Once the application is submitted on the EU portal and approved by the local Indian agency (like EIC), the number is generated in <strong>3–5 working days</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Statement on Origin"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is a specific piece of text that <strong>MUST be on your invoice</strong>. Example: <em>"The exporter [REX Number] of the products covered by this document declares that, except where otherwise clearly indicated, these products are of Indian preferential origin."</em>
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need a REX number for every product?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. <strong>One REX number covers your entire IEC</strong>. However, you must list all the HSN Sections you intend to export in your REX application. CloudDesk helps you <strong>"Future-Proof"</strong> your application by including relevant HSNs.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Does the REX registration expire?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No, the REX registration has <strong>no expiry date</strong>. However, it can be revoked if you fail to <strong>maintain records for 3 years</strong> or if an "Origin Audit" proves your goods don't meet the value-addition criteria.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What if I make a mistake in my REX statement?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If the EU Customs finds a discrepancy, they will deny the duty benefit to your buyer and charge the <strong>Full MFN Duty plus penalties</strong>. CloudDesk provides a <strong>Statement Validator</strong> to ensure every invoice is perfect.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

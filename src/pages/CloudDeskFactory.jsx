@@ -9,6 +9,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -352,6 +356,200 @@ const CloudDeskFactory = () => {
     </section>
 
     <Fees/>
+
+
+
+{/* --- WHY CLOUDDESK SECTION (FACTORY LICENSE) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Factory Licensing?</h2>
+      <p className="text-slate-500">
+        Most consultants just fill a form; we manage the engineering and safety architecture.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Stage-Wise Approval (The "Plan First" Rule)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            You cannot just "get" a license for an existing building. You must first get the <strong>Building Plan &amp; Machinery Layout approved</strong> by the Directorate of Industrial Safety and Health (DISH) before construction or installation. CloudDesk liaisons with <strong>"Approved Draftsmen"</strong> to ensure your ventilation, emergency exits, and machine spacing meet the <strong>2026 safety codes</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Structural Stability Certification</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            A major bottleneck in 2026 is the <strong>Stability Certificate (Form 1A)</strong>. We coordinate with <strong>Chartered Structural Engineers</strong> to certify that your building can handle the load of your heavy machinery, preventing rejections during the site inspection.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. Occupier vs. Manager Liability</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The Act identifies an <strong>"Occupier"</strong> (usually a Director/Proprietor) who is <strong>personally liable</strong> for any accidents. CloudDesk manages the <strong>Board Resolutions and Appointment Letters</strong> to clearly define these roles, protecting the rest of the board from operational legal risks.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. Integrated Health & Welfare Compliance</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            A factory license isn't just about machines; it's about people. We ensure your layout includes mandated <strong>Canteens, Restrooms, First Aid Rooms, and Creches</strong> (if applicable) — the first things a Factory Inspector checks during the mandatory site visit.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (FACTORY LICENSE) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Do I need a Factory License if I only have 5 workers?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Generally, No — you would fall under the <strong>Shop &amp; Establishment Act</strong>. However, if your manufacturing involves <strong>"Hazardous Processes"</strong> (chemicals, explosives, etc.), the government can notify your unit under <strong>Section 85</strong>, making a license mandatory even with just 1 worker.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "Aid of Power" definition in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          If you use <strong>electricity, solar, steam, or any mechanical energy</strong> to run even a single packaging machine or a small motor for your process, you are <strong>"with the aid of power."</strong>
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I run a factory in a residential area with a license?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. A Factory License is only granted for premises in <strong>Conforming Industrial Zones</strong> or land with <strong>Non-Agricultural (NA) Industrial conversion</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the primary documents required?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>Approved Building Plans and Machinery Layout.</strong><br />
+          • <strong>Stability Certificate</strong> from a licensed Structural Engineer.<br />
+          • <strong>NOC</strong> from Fire Department and Pollution Control Board (MPCB/CPCB).<br />
+          • <strong>Proof of Ownership/Lease</strong> and Electricity Load Sanction.<br />
+          • <strong>List of Raw Materials</strong> and Process Flow Chart.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long is the license valid?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          In 2026, most states allow you to apply for a validity of <strong>1, 5, or 10 years</strong>. CloudDesk recommends the <strong>10-year renewal</strong> to avoid annual bureaucratic interference.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What happens during the "Site Inspection"?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The Inspector checks: (1) If the <strong>machine layout matches the approved drawing</strong>, (2) If <strong>safety guards</strong> are on moving parts, (3) Adequate <strong>lighting/ventilation</strong>, and (4) If workers have proper <strong>PPE (Personal Protective Equipment)</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the penalty for late renewal?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Most states charge a <strong>25% surcharge</strong> if the renewal application is not filed <strong>30 days before expiry</strong>. If the license expires, you are technically operating an <strong>illegal unit</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can a Factory License be transferred?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. If the <strong>"Occupier" changes</strong> or the business is sold, you must file an <strong>Amendment Application</strong> with the new details and the transfer deed.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>    
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

@@ -9,6 +9,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  Building,
+  ShieldUser, 
+  CheckCircle,   
   Phone,
   Mail,
   MapPin,
@@ -310,6 +313,205 @@ const CloudDeskUN = () => {
     </section>
 
     <Fees/>
+
+
+
+{/* --- WHY CLOUDDESK SECTION (UN IIP CERTIFICATION) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for UN IIP Certification?</h2>
+      <p className="text-slate-500">
+        UN Certification is a 'Destructive Test.' If your packaging fails the drop test, your production stops.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. Mandatory Nodal Liaison</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The IIP is the <strong>only body authorized by DG Shipping and DGCA</strong> to issue these certificates. CloudDesk manages the entire workflow on the <strong>IIP Online Portal</strong>, from technical application to securing the final digital certificate.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. Pre-Test Technical Audit</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Before you send 24 samples to the lab for <strong>"Destructive Testing"</strong> (Drop, Stack, Hydraulic Pressure), CloudDesk reviews your packaging specifications. If your 5-ply box or HDPE drum isn't up to the <strong>IMDG/ICAO severity standards</strong> for your specific chemical (Class 1–9), we tell you <strong>before you waste money on lab fees</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. MSDS & Class Mapping</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Every application requires a <strong>Material Safety Data Sheet (MSDS)</strong>. We map your product to the correct <strong>UN Number and Packing Group (I, II, or III)</strong>. Mismatching a "High Danger" chemical with "Low Danger" packaging is the <strong>#1 reason for certification rejection</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. ISO-Linkage for Maximum Validity</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            In 2026, your certificate's lifespan depends on your quality status. CloudDesk ensures your <strong>ISO 9001 certificate is correctly linked</strong> to your IIP profile to secure the <strong>18-month validity</strong>, rather than the standard 9 months for non-ISO units.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (UN IIP CERTIFICATION) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the UN Mark?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          It is a unique code (e.g., <strong>4G/X15/S/26/IND/IIP-1234</strong>) printed on the package. It tells port authorities that this specific design has <strong>passed the UN's rigorous safety tests</strong> for dangerous goods.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Which products need UN IIP Certification?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Any item classified under the <strong>9 Classes of Dangerous Goods</strong>, including:<br />
+          • <strong>Chemicals &amp; Flammable Liquids</strong> (Paints, Solvents).<br />
+          • <strong>Lithium Batteries &amp; Lead-Acid Batteries.</strong><br />
+          • <strong>Pesticides &amp; Pharmaceuticals.</strong><br />
+          • <strong>Aerosols &amp; Compressed Gases.</strong>
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Is the certificate issued for the product or the package?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          The certificate is issued to the <strong>Packaging Manufacturer</strong> for a specific Package Design. However, it also lists the <strong>Exporter's Name</strong> who will be using that specific packaging.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How many samples do I need to send for testing?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Depending on the package type (Drums, Boxes, Bags), you typically need to send <strong>18 to 24 empty samples</strong> to the nearest IIP lab (Mumbai, Delhi, Chennai, Kolkata, Hyderabad, or Ahmedabad).
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the validity of the UN IIP Certificate in 2026?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>ISO-Certified Manufacturers:</strong> 18 Months.<br />
+          • <strong>Non-ISO Manufacturers:</strong> 9 Months.<br />
+          • <strong>Note:</strong> No extensions are granted. You must re-test fresh samples before expiry.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the "X, Y, Z" marking?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>X:</strong> Packing Group I (High Danger).<br />
+          • <strong>Y:</strong> Packing Group II (Medium Danger).<br />
+          • <strong>Z:</strong> Packing Group III (Low Danger).<br />
+          <em>Pro-Tip: An 'X' certified box can carry Y and Z goods, but a 'Z' box cannot carry X goods.</em>
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does the process take?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          From sample submission to certificate issuance, it takes <strong>7 to 10 working days (Normal)</strong> or <strong>3 to 5 days (Tatkal/Express)</strong>.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I use the same certificate for both Sea and Air?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. You can apply for a <strong>Combined Certificate</strong> that complies with both <strong>IMDG (Sea)</strong> and <strong>IATA/ICAO (Air)</strong> regulations. CloudDesk always recommends the combined route to give you <strong>logistics flexibility</strong>.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>    
 
 
       {/* Footer */}

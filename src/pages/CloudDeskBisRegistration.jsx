@@ -7,6 +7,9 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
   CheckCircle,
   HardHat,
   FlaskConical,
@@ -315,6 +318,196 @@ const CloudDeskBisRegistration = () => {
         </div>
       </section>
 
+
+{/* --- WHY CLOUDDESK SECTION (BIS) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-5xl">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Bis-Certification?</h2>
+      <p className="text-slate-500">
+        BIS is not just a certificate; it's a rigorous technical audit of your factory and your product.
+      </p>
+    </div>
+    <div className="grid md:grid-cols-2 gap-8">
+      {/* Feature 1 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+          <AlertTriangle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">1. CRS & ISI Scheme Selection</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Exporters often confuse <strong>CRS (Compulsory Registration Scheme)</strong> for electronics with the <strong>ISI Mark (Product Certification)</strong> for industrial goods. CloudDesk performs a <strong>Scheme Mapping</strong> to ensure you apply under the correct "Schedule," preventing rejected applications and wasted testing fees.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 2 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+          <CheckCircle size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">2. NABL Lab Coordination</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            BIS requires testing in <strong>BIS-recognized NABL labs</strong> within India. For foreign manufacturers, this means shipping samples under a <strong>"Temporary Import" bond</strong>. CloudDesk manages the <strong>Sample Logistics</strong>, lab scheduling, and technical follow-ups to ensure the "Test Report" meets the exact Indian Standard (IS) requirements.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 3 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+          <Building size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">3. FMCS (Foreign Manufacturers Certification Scheme)</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            If you are a manufacturer outside India, you need <strong>FMCS</strong> to use the ISI mark. CloudDesk acts as your <strong>Authorized Indian Agent (AIR)</strong>, managing the physical factory audit by BIS officers, the nomination of the technical personnel, and the execution of the <strong>Performance Bank Guarantee</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature 4 */}
+      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+          <ShieldUser size={24} />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-900 mb-2">4. QCO (Quality Control Order) Watch</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            The government adds new products to the <strong>"Mandatory BIS List"</strong> almost every month. CloudDesk's <strong>Compliance Radar</strong> alerts you <strong>90 days before</strong> a new QCO kicks in for your HSN code, giving you enough time to get certified before the port-blockade begins.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* --- FAQ SECTION (BIS) --- */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4 max-w-3xl">
+    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-4">
+      {/* FAQ 1 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the difference between BIS CRS and ISI Mark?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>CRS:</strong> Mostly for Electronics, IT products, and Solar (e.g., Laptops, Mobile phones). It is based on Self-Declaration of conformity.<br />
+          • <strong>ISI Mark:</strong> For "Core" sectors like Steel, Cement, Electrical Cables, Toys, and Chemicals. It involves a Factory Audit by BIS officials.
+        </p>
+      </details>
+
+      {/* FAQ 2 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How do I know if my product needs BIS?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          You must check the <strong>Compulsory Registration List</strong> on the BIS portal. In 2026, over <strong>600 products</strong> are under mandatory certification. CloudDesk provides an <strong>HSN-to-BIS Mapping</strong> service to confirm your status instantly.
+        </p>
+      </details>
+
+      {/* FAQ 3 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I import "Samples" for testing without BIS?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Yes. You can import limited samples for R&D or BIS testing by obtaining an <strong>Exemption Letter</strong> or a <strong>"Provisional Entry"</strong> from Customs. CloudDesk manages this specialized clearance.
+        </p>
+      </details>
+
+      {/* FAQ 4 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          Can I use my UL, CE, or IEC test reports for BIS?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          No. While Indian Standards (IS) are often aligned with International Standards (ISO/IEC), BIS mandates <strong>testing in an Indian Lab</strong> for most categories.
+        </p>
+      </details>
+
+      {/* FAQ 5 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What is the role of an "Authorized Indian Representative" (AIR)?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          For foreign manufacturers, an AIR is a local legal entity (like CloudDesk) that takes <strong>responsibility for the product's quality and compliance</strong> in India. Having a competent AIR is a <strong>mandatory requirement</strong> for FMCS and CRS.
+        </p>
+      </details>
+
+      {/* FAQ 6 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long does the registration take?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          • <strong>CRS:</strong> 15–30 days (after lab reports).<br />
+          • <strong>ISI/FMCS:</strong> 3–6 months (due to factory inspections and international travel for officers).
+        </p>
+      </details>
+
+      {/* FAQ 7 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          How long is the BIS certificate valid?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Typically <strong>2 years</strong>. You must apply for renewal at least <strong>3 months before expiry</strong>. CloudDesk's <strong>Renewal Bot</strong> ensures your certification never lapses.
+        </p>
+      </details>
+
+      {/* FAQ 8 */}
+      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+          What are the penalties for selling without BIS?
+          <ChevronDown
+            className="text-brand-500 transition-transform group-open:rotate-180"
+            size={20}
+          />
+        </summary>
+        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          Under the <strong>BIS Act, 2016</strong>, penalties include heavy fines (up to <strong>10x the value of goods</strong>), seizure of stock, and even <strong>imprisonment for company directors</strong>. In 2026, Customs has "Zero Tolerance" for BIS violations.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">

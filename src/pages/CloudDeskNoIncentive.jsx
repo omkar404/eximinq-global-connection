@@ -7,6 +7,10 @@ import {
   Linkedin,
   Twitter,
   Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser, 
+  CheckCircle,
   Phone,
   Mail,
   MapPin,
@@ -286,6 +290,208 @@ const CloudDeskNoDue = () => {
       </section>
 
       <Fees />
+
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+              <section className="py-20 bg-white">
+                <div className="container mx-auto px-4 max-w-5xl">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for No-Incentive-Certificate?</h2>
+                    <p className="text-slate-500">
+                          A No Incentive Certificate is a 'Negative Declaration' that requires positive proof. CloudDesk audits your shipping history to ensure your claim is 100% truthful.
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                        <AlertTriangle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">1. Cross-Scheme Audit (The Anti-Double Dipping Check)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Before Customs issues a Section 74 (98% Duty Refund), they require an NIC from the<strong> DGFT and the GST department </strong>confirming you haven't claimed<strong> RoDTEP, Drawback (AIR), or IGST </strong>refunds on that specific shipment. 
+                          <strong>CloudDesk performs a Cross-Portal Reconciliation to ensure no</strong> <strong>"Automatic" </strong>benefits were credited to your ledger.
+                         </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 2 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                        <CheckCircle size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">2. Regularization Support (AA/EPCG)</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          If you are<strong> "Surrendering" </strong>a license because you couldn't meet the<strong> Export Obligation,</strong> you must prove you didn't use the license for any exports. 
+                          <strong>CloudDesk </strong>obtains the NIC from the Jurisdictional Customs Port, <strong>certifying that no shipping bills </strong>were tagged against that license, allowing for a smooth closure.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 3 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                        <Building size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">3. IGST & Drawback Conflict Resolution</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Sometimes, the system accidentally credits a <strong>Drawback </strong>amount even if you didn't ask for it. This blocks other higher-value refunds. 
+                          <strong>CloudDesk </strong>manages the Drawback Re-payment process to<strong> "Reverse" </strong>the benefit and secure an NIC so you can claim your primary refund.
+                        </p>
+                      </div>
+                    </div>
+        
+                    {/* Feature 4 */}
+                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                        <ShieldUser size={24} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 mb-2">4. Bank & FEMA Compliance</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          For certain specialized financial transactions or<strong> FEMA regularizations,</strong> 
+                          banks require a certificate stating no government <strong>incentives </strong>were received for a particular inward remittance. We manage the<strong> CA Certification </strong>and government liaison to provide this<strong> "Clean Bill of Health."</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What exactly is a "No Incentive Certificate"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              It is a formal declaration from an authority (Customs or DGFT) stating that for a particular set of Shipping Bills or a particular License, no export incentives (like RoDTEP, Drawback, or Scrips) have been claimed or disbursed.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                When is an NIC mandatory?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                "• When claiming Section 74 Drawback (Re-exports).
+                 • When Regularizing/Closing an Advance Authorisation or EPCG license where no exports were made.
+                 • When applying for a Brand Rate Fixation (to prove you haven't taken the All Industry Rate)."
+
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I self-declare an NIC?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                In some cases, a Self-Declaration + CA Certificate works. However, for high-value refunds, Customs will insist on an EDI-generated NIC from the ICEGATE system or a manual one from the DGFT.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                How does CloudDesk verify "Non-Availment"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                We scan your Electronic Duty Credit Ledger (EDCL) on ICEGATE and your E-BRC list on the DGFT portal. If a benefit was granted, we help you surrender it (with interest, if applicable) to get the NIC.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                What if RoDTEP was automatically scrolled in my Shipping Bill?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  This is a common 2026 problem. Even if you didn't "ask" for it, the system might have processed it. To get an NIC, you must first refund the RoDTEP amount to the government. We manage this "Benefit Reversal" process.
+              </p>
+            </details>
+
+            {/* FAQ 6 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Does the NIC mention the specific amount?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. An NIC usually certifies that "No benefit has been availed under [Scheme Name] for Shipping Bill No. [X] dated [Y]."
+              </p>
+            </details>
+
+            {/* FAQ 7 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Is there an expiry for a No Incentive Certificate?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  The certificate itself doesn't expire, but it must be submitted to the requesting authority (like the Drawback Department) within their specific filing window (usually 30–90 days).
+              </p>
+            </details>
+
+            {/* FAQ 8 */}
+            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                Can I get an NIC for "Deemed Exports"?
+                <ChevronDown
+                  className="text-brand-500 transition-transform group-open:rotate-180"
+                  size={20}
+                />
+              </summary>
+
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. If you are a domestic supplier to an EOU/SEZ and the buyer is claiming the benefits, you need to provide an NIC to prove you haven't claimed them, ensuring the buyer’s claim is valid.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
