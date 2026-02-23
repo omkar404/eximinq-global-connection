@@ -3,10 +3,10 @@ import TopBar from "../Common/TopBar";
 
 export default function CloudDeskRefund() {
     return (
-        <div className="bg-slate-50 text-slate-800 antialiased selection:bg-teal-200 selection:text-teal-900">
+       <div className="bg-slate-50 text-slate-800 antialiased selection:bg-teal-200 selection:text-teal-900">
             <TopBar />
 
-            <header className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+             <header className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 flex items-center overflow-hidden bg-white">
 
                 {/* Background Blobs */}
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-indigo-50 rounded-full blur-[100px] opacity-60 -z-10 translate-x-1/3 -translate-y-1/4"></div>
