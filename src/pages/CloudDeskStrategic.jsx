@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Footer } from "../Common/Footer";
 import TopBar from "../Common/TopBar";
 
@@ -196,9 +197,14 @@ export default function StrategicSolutions() {
                                 <span className="text-xs font-semibold text-slate-400">
                                     TAT: 45 Days
                                 </span>
-                                <button className="text-teal-600 font-bold text-sm">
+                                <a
+                                    href="/epcg-closure-services"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-teal-600 font-bold text-sm"
+                                >
                                     Audit Now →
-                                </button>
+                                </a>
                             </div>
                         </div>
 
@@ -254,7 +260,14 @@ export default function StrategicSolutions() {
                                     Success: 98%
                                 </span>
                                 <button className="text-indigo-600 font-bold text-sm">
-                                    Check Status →
+                                    <a
+                                        href="/rodtep-refund-recovery"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-teal-600 font-bold text-sm"
+                                    >
+                                        Check Status →
+                                    </a>
                                 </button>
                             </div>
                         </div>
@@ -345,11 +358,27 @@ export default function StrategicSolutions() {
                             <h4 className="font-bold text-lg mb-2 text-teal-400 group-hover:text-white">
                                 Import Monitoring
                             </h4>
+
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
-                                <li>• SIMS (Steel Import)</li>
-                                <li>• NIMS (Coal Import)</li>
-                                <li>• PIMS (Paper/Chip Import)</li>
+                                <li>
+                                    <Link to="/sims" className="hover:text-white transition">
+                                        • SIMS (Steel Import)
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/nims" className="hover:text-white transition">
+                                        • NIMS (Coal Import)
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/pims" className="hover:text-white transition">
+                                        • PIMS (Paper/Chip Import)
+                                    </Link>
+                                </li>
                             </ul>
+
                             <p className="text-xs text-slate-500">
                                 Filed within 2 hours of invoice receipt.
                             </p>
@@ -360,11 +389,27 @@ export default function StrategicSolutions() {
                             <h4 className="font-bold text-lg mb-2 text-blue-400 group-hover:text-white">
                                 BIS & EPR
                             </h4>
+
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
-                                <li>• BIS / CRS Registration</li>
-                                <li>• EPR (Plastic Waste)</li>
-                                <li>• EPR (E-Waste & Battery)</li>
+                                <li>
+                                    <Link to="/bis-crs" className="hover:text-white transition">
+                                        • BIS / CRS Registration
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/epr-plastic" className="hover:text-white transition">
+                                        • EPR (Plastic Waste)
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/epr-ewaste-battery" className="hover:text-white transition">
+                                        • EPR (E-Waste & Battery)
+                                    </Link>
+                                </li>
                             </ul>
+
                             <p className="text-xs text-slate-500">
                                 Mandatory for Electronics & Packaging.
                             </p>
@@ -375,12 +420,33 @@ export default function StrategicSolutions() {
                             <h4 className="font-bold text-lg mb-2 text-purple-400 group-hover:text-white">
                                 Specialized Licensing
                             </h4>
+
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
-                                <li>• SCOMET (Dual Use)</li>
-                                <li>• WPC (ETA) Wireless</li>
-                                <li>• Fertilizer Import Authorization</li>
-                                <li>• Defence Exim License</li>
+                                <li>
+                                    <Link to="/scomet-license" className="hover:text-white transition">
+                                        • SCOMET (Dual Use)
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/wpc-eta" className="hover:text-white transition">
+                                        • WPC (ETA) Wireless
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/fertilizer-import-authorization" className="hover:text-white transition">
+                                        • Fertilizer Import Authorization
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/defence-exim-license" className="hover:text-white transition">
+                                        • Defence Exim License
+                                    </Link>
+                                </li>
                             </ul>
+
                             <p className="text-xs text-slate-500">
                                 For Defense, Telecom & Agri sectors.
                             </p>
@@ -391,12 +457,33 @@ export default function StrategicSolutions() {
                             <h4 className="font-bold text-lg mb-2 text-yellow-400 group-hover:text-white">
                                 Food & Pharma
                             </h4>
+
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
-                                <li>• FSSAI Central License</li>
-                                <li>• AQCS / PQMS Clearance</li>
-                                <li>• CDSCO (Drug Controller)</li>
-                                <li>• Horticulture Registration</li>
+                                <li>
+                                    <Link to="/fssai-central-license" className="hover:text-white transition">
+                                        • FSSAI Central License
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/aqcs-pqms-clearance" className="hover:text-white transition">
+                                        • AQCS / PQMS Clearance
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/cdsco-drug-controller" className="hover:text-white transition">
+                                        • CDSCO (Drug Controller)
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/horticulture-registration" className="hover:text-white transition">
+                                        • Horticulture Registration
+                                    </Link>
+                                </li>
                             </ul>
+
                             <p className="text-xs text-slate-500">
                                 Single window clearance support.
                             </p>
@@ -441,7 +528,11 @@ export default function StrategicSolutions() {
                                 to reduce duty burden on raw materials.
                             </p>
 
-                            <a href="#" className="text-teal-600 text-sm font-bold">
+                            <a href="/services/igcr-returns"
+                                target="_blank"
+                                rel="noopener noreferrer"
+
+                                className="text-teal-600 text-sm font-bold">
                                 Start IGCR →
                             </a>
                         </div>
@@ -473,7 +564,10 @@ export default function StrategicSolutions() {
                                 <li>• Factory License</li>
                             </ul>
 
-                            <a href="#" className="text-teal-600 text-sm font-bold">
+                            <a href="/services/factory-license"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-teal-600 text-sm font-bold">
                                 Get Licensed →
                             </a>
                         </div>
@@ -504,7 +598,10 @@ export default function StrategicSolutions() {
                                 <li>• UN IIP Certification</li>
                             </ul>
 
-                            <a href="#" className="text-teal-600 text-sm font-bold">
+                            <a href="/services/pollution-control"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-teal-600 text-sm font-bold">
                                 Ensure Compliance →
                             </a>
                         </div>
@@ -521,41 +618,53 @@ export default function StrategicSolutions() {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
 
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition">
+                        <Link
+                            to="/services/lmpc-registration"
+                            className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
+                        >
                             <div className="font-bold text-slate-800">
                                 LMPC Registration
                             </div>
                             <div className="text-xs text-slate-500">
                                 Legal Metrology (Packaging)
                             </div>
-                        </div>
+                        </Link>
 
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition">
+                        <Link
+                            to="/services/free-sale-certificate"
+                            className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
+                        >
                             <div className="font-bold text-slate-800">
                                 Free Sale Cert
                             </div>
                             <div className="text-xs text-slate-500">
                                 For Medical/Food Export
                             </div>
-                        </div>
+                        </Link>
 
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition">
+                        <Link
+                            to="/services/no-due-certificate"
+                            className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
+                        >
                             <div className="font-bold text-slate-800">
                                 No Due Cert
                             </div>
                             <div className="text-xs text-slate-500">
                                 Govt. Dues Clearance
                             </div>
-                        </div>
+                        </Link>
 
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition">
+                        <Link
+                            to="/services/no-incentive-certificate"
+                            className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
+                        >
                             <div className="font-bold text-slate-800">
                                 No Incentive Cert
                             </div>
                             <div className="text-xs text-slate-500">
                                 Avoid Double Dipping
                             </div>
-                        </div>
+                        </Link>
 
                     </div>
                 </div>
@@ -596,7 +705,13 @@ export default function StrategicSolutions() {
                                             d="M5 13l4 4L19 7"
                                         />
                                     </svg>
-                                    AEO T1/T2/T3 Certification & SOP Maintenance
+
+                                    <a
+                                        href="/aeo-moowr-consultancy"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        AEO T1/T2/T3 Certification & SOP Maintenance
+                                    </a>
                                 </li>
 
                                 <li className="flex items-center">
@@ -613,7 +728,12 @@ export default function StrategicSolutions() {
                                             d="M5 13l4 4L19 7"
                                         />
                                     </svg>
-                                    MOOWR (Bonded Warehouse) Setup
+                                    <a
+                                        href="/aeo-moowr-consultancy"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        MOOWR (Bonded Warehouse) Setup
+                                    </a>
                                 </li>
 
                                 <li className="flex items-center">
@@ -630,7 +750,12 @@ export default function StrategicSolutions() {
                                             d="M5 13l4 4L19 7"
                                         />
                                     </svg>
-                                    SVB (Special Valuation Branch) Registration
+                                    <a
+                                        href="/aeo-moowr-consultancy"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        SVB (Special Valuation Branch) Registration
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -656,7 +781,12 @@ export default function StrategicSolutions() {
                                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                                         />
                                     </svg>
-                                    Customs Adjudication (SCN Reply)
+                                    <a
+                                        href="/dispute-resolution"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        Customs Adjudication (SCN Reply)
+                                    </a>
                                 </li>
 
                                 <li className="flex items-center">
@@ -673,7 +803,12 @@ export default function StrategicSolutions() {
                                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                                         />
                                     </svg>
-                                    DGFT Policy Relaxation (PRC) Representation
+                                    <a
+                                        href="/dispute-resolution"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        DGFT Policy Relaxation (PRC) Representation
+                                    </a>
                                 </li>
 
                                 <li className="flex items-center">
@@ -690,7 +825,12 @@ export default function StrategicSolutions() {
                                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                                         />
                                     </svg>
-                                    RMCC Alert Removal
+                                    <a
+                                        href="/dispute-resolution"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        RMCC Alert Removal
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -759,73 +899,117 @@ export default function StrategicSolutions() {
 
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
                             <div className="font-bold text-slate-800">
-                                Freight Forwarding
+                                <div className="font-bold text-slate-800">
+                                    Freight Forwarding
+                                </div>
                             </div>
+
                             <div className="text-xs text-slate-500">
-                                Sea/Air Booking
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    Sea/Air Booking
+                                </a>
                             </div>
                         </div>
 
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
                             <div className="font-bold text-slate-800">
-                                CHA Services
+                                <div className="font-bold text-slate-800">
+                                    CHA Services
+                                </div>
                             </div>
+
                             <div className="text-xs text-slate-500">
-                                Customs Clearance
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    Customs Clearance
+                                </a>
                             </div>
                         </div>
 
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
                             <div className="font-bold text-slate-800">
-                                Warehousing
+                                <div className="font-bold text-slate-800">
+                                    Warehousing
+                                </div>
                             </div>
+
                             <div className="text-xs text-slate-500">
-                                Bonded & General
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    Bonded & General
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
+                            <div className="font-bold text-slate-800">
+                                <div className="font-bold text-slate-800">
+                                    Factory Stuffing
+                                </div>
+                            </div>
+
+                            <div className="text-xs text-slate-500">
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    On-site Packing
+                                </a>
                             </div>
                         </div>
 
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
                             <div className="font-bold text-slate-800">
-                                Factory Stuffing
+                                <div className="font-bold text-slate-800">
+                                    Inland Transport
+                                </div>
                             </div>
+
                             <div className="text-xs text-slate-500">
-                                On-site Packing
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    Factory to Port
+                                </a>
+                            </div>
+                        </div>
+
+
+
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
+                            <div className="font-bold text-slate-800">
+                                <div className="font-bold text-slate-800">
+                                    DPD Registration
+                                </div>
+                            </div>
+
+                            <div className="text-xs text-slate-500">
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    Direct Port Delivery
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
+                            <div className="font-bold text-slate-800">
+                                <div className="font-bold text-slate-800">
+                                    Project Cargo
+                                </div>
+                            </div>
+
+                            <div className="text-xs text-slate-500">
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    ODC Handling
+                                </a>
                             </div>
                         </div>
 
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
                             <div className="font-bold text-slate-800">
-                                Inland Transport
+                                <div className="font-bold text-slate-800">
+                                    Marine Insurance
+                                </div>
                             </div>
-                            <div className="text-xs text-slate-500">
-                                Factory to Port
-                            </div>
-                        </div>
 
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
-                            <div className="font-bold text-slate-800">
-                                DPD Registration
-                            </div>
                             <div className="text-xs text-slate-500">
-                                Direct Port Delivery
-                            </div>
-                        </div>
-
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
-                            <div className="font-bold text-slate-800">
-                                Project Cargo
-                            </div>
-                            <div className="text-xs text-slate-500">
-                                ODC Handling
-                            </div>
-                        </div>
-
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-teal-500 transition">
-                            <div className="font-bold text-slate-800">
-                                Marine Insurance
-                            </div>
-                            <div className="text-xs text-slate-500">
-                                Risk Coverage
+                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                    Risk Coverage
+                                </a>
                             </div>
                         </div>
 

@@ -111,6 +111,7 @@ import SEOManager from "./components/SEOManager";
 import CloudDeskAbout from "./pages/CloudDeskAbout";
 import CloudDeskStrategic from "./pages/CloudDeskStrategic";
 import CloudDeskRefund from "./pages/CloudDeskRefund";
+import CloudDeskEPCGClosure from "./pages/CloudDeskEPCGClosure";
 
 function App() {
   return (
@@ -433,6 +434,8 @@ function App() {
         <Route path="/tools/duty-calculator-finder" element={<CloudDeskDutyCalculator />} />
 
         <Route path="/rodtep-refund-recovery" element={<CloudDeskRefund />} />
+
+        <Route path="/epcg-closure-services" element={<CloudDeskEPCGClosure />} />
 
         {/* Thank You Page */}
         <Route path="*" element={<PageNotFound />} />
