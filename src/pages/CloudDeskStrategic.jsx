@@ -266,7 +266,7 @@ export default function StrategicSolutions() {
                                         rel="noopener noreferrer"
                                         className="text-teal-600 font-bold text-sm"
                                     >
-                                        Check Status →
+                                        Check Status → 
                                     </a>
                                 </button>
                             </div>
@@ -305,13 +305,29 @@ export default function StrategicSolutions() {
                             </p>
 
                             <ul className="text-sm text-slate-500 space-y-2 mb-6 border-t border-slate-100 pt-4">
-                                <li className="flex items-center">
+                                <li className="flex items-center space-x-2 mb-3">
                                     <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></span>
-                                    Section 74 Re-Export Drawback
+                                    {/* Section 74 Re-Export Drawback */}
+                                    <a
+                                        href="/services/duty-drawback"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-slate-600 text-sm hover:text-indigo-600 transition"
+                                    >
+                                        Section 74 Re-Export Drawback
+                                    </a>
                                 </li>
-                                <li className="flex items-center">
+                                <li className="flex items-center space-x-2 mb-3">
                                     <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></span>
-                                    Customs Duty Payments (ECL)
+                                    {/* Customs Duty Payments (ECL) */}
+                                    <a
+                                        href="/services/duty-payment-ecl"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-slate-600 text-sm hover:text-indigo-600 transition"
+                                    >
+                                        Customs Duty Payments (ECL)
+                                    </a>
                                 </li>
                             </ul>
 
@@ -319,9 +335,15 @@ export default function StrategicSolutions() {
                                 <span className="text-xs font-semibold text-slate-400">
                                     Gain: +2-4% Margin
                                 </span>
-                                <button className="text-orange-600 font-bold text-sm">
-                                    Calculate →
-                                </button>
+                                {/* <button className="text-orange-600 font-bold text-sm">
+                                    <a
+                                        href="/services/duty-drawback"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-teal-600 font-bold text-sm"
+                                    >
+                                    </a>
+                                </button> */}
                             </div>
                         </div>
 
@@ -380,32 +402,51 @@ export default function StrategicSolutions() {
                             </ul>
 
                             <p className="text-xs text-slate-500">
-                                Filed within 2 hours of invoice receipt.
+                                Filed within 2 hours of invoice receipt. 
                             </p>
+                        
+                        <button className="text-indigo-600 font-bold text-sm">
+                                    <a
+                                        href="/services/import-management-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-teal-600 font-bold text-sm"
+                                    >
+                                        Click → 
+                                    </a>
+                        </button>
                         </div>
 
                         {/* BIS & EPR */}
                         <div className="bg-slate-800/50 backdrop-blur border border-slate-700 p-6 rounded-xl hover:bg-slate-800 transition group">
                             <h4 className="font-bold text-lg mb-2 text-blue-400 group-hover:text-white">
-                                BIS & EPR
+                                BIS , EPR & ISO
                             </h4>
-
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
                                 <li>
-                                    <Link to="/bis-crs" className="hover:text-white transition">
-                                        • BIS / CRS Registration
+                                    <Link to="/services/bis-registration" 
+                                    target="_blank"
+                                    rel="noopener noreferrer" 
+                                    className="hover:text-white transition">
+                                        • BIS / CRS Registration   
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/epr-plastic" className="hover:text-white transition">
-                                        • EPR (Plastic Waste)
+                                    <Link to="/services/epr-authorization" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"  
+                                    className="hover:text-white transition whitespace-nowrap">
+                                        • EPR (Plastic Waste,E-Waste & Battery)
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/epr-ewaste-battery" className="hover:text-white transition">
-                                        • EPR (E-Waste & Battery)
+                                    <Link to="/services/iso-certification" 
+                                    target="_blank"
+                                    rel="noopener noreferrer" 
+                                    className="hover:text-white transition">
+                                        • ISO Registration
                                     </Link>
                                 </li>
                             </ul>
@@ -423,25 +464,37 @@ export default function StrategicSolutions() {
 
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
                                 <li>
-                                    <Link to="/scomet-license" className="hover:text-white transition">
+                                    <Link to="/services/scomet-licensing" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-white transition">
                                         • SCOMET (Dual Use)
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/wpc-eta" className="hover:text-white transition">
+                                    <Link to="/services/wpc-license"
+                                    target="_blank"
+                                    rel="noopener noreferrer" 
+                                    className="hover:text-white transition">
                                         • WPC (ETA) Wireless
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/fertilizer-import-authorization" className="hover:text-white transition">
+                                    <Link to="/services/fertiliser-import-license"
+                                    target="_blank"
+                                    rel="noopener noreferrer"  
+                                    className="hover:text-white transition">
                                         • Fertilizer Import Authorization
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/defence-exim-license" className="hover:text-white transition">
+                                    <Link to="/services/defence-exim-license"
+                                    target="_blank"
+                                    rel="noopener noreferrer" 
+                                    className="hover:text-white transition">
                                         • Defence Exim License
                                     </Link>
                                 </li>
@@ -450,6 +503,16 @@ export default function StrategicSolutions() {
                             <p className="text-xs text-slate-500">
                                 For Defense, Telecom & Agri sectors.
                             </p>
+                        {/* <button className="text-indigo-600 font-bold text-sm">
+                                    <a
+                                        href="/rodtep-refund-recovery"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-teal-600 font-bold text-sm"
+                                    >
+                                        Click → 
+                                    </a>
+                        </button> */}
                         </div>
 
                         {/* Food & Pharma */}
@@ -460,25 +523,37 @@ export default function StrategicSolutions() {
 
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
                                 <li>
-                                    <Link to="/fssai-central-license" className="hover:text-white transition">
+                                    <Link to="/services/fssai-licensing"
+                                    target="_blank"
+                                    rel="noopener noreferrer" 
+                                    className="hover:text-white transition">
                                         • FSSAI Central License
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/aqcs-pqms-clearance" className="hover:text-white transition">
+                                    <Link to="/services/aqcs-pqms"
+                                    target="_blank"
+                                    rel="noopener noreferrer"  
+                                    className="hover:text-white transition">
                                         • AQCS / PQMS Clearance
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/cdsco-drug-controller" className="hover:text-white transition">
+                                    <Link to="/services/cdsco-compliance"
+                                    target="_blank"
+                                    rel="noopener noreferrer"  
+                                    className="hover:text-white transition">
                                         • CDSCO (Drug Controller)
                                     </Link>
                                 </li>
 
                                 <li>
-                                    <Link to="/horticulture-registration" className="hover:text-white transition">
+                                    <Link to="/services/horticulture"
+                                    target="_blank"
+                                    rel="noopener noreferrer"  
+                                    className="hover:text-white transition">
                                         • Horticulture Registration
                                     </Link>
                                 </li>
@@ -487,8 +562,17 @@ export default function StrategicSolutions() {
                             <p className="text-xs text-slate-500">
                                 Single window clearance support.
                             </p>
+                        {/* <button className="text-indigo-600 font-bold text-sm ">
+                                    <a
+                                        href="/rodtep-refund-recovery"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-teal-600 font-bold text-sm"
+                                    >
+                                        Click → 
+                                    </a>
+                        </button> */}
                         </div>
-
                     </div>
                 </div>
             </section>
@@ -559,17 +643,47 @@ export default function StrategicSolutions() {
                             </div>
 
                             <ul className="text-sm text-slate-600 space-y-1 mb-4">
-                                <li>• Industrial License</li>
-                                <li>• IEM (Industrial Entrepreneur Memo)</li>
-                                <li>• Factory License</li>
+                                {/* <li>• Industrial License</li> */}
+                                <li>
+                                 <a
+                                        href="/services/industrial-license"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                      •  Industrial License
+                                </a>
+                                </li>
+                                {/* <li>• IEM (Industrial Entrepreneur Memo)</li> */}
+                                <li>
+                                 <a
+                                        href="/services/iem-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                      •  IEM (Industrial Entrepreneur Memo)
+                                </a>
+                                </li>
+                                {/* <li>• Factory License</li> */}
+                                <li>
+                                 <a
+                                        href="/services/factory-license"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                      •  Factory License
+                                </a>
+                                </li>
                             </ul>
 
-                            <a href="/services/factory-license"
+                            {/* <a href="/services/factory-license"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-teal-600 text-sm font-bold">
                                 Get Licensed →
-                            </a>
+                            </a> */}
                         </div>
 
                         {/* Environmental */}
@@ -618,8 +732,10 @@ export default function StrategicSolutions() {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
 
-                        <Link
-                            to="/services/lmpc-registration"
+                        <a
+                            href="/services/lmpc-registration"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
                         >
                             <div className="font-bold text-slate-800">
@@ -628,10 +744,12 @@ export default function StrategicSolutions() {
                             <div className="text-xs text-slate-500">
                                 Legal Metrology (Packaging)
                             </div>
-                        </Link>
+                        </a>
 
-                        <Link
-                            to="/services/free-sale-certificate"
+                        <a
+                            href="/services/free-sale-certificate"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
                         >
                             <div className="font-bold text-slate-800">
@@ -640,10 +758,12 @@ export default function StrategicSolutions() {
                             <div className="text-xs text-slate-500">
                                 For Medical/Food Export
                             </div>
-                        </Link>
+                        </a>
 
-                        <Link
-                            to="/services/no-due-certificate"
+                        <a
+                            href="/services/no-due-certificate"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
                         >
                             <div className="font-bold text-slate-800">
@@ -652,10 +772,12 @@ export default function StrategicSolutions() {
                             <div className="text-xs text-slate-500">
                                 Govt. Dues Clearance
                             </div>
-                        </Link>
+                        </a>
 
-                        <Link
-                            to="/services/no-incentive-certificate"
+                        <a
+                            href="/services/no-incentive-certificate"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
                         >
                             <div className="font-bold text-slate-800">
@@ -664,8 +786,7 @@ export default function StrategicSolutions() {
                             <div className="text-xs text-slate-500">
                                 Avoid Double Dipping
                             </div>
-                        </Link>
-
+                        </a>
                     </div>
                 </div>
             </section>
@@ -707,7 +828,9 @@ export default function StrategicSolutions() {
                                     </svg>
 
                                     <a
-                                        href="/aeo-moowr-consultancy"
+                                        href="/services/aeo-certification"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
                                     >
                                         AEO T1/T2/T3 Certification & SOP Maintenance
@@ -729,7 +852,9 @@ export default function StrategicSolutions() {
                                         />
                                     </svg>
                                     <a
-                                        href="/aeo-moowr-consultancy"
+                                        href="/services/moowr-scheme"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
                                     >
                                         MOOWR (Bonded Warehouse) Setup
@@ -751,7 +876,9 @@ export default function StrategicSolutions() {
                                         />
                                     </svg>
                                     <a
-                                        href="/aeo-moowr-consultancy"
+                                        href="/services/svb-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
                                     >
                                         SVB (Special Valuation Branch) Registration
@@ -782,9 +909,11 @@ export default function StrategicSolutions() {
                                         />
                                     </svg>
                                     <a
-                                        href="/dispute-resolution"
+                                        href="/services/customs-adjudication"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
-                                    >
+                                    >   
                                         Customs Adjudication (SCN Reply)
                                     </a>
                                 </li>
@@ -804,7 +933,9 @@ export default function StrategicSolutions() {
                                         />
                                     </svg>
                                     <a
-                                        href="/dispute-resolution"
+                                        href="/services/prc-relaxation"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
                                     >
                                         DGFT Policy Relaxation (PRC) Representation
@@ -826,7 +957,9 @@ export default function StrategicSolutions() {
                                         />
                                     </svg>
                                     <a
-                                        href="/dispute-resolution"
+                                        href="/services/rmcc-alert-removal"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
                                     >
                                         RMCC Alert Removal
@@ -862,10 +995,50 @@ export default function StrategicSolutions() {
                                 Daily Operations
                             </h4>
                             <ul className="space-y-2 text-sm text-slate-300">
-                                <li>• Certificate of Origin (Preferential/Non-Pref)</li>
-                                <li>• AD Code Registration</li>
-                                <li>• ICEGATE Profile Management</li>
-                                <li>• GST LUT Filing</li>
+                                {/* <li>• Certificate of Origin (Preferential/Non-Pref)</li> */}
+                                 <li>
+                                 <a
+                                        href="/services/certificate-of-origin"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                      •  Certificate of Origin (Preferential/Non-Pref)
+                                </a>
+                                </li>
+                                {/* <li>• AD Code Registration</li> */}
+                                <li>
+                                <a
+                                        href="/services/ad-code-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                       • AD Code Registration
+                                </a>
+                                </li>    
+                                {/* <li>• ICEGATE Profile Management</li> */}
+                                <li>
+                                 <a
+                                        href="/services/icegate-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                       • ICEGATE Profile Management
+                                </a> 
+                                </li>
+                                {/* <li>• GST LUT Filing</li> */}
+                                <li>
+                                 <a
+                                        href="/services/gst-lut-filing"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                       • GST LUT Filing
+                                </a> 
+                                </li>
                             </ul>
                         </div>
 
@@ -875,16 +1048,65 @@ export default function StrategicSolutions() {
                                 Payment Tracking
                             </h4>
                             <ul className="space-y-2 text-sm text-slate-300">
-                                <li>• e-BRC & EDPMS Closure</li>
-                                <li>• REX Registration (GSP)</li>
-                                <li>• No Due / No Incentive Certificates</li>
+                                {/* <li>• e-BRC & EDPMS Closure</li> */}
+                                <li>
+                                 <a
+                                        href="/services/edpms-ebrc"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                       • e-BRC & EDPMS Closure
+                                </a> 
+                                </li>
+                                {/* <li>• REX Registration (GSP)</li> */}
+                                 <li>
+                                 <a
+                                        href="/services/rex-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                       • REX Registration (GSP)
+                                </a> 
+                                </li>
+                                {/* <li>• No Due </li> */}
+                                 <li>
+                                 <a
+                                        href="/services/interest-equalisation-scheme"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                       • Interest Equalisation
+                                </a> 
+                                </li>
+                                {/* <li>• No Incentive Certificates</li> */}
+                                <li>
+                                 <a
+                                        href="/services/rodtep-rosctl-trading"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                       • Rodtep / Rosctl Script Trading
+                                </a> 
+                                </li>
                             </ul>
                         </div>
 
                     </div>
 
                     <button className="px-8 py-4 bg-white text-indigo-900 font-bold rounded-xl hover:bg-slate-100 transition shadow-lg">
-                        Get Retainer Quote (Starts ₹15k/mo)
+                        {/* Get Retainer Quote (Starts ₹25k/per months) */}
+                         <a
+                                        href="/services/certificate-of-origin"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        Get Exporter Quote (Starts ₹25k/per months)
+                                </a>
                     </button>
                 </div>
             </section>
@@ -919,7 +1141,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/cha-services" target="_blank" rel="noopener noreferrer">
                                     Customs Clearance
                                 </a>
                             </div>
@@ -933,7 +1155,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/warehousing-solutions" target="_blank" rel="noopener noreferrer">
                                     Bonded & General
                                 </a>
                             </div>
@@ -948,7 +1170,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/factory-stuffing" target="_blank" rel="noopener noreferrer">
                                     On-site Packing
                                 </a>
                             </div>
@@ -962,7 +1184,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/inland-transportation" target="_blank" rel="noopener noreferrer">
                                     Factory to Port
                                 </a>
                             </div>
@@ -978,7 +1200,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/dpd-registration" target="_blank" rel="noopener noreferrer">
                                     Direct Port Delivery
                                 </a>
                             </div>
@@ -993,7 +1215,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/project-cargo" target="_blank" rel="noopener noreferrer">
                                     ODC Handling
                                 </a>
                             </div>
@@ -1007,7 +1229,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/freight-forwarding" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/marine-insurance" target="_blank" rel="noopener noreferrer">
                                     Risk Coverage
                                 </a>
                             </div>
@@ -1050,61 +1272,189 @@ export default function StrategicSolutions() {
 
                                 <tr className="bg-white border-b hover:bg-slate-50">
                                     <td className="px-6 py-4 font-medium text-slate-900">
+                                        {/* IEC (Import Export Code) */}
+                                <a
+                                        href="/services/import-export-code"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         IEC (Import Export Code)
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* DSC (Digital Signature) */}
+                                <a
+                                        href="/services/icegate-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         DSC (Digital Signature)
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* ISO Certification */}
+                                <a
+                                        href="/services/iso-certification"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         ISO Certification
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* Trademark Registration */}
+                                <a
+                                        href="/services/trademark-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Trademark Registration
+                                </a>
                                     </td>
                                 </tr>
 
                                 <tr className="bg-white border-b hover:bg-slate-50">
                                     <td className="px-6 py-4 font-medium text-slate-900">
+                                        {/* E-RCMC Issuance */}
+                                 <a
+                                        href="/services/e-rcmc-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         E-RCMC Issuance
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* GST Returns */}
+                                 <a
+                                        href="/services/gst-returns"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         GST Returns
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* Star Export House */}
+                                 <a
+                                        href="/services/star-export-house"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Star Export House
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* Copyright Filing */}
+                                 <a
+                                        href="/services/copyright-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Copyright Filing
+                                </a>
                                     </td>
                                 </tr>
 
                                 <tr className="bg-white border-b hover:bg-slate-50">
                                     <td className="px-6 py-4 font-medium text-slate-900">
+                                        {/* GeM Registration */}
+                                 <a
+                                        href="/services/gem-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         GeM Registration
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* CA Certification */}
+                                 <a
+                                        href="/services/ca-certification-export-import"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         CA Certification
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* Halal Certification */}
+                                 <a
+                                        href="/services/halal-certification"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Halal Certification
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
-                                        Brand / Logo Protection
+                                        {/* Brand Registration */}
+                                 <a
+                                        href="/services/brand-copyright"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
+                                        Brand 
+                                </a>
                                     </td>
                                 </tr>
 
                                 <tr className="bg-white hover:bg-slate-50">
                                     <td className="px-6 py-4 font-medium text-slate-900">
+                                        {/* Customs License */}
+                                 <a
+                                        href="/services/customs-license-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Customs License
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* Barcode Registration */}
+                                 <a
+                                        href="/services/barcode-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Barcode Registration
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* Compliance Audit */}
+                                 <a
+                                        href="/services/compliance-audit"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Compliance Audit
+                                </a>
                                     </td>
                                     <td className="px-6 py-4">
+                                        {/* Design Registration */}
+                                 <a
+                                        href="/services/design-registration"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-blue-600 transition"
+                                    >
                                         Design Registration
+                                </a>
                                     </td>
                                 </tr>
 
