@@ -4,10 +4,24 @@ const QuickForm = () => {
   const [port, setPort] = useState("Nhava Sheva (INNSA1)");
   const [bank, setBank] = useState("");
   const [mobile, setMobile] = useState("");
+  const [formData, setFormData] = useState({
+  portCategory: "",
+});
 
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
+
+// const handleSubmit = () => {
+//   console.log(formData.portCategory);
+// };
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(formData.portCategory);
     if (!bank || !mobile) {
       alert("Please fill all required fields.");
       return;
@@ -28,6 +42,23 @@ const QuickForm = () => {
       <form onSubmit={handleSubmit}>
         
         {/* Port Select */}
+
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-1">Port Category</label>
+          <select
+            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            value={port}
+            onChange={(e) => setPort(e.target.value)}
+          >
+            <option>Select Port Category</option>
+            <option>Sea Port</option>
+            <option>Air Port</option>
+            <option>ICD</option>
+            <option>Land Port</option>
+          </select>
+        </div>
+
+
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">Select Port</label>
           <select
@@ -42,6 +73,25 @@ const QuickForm = () => {
             <option>Other / ICD</option>
           </select>
         </div>
+
+  {/* <div className="mb-4">
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Port Category
+  </label>
+
+  <select
+    name="portCategory"
+    value={formData.portCategory}
+    onChange={handleChange}
+    className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500"
+  >
+    <option value="">Select Port Category</option>
+    <option value="Sea Port">Sea Port</option>
+    <option value="Air Port">Air Port</option>
+    <option value="ICD">ICD</option>
+    <option value="Land Port">Land Port</option>
+  </select>
+</div> */}
 
         {/* Bank Name */}
         <div className="mb-4">

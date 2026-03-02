@@ -1,7 +1,9 @@
 // import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskDigitalSignatures/Navbar";
 import Hero from "../components/CloudDeskDigitalSignatures/Hero";
 import Fees from "../components/CloudDeskDigitalSignatures/Fees";
+import {ModalEnroll} from "../components/CloudDeskDigitalSignatures/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -22,13 +24,33 @@ import {
 import { MainNavbar } from "../components/CloudDeskDigitalSignatures/MainNavbar";
 
 const CloudDeskDigitalSignatures = () => {
+      const [showEnrollModal, setShowEnrollModal] = useState({
+        open: false,
+        type: "",
+      });
+          const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+      
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -133,7 +155,7 @@ const CloudDeskDigitalSignatures = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

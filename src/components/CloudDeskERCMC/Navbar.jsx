@@ -8,6 +8,9 @@ const Navbar = () => {
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
+          <a href="#home" className="hover:text-brand-600 transition">
+            Home
+          </a>
           <a href="#about" class="hover:text-brand-600 transition">
             What is RCMC?
           </a>
@@ -24,7 +27,7 @@ const Navbar = () => {
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
         <a 
-          href="#process"
+          href="#home"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now

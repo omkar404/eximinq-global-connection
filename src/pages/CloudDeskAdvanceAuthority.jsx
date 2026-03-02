@@ -202,7 +202,7 @@ const CloudDeskAdvanceAuthority = () => {
 
               <div className="mt-8 text-center">
                 <a
-                  href="#contact"
+                  href="#redemption"
                   className="bg-white text-brand-900 font-bold py-3 px-6 rounded hover:bg-slate-100 transition"
                 >
                   Consult an Expert
@@ -370,13 +370,25 @@ const CloudDeskAdvanceAuthority = () => {
                 clear backlogs.
               </p>
 
-              <a
+              {/* <a
                 href="#contact"
                 className="mt-6 inline-block border border-white px-6 py-2 rounded 
               hover:bg-white hover:text-slate-900 transition"
               >
                 Get Help Now
-              </a>
+              </a> */}
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Pending_EODC",
+                  })
+                }
+                className="mt-6 inline-block border border-white px-6 py-2 rounded 
+              hover:bg-white hover:text-slate-900 transition"
+              >
+                Get Help Now
+              </button>
             </div>
           </div>
         </div>

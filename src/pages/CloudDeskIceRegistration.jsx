@@ -181,7 +181,7 @@ const IECRegistration = () => {
 
                 <div className="mt-6">
                   <a
-                    href="#contact"
+                    href="#pricing"
                     className="inline-block bg-brand-600 text-white font-bold py-3 px-6 rounded hover:bg-brand-700 transition"
                   >
                     Register AD Code Now

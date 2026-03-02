@@ -253,7 +253,7 @@ const IECManagement = () => {
       </section>
 
       {/* Mandatory Compliance Section */}
-      <section className="py-20 bg-white">
+      <section id="benefits"className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="bg-red-50 border-l-8 border-red-500 rounded-lg p-8 shadow-sm">
             <div className="flex flex-col md:flex-row gap-6 items-start">
@@ -295,7 +295,7 @@ const IECManagement = () => {
                 </ul>
 
                 <a
-                  href="#contact"
+                  href="#fees"
                   className="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded hover:bg-red-700 transition"
                 >
                   File Annual Update Now
@@ -867,7 +867,7 @@ const IECManagement = () => {
                   Fees
                 </a>
               </li>
-            </ul>
+           </ul>
           </div>
 
           {/* OTHER SERVICES */}

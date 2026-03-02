@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { X, Handshake, Building, Mail } from "lucide-react";
+import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose, onSubmit }) => {
+export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -11,6 +11,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
     partner: false,
   });
 
+  const isApplyapplication = type === "Start_Application";
+
+  const [category, setCategory] = useState("");
+  const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
 
   if (!show) return null;
@@ -52,7 +56,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-
         {/* Header */}
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
           <div>
@@ -77,7 +80,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
         {/* Body */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
-
             {/* Name + Mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -123,7 +125,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                 Entity Name
               </label>
               <div className="relative">
-                <Building className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Building
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="text"
                   name="entity"
@@ -141,7 +146,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                 Email ID
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Mail
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="email"
                   name="email"
@@ -156,6 +164,27 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
               )}
             </div>
+
+            {isApplyapplication && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  CATEGORY
+                </label>
+                <div className="relative">
+                  <FileSignature
+                    className="absolute left-3 top-3 text-gray-400"
+                    size={16}
+                  />
+                  <input
+                    type="text"
+                    name="service"
+                    value="Status Certification"
+                    readOnly
+                    className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Role Selection */}
             <div>
@@ -190,7 +219,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
                         </span>
                       </label>
                     );
-                  }
+                  },
                 )}
               </div>
               {errors.role && (
@@ -227,7 +256,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit }) => {
             >
               Submit Enrollment
             </button>
-
           </form>
         </div>
       </div>

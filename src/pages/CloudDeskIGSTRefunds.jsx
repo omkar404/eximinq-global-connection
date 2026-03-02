@@ -1,7 +1,9 @@
 // import TopBar from "../components/CloudDeskIGSTRefunds/TopBar";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskIGSTRefunds/Navbar";
 import Hero from "../components/CloudDeskIGSTRefunds/Hero";
 import Fees from "../components/CloudDeskIGSTRefunds/Fees";
+import {ModalEnroll} from "../components/CloudDeskIGSTRefunds/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -26,13 +28,34 @@ import {
 import { MainNavbar } from "../components/CloudDeskIGSTRefunds/MainNavbar";
 
 const CloudDeskIGSTRefunds = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+            open: false,
+            type: "",
+          });
+
+  const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+            
+      
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
       <section id="about" class="py-20 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
@@ -255,12 +278,24 @@ const CloudDeskIGSTRefunds = () => {
               </div>
 
               <div className="mt-6 text-center">
-                <a
+                {/* <a
                   href="#home"
                   className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
                 >
                   Start Recovery
-                </a>
+                </a> */}
+
+                 <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Start_Recovery",
+                  })
+                }
+                className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
+              >
+                Start Recovery
+              </button>
               </div>
             </div>
           </div>

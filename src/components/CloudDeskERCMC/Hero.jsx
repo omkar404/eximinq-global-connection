@@ -2,7 +2,7 @@ import QuickForm from "./QuickForm";
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
+    <section id="home" className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
 
         {/* TEXT SECTION */}
@@ -17,7 +17,7 @@ const Hero = () => {
                     Claim RoDTEP, RoSCTL, and Duty Drawback. We help you identify the correct Export Promotion Council (EPC) based on your HSN Code and file for your E-RCMC instantly.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#process" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#panels" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Find My Council
                     </a>
                     <a href="#process" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
