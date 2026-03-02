@@ -29,7 +29,15 @@ import { MainNavbar } from "../components/CloudDeskExportHouse/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskExportHouse/ModalEnroll";
 
 const CloudDeskExportHouse = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+  console.log("Enrollment Submitted:", formData);
+
+  alert("Form submitted — check console for data.");
 
   const Stars = ({ count }) => (
     <div className="flex gap-1">
@@ -37,7 +45,7 @@ const CloudDeskExportHouse = () => {
         <Star key={i} size={16} className="text-yellow-500 fill-yellow-500" />
       ))}
     </div>
-  );
+)};
 
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -48,8 +56,10 @@ const CloudDeskExportHouse = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -114,7 +124,7 @@ const CloudDeskExportHouse = () => {
                   </td>
                   <td className="px-6 py-4 font-bold">USD 3 Million</td>
                   <td className="px-6 py-4">
-                    <Stars count={1} />
+                    <Star count={1} />
                   </td>
                 </tr>
 
@@ -124,7 +134,7 @@ const CloudDeskExportHouse = () => {
                   </td>
                   <td className="px-6 py-4 font-bold">USD 15 Million</td>
                   <td className="px-6 py-4">
-                    <Stars count={2} />
+                    <Star count={2} />
                   </td>
                 </tr>
 
@@ -134,7 +144,7 @@ const CloudDeskExportHouse = () => {
                   </td>
                   <td className="px-6 py-4 font-bold">USD 50 Million</td>
                   <td className="px-6 py-4">
-                    <Stars count={3} />
+                    <Star count={3} />
                   </td>
                 </tr>
 
@@ -144,7 +154,7 @@ const CloudDeskExportHouse = () => {
                   </td>
                   <td className="px-6 py-4 font-bold">USD 200 Million</td>
                   <td className="px-6 py-4">
-                    <Stars count={4} />
+                    <Star count={4} />
                   </td>
                 </tr>
 
@@ -154,7 +164,7 @@ const CloudDeskExportHouse = () => {
                   </td>
                   <td className="px-6 py-4 font-bold">USD 800 Million</td>
                   <td className="px-6 py-4">
-                    <Stars count={5} />
+                    <Star count={5} />
                   </td>
                 </tr>
               </tbody>
@@ -306,7 +316,7 @@ const CloudDeskExportHouse = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees  setShowEnrollModal={setShowEnrollModal}/>
 
               {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
                     <section className="py-20 bg-white">

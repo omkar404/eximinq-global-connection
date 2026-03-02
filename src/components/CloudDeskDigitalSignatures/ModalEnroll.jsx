@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
+import { X, Handshake, Building, Mail ,FileSignature} from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -33,9 +33,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setIssue("");
   };
 
-
-  const Applyapplication = type === "Pending_EODC";
-  const isApplyapplication = type === "New_Advance_License_Request";
+  const ApplyapplicatonDgft = type === "DGFT_ICEGATE";
+  const Applyapplication = type === "Combo_Pack";
 
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
@@ -44,13 +43,15 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "IEC SUSPENSION",
   ];
 
-  const PROFILE_UPDATE_OPTIONS = [
-    "Change in Address",
-    "Change in Directors / Partners",
-    "Addition / Deletion of Branch Address",
-    "Change in Bank Account",
-    "Change in Preferred Sectors",
-  ];
+const PROFILE_UPDATE_OPTIONS = [
+  "Steel Import NOC (SIMS)",
+  "Copper (NFMIMS)",
+  "Aluminium (NFMIMS)",
+  "Coal (CIMS)",
+  "Paper (PIMS)",
+  "Chip (CHIMS)",
+];
+
 
   const handleClose = () => {
     resetFrom();
@@ -270,10 +271,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 </div>
               </>
             )}
+
               {Applyapplication && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1">
-                  CATEGORY
+                  SERVICE CATEGORY
                 </label>
                 <div className="relative">
                   <FileSignature
@@ -283,7 +285,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <input
                     type="text"
                     name="service"
-                    value="Pending EODC"
+                    value="Dsc Service Combo Pack"
                     readOnly
                     className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
                   />
@@ -291,11 +293,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             )}
 
-
-            {isApplyapplication && (
+              {ApplyapplicatonDgft && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1">
-                  CATEGORY
+                  SERVICE CATEGORY
                 </label>
                 <div className="relative">
                   <FileSignature
@@ -305,13 +306,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <input
                     type="text"
                     name="service"
-                    value="New Advance License Request"
+                    value="Dsc Service for DGFT / ICEGATE"
                     readOnly
                     className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
                   />
                 </div>
               </div>
             )}
+
 
             {/* Role Selection */}
             <div>

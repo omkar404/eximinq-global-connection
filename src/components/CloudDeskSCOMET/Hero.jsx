@@ -17,7 +17,7 @@ const Hero = () => {
                     Exporting chemicals, electronics, or aerospace parts? They might be "Dual-Use". Ensure compliance with India's rigorous SCOMET regulations to avoid customs seizure.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#home" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         New SCOMET License Request
                     </a>
                     <a href="#contact" className="bg-white text-brand-900 hover:bg-slate-100 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">

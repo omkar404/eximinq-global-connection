@@ -48,6 +48,9 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "Change in Preferred Sectors",
   ];
 
+  const isADCode = type === "AD_Code_Registration"
+  const isIFSC = type === "IFSC_Registration"
+
   const handleClose = () => {
     resetFrom();
     onClose();
@@ -241,6 +244,37 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 </select>
               </div>
             )}
+
+
+            {isADCode && (
+            <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Category
+                </label>
+                <input
+                  type="text"
+                  value="AD Code Registration"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+)}
+
+
+
+            {isIFSC && (
+            <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Category
+                </label>
+                <input
+                  type="text"
+                  value="IFSC Registration"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+)}
 
             {isEnroll && (
               <>

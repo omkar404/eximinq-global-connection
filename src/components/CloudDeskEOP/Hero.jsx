@@ -16,10 +16,10 @@ const Hero = ({ setShowEnrollModal }) => {
                     Missed your export deadline? Don't let your license expire. We help you extend the validity of Advance Authorisation & EPCG licenses by paying minimal composition fees.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#fees" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Check Eligibility
                     </a>
-                    <a href="#fees" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
+                    <a href="#contact" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Calculate Fee
                     </a>
                 </div>

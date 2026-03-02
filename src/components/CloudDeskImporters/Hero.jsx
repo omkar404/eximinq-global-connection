@@ -1,12 +1,12 @@
 import QuickForm from "./QuickForm";
 
-const Hero = () => {
+const Hero = ({setShowEnrollModal}) => {
   return (
-    <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
+    <section id="home"className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
 
         {/* TEXT SECTION */}
-<div>
+                <div>
                 <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full mb-4 border border-white/30">
                     ONE-STOP COMPLIANCE SHOP
                 </span>
@@ -20,9 +20,20 @@ const Hero = () => {
                     <a href="#ims" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         View IMS Services
                     </a>
-                    <a href="#contact" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
+                    {/* <a href="#process" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Contact Us
-                    </a>
+                    </a> */}
+              {/* <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Need_Help",
+                  })
+                }
+                className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition"
+              >
+                Contact Us
+              </button> */}
                 </div>
             </div>
 

@@ -60,7 +60,7 @@
 
 import { CheckCircle } from "lucide-react";
 
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
@@ -101,12 +101,23 @@ const Fees = () => {
             </ul>
 
             {/* Button */}
-            <a
+            {/* <a
               href="tel:+917400096950"
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Get Expert Help
-            </a>
+            </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Get_Expert_Help",
+                  })
+                }
+                className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
+              >
+                Get Expert Help
+              </button>
           </div>
         </div>
       </div>

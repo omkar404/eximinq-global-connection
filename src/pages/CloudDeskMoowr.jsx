@@ -54,12 +54,12 @@ const CloudDeskAEOCertificate = () => {
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
-            <ModalEnroll
-              show={showEnrollModal.open}
-              type={showEnrollModal.type}
-              onClose={() => setShowEnrollModal({ open: false, type: "" })}
-              onSubmit={handleEnrollmentSubmit}
-            />
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -331,7 +331,7 @@ const CloudDeskAEOCertificate = () => {
       </section>
 
       {/* Dynamic Fees Section */}
-      <Fees />
+      <Fees  setShowEnrollModal={setShowEnrollModal}/>
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

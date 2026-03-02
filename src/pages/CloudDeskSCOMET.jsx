@@ -3,6 +3,7 @@ import TopBar from "../components/CloudDeskSCOMET/TopBar";
 import Navbar from "../components/CloudDeskSCOMET/Navbar";
 import Hero from "../components/CloudDeskSCOMET/Hero";
 import Fees from "../components/CloudDeskSCOMET/Fees";
+import {ModalEnroll} from "../components/CloudDeskSCOMET/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -26,12 +27,12 @@ import {
   Mail
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskSCOMET/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskSCOMET/ModalEnroll";
+
 
 const CloudDeskSCOMET = () => {
     const [showEnrollModal, setShowEnrollModal] = useState({
       open: false,
-      type: null,
+      type: "",
     });
   
     const handleEnrollmentSubmit = (formData) => {
@@ -384,12 +385,23 @@ const CloudDeskSCOMET = () => {
                   allows bulk approval for 3 years.
                 </p>
 
-                <a
+                {/* <a
                   href="#home" 
                   className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
                 >
                   Check GAEC Eligibility
-                </a>
+                </a> */}
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Check_GAEC_Eligibility",
+                  })
+                }
+                className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
+              >
+                Check GAEC Eligibility
+              </button>  
               </div>
             </div>
           </div>

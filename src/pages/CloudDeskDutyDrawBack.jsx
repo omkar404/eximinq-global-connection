@@ -1,7 +1,9 @@
-import TopBar from "../components/CloudDeskDutyDrawBack/TopBar";
+import { useState } from "react";
+// import TopBar from "../components/CloudDeskDutyDrawBack/TopBar";
 import Navbar from "../components/CloudDeskDutyDrawBack/Navbar";
 import Hero from "../components/CloudDeskDutyDrawBack/Hero";
 import Fees from "../components/CloudDeskDutyDrawBack/Fees";
+import {ModalEnroll} from "../components/CloudDeskDutyDrawBack/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -29,13 +31,34 @@ import {
 import { MainNavbar } from "../components/CloudDeskDutyDrawBack/MainNavbar";
 
 const CloudDeskDutyDrawBack = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+          open: false,
+          type: "",
+        });
+
+          const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+            
+      
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -117,12 +140,23 @@ const CloudDeskDutyDrawBack = () => {
                 </ul>
               </div>
 
-              <a
+              {/* <a
                 href="#home"
                 className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
               >
+                Apply for Brand Rate 
+              </a> */}
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Duty_Brand_Rate",
+                  })
+                }
+                className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
+              >
                 Apply for Brand Rate
-              </a>
+              </button>
             </div>
 
             {/* RIGHT SIDE */}

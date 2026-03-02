@@ -53,6 +53,8 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
     "Change in Prefered Sectors"
   ];
 
+  // const Applyapplication = type === "Apply_StartApplication"
+
   const isEnroll = type === "import-export-code-Apply";
 
   const icehoursform = type === "Get IEC in 24 Hours(IEC Registration";
@@ -349,6 +351,21 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
                 </select>
               </div>
             )}
+
+{/* {Applyapplication && (
+  <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Selected Certificate Type
+                </label>
+                <input
+                  type="text"
+                  value="Startup / Small Plan"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+)} */}
+
 
             {predefinedService && (
               <div>
