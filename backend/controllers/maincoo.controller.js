@@ -3,29 +3,38 @@ const nodemailer = require("nodemailer");
 const { getISTTime, getISTDateString } = require("../utils/dateTime");
 
 const ALLOWED_ENROLL_TYPES = [
+  "ENROLL",
   "certificate_of_origin_enroll",
   "HERO",
-  "PREFERENTIAL",
-  "NON_PREFERENTIAL",
+  "PREFERENTIAL_COO",
+  "NON_PREFERENTIAL_COO",
   "CTA",
   "FooterCTA",
+  "Startup_Small_Plan",
+  "MID_SIZE_EXPORTER_PLAN",
+  "LARGE_EXPORTER_PLAN",
 ];
 
 const ENROLL_TYPE_LABELS = {
+  ENROLL: "Enrollment",
   certificate_of_origin_enroll: "Certificate of Origin – Enrollment",
   HERO: "COO – Hero Section Enrollment",
-  PREFERENTIAL: "Preferential Certificate of Origin",
-  NON_PREFERENTIAL: "Non-Preferential Certificate of Origin",
+  PREFERENTIAL_COO: "Preferential Certificate of Origin",
+  NON_PREFERENTIAL_COO: "Non-Preferential Certificate of Origin",
+  STARTUP_SMALL_PLAN: "Startup Small Plan",
+  MID_SIZE_EXPORTER_PLAN: "Mid-Size Exporter Plan",
+  LARGE_EXPORTER_PLAN: "Large Exporter Plan",
   CTA: "COO – CTA Enrollment",
   FooterCTA: "COO – Footer CTA Enrollment",
 };
 
 const PREFERENTIAL_OPTIONS = [
-  "SAPTA / SAFTA",
-  "ASEAN-India FTA (AIFTA)",
-  "India-UAE CEPA",
-  "GSP (Generalized System of Preferences)",
-  "Free Trade Agreements (FTAs) - Others",
+  // "SAPTA / SAFTA",
+  // "ASEAN-India FTA (AIFTA)",
+  // "India-UAE CEPA",
+  // "GSP (Generalized System of Preferences)",
+  // "Free Trade Agreements (FTAs) - Others",
+  "PREFERENTIAL_COO",
 ];
 
 const NON_PREFERENTIAL_OPTIONS = [
@@ -83,40 +92,40 @@ exports.createcooEnroll = async (req, res) => {
     }
 
     /* 🔥 TYPE-BASED RULES */
-    switch (type) {
-      case "HERO":
-        if (!flow || !["preferential", "non_preferential"].includes(flow)) {
-          return res.status(400).json({
-            success: false,
-            error: "Invalid HERO flow",
-          });
-        }
-        break;
+    // switch (type) {
+    //   case "HERO":
+    //     if (!flow || !["preferential", "non_preferential"].includes(flow)) {
+    //       return res.status(400).json({
+    //         success: false,
+    //         error: "Invalid HERO flow",
+    //       });
+    //     }
+    //     break;
 
-      case "PREFERENTIAL":
-        if (!PREFERENTIAL_OPTIONS.includes(cooType)) {
-          return res.status(400).json({
-            success: false,
-            error: "Invalid Preferential COO type",
-          });
-        }
-        break;
+    //   case "PREFERENTIAL_COO":
+    //     if (!PREFERENTIAL_OPTIONS.includes(cooType)) {
+    //       return res.status(400).json({
+    //         success: false,
+    //         error: "Invalid Preferential COO type",
+    //       });
+    //     }
+    //     break;
 
-      case "NON_PREFERENTIAL":
-        if (!NON_PREFERENTIAL_OPTIONS.includes(cooType)) {
-          return res.status(400).json({
-            success: false,
-            error: "Invalid Non-Preferential COO type",
-          });
-        }
-        break;
+    //   case "NON_PREFERENTIAL_COO":
+    //     if (!NON_PREFERENTIAL_OPTIONS.includes(cooType)) {
+    //       return res.status(400).json({
+    //         success: false,
+    //         error: "Invalid Non-Preferential COO type",
+    //       });
+    //     }
+    //     break;
 
-      case "CTA":
-      case "FooterCTA":
-      case "certificate_of_origin_enroll":
-        // No extra validation
-        break;
-    }
+    //   case "CTA":
+    //   case "FooterCTA":
+    //   case "certificate_of_origin_enroll":
+    //     // No extra validation
+    //     break;
+    // }
 
     const istDate = getISTDateString();
     const istTime = getISTTime();

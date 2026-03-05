@@ -14,6 +14,9 @@ export const ModalEnroll = ({ show, onClose, type }) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  const startup = type === "Startup_Small_Plan";
+  const midsize = type === "MID_SIZE_EXPORTER_PLAN";
+  const large = type === "LARGE_EXPORTER_PLAN";
   const isPreferentialCOO = type === "PREFERENTIAL_COO";
   const isNonPreferentialCOO = type === "NON_PREFERENTIAL_COO";
 
@@ -67,13 +70,17 @@ export const ModalEnroll = ({ show, onClose, type }) => {
         ...form,
         type,
         certificateType:
-          type === "PREFERENTIAL_COO" || type === "NON_PREFERENTIAL_COO"
+          type === "PREFERENTIAL_COO" || type === "NON_PREFERENTIAL_COO"||
+          type === "Startup_Small_Plan" ||
+          type === "MID_SIZE_EXPORTER_PLAN" ||
+          type === "LARGE_EXPORTER_PLAN"
             ? type
             : null,
       };
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/coo-enroll`,
+        // `${process.env.REACT_APP_API_URL}/api/coo-enroll`,
+        'http://localhost:5000/api/coo-enroll',
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -82,6 +89,8 @@ export const ModalEnroll = ({ show, onClose, type }) => {
       );
 
       const data = await res.json();
+
+      console.log("Enroll response:", data);
 
       if (!res.ok || !data.success) {
         throw new Error(data.error || "API failed");
@@ -219,6 +228,48 @@ export const ModalEnroll = ({ show, onClose, type }) => {
                       ? "Preferential CoO"
                       : "Non-Preferential CoO"
                   }
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {(startup) && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Selected Certificate Type
+                </label>
+                <input
+                  type="text"
+                  value="Startup / Small Plan"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {(midsize) && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Selected Certificate Type
+                </label>
+                <input
+                  type="text"
+                  value="Mid-Size Exporter Plan"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {(large) && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Selected Certificate Type
+                </label>
+                <input
+                  type="text"
+                  value="Large-Size Exporter Plan"
                   disabled
                   className="w-full p-3 rounded-lg border bg-gray-100"
                 />

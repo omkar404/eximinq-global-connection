@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState, useEffect } from "react";
 import { Navbar } from "../components/CloudDeskHome/Navbar";
 import { MobileMenu } from "../components/CloudDeskHome/MobileMenu";
@@ -15,10 +16,10 @@ import IndustrySection from "../components/CloudDeskHome/IndustriesSection";
 import BentoGrid from "../components/CloudDeskHome/BentoGrid";
 
 const CloudDeskHome = () => {
-      const [showEnrollModal, setShowEnrollModal] = useState({
-        open: false,
-        type: null,
-      });
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("dgft");
   const [scrolled, setScrolled] = useState(false);
@@ -135,71 +136,127 @@ const CloudDeskHome = () => {
   // ─────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen font-sans text-gray-800 bg-gray-50 flex flex-col relative">
-      {/* NAVIGATION */}
-      <Navbar
-        scrolled={scrolled}
-        setShowEnrollModal={setShowEnrollModal}
-        isMenuOpen={isMenuOpen}
-        setIsMenuOpen={setIsMenuOpen}
-      />
+    <>
+      <Helmet>
+        <title>
+          Eximinq CloudDesk | DGFT, Customs & Export Compliance Experts in India
+        </title>
 
-      <MobileMenu
-        isMenuOpen={isMenuOpen}
-        setShowEnrollModal={setShowEnrollModal}
-        setIsMenuOpen={setIsMenuOpen}
-      />
+        <meta
+          name="description"
+          content="Eximinq CloudDesk provides DGFT, Customs, ICEGATE, AD Code and E-RCMC registration services across India. Trusted export compliance experts."
+        />
 
-      {/* HERO */}
-      <Hero setShowEnrollModal={setShowEnrollModal} />
+        <link rel="canonical" href="https://eximinq.in/" />
 
-      {/* STATS */}
-      <StatsStrip />
+        {/* Open Graph */}
+        <meta property="og:title" content="Eximinq CloudDesk | Export Compliance Experts" />
+        <meta
+          property="og:description"
+          content="DGFT, Customs, ICEGATE and RCMC advisory services across India."
+        />
+        <meta property="og:url" content="https://eximinq.in/" />
+        <meta property="og:type" content="website" />
 
-      <BentoGrid />
+        {/* Organization Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Eximinq Global Connections",
+            "url": "https://eximinq.in",
+            "logo": "https://eximinq.in/logo.png",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+91-7400096950",
+              "contactType": "customer service",
+              "areaServed": "IN",
+              "availableLanguage": "English"
+            }
+          })}
+        </script>
 
-      <SegmentSection />
+        {/* Website Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Eximinq CloudDesk",
+            "url": "https://eximinq.in",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://eximinq.in/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+      </Helmet>
+      <div className="min-h-screen font-sans text-gray-800 bg-gray-50 flex flex-col relative">
+        {/* NAVIGATION */}
+        <Navbar
+          scrolled={scrolled}
+          setShowEnrollModal={setShowEnrollModal}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
 
-      <IndustrySection />
+        <MobileMenu
+          isMenuOpen={isMenuOpen}
+          setShowEnrollModal={setShowEnrollModal}
+          setIsMenuOpen={setIsMenuOpen}
+        />
 
-      {/* <StuckInCustoms setShowEnrollModal={setShowEnrollModal} /> */}
-      {/* MAIN CONTENT */}
-      <main className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-8">
-            {/* <SectionHeader /> */}
+        {/* HERO */}
+        <Hero setShowEnrollModal={setShowEnrollModal} />
 
-            {/* <UpdatesTabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
+        {/* STATS */}
+        <StatsStrip />
 
-            {/* <UpdatesList updates={updates} /> */}
+        <BentoGrid />
 
-            <StuckInCustoms setShowEnrollModal={setShowEnrollModal} />
+        <SegmentSection />
+
+        <IndustrySection />
+
+        {/* <StuckInCustoms setShowEnrollModal={setShowEnrollModal} /> */}
+        {/* MAIN CONTENT */}
+        <main className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-8">
+              {/* <SectionHeader /> */}
+
+              {/* <UpdatesTabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
+
+              {/* <UpdatesList updates={updates} /> */}
+
+              <StuckInCustoms setShowEnrollModal={setShowEnrollModal} />
+            </div>
+
+            <div className="lg:col-span-4">
+              <Sidebar
+                sectors={sectors}
+                // onEnrollClick={() => setShowEnrollModal(true)}
+                setShowEnrollModal={setShowEnrollModal}
+              />
+            </div>
           </div>
+        </main>
 
-          <div className="lg:col-span-4">
-            <Sidebar
-              sectors={sectors}
-              // onEnrollClick={() => setShowEnrollModal(true)}
-              setShowEnrollModal={setShowEnrollModal}
-            />
-          </div>
-        </div>
-      </main>
+        {/* FOOTER */}
+        <Footer
+          setShowEnrollModal={setShowEnrollModal}
+        // onEnrollClick={() => setShowEnrollModal(true)}
+        />
 
-      {/* FOOTER */}
-      <Footer 
-      setShowEnrollModal={setShowEnrollModal}
-      // onEnrollClick={() => setShowEnrollModal(true)}
-       />
-
-      {/* MODAL */}
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: "" })}
-        onSubmit={handleEnrollmentSubmit}
-      />
-    </div>
+        {/* MODAL */}
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
+      </div>
+    </>
   );
 };
 

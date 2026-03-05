@@ -42,19 +42,23 @@ const MainCooSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
+        "ENROLL",
         "certificate_of_origin_enroll",
         "HERO",
-        "PREFERENTIAL",
-        "NON_PREFERENTIAL",
+        "PREFERENTIAL_COO",
+        "NON_PREFERENTIAL_COO",
         "CTA",
         "FooterCTA",
+        "Startup_Small_Plan",
+        "MID_SIZE_EXPORTER_PLAN",
+        "LARGE_EXPORTER_PLAN",
       ],
     },
 
     /* HERO only */
     flow: {
       type: String,
-      enum: ["preferential", "non_preferential"],
+      enum: ["PREFERENTIAL_COO", "NON_PREFERENTIAL_COO"],
     },
 
     /* Preferential / Non-Preferential only */

@@ -1,7 +1,9 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskExportHouse/TopBar";
 import Navbar from "../components/CloudDeskExportHouse/Navbar";
 import Hero from "../components/CloudDeskExportHouse/Hero";
+
 import Fees from "../components/CloudDeskExportHouse/Fees";
 import {
   Check,
@@ -40,6 +42,136 @@ const CloudDeskExportHouse = () => {
   );
 
   return (
+    <>
+    <Helmet>
+  <title>
+    Star Export House Certificate Registration | Status Holder DGFT
+  </title>
+
+  <meta
+    name="description"
+    content="Apply for Star Export House (Status Holder) certificate under DGFT. Eligibility, export thresholds, benefits and application process explained."
+  />
+
+  <link
+    rel="canonical"
+    href="https://eximinq.in/services/star-export-house"
+  />
+
+  <meta
+    property="og:title"
+    content="Star Export House Certificate Registration | DGFT Status Holder"
+  />
+  <meta
+    property="og:description"
+    content="Eligibility thresholds, benefits and DGFT application process for Star Export House certificate in India."
+  />
+  <meta
+    property="og:url"
+    content="https://eximinq.in/services/star-export-house"
+  />
+  <meta property="og:type" content="article" />
+
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://eximinq.in"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Services",
+              "item": "https://eximinq.in/services"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Star Export House",
+              "item": "https://eximinq.in/services/star-export-house"
+            }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Star Export House Certificate Registration",
+          "serviceType": "DGFT Status Holder Certification",
+          "description":
+            "Application support for Star Export House (Status Holder) certificate under DGFT based on export performance thresholds.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Eximinq Global Connections",
+            "url": "https://eximinq.in"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "India"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What are the export thresholds for Star Export House status?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The current thresholds are USD 3 million for One Star, USD 15 million for Two Star, USD 50 million for Three Star, USD 200 million for Four Star and USD 800 million for Five Star based on FOB export value."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does double weightage apply to all star categories?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Double weightage is generally applicable only for achieving One Star status. Higher categories are calculated on actual FOB export value."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long is the Star Export House certificate valid?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The certificate is typically valid for five years or until the end of the applicable Foreign Trade Policy period, whichever is earlier."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the Bank Guarantee exemption benefit?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Status Holders may receive exemption from furnishing bank guarantees for certain DGFT schemes such as EPCG and Advance Authorisation, subject to conditions."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can Star Export Houses establish export warehouses?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Eligible status holders may establish export warehouses as permitted under Department of Revenue guidelines."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What can lead to cancellation of Star Export House status?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mis-declaration, non-fulfilment of export obligations or violations under the Foreign Trade Policy may result in suspension or cancellation."
+              }
+            }
+          ]
+        }
+      ]
+    })}
+  </script>
+</Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -548,22 +680,22 @@ const CloudDeskExportHouse = () => {
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Advance Authorisation
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   EPCG Scheme
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Status Holder
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   RoDTEP Scrips
                 </a>
               </li>
@@ -575,22 +707,22 @@ const CloudDeskExportHouse = () => {
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   FTP 2023 Guidelines
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   DGFT Notifications
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Weightage Criteria
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Certificate Validity
                 </a>
               </li>
@@ -626,6 +758,7 @@ const CloudDeskExportHouse = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

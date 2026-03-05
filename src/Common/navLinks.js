@@ -20,7 +20,7 @@ export const navLinks = [
     ],
   },
 
-  { name: "SAAS", path: "/clouddesk-saas" },
+  { name: "CloudDesk", path: "/clouddesk-saas" },
 
   { name: "Contact", path: "/contact-us" },
 ];

@@ -383,21 +383,15 @@ export default function StrategicSolutions() {
 
                             <ul className="space-y-2 text-sm text-slate-400 mb-4">
                                 <li>
-                                    <Link to="/sims" className="hover:text-white transition">
-                                        • SIMS (Steel Import)
-                                    </Link>
+                                    • SIMS (Steel Import)
                                 </li>
 
                                 <li>
-                                    <Link to="/nims" className="hover:text-white transition">
-                                        • NIMS (Coal Import)
-                                    </Link>
+                                     • NIMS (Coal Import)
                                 </li>
 
                                 <li>
-                                    <Link to="/pims" className="hover:text-white transition">
-                                        • PIMS (Paper/Chip Import)
-                                    </Link>
+                                    • PIMS (Paper/Chip Import)
                                 </li>
                             </ul>
 

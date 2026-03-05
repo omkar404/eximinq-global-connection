@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import TopBar from "../components/CloudDeskShippingBills/TopBar";
 import Navbar from "../components/CloudDeskShippingBills/Navbar";
 import Hero from "../components/CloudDeskShippingBills/Hero";
@@ -28,7 +29,153 @@ import {
 import { MainNavbar } from "../components/CloudDeskShippingBills/MainNavbar";
 
 const CloudDeskShippingBills = () => {
-  return (
+  <>
+    <Helmet>
+      <title>
+        Shipping Bill Filing Service in India | Export Customs Clearance
+      </title>
+
+      <meta
+        name="description"
+        content="Professional Shipping Bill filing service for export customs clearance in India. Documentation review, incentive declaration and ICEGATE submission support."
+      />
+
+      <link
+        rel="canonical"
+        href="https://eximinq.in/services/shipping-bill-filing"
+      />
+
+      <meta
+        property="og:title"
+        content="Shipping Bill Filing Service in India"
+      />
+      <meta
+        property="og:description"
+        content="Export Shipping Bill filing, LEO process, incentive declaration and EGM tracking support."
+      />
+      <meta
+        property="og:url"
+        content="https://eximinq.in/services/shipping-bill-filing"
+      />
+      <meta property="og:type" content="article" />
+
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://eximinq.in"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Services",
+                  "item": "https://eximinq.in/services"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Shipping Bill Filing",
+                  "item": "https://eximinq.in/services/shipping-bill-filing"
+                }
+              ]
+            },
+            {
+              "@type": "Service",
+              "name": "Shipping Bill Filing Service",
+              "serviceType": "Export Customs Clearance Filing",
+              "description":
+                "Shipping Bill preparation and filing for export clearance including incentive declaration, documentation review and ICEGATE submission.",
+              "provider": {
+                "@type": "Organization",
+                "name": "Eximinq Global Connections",
+                "url": "https://eximinq.in"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "India"
+              }
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "When should a Shipping Bill be filed?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A Shipping Bill must be filed before goods enter the customs area. In practice, exporters file it prior to cargo arrival to avoid delays at the port."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is \"LEO\" (Let Export Order)?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "LEO is the final approval granted by the customs officer permitting goods to be loaded for export. After LEO, amendments become difficult."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How do I ensure I get my RoDTEP and Duty Drawback?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, exporters may claim IGST refund and eligible duty drawback benefits, subject to scheme conditions and correct declaration."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can I claim IGST refund and Duty Drawback together?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The Export General Manifest (EGM) is filed by the carrier as proof that goods have left India. Refunds and incentives are processed only after EGM confirmation."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is the \"SB005\" error, and how does CloudDesk fix it?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Amendments are possible under Section 149 but require formal procedures and may involve additional scrutiny."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can I amend a Shipping Bill after the ship has sailed?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A checklist is a draft summary of the Shipping Bill details provided to the exporter for verification before final submission."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is an EGM, and why is it important for me?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A checklist is a draft summary of the Shipping Bill details provided to the exporter for verification before final submission."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is a \"Checklist\"?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A checklist is a draft summary of the Shipping Bill details provided to the exporter for verification before final submission."
+                  }
+                },                
+              ]
+            }
+          ]
+        })}
+      </script>
+    </Helmet>
+    return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -366,77 +513,77 @@ const CloudDeskShippingBills = () => {
       <Fees />
 
 
-        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
-              <section className="py-20 bg-white">
-                <div className="container mx-auto px-4 max-w-5xl">
-                  <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Shipping-Bill-Filing?</h2>
-                    <p className="text-slate-500">
-                        A Shipping Bill filed without "Incentive Strategy" is a direct loss of 3%–7% of your profit margin.
-                    </p>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    {/* Feature 1 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
-                        <AlertTriangle size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">1. Incentive "Auto-Optimizer"</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          Most exporters miss out on<strong> RoDTEP or Drawback </strong>because they use the wrong Scheme Code 
-                          <strong>(e.g., filing under "Free" instead of "Drawback").
-                          CloudDesk’s</strong> Incentive Engine maps your HSN code to every available government benefit, 
-                          ensuring all claimable amounts are declared before the Let Export Order (LEO) is generated.
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 2 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
-                        <CheckCircle size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">2. GSTN-E-Way Bill Integration</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                         For the first time in 2026, the <strong>"System Validation" </strong>between your <strong>E-Way Bill, GST Invoice, and Shipping Bill </strong>is instantaneous. 
-                         <strong>CloudDesk</strong> performs a Triple-Check Sync to ensure values, quantity, and <strong>HSN codes </strong>match perfectly, preventing the dreaded "SB005" error that blocks IGST refunds.
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 3 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
-                        <Building size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">3. Real-Time LEO Tracker</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          The moment the Customs officer grants the <strong>Let Export Order (LEO),</strong> your cargo is legally exported. 
-                          <strong>CloudDesk </strong>provides a Live Milestones Dashboard—from Goods Arrival to Examination to LEO and finally <strong>EGM (Export General Manifest)</strong>—so you can tell your buyer exactly when the ship is sailing.
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 4 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
-                        <ShieldUser size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">4. Digital EGM Automation</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          Your export is only "Complete" in the eyes of the law when the shipping line files the EGM. 
-                          If the <strong>EGM is not filed or has errors,</strong> your incentives are blocked. 
-                          <strong>CloudDesk </strong>Monitors EGM Status and automatically triggers a follow-up with the shipping line if it’s not filed within 48 hours of vessel sailing.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+      {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Shipping-Bill-Filing?</h2>
+            <p className="text-slate-500">
+              A Shipping Bill filed without "Incentive Strategy" is a direct loss of 3%–7% of your profit margin.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Feature 1 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                <AlertTriangle size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">1. Incentive "Auto-Optimizer"</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Most exporters miss out on<strong> RoDTEP or Drawback </strong>because they use the wrong Scheme Code
+                  <strong>(e.g., filing under "Free" instead of "Drawback").
+                    CloudDesk’s</strong> Incentive Engine maps your HSN code to every available government benefit,
+                  ensuring all claimable amounts are declared before the Let Export Order (LEO) is generated.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                <CheckCircle size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">2. GSTN-E-Way Bill Integration</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  For the first time in 2026, the <strong>"System Validation" </strong>between your <strong>E-Way Bill, GST Invoice, and Shipping Bill </strong>is instantaneous.
+                  <strong>CloudDesk</strong> performs a Triple-Check Sync to ensure values, quantity, and <strong>HSN codes </strong>match perfectly, preventing the dreaded "SB005" error that blocks IGST refunds.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                <Building size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">3. Real-Time LEO Tracker</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  The moment the Customs officer grants the <strong>Let Export Order (LEO),</strong> your cargo is legally exported.
+                  <strong>CloudDesk </strong>provides a Live Milestones Dashboard—from Goods Arrival to Examination to LEO and finally <strong>EGM (Export General Manifest)</strong>—so you can tell your buyer exactly when the ship is sailing.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                <ShieldUser size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 mb-2">4. Digital EGM Automation</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Your export is only "Complete" in the eyes of the law when the shipping line files the EGM.
+                  If the <strong>EGM is not filed or has errors,</strong> your incentives are blocked.
+                  <strong>CloudDesk </strong>Monitors EGM Status and automatically triggers a follow-up with the shipping line if it’s not filed within 48 hours of vessel sailing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
@@ -488,10 +635,10 @@ const CloudDeskShippingBills = () => {
               </summary>
 
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               "You must mention the Scheme Code in the Shipping Bill.
-               • RoDTEP: Use the specific code for the Remission of Duties and Taxes on Exported Products.
-               • Drawback: Mention the DBK Schedule number and ""Brand Rate"" or ""All Industry Rate.""
-               CloudDesk’s Scheme Validator does this for you automatically based on your product."
+                "You must mention the Scheme Code in the Shipping Bill.
+                • RoDTEP: Use the specific code for the Remission of Duties and Taxes on Exported Products.
+                • Drawback: Mention the DBK Schedule number and ""Brand Rate"" or ""All Industry Rate.""
+                CloudDesk’s Scheme Validator does this for you automatically based on your product."
 
               </p>
             </details>
@@ -499,7 +646,7 @@ const CloudDeskShippingBills = () => {
             {/* Question 4 */}
             <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
               <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-               Can I claim IGST refund and Duty Drawback together?
+                Can I claim IGST refund and Duty Drawback together?
                 <ChevronDown
                   size={20}
                   className="text-brand-500 transition-transform group-open:rotate-180"
@@ -507,14 +654,14 @@ const CloudDeskShippingBills = () => {
               </summary>
 
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               Yes. You can claim the refund of the IGST paid on exports and also claim the "All Industry Rate" of Duty Drawback (for the Customs portion). CloudDesk ensures your declaration is set up to receive both without manual intervention.
+                Yes. You can claim the refund of the IGST paid on exports and also claim the "All Industry Rate" of Duty Drawback (for the Customs portion). CloudDesk ensures your declaration is set up to receive both without manual intervention.
               </p>
             </details>
 
             {/* Question 5 */}
             <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
               <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What is the "SB005" error, and how does CloudDesk fix it? 
+                What is the "SB005" error, and how does CloudDesk fix it?
                 <ChevronDown
                   size={20}
                   className="text-brand-500 transition-transform group-open:rotate-180"
@@ -522,7 +669,7 @@ const CloudDeskShippingBills = () => {
               </summary>
 
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               This is a "Data Mismatch" error between ICEGATE and GSTN. It is the #1 reason IGST refunds are delayed. CloudDesk’s Pre-Filing Sync catches these mismatches (like a missing 'dot' in the address or a 1-paise difference in value) before you hit submit.
+                This is a "Data Mismatch" error between ICEGATE and GSTN. It is the #1 reason IGST refunds are delayed. CloudDesk’s Pre-Filing Sync catches these mismatches (like a missing 'dot' in the address or a 1-paise difference in value) before you hit submit.
               </p>
             </details>
 
@@ -537,7 +684,7 @@ const CloudDeskShippingBills = () => {
               </summary>
 
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               Yes, but it requires a Section 149 Amendment and usually a physical hearing at the Customs house. It is time-consuming and can involve penalties. CloudDesk handles the drafting and follow-up for these "Post-LEO" amendments.
+                Yes, but it requires a Section 149 Amendment and usually a physical hearing at the Customs house. It is time-consuming and can involve penalties. CloudDesk handles the drafting and follow-up for these "Post-LEO" amendments.
               </p>
             </details>
 
@@ -552,14 +699,14 @@ const CloudDeskShippingBills = () => {
               </summary>
 
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               The Export General Manifest (EGM) is filed by the carrier (Shipping Line/Airline). It is the final proof that the goods have actually left India. Without a "Clean EGM" status, the GST department will not release your refund.
+                The Export General Manifest (EGM) is filed by the carrier (Shipping Line/Airline). It is the final proof that the goods have actually left India. Without a "Clean EGM" status, the GST department will not release your refund.
               </p>
             </details>
 
             {/* Question 8 */}
             <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
               <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              What is a "Checklist"?
+                What is a "Checklist"?
                 <ChevronDown
                   size={20}
                   className="text-brand-500 transition-transform group-open:rotate-180"
@@ -567,7 +714,7 @@ const CloudDeskShippingBills = () => {
               </summary>
 
               <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               Before the final Shipping Bill is generated, a "Checklist" is created. This is your last chance to verify all details. CloudDesk sends this checklist to your phone for a one-click "Approved" or "Edit" signal, ensuring no data is filed without your consent.
+                Before the final Shipping Bill is generated, a "Checklist" is created. This is your last chance to verify all details. CloudDesk sends this checklist to your phone for a one-click "Approved" or "Edit" signal, ensuring no data is filed without your consent.
               </p>
             </details>
           </div>
@@ -602,24 +749,24 @@ const CloudDeskShippingBills = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Shipping Bill Filing
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Bill of Entry Filing
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   AD Code Registration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   RoDTEP Scrip
                 </a>
               </li>
@@ -629,24 +776,24 @@ const CloudDeskShippingBills = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   HSN Code Finder
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Exchange Rates
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Drawback Schedule
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#" className="hover:text-white transition">
                   Container Tracking
                 </a>
               </li>
@@ -682,7 +829,8 @@ const CloudDeskShippingBills = () => {
         </div>
       </footer>
     </div>
-  );
+    );
+  </>
 };
 
 export default CloudDeskShippingBills;

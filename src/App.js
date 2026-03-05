@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import AnalyticsTracker from "./AnalyticsTracker";
+// import AnalyticsTracker from "./AnalyticsTracker";
 import Home from "./pages/Home";
 import ContactSupport from "./components/CloudDeskcharates/ContactSupport/ContactSupport";
 import CloudDeskHome from "./pages/CloudDeskHome";
@@ -116,8 +116,8 @@ import CloudDeskEPCGClosure from "./pages/CloudDeskEPCGClosure";
 function App() {
   return (
     <BrowserRouter>
-      <AnalyticsTracker />
-      <SEOManager />
+      {/* <AnalyticsTracker /> */}
+      {/* <SEOManager /> */}
       <Routes>
         {/* Charates Routes */}
         <Route path="/charates" element={<Home />} />

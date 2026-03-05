@@ -12,7 +12,7 @@ export const MainNavbar = ({
 }) => {
   return (
     <nav
-      className={`fixed w-full z-40 transition-all duration-300 top-8 ${scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
+      className={`fixed w-full z-40 transition-all duration-300 top-0 ${scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
         }`}
     >
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">

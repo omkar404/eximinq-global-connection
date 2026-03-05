@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskEOP/TopBar";
 import Navbar from "../components/CloudDeskEOP/Navbar";
@@ -36,560 +37,704 @@ const CloudDeskEOP = () => {
 
     alert("Form submitted — check console for data.");
   };
-;
+  ;
   return (
-    <div className="bg-slate-50 text-slate-800">
-      {/* Dynamic Sections */}
-      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      <Navbar setShowEnrollModal={setShowEnrollModal} />
-      <Hero setShowEnrollModal={setShowEnrollModal} />
+    <>
+      <Helmet>
+        <title>
+          Export Obligation Period (EOP) Extension | DGFT Compliance Support
+        </title>
 
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: null })}
-        onSubmit={handleEnrollmentSubmit}
-      />
+        <meta
+          name="description"
+          content="Apply for Export Obligation Period (EOP) extension under Advance Authorisation and EPCG. Composition fee calculation, PRC representation and DGFT filing support."
+        />
 
-      {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/eop-extension"
+        />
 
-      <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              Why Extend EOP?
-            </h2>
-            <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+        <meta property="og:title" content="EOP Extension Consultancy in India" />
+        <meta
+          property="og:description"
+          content="Professional support for DGFT Export Obligation Period extension, composition fee calculation and PRC representation."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/eop-extension"
+        />
+        <meta property="og:type" content="article" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://eximinq.in"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Services",
+                    "item": "https://eximinq.in/services"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "EOP Extension",
+                    "item": "https://eximinq.in/services/eop-extension"
+                  }
+                ]
+              },
+              {
+                "@type": "Service",
+                "name": "Export Obligation Period Extension",
+                "serviceType": "DGFT License Amendment",
+                "description":
+                  "Consultancy for Export Obligation Period (EOP) extension under Advance Authorisation and EPCG, including composition fee calculation and PRC representation.",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Eximinq Global Connections",
+                  "url": "https://eximinq.in"
+                },
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "India"
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "What is the standard Export Obligation Period (EOP)?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Export Obligation Period is the time allowed to complete export commitments under schemes like Advance Authorisation and EPCG."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Can I get an extension if my EOP has already expired?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes, but ex-post-facto extension involves higher composition fees and possible scrutiny from DGFT."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How many extensions can I get?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "It is calculated as a percentage of unfulfilled export obligation or proportionate duty saved amount."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How is the \"Composition Fee\" calculated?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "It is calculated as a percentage of unfulfilled export obligation or proportionate duty saved amount."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Is interest also charged for the extension period?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "No. If you get a valid EOP extension, you do not pay interest for that period. This is why getting an extension is always better than defaulting."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "What documents are required for an EOP extension?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "(1) A formal application via the DGFT portal, (2) A self-declaration of exports made so far, (3) Evidence of \"Genuine Hardship\" (like a fire report, strike notice, or bank letter), and (4) Proof of payment of the Composition Fee."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "What happens to my Bank Guarantee (BG) during the extension?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "You must extend the validity of your Bank Guarantee at Customs to match the new EOP. CloudDesk coordinates with your bank and the Customs department to ensure the BG remains active, preventing a \"BG Forfeiture\" action."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Can I get an extension for \"Deemed Exports\"?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes. If you are supplying to SEZs or EOU units in India (Deemed Exports), the same EOP rules and extension procedures apply as they do for physical exports."
+                    },
+                  }
+                ]
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+      <div className="bg-slate-50 text-slate-800">
+        {/* Dynamic Sections */}
+        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
+
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: null })}
+          onSubmit={handleEnrollmentSubmit}
+        />
+
+        {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
+
+        <section id="about" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                Why Extend EOP?
+              </h2>
+              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+            </div>
+            <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
+              <p className="mb-4">
+                Every export license comes with a fixed{" "}
+                <strong>Export Obligation Period (EOP)</strong>. For Advance
+                Authorisation, it is typically 18 months. For EPCG, it is 6 years.
+              </p>
+              [Image of EOP Timeline Diagram]
+              <p className="mb-4">
+                If you fail to complete the export obligation within this time,
+                you are liable to pay Customs Duty + Interest (15%). However, the
+                Foreign Trade Policy allows for an{" "}
+                <strong>Extension of EOP</strong> upon payment of a Composition
+                Fee. This is far cheaper than paying the duty with interest.
+              </p>
+            </div>
           </div>
-          <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
-            <p className="mb-4">
-              Every export license comes with a fixed{" "}
-              <strong>Export Obligation Period (EOP)</strong>. For Advance
-              Authorisation, it is typically 18 months. For EPCG, it is 6 years.
-            </p>
-            [Image of EOP Timeline Diagram]
-            <p className="mb-4">
-              If you fail to complete the export obligation within this time,
-              you are liable to pay Customs Duty + Interest (15%). However, the
-              Foreign Trade Policy allows for an{" "}
-              <strong>Extension of EOP</strong> upon payment of a Composition
-              Fee. This is far cheaper than paying the duty with interest.
-            </p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="types" className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-              Scheme Rules
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-              Extension Criteria
-            </h2>
-          </div>
-
-          {/* Cards */}
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Advance Authorisation */}
-            <div className="bg-white rounded-xl shadow-lg border-t-8 border-brand-600 overflow-hidden">
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  Advance Authorisation
-                </h3>
-                <p className="text-sm font-semibold text-slate-500 mb-6">
-                  Original EOP: 18 Months
-                </p>
-
-                <ul className="space-y-4 text-sm text-slate-600">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <span>
-                      <strong>1st Extension (6 Months):</strong> Allowed by
-                      paying Composition Fee of 0.5% of unfulfilled EO value.
-                    </span>
-                  </li>
-
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <span>
-                      <strong>2nd Extension (6 Months):</strong> Allowed by
-                      paying Composition Fee of 0.5% (Total 12 months extension
-                      possible).
-                    </span>
-                  </li>
-
-                  <li className="flex items-start gap-3">
-                    <AlertTriangle className="text-red-500 mt-1" size={18} />
-                    <span>
-                      Further extension requires approaching the{" "}
-                      <strong>Policy Relaxation Committee (PRC)</strong>.
-                    </span>
-                  </li>
-                </ul>
-              </div>
+        <section id="types" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Scheme Rules
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Extension Criteria
+              </h2>
             </div>
 
-            {/* EPCG Scheme */}
-            <div className="bg-white rounded-xl shadow-lg border-t-8 border-accent-500 overflow-hidden">
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  EPCG Scheme
-                </h3>
-                <p className="text-sm font-semibold text-slate-500 mb-6">
-                  Original EOP: 6 Years
+            {/* Cards */}
+            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+              {/* Advance Authorisation */}
+              <div className="bg-white rounded-xl shadow-lg border-t-8 border-brand-600 overflow-hidden">
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    Advance Authorisation
+                  </h3>
+                  <p className="text-sm font-semibold text-slate-500 mb-6">
+                    Original EOP: 18 Months
+                  </p>
+
+                  <ul className="space-y-4 text-sm text-slate-600">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="text-green-500 mt-1" size={18} />
+                      <span>
+                        <strong>1st Extension (6 Months):</strong> Allowed by
+                        paying Composition Fee of 0.5% of unfulfilled EO value.
+                      </span>
+                    </li>
+
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="text-green-500 mt-1" size={18} />
+                      <span>
+                        <strong>2nd Extension (6 Months):</strong> Allowed by
+                        paying Composition Fee of 0.5% (Total 12 months extension
+                        possible).
+                      </span>
+                    </li>
+
+                    <li className="flex items-start gap-3">
+                      <AlertTriangle className="text-red-500 mt-1" size={18} />
+                      <span>
+                        Further extension requires approaching the{" "}
+                        <strong>Policy Relaxation Committee (PRC)</strong>.
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* EPCG Scheme */}
+              <div className="bg-white rounded-xl shadow-lg border-t-8 border-accent-500 overflow-hidden">
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    EPCG Scheme
+                  </h3>
+                  <p className="text-sm font-semibold text-slate-500 mb-6">
+                    Original EOP: 6 Years
+                  </p>
+
+                  <ul className="space-y-4 text-sm text-slate-600">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="text-green-500 mt-1" size={18} />
+                      <span>
+                        <strong>Block-wise Extension:</strong> If Block 1 target
+                        (4 years) is missed, it can be regularized by paying a 2%
+                        fee.
+                      </span>
+                    </li>
+
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="text-green-500 mt-1" size={18} />
+                      <span>
+                        <strong>Overall Extension:</strong> One extension of up to
+                        2 years may be granted.
+                      </span>
+                    </li>
+
+                    <li className="flex items-start gap-3">
+                      <Coins className="text-accent-500 mt-1" size={18} />
+                      <span>
+                        <strong>Fee:</strong> 2% of proportionate duty saved
+                        amount on unfulfilled EO.
+                      </span>
+                    </li>
+                  </ul>
+
+                  {/* CTA */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="fees" className="py-20 bg-brand-900 text-white">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* LEFT CONTENT */}
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                  Composition Fee Structure
+                </h2>
+
+                <p className="text-slate-300 mb-8 leading-relaxed">
+                  The cost of extension is calculated based on the unfulfilled
+                  export value. It is critical to calculate this accurately to
+                  avoid rejection by the Regional Authority (RA).
                 </p>
 
-                <ul className="space-y-4 text-sm text-slate-600">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <span>
-                      <strong>Block-wise Extension:</strong> If Block 1 target
-                      (4 years) is missed, it can be regularized by paying a 2%
-                      fee.
-                    </span>
-                  </li>
+                <div className="space-y-4">
+                  <div className="bg-white/10 p-4 rounded-lg border border-white/20">
+                    <h4 className="font-bold text-accent-400">Advance License</h4>
+                    <p className="text-sm">
+                      0.5% of the shortfall in FOB value of Export Obligation.
+                    </p>
+                  </div>
 
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <span>
-                      <strong>Overall Extension:</strong> One extension of up to
-                      2 years may be granted.
-                    </span>
-                  </li>
+                  <div className="bg-white/10 p-4 rounded-lg border border-white/20">
+                    <h4 className="font-bold text-accent-400">EPCG License</h4>
+                    <p className="text-sm">
+                      2% of the proportionate duty saved amount corresponding to
+                      unfulfilled EO.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                  <li className="flex items-start gap-3">
-                    <Coins className="text-accent-500 mt-1" size={18} />
-                    <span>
-                      <strong>Fee:</strong> 2% of proportionate duty saved
-                      amount on unfulfilled EO.
-                    </span>
-                  </li>
-                </ul>
+              {/* RIGHT CARD */}
+              <div className="bg-white text-slate-800 rounded-xl p-8 shadow-2xl text-center">
+                <Calculator className="mx-auto text-brand-600 mb-6" size={56} />
+
+                <h3 className="text-xl font-bold mb-2">Example Calculation</h3>
+
+                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+                  <strong>Advance Auth Shortfall:</strong> ₹ 1 Crore
+                  <br />
+                  <strong>Extension Fee (0.5%):</strong> ₹ 50,000
+                  <br />
+                  <span className="text-xs text-red-500">
+                    (vs Duty + Interest which could be ₹ 30 Lakhs+)
+                  </span>
+                </p>
 
                 {/* CTA */}
+                <a
+                  href="#contact"
+                  class="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-700 transition"
+                >
+                  Get Precise Calculation
+                </a>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="fees" className="py-20 bg-brand-900 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* LEFT CONTENT */}
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Composition Fee Structure
+        <section id="process" className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+
+            {/* Header */}
+            <div className="text-center mb-16">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Filing Steps
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                DGFT Workflow
               </h2>
+            </div>
 
-              <p className="text-slate-300 mb-8 leading-relaxed">
-                The cost of extension is calculated based on the unfulfilled
-                export value. It is critical to calculate this accurately to
-                avoid rejection by the Regional Authority (RA).
-              </p>
+            {/* Steps */}
+            <div className="relative grid md:grid-cols-4 gap-8 step-connector">
 
-              <div className="space-y-4">
-                <div className="bg-white/10 p-4 rounded-lg border border-white/20">
-                  <h4 className="font-bold text-accent-400">Advance License</h4>
-                  <p className="text-sm">
-                    0.5% of the shortfall in FOB value of Export Obligation.
-                  </p>
+              {/* Step 1 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
+                            text-2xl font-bold text-brand-900 mx-auto mb-4
+                            border-4 border-brand-200 shadow-sm">
+                  1
                 </div>
-
-                <div className="bg-white/10 p-4 rounded-lg border border-white/20">
-                  <h4 className="font-bold text-accent-400">EPCG License</h4>
-                  <p className="text-sm">
-                    2% of the proportionate duty saved amount corresponding to
-                    unfulfilled EO.
-                  </p>
-                </div>
+                <h3 className="text-lg font-bold mb-2">Audit</h3>
+                <p className="text-sm text-slate-500">
+                  Determine total exports completed versus obligation pending.
+                </p>
               </div>
-            </div>
 
-            {/* RIGHT CARD */}
-            <div className="bg-white text-slate-800 rounded-xl p-8 shadow-2xl text-center">
-              <Calculator className="mx-auto text-brand-600 mb-6" size={56} />
-
-              <h3 className="text-xl font-bold mb-2">Example Calculation</h3>
-
-              <p className="text-sm text-slate-600 mb-6 leading-relaxed">
-                <strong>Advance Auth Shortfall:</strong> ₹ 1 Crore
-                <br />
-                <strong>Extension Fee (0.5%):</strong> ₹ 50,000
-                <br />
-                <span className="text-xs text-red-500">
-                  (vs Duty + Interest which could be ₹ 30 Lakhs+)
-                </span>
-              </p>
-
-              {/* CTA */}
-              <a
-                href="#contact"
-                class="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-700 transition"
-              >
-                Get Precise Calculation
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-          <section id="process" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-
-        {/* Header */}
-        <div className="text-center mb-16">
-          <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-            Filing Steps
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-            DGFT Workflow
-          </h2>
-        </div>
-
-        {/* Steps */}
-        <div className="relative grid md:grid-cols-4 gap-8 step-connector">
-
-          {/* Step 1 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
+              {/* Step 2 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
                             text-2xl font-bold text-brand-900 mx-auto mb-4
                             border-4 border-brand-200 shadow-sm">
-              1
-            </div>
-            <h3 className="text-lg font-bold mb-2">Audit</h3>
-            <p className="text-sm text-slate-500">
-              Determine total exports completed versus obligation pending.
-            </p>
-          </div>
+                  2
+                </div>
+                <h3 className="text-lg font-bold mb-2">Fee Payment</h3>
+                <p className="text-sm text-slate-500">
+                  Calculate and pay the composition fee on the DGFT portal.
+                </p>
+              </div>
 
-          {/* Step 2 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
+              {/* Step 3 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
                             text-2xl font-bold text-brand-900 mx-auto mb-4
                             border-4 border-brand-200 shadow-sm">
-              2
-            </div>
-            <h3 className="text-lg font-bold mb-2">Fee Payment</h3>
-            <p className="text-sm text-slate-500">
-              Calculate and pay the composition fee on the DGFT portal.
-            </p>
-          </div>
+                  3
+                </div>
+                <h3 className="text-lg font-bold mb-2">Application</h3>
+                <p className="text-sm text-slate-500">
+                  File the amendment request online for EOP extension.
+                </p>
+              </div>
 
-          {/* Step 3 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
-                            text-2xl font-bold text-brand-900 mx-auto mb-4
-                            border-4 border-brand-200 shadow-sm">
-              3
-            </div>
-            <h3 className="text-lg font-bold mb-2">Application</h3>
-            <p className="text-sm text-slate-500">
-              File the amendment request online for EOP extension.
-            </p>
-          </div>
-
-          {/* Step 4 */}
-          <div className="text-center relative z-10">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center
+              {/* Step 4 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center
                             mx-auto mb-4 border-4 border-white shadow-sm">
-              <Check className="text-white" size={28} />
+                  <Check className="text-white" size={28} />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Approval</h3>
+                <p className="text-sm text-slate-500">
+                  Regional Authority approves and updates license validity in DGFT.
+                </p>
+              </div>
+
             </div>
-            <h3 className="text-lg font-bold mb-2">Approval</h3>
-            <p className="text-sm text-slate-500">
-              Regional Authority approves and updates license validity in DGFT.
-            </p>
           </div>
+        </section>
 
-        </div>
-      </div>
-    </section>
-
-    <Fees setShowEnrollModal={setShowEnrollModal} />
+        <Fees setShowEnrollModal={setShowEnrollModal} />
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
-              <section className="py-20 bg-white">
-                <div className="container mx-auto px-4 max-w-5xl">
-                  <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Eop-Extension?</h2>
-                    <p className="text-slate-500">
-                        Missing a deadline by one day can cost you years of profit. CloudDesk manages the 'Clock' so you don't have to.
-                    </p>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    {/* Feature 1 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
-                        <AlertTriangle size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">1. Strategic "Reason-for-Delay" Drafting</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          The <strong>DGFT </strong>doesn't grant extensions just because you asked. You need a Compelling Legal Justification<strong> (e.g., force majeure, policy changes, or genuine hardship).</strong> 
-                          <strong>CloudDesk’s </strong>legal team drafts the representation to the<strong> Regional Authority (RA) or the Policy Relaxation Committee (PRC)</strong> to ensure your case is viewed favorably.
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 2 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
-                        <CheckCircle size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">2. Composition Fee Optimization</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          Extensions aren't free; they come with a Composition Fee (usually a % of the duty saved).<strong> CloudDesk </strong>performs a Cost-Benefit Analysis. 
-                          We calculate if it’s cheaper to pay the fee for an extension or to<strong> "Regularize"(pay duty + interest) </strong>based on your current order book.
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 3 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
-                        <Building size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">3. PRC (Policy Relaxation Committee) Representation</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          When your extension request falls outside the standard rules of the<strong> Hand Book of Procedures (HBP),</strong> it goes to the<strong> PRC at DGFT Headquarters, New Delhi.</strong> 
-                          <strong>CloudDesk </strong>manages the high-level representation, providing the necessary data and<strong> "Public Interest" </strong>arguments to secure an out-of-turn extension.
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 4 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
-                        <ShieldUser size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">4. Automatic "Deadline Sentinel"</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                         Exporters often realize their<strong> EOP </strong>has expired after it’s too late.<strong> CloudDesk’s </strong>Compliance Clock starts a countdown<strong> 6 months before your EOP expires.</strong> 
-                         If your <strong>exports are below 70% </strong>of the target, we automatically initiate the extension process to avoid<strong> "Ex-post-facto" penalties.</strong>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Eop-Extension?</h2>
+              <p className="text-slate-500">
+                Missing a deadline by one day can cost you years of profit. CloudDesk manages the 'Clock' so you don't have to.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Feature 1 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                  <AlertTriangle size={24} />
                 </div>
-              </section>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">1. Strategic "Reason-for-Delay" Drafting</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    The <strong>DGFT </strong>doesn't grant extensions just because you asked. You need a Compelling Legal Justification<strong> (e.g., force majeure, policy changes, or genuine hardship).</strong>
+                    <strong>CloudDesk’s </strong>legal team drafts the representation to the<strong> Regional Authority (RA) or the Policy Relaxation Committee (PRC)</strong> to ensure your case is viewed favorably.
+                  </p>
+                </div>
+              </div>
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          {/* Heading */}
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
+              {/* Feature 2 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                  <CheckCircle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">2. Composition Fee Optimization</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Extensions aren't free; they come with a Composition Fee (usually a % of the duty saved).<strong> CloudDesk </strong>performs a Cost-Benefit Analysis.
+                    We calculate if it’s cheaper to pay the fee for an extension or to<strong> "Regularize"(pay duty + interest) </strong>based on your current order book.
+                  </p>
+                </div>
+              </div>
 
-          {/* FAQ Items */}
-          <div className="space-y-4">
-            {/* Question 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What is the standard Export Obligation Period (EOP)?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
+              {/* Feature 3 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                  <Building size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">3. PRC (Policy Relaxation Committee) Representation</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    When your extension request falls outside the standard rules of the<strong> Hand Book of Procedures (HBP),</strong> it goes to the<strong> PRC at DGFT Headquarters, New Delhi.</strong>
+                    <strong>CloudDesk </strong>manages the high-level representation, providing the necessary data and<strong> "Public Interest" </strong>arguments to secure an out-of-turn extension.
+                  </p>
+                </div>
+              </div>
 
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                "• Advance Authorisation: Generally 18 months from the date of license issue.
-                 • EPCG: Generally 6 years from the date of license issue."
-
-              </p>
-            </details>
-
-            {/* Question 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Can I get an extension if my EOP has already expired?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Yes, but it's expensive. This is called "Ex-post-facto" extension. You will have to pay a much higher composition fee and may face a "Show Cause Notice" from the DGFT. CloudDesk specializes in resolving these "Expired License" crises.
-              </p>
-            </details>
-
-            {/* Question 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                How many extensions can I get?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                Under the 2023-2026 Policy, you can typically get two extensions of 6 months each for Advance Authorisation, and two extensions of 1 year each for EPCG, subject to payment of composition fees. Anything beyond this requires PRC approval.
-              </p>
-            </details>
-
-            {/* Question 4 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                How is the "Composition Fee" calculated?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               In 2026, the fee is usually a tiered percentage of the Duty Saved (e.g., 0.5% for the first extension, 1% for the second). CloudDesk ensures you are charged correctly—DGFT officers often over-calculate these fees manually.
-              </p>
-            </details>
-
-            {/* Question 5 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is interest also charged for the extension period?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               No. If you get a valid EOP extension, you do not pay interest for that period. This is why getting an extension is always better than defaulting.
-              </p>
-            </details>
-
-            {/* Question 6 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What documents are required for an EOP extension?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               (1) A formal application via the DGFT portal, (2) A self-declaration of exports made so far, (3) Evidence of "Genuine Hardship" (like a fire report, strike notice, or bank letter), and (4) Proof of payment of the Composition Fee.
-              </p>
-            </details>
-
-            {/* Question 7 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What happens to my Bank Guarantee (BG) during the extension?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               You must extend the validity of your Bank Guarantee at Customs to match the new EOP. CloudDesk coordinates with your bank and the Customs department to ensure the BG remains active, preventing a "BG Forfeiture" action.
-              </p>
-            </details>
-
-            {/* Question 8 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              Can I get an extension for "Deemed Exports"?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               Yes. If you are supplying to SEZs or EOU units in India (Deemed Exports), the same EOP rules and extension procedures apply as they do for physical exports.
-              </p>
-            </details>
+              {/* Feature 4 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                  <ShieldUser size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">4. Automatic "Deadline Sentinel"</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Exporters often realize their<strong> EOP </strong>has expired after it’s too late.<strong> CloudDesk’s </strong>Compliance Clock starts a countdown<strong> 6 months before your EOP expires.</strong>
+                    If your <strong>exports are below 70% </strong>of the target, we automatically initiate the extension process to avoid<strong> "Ex-post-facto" penalties.</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>   
+        </section>
 
-      {/* Footer */}
-      <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-          {/* BRAND */}
-          <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-3xl">
+            {/* Heading */}
+            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+              Frequently Asked Questions
+            </h2>
 
-            <p className="text-sm mb-6">
-              EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
-              Logistics compliance.
-            </p>
+            {/* FAQ Items */}
+            <div className="space-y-4">
+              {/* Question 1 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is the standard Export Obligation Period (EOP)?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
 
-            <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Linkedin size={18} />
-              </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Twitter size={18} />
-              </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Facebook size={18} />
-              </a>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  "• Advance Authorisation: Generally 18 months from the date of license issue.
+                  • EPCG: Generally 6 years from the date of license issue."
+
+                </p>
+              </details>
+
+              {/* Question 2 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I get an extension if my EOP has already expired?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes, but it's expensive. This is called "Ex-post-facto" extension. You will have to pay a much higher composition fee and may face a "Show Cause Notice" from the DGFT. CloudDesk specializes in resolving these "Expired License" crises.
+                </p>
+              </details>
+
+              {/* Question 3 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  How many extensions can I get?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Under the 2023-2026 Policy, you can typically get two extensions of 6 months each for Advance Authorisation, and two extensions of 1 year each for EPCG, subject to payment of composition fees. Anything beyond this requires PRC approval.
+                </p>
+              </details>
+
+              {/* Question 4 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  How is the "Composition Fee" calculated?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  In 2026, the fee is usually a tiered percentage of the Duty Saved (e.g., 0.5% for the first extension, 1% for the second). CloudDesk ensures you are charged correctly—DGFT officers often over-calculate these fees manually.
+                </p>
+              </details>
+
+              {/* Question 5 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Is interest also charged for the extension period?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. If you get a valid EOP extension, you do not pay interest for that period. This is why getting an extension is always better than defaulting.
+                </p>
+              </details>
+
+              {/* Question 6 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What documents are required for an EOP extension?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  (1) A formal application via the DGFT portal, (2) A self-declaration of exports made so far, (3) Evidence of "Genuine Hardship" (like a fire report, strike notice, or bank letter), and (4) Proof of payment of the Composition Fee.
+                </p>
+              </details>
+
+              {/* Question 7 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What happens to my Bank Guarantee (BG) during the extension?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  You must extend the validity of your Bank Guarantee at Customs to match the new EOP. CloudDesk coordinates with your bank and the Customs department to ensure the BG remains active, preventing a "BG Forfeiture" action.
+                </p>
+              </details>
+
+              {/* Question 8 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I get an extension for "Deemed Exports"?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes. If you are supplying to SEZs or EOU units in India (Deemed Exports), the same EOP rules and extension procedures apply as they do for physical exports.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
+          <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+            {/* BRAND */}
+            <div>
+              <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+
+              <p className="text-sm mb-6">
+                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
+                Logistics compliance.
+              </p>
+
+              <div className="flex gap-4">
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Linkedin size={18} />
+                </a>
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Twitter size={18} />
+                </a>
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Facebook size={18} />
+                </a>
+              </div>
+            </div>
+
+            {/* QUICK LINKS */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" class="hover:text-white transition">Advance Authorisation</a></li>
+                <li><a href="#" class="hover:text-white transition">EPCG Scheme</a></li>
+                <li><a href="#" class="hover:text-white transition">EODC Redemption</a></li>
+                <li><a href="#" class="hover:text-white transition">Clubbing of Licenses</a></li>
+              </ul>
+            </div>
+
+            {/* OTHER SERVICES */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Other Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" class="hover:text-white transition">Fee Calculator</a></li>
+                <li><a href="#" class="hover:text-white transition">Public Notices</a></li>
+                <li><a href="#" class="hover:text-white transition">Policy Circulars</a></li>
+                <li><a href="#" class="hover:text-white transition">Amnesty Scheme</a></li>
+              </ul>
+            </div>
+
+            {/* CONTACT */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Contact Us</h4>
+              <ul className="space-y-4 text-sm">
+                <li className="flex gap-3 items-center">
+                  <Phone size={18} className="text-brand-500" />
+                  +917400096950
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <Mail size={18} className="text-brand-500" />
+                  clouddesk@eximinq.in
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <MapPin size={18} className="text-brand-500" />
+                  Mumbai, India
+                </li>
+              </ul>
             </div>
           </div>
 
-          {/* QUICK LINKS */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Advance Authorisation</a></li>
-                    <li><a href="#" class="hover:text-white transition">EPCG Scheme</a></li>
-                    <li><a href="#" class="hover:text-white transition">EODC Redemption</a></li>
-                    <li><a href="#" class="hover:text-white transition">Clubbing of Licenses</a></li>
-            </ul>
+          {/* COPYRIGHT */}
+          <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
+            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            DGFT.
           </div>
-
-          {/* OTHER SERVICES */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul className="space-y-2 text-sm">
-                                  <li><a href="#" class="hover:text-white transition">Fee Calculator</a></li>
-                    <li><a href="#" class="hover:text-white transition">Public Notices</a></li>
-                    <li><a href="#" class="hover:text-white transition">Policy Circulars</a></li>
-                    <li><a href="#" class="hover:text-white transition">Amnesty Scheme</a></li>
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Contact Us</h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex gap-3 items-center">
-                <Phone size={18} className="text-brand-500" />
-                +917400096950
-              </li>
-
-              <li className="flex gap-3 items-center">
-                <Mail size={18} className="text-brand-500" />
-                clouddesk@eximinq.in
-              </li>
-
-              <li className="flex gap-3 items-center">
-                <MapPin size={18} className="text-brand-500" />
-                Mumbai, India
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* COPYRIGHT */}
-        <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-          © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
-          DGFT.
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   );
 };
 

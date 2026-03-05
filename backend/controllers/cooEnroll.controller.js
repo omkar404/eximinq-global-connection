@@ -24,6 +24,8 @@ exports.createCooEnroll = async (req, res) => {
       type, // 👈 THIS IS CRITICAL
     } = req.body;
 
+    console.log("Incoming body:", req.body);
+
     // 🔒 BASE VALIDATION (ALWAYS REQUIRED)
     if (!name || !mobile || !email || !role || !type) {
       return res.status(400).json({
@@ -35,7 +37,10 @@ exports.createCooEnroll = async (req, res) => {
     // 🔒 CONDITIONAL VALIDATION (ONLY FOR COO)
     if (
       type === "PREFERENTIAL_COO" ||
-      type === "NON_PREFERENTIAL_COO"
+      type === "NON_PREFERENTIAL_COO"||
+      type === "Startup_Small_Plan" ||
+      type === "MID_SIZE_EXPORTER_PLAN" ||
+      type === "LARGE_EXPORTER_PLAN"
     ) {
       if (!certificateType) {
         return res.status(400).json({
@@ -45,7 +50,11 @@ exports.createCooEnroll = async (req, res) => {
       }
 
       if (
-        !["PREFERENTIAL_COO", "NON_PREFERENTIAL_COO"].includes(
+        !["PREFERENTIAL_COO", 
+          "NON_PREFERENTIAL_COO", 
+          "Startup_Small_Plan", 
+          "MID_SIZE_EXPORTER_PLAN", 
+          "LARGE_EXPORTER_PLAN"].includes(
           certificateType
         )
       ) {
@@ -73,6 +82,9 @@ exports.createCooEnroll = async (req, res) => {
       ENROLL: "New Enrollment Request",
       PREFERENTIAL_COO: "New Preferential CoO Request",
       NON_PREFERENTIAL_COO: "New Non-Preferential CoO Request",
+      Startup_Small_Plan: "New Startup Small Plan Request",
+      MID_SIZE_EXPORTER_PLAN: "New Mid-Size Exporter Plan Request",
+      LARGE_EXPORTER_PLAN: "New Large Exporter Plan Request",
     };
 
     // 📧 EMAIL BODY (SAFE)

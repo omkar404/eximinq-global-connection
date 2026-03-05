@@ -223,9 +223,7 @@ const CloudDeskContact = () => {
       </section>
 
       <ContactInfoCards />
-
-
-
+      
       {/* Footer */}
       <FooterContact setShowModal={setShowModal} />
     </div>
