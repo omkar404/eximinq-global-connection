@@ -377,3 +377,4 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     </div>
   );
 };
+
