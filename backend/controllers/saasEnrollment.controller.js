@@ -120,6 +120,7 @@ exports.enrollSaas = async (req, res) => {
         <p><strong>Selected Plan:</strong> ${selectedPlan}</p>
         <p><strong>Billing:</strong> ${billingType || "-"}</p>
         <p><strong>Price:</strong> ${selectedPrice || "-"}</p>
+        <p><strong>Submitted (IST):</strong> ${istDate} ${istTime}</p>
       `,
     });
 
