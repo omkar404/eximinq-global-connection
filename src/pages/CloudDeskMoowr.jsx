@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import TopBar from "../components/CloudDeskAEOCertificate/TopBar";
 import Navbar from "../components/CloudDeskAEOCertificate/Navbar";
@@ -48,6 +49,152 @@ const CloudDeskAEOCertificate = () => {
     };
     
   return (
+    <>
+    <Helmet>
+  <title>
+    MOOWR Scheme Registration in India | Bonded Warehouse Setup
+  </title>
+
+  <meta
+    name="description"
+    content="MOOWR Scheme consultancy in India. Set up a bonded warehouse under Section 65 and defer customs duty on imports with compliance support."
+  />
+
+  <link
+    rel="canonical"
+    href="https://eximinq.in/services/moowr-scheme"
+  />
+
+  <meta
+    property="og:title"
+    content="MOOWR Scheme Registration in India"
+  />
+  <meta
+    property="og:description"
+    content="Manufacturing and Other Operations in Warehouse Regulations (MOOWR) setup and bonded warehouse licensing support."
+  />
+  <meta
+    property="og:url"
+    content="https://eximinq.in/services/moowr-scheme"
+  />
+  <meta property="og:type" content="article" />
+
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://eximinq.in"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Services",
+              "item": "https://eximinq.in/services"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "MOOWR Scheme",
+              "item": "https://eximinq.in/services/moowr-scheme"
+            }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "MOOWR Scheme Consultancy",
+          "serviceType": "Bonded Warehouse Setup under Section 65",
+          "description":
+            "Consultancy for MOOWR registration, bonded warehouse licensing, compliance setup and customs duty deferment implementation.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Eximinq Global Connections",
+            "url": "https://eximinq.in"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "India"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What exactly is the MOOWR Scheme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MOOWR allows manufacturers to import goods into a bonded warehouse without upfront customs duty and pay duty only when goods are cleared for domestic consumption."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is MOOWR better than an EOU (Export Oriented Unit) or SEZ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "There is no fixed time limit for storing goods in a bonded warehouse under MOOWR until they are cleared for domestic consumption."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is there a time limit for keeping goods in the MOOWR warehouse?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. There is no export obligation under the MOOWR scheme."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who can apply for a MOOWR license?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Inter-unit transfers are permitted without payment of duty, subject to customs procedures."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are the \"Security\" requirements for a MOOWR factory?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Your premises must be secure. Requirements include: (1) Strong physical boundaries, (2) 24/7 CCTV surveillance with a 30-day backup, and (3) Digital record-keeping of all entry and exit. CloudDesk provides a Security Checklist to ensure you meet these before the inspector arrives."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need a separate IEC for MOOWR?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. You use your existing IEC. However, your ICEGATE ID must be mapped to the specific Bonded Warehouse Code generated after your license is approved."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens when I sell my product in India (DTA)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You must file an Ex-Bond Bill of Entry and pay the deferred BCD and IGST on the raw materials used in that product. There is no interest charged on the deferred duty if paid at the time of clearance."
+              }
+            },
+                        {
+              "@type": "Question",
+              "name": "Can I transfer goods from one MOOWR unit to another?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Inter-unit transfers are permitted without payment of duty, making it an excellent scheme for companies with multiple manufacturing stages across different locations."
+              }
+            },
+          ]
+        }
+      ]
+    })}
+  </script>
+</Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -645,6 +792,7 @@ const CloudDeskAEOCertificate = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

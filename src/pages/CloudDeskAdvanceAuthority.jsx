@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 import TopBar from "../components/CloudDeskAdvanceAuthority/TopBar";
 import Navbar from "../components/CloudDeskAdvanceAuthority/Navbar";
@@ -40,6 +41,152 @@ const CloudDeskAdvanceAuthority = () => {
     };
 
   return (
+    <>
+    <Helmet>
+  <title>
+    Advance Authorisation Scheme | Duty Free Import License
+  </title>
+
+  <meta
+    name="description"
+    content="Advance Authorisation consultancy in India. Duty-free import of raw materials under DGFT with SION fixation, export obligation tracking and EODC closure support."
+  />
+
+  <link
+    rel="canonical"
+    href="https://eximinq.in/services/advance-authorisation"
+  />
+
+  <meta
+    property="og:title"
+    content="Advance Authorisation Scheme Consultancy"
+  />
+  <meta
+    property="og:description"
+    content="Apply for Advance Authorisation license with SION norms fixation, import management and export obligation redemption."
+  />
+  <meta
+    property="og:url"
+    content="https://eximinq.in/services/advance-authorisation"
+  />
+  <meta property="og:type" content="article" />
+
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://eximinq.in"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Services",
+              "item": "https://eximinq.in/services"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Advance Authorisation",
+              "item": "https://eximinq.in/services/advance-authorisation"
+            }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Advance Authorisation Consultancy",
+          "serviceType": "Duty Free Import License under DGFT",
+          "description":
+            "Consultancy for Advance Authorisation scheme including SION fixation, import planning, export obligation monitoring and EODC closure.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Eximinq Global Connections",
+            "url": "https://eximinq.in"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "India"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Who can apply for Advance Authorisation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Manufacturer exporters or merchant exporters tied with supporting manufacturers with required value addition can apply."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What can I import under this scheme?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The standard export obligation period is 18 months from the date of license issuance."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is \"Advance Authorisation for Annual Requirement\"?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All exempted customs duties along with applicable interest must be paid if export obligation is not fulfilled."
+              }
+            },
+                        {
+              "@type": "Question",
+              "name": "How much time do I have to export the finished goods?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The standard period is 18 months from the date of issue of the license. For defense, software, or specialized projects, this can be longer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens if I fail to export?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "This is the brutal part. You must pay all the exempted Customs duties plus 15% interest from the date of import. CloudDesk’s primary job is to ensure you never fall into this trap."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I sell the imported raw materials in the domestic market?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely not. Materials imported under AA are subject to \"Actual User Condition.\" They cannot be transferred or sold even after the export obligation is completed (though the finished goods can be sold domestically after EO is met)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a \"Consumption Register\" (Appendix-4H)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It is a mandatory logbook showing exactly how much raw material was used for each export batch. In 2026, DGFT audits these digitally. CloudDesk’s Auto-Ledger generates this report for you with one click."
+              }
+            },
+                        {
+              "@type": "Question",
+              "name": "Can I use Advance Authorisation and Duty Drawback together?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Since you didn't pay duty on imports, you can't claim a \"Drawback\" of that duty. However, you can claim the \"Customs portion\" of drawback if you used some domestic duty-paid inputs. CloudDesk calculates the most profitable path for you."
+              }
+            },
+          ]
+        }
+      ]
+    })}
+  </script>
+</Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -704,6 +851,7 @@ const CloudDeskAdvanceAuthority = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

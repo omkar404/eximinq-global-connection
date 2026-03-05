@@ -35,7 +35,7 @@ export function Navbar() {
           <a className="hover:text-teal-500" href="/certificate-of-origin">COO</a>
           <a className="hover:text-teal-500" href="/compliance-trade-india">Compliance</a>
           <a className="hover:text-teal-500" href="/contact-us">Contact</a>
-          <a className="hover:text-teal-500" href="/clouddesk-saas">SAAS</a>
+          <a className="hover:text-teal-500" href="/clouddesk-saas">CloudDesk</a>
         </div>
 
           {/* Desktop Actions */}

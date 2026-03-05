@@ -13,6 +13,9 @@ const mainCooRoutes = require("./routes/maincoo.routes");
 const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes")
 const icegateRegistrationRoutes = require("./routes/icegateRegistrationRoutes.routes")
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
+const maincontactRoutes = require("./routes/maincontactRoutes.routes");
+const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
+const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
 
 // const pdfPath = findPDFFile(noticeNo);
 
@@ -407,7 +410,11 @@ app.use("/api/main-coo-enroll", mainCooRoutes);
 
 app.use("/api/import-export-code", importExportCodeRoutes);
 
-app.use("/api/icegate-registration", icegateRegistrationRoutes);
+app.use("/api/contact-us", maincontactRoutes);
+
+app.use("/api/submit-audit-form", auditcomplianceformRoutes);
+
+app.use("/api/saas-enrollment", saasEnrollmentRoutes);
 
 startWatcher();
 

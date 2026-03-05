@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Footer } from "../Common/Footer";
 import MainNavbar from "../Common/MainNavbar";
 import TopBar from "../Common/TopBar";
+import profilePhoto from "../assets/images/Profile-photo.jpeg";
 
 export default function About() {
     const sectionRef = useRef(null);
@@ -118,7 +119,7 @@ export default function About() {
                             </h2>
 
                             <p className="text-slate-400 text-lg mb-6 leading-relaxed">
-                                In 2020, we audited a mid-sized Engineering firm. They had a full-time logistics team and a reputed CHA. Yet, we found{" "}
+                                Recently, we audited a mid-sized Engineering firm. They had a full-time logistics team and a reputed CHA. Yet, we found{" "}
                                 <strong className="text-teal-400">
                                     ₹12 Lakhs in unclaimed RoDTEP benefits
                                 </strong>{" "}
@@ -266,7 +267,7 @@ export default function About() {
                             </p>
 
                             <span className="text-xs font-bold text-teal-500 uppercase tracking-wide">
-                                3 Senior Consultants
+                                9 Senior Consultants
                             </span>
                         </div>
 
@@ -299,7 +300,7 @@ export default function About() {
                             </p>
 
                             <span className="text-xs font-bold text-indigo-400 uppercase tracking-wide">
-                                6 Field Runners
+                                16 Field Runners
                             </span>
                         </div>
 
@@ -332,7 +333,7 @@ export default function About() {
                             </p>
 
                             <span className="text-xs font-bold text-teal-500 uppercase tracking-wide">
-                                4 Data Auditors
+                                7 Data Auditors
                             </span>
                         </div>
 
@@ -520,95 +521,97 @@ export default function About() {
                 </div>
             </section>
 
-                <section className="py-24 bg-slate-900">
-      <div className="container mx-auto px-4 max-w-5xl">
-        
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-white">
-            Meet the Principal Auditor
-          </h2>
-        </div>
+            <section className="py-24 bg-slate-900">
+                <div className="container mx-auto px-4 max-w-5xl">
 
-        <div className="bg-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl border border-slate-700 flex flex-col md:flex-row items-center gap-12 group hover:border-teal-500/30 transition duration-500">
-          
-          {/* Profile Image Placeholder */}
-          <div className="w-48 h-48 md:w-64 md:h-64 bg-slate-700 rounded-full flex-shrink-0 border-4 border-slate-600 shadow-xl overflow-hidden relative group-hover:border-teal-500 transition duration-500">
-            <div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm text-center bg-slate-800">
-              Jaggdish Acharya
-              <br />
-              Photo
-            </div>
-          </div>
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold text-white">
+                            Meet the Principal Auditor
+                        </h2>
+                    </div>
 
-          {/* Content */}
-          <div className="flex-1 text-center md:text-left">
-            
-            <h3 className="text-3xl font-bold text-white mb-2">
-              Jaggdish Acharya
-            </h3>
+                    <div className="bg-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl border border-slate-700 flex flex-col md:flex-row items-center gap-12 group hover:border-teal-500/30 transition duration-500">
 
-            <p className="text-teal-400 font-bold uppercase tracking-wider text-sm mb-6">
-              Founder & Lead Compliance Strategist
-            </p>
+                        {/* Profile Image Placeholder */}
+                        <div className="w-48 h-48 md:w-64 md:h-64 bg-slate-700 rounded-full flex-shrink-0 border-4 border-slate-600 shadow-xl overflow-hidden relative group-hover:border-teal-500 transition duration-500">
+                            <div className="absolute inset-0 flex items-center justify-center text-slate-500 text-sm text-center bg-slate-800">
+                                <img
+                                    src={profilePhoto}
+                                    alt="Jaggdish Acharya"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        </div>
 
-            <p className="text-slate-400 text-lg leading-relaxed mb-6">
-              With over a decade of experience navigating the complex corridors
-              of DGFT and Customs, Jaggdish specializes in{" "}
-              <strong className="text-white">
-                "Impossible Cases"
-              </strong>
-              —licenses stuck for 5+ years, rejected RoDTEP claims, and complex
-              AEO audits.
-            </p>
+                        {/* Content */}
+                        <div className="flex-1 text-center md:text-left">
 
-            <p className="text-slate-400 text-lg leading-relaxed">
-              He built <strong>CloudDesk</strong> to ensure that no exporter
-              ever pays a penalty due to a "human error" again.
-            </p>
+                            <h3 className="text-3xl font-bold text-white mb-2">
+                                Jaggdish Acharya
+                            </h3>
 
-            {/* Social Links */}
-            <div className="mt-8 flex gap-4 justify-center md:justify-start">
-              
-              <a
-                href="https://in.linkedin.com/in/eximinq-cloud-desk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
-              </a>
+                            <p className="text-teal-400 font-bold uppercase tracking-wider text-sm mb-6">
+                                Founder & Lead Compliance Strategist
+                            </p>
 
-              <a
-                href="mailto:clouddesk@eximinq.in"
-                className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-400 hover:bg-teal-500 hover:text-white transition"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </a>
+                            <p className="text-slate-400 text-lg leading-relaxed mb-6">
+                                With over a decade of experience navigating the complex corridors
+                                of DGFT and Customs, Jaggdish specializes in{" "}
+                                <strong className="text-white">
+                                    "Impossible Cases"
+                                </strong>
+                                —licenses stuck for 5+ years, rejected RoDTEP claims, and complex
+                                AEO audits.
+                            </p>
 
-            </div>
+                            <p className="text-slate-400 text-lg leading-relaxed">
+                                He built <strong>CloudDesk</strong> to ensure that no exporter
+                                ever pays a penalty due to a "human error" again.
+                            </p>
 
-          </div>
-        </div>
-      </div>
-    </section>
+                            {/* Social Links */}
+                            <div className="mt-8 flex gap-4 justify-center md:justify-start">
+
+                                <a
+                                    href="https://in.linkedin.com/in/eximinq-cloud-desk"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition"
+                                >
+                                    <svg
+                                        className="w-5 h-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+
+                                <a
+                                    href="mailto:clouddesk@eximinq.in"
+                                    className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-400 hover:bg-teal-500 hover:text-white transition"
+                                >
+                                    <svg
+                                        className="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section className="py-24 bg-white text-slate-900">
                 <div className="container mx-auto px-4 flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto">
@@ -728,7 +731,7 @@ export default function About() {
                     </p>
 
                     <a
-                        href="https://eximinq.in/contact"
+                        href="#"
                         className="px-10 py-5 bg-white text-teal-800 font-bold rounded-xl shadow-2xl hover:bg-slate-50 transition transform hover:-translate-y-1 inline-block"
                     >
                         Request Free Risk Audit

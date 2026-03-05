@@ -55,20 +55,20 @@ import {
 // COMPONENTS
 import NavbarServices from "../components/CloudDeskServices/NavbarServices";
 import MobileMenuServices from "../components/CloudDeskServices/MobileMenuServices";
-import {ModalEnrollServices} from "../components/CloudDeskServices/ModalEnrollServices";
+import { ModalEnrollServices } from "../components/CloudDeskServices/ModalEnrollServices";
 import HeroServices from "../components/CloudDeskServices/HeroServices";
 import CategoriesTabs from "../components/CloudDeskServices/CategoriesTabs";
 import ServicesGrid from "../components/CloudDeskServices/ServicesGrid";
 import ProcessSteps from "../components/CloudDeskServices/ProcessSteps";
 import CTASectionServices from "../components/CloudDeskServices/CTASectionServices";
 import FooterServices from "../components/CloudDeskServices/FooterServices";
-import CustomAlert from "../Common/CustomAlert"; 
+import CustomAlert from "../Common/CustomAlert";
 
 const CloudDeskServices = () => {
-    const [showEnrollModal, setShowEnrollModal] = useState({
-      open: false,
-      type: null,
-    });
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
   // -------------------------
   // UI STATE
   // -------------------------
@@ -89,7 +89,7 @@ const CloudDeskServices = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
 
   // --------------------------------------------------
   // STATIC DATA (Categories + Services)
@@ -107,7 +107,196 @@ const CloudDeskServices = () => {
   ];
 
   const services = [
-    // Registration
+    {
+      id: 301,
+      category: "Licensing",
+      title: "Advance Authorisation",
+      description:
+        "Duty-free import of inputs physically incorporated in export products. Includes norm fixation and redemption.",
+      icon: <FileText className="w-8 h-8 text-teal-600" />,
+      popular: true,
+      link: "https://eximinq.in/services/advance-authorisation",
+    },
+    {
+      id: 302,
+      category: "Licensing",
+      title: "EPCG Scheme",
+      description:
+        "Zero duty import of capital goods for pre-production, production, and post-production.",
+      icon: <Award className="w-8 h-8 text-teal-600" />,
+      popular: true,
+      link: "https://eximinq.in/services/epcg-scheme",
+    },
+    {
+      id: 306,
+      category: "Licensing",
+      title: "DFIA License",
+      description:
+        "Duty Free Import Authorisation. Transferable license issued post-export.",
+      icon: <File className="w-8 h-8 text-teal-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/dfia-license",
+    },
+    {
+      id: 304,
+      category: "Licensing",
+      title: "EOP Extension",
+      description:
+        "Export Obligation Period Extension for Advance Authorization or EPCG.",
+      icon: <ArrowLeftRight className="w-8 h-8 text-teal-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/eop-extension",
+    },
+    {
+      id: 809,
+      category: "Compliance",
+      title: "Certificate of Origin",
+      description:
+        "Online issuance of Preferential (FTA/PTA) and Non-Preferential CoO.",
+      icon: <BadgeCheck className="w-8 h-8 text-indigo-700" />,
+      popular: true,
+      link: "https://eximinq.in/services/certificate-of-origin",
+    },
+    {
+      id: 105,
+      category: "Registration",
+      title: "Import Management",
+      description:
+        "SIMS, PFIMS, NFMIMS General registration services for managing import authorizations and compliance.",
+      icon: <ShoppingCart className="w-8 h-8 text-blue-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/import-management-registration",
+    },
+    {
+      id: 407,
+      category: "Incentives",
+      title: "Free Sale Cert",
+      description:
+        "States goods are freely sold in India, for medical/food product exports.",
+      icon: <Globe className="w-8 h-8 text-green-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/free-sale-certificate",
+    },
+    {
+      id: 812,
+      category: "Compliance",
+      title: "DSC Services",
+      description:
+        "Digital Signature Certificate. Essential for filing online documents with DGFT, Customs, and GST.",
+      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/dsc-services",
+    },
+    {
+      id: 408,
+      category: "Incentives",
+      title: "RODTEP / ROSCTL SCRIPT TRADING",
+      description:
+        "Buying & Selling options for Scripts at Best Market Competitive rates",
+      icon: <Recycle className="w-8 h-8 text-green-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/rodtep-rosctl-trading",
+    },
+    {
+      id: 823,
+      category: "Compliance",
+      title: "Compliance Audit",
+      description:
+        "Compliance Audit to ensure compliance with regulatory requirements.",
+      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/compliance-audit",
+    },
+    {
+      id: 107,
+      category: "Registration",
+      title: "Star Export House",
+      description:
+        "DGFT status certificate based on performance, granting privileges like fast-track.",
+      icon: <StarIcon className="w-8 h-8 text-blue-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/star-export-house",
+    },
+    {
+      id: 208,
+      category: "Customs Filing",
+      title: "SVB Registration",
+      description:
+        'Mandatory for importers related to foreign suppliers to validate pricing.',
+      icon: <FileText className="w-8 h-8 text-blue-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/svb-registration",
+    },
+    {
+      id: 708,
+      category: "Logistics",
+      title: "Factory Stuffing",
+      description:
+        "Permission to pack export containers inside factory under Customs supervision.",
+      icon: <BookCopy className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/factory-stuffing",
+    },
+    {
+      id: 206,
+      category: "Customs Filing",
+      title: "MOOWR Scheme",
+      description:
+        "Setup for Manufacturing and Other Operations in Warehouse Regulations to defer customs duty indefinitely.",
+      icon: <Briefcase className="w-8 h-8 text-blue-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/moowr-scheme",
+    },
+    {
+      id: 820,
+      category: "Compliance",
+      title: "Warehouse License",
+      description:
+        "License for bonded warehouses (MOOWR) to store goods without immediate duty.",
+      icon: <Warehouse className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/warehouse-license",
+    },
+    {
+      id: 406,
+      category: "Incentives",
+      title: "Interest Equalisation",
+      description:
+        "Scheme reducing the interest rate on pre/post-shipment export credit.",
+      icon: <TrendingUp className="w-8 h-8 text-green-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/interest-equalisation-scheme",
+    },
+    {
+      id: 303,
+      category: "Licensing",
+      title: "SCOMET Licensing",
+      description:
+        "Specialized filing for Dual-Use items (Special Chemicals, Organisms, Materials, Equipment).",
+      icon: <ShieldCheck className="w-8 h-8 text-teal-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/scomet-licensing",
+    },
+    {
+      id: 402,
+      category: "Incentives",
+      title: "IGST Refund",
+      description:
+        "Resolution of IGST refund scrolls stuck due to PFMS mismatch, EGM errors, or non-transmission.",
+      icon: <CreditCard className="w-8 h-8 text-green-600" />,
+      popular: true,
+      link: "https://eximinq.in/services/igst-refund",
+    },
+    {
+      id: 403,
+      category: "Incentives",
+      title: "Duty Drawback",
+      description:
+        "Brand Rate fixation and Section 74 drawback claims for re-exports.",
+      icon: <ArrowRight className="w-8 h-8 text-green-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/duty-drawback",
+    },
     {
       id: 101,
       category: "Registration",
@@ -139,6 +328,26 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/ad-code-registration",
     },
     {
+      id: 401,
+      category: "Incentives",
+      title: "RoDTEP Scheme",
+      description:
+        "Remission of Duties and Taxes on Exported Products. Scrip generation and ledger transfer.",
+      icon: <TrendingUp className="w-8 h-8 text-green-600" />,
+      popular: true,
+      link: "https://eximinq.in/services/rodtep-scheme",
+    },
+    {
+      id: 806,
+      category: "Compliance",
+      title: "EDPMS & e-BRC",
+      description:
+        "Export Data Processing and Monitoring System closure and e-BRC realization to avoid RBI caution listing.",
+      icon: <Landmark className="w-8 h-8 text-indigo-700" />,
+      popular: true,
+      link: "https://eximinq.in/services/edpms-ebrc",
+    },
+    {
       id: 104,
       category: "Registration",
       title: "E-RCMC Issuance",
@@ -149,34 +358,44 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/e-rcmc-registration",
     },
     {
-      id: 105,
-      category: "Registration",
-      title: "Import Management",
+      id: 205,
+      category: "Customs Filing",
+      title: "AEO Certification",
       description:
-        "SIMS, PFIMS, NFMIMS General registration services for managing import authorizations and compliance.",
-      icon: <ShoppingCart className="w-8 h-8 text-blue-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/import-management-registration",
+        "Consultancy for Authorized Economic Operator (T1/T2/T3) status for deferred duty and direct port delivery.",
+      icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
+      popular: true,
+      link: "https://eximinq.in/services/aeo-certification",
     },
     {
-      id: 106,
-      category: "Registration",
-      title: "Halal Certification",
+      id: 817,
+      category: "Compliance",
+      title: "Factory License",
       description:
-        "Essential for export to Middle Eastern/Islamic countries.",
-      icon: <Check className="w-8 h-8 text-blue-600" />,
+        "Approval from Chief Inspector of Factories ensuring safety and labor compliance.",
+      icon: <Building className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/halal-certification",
+      link: "https://eximinq.in/services/factory-license",
     },
     {
-      id: 107,
-      category: "Registration",
-      title: "Star Export House",
+      id: 816,
+      category: "Compliance",
+      title: "Industrial License",
       description:
-        "DGFT status certificate based on performance, granting privileges like fast-track.",
-      icon: <StarIcon className="w-8 h-8 text-blue-600" />,
+        "Mandatory license for industries involved in hazardous chemicals or defense sectors.",
+      icon: <Shield className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/star-export-house",
+      link: "https://eximinq.in/services/industrial-license",
+    },
+    {
+      id: 814,
+      category: "Compliance",
+      title: "IEM Registration",
+      description:
+        "Industrial Entrepreneur Memorandum for undertakings exempted from licensing.",
+      icon: <Building className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/iem-registration",
     },
     {
       id: 108,
@@ -189,27 +408,135 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/defence-exim-license",
     },
     {
-      id: 109,
-      category: "Registration",
-      title: "GeM Registration",
+      id: 601,
+      category: "Dispute Resolution",
+      title: "Customs Adjudication",
       description:
-        "Government e-Marketplace registration to sell directly to Indian government depts.",
-      icon: <Briefcase className="w-8 h-8 text-blue-600" />,
+        "Reply to Show Cause Notices (SCN) and representation in personal hearings.",
+      icon: <Gavel className="w-8 h-8 text-red-600" />,
       popular: false,
-      link: "https://eximinq.in/services/gem-registration",
+      link: "https://eximinq.in/services/customs-adjudication",
     },
     {
-      id: 110,
-      category: "Registration",
-      title: "Horticulture",
+      id: 802,
+      category: "Compliance",
+      title: "EPR Authorization",
       description:
-        "Registration with National Horticulture Board for exporting agricultural produce.",
-      icon: <Globe className="w-8 h-8 text-blue-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/horticulture",
+        "Extended Producer Responsibility compliance for E-waste, Plastic, Battery, and Waste Tyre management.",
+      icon: <Leaf className="w-8 h-8 text-green-700" />,
+      popular: true,
+      link: "https://eximinq.in/services/epr-authorization",
     },
-
-    // Customs Filing
+    {
+      id: 803,
+      category: "Compliance",
+      title: "FSSAI Licensing",
+      description:
+        "Food Import Clearance System (FICS) and Central Licensing for food importers ( FSSAI ).",
+      icon: <Utensils className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/fssai-licensing",
+    },
+    {
+      id: 805,
+      category: "Compliance",
+      title: "Legal Metrology (LMPC)",
+      description:
+        "Registration for pre-packaged commodities to ensure MRP labeling compliance.",
+      icon: <Scale className="w-8 h-8 text-blue-700" />,
+      popular: false,
+      link: "https://eximinq.in/services/lmpc-registration",
+    },
+    {
+      id: 821,
+      category: "Compliance",
+      title: "UN IIP Certification",
+      description:
+        "Certification for packages used to transport dangerous goods internationally.",
+      icon: <Cuboid className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/un-iip-certification",
+    },
+    {
+      id: 811,
+      category: "Compliance",
+      title: "REX Registration",
+      description:
+        "Registered Exporter System registration for self-certification of origin under GSP.",
+      icon: <Globe className="w-8 h-8 text-indigo-700" />,
+      popular: false,
+      link: "https://eximinq.in/services/rex-registration",
+    },
+    {
+      id: 804,
+      category: "Compliance",
+      title: "WPC (ETA) License",
+      description:
+        "Equipment Type Approval (ETA) for wireless products (Bluetooth/Wi-Fi) from WPC Wing.",
+      icon: <Radio className="w-8 h-8 text-blue-700" />,
+      popular: false,
+      link: "https://eximinq.in/services/wpc-license",
+    },
+    {
+      id: 602,
+      category: "Dispute Resolution",
+      title: "Policy Relaxation (PRC)",
+      description:
+        "Representing cases before the Policy Relaxation Committee for procedural lapses.",
+      icon: <AlertTriangle className="w-8 h-8 text-red-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/prc-relaxation",
+    },
+    {
+      id: 706,
+      category: "Logistics",
+      title: "Project Cargo",
+      description:
+        "Specialized handling for Over Dimensional Cargo (ODC) and heavy machinery with route surveys.",
+      icon: <Container className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/project-cargo",
+    },
+    {
+      id: 822,
+      category: "Compliance",
+      title: "CA Certification",
+      description:
+        "Chartered Accountant certificates to verify financial data or consumption norms.",
+      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/ca-certification-export-import",
+    },
+    {
+      id: 404,
+      category: "Incentives",
+      title: "No Due Certificate",
+      description:
+        "Proof of no outstanding dues to government bodies to claim rebates.",
+      icon: <Check className="w-8 h-8 text-green-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/no-due-certificate",
+    },
+    {
+      id: 405,
+      category: "Incentives",
+      title: "No Incentive Cert",
+      description:
+        "Verifies no other incentives were claimed to avoid double-dipping.",
+      icon: <AlertTriangle className="w-8 h-8 text-green-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/no-incentive-certificate",
+    },
+    {
+      id: 819,
+      category: "Compliance",
+      title: "Pollution Control",
+      description:
+        "Consent to Establish/Operate (CTE/CTO) from the Pollution Control Board.",
+      icon: <GlobeIcon className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/pollution-control",
+    },
     {
       id: 201,
       category: "Customs Filing",
@@ -251,47 +578,15 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/duty-payment-ecl",
     },
     {
-      id: 205,
-      category: "Customs Filing",
-      title: "AEO Certification",
+      id: 702,
+      category: "Logistics",
+      title: "CHA Services",
       description:
-        "Consultancy for Authorized Economic Operator (T1/T2/T3) status for deferred duty and direct port delivery.",
-      icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
+        "Dedicated Customs House Agent support for physical examination, sealing, and clearance at ports.",
+      icon: <Anchor className="w-8 h-8 text-orange-600" />,
       popular: true,
-      link: "https://eximinq.in/services/aeo-certification",
+      link: "https://eximinq.in/services/cha-services",
     },
-    {
-      id: 206,
-      category: "Customs Filing",
-      title: "MOOWR Scheme",
-      description:
-        "Setup for Manufacturing and Other Operations in Warehouse Regulations to defer customs duty indefinitely.",
-      icon: <Briefcase className="w-8 h-8 text-blue-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/moowr-scheme",
-    },
-    {
-      id: 207,
-      category: "Customs Filing",
-      title: "RMCC Alert Removal",
-      description:
-        'Removing "risky exporter" alerts that block IGST refunds and cause delays.',
-      icon: <AlertTriangle className="w-8 h-8 text-blue-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/rmcc-alert-removal",
-    },
-    {
-      id: 208,
-      category: "Customs Filing",
-      title: "SVB Registration",
-      description:
-        'Mandatory for importers related to foreign suppliers to validate pricing.',
-      icon: <FileText className="w-8 h-8 text-blue-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/svb-registration",
-    },
-
-    // Logistics
     {
       id: "logistics-701",
       category: "Logistics",
@@ -301,16 +596,6 @@ const CloudDeskServices = () => {
       icon: <Plane className="w-8 h-8 text-orange-600" />,
       popular: true,
       link: "https://eximinq.in/services/freight-forwarding",
-    },
-    {
-      id: 702,
-      category: "Logistics",
-      title: "CHA Services",
-      description:
-        "Dedicated Customs House Agent support for physical examination, sealing, and clearance at ports.",
-      icon: <Anchor className="w-8 h-8 text-orange-600" />,
-      popular: true,
-      link: "https://eximinq.in/services/cha-services",
     },
     {
       id: 703,
@@ -343,282 +628,14 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/marine-insurance",
     },
     {
-      id: 706,
-      category: "Logistics",
-      title: "Project Cargo",
-      description:
-        "Specialized handling for Over Dimensional Cargo (ODC) and heavy machinery with route surveys.",
-      icon: <Container className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/project-cargo",
-    },
-    {
-      id: 707,
-      category: "Logistics",
-      title: "DPD Registration",
-      description:
-        "Direct Port Delivery. Clear cargo directly from port within 48h to save costs.",
-      icon: <AlertTriangle className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/dpd-registration",
-    },
-    {
-      id: 708,
-      category: "Logistics",
-      title: "Factory Stuffing",
-      description:
-        "Permission to pack export containers inside factory under Customs supervision.",
-      icon: <BookCopy className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/factory-stuffing",
-    },
-
-    // Licensing
-    {
-      id: 301,
-      category: "Licensing",
-      title: "Advance Authorisation",
-      description:
-        "Duty-free import of inputs physically incorporated in export products. Includes norm fixation and redemption.",
-      icon: <FileText className="w-8 h-8 text-teal-600" />,
-      popular: true,
-      link: "https://eximinq.in/services/advance-authorisation",
-    },
-    {
-      id: 302,
-      category: "Licensing",
-      title: "EPCG Scheme",
-      description:
-        "Zero duty import of capital goods for pre-production, production, and post-production.",
-      icon: <Award className="w-8 h-8 text-teal-600" />,
-      popular: true,
-      link: "https://eximinq.in/services/epcg-scheme",
-    },
-    {
-      id: 303,
-      category: "Licensing",
-      title: "SCOMET Licensing",
-      description:
-        "Specialized filing for Dual-Use items (Special Chemicals, Organisms, Materials, Equipment).",
-      icon: <ShieldCheck className="w-8 h-8 text-teal-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/scomet-licensing",
-    },
-    { 
-      id: 304,
-      category: "Licensing",
-      title: "EOP Extension",
-      description:
-        "Export Obligation Period Extension for Advance Authorization or EPCG.",
-      icon: <ArrowLeftRight className="w-8 h-8 text-teal-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/eop-extension",
-    },
-    {
-      id: 305,
-      category: "Licensing",
-      title: "Fertiliser Import",
-      description:
-        "ExSpecific license required to import fertilizers, regulated by Dept of Fertilizers.",
-      icon: <ImportIcon className="w-8 h-8 text-teal-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/fertiliser-import-license",
-    },
-    {
-      id: 306,
-      category: "Licensing",
-      title: "DFIA License",
-      description:
-        "Duty Free Import Authorisation. Transferable license issued post-export.",
-      icon: <File className="w-8 h-8 text-teal-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/dfia-license",
-    },
-    {
-      id: 307,
-      category: "Licensing",
-      title: "Customs License",
-      description:
-        "LICENSES REGISTRATION AT CUSTOMS",
-      icon: <FileText className="w-8 h-8 text-teal-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/customs-license-registration",
-    },
-
-
-
-    // Incentives
-    {
-      id: 401,
-      category: "Incentives",
-      title: "RoDTEP Scheme",
-      description:
-        "Remission of Duties and Taxes on Exported Products. Scrip generation and ledger transfer.",
-      icon: <TrendingUp className="w-8 h-8 text-green-600" />,
-      popular: true,
-      link: "https://eximinq.in/services/rodtep-scheme",
-    },
-    {
-      id: 402,
-      category: "Incentives",
-      title: "IGST Refund",
-      description:
-        "Resolution of IGST refund scrolls stuck due to PFMS mismatch, EGM errors, or non-transmission.",
-      icon: <CreditCard className="w-8 h-8 text-green-600" />,
-      popular: true,
-      link: "https://eximinq.in/services/igst-refund",
-    },
-    {
-      id: 403,
-      category: "Incentives",
-      title: "Duty Drawback",
-      description:
-        "Brand Rate fixation and Section 74 drawback claims for re-exports.",
-      icon: <ArrowRight className="w-8 h-8 text-green-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/duty-drawback",
-    },
-    {
-      id: 404,
-      category: "Incentives",
-      title: "No Due Certificate",
-      description:
-        "Proof of no outstanding dues to government bodies to claim rebates.",
-      icon: <Check className="w-8 h-8 text-green-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/no-due-certificate",
-    },
-    {
-      id: 405,
-      category: "Incentives",
-      title: "No Incentive Cert",
-      description:
-        "Verifies no other incentives were claimed to avoid double-dipping.",
-      icon: <AlertTriangle className="w-8 h-8 text-green-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/no-incentive-certificate",
-    },
-    {
-      id: 406,
-      category: "Incentives",
-      title: "Interest Equalisation",
-      description:
-        "Scheme reducing the interest rate on pre/post-shipment export credit.",
-      icon: <TrendingUp className="w-8 h-8 text-green-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/interest-equalisation-scheme",
-    },
-    {
-      id: 407,
-      category: "Incentives",
-      title: "Free Sale Cert",
-      description:
-        "States goods are freely sold in India, for medical/food product exports.",
-      icon: <Globe className="w-8 h-8 text-green-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/free-sale-certificate",
-    },
-    {
-      id: 408,
-      category: "Incentives",
-      title: "RODTEP / ROSCTL SCRIPT TRADING",
-      description:
-        "Buying & Selling options for Scripts at Best Market Competitive rates",
-      icon: <Recycle className="w-8 h-8 text-green-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/rodtep-rosctl-trading",
-    },
-
-    // Compliance
-    {
-      id: 801,
+      id: 818,
       category: "Compliance",
-      title: "BIS Registration",
+      title: "GST Returns",
       description:
-        "Mandatory BIS (ISI/CRS) certification for Steel, Electronics, Chemicals, and Toys imports.",
-      icon: <Zap className="w-8 h-8 text-blue-700" />,
-      popular: true,
-      link: "https://eximinq.in/services/bis-registration",
-    },
-    {
-      id: 802,
-      category: "Compliance",
-      title: "EPR Authorization",
-      description:
-        "Extended Producer Responsibility compliance for E-waste, Plastic, Battery, and Waste Tyre management.",
-      icon: <Leaf className="w-8 h-8 text-green-700" />,
-      popular: true,
-      link: "https://eximinq.in/services/epr-authorization",
-    },
-    {
-      id: 803,
-      category: "Compliance",
-      title: "FSSAI Licensing",
-      description:
-        "Food Import Clearance System (FICS) and Central Licensing for food importers ( FSSAI ).",
-      icon: <Utensils className="w-8 h-8 text-orange-600" />,
+        "Filing returns for claiming Input Tax Credit (ITC) and refunds for exporters.",
+      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/fssai-licensing",
-    },
-    {
-      id: 804,
-      category: "Compliance",
-      title: "WPC (ETA) License",
-      description:
-        "Equipment Type Approval (ETA) for wireless products (Bluetooth/Wi-Fi) from WPC Wing.",
-      icon: <Radio className="w-8 h-8 text-blue-700" />,
-      popular: false,
-      link: "https://eximinq.in/services/wpc-license",
-    },
-    {
-      id: 805,
-      category: "Compliance",
-      title: "Legal Metrology (LMPC)",
-      description:
-        "Registration for pre-packaged commodities to ensure MRP labeling compliance.",
-      icon: <Scale className="w-8 h-8 text-blue-700" />,
-      popular: false,
-      link: "https://eximinq.in/services/lmpc-registration",
-    },
-    {
-      id: 806,
-      category: "Compliance",
-      title: "EDPMS & e-BRC",
-      description:
-        "Export Data Processing and Monitoring System closure and e-BRC realization to avoid RBI caution listing.",
-      icon: <Landmark className="w-8 h-8 text-indigo-700" />,
-      popular: true,
-      link: "https://eximinq.in/services/edpms-ebrc",
-    },
-    {
-      id: 807,
-      category: "Compliance",
-      title: "AQCS & PQMS",
-      description:
-        "Animal & Plant Quarantine clearances for livestock and agricultural imports/exports.",
-      icon: <Leaf className="w-8 h-8 text-green-700" />,
-      popular: false,
-      link: "https://eximinq.in/services/aqcs-pqms",
-    },
-    {
-      id: 808,
-      category: "Compliance",
-      title: "Drug Controller (CDSCO)",
-      description:
-        "Import registration and licensing for drugs, medical devices, and cosmetics.",
-      icon: <ShieldCheck className="w-8 h-8 text-red-700" />,
-      popular: false,
-      link: "https://eximinq.in/services/cdsco-compliance",
-    },
-    {
-      id: 809,
-      category: "Compliance",
-      title: "Certificate of Origin",
-      description:
-        "Online issuance of Preferential (FTA/PTA) and Non-Preferential CoO.",
-      icon: <BadgeCheck className="w-8 h-8 text-indigo-700" />,
-      popular: true,
-      link: "https://eximinq.in/services/certificate-of-origin",
+      link: "https://eximinq.in/services/gst-returns",
     },
     {
       id: 810,
@@ -631,26 +648,16 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/gst-lut-filing",
     },
     {
-      id: 811,
-      category: "Compliance",
-      title: "REX Registration",
+      id: 207,
+      category: "Customs Filing",
+      title: "RMCC Alert Removal",
       description:
-        "Registered Exporter System registration for self-certification of origin under GSP.",
-      icon: <Globe className="w-8 h-8 text-indigo-700" />,
+        'Removing "risky exporter" alerts that block IGST refunds and cause delays.',
+      icon: <AlertTriangle className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/rex-registration",
+      link: "https://eximinq.in/services/rmcc-alert-removal",
     },
     {
-      id: 812,
-      category: "Compliance",
-      title: "DSC Services",
-      description:
-        "Digital Signature Certificate. Essential for filing online documents with DGFT, Customs, and GST.",
-      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/dsc-services",
-    },
-        {
       id: 813,
       category: "Compliance",
       title: "IGCR Returns",
@@ -661,167 +668,14 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/igcr-returns",
     },
     {
-      id: 814,
+      id: 807,
       category: "Compliance",
-      title: "IEM Registration",
+      title: "AQCS & PQMS",
       description:
-        "Industrial Entrepreneur Memorandum for undertakings exempted from licensing.",
-      icon: <Building className="w-8 h-8 text-orange-600" />,
+        "Animal & Plant Quarantine clearances for livestock and agricultural imports/exports.",
+      icon: <Leaf className="w-8 h-8 text-green-700" />,
       popular: false,
-      link: "https://eximinq.in/services/iem-registration",
-    },
-    {
-      id: 816,
-      category: "Compliance",
-      title: "Industrial License",
-      description:
-        "Mandatory license for industries involved in hazardous chemicals or defense sectors.",
-      icon: <Shield className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/industrial-license",
-    },
-    {
-      id: 817,
-      category: "Compliance",
-      title: "Factory License",
-      description:
-        "Approval from Chief Inspector of Factories ensuring safety and labor compliance.",
-      icon: <Building className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/factory-license",
-    },
-    {
-      id: 818,
-      category: "Compliance",
-      title: "GST Returns",
-      description:
-        "Filing returns for claiming Input Tax Credit (ITC) and refunds for exporters.",
-      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/gst-returns",
-    },
-    {
-      id: 819,
-      category: "Compliance",
-      title: "Pollution Control",
-      description:
-        "Consent to Establish/Operate (CTE/CTO) from the Pollution Control Board.",
-      icon: <GlobeIcon className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/pollution-control",
-    },
-    {
-      id: 820,
-      category: "Compliance",
-      title: "Warehouse License",
-      description:
-        "License for bonded warehouses (MOOWR) to store goods without immediate duty.",
-      icon: <Warehouse className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/warehouse-license",
-    },
-    {
-      id: 821,
-      category: "Compliance",
-      title: "UN IIP Certification",
-      description:
-        "Certification for packages used to transport dangerous goods internationally.",
-      icon: <Cuboid className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/un-iip-certification",
-    },
-    {
-      id: 822,
-      category: "Compliance",
-      title: "CA Certification",
-      description:
-        "Chartered Accountant certificates to verify financial data or consumption norms.",
-      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/ca-certification-export-import",
-    },
-    {
-      id: 823,
-      category:"Compliance",
-      title: "Compliance Audit",
-      description:
-        "Compliance Audit to ensure compliance with regulatory requirements.",
-      icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/compliance-audit",
-    },
-
-    // Dispute Resolution
-    {
-      id: 601,
-      category: "Dispute Resolution",
-      title: "Customs Adjudication",
-      description:
-        "Reply to Show Cause Notices (SCN) and representation in personal hearings.",
-      icon: <Gavel className="w-8 h-8 text-red-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/customs-adjudication",
-    },
-    {
-      id: 602,
-      category: "Dispute Resolution",
-      title: "Policy Relaxation (PRC)",
-      description:
-        "Representing cases before the Policy Relaxation Committee for procedural lapses.",
-      icon: <AlertTriangle className="w-8 h-8 text-red-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/prc-relaxation",
-    },
-    // ISO & Trademark
-    {
-      id: "iso-701",
-      category: "ISO & Trademark",
-      title: "ISO Certification",
-      description:
-        "International standard certification ensuring quality management and compliance.",
-      icon: <Check className="w-8 h-8 text-pink-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/iso-certification",
-    },
-    {
-      id: 702,
-      category: "ISO & Trademark",
-      title: "Trademark",
-      description:
-        "Intellectual Property protection for brand names and symbols.",
-      icon: <Hash className="w-8 h-8 text-pink-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/trademark-registration",
-    },
-    {
-      id: 703,
-      category: "ISO & Trademark",
-      title: "Copyright",
-      description:
-        "Protection for original literary, artistic, or creative works.",
-      icon: <Timer className="w-8 h-8 text-pink-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/copyright-registration",
-    },
-    {
-      id: 704,
-      category: "ISO & Trademark",
-      title: "Brand Copyright",
-      description:
-        "Specific legal protection for unique brand identity elements.",
-      icon: <Lightbulb className="w-8 h-8 text-pink-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/brand-copyright",
-    },
-    {
-      id: 705,
-      category: "ISO & Trademark",
-      title: "Logo Copyright",
-      description:
-        "Specific legal protection for visual logos and graphic symbols.",
-      icon: <Image className="w-8 h-8 text-pink-600" />,
-      popular: false,
-      link: "https://eximinq.in/services/logo-copyright",
+      link: "https://eximinq.in/services/aqcs-pqms",
     },
     {
       id: 706,
@@ -834,6 +688,46 @@ const CloudDeskServices = () => {
       link: "https://eximinq.in/services/barcode-registration",
     },
     {
+      id: 801,
+      category: "Compliance",
+      title: "BIS Registration",
+      description:
+        "Mandatory BIS (ISI/CRS) certification for Steel, Electronics, Chemicals, and Toys imports.",
+      icon: <Zap className="w-8 h-8 text-blue-700" />,
+      popular: true,
+      link: "https://eximinq.in/services/bis-registration",
+    },
+    {
+      id: 704,
+      category: "ISO & Trademark",
+      title: "Brand Copyright",
+      description:
+        "Specific legal protection for unique brand identity elements.",
+      icon: <Lightbulb className="w-8 h-8 text-pink-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/brand-copyright",
+    },
+    {
+      id: 703,
+      category: "ISO & Trademark",
+      title: "Copyright",
+      description:
+        "Protection for original literary, artistic, or creative works.",
+      icon: <Timer className="w-8 h-8 text-pink-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/copyright-registration",
+    },
+    {
+      id: 307,
+      category: "Licensing",
+      title: "Customs License",
+      description:
+        "LICENSES REGISTRATION AT CUSTOMS",
+      icon: <FileText className="w-8 h-8 text-teal-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/customs-license-registration",
+    },
+    {
       id: 707,
       category: "ISO & Trademark",
       title: "Design Reg.",
@@ -843,6 +737,98 @@ const CloudDeskServices = () => {
       popular: false,
       link: "https://eximinq.in/services/design-registration",
     },
+    {
+      id: 707,
+      category: "Logistics",
+      title: "DPD Registration",
+      description:
+        "Direct Port Delivery. Clear cargo directly from port within 48h to save costs.",
+      icon: <AlertTriangle className="w-8 h-8 text-orange-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/dpd-registration",
+    },
+    {
+      id: 808,
+      category: "Compliance",
+      title: "Drug Controller (CDSCO)",
+      description:
+        "Import registration and licensing for drugs, medical devices, and cosmetics.",
+      icon: <ShieldCheck className="w-8 h-8 text-red-700" />,
+      popular: false,
+      link: "https://eximinq.in/services/cdsco-compliance",
+    },
+    {
+      id: 106,
+      category: "Registration",
+      title: "Halal Certification",
+      description:
+        "Essential for export to Middle Eastern/Islamic countries.",
+      icon: <Check className="w-8 h-8 text-blue-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/halal-certification",
+    },
+    {
+      id: "iso-701",
+      category: "ISO & Trademark",
+      title: "ISO Certification",
+      description:
+        "International standard certification ensuring quality management and compliance.",
+      icon: <Check className="w-8 h-8 text-pink-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/iso-certification",
+    },
+    {
+      id: 705,
+      category: "ISO & Trademark",
+      title: "Logo Copyright",
+      description:
+        "Specific legal protection for visual logos and graphic symbols.",
+      icon: <Image className="w-8 h-8 text-pink-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/logo-copyright",
+    },
+    {
+      id: 702,
+      category: "ISO & Trademark",
+      title: "Trademark",
+      description:
+        "Intellectual Property protection for brand names and symbols.",
+      icon: <Hash className="w-8 h-8 text-pink-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/trademark-registration",
+    },
+    {
+      id: 305,
+      category: "Licensing",
+      title: "Fertiliser Import",
+      description:
+        "ExSpecific license required to import fertilizers, regulated by Dept of Fertilizers.",
+      icon: <ImportIcon className="w-8 h-8 text-teal-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/fertiliser-import-license",
+    },
+    {
+      id: 109,
+      category: "Registration",
+      title: "GeM Registration",
+      description:
+        "Government e-Marketplace registration to sell directly to Indian government depts.",
+      icon: <Briefcase className="w-8 h-8 text-blue-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/gem-registration",
+    },
+    {
+      id: 110,
+      category: "Registration",
+      title: "Horticulture",
+      description:
+        "Registration with National Horticulture Board for exporting agricultural produce.",
+      icon: <Globe className="w-8 h-8 text-blue-600" />,
+      popular: false,
+      link: "https://eximinq.in/services/horticulture",
+    },
+
+
   ];
 
   // --------------------------------------------------
@@ -862,7 +848,7 @@ const CloudDeskServices = () => {
     return matchCategory && matchQuery;
   });
 
-    const handleEnrollmentSubmit = (formData) => {
+  const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
 
     // TODO → send API call
@@ -904,10 +890,10 @@ const CloudDeskServices = () => {
       />
 
       <ModalEnrollServices
-          show={showEnrollModal.open}
-          type={showEnrollModal.type}
-          onClose={() => setShowEnrollModal({ open: false, type: null })}
-          onSubmit={handleEnrollmentSubmit}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: null })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* HERO */}
@@ -921,13 +907,13 @@ const CloudDeskServices = () => {
       />
 
       {/* SERVICES GRID */}
-        <ServicesGrid
-          services={filteredServices}
-          onStartProcess={(service) => {
-            setSelectedService(service); 
-            setShowModal(true);        
-          }}
-        />
+      <ServicesGrid
+        services={filteredServices}
+        onStartProcess={(service) => {
+          setSelectedService(service);
+          setShowModal(true);
+        }}
+      />
 
       {/* PROCESS STEPS */}
       <ProcessSteps />

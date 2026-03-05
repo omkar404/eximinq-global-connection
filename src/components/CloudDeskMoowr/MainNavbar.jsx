@@ -46,7 +46,7 @@ export const MainNavbar = ({
             Contact
           </a>
           <a className="hover:text-teal-500" href="/clouddesk-saas">
-            SAAS
+            CloudDesk
           </a>
         </div>
 
