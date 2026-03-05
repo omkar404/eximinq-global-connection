@@ -6,17 +6,25 @@ const Navbar = () => {
   return (
     <header className="bg-white shadow-sm sticky top-24 z-30">
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
-
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#ims" class="hover:text-brand-600 transition">Import Monitoring</a>
-                <a href="#process" class="hover:text-brand-600 transition">How it Works</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
+          <a href="#ims" class="hover:text-brand-600 transition">
+            Import Monitoring
+          </a>
+          <a href="#process" class="hover:text-brand-600 transition">
+            How it Works
+          </a>
+          <a href="#contact" class="hover:text-brand-600 transition">
+            Introducing
+          </a>
+          <a href="#pricing" class="hover:text-brand-600 transition">
+            Fees
+          </a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        <a 
-          href="#contact"
+        <a
+          href="#pricing"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
@@ -29,16 +37,21 @@ const Navbar = () => {
         >
           ☰
         </button>
-
       </nav>
 
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#ims" class="block py-2 text-slate-600">Import Monitoring</a>
-            <a href="#process" class="block py-2 text-slate-600">How it Works</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Get Quote</a>
-          <a 
+          <a href="#ims" class="block py-2 text-slate-600">
+            Import Monitoring
+          </a>
+          <a href="#process" class="block py-2 text-slate-600">
+            How it Works
+          </a>
+          <a href="#contact" class="block py-2 text-brand-600 font-bold">
+            Get Quote
+          </a>
+          <a
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >

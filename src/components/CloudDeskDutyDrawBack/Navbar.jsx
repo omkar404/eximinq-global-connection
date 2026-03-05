@@ -17,7 +17,7 @@ const Navbar = () => {
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
         <a 
-          href="#home"
+          href="#brand-rate"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now

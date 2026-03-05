@@ -1,5 +1,5 @@
 const Fees = () => {
-  return (
+  return (  
 //    <!-- Pricing Section -->
     <section id="pricing" class="py-20 bg-slate-50">
         <div class="container mx-auto px-4 text-center">

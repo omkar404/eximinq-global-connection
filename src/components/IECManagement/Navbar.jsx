@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const Navbar = ({
-  setShowEnrollModal
-}) => {
+const Navbar = ({ setShowEnrollModal }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -10,6 +8,9 @@ const Navbar = ({
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
+          <a href="#home" className="hover:text-brand-600 transition">
+            Home
+          </a>
           <a href="#about" className="hover:text-brand-600 transition">
             About IEC
           </a>
@@ -28,14 +29,23 @@ const Navbar = ({
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
-  onClick={() => setShowEnrollModal({open: true, type: "import-export-code-Apply" })}
-  className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+        {/* <button
+          // onClick={() =>
+          //   setShowEnrollModal({ open: true, type: "import-export-code-Apply" })
+          // }
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
->
-  Apply Now
-</button>
+        >
+          Apply Now
+        </button> */}
 
+            <a
+              href="#fees"
+              className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+            >
+              Apply Now
+            </a>
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -65,7 +75,7 @@ const Navbar = ({
             Fees
           </a>
 
-          <a 
+          <a
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >

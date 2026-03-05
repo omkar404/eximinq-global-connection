@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Helmet } from "react-helmet-async";
+=======
+import { useState } from "react";
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import TopBar from "../components/CloudDeskShippingBills/TopBar";
 import Navbar from "../components/CloudDeskShippingBills/Navbar";
 import Hero from "../components/CloudDeskShippingBills/Hero";
@@ -27,8 +31,9 @@ import {
   CheckCheck,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskShippingBills/MainNavbar";
-
+import {ModalEnroll } from "../components/CloudDeskShippingBills/ModalEnroll";
 const CloudDeskShippingBills = () => {
+<<<<<<< HEAD
   <>
     <Helmet>
       <title>
@@ -176,12 +181,36 @@ const CloudDeskShippingBills = () => {
       </script>
     </Helmet>
     return (
+=======
+    const [showEnrollModal, setShowEnrollModal] = useState({
+            open: false,
+            type: "",
+          });
+  
+            const handleEnrollmentSubmit = (formData) => {
+        console.log("Enrollment Submitted:", formData);
+    
+        // TODO → send API call
+        // axios.post("/api/enroll", formData)
+    
+        alert("Form submitted — check console for data.");
+      };
+  return (
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+            
+      
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />      
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -402,10 +431,18 @@ const CloudDeskShippingBills = () => {
                   registered at the Port of Loading. We can register it for you.
                 </p>
 
-                <a
+                {/* <a
                   href="#contact"
                   className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
                 >
+                  Register AD Code
+                </a> */}
+                <a
+                    href="/services/ad-code-registration"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
+                  >
                   Register AD Code
                 </a>
               </div>
@@ -510,7 +547,7 @@ const CloudDeskShippingBills = () => {
       </section>
 
       {/* Dynamic Fees Section */}
-      <Fees />
+      <Fees  setShowEnrollModal={setShowEnrollModal}/>
 
 
       {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

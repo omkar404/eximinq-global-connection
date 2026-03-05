@@ -249,9 +249,9 @@
 //   },
 // ];
 
-
 import React, { useMemo, useState } from "react";
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
+import Marquee from "react-fast-marquee";
 import {
   DollarSign,
   Filter,
@@ -282,96 +282,88 @@ const getTodayISO = () => {
   return today.toISOString().split("T")[0];
 };
 
-
 /* ---------------- COMPONENT ---------------- */
 
 export default function ExchangeRates() {
   const [currency, setCurrency] = useState("USD");
   const [year, setYear] = useState("2026");
-const [date, setDate] = useState(getTodayISO());
+  const [date, setDate] = useState(getTodayISO());
 
-
-// converts "DD-MM-YYYY" → Date object
-// "DD-MM-YYYY" → Date
-// "DD-MM-YYYY" → Date
-// "DD-MM-YYYY" → Date
-const parseDMY = (dmy) => {
-  const [d, m, y] = dmy.split("-").map(Number);
-  return new Date(y, m - 1, d);
-};
-
-// Fortnight range from selected date (yyyy-mm-dd)
-const getFortnightRange = (selectedDate) => {
-  const d = new Date(selectedDate);
-  const y = d.getFullYear();
-  const m = d.getMonth();
-  const day = d.getDate();
-
-  if (day <= 15) {
-    return {
-      start: new Date(y, m, 1),
-      end: new Date(y, m, 15),
-    };
-  }
-
-  return {
-    start: new Date(y, m, 16),
-    end: new Date(y, m + 1, 0),
+  // converts "DD-MM-YYYY" → Date object
+  // "DD-MM-YYYY" → Date
+  // "DD-MM-YYYY" → Date
+  // "DD-MM-YYYY" → Date
+  const parseDMY = (dmy) => {
+    const [d, m, y] = dmy.split("-").map(Number);
+    return new Date(y, m - 1, d);
   };
-};
 
+  // Fortnight range from selected date (yyyy-mm-dd)
+  const getFortnightRange = (selectedDate) => {
+    const d = new Date(selectedDate);
+    const y = d.getFullYear();
+    const m = d.getMonth();
+    const day = d.getDate();
 
+    if (day <= 15) {
+      return {
+        start: new Date(y, m, 1),
+        end: new Date(y, m, 15),
+      };
+    }
+
+    return {
+      start: new Date(y, m, 16),
+      end: new Date(y, m + 1, 0),
+    };
+  };
 
   /* ---- FILTER DATA ---- */
-const filteredRates = useMemo(() => {
-  // 1) currency filter
-  let list = exchangeRates.filter(r => r.currency === currency);
+  const filteredRates = useMemo(() => {
+    // 1) currency filter
+    let list = exchangeRates.filter((r) => r.currency === currency);
 
-  // 2) sort by effectiveDate ASC (important)
-  list = list.sort(
-    (a, b) => parseDMY(a.effectiveDate) - parseDMY(b.effectiveDate)
-  );
-
-  // 3) date-based validity (rate valid until next effectiveDate)
-  if (date) {
-    const { start, end } = getFortnightRange(date);
-
-    list = list.filter((r, idx) => {
-      const eff = parseDMY(r.effectiveDate);
-      const nextEff = list[idx + 1]
-        ? parseDMY(list[idx + 1].effectiveDate)
-        : null;
-
-      const validFrom = eff;
-      const validTo = nextEff
-        ? new Date(nextEff.getTime() - 1) // until next rate
-        : new Date(2099, 11, 31); // open-ended (last known rate)
-
-      return (
-        validTo >= start && validFrom <= end
-      );
-    });
-  }
-
-  // 4) optional year label filter (display only; does not cut validity)
-  if (year) {
-    list = list.filter(
-      r => parseDMY(r.effectiveDate).getFullYear() <= Number(year)
+    // 2) sort by effectiveDate ASC (important)
+    list = list.sort(
+      (a, b) => parseDMY(a.effectiveDate) - parseDMY(b.effectiveDate),
     );
-  }
 
-  // 5) newest first for UI
-  return list.sort(
-    (a, b) => parseDMY(b.effectiveDate) - parseDMY(a.effectiveDate)
-  );
-}, [currency, date, year]);
+    // 3) date-based validity (rate valid until next effectiveDate)
+    if (date) {
+      const { start, end } = getFortnightRange(date);
 
+      list = list.filter((r, idx) => {
+        const eff = parseDMY(r.effectiveDate);
+        const nextEff = list[idx + 1]
+          ? parseDMY(list[idx + 1].effectiveDate)
+          : null;
+
+        const validFrom = eff;
+        const validTo = nextEff
+          ? new Date(nextEff.getTime() - 1) // until next rate
+          : new Date(2099, 11, 31); // open-ended (last known rate)
+
+        return validTo >= start && validFrom <= end;
+      });
+    }
+
+    // 4) optional year label filter (display only; does not cut validity)
+    if (year) {
+      list = list.filter(
+        (r) => parseDMY(r.effectiveDate).getFullYear() <= Number(year),
+      );
+    }
+
+    // 5) newest first for UI
+    return list.sort(
+      (a, b) => parseDMY(b.effectiveDate) - parseDMY(a.effectiveDate),
+    );
+  }, [currency, date, year]);
 
   const getPdfUrl = (effectiveDate) => {
     if (!effectiveDate) return null;
     return `/pdfs/${effectiveDate}.pdf`;
   };
-
 
   /* ---- MAP TABLE DATA WITH TREND ---- */
   const tableRates = filteredRates.map((r, index) => {
@@ -487,25 +479,115 @@ const filteredRates = useMemo(() => {
           </div>
         </div>
 
+        {/*Marquee example*/}
+        <div className="mb-8 bg-white rounded-xl shadow-md border border-gray-200 p-4">
+          <div className="flex justify-between items-center mb-3 px-2">
+            <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider">
+              Live Exchange Rates Ticker - All Currencies ({year})
+            </h3>
+            <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
+              {
+                exchangeRates.filter((r) => {
+                  const [day, month, yr] = r.effectiveDate.split("-");
+                  return yr === year;
+                }).length
+              }{" "}
+              {/* rates in {year} */}
+            </span>
+          </div>
+
+          <div className="relative">
+            <Marquee
+              speed={60}
+              gradient={true}
+              gradientColor={[255, 255, 255]}
+              gradientWidth={50}
+              pauseOnHover={true}
+              className="py-2"
+            >
+              {exchangeRates
+                .filter((r) => {
+                  const [day, month, yr] = r.effectiveDate.split("-");
+                  return yr === year;
+                })
+                .map((rate, index) => (
+                  <div
+                    key={`${rate.currency}-${rate.effectiveDate}-${index}`}
+                    className="mx-3 w-48 bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-lg text-gray-800">
+                        {rate.currency}
+                      </span>
+                      <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
+                        Unit: {rate.unit}
+                      </span>
+                    </div>
+                    <div className="text-xs text-gray-500 mb-2 truncate">
+                      {rate.currencyName}
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-center">
+                      <div className="bg-green-50 rounded p-1">
+                        <div className="text-xs text-green-600 font-medium">
+                          IMP
+                        </div>
+                        <div className="font-bold text-gray-800">
+                          ₹{rate.importRate}
+                        </div>
+                      </div>
+                      <div className="bg-orange-50 rounded p-1">
+                        <div className="text-xs text-orange-600 font-medium">
+                          EXP
+                        </div>
+                        <div className="font-bold text-gray-800">
+                          ₹{rate.exportRate}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-2 text-[10px] text-gray-400 flex justify-between">
+                      <span>{rate.effectiveDate}</span>
+                      <span className="text-blue-600">{rate.notification}</span>
+                    </div>
+                    {rate.pdfUrl && (
+                      <a
+                        href={`https://eximinq.in/pdfs/${rate.pdfUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute top-2 right-2 text-gray-400 hover:text-blue-600"
+                      >
+                        <FileText className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
+                ))}
+            </Marquee>
+          </div>
+        </div>
+
         {/* Trend Cards */}
         <div className="grid lg:grid-cols-3 gap-8 mb-8">
-          <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-6 text-white shadow-lg">
-            <div className="flex justify-between mb-4">
-              <div>
-                <p className="text-blue-200 text-xs font-bold uppercase">
-                  Current {currency} Rate
-                </p>
-                <h3 className="text-4xl font-bold mt-1">
-                  ₹{latest?.import}
-                </h3>
-                <p className="text-sm text-blue-200 mt-1">Import</p>
-              </div>
-              <div className="bg-white/20 p-2 rounded-lg">
-                <DollarSign className="w-6 h-6" />
-              </div>
-            </div>
-
-            <div className="flex items-center text-sm bg-black/20 rounded p-2">
+  <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-6 text-white shadow-lg">
+    <div className="flex justify-between items-start mb-4">
+      <div>
+        <p className="text-blue-200 text-xs font-bold uppercase">
+          Current {currency} Rate
+        </p>
+        <div className="grid grid-cols-2 gap-4 mt-3">
+          <div>
+            <p className="text-sm text-blue-200">Import</p>
+            <h3 className="text-3xl font-bold">₹{latest?.import}</h3>
+          </div>
+          <div>
+            <p className="text-sm text-blue-200">Export</p>
+            <h3 className="text-3xl font-bold">₹{latest?.export}</h3>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white/20 p-2 rounded-lg">
+        <DollarSign className="w-6 h-6" />
+      </div>
+    </div>
+    <div className="flex items-center text-sm bg-black/20 rounded p-2">
               {latest?.trend === "up" && (
                 <span className="text-red-300 font-bold mr-2 flex items-center">
                   <TrendingUp className="w-4 h-4 mr-1" /> Rising
@@ -522,14 +604,13 @@ const filteredRates = useMemo(() => {
                 </span>
               )}
             </div>
+    <p className="text-[10px] text-blue-300 mt-4">
+      Effective from: {latest?.date}
+    </p>
+  </div>
 
-            <p className="text-[10px] text-blue-300 mt-4">
-              Effective from: {latest?.date}
-            </p>
-          </div>
-
-          {/* Chart placeholder unchanged */}
-          <div className="lg:col-span-2 bg-white rounded-xl shadow-md border border-gray-200 p-6">
+  {/* Chart section unchanged */}
+<div className="lg:col-span-2 bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <h3 className="font-bold text-gray-700 mb-4">
               {currency} Trend (Last Records)
             </h3>
@@ -574,7 +655,9 @@ const filteredRates = useMemo(() => {
                 {tableRates.map((r, i) => (
                   <tr key={i} className="hover:bg-blue-50">
                     <td className="px-6 py-4 font-medium">{r.date}</td>
-                    <td className="px-6 py-4 text-blue-600">{r.notification}</td>
+                    <td className="px-6 py-4 text-blue-600">
+                      {r.notification}
+                    </td>
                     <td className="px-6 py-4 font-bold">{r.currency}</td>
                     <td className="px-6 py-4 text-right font-mono font-bold">
                       {r.import}
@@ -583,9 +666,15 @@ const filteredRates = useMemo(() => {
                       {r.export}
                     </td>
                     <td className="px-6 py-4 text-center">
-                      {r.trend === "up" && <TrendingUp className="w-4 h-4 text-red-600 inline" />}
-                      {r.trend === "down" && <TrendingDown className="w-4 h-4 text-green-600 inline" />}
-                      {r.trend === "stable" && <Minus className="w-4 h-4 text-gray-400 inline" />}
+                      {r.trend === "up" && (
+                        <TrendingUp className="w-4 h-4 text-red-600 inline" />
+                      )}
+                      {r.trend === "down" && (
+                        <TrendingDown className="w-4 h-4 text-green-600 inline" />
+                      )}
+                      {r.trend === "stable" && (
+                        <Minus className="w-4 h-4 text-gray-400 inline" />
+                      )}
                     </td>
                     <td className="px-6 py-4 text-center">
                       {r.pdfUrl ? (

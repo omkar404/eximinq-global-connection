@@ -8,6 +8,9 @@ const Navbar = ({ setShowEnrollModal }) => {
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
+          <a href="#home" className="hover:text-brand-600 transition">
+            Home
+          </a>
           <a href="#about" class="hover:text-brand-600 transition">
             About AD Code
           </a>
@@ -25,7 +28,8 @@ const Navbar = ({ setShowEnrollModal }) => {
           </a>
         </div>
         <a
-          href="#documents"
+          // href="#documents"
+          href="#pricing"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md 
              absolute right-4 transition"
@@ -57,7 +61,8 @@ const Navbar = ({ setShowEnrollModal }) => {
           {/* <a href="#contact" class="block py-2 text-brand-600 font-bold">Register Now</a> */}
 
           <button
-            onClick={() => setShowEnrollModal({ open: true, type: "" })}
+            // onClick={() => setShowEnrollModal({ open: true, type: "" })}
+            href="#home"
             className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
           >

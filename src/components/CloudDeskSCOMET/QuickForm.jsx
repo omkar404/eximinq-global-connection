@@ -62,7 +62,8 @@ const QuickForm = () => {
         </div>
 
         {/* Submit Button */}
-        <button
+        <button 
+          
           type="submit"
           className="w-full bg-brand-600 hover:bg-brand-700 text-white 
                    font-bold py-3 rounded-lg transition"

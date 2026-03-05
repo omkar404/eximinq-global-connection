@@ -365,9 +365,14 @@ const IECRegistration = () => {
                 </div>
                 <div className="flex justify-center">
                   <a
+<<<<<<< HEAD
                     href="/services/ad-code-registration"
                     target="_blank"
                     rel="noopener noreferrer"
+=======
+                    href="#pricing"
+                    className="inline-block bg-brand-600 text-white font-bold py-3 px-6 rounded hover:bg-brand-700 transition"
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
                   >
                     <button className="mt-6 bg-accent-500 hover:bg-accent-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition">
                       Register AD Code Now

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Handshake, Building, Mail } from "lucide-react";
+import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -33,6 +33,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setIssue("");
   };
 
+  // const isNeedHelp = type === "Need_Help";
+  const isSteelSIMS = type === "Steel_Import_NOC_SIMS";
+  const isCopperNFMIMS = type === "Copper_(NFMIMS)";
+  const isRegisterAluminium = type === "Register_Aluminium";
+  const isGetCIMSNo = type === "Get_CIMS_No"
+  const isGetPIMSNo = type === "Get_PIMS_No"
+  const isRegisterChips = type === "Register_Chips"
+
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
     "IEC PROFILE UPDATATION",
@@ -40,15 +48,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "IEC SUSPENSION",
   ];
 
-const PROFILE_UPDATE_OPTIONS = [
-  "Steel Import NOC (SIMS)",
-  "Copper (NFMIMS)",
-  "Aluminium (NFMIMS)",
-  "Coal (CIMS)",
-  "Paper (PIMS)",
-  "Chip (CHIMS)",
-];
-
+  const PROFILE_UPDATE_OPTIONS = [
+    "Steel Import NOC (SIMS)",
+    "Copper (NFMIMS)",
+    "Aluminium (NFMIMS)",
+    "Coal (CIMS)",
+    "Paper (PIMS)",
+    "Chip (CHIMS)",
+  ];
 
   const handleClose = () => {
     resetFrom();
@@ -235,11 +242,11 @@ const PROFILE_UPDATE_OPTIONS = [
                   <option value="" disabled>
                     Select Update Type
                   </option>
-                    {PROFILE_UPDATE_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
+                  {PROFILE_UPDATE_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
                 </select>
               </div>
             )}
@@ -268,6 +275,133 @@ const PROFILE_UPDATE_OPTIONS = [
                 </div>
               </>
             )}
+
+            {isSteelSIMS && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <FileSignature
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value="Steel Import NOC (SIMS)"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {isCopperNFMIMS && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <FileSignature
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value="Copper (NFMIMS)"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {isRegisterAluminium && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <FileSignature
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value="Aluminium (NFMIMS)"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+  
+            {isGetCIMSNo && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <FileSignature
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value="Get CIMS No"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {isGetPIMSNo && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <FileSignature
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value="Get PIMS No"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {isRegisterChips && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <FileSignature
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value="Register Chips"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {/* {isNeedHelp && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <FileSignature
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value="Need Help"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )} */}
 
             {/* Role Selection */}
             <div>
@@ -302,7 +436,7 @@ const PROFILE_UPDATE_OPTIONS = [
                         </span>
                       </label>
                     );
-                  }
+                  },
                 )}
               </div>
               {errors.role && (

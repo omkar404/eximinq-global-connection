@@ -1,6 +1,6 @@
 import QuickForm from "./QuickForm";
 
-const Hero = () => {
+const Hero = ({setShowEnrollModal}) => {
   return (
     <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
 
@@ -35,19 +35,30 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
-            <a
+            {/* <a
               href="#"
               className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               New Advance License Request
-            </a>
+            </a> */}
 
-            <a
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "New_Advance_License_Request",
+                  })
+                }
+                className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+              >
+                New Advance License Request
+              </button>
+            {/* <a
               href="#contact"
               className="bg-white text-brand-900 hover:bg-slate-100 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               Get Feasibility Report
-            </a>
+            </a> */}
 
             <a
               href="#norms"

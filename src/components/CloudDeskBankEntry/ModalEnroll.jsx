@@ -33,9 +33,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setIssue("");
   };
 
-
-  const Applyapplication = type === "Pending_EODC";
-  const isApplyapplication = type === "New_Advance_License_Request";
+  const Applyapplication = type === "File_Advance_Bill";
+  const isApplyapplication = type === "Submit_Documents";
 
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
@@ -237,11 +236,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <option value="" disabled>
                     Select Update Type
                   </option>
-                    {PROFILE_UPDATE_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
+                  {PROFILE_UPDATE_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
                 </select>
               </div>
             )}
@@ -270,7 +269,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 </div>
               </>
             )}
-              {Applyapplication && (
+
+            {Applyapplication && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1">
                   CATEGORY
@@ -283,14 +283,13 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <input
                     type="text"
                     name="service"
-                    value="Pending EODC"
+                    value="File Advance Bill"
                     readOnly
                     className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
                   />
                 </div>
               </div>
             )}
-
 
             {isApplyapplication && (
               <div>
@@ -305,7 +304,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <input
                     type="text"
                     name="service"
-                    value="New Advance License Request"
+                    value="Bill of Entry Filling"
                     readOnly
                     className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
                   />
@@ -346,7 +345,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                         </span>
                       </label>
                     );
-                  }
+                  },
                 )}
               </div>
               {errors.role && (

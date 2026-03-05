@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 import { Helmet } from "react-helmet-async";
 import TopBar from "../components/CloudDeskDutyDrawBack/TopBar";
+=======
+import { useState } from "react";
+// import TopBar from "../components/CloudDeskDutyDrawBack/TopBar";
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import Navbar from "../components/CloudDeskDutyDrawBack/Navbar";
 import Hero from "../components/CloudDeskDutyDrawBack/Hero";
 import Fees from "../components/CloudDeskDutyDrawBack/Fees";
+import {ModalEnroll} from "../components/CloudDeskDutyDrawBack/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -26,10 +32,41 @@ import {
 import { MainNavbar } from "../components/CloudDeskDutyDrawBack/MainNavbar";
 
 const CloudDeskDutyDrawBack = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+          open: false,
+          type: "",
+        });
+
+          const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
   return (
+<<<<<<< HEAD
     <>
       <Helmet>
         <title>Duty Drawback – Section 74 & Brand Rate Fixation</title>
+=======
+    <div className="bg-slate-50 text-slate-800">
+      {/* Dynamic Sections */}
+      {/* <TopBar /> */}
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+            
+      
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
+      {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
         <meta
           name="description"
@@ -301,6 +338,7 @@ const CloudDeskDutyDrawBack = () => {
                 </ul>
               </div>
 
+<<<<<<< HEAD
               {/* CASE 2 */}
               <div className="bg-brand-800 rounded-xl p-8 border border-brand-700 hover:border-accent-500 transition">
                 <div className="flex justify-between items-start mb-4">
@@ -308,6 +346,142 @@ const CloudDeskDutyDrawBack = () => {
                     Reduced Refund
                   </h3>
                   <Wrench className="text-accent-400 w-10 h-10" />
+=======
+              {/* <a
+                href="#home"
+                className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
+              >
+                Apply for Brand Rate 
+              </a> */}
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Duty_Brand_Rate",
+                  })
+                }
+                className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
+              >
+                Apply for Brand Rate
+              </button>
+            </div>
+
+            {/* RIGHT SIDE */}
+            <div className="bg-white rounded-xl shadow-xl p-8 border border-slate-200">
+              <h3 className="text-xl font-bold text-slate-800 mb-4">
+                Documents for Brand Rate
+              </h3>
+
+              <ul className="space-y-4 text-sm text-slate-600">
+                {/* Item 1 */}
+                <li className="flex gap-3">
+                  <FileSpreadsheet className="text-brand-500 w-5 h-5 mt-1" />
+                  <div>
+                    <strong className="block text-slate-800">
+                      Data Sheet (DBK-I / II / III)
+                    </strong>
+                    <span>
+                      Detailed consumption & wastage data certified by Chartered
+                      Engineer.
+                    </span>
+                  </div>
+                </li>
+
+                {/* Item 2 */}
+                <li className="flex gap-3">
+                  <Receipt className="text-brand-500 w-5 h-5 mt-1" />
+                  <div>
+                    <strong className="block text-slate-800">
+                      Original Import Bills
+                    </strong>
+                    <span>
+                      Bills of Entry showing duty payment for raw materials.
+                    </span>
+                  </div>
+                </li>
+
+                {/* Item 3 */}
+                <li className="flex gap-3">
+                  <FileOutput className="text-brand-500 w-5 h-5 mt-1" />
+                  <div>
+                    <strong className="block text-slate-800">
+                      Export Proofs
+                    </strong>
+                    <span>
+                      Shipping Bills (EP Copy) and Bank Realization Certificates
+                      (e-BRC).
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="section74" className="py-20 bg-brand-900 text-white">
+        <div className="container mx-auto px-4">
+          {/* HEADER */}
+          <div className="text-center mb-16">
+            <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
+              Re-Export Refund
+            </span>
+
+            <h2 className="text-3xl md:text-4xl font-bold mt-2">
+              Section 74 Drawback
+            </h2>
+
+            <p className="text-slate-300 mt-2">
+              Refund of duty paid on imported goods which are re-exported "as
+              such".
+            </p>
+          </div>
+
+          {/* TWO CARDS */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* CASE 1 */}
+            <div className="bg-brand-800 rounded-xl p-8 border border-brand-700 hover:border-accent-500 transition">
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-2xl font-bold text-white">98% Refund</h3>
+                <PackageOpen className="text-accent-400 w-10 h-10" />
+              </div>
+
+              <p className="text-slate-300 text-sm mb-6">
+                Applicable when goods are re-exported without being used. E.g.,
+                Wrong shipment received, or quality rejection before use.
+              </p>
+
+              <ul className="text-xs text-slate-400 space-y-2">
+                <li className="flex items-start">
+                  <CheckCircle className="text-green-400 w-4 h-4 mr-2 mt-0.5" />
+                  Goods identified easily by serial no.
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="text-green-400 w-4 h-4 mr-2 mt-0.5" />
+                  Re-export within 2 years of import payment.
+                </li>
+              </ul>
+            </div>
+
+            {/* CASE 2 */}
+            <div className="bg-brand-800 rounded-xl p-8 border border-brand-700 hover:border-accent-500 transition">
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-2xl font-bold text-white">
+                  Reduced Refund
+                </h3>
+                <Wrench className="text-accent-400 w-10 h-10" />
+              </div>
+
+              <p className="text-slate-300 text-sm mb-6">
+                Applicable when goods have been used after import before
+                re-export. The refund percentage drops based on the duration of
+                use.
+              </p>
+
+              <div className="bg-brand-900 p-3 rounded text-xs">
+                <div className="flex justify-between mb-1">
+                  <span>0–3 Months Use:</span>
+                  <span>95% Refund</span>
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
                 </div>
 
                 <p className="text-slate-300 text-sm mb-6">

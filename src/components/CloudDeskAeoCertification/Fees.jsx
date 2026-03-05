@@ -63,7 +63,7 @@ const Fees = ({setShowEnrollModal}) => {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "IEC_REGISTRATION",
+                    type: "End_to_End_AEO_Consultancy",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg mt-6 hover:bg-brand-700 transition"

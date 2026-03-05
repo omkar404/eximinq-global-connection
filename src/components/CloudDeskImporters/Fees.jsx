@@ -68,6 +68,7 @@ export default function Fees({setShowEnrollModal}) {
         </div>
 
         {/* Pricing Card */}
+        <section id="pricing" className="py-20 bg-white">
         <div className="max-w-md mx-auto">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
             <div className="bg-accent-500 text-brand-900 py-4">
@@ -99,6 +100,8 @@ export default function Fees({setShowEnrollModal}) {
             </div>
           </div>
         </div>
+        </section>
+
         {/* Footer Note */}
         <p className="text-sm text-slate-500 mt-8">
           *Government fees for IMS are payable separately (approx ₹500 – ₹1/1000 of value).

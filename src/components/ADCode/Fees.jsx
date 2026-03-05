@@ -20,7 +20,7 @@ const Fees = ({ setShowEnrollModal }) => {
 
             <div className="p-8">
               <div className="text-4xl font-bold text-slate-900 mb-2">
-                ₹ 2,500
+                ₹ 3,500
               </div>
               <p className="text-slate-500 text-sm mb-6">+ GST</p>
 
@@ -51,7 +51,7 @@ const Fees = ({ setShowEnrollModal }) => {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "",
+                    type: "AD_Code_Registration",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
@@ -70,7 +70,7 @@ const Fees = ({ setShowEnrollModal }) => {
 
             <div className="p-8">
               <div className="text-4xl font-bold text-slate-900 mb-2">
-                ₹ 1,500
+                ₹ 3,500
               </div>
               <p className="text-slate-500 text-sm mb-6">+ GST</p>
 
@@ -97,7 +97,7 @@ const Fees = ({ setShowEnrollModal }) => {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "",
+                    type: "IFSC_Registration",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"

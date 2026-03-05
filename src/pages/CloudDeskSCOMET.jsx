@@ -2,6 +2,11 @@ import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 import Navbar from "../components/CloudDeskSCOMET/Navbar";
 import Hero from "../components/CloudDeskSCOMET/Hero";
+<<<<<<< HEAD
+=======
+import Fees from "../components/CloudDeskSCOMET/Fees";
+import {ModalEnroll} from "../components/CloudDeskSCOMET/ModalEnroll";
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import {
   ChevronDown,
   Linkedin,
@@ -25,9 +30,10 @@ import {
   Mail
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskSCOMET/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskSCOMET/ModalEnroll";
+
 
 const CloudDeskSCOMET = () => {
+<<<<<<< HEAD
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
     type: null,
@@ -42,6 +48,22 @@ const CloudDeskSCOMET = () => {
     alert("Form submitted — check console for data.");
   };
 
+=======
+    const [showEnrollModal, setShowEnrollModal] = useState({
+      open: false,
+      type: "",
+    });
+  
+    const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
+  
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
   return (
     <>
       <Helmet>
@@ -458,6 +480,7 @@ const CloudDeskSCOMET = () => {
                   lead to immediate rejection.
                 </p>
 
+<<<<<<< HEAD
                 <ul className="space-y-4">
                   {/* Item 1 */}
                   <li className="flex items-start gap-3">
@@ -539,6 +562,25 @@ const CloudDeskSCOMET = () => {
                     Check GAEC Eligibility
                   </a>
                 </div>
+=======
+                {/* <a
+                  href="#home" 
+                  className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
+                >
+                  Check GAEC Eligibility
+                </a> */}
+              <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Check_GAEC_Eligibility",
+                  })
+                }
+                className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
+              >
+                Check GAEC Eligibility
+              </button>  
+>>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
               </div>
             </div>
           </div>
