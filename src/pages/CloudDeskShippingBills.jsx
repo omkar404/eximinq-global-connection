@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+import {useState} from "react";
 import { Helmet } from "react-helmet-async";
-=======
-import { useState } from "react";
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import TopBar from "../components/CloudDeskShippingBills/TopBar";
 import Navbar from "../components/CloudDeskShippingBills/Navbar";
 import Hero from "../components/CloudDeskShippingBills/Hero";
@@ -32,8 +29,22 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskShippingBills/MainNavbar";
 import {ModalEnroll } from "../components/CloudDeskShippingBills/ModalEnroll";
+
 const CloudDeskShippingBills = () => {
-<<<<<<< HEAD
+
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: null,
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   <>
     <Helmet>
       <title>
@@ -181,22 +192,6 @@ const CloudDeskShippingBills = () => {
       </script>
     </Helmet>
     return (
-=======
-    const [showEnrollModal, setShowEnrollModal] = useState({
-            open: false,
-            type: "",
-          });
-  
-            const handleEnrollmentSubmit = (formData) => {
-        console.log("Enrollment Submitted:", formData);
-    
-        // TODO → send API call
-        // axios.post("/api/enroll", formData)
-    
-        alert("Form submitted — check console for data.");
-      };
-  return (
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}

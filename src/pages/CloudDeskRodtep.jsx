@@ -1,9 +1,6 @@
 // import TopBar from "../components/CloudDeskRodtep/TopBar";
-<<<<<<< HEAD
+import {useState} from "react";
 import { Helmet } from "react-helmet-async";
-=======
-import { useState } from "react";
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import Navbar from "../components/CloudDeskRodtep/Navbar";
 import Hero from "../components/CloudDeskRodtep/Hero";
 import Fees from "../components/CloudDeskRodtep/Fees";
@@ -51,38 +48,11 @@ const CloudDeskRodtep = () => {
         alert("Form submitted — check console for data.");
       };
   return (
-<<<<<<< HEAD
     <>
       <Helmet>
         <title>
           RoDTEP Scheme Consultancy | Duty Credit Scrip & ICEGATE Ledger
         </title>
-=======
-    <div className="bg-slate-50 text-slate-800">
-      {/* Dynamic Sections */}
-      {/* <TopBar /> */}
-      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      <Navbar setShowEnrollModal={setShowEnrollModal} />
-      <Hero setShowEnrollModal={setShowEnrollModal} />
-            
-      
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: "" })}
-        onSubmit={handleEnrollmentSubmit}
-      />
-      {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
-      <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          {/* Heading */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              What is the RoDTEP Scheme?
-            </h2>
-            <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
-          </div>
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
         <meta
           name="description"
@@ -354,7 +324,6 @@ const CloudDeskRodtep = () => {
               </p>
             </div>
 
-<<<<<<< HEAD
             {/* Table */}
             <div className="overflow-x-auto bg-white rounded-xl shadow-lg border border-slate-200 max-w-4xl mx-auto">
               <table className="w-full text-sm text-left text-slate-600">
@@ -499,9 +468,6 @@ const CloudDeskRodtep = () => {
         </section>
 
         <Fees />
-=======
-      <Fees setShowEnrollModal={setShowEnrollModal} />
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
         <section className="py-20 bg-white">
