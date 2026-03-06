@@ -1,9 +1,6 @@
 // import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
-<<<<<<< HEAD
+import {useState} from "react";
 import { Helmet } from "react-helmet-async";
-=======
-import { useState } from "react";
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import Navbar from "../components/CloudDeskDigitalSignatures/Navbar";
 import Hero from "../components/CloudDeskDigitalSignatures/Hero";
 import Fees from "../components/CloudDeskDigitalSignatures/Fees";
@@ -41,27 +38,9 @@ const CloudDeskDigitalSignatures = () => {
       alert("Form submitted — check console for data.");
     };
   return (
-<<<<<<< HEAD
     <>
     <Helmet>
   <title>Class 3 Digital Signature (DSC) for DGFT & ICEGATE</title>
-=======
-    <div className="bg-slate-50 text-slate-800">
-      {/* Dynamic Sections */}
-      {/* <TopBar /> */}
-      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      <Navbar setShowEnrollModal={setShowEnrollModal} />
-      <Hero setShowEnrollModal={setShowEnrollModal} />
-      
-
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: "" })}
-        onSubmit={handleEnrollmentSubmit}
-      />
-      {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
   <meta
     name="description"
@@ -257,24 +236,7 @@ const CloudDeskDigitalSignatures = () => {
           </div>
         </section>
 
-<<<<<<< HEAD
         <Fees />
-=======
-          {/* Info Box */}
-          <div className="mt-12 bg-blue-50 border border-blue-200 p-4 rounded-lg flex items-center gap-3 max-w-3xl mx-auto">
-            <Info className="text-blue-600" size={22} />
-            <p className="text-sm text-blue-800">
-              <strong>Note:</strong> Effective Jan 2021, Class 2 DSCs are
-              discontinued. All new issuances are <strong>Class 3</strong>,
-              which covers both DGFT and ICEGATE requirements with higher
-              security.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <Fees setShowEnrollModal={setShowEnrollModal} />
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

@@ -1,10 +1,6 @@
-<<<<<<< HEAD
+import {useState} from "react";
 import { Helmet } from "react-helmet-async";
 // import TopBar from "../components/CloudDeskBankEntry/TopBar";
-=======
-import { useState } from "react";
-import TopBar from "../components/CloudDeskBankEntry/TopBar";
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import Navbar from "../components/CloudDeskBankEntry/Navbar";
 import Hero from "../components/CloudDeskBankEntry/Hero";
 import Fees from "../components/CloudDeskBankEntry/Fees";
@@ -45,23 +41,7 @@ const CloudDeskBankEntry = () => {
       alert("Form submitted — check console for data.");
     };
   return (
-<<<<<<< HEAD
     <>
-=======
-    <div className="bg-slate-50 text-slate-800">
-      {/* Dynamic Sections */}
-      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      <Navbar setShowEnrollModal={setShowEnrollModal} />
-      <Hero setShowEnrollModal={setShowEnrollModal} />
-            
-      
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: "" })}
-        onSubmit={handleEnrollmentSubmit}
-      />
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
       <Helmet>
         {/* Primary SEO */}
@@ -528,154 +508,10 @@ const CloudDeskBankEntry = () => {
                 </p>
               </div>
 
-<<<<<<< HEAD
               {/* Step 4 */}
               <div className="text-center relative z-10">
                 <div
                   className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-=======
-<section id="documents" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-
-          {/* LEFT SIDE */}
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">
-              Documents Checklist
-            </h2>
-
-            <p className="text-slate-600 mb-8">
-              To file a Bill of Entry smoothly, ensure you have the following
-              documents ready for e-Sanchit upload.
-            </p>
-
-            <ul className="space-y-4">
-
-              {/* Commercial Invoice */}
-              <li className="flex items-start gap-3">
-                <FileText className="text-brand-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">
-                    Commercial Invoice
-                  </strong>
-                  <span className="text-sm text-slate-500">
-                    Must clearly mention HS Codes, Unit Price, Currency & Incoterms.
-                  </span>
-                </div>
-              </li>
-
-              {/* Packing List */}
-              <li className="flex items-start gap-3">
-                <Boxes className="text-brand-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">
-                    Packing List (PL)
-                  </strong>
-                  <span className="text-sm text-slate-500">
-                    Details of contents, net weight & gross weight per package.
-                  </span>
-                </div>
-              </li>
-
-              {/* BL / AWB */}
-              <li className="flex items-start gap-3">
-                <Ship className="text-brand-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">
-                    Bill of Lading / Airway Bill
-                  </strong>
-                  <span className="text-sm text-slate-500">
-                    Transport document issued by carrier or freight forwarder.
-                  </span>
-                </div>
-              </li>
-
-              {/* Insurance Copy */}
-              <li className="flex items-start gap-3">
-                <Shield className="text-brand-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">
-                    Insurance Copy
-                  </strong>
-                  <span className="text-sm text-slate-500">
-                    Required for FOB/Ex-Works shipments to calculate CIF.
-                  </span>
-                </div>
-              </li>
-
-              {/* COO */}
-              <li className="flex items-start gap-3">
-                <Award className="text-brand-500 mt-1" size={22} />
-                <div>
-                  <strong className="block text-slate-800">
-                    Country of Origin Certificate
-                  </strong>
-                  <span className="text-sm text-slate-500">
-                    Mandatory to claim preferential duty benefits (FTA/PTA).
-                  </span>
-                </div>
-              </li>
-
-            </ul>
-          </div>
-
-          {/* RIGHT SIDE — Warning Card */}
-          <div className="bg-brand-50 rounded-2xl p-8 border border-brand-100 flex items-center justify-center text-center">
-            <div>
-              <AlertTriangle className="text-yellow-500 mx-auto mb-4" size={60} />
-
-              <h3 className="text-xl font-bold text-brand-900 mb-2">
-                Avoid Penalty
-              </h3>
-
-              <p className="text-slate-600 mb-6">
-                Late filing charges apply if BOE is not filed before the arrival
-                of the vessel/aircraft.
-              </p>
-
-              {/* <a
-                href="#contact"
-                className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
-              >
-                File Advance Bill
-              </a> */}
-              <button
-                onClick={() =>
-                  setShowEnrollModal({
-                    open: true,
-                    type: "File_Advance_Bill",
-                  })
-                }
-                className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
-              >
-                File Advance Bill
-              </button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-      <section id="process" className="py-20 bg-slate-900 text-white">
-        <div className="container mx-auto px-4">
-          {/* Heading */}
-          <div className="text-center mb-16">
-            <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
-              Workflow
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2">
-              Clearance Process
-            </h2>
-          </div>
-
-          {/* Steps */}
-          <div className="relative grid md:grid-cols-5 gap-8 step-connector">
-            {/* Step 1 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
               text-2xl font-bold text-brand-900 mx-auto mb-4 
               border-4 border-accent-500"
                 >
@@ -706,13 +542,8 @@ const CloudDeskBankEntry = () => {
           </div>
         </section>
 
-<<<<<<< HEAD
         {/* Dynamic Fees Section */}
         <Fees />
-=======
-      {/* Dynamic Fees Section */}
-      <Fees  setShowEnrollModal={setShowEnrollModal}/>
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
         <section className="py-20 bg-white">
