@@ -39,7 +39,7 @@ const CloudDeskImporters = () => {
     // TODO → send API call
     // axios.post("/api/enroll", formData)
 
-    alert("Form submitted — check console for data.");
+    // alert("Form submitted — check console for data.");
   };
   return (
     <>
@@ -234,12 +234,18 @@ const CloudDeskImporters = () => {
                   Mandatory advance registration for all iron & steel imports (HS
                   72, 73, 86). Fee based on value.
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                   Get SIMS No <ArrowRight size={12} className="ml-1" />
-                </a>
+                </a> */}
+                <button
+                 onClick={() => setShowEnrollModal({ open: true, type: "Steel_Import_NOC_SIMS" })}
+                 className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
+                >
+                Get SIMS No <ArrowRight size={12} className="ml-1" />
+                </button>
               </div>
 
               {/* Copper */}
@@ -254,12 +260,18 @@ const CloudDeskImporters = () => {
                   For Copper items under <strong>HS Chapter 74</strong>{" "}
                   (7401-7419). Registration required to track volume.
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                   Register Copper <ArrowRight size={12} className="ml-1" />
-                </a>
+                </a> */}
+                <button
+                 onClick={() => setShowEnrollModal({ open: true, type: "Copper_(NFMIMS)" })}
+                 className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
+                >
+                Register Copper <ArrowRight size={12} className="ml-1" />
+                </button>
               </div>
 
               {/* Aluminium */}
@@ -274,12 +286,18 @@ const CloudDeskImporters = () => {
                   For Aluminium items under <strong>HS Chapter 76</strong>{" "}
                   (7601-7616). Mandatory registration policy.
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                   Register Aluminium <ArrowRight size={12} className="ml-1" />
-                </a>
+                </a> */}
+                <button
+                 onClick={() => setShowEnrollModal({ open: true, type: "Register_Aluminium" })}
+                 className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
+                >
+                Register Aluminium <ArrowRight size={12} className="ml-1" />
+                </button>
               </div>
 
               {/* CIMS */}
@@ -294,12 +312,18 @@ const CloudDeskImporters = () => {
                   Coal Import Monitoring System. Covers Anthracite, Bituminous,
                   Coking Coal (<strong>HS 2701 to 2704</strong>).
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                   Get CIMS No <ArrowRight size={12} className="ml-1" />
-                </a>
+                </a> */}
+                <button
+                 onClick={() => setShowEnrollModal({ open: true, type: "Get_CIMS_No" })}
+                 className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
+                >
+                Get CIMS No <ArrowRight size={12} className="ml-1" />
+                </button>
               </div>
 
               {/* PIMS */}
@@ -314,12 +338,18 @@ const CloudDeskImporters = () => {
                   Registration for import of paper products (Newsprint, Handmade,
                   Tissue, etc.) under <strong>HS Chapter 48</strong>.
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                   Get PIMS No <ArrowRight size={12} className="ml-1" />
-                </a>
+                </a> */}
+                <button
+                 onClick={() => setShowEnrollModal({ open: true, type: "Get_PIMS_No" })}
+                 className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
+                >
+                Get PIMS No <ArrowRight size={12} className="ml-1" />
+                </button>
               </div>
 
               {/* CHIMS */}
@@ -335,12 +365,18 @@ const CloudDeskImporters = () => {
                   under
                   <strong> HS Code 8542</strong>.
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                   Register Chips <ArrowRight size={12} className="ml-1" />
-                </a>
+                </a> */}
+                <button
+                 onClick={() => setShowEnrollModal({ open: true, type: "Register_Chips" })}
+                 className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
+                >
+                Register Chips <ArrowRight size={12} className="ml-1" />
+                </button>
               </div>
 
               {/* Support box */}

@@ -24500,6 +24500,251 @@ export const exchangeRates = [
     "exportRate": 4.4,
     "notification": "01/2024",
     "pdfUrl": "05-07-2024.pdf"
-  }  
+  },
+  
+  [
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "AED",
+        "currencyName": "UAE Dirham",
+        "unit": 1,
+        "importRate": 25.7,
+        "exportRate": 24.25,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "AUD",
+        "currencyName": "Australian Dollar",
+        "unit": 1,
+        "importRate": 66.1,
+        "exportRate": 63.2,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "BHD",
+        "currencyName": "Bahraini Dinar",
+        "unit": 1,
+        "importRate": 252.1,
+        "exportRate": 234.4,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "CAD",
+        "currencyName": "Canadian Dollar",
+        "unit": 1,
+        "importRate": 68.25,
+        "exportRate": 66,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "CHF",
+        "currencyName": "Swiss Franc",
+        "unit": 1,
+        "importRate": 120.15,
+        "exportRate": 114.85,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "CNY",
+        "currencyName": "Chinese Yuan",
+        "unit": 1,
+        "importRate": 13.5,
+        "exportRate": 13.05,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "DKK",
+        "currencyName": "Danish Kroner",
+        "unit": 1,
+        "importRate": 14.45,
+        "exportRate": 14.05,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "EUR",
+        "currencyName": "Euro",
+        "unit": 1,
+        "importRate": 108.25,
+        "exportRate": 104.6,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "GBP",
+        "currencyName": "Pound Sterling",
+        "unit": 1,
+        "importRate": 124.25,
+        "exportRate": 120.3,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "HKD",
+        "currencyName": "Hongkong Dollar",
+        "unit": 1,
+        "importRate": 11.85,
+        "exportRate": 11.55,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "JPY",
+        "currencyName": "Japanese Yen",
+        "unit": 100,
+        "importRate": 59.3,
+        "exportRate": 57.45,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "KRW",
+        "currencyName": "Korean Won",
+        "unit": 100,
+        "importRate": 6.45,
+        "exportRate": 6.05,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "KWD",
+        "currencyName": "Kuwaiti Dinar",
+        "unit": 1,
+        "importRate": 307.6,
+        "exportRate": 289,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "NOK",
+        "currencyName": "Norwegian Kroner",
+        "unit": 1,
+        "importRate": 9.6,
+        "exportRate": 9.4,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "NZD",
+        "currencyName": "New Zealand Dollar",
+        "unit": 1,
+        "importRate": 55.7,
+        "exportRate": 53,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "QAR",
+        "currencyName": "Qatari Riyal",
+        "unit": 1,
+        "importRate": 26.9,
+        "exportRate": 23.6,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "SAR",
+        "currencyName": "Saudi Arabian Riyal",
+        "unit": 1,
+        "importRate": 25.2,
+        "exportRate": 23.8,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "SEK",
+        "currencyName": "Swedish Kroner",
+        "unit": 1,
+        "importRate": 10.1,
+        "exportRate": 9.85,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "SGD",
+        "currencyName": "Singapore Dollar",
+        "unit": 1,
+        "importRate": 73.05,
+        "exportRate": 70.55,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "TRY",
+        "currencyName": "Turkish Lira",
+        "unit": 1,
+        "importRate": 2.15,
+        "exportRate": 2,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "USD",
+        "currencyName": "US Dollar",
+        "unit": 1,
+        "importRate": 92.5,
+        "exportRate": 90.8,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    },
+    {
+        "notificationDate": "05/03/2026",
+        "effectiveDate": "06/03/2026",
+        "currency": "ZAR",
+        "currencyName": "South African Rand",
+        "unit": 1,
+        "importRate": 5.75,
+        "exportRate": 5.45,
+        "notification": "10/2026",
+        "pdfUrl": ""
+    }
+]
   
 ];

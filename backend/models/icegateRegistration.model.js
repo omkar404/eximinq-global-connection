@@ -1,68 +1,81 @@
 const mongoose = require("mongoose");
 
 const icegateRegistrationSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-            trim: true,
+{
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
 
-            required: function (){
-                return this.type !== "QUICK_FORM";
-            },
-        },
-        mobile: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-        email: {
-            type: String,
-            required: true,
-            lowercase: true,
-            trim: true,
-        },
-        role: {
-            type: String,
-            required: true,
-            enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder"],
+  mobile: {
+    type: String,
+    required: true,
+    trim: true
+  },
 
-            required: function () {
-                return this.type !== "QUICK_FORM";
-            },
-        },
-        partner: {
-            type: Boolean,
-            required: true,
-        },
+  email: {
+    type: String,
+    required: true,
+    lowercase: true,
+    trim: true
+  },
 
-        type: {
-            type: String,
-            required: true,
-            enum: [
-                "ENROLL",
-                "ENROLL",
-                "IEC_OPTIONS",
-                "IEC_PROFILE_UPDATATION",
-                "IEC_REGISTRATION",
-                "IEC_ANNUAL_UPDATE",
-                "QUICK_FORM",
-            ],
-        },
+  entity: {
+    type: String,
+    trim: true,
+    default: null
+  },
 
-        category: {
-            type: String,
-            default: null,
-        },
-        issue: {
-            type: String,
-            default: null,
-        },
+  role: {
+    type: String,
+    required: true,
+    enum: [
+      "Importer / Exporter",
+      "CHA",
+      "Logistics",
+      "Forwarder"
+    ]
+  },
+
+  partner: {
+    type: Boolean,
+    default: false
+  },
+
+  type: {
+    type: String,
+    required: true,
+    enum: [
+      "Enroll",
+      "Apply Now",
+      "AD_CODE_REGISTRATION",
+      "ICEGATE_REGISTRATION",
+      "IFSC_CODE_REGISTRATION"
+    ]
+  },
+
+  category: {
+    type: String,
+    required: function () {
+      return this.type === "Apply Now";
     },
-    { timestamps: true }
+    default: null
+  },
+
+  status: {
+    type: String,
+    enum: ["pending", "processing", "completed", "rejected"],
+    default: "pending"
+  }
+
+},
+{
+  timestamps: true
+}
 );
 
 module.exports = mongoose.model(
-    "icegateRegistration",
-    icegateRegistrationSchema
+  "icegateRegistrationModel",
+  icegateRegistrationSchema
 );

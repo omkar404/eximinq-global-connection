@@ -30,7 +30,7 @@ const ADCode = () => {
     type: "",
   });
 
-  const handleEnrollmentSubmit = (formData) => {
+   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
 
     // TODO → send API call
