@@ -39,7 +39,7 @@ const CloudDeskExportHouse = () => {
   const handleEnrollmentSubmit = (formData) => {
   console.log("Enrollment Submitted:", formData);
 
-  alert("Form submitted — check console for data.");
+  // alert("Form submitted — check console for data.");
 
   const Stars = ({ count }) => (
     <div className="flex gap-1">

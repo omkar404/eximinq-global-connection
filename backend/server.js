@@ -14,6 +14,7 @@ const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes")
 const icegateRegistrationRoutes = require("./routes/icegateRegistrationRoutes.routes");
 const adcodeRoutes = require("./routes/adcodeRegistrationRoutes.route");
 const importManagementRoutes = require("./routes/importManagementRoutes.route");
+const starExportHouseRoutes = require("./routes/starExportHouse.routes");
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
@@ -416,7 +417,9 @@ app.use("/api/icegate-registration", icegateRegistrationRoutes);
 
 app.use("/api/ad-code-registration", adcodeRoutes);
 
-app.use("/api/import-management-registration", importManagementRoutes)
+app.use("/api/import-management-registration", importManagementRoutes);
+
+app.use("/api/star-export-house", starExportHouseRoutes);
 
 app.use("/api/contact-us", maincontactRoutes);
 
