@@ -331,7 +331,7 @@ const IECRegistration = () => {
 
                   <div className="mt-6">
                     <a
-                      href="#contact"
+                      href="#pricing"
                       className="inline-block bg-brand-600 text-white font-bold py-3 px-6 rounded hover:bg-brand-700 transition"
                     >
                       Register AD Code Now
@@ -384,12 +384,11 @@ const IECRegistration = () => {
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <a
-                    href="#pricing"
-                    className="inline-block bg-brand-600 text-white font-bold py-3 px-6 rounded hover:bg-brand-700 transition"
-                  >
-                    <button className="mt-6 bg-accent-500 hover:bg-accent-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition">
-                      Register AD Code Now
+                  <a href="/services/ad-code-registration" 
+                  target="_blank" 
+                  rel="noopener noreferrer">
+                  <button class="mt-6 bg-accent-500 hover:bg-accent-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition">
+                    Register AD Code Now
                     </button>
                   </a>
                 </div>
