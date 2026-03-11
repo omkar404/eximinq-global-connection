@@ -34,7 +34,7 @@ const CloudDeskDigitalSignatures = () => {
       // TODO → send API call
       // axios.post("/api/enroll", formData)
   
-      alert("Form submitted — check console for data.");
+      // alert("Form submitted — check console for data.");
     };
   return (
     <>
@@ -128,16 +128,16 @@ const CloudDeskDigitalSignatures = () => {
       <div className="bg-slate-50 text-slate-800">
         {/* Dynamic Sections */}
         {/* <TopBar /> */}
-        <MainNavbar />
-        <Navbar />
-        <Hero />
+        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
 
-                <ModalEnroll
-                  show={showEnrollModal.open}
-                  type={showEnrollModal.type}
-                  onClose={() => setShowEnrollModal({ open: false, type: "" })}
-                  onSubmit={handleEnrollmentSubmit}
-                />
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
         {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
         <section id="about" className="py-20 bg-white">
@@ -242,7 +242,7 @@ const CloudDeskDigitalSignatures = () => {
           </div>
         </section>
 
-        <Fees />
+        <Fees setShowEnrollModal={setShowEnrollModal} />
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

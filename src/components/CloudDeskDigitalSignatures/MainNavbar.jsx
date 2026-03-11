@@ -8,7 +8,7 @@ export const MainNavbar = ({
   scrolled,
   isMenuOpen,
   setIsMenuOpen,
-  setShowModal,
+  setShowEnrollModal,
 }) => {
   return (
     <nav
@@ -135,7 +135,7 @@ export const MainNavbar = ({
           </div>
 
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowEnrollModal({ open: true, type: "Enroll" })}
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now
