@@ -1,5 +1,5 @@
 // import TopBar from "../components/CloudDeskRodtep/TopBar";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskRodtep/Navbar";
 import Hero from "../components/CloudDeskRodtep/Hero";
@@ -35,18 +35,18 @@ import { MainNavbar } from "../components/CloudDeskRodtep/MainNavbar";
 
 const CloudDeskRodtep = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
-            open: false,
-            type: "",
-          });
+    open: false,
+    type: "",
+  });
 
-    const handleEnrollmentSubmit = (formData) => {
-        console.log("Enrollment Submitted:", formData);
-    
-        // TODO → send API call
-        // axios.post("/api/enroll", formData)
-    
-        alert("Form submitted — check console for data.");
-      };
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <>
       <Helmet>
@@ -238,6 +238,12 @@ const CloudDeskRodtep = () => {
         <MainNavbar />
         <Navbar />
         <Hero />
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
         {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
         <section id="about" className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">

@@ -1,5 +1,5 @@
 // import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskDigitalSignatures/Navbar";
 import Hero from "../components/CloudDeskDigitalSignatures/Hero";
@@ -17,7 +17,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  Check,
   Globe,
   Ship,
   Info,
@@ -132,6 +131,13 @@ const CloudDeskDigitalSignatures = () => {
         <MainNavbar />
         <Navbar />
         <Hero />
+
+                <ModalEnroll
+                  show={showEnrollModal.open}
+                  type={showEnrollModal.type}
+                  onClose={() => setShowEnrollModal({ open: false, type: "" })}
+                  onSubmit={handleEnrollmentSubmit}
+                />
         {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
         <section id="about" className="py-20 bg-white">

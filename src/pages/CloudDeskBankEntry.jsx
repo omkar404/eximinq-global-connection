@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 // import TopBar from "../components/CloudDeskBankEntry/TopBar";
 import Navbar from "../components/CloudDeskBankEntry/Navbar";
@@ -21,28 +22,26 @@ import {
   FileText,
   Shield,
   Award,
-  AlertTriangle
+  AlertTriangle,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskBankEntry/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskBankEntry/ModalEnroll";
 const CloudDeskBankEntry = () => {
-
   const [showEnrollModal, setShowEnrollModal] = useState({
-          open: false,
-          type: "",
-        });
+    open: false,
+    type: "",
+  });
 
-          const handleEnrollmentSubmit = (formData) => {
-      console.log("Enrollment Submitted:", formData);
-  
-      // TODO → send API call
-      // axios.post("/api/enroll", formData)
-  
-      alert("Form submitted — check console for data.");
-    };
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    // alert("Form submitted — check console for data.");
+  };
   return (
     <>
-
       <Helmet>
         {/* Primary SEO */}
         <title>
@@ -81,156 +80,163 @@ const CloudDeskBankEntry = () => {
             "@graph": [
               {
                 "@type": "BreadcrumbList",
-                "itemListElement": [
+                itemListElement: [
                   {
                     "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://eximinq.in"
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in",
                   },
                   {
                     "@type": "ListItem",
-                    "position": 2,
-                    "name": "Services",
-                    "item": "https://eximinq.in/services"
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services",
                   },
                   {
                     "@type": "ListItem",
-                    "position": 3,
-                    "name": "Bill of Entry Filing",
-                    "item": "https://eximinq.in/services/bill-of-entry-filing"
-                  }
-                ]
+                    position: 3,
+                    name: "Bill of Entry Filing",
+                    item: "https://eximinq.in/services/bill-of-entry-filing",
+                  },
+                ],
               },
               {
                 "@type": "Service",
-                "name": "Bill of Entry Filing Service",
-                "serviceType": "Customs Import Clearance Filing",
-                "description":
+                name: "Bill of Entry Filing Service",
+                serviceType: "Customs Import Clearance Filing",
+                description:
                   "Bill of Entry filing service for import customs clearance in India including documentation review, duty calculation and ICEGATE submission.",
-                "provider": {
+                provider: {
                   "@type": "Organization",
-                  "name": "Eximinq Global Connections",
-                  "url": "https://eximinq.in"
+                  name: "Eximinq Global Connections",
+                  url: "https://eximinq.in",
                 },
-                "areaServed": {
+                areaServed: {
                   "@type": "Country",
-                  "name": "India"
+                  name: "India",
                 },
-                "hasOfferCatalog": {
+                hasOfferCatalog: {
                   "@type": "OfferCatalog",
-                  "name": "Bill of Entry Filing Services",
-                  "itemListElement": [
+                  name: "Bill of Entry Filing Services",
+                  itemListElement: [
                     {
                       "@type": "Offer",
-                      "itemOffered": {
+                      itemOffered: {
                         "@type": "Service",
-                        "name": "Document Verification"
-                      }
+                        name: "Document Verification",
+                      },
                     },
                     {
                       "@type": "Offer",
-                      "itemOffered": {
+                      itemOffered: {
                         "@type": "Service",
-                        "name": "Customs Duty Assessment"
-                      }
+                        name: "Customs Duty Assessment",
+                      },
                     },
                     {
                       "@type": "Offer",
-                      "itemOffered": {
+                      itemOffered: {
                         "@type": "Service",
-                        "name": "ICEGATE Filing Support"
-                      }
+                        name: "ICEGATE Filing Support",
+                      },
                     },
                     {
                       "@type": "Offer",
-                      "itemOffered": {
+                      itemOffered: {
                         "@type": "Service",
-                        "name": "Import Compliance Review"
-                      }
-                    }
-                  ]
-                }
+                        name: "Import Compliance Review",
+                      },
+                    },
+                  ],
+                },
               },
               {
                 "@type": "FAQPage",
-                "mainEntity": [
+                mainEntity: [
                   {
                     "@type": "Question",
-                    "name": "What is the mandatory timeline for filing a Bill of Entry?",
-                    "acceptedAnswer": {
+                    name: "What is the mandatory timeline for filing a Bill of Entry?",
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "Under Section 46, you must file the BoE before the end of the next day (excluding holidays) following the day on which the aircraft/vessel/vehicle carrying the goods arrives. • The Penalty: If you fail to meet this deadline, a \"Late Fee\" is charged (typically ₹5,000 per day for the first 3 days, and ₹10,000 per day thereafter). CloudDesk’s Timer Alert ensures you never pay a single rupee in late fees."
-                    }
+                      text: 'Under Section 46, you must file the BoE before the end of the next day (excluding holidays) following the day on which the aircraft/vessel/vehicle carrying the goods arrives. • The Penalty: If you fail to meet this deadline, a "Late Fee" is charged (typically ₹5,000 per day for the first 3 days, and ₹10,000 per day thereafter). CloudDesk’s Timer Alert ensures you never pay a single rupee in late fees.',
+                    },
                   },
                   {
                     "@type": "Question",
-                    "name": "Can I file a Bill of Entry without a Bill of Lading (BL)?",
-                    "acceptedAnswer": {
+                    name: "Can I file a Bill of Entry without a Bill of Lading (BL)?",
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "You can file a \"Prior\" BoE using a Master BL/AWB number. However, for the final assessment and \"Out of Charge,\" the House BL and final invoice must be uploaded."
-                    }
+                      text: 'You can file a "Prior" BoE using a Master BL/AWB number. However, for the final assessment and "Out of Charge," the House BL and final invoice must be uploaded.',
+                    },
                   },
                   {
                     "@type": "Question",
-                    "name": "What is the difference between a White, Yellow, and Green Bill of Entry?",
-                    "acceptedAnswer": {
+                    name: "What is the difference between a White, Yellow, and Green Bill of Entry?",
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "White (Home Consumption): When you want to pay the duty and take the goods directly to your factory/shop.Yellow (Into-Bond/Warehouse): When you want to store the goods in a Customs Warehouse without paying duty immediately (Duty is deferred).Green (Ex-Bond): When you want to take goods out of the warehouse for consumption (you pay the duty at this stage)."
-                    }
+                      text: "White (Home Consumption): When you want to pay the duty and take the goods directly to your factory/shop.Yellow (Into-Bond/Warehouse): When you want to store the goods in a Customs Warehouse without paying duty immediately (Duty is deferred).Green (Ex-Bond): When you want to take goods out of the warehouse for consumption (you pay the duty at this stage).",
+                    },
                   },
                   {
                     "@type": "Question",
-                    "name": "What is an \"Advance Bill of Entry\"?",
-                    "acceptedAnswer": {
+                    name: 'What is an "Advance Bill of Entry"?',
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "It is a BoE filed up to 30 days before the expected arrival of the goods. This is the gold standard for high-volume importers who want zero port-dwell time."
-                    }
+                      text: "It is a BoE filed up to 30 days before the expected arrival of the goods. This is the gold standard for high-volume importers who want zero port-dwell time.",
+                    },
                   },
                   {
                     "@type": "Question",
-                    "name": "What is \"Faceless Assessment\"?",
-                    "acceptedAnswer": {
+                    name: 'What is "Faceless Assessment"?',
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "Your BoE is no longer assessed by an officer at the port of arrival. It could be assessed by an officer in Bangalore even if your goods are at Nhava Sheva. This makes e-Sanchit documentation critical. If your digital documents aren't clear, your cargo gets stuck."
-                    }
+                      text: "Your BoE is no longer assessed by an officer at the port of arrival. It could be assessed by an officer in Bangalore even if your goods are at Nhava Sheva. This makes e-Sanchit documentation critical. If your digital documents aren't clear, your cargo gets stuck.",
+                    },
                   },
                   {
                     "@type": "Question",
-                    "name": "How can I check if my duty payment has been reflected?",
-                    "acceptedAnswer": {
+                    name: "How can I check if my duty payment has been reflected?",
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "You can check the \"Challan Status\" on ICEGATE. CloudDesk provides a Payment Verification Tracker that notifies you the moment the \"Duty Paid\" status is updated, triggering the next step: \"Examination\" or \"Out of Charge.\""
-                    }
+                      text: 'You can check the "Challan Status" on ICEGATE. CloudDesk provides a Payment Verification Tracker that notifies you the moment the "Duty Paid" status is updated, triggering the next step: "Examination" or "Out of Charge."',
+                    },
                   },
                   {
                     "@type": "Question",
-                    "name": "I made a mistake in the HSN code after filing. Can I change it?",
-                    "acceptedAnswer": {
+                    name: "I made a mistake in the HSN code after filing. Can I change it?",
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "Yes, but it requires a Section 149 Amendment. If the \"Out of Charge\" hasn't been given, it's easier. Once \"OOC\" is granted, you have to go through a formal \"Re-assessment\" process. CloudDesk manages these amendments to minimize delays."
-                    }
+                      text: 'Yes, but it requires a Section 149 Amendment. If the "Out of Charge" hasn\'t been given, it\'s easier. Once "OOC" is granted, you have to go through a formal "Re-assessment" process. CloudDesk manages these amendments to minimize delays.',
+                    },
                   },
                   {
                     "@type": "Question",
-                    "name": "What is \"RMS\" (Risk Management System)?",
-                    "acceptedAnswer": {
+                    name: 'What is "RMS" (Risk Management System)?',
+                    acceptedAnswer: {
                       "@type": "Answer",
-                      "text": "RMS is an AI-driven system that decides which BoE needs to be checked and which can be cleared immediately (\"Green Channel\"). CloudDesk helps you maintain a \"High Compliance Score\" to increase your chances of 100% Green Channel clearances."
-                    }
+                      text: 'RMS is an AI-driven system that decides which BoE needs to be checked and which can be cleared immediately ("Green Channel"). CloudDesk helps you maintain a "High Compliance Score" to increase your chances of 100% Green Channel clearances.',
+                    },
                   },
-                ]
-              }
-            ]
+                ],
+              },
+            ],
           })}
         </script>
       </Helmet>
       <div className="bg-slate-50 text-slate-800">
         {/* Dynamic Sections */}
         {/* <TopBar /> */}
-        <MainNavbar />
-        <Navbar />
-        <Hero />
+        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
+
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
 
         {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -256,9 +262,9 @@ const CloudDeskBankEntry = () => {
 
               <p className="mb-4">
                 Filing a BOE is the first step in the customs clearance process.
-                Based on this declaration, the Customs authorities assess the duty
-                payable. Late filing (beyond 24 hours of arrival) attracts strict
-                penalties from Customs.
+                Based on this declaration, the Customs authorities assess the
+                duty payable. Late filing (beyond 24 hours of arrival) attracts
+                strict penalties from Customs.
               </p>
             </div>
           </div>
@@ -291,9 +297,9 @@ const CloudDeskBankEntry = () => {
                     White Bill
                   </span>
                   <p className="text-slate-600 mt-4 text-sm">
-                    Filed when the importer wants to clear the goods for immediate
-                    use or sale. Import duty must be paid immediately upon
-                    assessment to release cargo.
+                    Filed when the importer wants to clear the goods for
+                    immediate use or sale. Import duty must be paid immediately
+                    upon assessment to release cargo.
                   </p>
                 </div>
               </div>
@@ -325,9 +331,9 @@ const CloudDeskBankEntry = () => {
                     Green Bill
                   </span>
                   <p className="text-slate-600 mt-4 text-sm">
-                    Filed to clear goods from the warehouse for home consumption.
-                    Duty is paid at this stage (along with interest if stored
-                    beyond free period).
+                    Filed to clear goods from the warehouse for home
+                    consumption. Duty is paid at this stage (along with interest
+                    if stored beyond free period).
                   </p>
                 </div>
               </div>
@@ -338,7 +344,6 @@ const CloudDeskBankEntry = () => {
         <section id="documents" className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-
               {/* LEFT SIDE */}
               <div>
                 <h2 className="text-3xl font-bold text-slate-900 mb-6">
@@ -346,12 +351,11 @@ const CloudDeskBankEntry = () => {
                 </h2>
 
                 <p className="text-slate-600 mb-8">
-                  To file a Bill of Entry smoothly, ensure you have the following
-                  documents ready for e-Sanchit upload.
+                  To file a Bill of Entry smoothly, ensure you have the
+                  following documents ready for e-Sanchit upload.
                 </p>
 
                 <ul className="space-y-4">
-
                   {/* Commercial Invoice */}
                   <li className="flex items-start gap-3">
                     <FileText className="text-brand-500 mt-1" size={22} />
@@ -360,7 +364,8 @@ const CloudDeskBankEntry = () => {
                         Commercial Invoice
                       </strong>
                       <span className="text-sm text-slate-500">
-                        Must clearly mention HS Codes, Unit Price, Currency & Incoterms.
+                        Must clearly mention HS Codes, Unit Price, Currency &
+                        Incoterms.
                       </span>
                     </div>
                   </li>
@@ -373,7 +378,8 @@ const CloudDeskBankEntry = () => {
                         Packing List (PL)
                       </strong>
                       <span className="text-sm text-slate-500">
-                        Details of contents, net weight & gross weight per package.
+                        Details of contents, net weight & gross weight per
+                        package.
                       </span>
                     </div>
                   </li>
@@ -386,7 +392,8 @@ const CloudDeskBankEntry = () => {
                         Bill of Lading / Airway Bill
                       </strong>
                       <span className="text-sm text-slate-500">
-                        Transport document issued by carrier or freight forwarder.
+                        Transport document issued by carrier or freight
+                        forwarder.
                       </span>
                     </div>
                   </li>
@@ -416,33 +423,45 @@ const CloudDeskBankEntry = () => {
                       </span>
                     </div>
                   </li>
-
                 </ul>
               </div>
 
               {/* RIGHT SIDE — Warning Card */}
               <div className="bg-brand-50 rounded-2xl p-8 border border-brand-100 flex items-center justify-center text-center">
                 <div>
-                  <AlertTriangle className="text-yellow-500 mx-auto mb-4" size={60} />
+                  <AlertTriangle
+                    className="text-yellow-500 mx-auto mb-4"
+                    size={60}
+                  />
 
                   <h3 className="text-xl font-bold text-brand-900 mb-2">
                     Avoid Penalty
                   </h3>
 
                   <p className="text-slate-600 mb-6">
-                    Late filing charges apply if BOE is not filed before the arrival
-                    of the vessel/aircraft.
+                    Late filing charges apply if BOE is not filed before the
+                    arrival of the vessel/aircraft.
                   </p>
 
-                  <a
+                  {/* <a
                     href="#contact"
                     className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
                   >
                     File Advance Bill
-                  </a>
+                  </a> */}
+                  <button
+                    onClick={() =>
+                      setShowEnrollModal({
+                        open: true,
+                        type: "File_Advance_Bill",
+                      })
+                    }
+                    className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
+                  >
+                    File Advance Bill
+                  </button>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
@@ -544,14 +563,18 @@ const CloudDeskBankEntry = () => {
 
         {/* Dynamic Fees Section */}
         <Fees />
+        <Fees setShowEnrollModal={setShowEnrollModal} />
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Bill-Of-Entry-Filing?</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Why CloudDesk for Bill-Of-Entry-Filing?
+              </h2>
               <p className="text-slate-500">
-                Accurate classification, valuation and documentation reduce reassessment risk and clearance delays.
+                Accurate classification, valuation and documentation reduce
+                reassessment risk and clearance delays.
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
@@ -561,10 +584,19 @@ const CloudDeskBankEntry = () => {
                   <AlertTriangle size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-2">1. "Prior Filing" Optimization</h4>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    1. "Prior Filing" Optimization
+                  </h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Customs law now allows <strong>(and encourages) </strong>filing a BoE before the goods arrive. <strong>CloudDesk’s</strong> ETA-Sync monitors your vessel/flight and triggers a <strong>"Prior Bill of Entry" </strong>filing 48 hours before arrival.
-                    This ensures your assessment is done while the ship is still at sea, allowing for<strong> Direct Port Delivery (DPD) </strong>the moment it berths.
+                    Customs law now allows <strong>(and encourages) </strong>
+                    filing a BoE before the goods arrive.{" "}
+                    <strong>CloudDesk’s</strong> ETA-Sync monitors your
+                    vessel/flight and triggers a{" "}
+                    <strong>"Prior Bill of Entry" </strong>filing 48 hours
+                    before arrival. This ensures your assessment is done while
+                    the ship is still at sea, allowing for
+                    <strong> Direct Port Delivery (DPD) </strong>the moment it
+                    berths.
                   </p>
                 </div>
               </div>
@@ -575,10 +607,17 @@ const CloudDeskBankEntry = () => {
                   <CheckCircle size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-2">2. HSN & Notification Logic</h4>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    2. HSN & Notification Logic
+                  </h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    With thousands of exemption notifications<strong> (like IGCR or FTA benefits),</strong> most importers overpay duty.
-                    <strong>CloudDesk’s Duty-Logic </strong>Engine scans your HSN and Country of Origin to automatically suggest the most beneficial notification, ensuring you pay the Lowest Legal Duty.
+                    With thousands of exemption notifications
+                    <strong> (like IGCR or FTA benefits),</strong> most
+                    importers overpay duty.
+                    <strong>CloudDesk’s Duty-Logic </strong>Engine scans your
+                    HSN and Country of Origin to automatically suggest the most
+                    beneficial notification, ensuring you pay the Lowest Legal
+                    Duty.
                   </p>
                 </div>
               </div>
@@ -589,10 +628,17 @@ const CloudDeskBankEntry = () => {
                   <Building size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-2">3. The "Query Pre-emptor"</h4>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    3. The "Query Pre-emptor"
+                  </h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Faceless Assessment officers often raise queries regarding<strong> "Value" or "Technical Specs." CloudDesk’s </strong>Pre-Filing Audit identifies "High-Risk" declarations (e.g., related party transactions or low-value items) and prompts you to upload supporting
-                    <strong>"Literature/Catalogues" </strong>on e-Sanchit before the officer asks, cutting clearance time by 50%.
+                    Faceless Assessment officers often raise queries regarding
+                    <strong> "Value" or "Technical Specs." CloudDesk’s </strong>
+                    Pre-Filing Audit identifies "High-Risk" declarations (e.g.,
+                    related party transactions or low-value items) and prompts
+                    you to upload supporting
+                    <strong>"Literature/Catalogues" </strong>on e-Sanchit before
+                    the officer asks, cutting clearance time by 50%.
                   </p>
                 </div>
               </div>
@@ -603,10 +649,16 @@ const CloudDeskBankEntry = () => {
                   <ShieldUser size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-2">4. Automatic IGST & Credit Sync</h4>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    4. Automatic IGST & Credit Sync
+                  </h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Errors in the BoE often lead to mismatched <strong>IGST credits </strong>on your GSTR-2B.
-                    <strong>CloudDesk performs a GSTN-ICEGATE </strong>Cross-Check, ensuring your GSTIN and Invoice details are perfectly mapped so your input tax credit flows seamlessly into your books.
+                    Errors in the BoE often lead to mismatched{" "}
+                    <strong>IGST credits </strong>on your GSTR-2B.
+                    <strong>CloudDesk performs a GSTN-ICEGATE </strong>
+                    Cross-Check, ensuring your GSTIN and Invoice details are
+                    perfectly mapped so your input tax credit flows seamlessly
+                    into your books.
                   </p>
                 </div>
               </div>
@@ -634,8 +686,13 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Under Section 46, you must file the BoE before the end of the next day (excluding holidays) following the day on which the aircraft/vessel/vehicle carrying the goods arrives.
-                  The Penalty: If you fail to meet this deadline, a ""Late Fee"" is charged (typically ₹5,000 per day for the first 3 days, and ₹10,000 per day thereafter). CloudDesk’s Timer Alert ensures you never pay a single rupee in late fees."
+                  Under Section 46, you must file the BoE before the end of the
+                  next day (excluding holidays) following the day on which the
+                  aircraft/vessel/vehicle carrying the goods arrives. The
+                  Penalty: If you fail to meet this deadline, a ""Late Fee"" is
+                  charged (typically ₹5,000 per day for the first 3 days, and
+                  ₹10,000 per day thereafter). CloudDesk’s Timer Alert ensures
+                  you never pay a single rupee in late fees."
                 </p>
               </details>
 
@@ -650,14 +707,17 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  You can file a "Prior" BoE using a Master BL/AWB number. However, for the final assessment and "Out of Charge," the House BL and final invoice must be uploaded.
+                  You can file a "Prior" BoE using a Master BL/AWB number.
+                  However, for the final assessment and "Out of Charge," the
+                  House BL and final invoice must be uploaded.
                 </p>
               </details>
 
               {/* Question 3 */}
               <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
                 <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What is the difference between a White, Yellow, and Green Bill of Entry?
+                  What is the difference between a White, Yellow, and Green Bill
+                  of Entry?
                   <ChevronDown
                     size={20}
                     className="text-brand-500 transition-transform group-open:rotate-180"
@@ -665,9 +725,13 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  White (Home Consumption): When you want to pay the duty and take the goods directly to your factory/shop.
-                  Yellow (Into-Bond/Warehouse): When you want to store the goods in a Customs Warehouse without paying duty immediately (Duty is deferred).
-                  Green (Ex-Bond): When you want to take goods out of the warehouse for consumption (you pay the duty at this stage).
+                  White (Home Consumption): When you want to pay the duty and
+                  take the goods directly to your factory/shop. Yellow
+                  (Into-Bond/Warehouse): When you want to store the goods in a
+                  Customs Warehouse without paying duty immediately (Duty is
+                  deferred). Green (Ex-Bond): When you want to take goods out of
+                  the warehouse for consumption (you pay the duty at this
+                  stage).
                 </p>
               </details>
 
@@ -682,7 +746,9 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  It is a BoE filed up to 30 days before the expected arrival of the goods. This is the gold standard for high-volume importers who want zero port-dwell time.
+                  It is a BoE filed up to 30 days before the expected arrival of
+                  the goods. This is the gold standard for high-volume importers
+                  who want zero port-dwell time.
                 </p>
               </details>
 
@@ -697,7 +763,11 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Your BoE is no longer assessed by an officer at the port of arrival. It could be assessed by an officer in Bangalore even if your goods are at Nhava Sheva. This makes e-Sanchit documentation critical. If your digital documents aren't clear, your cargo gets stuck.
+                  Your BoE is no longer assessed by an officer at the port of
+                  arrival. It could be assessed by an officer in Bangalore even
+                  if your goods are at Nhava Sheva. This makes e-Sanchit
+                  documentation critical. If your digital documents aren't
+                  clear, your cargo gets stuck.
                 </p>
               </details>
 
@@ -712,14 +782,18 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  You can check the "Challan Status" on ICEGATE. CloudDesk provides a Payment Verification Tracker that notifies you the moment the "Duty Paid" status is updated, triggering the next step: "Examination" or "Out of Charge."
+                  You can check the "Challan Status" on ICEGATE. CloudDesk
+                  provides a Payment Verification Tracker that notifies you the
+                  moment the "Duty Paid" status is updated, triggering the next
+                  step: "Examination" or "Out of Charge."
                 </p>
               </details>
 
               {/* Question 7 */}
               <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
                 <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  I made a mistake in the HSN code after filing. Can I change it?
+                  I made a mistake in the HSN code after filing. Can I change
+                  it?
                   <ChevronDown
                     size={20}
                     className="text-brand-500 transition-transform group-open:rotate-180"
@@ -727,7 +801,10 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Yes, but it requires a Section 149 Amendment. If the "Out of Charge" hasn't been given, it's easier. Once "OOC" is granted, you have to go through a formal "Re-assessment" process. CloudDesk manages these amendments to minimize delays.
+                  Yes, but it requires a Section 149 Amendment. If the "Out of
+                  Charge" hasn't been given, it's easier. Once "OOC" is granted,
+                  you have to go through a formal "Re-assessment" process.
+                  CloudDesk manages these amendments to minimize delays.
                 </p>
               </details>
 
@@ -742,7 +819,11 @@ const CloudDeskBankEntry = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  RMS is an AI-driven system that decides which BoE needs to be checked and which can be cleared immediately ("Green Channel"). CloudDesk helps you maintain a "High Compliance Score" to increase your chances of 100% Green Channel clearances.
+                  RMS is an AI-driven system that decides which BoE needs to be
+                  checked and which can be cleared immediately ("Green
+                  Channel"). CloudDesk helps you maintain a "High Compliance
+                  Score" to increase your chances of 100% Green Channel
+                  clearances.
                 </p>
               </details>
             </div>
@@ -754,7 +835,9 @@ const CloudDeskBankEntry = () => {
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
             {/* BRAND */}
             <div>
-              <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+              <a className="text-2xl font-bold text-white mb-4 block">
+                EXIMINQ
+              </a>
 
               <p className="text-sm mb-6">
                 EXIMINQ Contact: Your trusted partner for DGFT, Customs, and

@@ -90,7 +90,7 @@ export default function Fees({setShowEnrollModal}) {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "IEC_PROFILE_UPDATE",
+                    type: "IMS_Registration",
                   })
                 }
                 className="block w-full bg-accent-600 text-white font-bold py-3 rounded-lg hover:bg-accent-700 transition"
