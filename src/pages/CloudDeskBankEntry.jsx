@@ -561,6 +561,7 @@ const CloudDeskBankEntry = () => {
         </section>
 
         {/* Dynamic Fees Section */}
+        <Fees />
         <Fees setShowEnrollModal={setShowEnrollModal} />
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

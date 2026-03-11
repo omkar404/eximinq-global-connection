@@ -1,5 +1,5 @@
 // import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
-import {useState} from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskDigitalSignatures/Navbar";
 import Hero from "../components/CloudDeskDigitalSignatures/Hero";
@@ -17,7 +17,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  Check,
   Globe,
   Ship,
   Info,

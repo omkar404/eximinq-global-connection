@@ -25,7 +25,8 @@ import {
   Mail
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskSCOMET/MainNavbar";
-import { ModalEnroll} from "../components/CloudDeskSCOMET/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskSCOMET/ModalEnroll";
+
 
 const CloudDeskSCOMET = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({

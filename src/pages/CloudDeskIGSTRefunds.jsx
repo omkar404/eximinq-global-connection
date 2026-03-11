@@ -1,10 +1,9 @@
 // import TopBar from "../components/CloudDeskIGSTRefunds/TopBar";
-import {useState} from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskIGSTRefunds/Navbar";
 import Hero from "../components/CloudDeskIGSTRefunds/Hero";
-import Fees from "../components/CloudDeskIGSTRefunds/Fees";
-import {ModalEnroll} from "../components/CloudDeskIGSTRefunds/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskIGSTRefunds/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -30,18 +29,18 @@ import { MainNavbar } from "../components/CloudDeskIGSTRefunds/MainNavbar";
 
 const CloudDeskIGSTRefunds = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
-            open: false,
-            type: "",
-          });
+    open: false,
+    type: "",
+  });
 
   const handleEnrollmentSubmit = (formData) => {
-      console.log("Enrollment Submitted:", formData);
-  
-      // TODO → send API call
-      // axios.post("/api/enroll", formData)
-  
-      alert("Form submitted — check console for data.");
-    };
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <>
       <Helmet>
@@ -149,9 +148,16 @@ const CloudDeskIGSTRefunds = () => {
       <div className="bg-slate-50 text-slate-800">
         {/* Dynamic Sections */}
         {/* <TopBar /> */}
-        <MainNavbar />
-        <Navbar />
-        <Hero />
+<MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
+
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
         {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
         <section id="about" className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">
