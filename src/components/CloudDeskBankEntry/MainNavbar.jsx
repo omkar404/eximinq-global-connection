@@ -8,15 +8,15 @@ export const MainNavbar = ({
   scrolled,
   isMenuOpen,
   setIsMenuOpen,
-  setShowModal,
+  setShowEnrollModal,
 }) => {
   return (
     <nav
-      className={`fixed w-full z-40 transition-all duration-300 top-0 ${scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
-        }`}
+      className={`fixed w-full z-40 transition-all duration-300 top-0 ${
+        scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
+      }`}
     >
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-
         {/* Logo */}
         <div className="flex items-center">
           {/* <a href="https://eximinq.in/" className="cursor-pointer">
@@ -37,13 +37,14 @@ export const MainNavbar = ({
                 </span>
 
                 {/* Dropdown */}
-                <div className="absolute left-0 mt-4 w-72 
+                <div
+                  className="absolute left-0 mt-4 w-72 
                       bg-gray-100 rounded-2xl shadow-xl 
                       opacity-0 invisible 
                       group-hover:opacity-100 group-hover:visible 
                       transition-all duration-200 
-                      p-6 z-50">
-
+                      p-6 z-50"
+                >
                   <div className="flex flex-col space-y-6">
                     {link.children.map((child) => (
                       <Link
@@ -55,7 +56,6 @@ export const MainNavbar = ({
                       </Link>
                     ))}
                   </div>
-
                 </div>
               </div>
             ) : (
@@ -66,7 +66,7 @@ export const MainNavbar = ({
               >
                 {link.name}
               </Link>
-            )
+            ),
           )}
         </div>
 
@@ -135,7 +135,7 @@ export const MainNavbar = ({
           </div>
 
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowEnrollModal({ open: true, type: "Enroll" })}
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now
@@ -145,14 +145,13 @@ export const MainNavbar = ({
         {/* Hamburger */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`md:hidden text-3xl font-bold ${scrolled ? "text-gray-800" : "text-gray-800"
-            }`}
+          className={`md:hidden text-3xl font-bold ${
+            scrolled ? "text-gray-800" : "text-gray-800"
+          }`}
         >
           {isMenuOpen ? "✕" : "☰"}
         </button>
-
       </div>
     </nav>
-
   );
 };
