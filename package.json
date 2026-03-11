@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "firebase": "^12.10.0",
     "lucide-react": "^0.555.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -26,38 +27,36 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-"reactSnap": {
-  "crawl": false,
-  "include": [
-    "/",
-    "/services",
-    "/services/icegate-registration",
-    "/services/import-export-code",
-    "/services/ad-code-registration",
-    "/services/epcg-scheme/",
-    "/services/bill-of-entry-filing",
-    "/services/import-management-registration",
-    "/services/star-export-house",
-    "/services/aeo-registration",
-    "/services/moowr-scheme",
-    "/services/advance-authorisation",
-    "/services/epcg-scheme",
-    "/services/scomet-licensing",
-    "/services/eop-extension",
-    "/services/rodtep-scheme", 
-    "/services/igst-refund",
-    "/services/duty-drawback",
-    "/services/certificate-of-origin",
-    "/services/dsc-services",
-    "/services/aeo-certification",
-
-
-    "/contact-us",
-    "/foreign-trade-policy",
-    "/dgft-customs-consultancy",
-    "/certificate-of-origin"
-  ]
-},
+  "reactSnap": {
+    "crawl": false,
+    "include": [
+      "/",
+      "/services",
+      "/services/icegate-registration",
+      "/services/import-export-code",
+      "/services/ad-code-registration",
+      "/services/epcg-scheme/",
+      "/services/bill-of-entry-filing",
+      "/services/import-management-registration",
+      "/services/star-export-house",
+      "/services/aeo-registration",
+      "/services/moowr-scheme",
+      "/services/advance-authorisation",
+      "/services/epcg-scheme",
+      "/services/scomet-licensing",
+      "/services/eop-extension",
+      "/services/rodtep-scheme",
+      "/services/igst-refund",
+      "/services/duty-drawback",
+      "/services/certificate-of-origin",
+      "/services/dsc-services",
+      "/services/aeo-certification",
+      "/contact-us",
+      "/foreign-trade-policy",
+      "/dgft-customs-consultancy",
+      "/certificate-of-origin"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

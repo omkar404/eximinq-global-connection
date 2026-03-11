@@ -1,9 +1,6 @@
 // import TopBar from "../components/CloudDeskIGSTRefunds/TopBar";
-<<<<<<< HEAD
+import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-=======
-import { useState } from "react";
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 import Navbar from "../components/CloudDeskIGSTRefunds/Navbar";
 import Hero from "../components/CloudDeskIGSTRefunds/Hero";
 import Fees from "../components/CloudDeskIGSTRefunds/Fees";
@@ -46,71 +43,11 @@ const CloudDeskIGSTRefunds = () => {
       alert("Form submitted — check console for data.");
     };
   return (
-<<<<<<< HEAD
     <>
       <Helmet>
         <title>
           IGST Refund for Exporters | GST & ICEGATE Error Resolution
         </title>
-=======
-    <div className="bg-slate-50 text-slate-800">
-      {/* Dynamic Sections */}
-      {/* <TopBar /> */}
-      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      <Navbar setShowEnrollModal={setShowEnrollModal} />
-      <Hero setShowEnrollModal={setShowEnrollModal} />
-            
-      
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: "" })}
-        onSubmit={handleEnrollmentSubmit}
-      />
-      {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
-      <section id="about" class="py-20 bg-white">
-        <div class="container mx-auto px-4 max-w-5xl">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">
-              How Automated Refunds Work (And Fail)
-            </h2>
-            <div class="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
-          </div>
-          <div class="prose lg:prose-lg mx-auto text-slate-600 text-justify">
-            <p class="mb-4">
-              Under <strong>Rule 96 of CGST Rules</strong>, exporters who pay
-              IGST on exports can claim a refund. The process is designed to be
-              automated: once the GSTR-3B is filed and the Export General
-              Manifest (EGM) is submitted, the GSTN portal transmits invoice
-              data to ICEGATE.
-            </p>
-            <p class="mb-4">
-              Ideally, the ICEGATE system matches the GST return data with the
-              Shipping Bill data. If they match, a{" "}
-              <strong>Refund Scroll</strong> is generated, and money is credited
-              to your bank account. However, even a tiny mismatch (like a comma
-              in an invoice number or a ₹1 difference in tax value) causes the
-              system to reject the refund, leading to specific{" "}
-              <strong>Error Codes</strong>.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section id="errors" className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4">
-          {/* HEADER */}
-          <div className="text-center mb-16">
-            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-              Troubleshooting
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-              Why is Your Refund Stuck?
-            </h2>
-            <p className="text-slate-500 mt-2">
-              Identifying the error code is the first step to resolution.
-            </p>
-          </div>
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
 
         <meta
           name="description"
@@ -727,7 +664,6 @@ const CloudDeskIGSTRefunds = () => {
               </ul>
             </div>
 
-<<<<<<< HEAD
             {/* OTHER SERVICES */}
             <div>
               <h4 className="text-white font-bold mb-6">Other Services</h4>
@@ -753,67 +689,6 @@ const CloudDeskIGSTRefunds = () => {
                   </a>
                 </li>
               </ul>
-=======
-            {/* RIGHT SIDE */}
-            <div className="relative bg-white text-slate-800 rounded-xl p-8 shadow-2xl">
-              <h3 className="text-xl font-bold mb-4 text-brand-900 border-b pb-4">
-                Professional Fees
-              </h3>
-              <p className="text-sm text-slate-600 mb-6">
-                We operate on a transparent model.
-              </p>
-
-              <div className="space-y-4">
-                {/* Fees Block 1 */}
-                <div className="p-4 bg-slate-50 rounded border border-slate-200">
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="font-bold text-slate-700">
-                      Audit & Diagnosis
-                    </span>
-                    <span className="font-bold text-brand-600">₹ 1,500</span>
-                  </div>
-                  <p className="text-xs text-slate-500">
-                    Per Shipping Bill Analysis
-                  </p>
-                </div>
-
-                {/* Fees Block 2 */}
-                <div className="p-4 bg-brand-50 rounded border border-brand-200">
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="font-bold text-brand-900">
-                      Success Fee
-                    </span>
-                    <span className="font-bold text-accent-600">
-                      % of Refund
-                    </span>
-                  </div>
-                  <p className="text-xs text-brand-700">
-                    Payable only after scroll generation.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                {/* <a
-                  href="#home"
-                  className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
-                >
-                  Start Recovery
-                </a> */}
-
-                 <button
-                onClick={() =>
-                  setShowEnrollModal({
-                    open: true,
-                    type: "Start_Recovery",
-                  })
-                }
-                className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
-              >
-                Start Recovery
-              </button>
-              </div>
->>>>>>> 37c3a400f80bde7b9b46c7958383fa59025eff96
             </div>
 
             {/* CONTACT */}
