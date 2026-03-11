@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import {useState} from "react";
 import { Helmet } from "react-helmet-async";
-import TopBar from "../components/CloudDeskDutyDrawBack/TopBar";
 import Navbar from "../components/CloudDeskDutyDrawBack/Navbar";
 import Hero from "../components/CloudDeskDutyDrawBack/Hero";
 import Fees from "../components/CloudDeskDutyDrawBack/Fees";
