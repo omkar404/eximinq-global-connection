@@ -88,7 +88,7 @@ async function sendEmail(record) {
 
   await transporter.sendMail({
     from:    `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to:      "crm@eximinq.com, omkarmhetar100@gmail.com",
+    to:      "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
     subject: `New Star Export House Registration — ${type}`,
     html: `
       <h3>New Star Export House Registration</h3>

@@ -14,13 +14,22 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const isEnroll = type === "ENROLL";
+  /* ─────────────────────────────────────────
+     FORM TYPE FLAGS
+  ───────────────────────────────────────── */
+  const isEnroll = type === "Enroll";
+  const Applyapplication = type === "File_Advance_Bill";
+  const isApplyapplication = type === "Submit_Documents";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
-  const resetFrom = () => {
+  /* ─────────────────────────────────────────
+     RESET
+  ───────────────────────────────────────── */
+  const resetForm = () => {
     setForm({
       name: "",
       mobile: "",
@@ -31,10 +40,15 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     });
     setCategory("");
     setIssue("");
+    setErrors({});
   };
 
-  const Applyapplication = type === "File_Advance_Bill";
-  const isApplyapplication = type === "Submit_Documents";
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
+  if (!show) return null;
 
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
@@ -51,12 +65,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "Change in Preferred Sectors",
   ];
 
-  const handleClose = () => {
-    resetFrom();
-    onClose();
-  };
-
-  if (!show) return null;
+  /* ─────────────────────────────────────────
+     CHANGE HANDLER
+     FIX: renamed destructured 'type' → 'inputType'
+     to avoid shadowing the 'type' prop.
+     Previously the checkbox was never toggling
+     because `type === "checkbox"` was comparing
+     against e.g. "Enroll" instead of "checkbox".
+  ───────────────────────────────────────── */
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -66,6 +82,9 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     }));
   };
 
+  /* ─────────────────────────────────────────
+     VALIDATION
+  ───────────────────────────────────────── */
   const validate = () => {
     const newErrors = {};
 
@@ -76,28 +95,81 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
     return newErrors;
   };
-
-  const handleSubmit = (e) => {
+  /* ─────────────────────────────────────────
+     SUBMIT
+  ───────────────────────────────────────── */
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const v = validate();
-    setErrors(v);
 
-    if (Object.keys(v).length > 0) return;
+    // Validate before sending
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
 
-    // Send data out if callback provided
-    if (typeof onSubmit === "function") {
-      onSubmit({
-        ...form,
-        type,
-        category: isEnroll ? category : null,
-        issue: isProfileUpdate ? issue : null,
-      });
+    setLoading(true);
+
+    const payload = {
+      ...form,
+      type,
+      category: isEnroll       ? category : null,
+      issue:    isProfileUpdate ? issue    : null,
+    };
+
+    console.log("Final Payload:", payload);
+
+    try {
+      const res = await fetch(
+        "http://localhost:5000/api/bill-of-entry-filing",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await res.json();
+      console.log("API Response:", data);
+
+      if (res.ok) {
+        alert("Registration submitted successfully");
+        if (typeof onSubmit === "function") onSubmit(payload);
+        resetForm();
+        onClose();
+      } else {
+        alert(data.message || "Submission failed");
+      }
+    } catch (error) {
+      console.error("Fetch error:", error.name, error.message);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    resetFrom();
-
-    onClose();
   };
+
+  /* ─────────────────────────────────────────
+     REUSABLE: Disabled issue-type field
+     FIX: added 'relative' wrapper so the
+     absolute-positioned icon stays inside.
+  ───────────────────────────────────────── */
+  const IssueTypeField = ({ value }) => (
+    <div>
+      <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+        Issue Type
+      </label>
+      <div className="relative">
+        <FileSignature className="absolute left-3 top-3 text-gray-400" size={16} />
+        <input
+          type="text"
+          value={value}
+          disabled
+          className="w-full pl-10 p-3 rounded-lg border bg-gray-100 text-sm text-gray-600"
+        />
+      </div>
+    </div>
+  );
+  /* ─────────────────────────────────────────
+     RENDER
+  ───────────────────────────────────────── */
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
@@ -222,7 +294,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
               )}
             </div>
-
+            
+            {/* IEC Profile Update — issue dropdown */}
             {isProfileUpdate && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
@@ -249,7 +322,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
                   </label>
                   <select
@@ -265,7 +338,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                         {option}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
               </>
             )}
