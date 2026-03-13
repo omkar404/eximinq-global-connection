@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const DutyCheckSchema = new mongoose.Schema(
+const servicecertificateoforigin = new mongoose.Schema(
   {
     destinationCountry: {
       type: String,
@@ -20,4 +20,4 @@ const DutyCheckSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("DutyCheck", DutyCheckSchema);
+module.exports = mongoose.model("servicecertificateoforigin", servicecertificateoforigin);

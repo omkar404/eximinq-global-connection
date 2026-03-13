@@ -35,6 +35,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
 
+
+  const isEnroll = type === "Enroll";
   /* --------------------------------
      FORM TYPE FLAGS
   -------------------------------- */
@@ -114,7 +116,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-
+    if (isEnroll) ;
     if (isIECService && !category) {
       newErrors.category = "Please select category.";
     }
@@ -127,26 +129,58 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   -------------------------------- */
 const handleSubmit = async (e) => {
   e.preventDefault();
+  const v = validate();
+  setErrors(v);
 
-  setLoading(true);
+  if (Object.keys(v).length > 0) return;
+  // setLoading(true);
 
-  const payload = {
+  // send data out if callback provided
+  if (typeof onSubmit === "function") {
+    onSubmit({
     ...form,
     type,
-    category,
+    category: isEnroll,
     issue,
-  };
+    });
+  }
 
-  console.log("Final Payload:", payload);
+  // const payload = {
+  //   ...form,
+  //   type,
+  //   category,
+  //   issue,
+  // };
 
   try {
-    const res = await fetch("http://localhost:5000/api/ad-code-registration", {
+    const finalType = type || "ENROLL_NOW";
+
+    const payload = {
+        ...form,
+        type: finalType,
+        category: isEnroll ? category : undefined,
+        issue: isProfileUpdate ? issue : undefined,
+      };
+
+      if (category) {
+        payload.category = category;
+      }
+
+      if (issue) {
+        payload.issue = issue;
+      }    
+      console.log("Final Payload:", payload);
+
+ 
+    const res = await fetch(
+     `${process.env.REACT_APP_API_URL}/api/ad-code-registration`, 
+      // "http://localhost:5000/api/ad-code-registration",
+      {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: {"Content-Type": "application/json",},
       body: JSON.stringify(payload),
-    });
+    }
+  );
 
     const data = await res.json();
 
@@ -168,9 +202,9 @@ const handleSubmit = async (e) => {
   } catch (error) {
     console.error("Submission error:", error);
     alert("Submission failed. Please try again.");
-  }
-
+  } finally {
   setLoading(false);
+  }
 };
 
   return (
@@ -323,6 +357,31 @@ const handleSubmit = async (e) => {
                 />
               </div>
             )}
+
+            {isEnroll && (
+              <>
+                {/* Category + Issue or ENROLL-specific fields */}
+                <div>
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                    Category
+                  </label>
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                  >
+                    <option value="" disabled>
+                      Select Category
+                    </option>
+                    {IEC_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select> */}
+                </div>
+              </>
+            )}            
 
             {/* IEC CATEGORY */}
 

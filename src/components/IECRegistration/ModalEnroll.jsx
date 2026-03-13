@@ -36,6 +36,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const predefinedService = serviceConfig?.service;
 
   const isEnroll = type === "Apply Now";
+  const geticegateid = type === "GET_ICEGATE_ID";
+  // const CheckEligibility = type === "Check_Eligibility"
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
@@ -133,7 +135,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       console.log("final payload", payload);
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/import-export-code`,
+        // `${process.env.REACT_APP_API_URL}/api/icegate-registration`,
         `http://localhost:5000/api/icegate-registration`,
         {
           method: "POST",
@@ -347,6 +349,34 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 </div>
               </>
             )}
+
+            {geticegateid && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <input
+                  type="text"
+                  value="NEW ICEGATE REGISTRATION"
+                  disabled
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )}
+
+            {/* {CheckEligibility && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Issue Type
+                </label>
+                <input
+                  type="text"
+                  value=""
+                  disabled={loading}
+                  className="w-full p-3 rounded-lg border bg-gray-100"
+                />
+              </div>
+            )} */}
 
             {/* Role Selection */}
             <div>

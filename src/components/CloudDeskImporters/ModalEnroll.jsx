@@ -101,6 +101,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     // Validate before sending
     const validationErrors = validate();
     setErrors(validationErrors);
@@ -108,18 +109,37 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
     setLoading(true);
 
-    const payload = {
+    // Send data out of callback provided
+    if (typeof onSubmit === "function"){
+      onSubmit({
       ...form,
       type,
       category: isEnroll       ? category : null,
       issue:    isProfileUpdate ? issue    : null,
-    };
-
-    console.log("Final Payload:", payload);
+    });
+    }
 
     try {
+
+      const finalType = type || "ENROLL_NOW";
+      const payload = {
+        ...form,
+        type: finalType,
+        category: isEnroll ? category : undefined,
+        issue: isProfileUpdate ? issue : undefined,
+      };
+
+      if (category) {
+        payload.category = category;
+      }
+
+      if (issue) {
+        payload.issue = issue;
+      }
+    console.log("Final Payload:", payload);
       const res = await fetch(
-        "http://localhost:5000/api/import-management-registration",
+      `${process.env.REACT_APP_API_URL}/api/import-management-registration`,  
+        // "http://localhost:5000/api/import-management-registration",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

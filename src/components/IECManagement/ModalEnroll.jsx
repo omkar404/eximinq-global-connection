@@ -50,7 +50,7 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
     "Change in Directors / Partners",
     "Addition / Deletion of Branch Address",
     "Change in Bank Account",
-    "Change in Prefered Sectors"
+    "Change in Prefered Sectors",
   ];
 
   // const Applyapplication = type === "Apply_StartApplication"
@@ -93,7 +93,6 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
   };
 
   if (!show) return null;
-
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -147,17 +146,16 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
         payload.issue = issue;
       }
 
-
       console.log("final payload", payload);
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/import-export-code`,
-        // `http://localhost:5000/api/import-export-code`,
+        // `${process.env.REACT_APP_API_URL}/api/import-export-code`,
+        `http://localhost:5000/api/import-export-code`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const data = await res.json();
@@ -352,7 +350,7 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
               </div>
             )}
 
-{/* {Applyapplication && (
+            {/* {Applyapplication && (
   <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Selected Certificate Type
@@ -365,7 +363,6 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
                 />
               </div>
 )} */}
-
 
             {predefinedService && (
               <div>
@@ -401,7 +398,7 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
                       />
                       {r}
                     </label>
-                  )
+                  ),
                 )}
               </div>
               {errors.role && (

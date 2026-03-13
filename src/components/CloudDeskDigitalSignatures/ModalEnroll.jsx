@@ -125,7 +125,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/dsc-services",
+        `${process.env.REACT_APP_API_URL}/api/dsc-services`,
+        // "http://localhost:5000/api/dsc-services",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -1,4 +1,4 @@
-const DutyCheck = require("../models/DutyCheck");
+const servicecertificateoforigin = require("../models/servicecertificateoforigin");
 const nodemailer = require("nodemailer");
 
 const nowIST = new Date().toLocaleString("en-IN", {
@@ -34,7 +34,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.createDutyCheck = async (req, res) => {
+exports.servicecertificateoforigin = async (req, res) => {
   try {
     const { destinationCountry, hsCode, mobile } = req.body;
 
@@ -52,7 +52,7 @@ exports.createDutyCheck = async (req, res) => {
       });
     }
 
-    const saved = await DutyCheck.create({
+    const saved = await servicecertificateoforigin.create({
       destinationCountry,
       hsCode,
       mobile,

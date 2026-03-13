@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskDutyDrawBack/Navbar";
 import Hero from "../components/CloudDeskDutyDrawBack/Hero";
-import Fees from "../components/CloudDeskDutyDrawBack/Fees";
-import {ModalEnroll} from "../components/CloudDeskDutyDrawBack/ModalEnroll";
+// import Fees from "../components/CloudDeskDutyDrawBack/Fees";
+import { ModalEnroll } from "../components/CloudDeskDutyDrawBack/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -127,9 +127,16 @@ const CloudDeskDutyDrawBack = () => {
       <div className="bg-slate-50 text-slate-800">
         {/* Dynamic Sections */}
         {/* <TopBar /> */}
-        <MainNavbar />
-        <Navbar />
-        <Hero />
+        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
+
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
         {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
         <section id="about" className="py-20 bg-white">
@@ -211,12 +218,18 @@ const CloudDeskDutyDrawBack = () => {
                   </ul>
                 </div>
 
-                <a
+                {/* <a
                   href="#home"
                   className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
                 >
                   Apply for Brand Rate
-                </a>
+                </a> */}
+                <button
+                 onClick={() => setShowEnrollModal({ open:true , type: "Apply_for_Brand_Rate"} )}
+                 className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
+                >
+                Apply for Brand Rate
+              </button>
               </div>
 
               {/* RIGHT SIDE */}
@@ -433,6 +446,7 @@ const CloudDeskDutyDrawBack = () => {
           </div>
         </section>
 
+        {/* <Fees setShowEnrollModal={setShowEnrollModal} /> */}
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
         <section className="py-20 bg-white">

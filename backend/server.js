@@ -4,14 +4,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const path = require("path");
-const dutyCheckRoutes = require("./routes/dutyCheck.routes");
+const servicecertificateoforigin = require("./routes/servicecertificateoforigin.routes");
 const cooEnrollRoutes = require("./routes/cooEnroll.routes");
 const enrollRoutes = require("./routes/enroll.routes");
 const industriesWePowerRoutes = require("./routes/industriesWePower.routes");
 const mainenrollRoutes = require("./routes/mainenroll.routes");
 const mainCooRoutes = require("./routes/maincoo.routes");
 const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes");
-const icegateRegistrationRoutes = require("./routes/icegateRegistrationRoutes.routes");
+const icegateRoutes = require("./routes/icegateRegistrationRoutes.routes");
 const adcodeRoutes = require("./routes/adcodeRegistrationRoutes.route");
 const importManagementRoutes = require("./routes/importManagementRoutes.route");
 const starExportHouseRoutes = require("./routes/starExportHouse.routes");
@@ -401,7 +401,7 @@ app.get("/api/dgft/pdf-download", (req, res) => {
 });
 
 // Routes
-app.use("/api/duty-check", dutyCheckRoutes);
+app.use("/api/certificate-of-origin", servicecertificateoforigin);
 
 app.use("/api/coo-enroll", cooEnrollRoutes);
 
@@ -415,7 +415,7 @@ app.use("/api/main-coo-enroll", mainCooRoutes);
 
 app.use("/api/import-export-code", importExportCodeRoutes);
 
-app.use("/api/icegate-registration", icegateRegistrationRoutes);
+app.use("/api/icegate-registration", icegateRoutes);
 
 app.use("/api/ad-code-registration", adcodeRoutes);
 
