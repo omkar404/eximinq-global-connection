@@ -1,64 +1,134 @@
-// models/importManagement.model.js
+// const mongoose = require("mongoose");
+
+// const VALID_TYPES = [
+//   "QUICK_FORM",
+//   "Enroll",
+//   "Start_Application",
+// ];
+
+
+
+// const StarExportHouseSchema = new mongoose.Schema(
+// {
+//   name: {
+//     type: String,
+//     trim: true,
+//     default: null
+//   },
+
+//   mobile: {
+//     type: String,
+//     required: true,
+//     trim: true
+//   },
+
+//   email: {
+//     type: String,
+//     trim: true,
+//     lowercase: true,
+//     default: null
+//   },
+
+//   entity: {
+//     type: String,
+//     default: null,
+//     trim: true
+//   },
+
+//   role: {
+//     type: String,
+//     default: null
+//   },
+
+//   partner: {
+//     type: Boolean,
+//     default: false
+//   },
+
+//   type: {
+//     type: String,
+//     enum: VALID_TYPES,
+//     default: "QUICK_FORM"
+//   },
+
+//   category: {
+//     type: String,
+//     default: null
+//   },
+
+//   issue: {
+//     type: String,
+//     default: null
+//   }
+// },
+// { timestamps: true }
+// );
+
+// mongoose.model("StarExportHouseSchema", StarExportHouseSchema)
 
 const mongoose = require("mongoose");
 
 const VALID_TYPES = [
+  "QUICK_FORM",
   "Enroll",
   "Start_Application",
 ];
 
-const starexportRoutesSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    mobile: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      lowercase: true,
-    },
-    entity: {
-      type: String,
-      default: null,
-      trim: true,
-    },
-    role: {
-      type: String,
-      default: null,
-      enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
-    },
-    type: {
-      type: String,
-      required: true,
-      enum: VALID_TYPES,
-    },
-    // Only populated when type === "Enroll"
-    category: {
-      type: String,
-      default: null,
-    },
-    // Only populated when type === "IEC_PROFILE_UPDATE"
-    issue: {
-      type: String,
-      default: null,
-    },
-    // "Interested in being a Partner" checkbox
-    partner: {
-      type: Boolean,
-      default: false,
-    },
+const StarExportHouseSchema = new mongoose.Schema(
+{
+  name: {
+    type: String,
+    trim: true,
+    default: null
   },
-  {
-    timestamps: true, // auto adds createdAt + updatedAt
+
+  mobile: {
+    type: String,
+    required: true,
+    trim: true
+  },
+
+  email: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    default: null
+  },
+
+  entity: {
+    type: String,
+    trim: true,
+    default: null
+  },
+
+  role: {
+    type: String,
+    default: null
+  },
+
+  partner: {
+    type: Boolean,
+    default: false
+  },
+
+  type: {
+    type: String,
+    enum: VALID_TYPES,
+    default: "QUICK_FORM"
+  },
+
+  category: {
+    type: String,
+    default: null
+  },
+
+  issue: {
+    type: String,
+    default: null
   }
+
+},
+{ timestamps: true }
 );
 
-module.exports = mongoose.model("starexportRoutes", starexportRoutesSchema);
+module.exports = mongoose.model("StarExportHouse", StarExportHouseSchema);

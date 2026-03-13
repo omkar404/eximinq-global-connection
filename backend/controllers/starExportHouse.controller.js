@@ -1,23 +1,25 @@
 const mongoose = require("mongoose");
+const StarExportHouse = require("../models/starExportHouse.model");
 const nodemailer = require("nodemailer");
 
 // ── Schema ──────────────────────────────────────────────
-const StarExportHouseSchema = new mongoose.Schema(
-  {
-    name:     { type: String, required: true, trim: true },
-    mobile:   { type: String, required: true, trim: true },
-    email:    { type: String, required: true, trim: true, lowercase: true },
-    entity:   { type: String, default: null, trim: true },
-    role:     { type: String, default: null },
-    partner:  { type: Boolean, default: false },
-    type:     { type: String, required: true },
-    category: { type: String, default: null },
-    issue:    { type: String, default: null },
-  },
-  { timestamps: true }
-);
+// const StarExportHouseSchema = new mongoose.Schema(
+//   {
+//     name:     { type: String, required: true, trim: true },
+//     mobile:   { type: String, required: true, trim: true },
+//     email:    { type: String, required: true, trim: true, lowercase: true },
+//     entity:   { type: String, default: null, trim: true },
+//     role:     { type: String, default: null },
+//     partner:  { type: Boolean, default: false },
+//     type:     { type: String, required: true },
+//     category: { type: String, default: null },
+//     issue:    { type: String, default: null },
+//   },
+//   { timestamps: true }
+// );
 
-const StarExportHouse = mongoose.model("StarExportHouse", StarExportHouseSchema);
+// const StarExportHouse = mongoose.model("StarExportHouse", StarExportHouseSchema);
+
 
 // ── SMTP Transporter (reuse your existing env vars) ─────
 const transporter = nodemailer.createTransport({
@@ -33,52 +35,61 @@ const transporter = nodemailer.createTransport({
 // ── Controller ──────────────────────────────────────────
 exports.createStarExportHouse = async (req, res) => {
   try {
+
     console.log("Star Export House Incoming:", req.body);
 
     const { name, mobile, email, entity, role, type, category, issue, partner } = req.body;
 
-    if (!name || !mobile || !email || !type) {
+    if (!mobile) {
       return res.status(400).json({
         success: false,
-        message: "Name, Mobile, Email and Type are required",
+        message: "Mobile is required",
       });
     }
 
-    // Save to DB
     const record = await StarExportHouse.create({
-      name:     name.trim(),
-      mobile:   mobile.trim(),
-      email:    email.trim().toLowerCase(),
-      entity:   entity   ? entity.trim() : null,
-      role:     role     || null,
-      type,
+      name: name?.trim() || null,
+      mobile: mobile?.trim(),
+      email: email?.trim()?.toLowerCase() || null,
+      entity: entity?.trim() || null,
+      role: role || null,
+      type: type || "QUICK_FORM",
       category: category || null,
-      issue:    issue    || null,
-      partner:  Boolean(partner),
+      issue: issue || null,
+      partner: Boolean(partner),
     });
 
-    console.log("Saved Star Export House record:", record._id);
+    console.log("Saved record:", record._id);
 
-    // Send email — fire and forget (email failure won't break the 201)
-    sendEmail(record).catch((err) =>
-      console.error("Email failed (record was saved):", err.message)
+    sendEmail(record).catch(err =>
+      console.error("Email failed:", err.message)
     );
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
-      message: "Star Export House registration submitted successfully",
+      message: "Registration submitted successfully",
       data: record,
     });
 
   } catch (error) {
-    console.error("Star Export House Error:", error.message);
+
+    console.error("Star Export House Error:", error);
 
     if (error.name === "ValidationError") {
-      const messages = Object.values(error.errors).map((e) => e.message);
-      return res.status(400).json({ success: false, message: "Validation failed", errors: messages });
+      const messages = Object.values(error.errors).map(e => e.message);
+      return res.status(400).json({
+        success: false,
+        message: "Validation failed",
+        errors: messages,
+      });
     }
 
-    return res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      error: error.message,
+    });
+
   }
 };
 
