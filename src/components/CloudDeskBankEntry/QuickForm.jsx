@@ -32,8 +32,8 @@ const QuickForm = () => {
       // FIX 1: fetch result was stored as 'res' but then read as 'response'
       // Renamed to 'response' consistently throughout
       const response = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/bill-of-entry-filing`,
-        "http://localhost:5000/api/bill-of-entry-filing",
+        `${process.env.REACT_APP_API_URL}/api/bill-of-entry-filing`,
+        // "http://localhost:5000/api/bill-of-entry-filing",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
