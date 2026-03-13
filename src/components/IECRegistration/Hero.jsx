@@ -18,7 +18,7 @@ const Hero = ({setShowEnrollModal}) => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                     <button
-                       onClick={() => setShowEnrollModal({open: true, type: "Apply Now" })}
+                       onClick={() => setShowEnrollModal({open: true, type: "GET_ICEGATE_ID" })}
                     className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                     
                         Get ICEGATE ID

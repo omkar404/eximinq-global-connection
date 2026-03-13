@@ -31,12 +31,13 @@ export default function QuickForm() {
       setLoading(true);
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/duty-check`,
+        `${process.env.REACT_APP_API_URL}/api/certificate-of-origin`,
+        // "http://localhost:5000/api/certificate-of-origin",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form),
-        }
+        },
       );
 
       const data = await res.json();

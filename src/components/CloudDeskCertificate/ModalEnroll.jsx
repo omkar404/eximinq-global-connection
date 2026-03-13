@@ -302,6 +302,26 @@ export const ModalEnroll = ({ show, onClose, type }) => {
               )}
             </div>
 
+            {/* Partner Checkbox */}
+            <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
+              <label className="flex items-start cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="partner"
+                  checked={form.partner}
+                  onChange={handleChange}
+                  className="mt-1 w-5 h-5 text-teal-600 rounded border-gray-300 focus:ring-teal-500"
+                />
+                <span className="ml-3 text-sm text-gray-800">
+                  I am interested in being a{" "}
+                  <span className="font-bold text-teal-700">
+                    Partner with EXIMINQ CLOUDDESK
+                  </span>{" "}
+                  and agree to the terms of enrollment.
+                </span>
+              </label>
+            </div>
+
             {/* Submit */}
             <button
               type="submit"

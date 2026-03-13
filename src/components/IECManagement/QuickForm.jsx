@@ -22,7 +22,7 @@ const QuickForm = () => {
       setLoading(true);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/quick-form`, 
+         `${process.env.REACT_APP_API_URL}/api/import-export-code`, 
         // `http://localhost:5000/api/import-export-code`,
   {
     method: "POST",

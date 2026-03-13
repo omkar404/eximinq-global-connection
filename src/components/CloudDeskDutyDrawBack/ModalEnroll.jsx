@@ -1,7 +1,15 @@
+// 
+
+// components/ModalEnroll.jsx
+
 import React, { useState } from "react";
-import { X, Handshake, Building, Mail ,FileSignature} from "lucide-react";
+import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
+
+  /* ─────────────────────────────────────────
+     STATE — all hooks before early return
+  ───────────────────────────────────────── */
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -12,30 +20,21 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   });
 
   const [category, setCategory] = useState("");
-  const [issue, setIssue] = useState("");
-  const [errors, setErrors] = useState({});
+  const [issue, setIssue]       = useState("");
+  const [errors, setErrors]     = useState({});
+  const [loading, setLoading]   = useState(false); // FIX 4: was missing entirely
 
-  const isEnroll = type === "ENROLL";
+  /* ─────────────────────────────────────────
+     FORM TYPE FLAGS
+  ───────────────────────────────────────── */
+  const isEnroll        = type === "Enroll";
+  const isApplyBrand    = type === "Apply_for_Brand_Rate";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
-  const isRegistration =
-    type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
+  const isRegistration  = type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
-  const resetFrom = () => {
-    setForm({
-      name: "",
-      mobile: "",
-      entity: "",
-      email: "",
-      role: "",
-      partner: false,
-    });
-    setCategory("");
-    setIssue("");
-  };
-
-  const Applyapplication = type === "Duty_Brand_Rate";
-
-// CATEGORY
+  /* ─────────────────────────────────────────
+     OPTIONS
+  ───────────────────────────────────────── */
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
     "IEC PROFILE UPDATATION",
@@ -43,68 +42,126 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "IEC SUSPENSION",
   ];
 
-const PROFILE_UPDATE_OPTIONS = [
-  "Steel Import NOC (SIMS)",
-  "Copper (NFMIMS)",
-  "Aluminium (NFMIMS)",
-  "Coal (CIMS)",
-  "Paper (PIMS)",
-  "Chip (CHIMS)",
-];
+  const PROFILE_UPDATE_OPTIONS = [
+    "Steel Import NOC (SIMS)",
+    "Copper (NFMIMS)",
+    "Aluminium (NFMIMS)",
+    "Coal (CIMS)",
+    "Paper (PIMS)",
+    "Chip (CHIMS)",
+  ];
 
+  /* ─────────────────────────────────────────
+     RESET
+     FIX 3: Original had 'resetFrom' (typo) which
+     didn't clear errors. Renamed to 'resetForm'
+     and added setErrors({}) so old validation
+     messages don't appear on reopen.
+  ───────────────────────────────────────── */
+  const resetForm = () => {
+    setForm({ name: "", mobile: "", entity: "", email: "", role: "", partner: false });
+    setCategory("");
+    setIssue("");
+    setErrors({});   // ← FIX 3: was missing
+    setLoading(false);
+  };
 
   const handleClose = () => {
-    resetFrom();
+    resetForm(); // FIX 3: was calling resetFrom() (typo)
     onClose();
   };
 
   if (!show) return null;
 
+  /* ─────────────────────────────────────────
+     CHANGE HANDLER
+     FIX 2: 'type' from e.target shadowed the
+     'type' prop. `type === "checkbox"` was
+     comparing against "Enroll" / "Apply_for_Brand_Rate"
+     so the partner checkbox never toggled.
+     Fixed by renaming to 'inputType'.
+  ───────────────────────────────────────── */
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type: inputType, checked } = e.target; // ← FIX 2
     setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: inputType === "checkbox" ? checked : value,
     }));
   };
 
+  /* ─────────────────────────────────────────
+     VALIDATION
+  ───────────────────────────────────────── */
   const validate = () => {
     const newErrors = {};
-
-    if (!form.name.trim()) newErrors.name = "Name is required.";
+    if (!form.name.trim())   newErrors.name   = "Name is required.";
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
-    if (!form.email.trim()) newErrors.email = "Email is required.";
-    if (!form.role) newErrors.role = "Please select your role.";
-
+    if (!form.email.trim())  newErrors.email  = "Email is required.";
+    if (!form.role)          newErrors.role   = "Please select your role.";
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  /* ─────────────────────────────────────────
+     SUBMIT
+     FIX 1: handleSubmit was not async but used
+     await — SyntaxError, form never submitted.
+  ───────────────────────────────────────── */
+  const handleSubmit = async (e) => {  // ← FIX 1: added async
     e.preventDefault();
+
     const v = validate();
     setErrors(v);
-
     if (Object.keys(v).length > 0) return;
 
-    // Send data out if callback provided
-    if (typeof onSubmit === "function") {
-      onSubmit({
-        ...form,
-        type,
-        category: isEnroll ? category : null,
-        issue: isProfileUpdate ? issue : null,
+    setLoading(true);
+
+    const payload = {
+      ...form,
+      type,
+      category: isEnroll       ? category : null,
+      issue:    isProfileUpdate ? issue    : null,
+    };
+
+    console.log("Final payload:", payload);
+
+    try {
+      const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+      const res = await fetch(`${baseUrl}/api/duty-drawback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || data.message || "API failed");
+      }
+
+      // onSubmit called only after confirmed API success
+      if (typeof onSubmit === "function") onSubmit(payload);
+
+      alert("Registration submitted successfully");
+      resetForm();
+      onClose();
+
+    } catch (err) {
+      console.error("Enroll error:", err.name, err.message);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    resetFrom();
-
-    onClose();
   };
 
+  /* ─────────────────────────────────────────
+     RENDER
+  ───────────────────────────────────────── */
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-        {/* Header */}
+
+        {/* ── Header ── */}
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
           <div>
             <h2 className="text-2xl font-bold flex items-center">
@@ -114,20 +171,19 @@ const PROFILE_UPDATE_OPTIONS = [
               Join the CloudDesk Network
             </p>
           </div>
-
           <button
             onClick={handleClose}
-            className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 
-            rounded-full p-1 transition"
+            className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-1 transition"
             aria-label="Close modal"
           >
             <X size={20} />
           </button>
         </div>
 
-        {/* Body */}
+        {/* ── Body ── */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
+
             {/* Name + Mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -140,8 +196,7 @@ const PROFILE_UPDATE_OPTIONS = [
                   placeholder="Your Name"
                   value={form.name}
                   onChange={handleChange}
-                  className={`w-full p-3 rounded-lg border text-sm outline-none
-                  ${
+                  className={`w-full p-3 rounded-lg border text-sm outline-none ${
                     errors.name
                       ? "border-red-400"
                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
@@ -162,8 +217,7 @@ const PROFILE_UPDATE_OPTIONS = [
                   placeholder="+91 XXXXX XXXXX"
                   value={form.mobile}
                   onChange={handleChange}
-                  className={`w-full p-3 rounded-lg border text-sm outline-none
-                  ${
+                  className={`w-full p-3 rounded-lg border text-sm outline-none ${
                     errors.mobile
                       ? "border-red-400"
                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
@@ -181,10 +235,7 @@ const PROFILE_UPDATE_OPTIONS = [
                 Entity Name
               </label>
               <div className="relative">
-                <Building
-                  className="absolute left-3 top-3 text-gray-400"
-                  size={16}
-                />
+                <Building className="absolute left-3 top-3 text-gray-400" size={16} />
                 <input
                   type="text"
                   name="entity"
@@ -202,18 +253,14 @@ const PROFILE_UPDATE_OPTIONS = [
                 Email ID
               </label>
               <div className="relative">
-                <Mail
-                  className="absolute left-3 top-3 text-gray-400"
-                  size={16}
-                />
+                <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
                 <input
                   type="email"
                   name="email"
                   placeholder="official@domain.com"
                   value={form.email}
                   onChange={handleChange}
-                  className={`w-full pl-10 p-3 rounded-lg border text-sm outline-none
-                  ${
+                  className={`w-full pl-10 p-3 rounded-lg border text-sm outline-none ${
                     errors.email
                       ? "border-red-400"
                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
@@ -225,6 +272,7 @@ const PROFILE_UPDATE_OPTIONS = [
               )}
             </div>
 
+            {/* IEC Profile Update — issue dropdown */}
             {isProfileUpdate && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
@@ -235,106 +283,90 @@ const PROFILE_UPDATE_OPTIONS = [
                   onChange={(e) => setIssue(e.target.value)}
                   className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
                 >
-                  <option value="" disabled>
-                    Select Update Type
-                  </option>
-                    {PROFILE_UPDATE_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
+                  <option value="" disabled>Select Update Type</option>
+                  {PROFILE_UPDATE_OPTIONS.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
                 </select>
               </div>
             )}
 
+            {/* Enroll — category dropdown (uncomment when needed) */}
             {isEnroll && (
-              <>
-                {/* Category + Issue or ENROLL-specific fields */}
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                    Category
-                  </label>
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
-                  >
-                    <option value="" disabled>
-                      Select Category
-                    </option>
-                    {IEC_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
+              <div>
+                {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Category
+                </label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                >
+                  <option value="" disabled>Select Category</option>
+                  {IEC_OPTIONS.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select> */}
+              </div>
             )}
 
-  {Applyapplication && (
-  <div>
-    <label className="block text-xs font-bold text-gray-700 mb-1">
-      CATEGORY
-    </label>
-    <div className="relative">
-      <FileSignature
-        className="absolute left-3 top-3 text-gray-400"
-        size={16}
-      />
-      <input
-        type="text"
-        name="service"
-        value="Apply for Brand Rate"
-        readOnly
-        className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
-      />
-    </div>
-  </div>
-)}
+            {/* Brand Rate — locked service field */}
+            {isApplyBrand && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Category
+                </label>
+                <div className="relative">
+                  <FileSignature className="absolute left-3 top-3 text-gray-400" size={16} />
+                  <input
+                    type="text"
+                    name="service"
+                    value="Brand Rate Fixation"
+                    readOnly
+                    className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Role Selection */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
                 I am a:
               </label>
-
               <div className="grid grid-cols-2 gap-3">
-                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
-                  (role) => {
-                    const selected = form.role === role;
-                    return (
-                      <label
-                        key={role}
-                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition
-                        ${
-                          selected
-                            ? "border-teal-500 bg-teal-50"
-                            : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="role"
-                          value={role}
-                          checked={form.role === role}
-                          onChange={handleChange}
-                          className="w-4 h-4 text-teal-600 focus:ring-teal-500"
-                        />
-                        <span className="ml-2 text-sm font-medium text-gray-700">
-                          {role}
-                        </span>
-                      </label>
-                    );
-                  }
-                )}
+                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map((role) => {
+                  const selected = form.role === role;
+                  return (
+                    <label
+                      key={role}
+                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition ${
+                        selected
+                          ? "border-teal-500 bg-teal-50"
+                          : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="role"
+                        value={role}
+                        checked={form.role === role}
+                        onChange={handleChange}
+                        className="w-4 h-4 text-teal-600 focus:ring-teal-500"
+                      />
+                      <span className="ml-2 text-sm font-medium text-gray-700">
+                        {role}
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
               {errors.role && (
                 <p className="text-xs text-red-500 mt-2">{errors.role}</p>
               )}
             </div>
 
-            {/* Checkbox */}
+            {/* Partner Checkbox */}
             <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
               <label className="flex items-start cursor-pointer">
                 <input
@@ -354,15 +386,41 @@ const PROFILE_UPDATE_OPTIONS = [
               </label>
             </div>
 
-            {/* Submit */}
+            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 
-              text-white font-bold rounded-xl shadow-lg hover:shadow-xl 
-              transform hover:-translate-y-0.5 transition flex items-center justify-center text-lg"
+              disabled={loading}
+              className={`w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700
+                text-white font-bold rounded-xl shadow-lg hover:shadow-xl
+                transition flex items-center justify-center text-lg
+                ${loading
+                  ? "opacity-60 cursor-not-allowed"
+                  : "transform hover:-translate-y-0.5"
+                }`}
             >
-              Submit Enrollment
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5 mr-2 text-white"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25" cx="12" cy="12" r="10"
+                      stroke="currentColor" strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8z"
+                    />
+                  </svg>
+                  Submitting...
+                </>
+              ) : (
+                "Submit Enrollment"
+              )}
             </button>
+
           </form>
         </div>
       </div>
