@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const VALID_TYPES = [
   "Enroll",
+  "QUICK_FORM",
   "File_Bill_Of_Entry",
   "Submit_Documents",
 ];
@@ -12,8 +13,9 @@ const billOfEntryFilingSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
+      default: null
     },
     mobile: {
       type: String,
@@ -22,9 +24,10 @@ const billOfEntryFilingSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
       lowercase: true,
+      default: null
     },
     entity: {
       type: String,
@@ -39,7 +42,8 @@ const billOfEntryFilingSchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: VALID_TYPES,
+      enum: ["BILL_OF_ENTRY", "EXPORT", "IMPORT", "QUICK_FORM"],
+      default: "QUICK_FORM"
     },
     // Populated when type === "Enroll"
     category: {
