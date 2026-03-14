@@ -5,6 +5,7 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 const path = require("path");
 const servicecertificateoforigin = require("./routes/servicecertificateoforigin.routes");
+const serviceaeocertification = require("./routes/serviceaeocertification.routes");
 const cooEnrollRoutes = require("./routes/cooEnroll.routes");
 const enrollRoutes = require("./routes/enroll.routes");
 const industriesWePowerRoutes = require("./routes/industriesWePower.routes");
@@ -403,6 +404,8 @@ app.get("/api/dgft/pdf-download", (req, res) => {
 
 // Routes
 app.use("/api/certificate-of-origin", servicecertificateoforigin);
+
+app.use("/api/aeo-certification", serviceaeocertification);
 
 app.use("/api/coo-enroll", cooEnrollRoutes);
 
