@@ -62,8 +62,8 @@ const QuickForm = () => {
       };
 
       const response = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/advance-authorisation`,
-        "http://localhost:5000/api/advance-authorisation",
+        `${process.env.REACT_APP_API_URL}/api/advance-authorisation`,
+        // "http://localhost:5000/api/advance-authorisation",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
