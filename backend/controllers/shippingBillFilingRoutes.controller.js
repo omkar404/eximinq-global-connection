@@ -284,96 +284,96 @@ if (missingFields.length > 0) {
       : `🚢 New Shipping Bill Filing Registration — ${finalType.replace(/_/g, ' ')}`;
 
     const emailHtml = finalType === "QUICK_FORM"
-      ? `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: #f8f9fa; padding: 15px; border-bottom: 3px solid #ffc107; }
-            .content { padding: 20px 0; }
-            .field { margin-bottom: 10px; }
-            .label { font-weight: bold; color: #555; }
-            .value { color: #333; }
-            .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #777; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h2 style="margin:0; color:#ffc107;">🚢 EXIMINQ CloudDesk</h2>
-              <p style="margin:5px 0 0; color:#666;">New Quick Lead - Shipping Service</p>
-            </div>
-            <div class="content">
-              <div class="field">
-                <span class="label">📧 Email:</span>
-                <span class="value">${email || "N/A"}</span>
-              </div>
-              <div class="field">
-                <span class="label">📱 Mobile:</span>
-                <span class="value">${mobile}</span>
-              </div>
-            </div>
-            <div class="footer">
-              <p>📅 Submitted: ${istTime}, ${istDate}</p>
-              <p>🆔 Lead ID: ${record._id}</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `
-      : `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: #f8f9fa; padding: 15px; border-bottom: 3px solid #007bff; }
-            .content { padding: 20px 0; }
-            table { width: 100%; border-collapse: collapse; }
-            td { padding: 10px; border-bottom: 1px solid #eee; }
-            td:first-child { font-weight: bold; width: 40%; background: #f8f9fa; }
-            td:last-child { color: #333; }
-            .badge { 
-              display: inline-block; 
-              padding: 3px 8px; 
-              border-radius: 4px; 
-              font-size: 12px;
-              background: #28a745; 
-              color: white;
-            }
-            .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #777; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h2 style="margin:0; color:#007bff;">🚢 EXIMINQ CloudDesk</h2>
-              <p style="margin:5px 0 0; color:#666;">New Shipping Bill Filing Registration</p>
-            </div>
-            <div class="content">
-              <table>
-                <tr><td>👤 Name</td><td>${name || "N/A"}</td></tr>
-                <tr><td>📱 Mobile</td><td>${mobile}</td></tr>
-                <tr><td>📧 Email</td><td>${email || "N/A"}</td></tr>
-                <tr><td>🏢 Entity</td><td>${entity || "N/A"}</td></tr>
-                <tr><td>👔 Role</td><td>${role || "N/A"}</td></tr>
-                <tr><td>📋 Service Type</td><td><span class="badge">${finalType.replace(/_/g, ' ')}</span></td></tr>
-                <tr><td>📂 Category</td><td>${category || "N/A"}</td></tr>
-                <tr><td>❓ Issue</td><td>${issue || "N/A"}</td></tr>
-                <tr><td>🤝 Partner Interest</td><td>${isPartner ? "Yes" : "No"}</td></tr>
-              </table>
-            </div>
-            <div class="footer">
-              <p>📅 Submitted: ${istTime}, ${istDate}</p>
-              <p>🆔 Registration ID: ${record._id}</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `;
+
+    //     <!DOCTYPE html>
+    //     <html>
+    //     <head>
+    //       <style>
+    //         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    //         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    //         .header { background: #f8f9fa; padding: 15px; border-bottom: 3px solid #ffc107; }
+    //         .content { padding: 20px 0; }
+    //         .field { margin-bottom: 10px; }
+    //         .label { font-weight: bold; color: #555; }
+    //         .value { color: #333; }
+    //         .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #777; }
+    //       </style>
+    //     </head>
+    //     <body>
+    //       <div class="container">
+    //         <div class="header">
+    //           <h2 style="margin:0; color:#ffc107;">🚢 EXIMINQ CloudDesk</h2>
+    //           <p style="margin:5px 0 0; color:#666;">New Quick Lead - Shipping Service</p>
+    //         </div>
+    //         <div class="content">
+    //           <div class="field">
+    //             <span class="label">📧 Email:</span>
+    //             <span class="value">${email || "N/A"}</span>
+    //           </div>
+    //           <div class="field">
+    //             <span class="label">📱 Mobile:</span>
+    //             <span class="value">${mobile}</span>
+    //           </div>
+    //         </div>
+    //         <div class="footer">
+    //           <p>📅 Submitted: ${istTime}, ${istDate}</p>
+    //           <p>🆔 Lead ID: ${record._id}</p>
+    //         </div>
+    //       </div>
+    //     </body>
+    //     </html>
+    //   `
+    //   : `
+    //     <!DOCTYPE html>
+    //     <html>
+    //     <head>
+    //       <style>
+    //         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    //         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    //         .header { background: #f8f9fa; padding: 15px; border-bottom: 3px solid #007bff; }
+    //         .content { padding: 20px 0; }
+    //         table { width: 100%; border-collapse: collapse; }
+    //         td { padding: 10px; border-bottom: 1px solid #eee; }
+    //         td:first-child { font-weight: bold; width: 40%; background: #f8f9fa; }
+    //         td:last-child { color: #333; }
+    //         .badge { 
+    //           display: inline-block; 
+    //           padding: 3px 8px; 
+    //           border-radius: 4px; 
+    //           font-size: 12px;
+    //           background: #28a745; 
+    //           color: white;
+    //         }
+    //         .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #777; }
+    //       </style>
+    //     </head>
+    //     <body>
+    //       <div class="container">
+    //         <div class="header">
+    //           <h2 style="margin:0; color:#007bff;">🚢 EXIMINQ CloudDesk</h2>
+    //           <p style="margin:5px 0 0; color:#666;">New Shipping Bill Filing Registration</p>
+    //         </div>
+    //         <div class="content">
+    //           <table>
+    //             <tr><td>👤 Name</td><td>${name || "N/A"}</td></tr>
+    //             <tr><td>📱 Mobile</td><td>${mobile}</td></tr>
+    //             <tr><td>📧 Email</td><td>${email || "N/A"}</td></tr>
+    //             <tr><td>🏢 Entity</td><td>${entity || "N/A"}</td></tr>
+    //             <tr><td>👔 Role</td><td>${role || "N/A"}</td></tr>
+    //             <tr><td>📋 Service Type</td><td><span class="badge">${finalType.replace(/_/g, ' ')}</span></td></tr>
+    //             <tr><td>📂 Category</td><td>${category || "N/A"}</td></tr>
+    //             <tr><td>❓ Issue</td><td>${issue || "N/A"}</td></tr>
+    //             <tr><td>🤝 Partner Interest</td><td>${isPartner ? "Yes" : "No"}</td></tr>
+    //           </table>
+    //         </div>
+    //         <div class="footer">
+    //           <p>📅 Submitted: ${istTime}, ${istDate}</p>
+    //           <p>🆔 Registration ID: ${record._id}</p>
+    //         </div>
+    //       </div>
+    //     </body>
+    //     </html>
+    //   `;
 
     // ---------------- SEND EMAIL (fire and forget) ----------------
     transporter.sendMail({
