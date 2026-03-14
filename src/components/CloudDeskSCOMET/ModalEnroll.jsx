@@ -14,13 +14,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
-
-  const isEnroll = type === "ENROLL";
+  const [loading, setLoading] = useState("");
+  const isEnroll = type === "Enroll";
+  const Applyapplication = type === "Check_GAEC_Eligibility";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
-  const resetFrom = () => {
+  const resetForm = () => {
     setForm({
       name: "",
       mobile: "",
@@ -33,7 +34,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setIssue("");
   };
 
-  const Applyapplication = type === "Check_GAEC_Eligibility";
+
 
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
@@ -51,7 +52,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   ];
 
   const handleClose = () => {
-    resetFrom();
+    resetForm();
     onClose();
   };
 
@@ -72,17 +73,21 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-
+    if (isEnroll);
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const v = validate();
-    setErrors(v);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  const validationErrors = validate();
+  setErrors(validationErrors);
 
-    if (Object.keys(v).length > 0) return;
+  if (Object.keys(validationErrors).length > 0) return;
 
+  setLoading(true);
+
+  try {
     // Send data out if callback provided
     if (typeof onSubmit === "function") {
       onSubmit({
@@ -92,11 +97,61 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         issue: isProfileUpdate ? issue : null,
       });
     }
+    
+    const finalType = type || "ENROLL_NOW";
 
-    resetFrom();
+    const payload = {
+      ...form,
+      type: finalType,
+      category: isEnroll ? category : undefined,
+      issue: isProfileUpdate ? issue : undefined,
+    };
 
-    onClose();
-  };
+    if (category) {
+      payload.category = category;
+    }
+
+    if (issue) {
+      payload.issue = issue;
+    }
+    
+    console.log("final payload", payload);
+
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/scomet-licensing`,
+      // `http://localhost:5000/api/scomet-licensing`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data = await res.json();
+
+    console.log("API Response:", data);
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || "API failed");
+    }
+
+    alert("Request submitted successfully");
+    
+    // Reset form
+    resetForm();
+    
+    // Close modal/drawer if onClose is provided
+    if (typeof onClose === "function") {
+      onClose();
+    }
+    
+  } catch (err) {
+    console.error("Enroll error:", err);
+    alert(err.message || "Submission failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
@@ -248,7 +303,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
                   </label>
                   <select
@@ -264,7 +319,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                         {option}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
               </>
             )}
@@ -282,7 +337,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <input
                     type="text"
                     name="service"
-                    value="Apply for GAEC (Global Authorization)"
+                    value="GAEC (Global Authorization)"
                     readOnly
                     className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
                   />
