@@ -14,8 +14,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState("");
 
-  const isEnroll = type === "ENROLL";
+  const isEnroll = type === "Enroll";
+  const Applyapplication = type === "Submit_Documents";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
@@ -32,8 +34,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setCategory("");
     setIssue("");
   };
-
-  const Applyapplication = type === "Submit_Documents";
 
 
   const IEC_OPTIONS = [
@@ -75,31 +75,79 @@ const PROFILE_UPDATE_OPTIONS = [
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-
+    if(isEnroll);
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const v = validate();
-    setErrors(v);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const v = validate();
+  setErrors(v);
 
-    if (Object.keys(v).length > 0) return;
+  if (Object.keys(v).length > 0) return;
 
-    // Send data out if callback provided
-    if (typeof onSubmit === "function") {
-      onSubmit({
-        ...form,
-        type,
-        category: isEnroll ? category : null,
-        issue: isProfileUpdate ? issue : null,
-      });
+  // Send data out if callback provided
+  if (typeof onSubmit === "function") {
+    onSubmit({
+      ...form,
+      type,
+      category: isEnroll ? category : null,
+      issue: isProfileUpdate ? issue : null,
+    });
+  }
+
+  try {
+    setLoading(true);
+    
+    const finalType = type || "ENROLL_NOW";
+
+    const payload = {
+      ...form,
+      type: finalType,
+      category: isEnroll ? category : undefined,
+      issue: isProfileUpdate ? issue : undefined,
+    };
+
+    // Clean up undefined values
+    if (!payload.category) delete payload.category;
+    if (!payload.issue) delete payload.issue;
+    
+    console.log("Final payload:", payload);
+
+    const res = await fetch(
+      // `${process.env.REACT_APP_API_URL}/api/shipping-bill-filing`,
+      `http://localhost:5000/api/shipping-bill-filing`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data = await res.json();
+    console.log("Response data:", data);
+
+    if (!res.ok) {
+      throw new Error(data.error || data.message || `HTTP error ${res.status}`);
     }
 
-    resetFrom();
-
-    onClose();
-  };
+    alert("Request submitted successfully");
+    
+    // OPTION 1: Just call onClose if that's enough
+    if (typeof onClose === "function") {
+      onClose();
+    }
+    
+    // OPTION 2: Define and use a local reset function
+    // resetLocalForm();
+    
+  } catch (err) {
+    console.error("Enroll error:", err);
+    alert(`Submission failed: ${err.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
@@ -251,7 +299,7 @@ const PROFILE_UPDATE_OPTIONS = [
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
                   </label>
                   <select
@@ -267,7 +315,7 @@ const PROFILE_UPDATE_OPTIONS = [
                         {option}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
               </>
             )}
