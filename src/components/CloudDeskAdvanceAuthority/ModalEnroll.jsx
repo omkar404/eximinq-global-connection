@@ -14,13 +14,16 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState("");
 
-  const isEnroll = type === "ENROLL";
+  const isEnroll = type === "Enroll";
+  const Applyapplication = type === "Pending_EODC";
+  const isApplyapplication = type === "New_Advance_License_Request";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
-  const resetFrom = () => {
+  const resetForm = () => {
     setForm({
       name: "",
       mobile: "",
@@ -33,9 +36,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setIssue("");
   };
 
-
-  const Applyapplication = type === "Pending_EODC";
-  const isApplyapplication = type === "New_Advance_License_Request";
 
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
@@ -53,7 +53,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   ];
 
   const handleClose = () => {
-    resetFrom();
+    resetForm();
     onClose();
   };
 
@@ -74,11 +74,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-
+    if (isEnroll);
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const v = validate();
     setErrors(v);
@@ -95,9 +95,52 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       });
     }
 
-    resetFrom();
+    try {
+      const finalType = type || "ENROLL_NOW";
 
-    onClose();
+      const payload = {
+        ...form,
+        type: finalType,
+        category: isEnroll ? category : undefined,
+        issue: isProfileUpdate ? issue : undefined,
+      };
+
+      if (category) {
+        payload.category = category;
+      }
+
+      if (issue) {
+        payload.issue = issue;
+      }
+      console.log("final payload", payload);
+
+      const res = await fetch(
+        // `${process.env.REACT_APP_API_URL}/api/advance-authorisation`,
+        `http://localhost:5000/api/advance-authorisation`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await res.json();
+
+      console.log("log", data);
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "API failed");
+      }
+
+      alert("Request submitted successfully");
+      resetForm();
+      onClose();
+    } catch (err) {
+      console.error("Enroll error:", err);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -250,7 +293,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
                   </label>
                   <select
@@ -266,7 +309,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                         {option}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
               </>
             )}

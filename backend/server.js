@@ -19,6 +19,7 @@ const starExportHouseRoutes = require("./routes/starExportHouse.routes");
 const billOfEntryFilingRoutes = require("./routes/billOfEntryFiling.routes");
 const shippingBillFilingRoutes = require("./routes/shippingBillFilingRoutes.routes");
 const moowrschemeRoutes = require("./routes/moowrschemeRoutes.routes");
+const advanceAuthorisationRoutes = require("./routes/advanceAuthorisationRoutes.routes");
 const dscServiceRoutes = require("./routes/dscServicesRoutes.routes");
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
@@ -433,6 +434,8 @@ app.use("/api/bill-of-entry-filing", billOfEntryFilingRoutes);
 app.use("/api/shipping-bill-filing", shippingBillFilingRoutes);
 
 app.use("/api/moowr-scheme",moowrschemeRoutes);
+
+app.use("/api/advance-authorisation", advanceAuthorisationRoutes);
 
 app.use("/api/dsc-services", dscServiceRoutes);
 
