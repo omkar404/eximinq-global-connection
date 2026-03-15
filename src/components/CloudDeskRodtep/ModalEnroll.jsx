@@ -14,13 +14,15 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState("");
 
-  const isEnroll = type === "ENROLL";
+  const isEnroll = type === "Enroll";
+  const Applyapplication = type === "Get_Expert_Help";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
-  const resetFrom = () => {
+  const resetForm = () => {
     setForm({
       name: "",
       mobile: "",
@@ -32,9 +34,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setCategory("");
     setIssue("");
   };
-
-  const Applyapplication = type === "Get_Expert_Help";
-
 
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
@@ -54,7 +53,7 @@ const PROFILE_UPDATE_OPTIONS = [
 
 
   const handleClose = () => {
-    resetFrom();
+    resetForm();
     onClose();
   };
 
@@ -79,26 +78,55 @@ const PROFILE_UPDATE_OPTIONS = [
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const v = validate();
     setErrors(v);
-
     if (Object.keys(v).length > 0) return;
 
-    // Send data out if callback provided
-    if (typeof onSubmit === "function") {
-      onSubmit({
+    try {
+      setLoading(true);
+
+      const payload = {
         ...form,
         type,
-        category: isEnroll ? category : null,
-        issue: isProfileUpdate ? issue : null,
-      });
+        certificateType:
+          type === "PREFERENTIAL_COO" || type === "NON_PREFERENTIAL_COO"||
+          type === "Startup_Small_Plan" ||
+          type === "MID_SIZE_EXPORTER_PLAN" ||
+          type === "LARGE_EXPORTER_PLAN"
+            ? type
+            : null,
+      };
+
+      const res = await fetch(
+        // `${process.env.REACT_APP_API_URL}/api/rodtep-scheme`,
+        "http://localhost:5000/api/rodtep-scheme",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await res.json();
+
+      console.log("Enroll response:", data);
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "API failed");
+      }
+
+      alert("Request submitted successfully");
+      resetForm();
+      onClose();
+    } catch (err) {
+      console.error("Enroll error:", err);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    resetFrom();
-
-    onClose();
   };
 
   return (
@@ -251,7 +279,7 @@ const PROFILE_UPDATE_OPTIONS = [
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
                   </label>
                   <select
@@ -267,7 +295,7 @@ const PROFILE_UPDATE_OPTIONS = [
                         {option}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
               </>
             )}
