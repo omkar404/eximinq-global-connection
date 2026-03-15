@@ -12,8 +12,13 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   });
 
   const isEOP = type === "EOP_MANAGEMENT";
+  const isEnroll = type === "Enroll";
   const [eopLicense, setEopLicense] = useState("");
+  const [category, setCategory] = useState("");
+  const [issue, setIssue] = useState("");
 
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState("");
   const resetForm = () => {
     setForm({
       name: "",
@@ -26,8 +31,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
     setEopLicense("");
   };
-
-  const [errors, setErrors] = useState({});
 
   if (!show) return null;
 
@@ -51,7 +54,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     if (!form.mobile.trim()) errors.mobile = "Mobile is required";
     if (!form.email.trim()) errors.email = "Email is required";
     if (!form.role) errors.role = "Role is required";
-
+    if (!isEnroll);
     if (type === "EOP_MANAGEMENT" && !eopLicense) {
       errors.eopLicense = "Select EOP license type";
     }
@@ -59,24 +62,76 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     return errors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const v = validate();
-    setErrors(v);
-    if (Object.keys(v).length > 0) return;
+  const v = validate();
+  setErrors(v);
+  
+  if (Object.keys(v).length > 0) return;
 
-    if (typeof onSubmit === "function") {
-      onSubmit({
-        ...form,
-        type, // service type (EOP_MANAGEMENT, ICEGATE, etc.)
-        eopLicense: type === "EOP_MANAGEMENT" ? eopLicense : null,
-      });
+  // Send data out if callback provided
+  if (typeof onSubmit === "function") {
+    onSubmit({
+      ...form,
+      type, // service type (EOP_MANAGEMENT, ICEGATE, etc.)
+      eopLicense: type === "EOP_MANAGEMENT" ? eopLicense : null,
+    });
+  }
+
+  try {
+    setLoading(true);
+
+    const finalType = type || "EOP_EXTENSION";
+
+    const payload = {
+      ...form,
+      type: finalType,
+      eopLicense: type === "EOP_MANAGEMENT" ? eopLicense : undefined,
+      service: "EOP Extension",
+    };
+
+    // Add eopLicense if it exists and type is EOP_MANAGEMENT
+    if (type === "EOP_MANAGEMENT" && eopLicense) {
+      payload.eopLicense = eopLicense;
     }
 
-    resetForm(); // clear all state (form + eopLicense)
-    onClose();
-  };
+    console.log("final payload", payload);
+
+    const res = await fetch(
+      // `${process.env.REACT_APP_API_URL}/api/eop-extension`,
+      "http://localhost:5000/api/eop-extension",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data = await res.json();
+
+    console.log("API Response:", data);
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || data.message || "API failed");
+    }
+
+    alert(data.message || "Request submitted successfully");
+    
+    // Reset form and close modal
+    resetForm();
+    
+    if (typeof onClose === "function") {
+      onClose();
+    }
+    
+  } catch (err) {
+    console.error("EOP Extension error:", err);
+    alert(err.message || "Submission failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
@@ -201,6 +256,31 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
               )}
             </div>
+
+            {isEnroll && (
+              <>
+                {/* Category + Issue or ENROLL-specific fields */}
+                <div>
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                    Category
+                  </label>
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                  >
+                    <option value="" disabled>
+                      Select Category
+                    </option>
+                    {IEC_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select> */}
+                </div>
+              </>
+            )}           
 
             {type === "EOP_MANAGEMENT" && (
               <div>
