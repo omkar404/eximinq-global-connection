@@ -24,6 +24,7 @@ const scometlicensingRoutes = require("./routes/scometlicensingRoutes.routes");
 const eopextensionRoutes = require("./routes/eopextensionRoutes.routes");
 const rodtepschemeRoutes = require("./routes/rodtepschemeRoutes.routes");
 const igstrefundRoutes = require("./routes/igstrefundRoutes.routes");
+const dutydrawbackRoutes = require("./routes/dutydrawbackRoutes.routes");
 const dscServiceRoutes = require("./routes/dscServicesRoutes.routes");
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
@@ -448,6 +449,8 @@ app.use("/api/eop-extension", eopextensionRoutes);
 app.use("/api/rodtep-scheme", rodtepschemeRoutes);
 
 app.use("/api/igst-refund", igstrefundRoutes);
+
+app.use("/api/duty-drawback", dutydrawbackRoutes);
 
 app.use("/api/dsc-services", dscServiceRoutes);
 
