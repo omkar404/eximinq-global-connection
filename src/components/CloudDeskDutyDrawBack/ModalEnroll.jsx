@@ -125,13 +125,17 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     console.log("Final payload:", payload);
 
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      setLoading(true);
 
-      const res = await fetch(`${baseUrl}/api/duty-drawback`, {
+      const res = await fetch(
+        //  `${process.env.REACT_APP_API_URL}/api/duty-drawback`,
+        "http://localhost:5000/api/duty-drawback", 
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-      });
+      }
+    );
 
       const data = await res.json();
 
