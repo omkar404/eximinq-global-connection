@@ -14,13 +14,15 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
-
-  const isEnroll = type === "ENROLL";
+  const [loading, setLoading] = useState("");
+  
+  const isEnroll = type === "Enroll";
+  const Applyapplication = type === "Start_Recovery";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
-  const resetFrom = () => {
+  const resetForm = () => {
     setForm({
       name: "",
       mobile: "",
@@ -32,8 +34,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setCategory("");
     setIssue("");
   };
-
-  const Applyapplication = type === "Start_Recovery";
 
 
   const IEC_OPTIONS = [
@@ -54,7 +54,7 @@ const PROFILE_UPDATE_OPTIONS = [
 
 
   const handleClose = () => {
-    resetFrom();
+    resetForm();
     onClose();
   };
 
@@ -75,11 +75,11 @@ const PROFILE_UPDATE_OPTIONS = [
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-
+    if (isEnroll);
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const v = validate();
     setErrors(v);
@@ -96,10 +96,54 @@ const PROFILE_UPDATE_OPTIONS = [
       });
     }
 
-    resetFrom();
+    try {
+      const finalType = type || "ENROLL_NOW";
 
-    onClose();
+      const payload = {
+        ...form,
+        type: finalType,
+        category: isEnroll ? category : undefined,
+        issue: isProfileUpdate ? issue : undefined,
+      };
+
+      if (category) {
+        payload.category = category;
+      }
+
+      if (issue) {
+        payload.issue = issue;
+      }
+      console.log("final payload", payload);
+
+      const res = await fetch(
+        // `${process.env.REACT_APP_API_URL}/api/igst-refund`,
+        "http://localhost:5000/api/igst-refund",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await res.json();
+
+      console.log("log", data);
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "API failed");
+      }
+
+      alert("Request submitted successfully");
+      resetForm();
+      onClose();
+    } catch (err) {
+      console.error("Enroll error:", err);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
@@ -251,7 +295,7 @@ const PROFILE_UPDATE_OPTIONS = [
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
                   </label>
                   <select
@@ -267,7 +311,7 @@ const PROFILE_UPDATE_OPTIONS = [
                         {option}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
               </>
             )}
