@@ -298,7 +298,7 @@ const ModalEnrollSaas = ({ show, onClose, type, plan, billing, price, onSubmit }
                 </label>
                 <input
                   type="text"
-                  value={`${billing === "annual" ? "Annual Plan" : "Monthly Plan"} - ${plan} - ${price}`}
+                  value={`${billing === "annual" ? "Annual Plan" : "Quarter Plan"} - ${plan} - ${price}`}
                   disabled
                   className="w-full p-3 rounded-lg border bg-gray-100"
                 />
