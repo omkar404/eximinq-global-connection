@@ -26,6 +26,8 @@ const rodtepschemeRoutes = require("./routes/rodtepschemeRoutes.routes");
 const igstrefundRoutes = require("./routes/igstrefundRoutes.routes");
 const dutydrawbackRoutes = require("./routes/dutydrawbackRoutes.routes");
 const dscServiceRoutes = require("./routes/dscServicesRoutes.routes");
+const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
+const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
@@ -453,6 +455,10 @@ app.use("/api/igst-refund", igstrefundRoutes);
 app.use("/api/duty-drawback", dutydrawbackRoutes);
 
 app.use("/api/dsc-services", dscServiceRoutes);
+
+app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
+
+app.use("/api/rodtep-refund-recovery",rodtepRefundRecoveryRoutes);
 
 app.use("/api/contact-us", maincontactRoutes);
 
