@@ -3,6 +3,10 @@ import TopBar from "../Common/TopBar";
 import RecoveryAuditForm from "../components/CloudDeskRefund/RecoveryAuditForm";
 
 export default function CloudDeskRefund() {
+
+  const handleSubmit = (data) => {
+    console.log("Submit to backend:", data);
+  };
     return (
         <div className="bg-slate-50 text-slate-800 antialiased selection:bg-teal-200 selection:text-teal-900">
             <TopBar />
@@ -594,7 +598,7 @@ export default function CloudDeskRefund() {
                 </div>
             </section>
 
-            <RecoveryAuditForm />
+            <RecoveryAuditForm onSubmit={handleSubmit}/>
 
             <Footer />
 
