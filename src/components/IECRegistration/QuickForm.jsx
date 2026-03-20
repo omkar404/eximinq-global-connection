@@ -445,8 +445,8 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        "http://localhost:5000/api/icegate-registration",
-        // `${process.env.REACT_APP_API_URL}/api/icegate-registration`,
+        // "http://localhost:5000/api/icegate-registration",
+        `${process.env.REACT_APP_API_URL}/api/icegate-registration`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
