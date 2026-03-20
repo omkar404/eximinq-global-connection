@@ -1,4 +1,466 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import { X, Handshake, Building, Mail } from "lucide-react";
+
+// export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
+//   const [form, setForm] = useState({
+//     name: "",
+//     mobile: "",
+//     entity: "",
+//     email: "",
+//     role: "",
+//     partner: false,
+//   });
+
+//   const [category, setCategory] = useState("");
+//   const [issue, setIssue] = useState("");
+
+//   const [errors, setErrors] = useState({});
+//   const [loading, setLoading] = useState("");
+
+//   const SERVICE_MAP = {
+//     ICEGATE_REGISTRATION: {
+//       label: "ICEGATE Registration",
+//       service: "ICEGATE Registration",
+//     },
+//     AD_CODE_REGISTRATION: {
+//       label: "AD Code Registration",
+//       service: "AD Code Registration",
+//     },
+//     IFSC_CODE_REGISTRATION: {
+//       label: "IFSC Code Registration",
+//       service: "IFSC Code Registration",
+//     },
+//   };
+
+//   const serviceConfig = SERVICE_MAP[type];
+//   const predefinedService = serviceConfig?.service;
+
+//   const isEnroll = type === "Apply Now";
+//   const geticegateid = type === "GET_ICEGATE_ID";
+//   // const CheckEligibility = type === "Check_Eligibility"
+//   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
+//   const isRegistration =
+//     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
+
+//   const resetForm = () => {
+//     setForm({
+//       name: "",
+//       mobile: "",
+//       entity: "",
+//       email: "",
+//       role: "",
+//       partner: false,
+//     });
+//     setCategory("");
+//     setIssue("");
+//   };
+
+//   const IEC_OPTIONS = [
+//     "NEW ICEGATE REGISTRATION",
+//     "Deletion of Icegate Registration",
+//     "Change in Icegate Profile",
+//     "Insertion / Deletion of Child User",
+//   ];
+
+//   const PROFILE_UPDATE_OPTIONS = [
+//     "Change in Address",
+//     "Change in Directors / Partners",
+//     "Addition / Deletion of Branch Address",
+//     "Change in Bank Account",
+//     "Change in Preferred Sectors",
+//   ];
+
+//   const handleClose = () => {
+//     resetForm();
+//     onClose();
+//   };
+
+//   if (!show) return null;
+
+//   const handleChange = (e) => {
+//     const { name, value, type, checked } = e.target;
+//     setForm((prev) => ({
+//       ...prev,
+//       [name]: type === "checkbox" ? checked : value,
+//     }));
+//   };
+
+//   const validate = () => {
+//     const newErrors = {};
+
+//     if (!form.name.trim()) newErrors.name = "Name is required.";
+//     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
+//     if (!form.email.trim()) newErrors.email = "Email is required.";
+//     if (!form.role) newErrors.role = "Please select your role.";
+//     if (isEnroll && !category) {
+//       newErrors.category = "Please select category.";
+//     }
+//     return newErrors;
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const v = validate();
+//     setErrors(v);
+
+//     if (Object.keys(v).length > 0) return;
+
+//     // Send data out if callback provided
+//     if (typeof onSubmit === "function") {
+//       onSubmit({
+//         ...form,
+//         type,
+//         category: isEnroll ? category : null,
+//         issue: isProfileUpdate ? issue : null,
+//       });
+//     }
+
+//     try {
+//       const finalType = type || "ENROLL_NOW";
+
+//       const payload = {
+//         ...form,
+//         type: finalType,
+//         category: isEnroll ? category : undefined,
+//         issue: isProfileUpdate ? issue : undefined,
+//       };
+
+//       if (category) {
+//         payload.category = category;
+//       }
+
+//       if (issue) {
+//         payload.issue = issue;
+//       }
+//       console.log("final payload", payload);
+
+//       const res = await fetch(
+//         // `${process.env.REACT_APP_API_URL}/api/icegate-registration`,
+//         `http://localhost:5000/api/icegate-registration`,
+//         {
+//           method: "POST",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify(payload),
+//         },
+//       );
+
+//       const data = await res.json();
+
+//       console.log("log", data);
+
+//       if (!res.ok || !data.success) {
+//         throw new Error(data.error || "API failed");
+//       }
+
+//       alert("Request submitted successfully");
+//       resetForm();
+//       onClose();
+//     } catch (err) {
+//       console.error("Enroll error:", err);
+//       alert("Submission failed. Please try again.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
+//       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
+//         {/* Header */}
+//         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
+//           <div>
+//             <h2 className="text-2xl font-bold flex items-center">
+//               <Handshake className="mr-2 text-teal-400" /> Enroll Now
+//             </h2>
+//             <p className="text-indigo-200 text-sm mt-1">
+//               Join the CloudDesk Network
+//             </p>
+//           </div>
+
+//           <button
+//             onClick={handleClose}
+//             className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 
+//             rounded-full p-1 transition"
+//             aria-label="Close modal"
+//           >
+//             <X size={20} />
+//           </button>
+//         </div>
+
+//         {/* Body */}
+//         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
+//           <form className="space-y-5" onSubmit={handleSubmit}>
+//             {/* Name + Mobile */}
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//               <div>
+//                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                   Name
+//                 </label>
+//                 <input
+//                   type="text"
+//                   name="name"
+//                   placeholder="Your Name"
+//                   value={form.name}
+//                   onChange={handleChange}
+//                   className={`w-full p-3 rounded-lg border text-sm outline-none
+//                   ${
+//                     errors.name
+//                       ? "border-red-400"
+//                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+//                   }`}
+//                 />
+//                 {errors.name && (
+//                   <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+//                 )}
+//               </div>
+
+//               <div>
+//                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                   Mobile No
+//                 </label>
+//                 <input
+//                   type="tel"
+//                   name="mobile"
+//                   placeholder="+91 XXXXX XXXXX"
+//                   value={form.mobile}
+//                   onChange={handleChange}
+//                   className={`w-full p-3 rounded-lg border text-sm outline-none
+//                   ${
+//                     errors.mobile
+//                       ? "border-red-400"
+//                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+//                   }`}
+//                 />
+//                 {errors.mobile && (
+//                   <p className="text-xs text-red-500 mt-1">{errors.mobile}</p>
+//                 )}
+//               </div>
+//             </div>
+
+//             {/* Entity Name */}
+//             <div>
+//               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                 Entity Name
+//               </label>
+//               <div className="relative">
+//                 <Building
+//                   className="absolute left-3 top-3 text-gray-400"
+//                   size={16}
+//                 />
+//                 <input
+//                   type="text"
+//                   name="entity"
+//                   placeholder="Company / Firm Name"
+//                   value={form.entity}
+//                   onChange={handleChange}
+//                   className="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+//                 />
+//               </div>
+//             </div>
+
+//             {/* Email ID */}
+//             <div>
+//               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                 Email ID
+//               </label>
+//               <div className="relative">
+//                 <Mail
+//                   className="absolute left-3 top-3 text-gray-400"
+//                   size={16}
+//                 />
+//                 <input
+//                   type="email"
+//                   name="email"
+//                   placeholder="official@domain.com"
+//                   value={form.email}
+//                   onChange={handleChange}
+//                   className={`w-full pl-10 p-3 rounded-lg border text-sm outline-none
+//                   ${
+//                     errors.email
+//                       ? "border-red-400"
+//                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+//                   }`}
+//                 />
+//               </div>
+//               {errors.email && (
+//                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+//               )}
+//             </div>
+
+//             {predefinedService && (
+//               <div>
+//                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                   Service Type
+//                 </label>
+
+//                 <input
+//                   type="text"
+//                   value={predefinedService}
+//                   readOnly
+//                   className="w-full p-3 rounded-lg border border-gray-300 
+//                  bg-gray-100 text-gray-800 text-sm cursor-not-allowed"
+//                 />
+//               </div>
+//             )}
+
+//             {isProfileUpdate && (
+//               <div>
+//                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                   Update Type
+//                 </label>
+//                 <select
+//                   value={issue}
+//                   onChange={(e) => setIssue(e.target.value)}
+//                   className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+//                 >
+//                   <option value="" disabled>
+//                     Select Update Type
+//                   </option>
+//                   {PROFILE_UPDATE_OPTIONS.map((option) => (
+//                     <option key={option} value={option}>
+//                       {option}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
+//             )}
+
+//             {isEnroll && (
+//               <>
+//                 {/* Category + Issue or ENROLL-specific fields */}
+//                 <div>
+//                   <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                     Category
+//                   </label>
+//                   <select
+//                     value={category}
+//                     onChange={(e) => setCategory(e.target.value)}
+//                     className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+//                   >
+//                     <option value="" disabled>
+//                       Select Category
+//                     </option>
+//                     {IEC_OPTIONS.map((option) => (
+//                       <option key={option} value={option}>
+//                         {option}
+//                       </option>
+//                     ))}
+//                   </select>
+//                 </div>
+//               </>
+//             )}
+
+//             {geticegateid && (
+//               <div>
+//                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                   Issue Type
+//                 </label>
+//                 <input
+//                   type="text"
+//                   value="NEW ICEGATE REGISTRATION"
+//                   disabled
+//                   className="w-full p-3 rounded-lg border bg-gray-100"
+//                 />
+//               </div>
+//             )}
+
+//             {/* {CheckEligibility && (
+//               <div>
+//                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+//                   Issue Type
+//                 </label>
+//                 <input
+//                   type="text"
+//                   value=""
+//                   disabled={loading}
+//                   className="w-full p-3 rounded-lg border bg-gray-100"
+//                 />
+//               </div>
+//             )} */}
+
+//             {/* Role Selection */}
+//             <div>
+//               <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
+//                 I am a:
+//               </label>
+
+//               <div className="grid grid-cols-2 gap-3">
+//                 {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
+//                   (role) => {
+//                     const selected = form.role === role;
+//                     return (
+//                       <label
+//                         key={role}
+//                         className={`flex items-center p-3 border rounded-lg cursor-pointer transition
+//                         ${
+//                           selected
+//                             ? "border-teal-500 bg-teal-50"
+//                             : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
+//                         }`}
+//                       >
+//                         <input
+//                           type="radio"
+//                           name="role"
+//                           value={role}
+//                           checked={form.role === role}
+//                           onChange={handleChange}
+//                           className="w-4 h-4 text-teal-600 focus:ring-teal-500"
+//                         />
+//                         <span className="ml-2 text-sm font-medium text-gray-700">
+//                           {role}
+//                         </span>
+//                       </label>
+//                     );
+//                   },
+//                 )}
+//               </div>
+//               {errors.role && (
+//                 <p className="text-xs text-red-500 mt-2">{errors.role}</p>
+//               )}
+//             </div>
+
+//             {/* Checkbox */}
+//             <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
+//               <label className="flex items-start cursor-pointer">
+//                 <input
+//                   type="checkbox"
+//                   name="partner"
+//                   checked={form.partner}
+//                   onChange={handleChange}
+//                   className="mt-1 w-5 h-5 text-teal-600 rounded border-gray-300 focus:ring-teal-500"
+//                 />
+//                 <span className="ml-3 text-sm text-gray-800">
+//                   I am interested in being a{" "}
+//                   <span className="font-bold text-teal-700">
+//                     Partner with EXIMINQ CLOUDDESK
+//                   </span>{" "}
+//                   and agree to the terms of enrollment.
+//                 </span>
+//               </label>
+//             </div>
+
+//             {/* Submit */}
+//             <button
+//               type="submit"
+//               disabled={loading}
+//               className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 
+//               text-white font-bold rounded-xl shadow-lg hover:shadow-xl 
+//               transform hover:-translate-y-0.5 transition flex items-center justify-center text-lg"
+//             >
+//               Submit Enrollment
+//             </button>
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+/*-----------------------*/
+
+
+import React, { useState, useEffect } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
@@ -9,13 +471,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     email: "",
     role: "",
     partner: false,
+    service: "ICEGATE Registration", // Default service
   });
 
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
 
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const SERVICE_MAP = {
     ICEGATE_REGISTRATION: {
@@ -35,12 +498,16 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
 
-  const isEnroll = type === "Apply Now";
+  // Update service when predefinedService changes
+  useEffect(() => {
+    if (predefinedService) {
+      setForm(prev => ({ ...prev, service: predefinedService }));
+    }
+  }, [predefinedService]);
+
+  const isEnroll = !!predefinedService;
   const geticegateid = type === "GET_ICEGATE_ID";
-  // const CheckEligibility = type === "Check_Eligibility"
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
-  const isRegistration =
-    type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
   const resetForm = () => {
     setForm({
@@ -50,6 +517,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       email: "",
       role: "",
       partner: false,
+      service: predefinedService || "ICEGATE Registration",
     });
     setCategory("");
     setIssue("");
@@ -92,9 +560,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
+    
     if (isEnroll && !category) {
       newErrors.category = "Please select category.";
     }
+    
     return newErrors;
   };
 
@@ -104,6 +574,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setErrors(v);
 
     if (Object.keys(v).length > 0) return;
+
+    setLoading(true);
 
     // Send data out if callback provided
     if (typeof onSubmit === "function") {
@@ -117,47 +589,48 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
     try {
       const finalType = type || "ENROLL_NOW";
+      
+      // Use predefined service if available, otherwise use form.service
+      const serviceValue = predefinedService || form.service;
 
       const payload = {
-        ...form,
+        name: form.name,
+        mobile: form.mobile,
+        entity: form.entity,
+        email: form.email,
+        role: form.role,
+        partner: form.partner,
+        service: serviceValue,
         type: finalType,
-        category: isEnroll ? category : undefined,
-        issue: isProfileUpdate ? issue : undefined,
+        category: category || undefined,
+        issue: issue || undefined,
       };
 
-      if (category) {
-        payload.category = category;
-      }
+      console.log("📤 FINAL PAYLOAD:", payload);
 
-      if (issue) {
-        payload.issue = issue;
-      }
-      console.log("final payload", payload);
+      const apiUrl = `http://localhost:5000/api/icegate-registration`;
 
-      const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/icegate-registration`,
-        `http://localhost:5000/api/icegate-registration`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+      const res = await fetch(apiUrl, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
         },
-      );
+        body: JSON.stringify(payload),
+      });
 
       const data = await res.json();
 
-      console.log("log", data);
-
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "API failed");
+      if (!res.ok) {
+        throw new Error(data.error || data.message || `HTTP error ${res.status}`);
       }
 
       alert("Request submitted successfully");
       resetForm();
       onClose();
     } catch (err) {
-      console.error("Enroll error:", err);
-      alert("Submission failed. Please try again.");
+      console.error("❌ Enroll error:", err);
+      alert(`Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -194,7 +667,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Name
+                  Name 
                 </label>
                 <input
                   type="text"
@@ -216,7 +689,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Mobile No
+                  Mobile No 
                 </label>
                 <input
                   type="tel"
@@ -236,6 +709,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 )}
               </div>
             </div>
+
+            {/* No service dropdown - service is set automatically */}
 
             {/* Entity Name */}
             <div>
@@ -261,7 +736,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
             {/* Email ID */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                Email ID
+                Email ID 
               </label>
               <div className="relative">
                 <Mail
@@ -287,22 +762,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               )}
             </div>
 
-            {predefinedService && (
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Service Type
-                </label>
-
-                <input
-                  type="text"
-                  value={predefinedService}
-                  readOnly
-                  className="w-full p-3 rounded-lg border border-gray-300 
-                 bg-gray-100 text-gray-800 text-sm cursor-not-allowed"
-                />
-              </div>
-            )}
-
             {isProfileUpdate && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
@@ -327,7 +786,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
             {isEnroll && (
               <>
-                {/* Category + Issue or ENROLL-specific fields */}
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
@@ -364,24 +822,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             )}
 
-            {/* {CheckEligibility && (
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Issue Type
-                </label>
-                <input
-                  type="text"
-                  value=""
-                  disabled={loading}
-                  className="w-full p-3 rounded-lg border bg-gray-100"
-                />
-              </div>
-            )} */}
-
             {/* Role Selection */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
-                I am a:
+                I am a: 
               </label>
 
               <div className="grid grid-cols-2 gap-3">
@@ -447,7 +891,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               text-white font-bold rounded-xl shadow-lg hover:shadow-xl 
               transform hover:-translate-y-0.5 transition flex items-center justify-center text-lg"
             >
-              Submit Enrollment
+              {loading ? "Submitting..." : "Submit Enrollment"}
             </button>
           </form>
         </div>

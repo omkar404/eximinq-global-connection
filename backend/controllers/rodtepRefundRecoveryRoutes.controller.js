@@ -66,7 +66,7 @@ async function sendEmail(record) {
       to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
       subject: `New Recovery Audit — ${Incentive_Type[licenseType] || ""}`,
       html: `
-        <h3>New Recovery Audit Request</h3>
+        <h3>New rodtep-refund-recovery Request</h3>
 
         <table cellpadding="6" style="border-collapse:collapse;font-family:Arial;">
           <tr><td><b>Name</b></td><td>${name}</td></tr>
@@ -171,7 +171,7 @@ exports.createRecoveryAudit = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: "Recovery Audit submitted successfully",
+      message: "rodtep-refund-recovery submitted successfully",
       data: record
     });
 

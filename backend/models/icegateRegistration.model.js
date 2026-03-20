@@ -85,103 +85,182 @@
 
 
 
+// // models/icegateRegistration.model.js
+
+// const mongoose = require("mongoose");
+
+// const icegateRegistrationSchema = new mongoose.Schema(
+//   {
+//     service: {
+//       type: String,
+//       // required: true,
+//       trim: true,
+//       enum: [
+//         "New ICEGATE Registration",
+//         "AD Code Registration",
+//         "e-Sanchit Registration",
+//         "DSC Update on ICEGATE",
+//       ],
+//     },
+
+//     port: {
+//       type: String,
+//       trim: true,
+//       default: null,
+//     },
+
+//     mobile: {
+//       type: String,
+//       required: true,  // ✅ only required field from QuickForm
+//       trim: true,
+//     },
+
+//     // FIX 1: was required: true — QuickForm doesn't send name
+//     name: {
+//       type: String,
+//       trim: true,
+//       default: null,
+//     },
+
+//     // FIX 2: was required: true — QuickForm doesn't send email
+//     email: {
+//       type: String,
+//       lowercase: true,
+//       trim: true,
+//       default: null,
+//     },
+
+//     entity: {
+//       type: String,
+//       trim: true,
+//       default: null,
+//     },
+
+//     // FIX 3: was required: true — QuickForm doesn't send role
+//     role: {
+//       type: String,
+//       default: null,
+//       enum: [
+//         "Importer / Exporter",
+//         "CHA",
+//         "Logistics",
+//         "Forwarder",
+//         null,
+//       ],
+//     },
+
+//     partner: {
+//       type: Boolean,
+//       default: false,
+//     },
+
+//     // FIX 4: added QUICK_FORM to enum — was missing so QuickForm always failed
+//     type: {
+//       type: String,
+//       default: "QUICK_FORM",
+//       enum: [
+//         "QUICK_FORM",             // ← QuickForm uses this
+//         "Enroll",
+//         "Apply Now",
+//         "GET_ICEGATE_ID",
+//         "Check_Eligibility",
+//         "AD_CODE_REGISTRATION",
+//         "ICEGATE_REGISTRATION",
+//         "IFSC_CODE_REGISTRATION",
+//       ],
+//     },
+
+//     category: {
+//       type: String,
+//       default: null,
+//     },
+
+//     status: {
+//       type: String,
+//       enum: ["pending", "processing", "completed", "rejected"],
+//       default: "pending",
+//     },
+//   },
+//   { timestamps: true }
+// );
+
+// module.exports = mongoose.model("IcegateRegistration", icegateRegistrationSchema);
+
+
+
+/*-----------------------*/
+
 // models/icegateRegistration.model.js
+const mongoose = require('mongoose');
 
-const mongoose = require("mongoose");
-
-const icegateRegistrationSchema = new mongoose.Schema(
-  {
-    service: {
-      type: String,
-      // required: true,
-      trim: true,
-      enum: [
-        "New ICEGATE Registration",
-        "AD Code Registration",
-        "e-Sanchit Registration",
-        "DSC Update on ICEGATE",
-      ],
-    },
-
-    port: {
-      type: String,
-      trim: true,
-      default: null,
-    },
-
-    mobile: {
-      type: String,
-      required: true,  // ✅ only required field from QuickForm
-      trim: true,
-    },
-
-    // FIX 1: was required: true — QuickForm doesn't send name
-    name: {
-      type: String,
-      trim: true,
-      default: null,
-    },
-
-    // FIX 2: was required: true — QuickForm doesn't send email
-    email: {
-      type: String,
-      lowercase: true,
-      trim: true,
-      default: null,
-    },
-
-    entity: {
-      type: String,
-      trim: true,
-      default: null,
-    },
-
-    // FIX 3: was required: true — QuickForm doesn't send role
-    role: {
-      type: String,
-      default: null,
-      enum: [
-        "Importer / Exporter",
-        "CHA",
-        "Logistics",
-        "Forwarder",
-        null,
-      ],
-    },
-
-    partner: {
-      type: Boolean,
-      default: false,
-    },
-
-    // FIX 4: added QUICK_FORM to enum — was missing so QuickForm always failed
-    type: {
-      type: String,
-      default: "QUICK_FORM",
-      enum: [
-        "QUICK_FORM",             // ← QuickForm uses this
-        "Enroll",
-        "Apply Now",
-        "GET_ICEGATE_ID",
-        "Check_Eligibility",
-        "AD_CODE_REGISTRATION",
-        "ICEGATE_REGISTRATION",
-        "IFSC_CODE_REGISTRATION",
-      ],
-    },
-
-    category: {
-      type: String,
-      default: null,
-    },
-
-    status: {
-      type: String,
-      enum: ["pending", "processing", "completed", "rejected"],
-      default: "pending",
-    },
+const icegateRegistrationSchema = new mongoose.Schema({
+  service: { 
+    type: String,
+    default: "ICEGATE Registration"
   },
-  { timestamps: true }
-);
+  
+  mobile: { 
+    type: String, 
+    required: [true, 'Mobile number is required'],
+    trim: true,
+    validate: {
+      validator: function(v) {
+        return /\d{10,}/.test(v.replace(/\D/g, ''));
+      },
+      message: props => `${props.value} is not a valid mobile number!`
+    }
+  },
+  
+  name: { 
+    type: String, 
+    trim: true 
+  },
+  
+  email: { 
+    type: String, 
+    trim: true, 
+    lowercase: true,
+    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email']
+  },
+  
+  entity: { 
+    type: String, 
+    trim: true 
+  },
+  
+  role: { 
+    type: String,
+    enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
+    default: null
+  },
+  
+  partner: { 
+    type: Boolean, 
+    default: false 
+  },
+  
+  type: { 
+    type: String, 
+    default: 'QUICK_FORM'
+  },
+  
+  category: { 
+    type: String,
+    default: null
+  },
+  
+  issue: { 
+    type: String,
+    default: null
+  },
 
-module.exports = mongoose.model("IcegateRegistration", icegateRegistrationSchema);
+  portName: {
+    type: String,
+    default: null
+  }
+  
+}, {
+  timestamps: true
+});
+
+module.exports = mongoose.model('IcegateRegistration', icegateRegistrationSchema);
