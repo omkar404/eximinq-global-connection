@@ -383,22 +383,37 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
             {/* Role */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
-                I am a:
+                I am a: 
               </label>
+
               <div className="grid grid-cols-2 gap-3">
                 {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
-                  (r) => (
-                    <label key={r} className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        name="role"
-                        value={r}
-                        checked={form.role === r}
-                        onChange={handleChange}
-                      />
-                      {r}
-                    </label>
-                  ),
+                  (role) => {
+                    const selected = form.role === role;
+                    return (
+                      <label
+                        key={role}
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition
+                        ${
+                          selected
+                            ? "border-teal-500 bg-teal-50"
+                            : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="role"
+                          value={role}
+                          checked={form.role === role}
+                          onChange={handleChange}
+                          className="w-4 h-4 text-teal-600 focus:ring-teal-500"
+                        />
+                        <span className="ml-2 text-sm font-medium text-gray-700">
+                          {role}
+                        </span>
+                      </label>
+                    );
+                  },
                 )}
               </div>
               {errors.role && (
