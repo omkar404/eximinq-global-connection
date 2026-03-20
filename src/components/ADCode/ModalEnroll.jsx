@@ -127,75 +127,135 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   /* --------------------------------
      SUBMIT FORM
   -------------------------------- */
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const v = validate();
-  setErrors(v);
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   const v = validate();
+//   setErrors(v);
 
-  if (Object.keys(v).length > 0) return;
-  // setLoading(true);
+//   if (Object.keys(v).length > 0) return;
+//   // setLoading(true);
 
-  // send data out if callback provided
-  if (typeof onSubmit === "function") {
-    onSubmit({
-    ...form,
-    type,
-    category: isEnroll,
-    issue,
-    });
-  }
+//   // send data out if callback provided
+//   if (typeof onSubmit === "function") {
+//     onSubmit({
+//     ...form,
+//     type,
+//     category: isEnroll,
+//     issue,
+//     });
+//   }
 
-  // const payload = {
-  //   ...form,
-  //   type,
-  //   category,
-  //   issue,
-  // };
+//   // const payload = {
+//   //   ...form,
+//   //   type,
+//   //   category,
+//   //   issue,
+//   // };
 
-  try {
-    const finalType = type || "ENROLL_NOW";
+//   try {
+//     const finalType = type || "ENROLL_NOW";
 
-    const payload = {
-        ...form,
-        type: finalType,
-        category: isEnroll ? category : undefined,
-        issue: isProfileUpdate ? issue : undefined,
-      };
+//     const payload = {
+//         ...form,
+//         type: finalType,
+//         category: isEnroll ? category : undefined,
+//         issue: isProfileUpdate ? issue : undefined,
+//       };
 
-      if (category) {
-        payload.category = category;
-      }
+//       if (category) {
+//         payload.category = category;
+//       }
 
-      if (issue) {
-        payload.issue = issue;
-      }    
-      console.log("Final Payload:", payload);
+//       if (issue) {
+//         payload.issue = issue;
+//       }    
+//       console.log("Final Payload:", payload);
 
  
-    const res = await fetch(
-     `${process.env.REACT_APP_API_URL}/api/ad-code-registration`, 
-      // "http://localhost:5000/api/ad-code-registration",
-      {
-      method: "POST",
-      headers: {"Content-Type": "application/json",},
-      body: JSON.stringify(payload),
+//     const res = await fetch(
+//      `${process.env.REACT_APP_API_URL}/api/ad-code-registration`, 
+//       // "http://localhost:5000/api/ad-code-registration",
+//       {
+//       method: "POST",
+//       headers: {"Content-Type": "application/json",},
+//       body: JSON.stringify(payload),
+//     }
+//   );
+
+//     const data = await res.json();
+
+//     console.log("API Response:", data);
+
+//     if (res.ok) {
+//       alert("Registration submitted successfully");
+//       setForm({
+//         name: "",
+//         mobile: "",
+//         email: "",
+//         entity: "",
+//         role: "",
+//         partner: false,
+//       });
+//     } else {
+//       alert(data.message || "Submission failed");
+//     }
+//   } catch (error) {
+//     console.error("Submission error:", error);
+//     alert("Submission failed. Please try again.");
+//   } finally {
+//   setLoading(false);
+//   }
+// };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const v = validate();
+  setErrors(v);
+  if (Object.keys(v).length > 0) return;
+
+  setLoading(true); // ✅ uncommented
+
+  try {
+    const finalType = type || "Enroll";
+
+    // ✅ Clean payload — all fields correctly sent
+    const payload = {
+      name:     form.name,
+      mobile:   form.mobile,
+      email:    form.email,
+      entity:   form.entity,      // ✅ Entity Name
+      role:     form.role,        // ✅ Importer/CHA/Logistics/Forwarder
+      partner:  form.partner,     // ✅ true / false
+      type:     finalType,
+      category: category || "",   // ✅ was wrongly "isEnroll" (boolean)
+      issue:    issue    || "",
+      service:  predefinedService || finalType, // ✅ service name
+    };
+
+    console.log("Final Payload:", payload);
+
+    // ✅ Send to parent callback if provided
+    if (typeof onSubmit === "function") {
+      onSubmit(payload);
     }
-  );
+
+    const res = await fetch(
+      // `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
+       "http://localhost:5000/api/ad-code-registration",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
 
     const data = await res.json();
-
     console.log("API Response:", data);
 
     if (res.ok) {
-      alert("Registration submitted successfully");
-      setForm({
-        name: "",
-        mobile: "",
-        email: "",
-        entity: "",
-        role: "",
-        partner: false,
-      });
+      alert("Registration submitted successfully!");
+      resetForm();  // ✅ resets all fields
+      onClose();    // ✅ closes modal
     } else {
       alert(data.message || "Submission failed");
     }
@@ -203,10 +263,9 @@ const handleSubmit = async (e) => {
     console.error("Submission error:", error);
     alert("Submission failed. Please try again.");
   } finally {
-  setLoading(false);
+    setLoading(false);
   }
 };
-
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
@@ -251,10 +310,11 @@ const handleSubmit = async (e) => {
                 <input
                   type="text"
                   name="name"
+                  placeholder="Your Name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="Your Name"
-                  className={`w-full p-3 rounded-lg border text-sm ${
+                  className={`w-full p-3 rounded-lg border text-sm outline-none 
+                  ${
                     errors.name
                       ? "border-red-400"
                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
@@ -274,10 +334,11 @@ const handleSubmit = async (e) => {
                 <input
                   type="tel"
                   name="mobile"
+                  placeholder="+91 XXXXX XXXXX"
                   value={form.mobile}
                   onChange={handleChange}
-                  placeholder="+91 XXXXX XXXXX"
-                  className={`w-full p-3 rounded-lg border text-sm ${
+                  className={`w-full p-3 rounded-lg border text-sm outline-none
+                  ${
                     errors.mobile
                       ? "border-red-400"
                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"
@@ -297,17 +358,17 @@ const handleSubmit = async (e) => {
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                 Entity Name
               </label>
-
               <div className="relative">
-                <Building className="absolute left-3 top-3 text-gray-400" size={16} />
-
+                <Building className="absolute left-3 top-3 text-gray-400" 
+                size={16} 
+                />
                 <input
                   type="text"
                   name="entity"
+                  placeholder="Company / Firm Name"
                   value={form.entity}
                   onChange={handleChange}
-                  placeholder="Company / Firm Name"
-                  className="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 text-sm"
+                  className="w-full pl-10 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
                 />
               </div>
             </div>
@@ -318,17 +379,18 @@ const handleSubmit = async (e) => {
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                 Email ID
               </label>
-
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
-
+                <Mail className="absolute left-3 top-3 text-gray-400" 
+                size={16} 
+                />
                 <input
                   type="email"
                   name="email"
+                  placeholder="official@domain.com"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="official@domain.com"
-                  className={`w-full pl-10 p-3 rounded-lg border text-sm ${
+                  className={`w-full pl-10 p-3 rounded-lg border text-sm outline-none 
+                  ${
                     errors.email
                       ? "border-red-400"
                       : "border-gray-300 focus:ring-2 focus:ring-teal-500"

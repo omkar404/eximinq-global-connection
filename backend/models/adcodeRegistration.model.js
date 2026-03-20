@@ -64,24 +64,81 @@
 
 // module.exports = AdcodeRegistration;
 
+// const mongoose = require("mongoose");
+
+// const adcodeRegistrationSchema = new mongoose.Schema({
+//   name: String,
+//   mobile: String,
+//   email: String,
+//   entity: String,
+//   role: String,
+//   partner: Boolean,
+//   type: String,
+//   category: String,
+//   issue: String
+// },{
+//   timestamps:true
+// });
+
+// module.exports = mongoose.model(
+//   "AdcodeRegistration",
+//   adcodeRegistrationSchema
+// );
+
+
+
 const mongoose = require("mongoose");
 
-const adcodeRegistrationSchema = new mongoose.Schema({
-  name: String,
-  mobile: String,
-  email: String,
-  entity: String,
-  role: String,
-  partner: Boolean,
-  type: String,
-  category: String,
-  issue: String
-},{
-  timestamps:true
-});
-
-module.exports = mongoose.model(
-  "AdcodeRegistration",
-  adcodeRegistrationSchema
+const adcodeRegistrationSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    mobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    entity: {               // ✅ Add this
+      type: String,
+      trim: true,
+      default: "",
+    },
+    role: {                 // ✅ Add this
+      type: String,
+      trim: true,
+      default: "",
+    },
+    partner: {              // ✅ Add this
+      type: Boolean,
+      default: false,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
+module.exports = mongoose.model("AdcodeRegistration", adcodeRegistrationSchema);
