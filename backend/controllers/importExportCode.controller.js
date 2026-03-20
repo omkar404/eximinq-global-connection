@@ -194,6 +194,8 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
+
 // ---------------- TYPE MAP ----------------
 // Frontend sends raw type strings → controller normalises them
 const TYPE_MAP = {
@@ -326,7 +328,7 @@ exports.createImportExportCode = async (req, res) => {
     // Fire and forget — email failure does NOT break the 201 response
     transporter.sendMail({
       from:    process.env.SMTP_USER,
-      to:      "crm@eximinq.com, omkarmhetar100@gmail.com",
+      to:      "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
       subject: emailSubject,
       html:    emailHtml,
     }).catch((err) => console.error("Email failed (record was saved):", err.message));

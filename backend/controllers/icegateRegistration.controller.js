@@ -137,6 +137,136 @@
 // };
 
 
+// // controllers/icegateRegistration.controller.js
+
+// const IcegateRegistration = require("../models/icegateRegistration.model");
+// const nodemailer = require("nodemailer");
+
+// /* ─────────────────────────────────────────────
+//    SMTP TRANSPORTER
+// ───────────────────────────────────────────── */
+// const transporter = nodemailer.createTransport({
+//   host:   process.env.SMTP_HOST,
+//   port:   Number(process.env.SMTP_PORT),
+//   secure: true,
+//   auth: {
+//     user: process.env.SMTP_USER,
+//     pass: process.env.SMTP_PASS,
+//   },
+// });
+
+// /* ─────────────────────────────────────────────
+//    EMAIL HELPER — fire and forget
+// ───────────────────────────────────────────── */
+// async function sendEmail(record) {
+//   const { _id, service, port, mobile, name, email, entity, role, partner } = record;
+
+//   await transporter.sendMail({
+//     from:    `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
+//     to:      "yadavsheshnath236@gmail.com",
+//     subject: `New ICEGATE Registration — ${service}`,
+//     html: `
+//       <h3>New ICEGATE Registration Request</h3>
+//       <table cellpadding="6" style="border-collapse:collapse; font-family:Arial,sans-serif;">
+//         <tr><td><b>Service</b></td><td>${service}</td></tr>
+//         <tr><td><b>Port</b></td><td>${port    || "N/A"}</td></tr>
+//         <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
+//         <tr><td><b>Name</b></td><td>${name    || "N/A"}</td></tr>
+//         <tr><td><b>Email</b></td><td>${email  || "N/A"}</td></tr>
+//         <tr><td><b>Entity</b></td><td>${entity || "N/A"}</td></tr>
+//         <tr><td><b>Role</b></td><td>${role    || "N/A"}</td></tr>
+//         <tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>
+//       </table>
+//       <hr/>
+//       <p><small>ID: ${_id}</small></p>
+//       <p><small>Submitted (IST): ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</small></p>
+//     `,
+//   });
+
+//   console.log("Email sent for ICEGATE Registration:", _id);
+// }
+
+// /* ─────────────────────────────────────────────
+//    CONTROLLER — POST /api/icegate-registration
+   
+//    Accepts QuickForm:  { service, port, mobile }
+//    Accepts ModalEnroll: { ...above + name, email, entity, role, partner, type }
+   
+//    Only 'mobile' is required — name and email are optional.
+//    This matches the QuickForm which only collects mobile.
+// ───────────────────────────────────────────── */
+// exports.createIcegateRegistration = async (req, res) => {
+//   try {
+//     console.log("ICEGATE Registration Incoming:", req.body);
+    
+//     const {
+//       service, port, mobile,
+//       name, email, entity, role, partner, type,
+//     } = req.body;
+
+//     // Only mobile is required
+//     if (!mobile || !mobile.trim()) {
+//       return res.status(400).json({
+//         success: false,
+//         error: "Mobile number is required",
+//       });
+//     }
+
+//     // if (!service) {
+//     //   return res.status(400).json({
+//     //     success: false,
+//     //     error: "Service is required",
+//     //   });
+//     // }
+
+//     const record = await IcegateRegistration.create({
+//       service,
+//       port:    port    ? port.trim()                 : null,
+//       mobile:  mobile.trim(),
+//       name:    name    ? name.trim()                 : null,
+//       email:   email   ? email.trim().toLowerCase()  : null,
+//       entity:  entity  ? entity.trim()               : null,
+//       role:    role    || null,
+//       partner: Boolean(partner),
+//       type:    type    || "QUICK_FORM",
+//     });
+
+//     console.log("Saved ICEGATE record:", record._id);
+
+//     // Email — does not block the 201 response
+//     sendEmail(record).catch((err) =>
+//       console.error("Email failed (record saved):", err.message)
+//     );
+
+//     return res.status(201).json({
+//       success: true,
+//       message: "ICEGATE Registration submitted successfully",
+//       data: record,
+//     });
+
+//   } catch (error) {
+//     console.error("ICEGATE Error:", error.name, error.message);
+
+//     if (error.name === "ValidationError") {
+//       const messages = Object.values(error.errors).map((e) => e.message);
+//       return res.status(400).json({
+//         success: false,
+//         message: "Validation failed",
+//         errors: messages,
+//       });
+//     }
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Server Error",
+//       error: error.message,
+//     });
+//   }
+// };
+
+/*-----------------------*/
+
+
 // controllers/icegateRegistration.controller.js
 
 const IcegateRegistration = require("../models/icegateRegistration.model");
@@ -146,8 +276,8 @@ const nodemailer = require("nodemailer");
    SMTP TRANSPORTER
 ───────────────────────────────────────────── */
 const transporter = nodemailer.createTransport({
-  host:   process.env.SMTP_HOST,
-  port:   Number(process.env.SMTP_PORT),
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
   secure: true,
   auth: {
     user: process.env.SMTP_USER,
@@ -156,110 +286,184 @@ const transporter = nodemailer.createTransport({
 });
 
 /* ─────────────────────────────────────────────
-   EMAIL HELPER — fire and forget
+   EMAIL HELPER
 ───────────────────────────────────────────── */
 async function sendEmail(record) {
-  const { _id, service, port, mobile, name, email, entity, role, partner } = record;
+  const {
+    _id,
+    service,
+    mobile,
+    name,
+    email,
+    entity,
+    role,
+    partner,
+    type,
+    category,
+    issue,
+    portName, // ✅ ADDED
+  } = record;
+
+  const serviceDisplay = service || "ICEGATE Registration";
 
   await transporter.sendMail({
-    from:    `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to:      "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
-    subject: `New ICEGATE Registration — ${service}`,
+    from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
+    to: "yadavsheshnath236@gmail.com",
+    subject: `New ICEGATE Registration — ${serviceDisplay}`,
     html: `
-      <h3>New ICEGATE Registration Request</h3>
-      <table cellpadding="6" style="border-collapse:collapse; font-family:Arial,sans-serif;">
-        <tr><td><b>Service</b></td><td>${service}</td></tr>
-        <tr><td><b>Port</b></td><td>${port    || "N/A"}</td></tr>
-        <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
-        <tr><td><b>Name</b></td><td>${name    || "N/A"}</td></tr>
-        <tr><td><b>Email</b></td><td>${email  || "N/A"}</td></tr>
-        <tr><td><b>Entity</b></td><td>${entity || "N/A"}</td></tr>
-        <tr><td><b>Role</b></td><td>${role    || "N/A"}</td></tr>
-        <tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>
-      </table>
-      <hr/>
-      <p><small>ID: ${_id}</small></p>
-      <p><small>Submitted (IST): ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</small></p>
+      <div style="font-family:Arial;">
+        <h2>New ICEGATE Registration</h2>
+
+        <table border="1" cellpadding="6" style="border-collapse:collapse;">
+          <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
+          <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+
+          ${portName ? `<tr><td><b>Port Name</b></td><td>${portName}</td></tr>` : ""}
+
+          ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
+          ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
+
+          <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
+
+          ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
+          ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
+          ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
+
+          ${
+            !type || type !== "QUICK_FORM"
+              ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>`
+              : ""
+          }
+        </table>
+
+        <p>
+          <b>ID:</b> ${_id}<br/>
+          <b>Time:</b> ${new Date().toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+          })}
+        </p>
+      </div>
     `,
   });
 
-  console.log("Email sent for ICEGATE Registration:", _id);
+  console.log("✅ Email sent:", _id);
 }
 
 /* ─────────────────────────────────────────────
-   CONTROLLER — POST /api/icegate-registration
-   
-   Accepts QuickForm:  { service, port, mobile }
-   Accepts ModalEnroll: { ...above + name, email, entity, role, partner, type }
-   
-   Only 'mobile' is required — name and email are optional.
-   This matches the QuickForm which only collects mobile.
+   CREATE API
 ───────────────────────────────────────────── */
 exports.createIcegateRegistration = async (req, res) => {
   try {
-    console.log("ICEGATE Registration Incoming:", req.body);
-    
+    console.log("📥 Incoming:", req.body);
+
     const {
-      service, port, mobile,
-      name, email, entity, role, partner, type,
+      service,
+      mobile,
+      name,
+      email,
+      entity,
+      role,
+      partner,
+      type,
+      category,
+      issue,
+      portName, // ✅ ADDED
     } = req.body;
 
-    // Only mobile is required
+    // 🔥 Detect Quick Form
+    const isQuickForm = type === "QUICK_FORM";
+
+    // ✅ Only mobile required
     if (!mobile || !mobile.trim()) {
       return res.status(400).json({
         success: false,
-        error: "Mobile number is required",
+        message: "Mobile is required",
       });
     }
 
-    // if (!service) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     error: "Service is required",
-    //   });
-    // }
+    // ✅ Prepare Data
+    const recordData = {
+      service: service || "ICEGATE Registration",
+      mobile: mobile.trim(),
 
-    const record = await IcegateRegistration.create({
-      service,
-      port:    port    ? port.trim()                 : null,
-      mobile:  mobile.trim(),
-      name:    name    ? name.trim()                 : null,
-      email:   email   ? email.trim().toLowerCase()  : null,
-      entity:  entity  ? entity.trim()               : null,
-      role:    role    || null,
-      partner: Boolean(partner),
-      type:    type    || "QUICK_FORM",
-    });
+      portName: portName ? portName.trim() : null, // ✅ ADDED
 
-    console.log("Saved ICEGATE record:", record._id);
+      // 🔥 KEY LOGIC (Quick Form fields ignore)
+      name: isQuickForm ? null : name ? name.trim() : null,
+      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      entity: isQuickForm ? null : entity ? entity.trim() : null,
+      role: isQuickForm ? null : role || null,
+      partner: isQuickForm ? false : Boolean(partner),
 
-    // Email — does not block the 201 response
+      type: type || "QUICK_FORM",
+      category: category || null,
+      issue: issue || null,
+    };
+
+    console.log("📦 Saving:", recordData);
+
+    // ✅ Save to DB
+    const record = await IcegateRegistration.create(recordData);
+
+    console.log("✅ Saved:", record._id);
+
+    // ✅ Send Email (async)
     sendEmail(record).catch((err) =>
-      console.error("Email failed (record saved):", err.message)
+      console.error("❌ Email Error:", err.message)
     );
 
+    // ✅ Response
     return res.status(201).json({
       success: true,
-      message: "ICEGATE Registration submitted successfully",
+      message: "Submitted successfully",
       data: record,
     });
-
   } catch (error) {
-    console.error("ICEGATE Error:", error.name, error.message);
-
-    if (error.name === "ValidationError") {
-      const messages = Object.values(error.errors).map((e) => e.message);
-      return res.status(400).json({
-        success: false,
-        message: "Validation failed",
-        errors: messages,
-      });
-    }
+    console.error("❌ Error:", error);
 
     return res.status(500).json({
       success: false,
       message: "Server Error",
-      error: error.message,
     });
+  }
+};
+
+/* ─────────────────────────────────────────────
+   GET ALL
+───────────────────────────────────────────── */
+exports.getAllIcegateRegistrations = async (req, res) => {
+  try {
+    const data = await IcegateRegistration.find().sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      data,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false });
+  }
+};
+
+/* ─────────────────────────────────────────────
+   GET BY ID
+───────────────────────────────────────────── */
+exports.getIcegateRegistrationById = async (req, res) => {
+  try {
+    const data = await IcegateRegistration.findById(req.params.id);
+
+    if (!data) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      data,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false });
   }
 };

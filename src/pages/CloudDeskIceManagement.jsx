@@ -489,7 +489,7 @@ const IECManagement = () => {
                   </ul>
 
                   <a
-                    href="#contact"
+                    href="#fees"
                     className="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded hover:bg-red-700 transition"
                   >
                     File Annual Update Now
@@ -501,7 +501,7 @@ const IECManagement = () => {
         </section>
 
         {/* Exemptions */}
-        <section className="py-20 bg-slate-50">
+        <section id = "benefits" className="py-20 bg-slate-50">
           <div className="container mx-auto px-4 max-w-4xl">
             <h2 className="text-3xl font-bold text-center text-slate-900 mb-8">
               Who is Exempted from IEC?
