@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
@@ -9,18 +9,38 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     email: "",
     role: "",
     partner: false,
+    service: "E-RCMC Registration",
   });
+
+  const SERVICE_MAP = {
+    IEC_PROFILE_UPDATE: {
+      label: "IEC_PROFILE_UPDATE",
+      service: "IEC PROFILE UPDATE",
+    },
+  };
+
+  const serviceConfig = SERVICE_MAP[type];
+  const predefinedService = serviceConfig?.service;
+
+  // Update service when predefinedService changes
+  useEffect(() => {
+    if (predefinedService) {
+      setForm((prev) => ({ ...prev, service: predefinedService }));
+    }
+  }, [predefinedService]);
 
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const isEnroll = type === "ENROLL";
+  // const isEnroll = type === "Enroll";
+  const isEnroll = !!predefinedService;
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
-  const resetFrom = () => {
+  const resetForm = () => {
     setForm({
       name: "",
       mobile: "",
@@ -28,6 +48,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       email: "",
       role: "",
       partner: false,
+      service: predefinedService || "E-RCMC Registration",
     });
     setCategory("");
     setIssue("");
@@ -40,40 +61,39 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "IEC SUSPENSION",
   ];
 
-const PROFILE_UPDATE_OPTIONS = [
-  "FIEO (Multi-Product / Trader)",
-  "SEPC (Services EPC)",
-  "PEPC (Project Exports)",
-  "EIC (Export Inspection Council)",
-  "EEPC India (Engineering)",
-  "ESC (Electronics & Software)",
-  "TEPC (Telecom Equipment)",
-  "APEDA",
-  "Spices Board",
-  "Tea Board",
-  "Coffee Board",
-  "Rubber Board",
-  "Tobacco Board",
-  "Coconut Board",
-  "AEPC (Garments)",
-  "TEXPROCIL (Cotton)",
-  "MATEXIL",
-  "HEPC",
-  "CEPC",
-  "WWEPC",
-  "ISEPC",
-  "Jute Board",
-  "GJEPC",
-  "CLE",
-  "EPCH",
-  "SGEPC",
-  "MPEDA",
-  "IOPEPC",
-];
-
+  const PROFILE_UPDATE_OPTIONS = [
+    "FIEO (Multi-Product / Trader)",
+    "SEPC (Services EPC)",
+    "PEPC (Project Exports)",
+    "EIC (Export Inspection Council)",
+    "EEPC India (Engineering)",
+    "ESC (Electronics & Software)",
+    "TEPC (Telecom Equipment)",
+    "APEDA",
+    "Spices Board",
+    "Tea Board",
+    "Coffee Board",
+    "Rubber Board",
+    "Tobacco Board",
+    "Coconut Board",
+    "AEPC (Garments)",
+    "TEXPROCIL (Cotton)",
+    "MATEXIL",
+    "HEPC",
+    "CEPC",
+    "WWEPC",
+    "ISEPC",
+    "Jute Board",
+    "GJEPC",
+    "CLE",
+    "EPCH",
+    "SGEPC",
+    "MPEDA",
+    "IOPEPC",
+  ];
 
   const handleClose = () => {
-    resetFrom();
+    resetForm();
     onClose();
   };
 
@@ -94,32 +114,147 @@ const PROFILE_UPDATE_OPTIONS = [
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-
+    if (isEnroll);
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const v = validate();
+  //   setErrors(v);
+
+  //   if (Object.keys(v).length > 0) return;
+
+  //   setLoading(true);
+
+  //   // Send data out if callback provided
+  //   if (typeof onSubmit === "function") {
+  //     onSubmit({
+  //       ...form,
+  //       type,
+  //       category: isEnroll ? category : null,
+  //       issue: isProfileUpdate ? issue : null,
+  //     });
+  //   }
+
+  //   try {
+  //     const finalType = type || "ENROLL_NOW";
+
+  //     // use predefined service if available , otherwise use from.service
+  //     const serviceValue = predefinedService || form.service;
+
+  //     const payload = {
+  //       name: form.name,
+  //       mobile: form.mobile,
+  //       entity: form.entity,
+  //       email: form.email,
+  //       role: form.role,
+  //       partner: form.partner,
+  //       service: serviceValue,
+  //       type: finalType,
+  //       category: category || undefined,
+  //       issue: issue || undefined,
+  //     };
+
+  //     console.log("📤 FINAL PAYLOAD:", payload);
+
+  //     const res = await fetch(
+  //     // `${process.env.REACT_APP_API_URL}/api/e-rcmc-registration`,
+  //     "http://localhost:5000/api/e-rcmc-registration";
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Accept": "application/json"
+  //       },
+  //       body: JSON.stringify(payload),
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (!res.ok) {
+  //       throw new Error(data.error || data.message || `HTTP error ${res.status}`);
+  //     }
+
+  //     alert("Request submitted successfully");
+  //    resetFrom();
+  //    onClose();
+  //   } catch (err) {
+  //     console.error("❌ Enroll error:", err);
+  //     alert(`Submission failed: ${err.message}`);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const v = validate();
     setErrors(v);
 
     if (Object.keys(v).length > 0) return;
 
-    // Send data out if callback provided
-    if (typeof onSubmit === "function") {
-      onSubmit({
-        ...form,
-        type,
-        category: isEnroll ? category : null,
-        issue: isProfileUpdate ? issue : null,
-      });
+    setLoading(true);
+
+    try {
+      const finalType = type || "ENROLL_NOW";
+      const serviceValue = predefinedService || form.service;
+
+      const payload = {
+        name: form.name,
+        mobile: form.mobile,
+        entity: form.entity,
+        email: form.email,
+        role: form.role,
+        partner: form.partner,
+        service: serviceValue,
+        type: finalType,
+        category: category || undefined,
+        issue: issue || undefined,
+      };
+
+      console.log("📤 FINAL PAYLOAD:", payload);
+
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/e-rcmc-registration`, // ✅ Use env var, semicolon → comma
+        // "http://localhost:5000/api/e-rcmc-registration",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(
+          data.error || data.message || `HTTP error ${res.status}`,
+        );
+      }
+
+      // ✅ Moved inside try — only fires on success
+      if (typeof onSubmit === "function") {
+        onSubmit({
+          ...form,
+          type,
+          category: isEnroll ? category : null,
+          issue: isProfileUpdate ? issue : null,
+        });
+      }
+
+      alert("Request submitted successfully");
+      resetForm(); // ✅ Fixed typo: resetFrom → resetForm
+      onClose();
+    } catch (err) {
+      console.error("❌ Enroll error:", err);
+      alert(`Submission failed: ${err.message}`);
+    } finally {
+      setLoading(false);
     }
-
-    resetFrom();
-
-    onClose();
   };
-
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
@@ -257,11 +392,11 @@ const PROFILE_UPDATE_OPTIONS = [
                   <option value="" disabled>
                     Select Update Type
                   </option>
-                    {PROFILE_UPDATE_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
+                  {PROFILE_UPDATE_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
                 </select>
               </div>
             )}
@@ -270,7 +405,7 @@ const PROFILE_UPDATE_OPTIONS = [
               <>
                 {/* Category + Issue or ENROLL-specific fields */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                     Category
                   </label>
                   <select
@@ -286,7 +421,7 @@ const PROFILE_UPDATE_OPTIONS = [
                         {option}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
               </>
             )}
@@ -324,7 +459,7 @@ const PROFILE_UPDATE_OPTIONS = [
                         </span>
                       </label>
                     );
-                  }
+                  },
                 )}
               </div>
               {errors.role && (
