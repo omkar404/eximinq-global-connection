@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { X, Handshake, Building, Mail } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -9,13 +9,34 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     email: "",
     role: "",
     partner: false,
+    service: "halal-certification",
   });
+
+  const SERVICE_MAP ={
+    IEC_PROFILE_UPDATE: {
+      label: "IEC_PROFILE_UPDATE",
+      service: "IEC PROFILE UPDATE",
+    },
+  };
+
+  const serviceConfig = SERVICE_MAP[type];
+  const predefinedService = serviceConfig?.service;
+
+  // Upadate service when predefinedService changes
+
+  useEffect(() => {
+    if (predefinedService) {
+      setForm((prev) => ({ ...prev, service: predefinedService }));
+    }
+  }, [predefinedService]);
 
   const [category, setCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const isEnroll = type === "ENROLL";
+  const isEnroll = !!predefinedService;
+  const Applyapplication = type === "Halal_Certification"
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
@@ -28,6 +49,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       email: "",
       role: "",
       partner: false,
+      service: predefinedService || "halal-certification",
     });
     setCategory("");
     setIssue("");
@@ -70,16 +92,58 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-
+    if (isEnroll);
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const v = validate();
     setErrors(v);
 
     if (Object.keys(v).length > 0) return;
+
+    setLoading(true);
+
+    try {
+      const finalType = type || "ENROLL_NOW";
+      const serviceValue = predefinedService || form.service;
+
+      const payload = {
+        name: form.name,
+        mobile: form.mobile,
+        entity: form.entity,
+        email: form.email,
+        role: form.role,
+        partner: form.partner,
+        service: serviceValue,
+        type: finalType,
+        category: category || undefined,
+        issue: issue || undefined,
+      };
+
+      console.log("📤 FINAL PAYLOAD:", payload);
+
+      const res = await fetch(
+        // `${process.env.REACT_APP_API_URL}/api/halal-certification`, // ✅ Use env var, semicolon → comma
+        "http://localhost:5000/api/halal-certification",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(
+          data.error || data.message || `HTTP error ${res.status}`,
+        );
+      }
 
     // Send data out if callback provided
     if (typeof onSubmit === "function") {
@@ -91,10 +155,16 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       });
     }
 
+    alert("Request submitted successfully");
     resetFrom();
-
     onClose();
-  };
+  } catch (err) {
+    console.error("❌ Enroll error:", err);
+    alert(`Submission failed: ${err.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
@@ -266,6 +336,27 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 </div>
               </>
             )}
+
+              {Applyapplication && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  CATEGORY
+                </label>
+                <div className="relative">
+                  <FileSignature
+                    className="absolute left-3 top-3 text-gray-400"
+                    size={16}
+                  />
+                  <input
+                    type="text"
+                    name="service"
+                    value="Halal Certification"
+                    readOnly
+                    className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
+                  />
+                </div>
+              </div>
+            )} 
 
             {/* Role Selection */}
             <div>

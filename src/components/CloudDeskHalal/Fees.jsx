@@ -53,7 +53,7 @@ const Fees = ({ setShowEnrollModal }) => {
              onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "",
+                    type: "Halal_Certification",
                   })
                 }
                 className="block w-full bg-brand-900 text-white font-bold py-3 
