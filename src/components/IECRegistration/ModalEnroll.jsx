@@ -608,9 +608,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
       console.log("📤 FINAL PAYLOAD:", payload);
 
-      const apiUrl = `http://localhost:5000/api/icegate-registration`;
+      // `${process.env.REACT_APP_API_URL}/api/icegate-registration`,
+      // `http://localhost:5000/api/icegate-registration`;
 
-      const res = await fetch(apiUrl, {
+      const res = await fetch( 
+       `${process.env.REACT_APP_API_URL}/api/icegate-registration`,
+      // `http://localhost:5000/api/icegate-registration`;
+ 
+      {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
