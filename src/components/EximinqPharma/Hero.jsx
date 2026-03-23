@@ -36,10 +36,17 @@ const Hero = () => {
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-teal-500 hover:bg-teal-400 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-teal-500/50 flex items-center justify-center gap-2">
+            {/* <button className="bg-teal-500 hover:bg-teal-400 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-teal-500/50 flex items-center justify-center gap-2">
               Explore Services
               <ChevronRight className="w-5 h-5" />
-            </button>
+            </button> */}
+            <a
+              href="#services"
+              className="bg-teal-500 hover:bg-teal-400 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-teal-500/50 flex items-center justify-center gap-2"
+            >
+              Explore Services
+              <ChevronRight className="w-5 h-5" />
+            </a>
 
             <button className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-2">
               <Box className="w-5 h-5" />

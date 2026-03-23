@@ -19,7 +19,7 @@ const CTA = ({ setShowEnrollModal }) => {
             onClick={() =>
               setShowEnrollModal({
                 open: true,
-                type: "pharmaceuticals_industry_import_export",
+                type: "Get_Free_Consultation",
               })
             }
             className="bg-white text-teal-700 hover:bg-teal-50 px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all"
