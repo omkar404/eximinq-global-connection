@@ -14,7 +14,7 @@ export const Sidebar = ({ setShowEnrollModal }) => {
     <div className="space-y-8">
       {/* WHY CLOUDDESK CARD */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Why CloudDesk?</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-4">Why CloudDesk? </h3>
 
         <ul className="space-y-4 text-sm">
           <li className="flex items-start">
