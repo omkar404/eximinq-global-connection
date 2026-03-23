@@ -338,7 +338,7 @@ exports.createAdcodeRegistration = async (req, res) => {
 
     // ✅ Send Email (async)
     sendEmail(record).catch((err) =>
-      console.error("❌ Email Error:", err.message)
+      console.error("❌ Email Error adcode:", err.message)
     );
 
     // ✅ Response

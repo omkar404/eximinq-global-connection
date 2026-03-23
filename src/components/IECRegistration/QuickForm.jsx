@@ -378,23 +378,14 @@ const QuickForm = () => {
 
     // For mobile, only allow digits
     if (name === "mobile") {
-      const digitsOnly = value.replace(/\D/g, '').slice(0, 10);
-      setForm((prev) => ({
-        ...prev,
-        [name]: digitsOnly,
-      }));
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
     } else {
-      setForm((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      setForm((prev) => ({ ...prev, [name]: value }));
     }
 
-    // Clear error when typing
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
+    // Clear that field's error on typing
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   /* -------------------------
@@ -427,19 +418,17 @@ const QuickForm = () => {
     const validationErrors = validate();
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
+    if (Object.keys(validationErrors).length > 0) return;
 
+    setLoading(true);
     try {
-      setLoading(true);
 
       // Prepare payload - ONLY service, port, mobile
       const payload = {
         service: form.service,
+        port: form.port,
         mobile: form.mobile,
         type: "QUICK_FORM", // This identifies it's from QuickForm
-        ...(form.port && { port: form.port }), // Only include port if provided
       };
 
       console.log("📤 Sending data:", payload);
@@ -457,7 +446,7 @@ const QuickForm = () => {
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message);
+        throw new Error(data.error || data.message || "Something went wrong");
       }
 
       // Show success message
