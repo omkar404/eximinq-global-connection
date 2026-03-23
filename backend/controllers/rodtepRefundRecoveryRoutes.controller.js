@@ -86,7 +86,7 @@ async function sendEmail(record) {
     console.log("✅ Email Sent:", _id);
 
   } catch (err) {
-    console.error("❌ Email Error:", err.message);
+    console.error("❌ Email Error rooteprefund:", err.message);
   }
 }
 

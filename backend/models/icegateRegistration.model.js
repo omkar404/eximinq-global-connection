@@ -189,78 +189,68 @@
 
 
 /*-----------------------*/
-
 // models/icegateRegistration.model.js
-const mongoose = require('mongoose');
 
-const icegateRegistrationSchema = new mongoose.Schema({
-  service: { 
-    type: String,
-    default: "ICEGATE Registration"
-  },
-  
-  mobile: { 
-    type: String, 
-    required: [true, 'Mobile number is required'],
-    trim: true,
-    validate: {
-      validator: function(v) {
-        return /\d{10,}/.test(v.replace(/\D/g, ''));
-      },
-      message: props => `${props.value} is not a valid mobile number!`
-    }
-  },
-  
-  name: { 
-    type: String, 
-    trim: true 
-  },
-  
-  email: { 
-    type: String, 
-    trim: true, 
-    lowercase: true,
-    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email']
-  },
-  
-  entity: { 
-    type: String, 
-    trim: true 
-  },
-  
-  role: { 
-    type: String,
-    enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
-    default: null
-  },
-  
-  partner: { 
-    type: Boolean, 
-    default: false 
-  },
-  
-  type: { 
-    type: String, 
-    default: 'QUICK_FORM'
-  },
-  
-  category: { 
-    type: String,
-    default: null
-  },
-  
-  issue: { 
-    type: String,
-    default: null
-  },
+const mongoose = require("mongoose");
 
-  portName: {
-    type: String,
-    default: null
-  }
-  
-}, {
-  timestamps: true
-});
+const icegateRegistrationSchema = new mongoose.Schema(
+  {
+    service: {
+      type: String,
+      trim: true,
+      default: null,     // ✅ Not required — can be null
+    },
+    port: {          // ✅ Fixed: was "port{" with missing colon, wrong field name
+      type: String,
+      trim: true,
+      default: null,
+    },
+    name: {
+      type: String,
+      trim: true,
+      default: null,     // ✅ Not required — null for QUICK_FORM
+    },
+    mobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      default: null,     // ✅ Not required — null for QUICK_FORM
+    },
+    entity: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    role: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('IcegateRegistration', icegateRegistrationSchema);
+module.exports = mongoose.model("IcegateRegistration", icegateRegistrationSchema);

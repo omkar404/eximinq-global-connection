@@ -301,14 +301,16 @@ async function sendEmail(record) {
     type,
     category,
     issue,
-    portName, // ✅ ADDED
+    port, // ✅ ADDED
   } = record;
 
-  const serviceDisplay = service || "ICEGATE Registration";
+  const serviceDisplay = "ICEGATE Registration";
+   console.log("reached inside sendemail method",port);
 
   await transporter.sendMail({
+   
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to: "yadavsheshnath236@gmail.com",
+    to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
     subject: `New ICEGATE Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
@@ -318,12 +320,14 @@ async function sendEmail(record) {
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
 
-          ${portName ? `<tr><td><b>Port Name</b></td><td>${portName}</td></tr>` : ""}
+          ${port ? `<tr><td><b>Port Name</b></td><td>${port}</td></tr>` : ""}
+          ${service ? `<tr><td><b>Service Name</b></td><td>${service}</td></tr>` : ""}
+          ${mobile ? `<tr><td><b>Mobile</b></td><td>${mobile}</td></tr>` : ""}
 
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
 
-          <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
+          
 
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
           ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
@@ -347,7 +351,7 @@ async function sendEmail(record) {
     `,
   });
 
-  console.log("✅ Email sent:", _id);
+  console.log("✅ Email sent isces:", _id);
 }
 
 /* ─────────────────────────────────────────────
@@ -355,7 +359,7 @@ async function sendEmail(record) {
 ───────────────────────────────────────────── */
 exports.createIcegateRegistration = async (req, res) => {
   try {
-    console.log("📥 Incoming:", req.body);
+    console.log("📥 Incoming request body:", req.body);
 
     const {
       service,
@@ -368,7 +372,7 @@ exports.createIcegateRegistration = async (req, res) => {
       type,
       category,
       issue,
-      portName, // ✅ ADDED
+      port, // ✅ ADDED
     } = req.body;
 
     // 🔥 Detect Quick Form
@@ -384,10 +388,9 @@ exports.createIcegateRegistration = async (req, res) => {
 
     // ✅ Prepare Data
     const recordData = {
-      service: service || "ICEGATE Registration",
-      mobile: mobile.trim(),
-
-      portName: portName ? portName.trim() : null, // ✅ ADDED
+      service: service ? service.trim(): null,
+      mobile:  mobile.trim(),
+      port: port ? port.trim() : null, // ✅ ADDED
 
       // 🔥 KEY LOGIC (Quick Form fields ignore)
       name: isQuickForm ? null : name ? name.trim() : null,
@@ -400,8 +403,9 @@ exports.createIcegateRegistration = async (req, res) => {
       category: category || null,
       issue: issue || null,
     };
+    console.log(recordData);
 
-    console.log("📦 Saving:", recordData);
+    console.log("📦 Saving record data:", recordData.port);
 
     // ✅ Save to DB
     const record = await IcegateRegistration.create(recordData);
@@ -410,7 +414,7 @@ exports.createIcegateRegistration = async (req, res) => {
 
     // ✅ Send Email (async)
     sendEmail(record).catch((err) =>
-      console.error("❌ Email Error:", err.message)
+      console.error("Email Error icegate:", err.message)
     );
 
     // ✅ Response
