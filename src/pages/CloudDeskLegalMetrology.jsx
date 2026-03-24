@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskLegalMetrology/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskLegalMetrology/Navbar";
 import Hero from "../components/CloudDeskLegalMetrology/Hero";
 import Fees from "../components/CloudDeskLegalMetrology/Fees";
@@ -26,6 +27,170 @@ import { MainNavbar } from "../components/CloudDeskLegalMetrology/MainNavbar";
 
 const CloudDeskLegalMetrology = () => {
   return (
+
+<>
+<Helmet>
+        <title>
+          Mandatory LMPC Registration for Importers | LMPC Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Ensure your pre-packaged goods comply with Rule 27 of the Legal Metrology Act. Avoid customs detention and market seizures with correct MRP labeling."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/lmpc-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Mandatory LMPC Registration for Importers Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Ensure your pre-packaged goods comply with Rule 27 of the Legal Metrology Act. Avoid customs detention and market seizures with correct MRP labeling."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/lmpc-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Mandatory LMPC Registration for Importers",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Obtain mandatory licensing under Section 57, 58, or 65 of the Customs Act. We handle the process of converting your facility into a legally recognized Bonded Warehouse"
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can I stick labels after importing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, if the goods arrive without proper labels, you can apply for permission to carry out labeling in a Customs Bonded Warehouse. However, goods cannot be cleared for home consumption without compliance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is LMPC required for industrial raw materials?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. Goods meant for industrial or institutional consumers (who buy directly for use and not for resale) are exempt from LMPC rules, provided the package is marked "Not for Retail Sale".`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to get the certificate?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It typically takes 7 to 20 working days depending on the state department's workload and query response time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Pre-Packaged Commodity"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Any commodity placed in a package of whatever nature, without the purchaser being present, such that the quantity has a predetermined value. If you sell it in a box, tin, or bottle with a weight/volume/number on it, you need LMPC."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Who is exempt from LMPC registration?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, exemptions are narrow (1) Packages over 25kg or 25L (except cement/fertilizer), (2) Institutional/Industrial consumers who buy directly for their own use (not for retail), and (3) Packages weighing 10g/10ml or less."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I stick a "Correction Sticker" at the port?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Only for specific fields. You can fix the Importer's address, MRP, and the Veg/Non-Veg logo in a Customs Bonded Warehouse. However, you cannot "sticker over" an incorrect Net Quantity or Date of Import/Manufacture.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What MUST be on every retail label in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `1. Name and Address of the Manufacturer/Packer/Importer.
+                     2. Common/Generic Name of the commodity.
+                     3. Net Quantity (Standard units only kg, l, m, or number).
+                     4. Month and Year of Manufacture/Import.
+                     5. Maximum Retail Price (MRP) (Inclusive of all taxes).
+                     6. Country of Origin (Mandatory for imports).
+                     7. Consumer Care Details (Name, address, phone, and email).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Are "MRP Stickers" allowed?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. In 2026, the MRP must be printed on the package. Stickers are generally considered a violation and are only allowed in very specific, pre-authorized scenarios (like price changes due to GST revisions)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the government fees for LMPC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The registration fee is generally ₹500, but varies slightly by state. However, the true cost of non-compliance is the penalty — starting at ₹10,000 for the first offense and scaling to ₹50,000 or imprisonment for repeat violations."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long is the certificate valid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Usually between 1 to 5 years. CloudDesk recommends the 5-year option to minimize the administrative burden of frequent renewals."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Section 36" of the Legal Metrology Act?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `This is the most "feared" section by importers. It empowers officials to seize non-standard packages and impose heavy fines for misleading declarations.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -631,6 +796,7 @@ const CloudDeskLegalMetrology = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
