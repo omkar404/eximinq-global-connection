@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskWPCETA/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskWPCETA/Navbar";
 import Hero from "../components/CloudDeskWPCETA/Hero";
 import Fees from "../components/CloudDeskWPCETA/Fees";
@@ -30,6 +31,139 @@ import { MainNavbar } from "../components/CloudDeskWPCETA/MainNavbar";
 
 const CloudDeskWPCETA = () => {
   return (
+<>
+
+<Helmet>
+        <title>
+          Mandatory WPC (ETA) for Wireless Imports | WPC Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Importing Bluetooth headphones, Smartwatches, or Wi-Fi Routers? You need an <strong>Equipment Type Approval (ETA)</strong> from the WPC Wing before customs clearance."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/wpc-license"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Mandatory WPC (ETA) for Wireless Imports Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Importing Bluetooth headphones, Smartwatches, or Wi-Fi Routers? You need an <strong>Equipment Type Approval (ETA)</strong> from the WPC Wing before customs clearance."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/wpc-license"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Mandatory WPC (ETA) for Wireless Imports",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Importing Bluetooth headphones, Smartwatches, or Wi-Fi Routers? You need an <strong>Equipment Type Approval (ETA)</strong> from the WPC Wing before customs clearance."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does every Bluetooth device need WPC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. Any device using Bluetooth, Wi-Fi, RFID, NFC, or Zigbee must have an ETA. In 2026, even "Passive" RFID tags in high volumes are being scrutinized at major ports.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between ETA and a WPC Import License?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `ETA (Equipment Type Approval) Certifies the product design is safe for Indian frequencies.
+                     Import License A permission to bring a specific quantity or model into the country. You usually need the ETA to apply for the Import License.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Which products are under the "Self-Declaration" (ETA-SD) route?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Consumer electronics like Mobile phones, Laptops, Tablets, Smartwatches, and Wireless Peripherals (mouse/keyboard). Items like Drones, Radars, and Jammers are strictly under the "Scrutiny" route (manual review).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use my FCC or CE test reports for WPC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, if they are from an ILAC-accredited lab and the testing parameters match the Indian de-licensed frequency bands. CloudDesk provides a Report Gap-Analysis to see if your global reports are sufficient or if fresh testing is needed."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does the WPC ETA process take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Self-Declaration (ETA-SD) 1-3 working days.
+                     Scrutiny-Based ETA 4-8 weeks (requires manual officer review).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the validity of a WPC ETA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is valid for the lifetime of that specific product model. If you change the wireless module or the frequency parameters in a newer version, you must apply for a fresh ETA."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can Customs seize my goods for a WPC error?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. Under the Indian Telegraph Act, Customs can seize "Unauthorized Wireless Apparatus." In 2026, fines can reach up to ₹50 Lakh for large commercial shipments lacking ETA.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Red Channel" flag for WPC?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                      `If your HSN code identifies the product as "Wireless" but no ETA number is mentioned in the Bill of Entry, the Risk Management System (RMS) will divert the cargo for 100% inspection.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -657,6 +791,7 @@ const CloudDeskWPCETA = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
