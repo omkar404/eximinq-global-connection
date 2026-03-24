@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskCustomsAdjudication/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskCustomsAdjudication/Navbar";
 import Hero from "../components/CloudDeskCustomsAdjudication/Hero";
 import Fees from "../components/CloudDeskCustomsAdjudication/Fees";
@@ -20,6 +21,173 @@ import { MainNavbar } from "../components/CloudDeskCustomsAdjudication/MainNavba
 
 const CloudDeskCustomsAdjudication = () => {
   return (
+
+<>
+<Helmet>
+        <title>
+          Policy Relaxation Committee (PRC) Representation | Policy Relaxation Committee Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Has your application been rejected by the Regional Authority due to
+            a procedural lapse? We represent your case at DGFT Headquarters to
+            condone delays and relax policy provisions."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/prc-relaxation"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Policy Relaxation Committee (PRC) Representation Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Has your application been rejected by the Regional Authority due to
+            a procedural lapse? We represent your case at DGFT Headquarters to
+            condone delays and relax policy provisions."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/prc-relaxation"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Policy Relaxation Committee (PRC) Representation",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Has your application been rejected by the Regional Authority due to a procedural lapse? We represent your case at DGFT Headquarters to condone delays and relax policy provisions."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is the PRC decision final?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Generally, yes. The decision of the Policy Relaxation Committee is communicated to the RA for implementation. If rejected, further legal recourse may involve filing a Writ Petition in the High Court, but administrative remedies within DGFT are usually exhausted at this stage."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What constitutes "Genuine Hardship"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It refers to situations beyond the control of the exporter, such as natural calamities, sudden policy changes by foreign governments, or financial insolvency of the buyer. Mere negligence or ignorance of law is usually not considered genuine hardship."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take for a decision?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The PRC typically meets once a month. Once the application is complete and filed, it may take 1–3 months to get listed for a meeting and receive the minutes."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What kind of cases does the PRC handle?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Common cases include
+                     Extension of Export Obligation (EO) period after all regular extensions are exhausted.
+                     Revalidation of expired Duty Credit Scrips (MEIS/SEIS/RoDTEP).
+                     Acceptance of Shipping Bills where the "Intent to claim benefits" was marked "No" by mistake.
+                     Clubbing of licenses that don't meet the standard "same HSN" criteria.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Public Interest" in a PRC context?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If your failure to export causes massive job losses, or if a government system (like ICEGATE) was down during your deadline, the PRC considers relaxation to be in the "Public Interest."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I apply to the PRC if I just forgot the deadline?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. Mere negligence is not "Genuine Hardship." You must show a reason that a "reasonable person" could not have avoided.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the fee for a PRC application in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Fresh Application ₹2,000.
+                     Review Application (if rejected once) ₹5,000.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a PRC decision take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The committee usually meets once or twice a month. From filing to the publication of Minutes of the Meeting (MoM), it typically takes 45 to 90 days."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I track my PRC case online?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. Under "Submitted Applications" on the DGFT portal, you can see the "Life Cycle" of your PRC file.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `My case was "Deferred." What does that mean?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It means the committee wants more data or a clarification. You will receive a Deficiency Letter. You must respond within the stipulated time, or the case will be "Rejected" in the next meeting.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "If the PRC rejects my case, is it over?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You can file a Review Application (with the ₹5,000 fee) if you have new evidence that wasn't presented the first time. If the Review is also rejected, your only remaining option is a Writ Petition in the High Court."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -570,6 +738,7 @@ const CloudDeskCustomsAdjudication = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
