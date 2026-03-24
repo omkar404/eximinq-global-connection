@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 import TopBar from "../components/CloudDeskMarine/TopBar";
 import Navbar from "../components/CloudDeskMarine/Navbar";
@@ -45,6 +46,138 @@ const CloudDeskMarine = () => {
       alert("Form submitted — check console for data.");
     };
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Zero Duty Import of Capital Goods | Capital Goods Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/project-cargo"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Zero Duty Import of Capital Goods Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/project-cargo"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Zero Duty Import of Capital Goods",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": `What qualifies as "Project Cargo"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Any cargo that is too big or too heavy to fit into a standard 20ft or 40ft container. This includes "Over-Dimensional" (width/height) and "Over-Weight" (tonnage) shipments that require Flat Racks, Open Tops, or Breakbulk vessels.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Breakbulk" shipping?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a method of shipping where cargo is loaded individually onto the ship's deck or hold, rather than inside a container. It’s the standard for massive pipes, boilers, and heavy machinery."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What are "Hydraulic Axles"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For extremely heavy cargo (over 50–100 tons), standard trucks fail. We use Multi-Axle Hydraulic Trailers that can distribute weight evenly and tilt to navigate uneven terrain, ensuring the cargo stays level."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need special permits for ODC movement in India?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. You need "Over Dimensional" permits from the Ministry of Road Transport and Highways (MoRTH) and often state-level police clearances. CloudDesk’s Compliance Team handles these permits for every state the cargo traverses.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can Project Cargo be imported under "Zero Duty"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, if the project falls under specific government schemes like EPCG or if it is a "Mega Power Project" or "Infrastructure Project" with a valid Essentiality Certificate. CloudDesk helps you secure these certificates.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Escort Vehicle" requirement?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For cargo exceeding specific width/length limits, an escort vehicle with warning lights is mandatory to guide traffic. CloudDesk provides Pilot Cars to ensure public safety and legal compliance during transit."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is standard Marine Insurance enough for Project Cargo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Usually, no. You need a "Loading & Unloading" add-on and often a "Marine Warranty Survey" (MWS). CloudDesk works with specialized underwriters to provide tailored project insurance that covers the high risks of heavy lifting.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Lashing Certificate"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a document issued by a certified surveyor confirming that the cargo has been secured (lashed) properly to the vessel or trailer. Without this, most insurance claims for transit damage will be rejected."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -670,6 +803,7 @@ const CloudDeskMarine = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
