@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskIES/TopBar";
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Navbar from "../components/CloudDeskIES/Navbar";
 import Hero from "../components/CloudDeskIES/Hero";
@@ -28,6 +29,138 @@ import { MainNavbar } from "../components/CloudDeskIES/MainNavbar";
 const CloudDeskIES = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   return (
+  <>
+  <Helmet>
+        <title>
+          Interest Equalisation Scheme (IES) on Export Credit | Interest Equalisation Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Reduce your Packing Credit (PC) and Post-Shipment (PCFC) interest
+            burden. We help MSMEs and Manufacturer Exporters claim up to 3%
+            interest subsidy directly from banks."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/interest-equalisation-scheme"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Interest Equalisation Scheme (IES) on Export Credit in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Reduce your Packing Credit (PC) and Post-Shipment (PCFC) interest burden. We help MSMEs and Manufacturer Exporters claim up to 3% interest subsidy directly from banks."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/interest-equalisation-scheme"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Interest Equalisation Scheme (IES) on Export Credit",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Reduce your Packing Credit (PC) and Post-Shipment (PCFC) interest burden. We help MSMEs and Manufacturer Exporters claim up to 3% interest subsidy directly from banks."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the current interest subvention rate in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The base rate is 2.75% per annum for all eligible MSME (Micro, Small, and Medium) manufacturer exporters."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are Merchant Exporters still eligible?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. As of the 2026 revamp, the scheme is exclusively for MSME Manufacturers. Non-MSME and Merchant exporters have been moved out of the fresh claim cycle to focus resources on small-scale manufacturing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is there a limit on how much I can save?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. The fiscal benefit is capped at ₹50 Lakh per exporting firm per financial year."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need a new UIN for every loan?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You need a UIN to be shared with your bank. The UIN is generally valid for one year. If you deal with multiple banks, you must ensure the total subvention across all banks stays under the ₹50 Lakh cap."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Positive List"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The government now maintains a list of HSN 6-digit codes that are eligible for the 2.75% subvention. If your product is not on this list (e.g., certain steel or chemical lines), you cannot claim the benefit."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What documents are needed for the DGFT UIN?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You need an Active IEC, Udyam Registration, and a valid Digital Signature (DSC). CloudDesk handles the portal navigation and document attachment (Export Orders, etc.)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I claim Interest Subvention if I am also in a PLI Scheme?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. Products covered under any Production Linked Incentive (PLI) scheme are specifically excluded from interest subvention in 2026 to prevent "Incentive Overlap."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I over-claim?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If you exceed the ₹50 Lakh cap, you must voluntarily surrender the excess within the same financial year. Failure to do so renders you liable for the amount plus interest/penalties from the DGFT."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -640,6 +773,7 @@ const CloudDeskIES = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 export default CloudDeskIES;
