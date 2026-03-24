@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskWarehouse/TopBar";
 import Navbar from "../components/CloudDeskWarehouse/Navbar";
@@ -32,6 +33,137 @@ const CloudDeskWarehouse = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+  <> 
+  <Helmet>
+        <title>
+          Customs Warehouse License Registration | Warehouse Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Obtain mandatory licensing under Section 57, 58, or 65 of the Customs Act. We handle the process of converting your facility into a legally recognized Bonded Warehouse"
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/warehouse-license"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Customs Warehouse License Registration Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Obtain mandatory licensing under Section 57, 58, or 65 of the Customs Act. We handle the process of converting your facility into a legally recognized Bonded Warehouse"
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/warehouse-license"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Customs Warehouse License Registration",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Obtain mandatory licensing under Section 57, 58, or 65 of the Customs Act. We handle the process of converting your facility into a legally recognized Bonded Warehouse"
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the difference between Section 57 and Section 58 warehouses?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    ` Section 57 (Public) Operated by the government or authorized agencies (like CWC). Anyone can store goods here.
+                      Section 58 (Private) Your own facility licensed to store your imported goods without immediate duty payment.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long can I keep goods in a Bonded Warehouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, the initial period is one year, extendable by the Commissioner. However, for capital goods (machinery), you can often store them until they are cleared for home consumption."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is GST applicable on Bonded Warehouse storage charges?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. Storage and handling charges attract 18% GST. However, the sale of goods within a bonded warehouse to another buyer is treated as a "no-supply" under Schedule III (Tax-Free) until the goods are cleared for home consumption.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need a separate FSSAI license for a warehouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. If you store food items, you must have an FSSAI Registration/License specifically for the "Storage/Warehouse" category. A manufacturing license is not enough for a standalone storage site.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Insurance" requirement for a license?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Customs and WDRA mandate that the warehouse must be insured for Fire, Flood, Theft, and Burglary. In 2026, the policy must also cover the Duty Amount of the stored goods, not just their value."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I perform "Value Addition" like labeling in a warehouse?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, under Section 64 (Owner's Right). You can sort, pack, or relabel goods in a bonded warehouse under Customs supervision. This is ideal for meeting LMPC (Legal Metrology) labeling requirements before final clearance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I lose goods in a Bonded Warehouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `You are liable to pay Full Duty + Interest + Penalties. The "Warehouse Keeper" is personally responsible for any shortage in the digital stock ledger.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Digital Bonded Ledger" in 2026?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, manual registers are illegal. You must maintain a Cloud-Based Inventory System that is accessible by Customs officers for real-time audits. CloudDesk provides the software integration for this ledger."
+                }
+              },
+            ]
+          })}
+        </script>
+  </Helmet>    
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -521,6 +653,7 @@ const CloudDeskWarehouse = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
