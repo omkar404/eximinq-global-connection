@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskDefenceEXIM/TopBar";
 import Navbar from "../components/CloudDeskDefenceEXIM/Navbar";
@@ -31,6 +32,137 @@ const CloudDeskDefenceEXIM = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+
+<Helmet>
+        <title>
+          Defence EXIM Authorization | Authorization Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Navigating the complexities of SCOMET Category 6 (Munitions) and MoD approvals. We ensure compliance for exports of military hardware, software, and technology."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/defence-exim-license"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Defence EXIM Authorization in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Navigating the complexities of SCOMET Category 6 (Munitions) and MoD approvals. We ensure compliance for exports of military hardware, software, and technology."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/warehouse-license"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Defence EXIM Authorization",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Navigating the complexities of SCOMET Category 6 (Munitions) and MoD approvals. We ensure compliance for exports of military hardware, software, and technology."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is SCOMET and how does Category 6 differ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `SCOMET stands for Special Chemicals, Organisms, Materials, Equipment and Technologies. Category 6 is the "Munitions List," which covers strictly military-grade hardware, ammunition, and specialized components. While other SCOMET items are "Dual-Use," Category 6 is for "Lethal/Combat" items.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Does a "Part" or "Component" of a tank require a Defence License?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Even if it’s just a specialized screw or a circuit board, if it is designed specifically for a military platform listed in SCOMET Category 6, it requires a Defence Export Authorization from the Department of Defence Production (DDP)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is OGEL (Open General Export License)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `OGEL is a "Bulk License" for specified items and destinations (usually friendly nations). If you qualify for OGEL, you don't need an individual license for every shipment. CloudDesk helps you apply for OGEL to drastically reduce your lead times.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Who issues the Defence Export License DGFT or MoD?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `While the DGFT manages the portal, for Category 6 (Defence), the primary "Subject Matter Expert" and approving authority is the Department of Defence Production (DDP) under the Ministry of Defence.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "End-Use Certificate" (EUC) requirement?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "An EUC is a legal undertaking by the foreign government or the end-user that the item will not be diverted, re-exported, or used for weapons of mass destruction. It must be signed by a high-ranking official or an authorized representative of the buyer."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I export Defence items for "Testing and Evaluation" without a license?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. Even for "Demo" or "Testing" purposes, you need a temporary export authorization. CloudDesk manages these "Returnable Export" licenses to ensure your equipment comes back to India safely.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long is a Defence Export Authorization valid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Typically, an authorization is valid for 2 years. However, for large projects, it can be extended based on the delivery schedule."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the reporting requirements after the export?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must submit a Delivery Verification Certificate (DVC) or equivalent document within 90 days of export to prove the goods reached the intended destination. CloudDesk’s Compliance Sentinel ensures you never miss these critical filings."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -521,6 +653,7 @@ const CloudDeskDefenceEXIM = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
