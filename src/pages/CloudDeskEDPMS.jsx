@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskEDPMS/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskEDPMS/Navbar";
 import Hero from "../components/CloudDeskEDPMS/Hero";
 import Fees from "../components/CloudDeskEDPMS/Fees";
@@ -36,6 +37,157 @@ import { MainNavbar } from "../components/CloudDeskEDPMS/MainNavbar";
 
 const CloudDeskEDPMS = () => {
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Close Open Entries in EDPMS & Get e-BRC | EDPMS BRC Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Un-reconciled export payments can land you on the <strong>RBI Caution List</strong>, stopping all your future shipments. We map IRMs to Shipping Bills and regularize your account."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/edpms-ebrc"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Close Open Entries in EDPMS & Get e-BRC in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Un-reconciled export payments can land you on the <strong>RBI Caution List</strong>, stopping all your future shipments. We map IRMs to Shipping Bills and regularize your account."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/edpms-ebrc"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Close Open Entries in EDPMS & Get e-BRC",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Un-reconciled export payments can land you on the RBI Caution List, stopping all your future shipments. We map IRMs to Shipping Bills and regularize your account."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does the new e-BRC system require bank intervention?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Under the new DGFT system (2023), the process is self-certified. The bank issues the IRM, and the exporter can self-generate the e-BRC on the DGFT portal by linking the IRM to the Shipping Bill. However, closing the entry in EDPMS still requires bank action."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my payment came with a deduction (Bank Charges)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Small deductions ("Bank Charges") are allowed. You must instruct the bank to close the Shipping Bill fully by accounting for the "Bank Charges" component separately in the EDPMS system.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I get removed from the Caution List instantly?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is not instant. Once the AD Bank marks the bills as "Realized" or "Extension Granted" in the EDPMS, the system updates the status overnight or within a few days, removing the caution flag.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between EDPMS and e-BRC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `• EDPMS An RBI system where the Shipping Bill (money expected) and IRM (money received) are matched.
+                     • e-BRC A DGFT certificate that proves the money was received, used to claim government incentives.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the time limit to realize export proceeds in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The standard window is 15 months from the date of export. For "Status Holders" and specific "INR-Invoiced" exports, this can be extended up to 18 months with prior bank approval.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Why is my Shipping Bill still "Open" despite receiving payment?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The bank likely hasn't updated the "Object Code" or the "SB Mapping" in the EDPMS server. This is a common manual error by bank staff. CloudDesk provides the Reconciliation Report you need to send to your bank manager to fix this.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I receive payment in a different currency?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `EDPMS can handle currency fluctuations within a 5% tolerance. If the difference is higher (due to bank charges or FX moves), you must provide a "Reason for Short-Realization" to the bank.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I get an e-BRC for a "Third-Party" payment?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, but it's complex. You must mention the third-party details in the Shipping Bill and have a "Tripartite Agreement." Without this, the bank will refuse to issue the e-BRC and you'll lose your incentives.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the penalties for not closing EDPMS entries?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Under FEMA 1999/2026, non-realization is a serious offense. Penalties can be up to 3x the amount not realized. More practically, your bank will stop issuing "Forward Contracts" and "PCFC" (Pre-shipment Credit) for your future orders.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does the new e-BRC system affect GST refunds?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `In 2026, the GST portal is directly linked to the DGFT's e-BRC server. If your e-BRC isn't generated within the time limit, the GST department can issue a "Demand" to recover the IGST refund they previously paid you.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -647,6 +799,7 @@ const CloudDeskEDPMS = () => {
         </div>
       </footer>
     </div>
+</>
   );
 };
 
