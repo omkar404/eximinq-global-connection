@@ -1,3 +1,4 @@
+import { Helment } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskFactory/TopBar";
 import Navbar from "../components/CloudDeskFactory/Navbar";
@@ -36,6 +37,140 @@ const CloudDeskFactory = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+<Helmet>
+        <title>
+          Factory License Registration & Renewal | Factory License Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Setting up a manufacturing unit? We assist with Factory Plan Approval, Stability Certification, and Licensing from the Directorate of Industrial Safety and Health (DISH)."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/factory-license"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Factory License Registration & Renewal in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Setting up a manufacturing unit? We assist with Factory Plan Approval, Stability Certification, and Licensing from the Directorate of Industrial Safety and Health (DISH)."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/factory-license"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Factory License Registration & Renewal",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Setting up a manufacturing unit? We assist with Factory Plan Approval, Stability Certification, and Licensing from the Directorate of Industrial Safety and Health (DISH)."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Do I need a Factory License if I only have 5 workers?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Generally, No — you would fall under the Shop & Establishment Act. However, if your manufacturing involves "Hazardous Processes" (chemicals, explosives, etc.), the government can notify your unit under Section 85, making a license mandatory even with just 1 worker.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Aid of Power" definition in 2026?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If you use electricity, solar, steam, or any mechanical energy to run even a single packaging machine or a small motor for your process, you are "with the aid of power."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I run a factory in a residential area with a license?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. A Factory License is only granted for premises in Conforming Industrial Zones or land with Non-Agricultural (NA) Industrial conversion."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the primary documents required?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    ` Approved Building Plans and Machinery Layout.
+                      Stability Certificate from a licensed Structural Engineer.
+                      NOC from Fire Department and Pollution Control Board (MPCB/CPCB).
+                      Proof of Ownership/Lease and Electricity Load Sanction.
+                      List of Raw Materials and Process Flow Chart.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long is the license valid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, most states allow you to apply for a validity of 1, 5, or 10 years. CloudDesk recommends the 10-year renewal to avoid annual bureaucratic interference."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What happens during the "Site Inspection"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The Inspector checks(1) If the machine layout matches the approved drawing, (2) If safety guards are on moving parts, (3) Adequate lighting/ventilation, and (4) If workers have proper PPE (Personal Protective Equipment)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the penalty for late renewal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Most states charge a 25% surcharge if the renewal application is not filed 30 days before expiry. If the license expires, you are technically operating an illegal unit."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can a Factory License be transferred?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. If the "Occupier" changes or the business is sold, you must file an Amendment Application with the new details and the transfer deed.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -627,6 +762,7 @@ const CloudDeskFactory = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
