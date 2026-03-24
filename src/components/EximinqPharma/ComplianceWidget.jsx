@@ -11,7 +11,6 @@ const ComplianceWidget = () => {
     <section className="relative -mt-10 z-20">
       <div className="max-w-7xl mx-auto px-4">
         <div className="bg-white rounded-2xl shadow-xl border border-slate-100 py-12 px-6 md:px-10">
-
           {/* Heading */}
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-slate-800">
@@ -25,7 +24,10 @@ const ComplianceWidget = () => {
           {/* Options */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categories.map((item) => (
-              <button
+              <a
+                href="/services/cdsco-compliance"
+                target="_blank"
+                rel="noopener noreferrer"
                 key={item}
                 className="group p-6 rounded-xl border border-slate-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left"
               >
@@ -38,10 +40,18 @@ const ComplianceWidget = () => {
                 <p className="text-sm text-slate-500">
                   View CDSCO & DGFT requirements
                 </p>
-              </button>
+              </a>
             ))}
           </div>
 
+          {/* <a
+            href="/epcg-closure-services"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal-600 font-bold text-sm"
+          >
+            Audit Now →
+          </a> */}
         </div>
       </div>
     </section>
