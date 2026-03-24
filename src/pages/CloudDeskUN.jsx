@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskUN/TopBar";
 import Navbar from "../components/CloudDeskUN/Navbar";
@@ -30,6 +31,145 @@ const CloudDeskUN = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+<Helmet>
+        <title>
+          Mandatory UN IIP Packaging Certification | Mandatory UN IIP Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Exporting Chemicals, Flammable Liquids, or Explosives? Your packaging must carry the UN Mark. We manage the testing and certification process through the Indian Institute of Packaging (IIP)."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/un-iip-certification"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Mandatory UN IIP Packaging Certification Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Exporting Chemicals, Flammable Liquids, or Explosives? Your packaging must carry the UN Mark. We manage the testing and certification process through the Indian Institute of Packaging (IIP)."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/un-iip-certification"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Mandatory UN IIP Packaging Certification",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Exporting Chemicals, Flammable Liquids, or Explosives? Your packaging must carry the UN Mark. We manage the testing and certification process through the Indian Institute of Packaging (IIP)."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the UN Mark?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a unique code (e.g., 4G/X15/S/26/IND/IIP-1234) printed on the package. It tells port authorities that this specific design has passed the UN's rigorous safety tests for dangerous goods."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which products need UN IIP Certification?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Any item classified under the 9 Classes of Dangerous Goods, including:
+                     Chemicals & Flammable Liquids (Paints, Solvents).
+                     Lithium Batteries & Lead-Acid Batteries.
+                     Pesticides & Pharmaceuticals.
+                     Aerosols & Compressed Gases.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is the certificate issued for the product or the package?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The certificate is issued to the Packaging Manufacturer for a specific Package Design. However, it also lists the Exporter's Name who will be using that specific packaging."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How many samples do I need to send for testing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Depending on the package type (Drums, Boxes, Bags), you typically need to send 18 to 24 empty samples to the nearest IIP lab (Mumbai, Delhi, Chennai, Kolkata, Hyderabad, or Ahmedabad)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the validity of the UN IIP Certificate in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    ` ISO-Certified Manufacturers 18 Months.
+                      Non-ISO Manufacturers 9 Months.
+                      Note No extensions are granted. You must re-test fresh samples before expiry.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "X, Y, Z" marking?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    ` X Packing Group I (High Danger).
+                      Y Packing Group II (Medium Danger).
+                      Z Packing Group III (Low Danger).
+                     Pro-Tip An 'X' certified box can carry Y and Z goods, but a 'Z' box cannot carry X goods.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does the process take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "From sample submission to certificate issuance, it takes 7 to 10 working days (Normal) or 3 to 5 days (Tatkal/Express)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use the same certificate for both Sea and Air?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. You can apply for a Combined Certificate that complies with both IMDG (Sea) and IATA/ICAO (Air) regulations. CloudDesk always recommends the combined route to give you logistics flexibility."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -590,6 +730,7 @@ const CloudDeskUN = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
