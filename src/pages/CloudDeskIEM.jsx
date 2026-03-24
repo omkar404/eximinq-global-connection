@@ -1,3 +1,4 @@
+import { Helment } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskIEM/TopBar";
 import Navbar from "../components/CloudDeskIEM/Navbar";
@@ -29,6 +30,138 @@ const CloudDeskIEM = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+
+<>
+
+<Helmet>
+        <title>
+          IEM Registration with DPIIT | IEM Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Have you outgrown the MSME limit? Industrial undertakings exempted from Compulsory Licensing must file an Industrial Entrepreneur Memorandum (IEM) to secure government recognition."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/iem-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="IEM Registration with DPIIT in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Have you outgrown the MSME limit? Industrial undertakings exempted from Compulsory Licensing must file an Industrial Entrepreneur Memorandum (IEM) to secure government recognition."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/iem-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "IEM Registration with DPIIT",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Have you outgrown the MSME limit? Industrial undertakings exempted from Compulsory Licensing must file an Industrial Entrepreneur Memorandum (IEM) to secure government recognition."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Who needs to file an IEM?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Any industrial undertaking that (1) is NOT an MSME (i.e., investment in plant/machinery > ₹50 Crore), (2) is in the "Non-Licensed" sector (most manufacturing), and (3) is not covered under the MSMED Act.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can an MSME file an IEM?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. MSMEs must register under Udyam. If an MSME grows and crosses the ₹50Cr/₹250Cr limit, they must transition from Udyam to IEM."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is IEM required for Service-based industries?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. IEM is strictly for Industrial Undertakings (Manufacturing/Processing). Services usually fall under Shop & Establishment or Udyam (for service MSMEs)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "When should I file IEM Part A?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `As soon as you have "Taken Effective Steps" to set up the unit — this means you have acquired land, placed orders for machinery, or secured financing.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the deadline for filing Part B?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must file Part B (Commencement of Production) within 6 months of starting commercial operations. Failure to do so can lead to the cancellation of your Part A acknowledgment."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my investment amount changes from Part A to Part B?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `This is common. Part B allows you to report the actual final investment and employment figures. CloudDesk manages the "Variation Analysis" to ensure the deviation is within acceptable limits.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Is IEM a "Certificate of Origin"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. IEM is an industrial license. However, a copy of your IEM is often required by the DGFT when you apply for a Certificate of Origin or Export Incentives."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the fees for IEM registration in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The government fee is currently ₹1,000 for Part A. There is no fee for Part B, but professional management is key to ensuring the data matches your GST and Income Tax filings."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -498,6 +631,7 @@ const CloudDeskIEM = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
