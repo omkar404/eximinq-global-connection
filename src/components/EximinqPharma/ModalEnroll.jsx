@@ -426,7 +426,7 @@ export const ModalEnroll = ({
       console.log("📤 Final payload:", payload);
 
       const res = await fetch(
-         `${process.env.REACT_APP_API_URL}/api/pharmaceuticals-industry-import-export`,
+        `${process.env.REACT_APP_API_URL}/api/pharmaceuticals-industry-import-export`,
         // "http://localhost:5000/api/pharmaceuticals-industry-import-export",
         {
           method: "POST",
