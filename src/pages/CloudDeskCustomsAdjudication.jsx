@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskCustomsAdjudication/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskCustomsAdjudication/Navbar";
 import Hero from "../components/CloudDeskCustomsAdjudication/Hero";
 import Fees from "../components/CloudDeskCustomsAdjudication/Fees";
@@ -30,6 +31,168 @@ import { MainNavbar } from "../components/CloudDeskCustomsAdjudication/MainNavba
 
 const CloudDeskCustomsAdjudication = () => {
   return (
+<>
+<Helmet>
+        <title>
+          Policy Relaxation Committee (PRC) Representation | Policy Relaxation Committee Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Has your application been rejected by the Regional Authority due to
+            a procedural lapse? We represent your case at DGFT Headquarters to
+            condone delays and relax policy provisions."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/customs-adjudication"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Policy Relaxation Committee (PRC) Representation Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Has your application been rejected by the Regional Authority due to
+            a procedural lapse? We represent your case at DGFT Headquarters to
+            condone delays and relax policy provisions."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/customs-adjudication"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Policy Relaxation Committee (PRC) Representation",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Has your application been rejected by the Regional Authority due to a procedural lapse? We represent your case at DGFT Headquarters to condone delays and relax policy provisions."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can I attend the Personal Hearing myself?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, you can. However, Customs Law is complex. Having a professional consultant or lawyer who understands the nuances of the Customs Act, Valuation Rules, and case precedents significantly improves your chances of a favorable outcome."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I ignore the SCN?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If you fail to reply or appear for hearings (usually 3 opportunities are given), the officer will pass an Ex-Parte Order based on available records, likely confirming the demand for duty and imposing maximum penalties."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can penalties be reduced?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Under Section 28 of the Customs Act, if you pay the duty along with interest and a reduced penalty (15% or 25%) within 30 days of the SCN/Order, the proceedings can be concluded. We advise on whether to opt for this or contest the case."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is a Show Cause Notice (SCN)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a formal notice informing you of the grounds on which the department proposes to confiscate your goods or impose a penalty. You are typically given 30 days to respond."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I ignore an SCN?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The Adjudicator will pass an "Ex-Parte Order" (an order in your absence). This usually results in the highest possible penalties and absolute confiscation because your side of the story was never heard.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I ask for more time to reply?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. You can request an extension. Under Section 122A, you are generally allowed up to three adjournments if you can show sufficient cause."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is an Order-in-Original (O-I-O)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is the final written decision of the Adjudicating Authority. It contains the facts, your submissions, the officer’s findings, and the final "Operating Order" (Duty + Fine + Penalty).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the limits of the Adjudicators?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `" Assistant/Deputy Commissioner Cases where the value of goods is up to ₹5 Lakh.  Joint/Additional Commissioner Cases up to ₹50 Lakh.  Commissioner Cases with no value limit."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Redemption Fine"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If your goods are confiscated, the officer may give you an "option to pay a fine in lieu of confiscation" (Section 125). Once you pay this fine (and the duty), you can take your goods home.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "I am unhappy with the O-I-O. What is the next step?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must file an appeal with the Commissioner of Customs (Appeals) within 60 days of receiving the order."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I have to pay the penalty before appealing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, you must make a Pre-Deposit of 7.5% of the disputed duty or penalty (Section 129E) to stay the recovery and have your appeal heard."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
+
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -560,6 +723,7 @@ const CloudDeskCustomsAdjudication = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
