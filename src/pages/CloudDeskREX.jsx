@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskREX/TopBar";
+import { Helment } from "react-helmet-async";
 import Navbar from "../components/CloudDeskREX/Navbar";
 import Hero from "../components/CloudDeskREX/Hero";
 import Fees from "../components/CloudDeskREX/Fees";
@@ -33,6 +34,138 @@ import { MainNavbar } from "../components/CloudDeskREX/MainNavbar";
 
 const CloudDeskREX = () => {
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Registered Exporter (REX) System | Registered Exporter Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Stop paying for physical Certificates of Origin (Form A). Get your <strong>REX Number</strong> and self-certify the origin of your goods for duty-free exports to the EU & UK."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/rex-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Registered Exporter (REX) System Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Stop paying for physical Certificates of Origin (Form A). Get your <strong>REX Number</strong> and self-certify the origin of your goods for duty-free exports to the EU & UK."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/rex-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Registered Exporter (REX) System",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Stop paying for physical Certificates of Origin (Form A). Get your <strong>REX Number</strong> and self-certify the origin of your goods for duty-free exports to the EU & UK."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the REX System?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is a system of certification of origin based on a principle of Self-Certification. Exporters who are "Registered" can certify the origin of their goods themselves via a "Statement on Origin" on the invoice.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is REX mandatory for all exports to the EU?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is mandatory for shipments where you want to claim GSP (Preferential) duty benefits and the value exceeds €6,000. For shipments below €6,000, any exporter can self-certify without a REX number."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does REX apply to the UK?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, the UK uses the DCTS (Developing Countries Trading Scheme). While similar to REX, it has its own registration requirements. CloudDesk manages both REX (EU/Switzerland/Norway) and DCTS (UK) registrations."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to get a REX number?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Once the application is submitted on the EU portal and approved by the local Indian agency (like EIC), the number is generated in 3-5 working days."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Statement on Origin"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is a specific piece of text that MUST be on your invoice. Example: "The exporter [REX Number] of the products covered by this document declares that, except where otherwise clearly indicated, these products are of Indian preferential origin."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need a REX number for every product?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. One REX number covers your entire IEC. However, you must list all the HSN Sections you intend to export in your REX application. CloudDesk helps you "Future-Proof" your application by including relevant HSNs.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the REX registration expire?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No, the REX registration has no expiry date. However, it can be revoked if you fail to maintain records for 3 years or if an "Origin Audit" proves your goods don't meet the value-addition criteria.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if I make a mistake in my REX statement?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If the EU Customs finds a discrepancy, they will deny the duty benefit to your buyer and charge the Full MFN Duty plus penalties. CloudDesk provides a Statement Validator to ensure every invoice is perfect."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -614,6 +747,7 @@ const CloudDeskREX = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
