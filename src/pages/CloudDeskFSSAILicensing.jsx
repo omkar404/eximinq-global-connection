@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskFSSAILicensing/TopBar";
+import {Helment} from "react-helmet-async";
 import Navbar from "../components/CloudDeskFSSAILicensing/Navbar";
 import Hero from "../components/CloudDeskFSSAILicensing/Hero";
 import Fees from "../components/CloudDeskFSSAILicensing/Fees";
@@ -27,6 +28,163 @@ import { MainNavbar } from "../components/CloudDeskFSSAILicensing/MainNavbar";
 
 const CloudDeskFSSAILicensing = () => {
   return (
+<>
+<Helmet>
+        <title>
+          FSSAI Licensing & Import Clearance | FSSAI Licensing Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Importing food products? You need a mandatory Central License and FICS clearance. We manage sampling, lab testing, and NOC generation to prevent shipment rejection."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/fssai-licensing"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="FSSAI Licensing & Import Clearance Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Importing food products? You need a mandatory Central License and FICS clearance. We manage sampling, lab testing, and NOC generation to prevent shipment rejection."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/fssai-licensing"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "FSSAI Licensing & Import Clearance",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Importing food products? You need a mandatory Central License and FICS clearance. We manage sampling, lab testing, and NOC generation to prevent shipment rejection."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What if the sample fails the lab test?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If a sample fails, you can apply for a re-test at a referral lab. If that also fails, the shipment gets a Non-Conformance Report (NCR) and must be re-exported or destroyed. It cannot be cleared for consumption."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is FSSAI required for 100% Export Oriented Units (EOU)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, even 100% Export Oriented Units must obtain a Central License under the category of "Exporting FBO". However, import clearance procedures may be simplified if the goods are for re-export.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I stick labels after the goods arrive in India?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Generally, labels should be affixed before shipment. However, FSSAI allows rectification of labeling deficiencies (like adding Importer details or Veg/Non-Veg logo) at the Customs Bonded Warehouse under officer supervision for a fee."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need a State or Central License?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, all Importers and Exporters must obtain a Central License, regardless of turnover. State Licenses are only for domestic-only traders/manufacturers with turnover between ₹12 Lakh and ₹20 Crore."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the cost of an FSSAI Central License in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The government fee is ₹7,500 per year. You can apply for up to 5 years (₹37,500) to avoid annual renewal hassles."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use one license for multiple locations?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. FSSAI is Premise-Based. You can have a "Head Office" license to manage the brand, but every warehouse or cold storage facility must have its own license/registration.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I link my FSSAI license to my Bill of Entry?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Under SWIFT 2.0, this is automatic. When you file your BE on ICEGATE, the system fetches your FSSAI details using your IEC. CloudDesk ensures this mapping is active before you ship your first container."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if my product fails the lab test?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If the sample is non-conforming, a Non-Conforming Report (NCR) is issued. You have the right to appeal for a "Second Referral" to a Referral Lab. CloudDesk manages this appeal process (Form 6) to save your shipment.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Are "Rectifiable Labels" allowed?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, for certain missing details like the FSSAI Logo, Importer Name/Address, or Veg/Non-Veg symbol. You can fix these in a Customs Bonded Warehouse before the NOC is issued. However, "Date of Manufacture" or "Expiry" are NOT rectifiable.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "When is the FSSAI Annual Return (Form D1) due?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Every licensed manufacturer and importer must file the annual return by May 31st for the previous financial year."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the penalty for late renewal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, the late fee is ₹100 per day from the date of expiry. If you don't renew within 30 days of expiry, the license is permanently terminated and you must apply for a fresh one"
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -695,6 +853,7 @@ const CloudDeskFSSAILicensing = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
