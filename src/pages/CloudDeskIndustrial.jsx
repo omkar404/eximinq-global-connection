@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskIndustrial/TopBar";
 import Navbar from "../components/CloudDeskIndustrial/Navbar";
@@ -34,6 +35,138 @@ const CloudDeskIndustrial = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+
+<>
+<Helmet>
+        <title>
+          Industrial License for Regulated Sectors | Industrial License Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Planning to manufacture Defense Equipment, Explosives, or Hazardous Chemicals? You cannot just file an IEM. You need a formal Industrial License (IL) from DPIIT & MHA."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/industrial-license"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Industrial License for Regulated Sectors in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Planning to manufacture Defense Equipment, Explosives, or Hazardous Chemicals? You cannot just file an IEM. You need a formal Industrial License (IL) from DPIIT & MHA."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/industrial-license"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Industrial License for Regulated Sectors",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Planning to manufacture Defense Equipment, Explosives, or Hazardous Chemicals? You cannot just file an IEM. You need a formal Industrial License (IL) from DPIIT & MHA."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the difference between an IEM and an Industrial License?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    ` IEM For "Non-Licensed" sectors (e.g., textiles, cars, food). It is a declaration of starting a business.
+                      Industrial License For "Sensitive" sectors. It is an explicit permission granted by the government after security and technical audits.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does an MSME need an Industrial License?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. If an MSME manufactures a product on the "Compulsory Licensing" list (like defense components), they must obtain an IL, regardless of their size or investment.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Is the "Alcoholic Drinks" license for retail shops?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. This IL is for the manufacturing (Distillation and Brewing) of alcohol. Retail and wholesale licenses are governed separately by State Excise departments."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long is an Industrial License valid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, an IL is typically valid for 15 years, provided you commence production within the period specified in the license (usually 3 years, extendable by 2)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the main grounds for rejection of an IL?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The most common reasons are (1) Adverse security reports from MHA, (2) Environmental concerns in "Red Category" zones, and (3) Location restrictions (being too close to an urban area or a sensitive ecological zone).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can an Industrial License be transferred?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, but only with prior government approval. If you sell the company or change the majority shareholding, you must apply for a "Change in Ownership" amendment to the IL.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Do I need an IL for "Dual-Use" items?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Items that have both civilian and military applications (Dual-Use) are governed by the SCOMET list. You may not need an IL for manufacturing, but you will definitely need an Export Authorization to ship them abroad."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Letter of Intent" (LOI)?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The government first issues an LOI. Once you fulfill the conditions (like getting environmental clearance or setting up the plant), the LOI is converted into a formal Industrial License."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -516,6 +649,7 @@ const CloudDeskIndustrial = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
