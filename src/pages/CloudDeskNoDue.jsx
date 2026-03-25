@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskNoDue/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskNoDue/Navbar";
 import Hero from "../components/CloudDeskNoDue/Hero";
 import Fees from "../components/CloudDeskNoDue/Fees";
@@ -27,6 +28,137 @@ import { MainNavbar } from "../components/CloudDeskNoDue/MainNavbar";
 
 const CloudDeskNoDue = () => {
   return (
+
+<>
+<Helmet>
+        <title>
+          No Incentive Certificate for Returned Goods | No Incentive Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content={`Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`}
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/no-due-certificate"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="No Incentive Certificate for Returned Goods Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content={`Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`}
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/no-due-certificate"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "No Incentive Certificate for Returned Goods",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              `Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why do I need an NDC for my EPCG/AA license?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The NDC proves that you have not only fulfilled the "Export Obligation" but have also paid any administrative fees, late fees, or penalties that might have been levied during the 6-year license tenure.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I get my Bank Guarantee back without an NDC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. Customs will only "Cancel" the bond and release the BG once the License Cell issues a "Closure Order," which is contingent upon an NDC from the Fine & Penalty (F&P) section.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to get a No Due Certificate from Customs?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If your records are clear, it takes 7–15 working days. If there are pending "Queries" or unpaid "Demands," it can take months. CloudDesk’s Pre-Check identifies these demands before you apply.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Shipping Line NDC"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is a digital or physical document issued by the carrier (e.g., Maersk, MSC) confirming that ocean freight, local charges, and "Detention" (if any) are paid. Without this, you cannot get the Delivery Order (DO).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does a CFS issue an NDC for every container?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. The CFS NDC (or "Pass-out") confirms that handling, scanning, and "Demurrage" (storage) charges are settled. CloudDesk integrates these payments into your dashboard for one-click clearance.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "I want to close my IEC. Do I need an NDC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. You must prove to the DGFT that there are no "Incomplete Export Obligations" linked to your IEC. If you have open licenses, you must either fulfill them or "Regularize" them (pay duty + interest) to get the NDC.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can a "Show Cause Notice" block my NDC?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Absolutely. Even an unproven notice will block your NDC. CloudDesk helps you file an "Ad-hoc Bond" or resolve the notice through the Adjudication process to clear the path for the NDC.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is an "Internal NDC" in a large company?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `For large corporates, the EXIM department must provide an NDC to the Finance department before an "Export Incentive" is booked as profit. CloudDesk provides the Compliance Report that serves as this internal NDC.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -600,6 +732,7 @@ const CloudDeskNoDue = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
