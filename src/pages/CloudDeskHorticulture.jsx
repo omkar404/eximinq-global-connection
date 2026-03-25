@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskGSTFiling/TopBar";
 import Navbar from "../components/CloudDeskHorticulture/Navbar";
@@ -32,6 +33,138 @@ const CloudDeskHorticulture = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Horticulture Export & Subsidy Solutions | Horticulture Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Setting up a Cold Storage, Packhouse, or Ripening Chamber? Get up to 35% - 50% Capital Subsidy from the National Horticulture Board (NHB). We guide you from Project Report to Grant Release."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/horticulture"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Horticulture Export & Subsidy Solutions Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Setting up a Cold Storage, Packhouse, or Ripening Chamber? Get up to 35% - 50% Capital Subsidy from the National Horticulture Board (NHB). We guide you from Project Report to Grant Release."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/horticulture"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Horticulture Export & Subsidy Solutions",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Setting up a Cold Storage, Packhouse, or Ripening Chamber? Get up to 35% - 50% Capital Subsidy from the National Horticulture Board (NHB). We guide you from Project Report to Grant Release."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Do I need both NHB and APEDA registration?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Yes, for different reasons. NHB Is for infrastructure and production (e.g., setting up your cold store, nursery, or high-tech farm and getting subsidies). APEDA Is for exporting (e.g., getting your RCMC to claim incentives and meet international sanitary standards)."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Nursery Rating System"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `To ensure quality, NHB rates nurseries from 1 to 5 stars. In 2026, many government schemes only allow you to buy planting material from 3-Star rated nurseries or above. CloudDesk helps nurseries achieve these ratings to become "Authorized Suppliers."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is there a minimum land requirement for NHB schemes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. For open-field cultivation, it is usually over 2.0 hectares, and for protected cultivation (polyhouses), it is over 2,500 sq. meters. (Lower limits apply for North East/Hilly regions)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I export horticulture products without a Phytosanitary Certificate (PSC)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. Almost every country requires a PSC under the International Plant Protection Convention (IPPC). Shipping without one is a guaranteed way to have your cargo destroyed or returned at your own cost."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Restricted" list for Horticulture?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Certain items like Sandalwood, Red Sanders, and specific Onion seeds are either prohibited or require a special "Export License" from the DGFT/Ministry of Agriculture. CloudDesk monitors the "EXIM Committee" minutes to keep you updated on these quotas.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Back-Ended" subsidy?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It means the bank provides the full loan first. Once your project is complete and inspected, the NHB releases the subsidy amount to the bank, which is then adjusted against your last loan installments. This ensures the project is actually built before the government pays."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much is the APEDA RCMC fee?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The registration fee is ₹5,000 (plus GST). It is valid for 5 years. CloudDesk manages your renewal so your "Exporter" status never lapses.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "TraceNet"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is APEDA’s software for tracking the supply chain of organic products (and certain fruits like grapes/pomegranates). CloudDesk integrates with TraceNet to ensure your "Transaction Certificates" are issued accurately for every batch.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -580,6 +713,7 @@ const CloudDeskHorticulture = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
