@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskDPD/TopBar";
 import Navbar from "../components/CloudDeskDPD/Navbar";
@@ -31,6 +32,136 @@ const CloudDeskDPD = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+<Helmet>
+        <title>
+          Direct Port Delivery (DPD) Registration | Direct Port Delivery Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Bypass the CFS and clear your cargo directly from the Terminal. Reduce logistics costs by up to ₹ 10,000 per container and cut delivery time by 3-5 days."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/dpd-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Direct Port Delivery (DPD) Registration Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Bypass the CFS and clear your cargo directly from the Terminal. Reduce logistics costs by up to ₹ 10,000 per container and cut delivery time by 3-5 days."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/dpd-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Direct Port Delivery (DPD) Registration",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Bypass the CFS and clear your cargo directly from the Terminal. Reduce logistics costs by up to ₹ 10,000 per container and cut delivery time by 3-5 days."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Who is eligible for DPD registration?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, eligibility is primarily based on: (1) AEO (T1, T2, or T3) status holders, or (2) Importers with a minimum volume of 25-50 TEUs (containers) per year at a specific port. CloudDesk helps SMEs get DPD by leveraging their AEO T1 certification."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is DPD available at all Indian ports?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is most active at major ports like Nhava Sheva (JNPT), Mundra, Hazira, and Chennai. Each port has its own "DPD Cell" which CloudDesk liaises with on your behalf.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does DPD registration expire?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `DPD permission is typically valid as long as your IEC and AEO status are active. However, you must file a "DPD Renewal/Continuance" declaration annually to confirm your volume and compliance.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much money can I save with DPD?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "On average, DPD saves between ₹8,000 to ₹20,000 per container by eliminating CFS handling charges, ground rent, and secondary transportation costs. For a company importing 10 containers a month, that’s over ₹1.5 Lakhs in pure profit saved."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "72-Hour Rule"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If you do not pick up your container from the port terminal within 48 to 72 hours (depending on the port), the terminal "evacuates" it to a designated CFS. You then lose the DPD benefit and pay full CFS charges. CloudDesk’s Alert System prevents this evacuation.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use DPD for LCL (Less than Container Load) shipments?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. DPD is only for FCL (Full Container Load) shipments because the entire container is delivered to a single importer. LCL cargo must go to a CFS for "de-stuffing" and sorting.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "DPD Code"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a unique identification number assigned to your company by the Port Terminal. You must mention this code in your Bill of Entry to inform Customs and the Terminal that the container is meant for Direct Delivery."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What if my cargo needs "Physical Examination"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Even DPD cargo can be marked for examination by the RMS. In such cases, the examination is done at a special DPD Area within the port or at a nearby "DPD-Speed" facility, rather than a general CFS, maintaining the speed of delivery.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -578,6 +709,7 @@ const CloudDeskDPD = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
