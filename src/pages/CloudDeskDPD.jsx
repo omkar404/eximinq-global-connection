@@ -158,7 +158,7 @@ const CloudDeskDPD = () => {
                     `Even DPD cargo can be marked for examination by the RMS. In such cases, the examination is done at a special DPD Area within the port or at a nearby "DPD-Speed" facility, rather than a general CFS, maintaining the speed of delivery.`
                 }
               },
-            ]
+            ] 
           })}
         </script>
       </Helmet>
