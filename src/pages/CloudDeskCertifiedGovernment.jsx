@@ -1,3 +1,4 @@
+import  { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskFactoryStuffing/TopBar";
 import Navbar from "../components/CloudDeskFactoryStuffing/Navbar";
@@ -31,6 +32,142 @@ const CloudDeskFactoryStuffing = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+<Helmet>
+        <title>
+          Become a Certified Government Supplier | Certified  Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Direct access to tenders from Central & State Ministries, PSUs, and Autonomous Bodies. We handle your GeM Registration, Catalog Upload, and Bid Participation."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/gem-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Become a Certified Government Supplier Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Direct access to tenders from Central & State Ministries, PSUs, and Autonomous Bodies. We handle your GeM Registration, Catalog Upload, and Bid Participation."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/gem-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Become a Certified Government Supplier",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Direct access to tenders from Central & State Ministries, PSUs, and Autonomous Bodies. We handle your GeM Registration, Catalog Upload, and Bid Participation."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is GeM registration really free?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"The registration process is free, but to participate in bids and accept orders, you must pay Caution Money.
+                    Turnover < ₹1 Cr: ₹5,000
+                    Turnover ₹1 Cr – ₹10 Cr: ₹10,000
+                    Turnover > ₹10 Cr: ₹25,000
+                    CloudDesk helps you process this through the official GeM Pool Account."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I register as a seller if I don't have a GST number?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Technically, some categories (like small artisans or exempt services) can register without GST. However, for 99% of business categories, a GSTIN is mandatory to accept any order above ₹2.5 Lakhs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Primary User" vs. "Secondary User"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The Primary User (typically the Director/Owner) has the legal authority and must use their Aadhaar/PAN for KYC. They can then create Secondary Users (Sales Managers) to handle daily tasks like uploading catalogs or bidding, without sharing sensitive login credentials."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the difference between "Direct Purchase" and "L1 Bidding"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Direct Purchase For orders up to ₹25,000, a buyer can buy directly from any seller.
+                      L1 (Comparison) For orders ₹25,000 – ₹5,00,000, the buyer must compare at least 3 different OEMs/Sellers and pick the lowest price. 
+                      Bidding/RA Above ₹5,00,000, a formal electronic bid or reverse auction is mandatory."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do MSMEs get any special treatment on GeM?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. If you have a Udyam Certificate, you are entitled to (1) Exemption from Earnest Money Deposit (EMD), (2) A 25% purchase preference (if you are within L1+15% price band), and (3) Free Vendor Assessment in many categories."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Vendor Assessment"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a mandatory check for OEMs to verify their manufacturing capacity. It is conducted by third parties like QCI. CloudDesk provides a Mock Audit Checklist to ensure your premises are ready for the physical or desktop assessment."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I get paid on GeM?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `GeM uses the i-GPMS (Integrated Government Payment Management System). Once you upload the "Consignee Receipt and Acceptance Certificate" (CRAC), the system triggers the payment. CloudDesk tracks your CRAC timelines to ensure you aren't waiting 90 days for a 10-day payment cycle.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can my account be blacklisted?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, for "Incident Management" violations like (1) Failing to deliver after accepting an order, (2) Supplying sub-standard goods, or (3) Pricing your product higher on GeM than on other platforms (Amazon/Flipkart). CloudDesk’s Compliance Monitor flags these risks before they become "Incidents."`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -622,6 +759,7 @@ const CloudDeskFactoryStuffing = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
