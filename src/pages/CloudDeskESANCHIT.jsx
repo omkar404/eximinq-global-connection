@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskESANCHIT/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskESANCHIT/Navbar";
 import Hero from "../components/CloudDeskESANCHIT/Hero";
 import Fees from "../components/CloudDeskESANCHIT/Fees";
@@ -28,6 +29,170 @@ import { MainNavbar } from "../components/CloudDeskESANCHIT/MainNavbar";
 
 const CloudDeskESANCHIT = () => {
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Hassle-Free e-Sanchit & IRN Generation | e-Sanchit Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Struggling with Digital Signature errors? We handle document
+            resizing, PDF signing, and instant upload to ICEGATE for seamless
+            clearance."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/e-sanchit-filing"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Hassle-Free e-Sanchit & IRN Generation Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Struggling with Digital Signature errors? We handle document
+            resizing, PDF signing, and instant upload to ICEGATE for seamless
+            clearance."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/e-sanchit-filing"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Hassle-Free e-Sanchit & IRN Generation",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Struggling with Digital Signature errors? We handle document resizing, PDF signing, and instant upload to ICEGATE for seamless clearance."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is a DRN vs IRN?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `DRN (Document Reference Number) Generated temporarily when a document is uploaded.
+                     IRN (Image Reference Number) Generated after the DRN is digitally signed and submitted. Only the IRN is valid for customs filing.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Why am I getting "Digital Signature Not Verified" error?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "This happens if the DSC used to sign the PDF is not registered under the same ICEGATE ID being used for upload. It may also occur if the Signing Utility (Signer) is outdated."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I upload documents after filing the Bill of Entry?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes — use the e-Sanchit (Post Filing) option. You must provide the Job Number and Date to link the additional documents to the existing Bill of Entry."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the exact file specifications for e-Sanchit in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Documents must be in PDF format, preferably in black and white (to save space). Each file must be less than 1 MB. The filename should not contain spaces or special characters (e.g., use Invoice_123.pdf instead of Invoice #123.pdf)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is a Digital Signature mandatory for every upload?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Every document uploaded to e-Sanchit must be digitally signed by the person registered on the ICEGATE profile (either the Importer/Exporter or the authorized CHA)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I upload a photograph of a document?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. Photographs (JPEG/PNG) are not accepted. You must scan the document and convert it to a clear, legible PDF. CloudDesk’s mobile app includes a "Customs-Grade Scanner" that does this automatically.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is an IRN, and how long does it take to generate?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `An Image Reference Number (IRN) is a unique 16-digit number generated by the system for every successful upload. Usually, it is generated instantly. If it’s "Pending," CloudDesk’s Ping-Bot monitors the status and alerts you the moment it’s ready`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Once I have an IRN, is the document permanently saved?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, the document is stored in the ICEGATE repository. However, an IRN is typically linked to a specific job. If you need to use the same document (like an Annual Insurance Policy) for multiple shipments, CloudDesk helps you re-use the IRN, saving you from redundant uploads."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What should I do if the system says "Signature Verification Failed"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "This usually happens if the DSC used for signing is not the same as the one mapped to the ICEGATE ID. CloudDesk’s DSC-Verify Tool checks the mapping before you sign to prevent this error."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I delete a document after generating an IRN?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No, you cannot delete it from the Customs server once the IRN is generated. If you uploaded the wrong file, you must upload the correct one, generate a new IRN, and use the new one in your filing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How many documents can I link to a single Bill of Entry?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `There is no hard limit, but you must upload all "Mandatory Documents" (Invoice, PL, BL) plus any "Supportive Documents" required for duty exemptions. CloudDesk provides a Checklist per HSN so you know exactly which documents need an IRN.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -600,6 +765,7 @@ const CloudDeskESANCHIT = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
