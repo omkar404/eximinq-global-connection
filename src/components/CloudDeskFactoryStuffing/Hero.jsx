@@ -14,7 +14,7 @@ const Hero = ({ setShowEnrollModal }) => {
                     <span > Government Supplier </span>
                 </h1>
                 <p className="text-lg text-slate-200 mb-8 leading-relaxed">
-                                        Direct access to tenders from Central & State Ministries, PSUs, and Autonomous Bodies. We handle your GeM Registration, Catalog Upload, and Bid Participation.
+                  Direct access to tenders from Central & State Ministries, PSUs, and Autonomous Bodies. We handle your GeM Registration, Catalog Upload, and Bid Participation.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                     <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
