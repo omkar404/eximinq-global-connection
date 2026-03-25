@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 // import TopBar from "../components/CloudDeskBisRegistration/TopBar";
 import Navbar from "../components/CloudDeskBisRegistration/Navbar";
 import Hero from "../components/CloudDeskBisRegistration/Hero";
@@ -27,6 +28,138 @@ import { MainNavbar } from "../components/CloudDeskBisRegistration/MainNavbar";
 
 const CloudDeskBisRegistration = () => {
   return (
+<>
+<Helmet>
+        <title>
+          Mandatory BIS Certification for Imports | BIS Certification Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/bis-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Mandatory BIS Certification for Imports Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/bis-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Mandatory BIS Certification for Imports",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the difference between BIS CRS and ISI Mark?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `CRS Mostly for Electronics, IT products, and Solar (e.g., Laptops, Mobile phones). It is based on Self-Declaration of conformity.
+                     ISI Mark For "Core" sectors like Steel, Cement, Electrical Cables, Toys, and Chemicals. It involves a Factory Audit by BIS officials.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I know if my product needs BIS?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must check the Compulsory Registration List on the BIS portal. In 2026, over 600 products are under mandatory certification. CloudDesk provides an HSN-to-BIS Mapping service to confirm your status instantly."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I import "Samples" for testing without BIS?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. You can import limited samples for R&D or BIS testing by obtaining an Exemption Letter or a "Provisional Entry" from Customs. CloudDesk manages this specialized clearance.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use my UL, CE, or IEC test reports for BIS?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. While Indian Standards (IS) are often aligned with International Standards (ISO/IEC), BIS mandates testing in an Indian Lab for most categories."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the role of an "Authorized Indian Representative" (AIR)?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For foreign manufacturers, an AIR is a local legal entity (like CloudDesk) that takes responsibility for the product's quality and compliance in India. Having a competent AIR is a mandatory requirement for FMCS and CRS."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does the registration take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `CRS 15–30 days (after lab reports).
+                     ISI/FMCS 3–6 months (due to factory inspections and international travel for officers).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long is the BIS certificate valid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Typically 2 years. You must apply for renewal at least 3 months before expiry. CloudDesk's Renewal Bot ensures your certification never lapses."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the penalties for selling without BIS?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Under the BIS Act, 2016, penalties include heavy fines (up to 10x the value of goods), seizure of stock, and even imprisonment for company directors. In 2026, Customs has "Zero Tolerance" for BIS violations.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -616,6 +749,7 @@ const CloudDeskBisRegistration = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
