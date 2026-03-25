@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskCA/TopBar";
 import Navbar from "../components/CloudDeskCA/Navbar";
@@ -31,6 +32,137 @@ const CloudDeskCA = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+
+<>
+<Helmet>
+        <title>
+          In-House CA Certification for Export Turnover | CA Certification Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Fast, reliable, and compliant CA Certificates required by DGFT, Customs, and RBI for all major export incentive and obligation schemes."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/ca-certification-export-import"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="In-House CA Certification for Export Turnover Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Fast, reliable, and compliant CA Certificates required by DGFT, Customs, and RBI for all major export incentive and obligation schemes."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/ca-certification-export-import"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "In-House CA Certification for Export Turnover",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Fast, reliable, and compliant CA Certificates required by DGFT, Customs, and RBI for all major export incentive and obligation schemes."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why do I need a CA for EPCG closure?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `You must prove you installed the machinery (Installation Certificate) and used it to export (Appendix 5C). A CA verifies that the specific Shipping Bills used for EO haven't been "double-counted" for other licenses.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is an "Average Export Performance" certificate?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "When applying for a new license, DGFT often asks for your average exports over the last 3 years. A CA certifies this so the government knows you have the capacity to fulfill future obligations."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can my internal company accountant sign these?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. It must be a Practicing Chartered Accountant (holding a Certificate of Practice) who is independent of the firm."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "When is Form 15CB mandatory in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is mandatory if the remittance to a non-resident exceeds ₹5 Lakh in a financial year AND the payment is taxable in India."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the penalty for a wrong CA Certificate?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If a CA provides false data, both the exporter and the CA face penalties under the FTDR Act and Customs Act, including blacklisting (DEL) and professional misconduct proceedings by ICAI."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Does a CA need to verify my "Consumption of Inputs"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. For Advance Authorization, a CA (or a Chartered Engineer) must certify that the raw materials imported duty-free were actually consumed in the final export product as per SION norms."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I verify if my CA's certificate is genuine?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Go to the ICAI UDIN Portal and enter the 18-digit number printed on the document. It will show you the CA's name and the specific values they certified (e.g., Turnover amount)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if my CA forgot to generate a UDIN?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `In 2026, the CA has 15 days to update the UDIN. If they fail, the document becomes "Invalid" and your DGFT application will be automatically rejected by the system.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -506,6 +638,7 @@ const CloudDeskCA = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
