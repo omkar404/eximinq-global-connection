@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskHalal/TopBar";
 import Navbar from "../components/CloudDeskHalal/Navbar";
@@ -41,6 +42,139 @@ const CloudDeskHalal = () => {
     alert("Form submitted — check console for data.");
   };
   return (
+<>
+<Helmet>
+        <title>
+          Halal Certification for Global Trade Success | Halal Certification Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Ensure your products meet Sharia standards. Mandatory for exporting Food, Cosmetics, and Pharmaceuticals to GCC, Malaysia, Indonesia, and other Islamic nations."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/halal-certification"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Halal Certification for Global Trade Success Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Ensure your products meet Sharia standards. Mandatory for exporting Food, Cosmetics, and Pharmaceuticals to GCC, Malaysia, Indonesia, and other Islamic nations."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/halal-certification"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Halal Certification for Global Trade Success",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Ensure your products meet Sharia standards. Mandatory for exporting Food, Cosmetics, and Pharmaceuticals to GCC, Malaysia, Indonesia, and other Islamic nations."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is Halal certification mandatory for all food exports?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. As of 2026, it is mandatory only for specified meat and meat products being exported to 15 specific countries (Bahrain, Bangladesh, Indonesia, Iran, Iraq, Jordan, Kuwait, Malaysia, Oman, Philippines, Qatar, Saudi Arabia, Singapore, Turkey, and UAE). For other products like cosmetics or plant-based foods, it is optional but highly recommended for market access."
+                }
+              },
+              {
+                "@type": "Question",
+                "name":  `What is "I-CAS Halal"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `I-CAS stands for India Conformity Assessment Scheme. Developed by the Quality Council of India (QCI), it is the government-recognized framework that streamlines the Halal process. To export meat as "Halal," your facility must be certified under this specific scheme by an NABCB-accredited body.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I still use my local Jamat or private Halal certificate?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For the 15 specified countries, a private certificate is no longer sufficient for meat exports. It must be a certificate issued under the I-CAS framework. However, for non-notified countries or non-meat products, private certifications are still accepted."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do cosmetics and pharmaceuticals need Halal certification?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "While not mandated by India's DGFT yet, countries like Indonesia have made Halal certification mandatory for all consumer goods (including cosmetics and fashion) starting in October 2026. CloudDesk helps you get ahead of this curve."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What are the "Haram" (prohibited) elements in non-meat products?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Common issues include alcohol (used in perfumes/sanitizers), gelatin (in capsules), and glycerin or stearic acid (if derived from non-Halal animal fats). CloudDesk helps you reformulate or find certified-Halal suppliers for these ingredients."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does Halal certification cost in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"1-Year Cycle Approx. ₹25,000 + ₹500 per product. 
+                    3-Year Cycle Approx. ₹60,000 + ₹1,500 per product. 
+                    Logo Usage Often carries an additional annual fee (approx. ₹20,000).
+                    Note Exporting meat also requires a 'Consignment Fee' of approx. ₹800–₹1,000 per shipment."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does the process take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Typically 6 to 8 weeks. This includes document review, an on-site audit of your facility, and the final decision by the certification committee. CloudDesk’s "Fast-Track" service can reduce this to 4 weeks by ensuring "First-Time-Right" documentation.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What happens if I export "Halal" meat without the I-CAS certificate?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Your shipment will be flagged as a Policy Violation at the Indian port. Even if it leaves India, it will be rejected or seized by the importing country’s Customs, leading to a 100% loss of cargo value and potential blacklisting of your IEC."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -644,6 +778,7 @@ The transition from "Private Halal" to "Government-Regulated Halal" is a minefie
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
