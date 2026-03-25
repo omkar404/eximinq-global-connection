@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskISO/TopBar";
 import Navbar from "../components/CloudDeskISO/Navbar";
@@ -36,6 +37,138 @@ import { ModalEnroll } from "../components/CloudDeskISO/ModalEnroll";
 const CloudDeskISO = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Boost Credibility with ISO Certification | ISO Certification Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Eligible for Govt Tenders & Exports. Get <strong>ISO 9001:2015</strong>, 14001, 45001, and 27001 certificates. Choose between IAF Accredited or Non-IAF options based on your need."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/iso-certification"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Boost Credibility with ISO Certification Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Eligible for Govt Tenders & Exports. Get <strong>ISO 9001:2015</strong>, 14001, 45001, and 27001 certificates. Choose between IAF Accredited or Non-IAF options based on your need."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/iso-certification"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Boost Credibility with ISO Certification",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Eligible for Govt Tenders & Exports. Get <strong>ISO 9001:2015</strong>, 14001, 45001, and 27001 certificates. Choose between IAF Accredited or Non-IAF options based on your need."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the most important ISO for an exporter?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `ISO 90012015 (Quality Management System). It is the universal language of business. Without it, you cannot apply for "Star Export House" status or bid for most international tenders.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `How do I know if an ISO certificate is "fake" or "non-accredited"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Check for the IAF logo. In 2026, you can verify any genuine certificate on the IAF CertSearch global database. If it's not there, it's just a piece of paper with no legal standing in international trade."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does ISO certification expire?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. It is valid for 3 years, but you must undergo a Surveillance Audit every year to keep it active. CloudDesk manages these annual audits so your status never lapses."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to get certified?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For a small to medium unit, the process takes 4 to 6 weeks. This includes the time for system implementation and the two-stage audit."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the cost of ISO 9001 in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For a single-site SME, the total cost (including audit fees) typically ranges from ₹25,000 to ₹45,000 for a 3-year cycle."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I get ISO for my software?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. You should aim for ISO 27001 (Information Security). This proves to your SaaS clients that their data is protected by global security standards."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `How does ISO help in getting "Star Export House" status?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Under the FTP 2023-2026, holding an ISO certificate is a mandatory "support document" for the application. It signifies that the exporter has a standardized process, reducing the "risk profile" in the eyes of the DGFT.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are there government subsidies for ISO certification?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Under the MSME Champions Scheme, small businesses can get a reimbursement of up to 75% of the certification costs. CloudDesk helps you file the reimbursement claim after your certificate is issued."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -620,6 +753,7 @@ const CloudDeskISO = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
