@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 // import TopBar from "../components/CloudDeskCDSCO/TopBar";
 import Navbar from "../components/CloudDeskCDSCO/Navbar";
 import Hero from "../components/CloudDeskCDSCO/Hero";
@@ -28,6 +29,121 @@ import { MainNavbar } from "../components/CloudDeskCDSCO/MainNavbar";
 
 const CloudDeskCDSCO = () => {
   return (
+<>
+<Helmet>
+        <title>
+          Simplifying CDSCO Registration for Importers | CDSCO Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Navigate India's rigorous regulatory landscape. We provide end-to-end licensing for Medical Devices (MD-14), Drugs (Form 10), and Cosmetics (Form 43) via the SUGAM portal."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/cdsco-compliance"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Simplifying CDSCO Registration for Importers Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Navigate India's rigorous regulatory landscape. We provide end-to-end licensing for Medical Devices (MD-14), Drugs (Form 10), and Cosmetics (Form 43) via the SUGAM portal."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/cdsco-compliance"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Simplifying CDSCO Registration for Importers",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Navigate India's rigorous regulatory landscape. We provide end-to-end licensing for Medical Devices (MD-14), Drugs (Form 10), and Cosmetics (Form 43) via the SUGAM portal."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the risk-based classification for Medical Devices in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Class A Low Risk (e.g., Absorbent cotton, Surgical tape).
+                     Class B Low-Moderate Risk (e.g., Needles, Catheters).
+                     Class C Moderate-High Risk (e.g., Bone bolts, Lenses).
+                     Class D High Risk (e.g., Heart valves, Pacemakers).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I import "Unapproved" drugs for personal use?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, via Form 12A. You can import small quantities for personal use with a valid doctor's prescription, but this is restricted to non-commercial use."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Do I need a CDSCO license for "Diagnostic Kits"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. In-Vitro Diagnostics (IVD) are treated as medical devices. Depending on the disease they detect (e.g., HIV/Malaria), they are usually Class C or D."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long is a CDSCO Registration Certificate (RC) valid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `In 2026, the RC is valid perpetually, provided the Retention Fee is paid every five years. CloudDesk's "Compliance Calendar" manages these fee payments for you.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the government fees for Medical Device Import?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It varies by class. For Class A, it's approximately $1,000, scaling up significantly for Class D. CloudDesk provides an exact Fee Estimator based on your product specs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Dual-Use" NOC?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If you import a chemical that could be used as a drug but you are using it for industrial purposes, you need a Dual-Use NOC from the CDSCO to clear Customs."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -664,6 +780,7 @@ const CloudDeskCDSCO = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
