@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 import TopBar from "../components/CloudDeskCHAServices/TopBar";
 import Navbar from "../components/CloudDeskCHAServices/Navbar";
@@ -40,6 +41,170 @@ const CloudDeskCHAServices = () => {
     };
 
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Dedicated CHA Services & Ground Handling | CHA Services Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Online filing is only half the job. Our field experts handle
+            Physical Examination, Factory Stuffing, Sealing, and Out of Charge
+            (OOC) directly at the docks."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/cha-services"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Dedicated CHA Services & Ground Handling Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Online filing is only half the job. Our field experts handle
+            Physical Examination, Factory Stuffing, Sealing, and Out of Charge
+            (OOC) directly at the docks."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/cha-services"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Dedicated CHA Services & Ground Handling",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Online filing is only half the job. Our field experts handle Physical Examination, Factory Stuffing, Sealing, and Out of Charge (OOC) directly at the docks."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does a CHA handle transport?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Strictly speaking, a CHA's role ends at customs clearance. However, at EXIMINQ, we offer integrated services, meaning we can arrange the transporter to pick up goods once our CHA team clears them."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is physical presence mandatory for all shipments?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If your shipment is routed through the Green Channel (RMS), physical examination is waived. However, a CHA is still needed to register the goods at the shed and generate the OOC/Gate Pass."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is Factory Stuffing Permission?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a permission granted by Customs allowing exporters to pack containers at their own factory under the supervision of a Central Excise officer, rather than at the port. We help obtain this permission."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between a Freight Forwarder and a CHA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Freight Forwarder Manages the transportation (booking the ship/plane). 
+                      CHA Manages the legal clearance (filing the Bill of Entry/Shipping Bill and dealing with Customs Officers). CloudDesk provides both, ensuring your transport and clearance never clash."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is it mandatory to hire a CHA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Technically, an importer can clear their own goods if they pass the "Rule 6" exam, but 99% of businesses hire a licensed CHA because of the legal complexity and the requirement for a valid Customs Broker License.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can one CHA work at all ports in India?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `A CHA holds a license for a specific "Customs Station" but can operate at other ports through "Form-C" registration. CloudDesk’s network covers all major Sea Ports, ICDs, and Airports in India.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does a CHA charge for their services?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Fees are usually structured as (1) An Agency Commission (fixed or % of value), (2) Documentation Charges, and (3) Statutory Reimbursements (like port charges and duty). CloudDesk provides a transparent fee schedule with zero hidden markups on port expenses."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Examination" and why does the CHA need to be there?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If Customs suspects the cargo doesn't match the documents, they order a physical check. The CHA must be present to open the packages, show the goods to the Inspector, and answer technical questions to get the "Out of Charge" (OOC).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if the CHA makes a mistake in filing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Under the Customs Broker Licensing Regulations (CBLR), the CHA can lose their license for negligence. However, the Importer/Exporter is still legally responsible for the data filed. CloudDesk uses a "Double-Verification" system to ensure no filing happens without client approval.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I authorize a CHA to work for me?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `You must log in to your ICEGATE profile and "Add" the CHA’s license number to your authorized list. This digital handshake is mandatory for them to file any documents on your behalf.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can a CHA help with "Refunds" and "Drawbacks"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. A good CHA (like CloudDesk) handles the post-clearance work, including following up on Duty Drawback status, IGST Refunds, and Refund of Security Deposits (like Special Additional Duty - SAD)."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -727,6 +892,7 @@ const CloudDeskCHAServices = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
