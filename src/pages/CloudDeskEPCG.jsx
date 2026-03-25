@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskEPCG/TopBar";
 import Navbar from "../components/CloudDeskEPCG/Navbar";
@@ -28,6 +29,136 @@ const CloudDeskEPCG = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+<Helmet>
+        <title>
+          Customs Registration for EPCG & Advance Licenses | Customs Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Don't let your machinery import get stuck. We handle the physical and online registration of your DGFT license with the Customs Bond Section and manage the essential Bond/Bank Guarantee submission."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/customs-license-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Customs Registration for EPCG & Advance Licenses Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Don't let your machinery import get stuck. We handle the physical and online registration of your DGFT license with the Customs Bond Section and manage the essential Bond/Bank Guarantee submission."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/customs-license-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Customs Registration for EPCG & Advance Licenses",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Don't let your machinery import get stuck. We handle the physical and online registration of your DGFT license with the Customs Bond Section and manage the essential Bond/Bank Guarantee submission."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is an e-BG?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a digital version of a bank guarantee. In 2026, banks issue these via the NeSL platform. Once issued, it is automatically transmitted to the Customs system (ICEGATE), eliminating the need for physical submission at the port."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is an e-Bond?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "An e-Bond is the electronic equivalent of the indemnity bond you used to sign on stamp paper. It is created and digitally signed on the ICEGATE website."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I still need to visit the Customs House License Cell?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. For ports that are 100% digital, the entire process of e-Bond and e-BG registration is "Faceless." Your digital approval appears on your dashboard.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I link my e-BG to my Advance Authorisation license?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Once the e-BG is visible in your ICEGATE "Financial" module, you must perform the "License-BG Mapping" operation. CloudDesk handles this step, ensuring the specific DGFT license is legally tied to the correct e-BG.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can one e-BG be used for multiple licenses?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. Unlike physical BGs, a single "Global e-BG" can be used for multiple licenses or schemes, provided the value is sufficient. This is a massive improvement in capital efficiency.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Acknowledgment Number" (IRN)?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "When your bank issues an e-BG, NeSL generates a Information Reference Number (IRN). You need this IRN to track the status of your guarantee on the ICEGATE portal."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much time does e-Bond/e-BG registration save?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The old process took 3–7 days. The e-registration process takes less than 24 hours (often just a few hours) if the data sync is successful."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are there any extra costs for e-BG?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Banks may charge a small processing fee for e-BG issuance via NeSL, but you save significantly on Stamp Duty, Courier, and Professional Fees for physical port visits."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -484,6 +615,7 @@ const CloudDeskEPCG = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
