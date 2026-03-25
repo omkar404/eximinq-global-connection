@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskFertilizer/TopBar";
 import Navbar from "../components/CloudDeskFertilizer/Navbar";
@@ -34,6 +35,137 @@ import { ModalEnroll } from "../components/CloudDeskFertilizer/ModalEnroll";
 const CloudDeskFertilizer = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   return (
+<>
+<Helmet>
+        <title>
+          Fertiliser Import License & Compliance | Fertiliser Import License Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Importing Urea, DAP, NPK, or Bio-stimulants? Secure your <strong>Importer Registration Certificate</strong> from the Central/State Agriculture Department and manage <strong>iFMS</strong> filings seamlessly."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/fertiliser-import-license"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Fertiliser Import License & Compliance Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Importing Urea, DAP, NPK, or Bio-stimulants? Secure your <strong>Importer Registration Certificate</strong> from the Central/State Agriculture Department and manage <strong>iFMS</strong> filings seamlessly."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/fertiliser-import-license"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Fertiliser Import License & Compliance",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Importing Urea, DAP, NPK, or Bio-stimulants? Secure your <strong>Importer Registration Certificate</strong> from the Central/State Agriculture Department and manage <strong>iFMS</strong> filings seamlessly."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can any company import fertilisers into India?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. You must be registered under the Fertiliser Control Order (FCO). You need a Certificate of Manufacture/Registration from the State Agriculture Department or the Central Government, depending on the type of fertiliser."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the difference between "Restricted" and "Free" fertiliser imports?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Urea Restricted. Can only be imported through designated State Trading Enterprises.
+                    Complex Fertilisers (DAP/MOP/NPK) Generally ""Free"" but subject to strict FCO specifications and mandatory registration with the Department of Fertilisers."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Do I need a license for "Growth Regulators" or "Bio-stimulants"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. As per the 2021 amendment to the FCO, all bio-stimulants must be registered. You cannot import them as "Plant Growth Promoters" anymore without a valid FCO registration number.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if the fertiliser fails the lab test at the port?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is declared "Non-Standard." You will be forced to either re-export the entire cargo at your own cost or it will be seized and destroyed. CloudDesk’s Technical Verification service is designed specifically to prevent this.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are there restrictions on the heavy metal content?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. The FCO has strict limits on Lead (Pb), Cadmium (Cd), and Arsenic (As). If your fertiliser exceeds these parts-per-million (PPM) limits, it is banned."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is there a Customs Duty on fertilisers?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Most fertilisers attract a 5% Basic Customs Duty (BCD) and 5% GST. However, rates can vary for specialized organic fertilisers."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can an importer claim the government subsidy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Generally, subsidies are paid to manufacturers/importers who are registered under the Nutrient Based Subsidy (NBS) scheme. To claim this, you must have your own storage godowns and a point-of-sale (POS) tracking system. CloudDesk helps you set up the iFMS (Integrated Fertiliser Management System) for subsidy tracking."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What documents are needed for Customs clearance?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "(1) FCO Registration Certificate, (2) Analysis Report from the supplier, (3) Bill of Lading, (4) Commercial Invoice, and (5) Pre-shipment Inspection Certificate (for certain types)."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -633,6 +765,7 @@ const CloudDeskFertilizer = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
