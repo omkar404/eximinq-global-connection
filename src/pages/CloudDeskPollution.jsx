@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskPollution/TopBar";
 import Navbar from "../components/CloudDeskPollution/Navbar";
@@ -28,6 +29,137 @@ const CloudDeskPollution = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+
+<>
+<Helmet>
+        <title>
+          Pollution Control Board Registration | Pollution Control Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Mandatory environmental consent for industries. We help you obtain Consent to Establish (CTE) and Consent to Operate (CTO) from State Pollution Control Boards (SPCB)."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/pollution-control"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Pollution Control Board Registration Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Mandatory environmental consent for industries. We help you obtain Consent to Establish (CTE) and Consent to Operate (CTO) from State Pollution Control Boards (SPCB)."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/pollution-control"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Pollution Control Board Registration",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Mandatory environmental consent for industries. We help you obtain Consent to Establish (CTE) and Consent to Operate (CTO) from State Pollution Control Boards (SPCB)."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is Consent to Establish (CTE)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is the "Permission to Build." You must get this before you lay a single brick or install any machinery. It validates that your location and pollution control plans are legal.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is Consent to Operate (CTO)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is the "Permission to Run." Once the factory is built, we apply for CTO. An inspector (or auditor) verifies that you actually installed the ETP/STP you promised in the CTE. You cannot start commercial production without this.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I skip CTE if I am moving into an existing building?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. If the "Process" or "Capacity" changes, a fresh CTE (or an Amendment) is required.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Is the "Periodic Renewal" of CTO really gone?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Under the 2026 framework, once granted, the CTO stays valid for the chosen period (up to 25 years) as long as you pay the annual fee and don't violate the pollution norms."
+                }
+              },
+              {
+                "@type": "Question",
+                "name":  `What is the "One-Time Fee" system?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "State boards now allow you to pay the consent fee for a block of 5, 10, or 25 years upfront. CloudDesk calculates the most tax-efficient block for your business scale."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Does the "White Category" really need zero paperwork?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Not zero. You must submit an Online Intimation and a Self-Declaration. If you fail to do this and are caught, you are treated as an "Unregistered Unit."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Polluter Pays" fine in 2026?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If you exceed discharge limits, the PCB calculates Environmental Compensation based on the duration of the violation. For a medium-scale Orange unit, this can easily reach ₹5,000 to ₹10,000 per day."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can my CEO be imprisoned for pollution?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. Under the Water and Air Acts, the "Person in Charge" can face 1.5 to 6 years of imprisonment for continued non-compliance or operating without consent.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -585,6 +717,7 @@ const CloudDeskPollution = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
