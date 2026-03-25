@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 // import TopBar from "../components/CloudDeskDutyPayment/TopBar";
 import Navbar from "../components/CloudDeskDutyPayment/Navbar";
@@ -46,6 +47,165 @@ const CloudDeskDutyPayment = () => {
       alert("Form submitted — check console for data.");
     };
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Fast & Secure Duty Payment via ECL | Duty Payment Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Avoid interest penalties on imports. We manage your <strong>Electronic Cash Ledger (ECL)</strong>, create challans, and ensure instant duty clearance at all ports."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/duty-payment-ecl"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Fast & Secure Duty Payment via ECL Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Avoid interest penalties on imports. We manage your <strong>Electronic Cash Ledger (ECL)</strong>, create challans, and ensure instant duty clearance at all ports."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/duty-payment-ecl"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Fast & Secure Duty Payment via ECL",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Avoid interest penalties on imports. We manage your <strong>Electronic Cash Ledger (ECL)</strong>, create challans, and ensure instant duty clearance at all ports."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can I get a refund of the balance in my ECL?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, any unutilized balance in the Electronic Cash Ledger can be refunded to your registered bank account by filing a refund application on the ICEGATE portal."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does ECL work on weekends/holidays?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The ICEGATE portal is available 24/7. However, NEFT/RTGS transfers depend on banking hours. If you use Netbanking (available for select banks), the top-up is usually instant even on holidays."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I pay duty for multiple Bills of Entry at once?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, this is the main advantage of ECL. You can top up a lump sum amount and then select multiple challans to pay them simultaneously from the wallet balance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the Electronic Cash Ledger (ECL)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The ECL is a digital account on the ICEGATE portal where importers can deposit money in advance. This money can then be used to pay Customs duties, taxes, and fees for any number of shipments."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is it mandatory to use ECL for all duty payments?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. As of 2026, all major EDI ports require payments to be routed through the ECL. Direct bank-to-challan payments are being phased out in favor of this "Wallet" system to ensure transparency and faster reconciliation.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use the balance in my GST Electronic Cash Ledger to pay Customs duty?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. The GST Ledger (GSTN) and Customs Ledger (ICEGATE) are separate systems. You must deposit money specifically into the Customs ECL to clear your imports."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `How do I "Top Up" my ECL?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You can deposit funds via Internet Banking, NEFT, or RTGS by generating an E-Challan on the ICEGATE portal. CloudDesk generates these top-up challans for you based on your upcoming shipment projections."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I pay more than the required duty?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The excess money stays in your ECL "Wallet." You can either use it for your next shipment or apply for a Digital Refund through the portal.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I pay duty for multiple Bills of Entry at once?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. The ECL allows you to select multiple pending challans and pay them in a single batch, provided you have a sufficient balance in your ledger."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "My bank debited the money, but the ECL balance isn't showing. What now?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `This is a common "Bank-to-Portal Sync" error. CloudDesk’s Transaction Recovery Tool pings the ICEGATE API to force-refresh your status. We also provide the "Transaction Reference Number" (TRN) required to raise a ticket with the helpdesk.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does money in the ECL earn interest?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. Money kept in the Customs ECL does not earn any interest. It is strictly a non-interest-bearing deposit for duty payment purposes."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -602,6 +762,7 @@ const CloudDeskDutyPayment = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
