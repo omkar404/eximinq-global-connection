@@ -1,5 +1,5 @@
 // import TopBar from "../components/CloudDeskEPRAuthorization/TopBar";
-import { Helment } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskEPRAuthorization/Navbar";
 import Hero from "../components/CloudDeskEPRAuthorization/Hero";
 import Fees from "../components/CloudDeskEPRAuthorization/Fees";
