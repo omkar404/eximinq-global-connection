@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 import TopBar from "../components/CloudDeskGlobalTrade/TopBar";
 import Navbar from "../components/CloudDeskGlobalTrade/Navbar";
@@ -54,6 +55,147 @@ const CloudDeskGlobalTrade = () => {
     };
 
   return (
+
+<>
+
+<Helmet>
+        <title>
+          Smart Freight Forwarding for Global Trade | Freight Forwarding  Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content=" We negotiate the best rates so you don't have to. End-to-end cargo
+            booking for Sea (FCL/LCL) and Air shipments with 100% visibility."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/freight-forwarding"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Smart Freight Forwarding for Global Trade Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content=" We negotiate the best rates so you don't have to. End-to-end cargo
+            booking for Sea (FCL/LCL) and Air shipments with 100% visibility."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/freight-forwarding"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Smart Freight Forwarding for Global Trade",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              " We negotiate the best rates so you don't have to. End-to-end cargo booking for Sea (FCL/LCL) and Air shipments with 100% visibility."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "When should I choose Air Freight over Sea Freight?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Use Air Freight if (1) Your cargo is high-value and low-volume (e.g., electronics, pharma), (2) The shelf life is short (e.g., horticulture), or (3) The "Stock-out" cost is higher than the freight premium. For everything else, Sea Freight is 80% cheaper but takes 4–6 weeks longer.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between LCL and FCL?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"FCL (Full Container Load) You rent the entire container. It's faster and has a lower risk of damage. 
+                      LCL (Less-than-Container Load) Your cargo shares a container with other exporters. It’s cheaper for small shipments but involves ""Stuffing"" and ""De-stuffing"" delays at the warehouse."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What are "Incoterms 2020"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"These are international rules that define who pays for what.
+                      FOB (Free on Board) You pay until the goods are on the ship.
+                      CIF (Cost, Insurance, Freight) You pay for everything until the destination port. 
+                      DDP (Delivered Duty Paid) You pay for everything, including the buyer's import taxes."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Demurrage" and "Detention"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Demurrage The penalty you pay to the Port for keeping your container inside the terminal for too long. 
+                      Detention The penalty you pay to the Shipping Line for keeping their container outside the port for too long. CloudDesk’s Buffer-Management helps you avoid these by pre-clearing all paperwork."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Are there hidden "Local Charges" at the destination?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Every port has Terminal Handling Charges (THC), documentation fees, and CFS charges. CloudDesk provides an All-In Quote so you aren't surprised by a $500 bill at the destination port."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Freight Collect" vs. "Freight Pre-paid"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Pre-paid You pay the forwarder in India.
+                      Collect: Your buyer pays the forwarder in their country. 
+                      Note Some countries and commodities do not allow 'Freight Collect'—CloudDesk checks these regulations for you."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Bill of Lading" (BL)?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The BL is the "Title to the Goods." Whoever holds the original BL owns the cargo. CloudDesk manages the HBL (House Bill of Lading) and MBL (Master Bill of Lading) reconciliation to ensure your payment is secure before you release the documents.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need Marine Insurance?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Absolutely. Standard carrier liability is very limited (often based on weight, not value). For a fraction of the cargo cost, CloudDesk provides All-Risk Marine Insurance to cover theft, damage, or loss at sea."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -834,6 +976,7 @@ const CloudDeskGlobalTrade = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
