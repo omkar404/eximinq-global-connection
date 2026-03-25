@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskCopyright/TopBar";
 import Navbar from "../components/CloudDeskCopyright/Navbar";
@@ -28,6 +29,91 @@ const CloudDeskCopyright = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+<Helmet>
+        <title>
+          Copyright Registration for Original Works | Copyright  Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Secure your ownership over Software Code, Books, Artistic Logos, Music, and Videos. Prevent unauthorized copying and piracy with legal protection under the Copyright Act, 1957."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/copyright-registration"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Copyright Registration for Original Works Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Secure your ownership over Software Code, Books, Artistic Logos, Music, and Videos. Prevent unauthorized copying and piracy with legal protection under the Copyright Act, 1957."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/copyright-registration"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Copyright Registration for Original Works",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Secure your ownership over Software Code, Books, Artistic Logos, Music, and Videos. Prevent unauthorized copying and piracy with legal protection under the Copyright Act, 1957."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is software patented or copyrighted in India?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `In India, software code is protected under the Copyright Act as a “Literary Work”. It is generally not patentable unless it is embedded in hardware with a unique technical effect.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between Trademark and Copyright?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Trademark protects your Brand Identity (Name, Logo, Slogan) used in trade. Copyright protects the creative expression (Artistic design of the logo, content of a book, code of an app). For a logo, it is recommended to get both."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is copyright registration mandatory?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Registration is not mandatory for protection (copyright exists automatically upon creation), but the registration certificate is the primary evidence required to file a lawsuit for infringement or claim damages."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -429,6 +515,7 @@ const CloudDeskCopyright = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
