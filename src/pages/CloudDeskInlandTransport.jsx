@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 import TopBar from "../components/CloudDeskInlandTransport/TopBar";
 import Navbar from "../components/CloudDeskInlandTransport/Navbar";
@@ -46,6 +47,137 @@ const CloudDeskInlandTransport = () => {
     };
 
   return (
+<>
+<Helmet>
+        <title>
+          Reliable Inland Transportation for Factories & Ports | Inland Transportation Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Connecting your warehouse to the world. We provide GPS-enabled Trailers for Factory Stuffing, Port Delivery, and ICD movements with guaranteed on-time performance."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/inland-transportation"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Reliable Inland Transportation for Factories & Ports Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Connecting your warehouse to the world. We provide GPS-enabled Trailers for Factory Stuffing, Port Delivery, and ICD movements with guaranteed on-time performance."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/inland-transportation"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Reliable Inland Transportation for Factories & Ports",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Connecting your warehouse to the world. We provide GPS-enabled Trailers for Factory Stuffing, Port Delivery, and ICD movements with guaranteed on-time performance."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": `What is "Inland Haulage" (IHC)?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is the cost and process of moving a container from an Inland Container Depot (ICD) to a Gateway Sea Port (or vice versa) via rail or road."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the difference between a "Trailer" and a "Truck"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Trucks Used for ""Loose Cargo"" (LCL or domestic).
+                      Trailers: Specialized vehicles (20ft/40ft) designed specifically to carry international shipping containers. CloudDesk only uses certified trailers for FCL movement to ensure cargo safety."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use my own transport for export/import?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, provided the vehicle is registered and the driver has a valid "Gate Pass" for the Port or ICD. However, most exporters use CloudDesk’s Verified Fleet because our drivers are pre-vetted for Port-Security protocols.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is GST applicable on inland transportation for exports?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. As of 2026, under GST law, the service of transporting goods from India to a place outside India (and the inland leg thereof) is exempt/zero-rated, provided specific conditions are met. CloudDesk ensures your transporters issue "Zero-Rated" invoices correctly.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What are "Detention Charges" in inland transport?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If your factory takes too long to load/unload a truck (typically more than 6–12 hours), the transporter charges a "Waiting Fee" per day. CloudDesk’s Loading-Dock Manager helps you track these times to avoid unnecessary penalties.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Does the "Per Ton" rate include toll and parking?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Usually, no. Tolls (Fastag) and Green Taxes are charged on actuals. CloudDesk provides an "All-Inclusive" Quote that covers freight, tolls, and documentation to give you a final landed cost.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Transit Insurance"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "While your marine insurance covers the sea leg, you need Inland Transit Insurance (Road/Rail) to cover accidents, theft, or fire during the land journey. CloudDesk bundles this with your transport booking for peace of mind."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Direct Port Entry" (DPE)?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "DPE allows factory-stuffed containers to go directly to the port without stopping at a CFS (Container Freight Station). CloudDesk’s DPE-Certified Fleet saves you 24–48 hours in the export cycle."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -618,6 +750,7 @@ const CloudDeskInlandTransport = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
