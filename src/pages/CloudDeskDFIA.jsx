@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskDFIA/TopBar";
 import Navbar from "../components/CloudDeskDFIA/Navbar";
@@ -28,6 +29,136 @@ import { ModalEnroll } from "../components/CloudDeskDFIA/ModalEnroll";
 const CloudDeskDFIA = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   return (
+<>
+<Helmet>
+        <title>
+          DFIA License for Post-Export Benefits | DFIA License Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Convert your exports into a tradeable asset. Duty Free Import Authorisation allows you to import raw materials without BCD or sell the license in the open market."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/dfia-license"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="DFIA License for Post-Export Benefits Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Convert your exports into a tradeable asset. Duty Free Import Authorisation allows you to import raw materials without BCD or sell the license in the open market."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/dfia-license"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "DFIA License for Post-Export Benefits",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Convert your exports into a tradeable asset. Duty Free Import Authorisation allows you to import raw materials without BCD or sell the license in the open market."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the main difference between DFIA and Advance Authorisation (AA)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Advance Authorisation Pre-import (mostly), non-transferable, subject to ""Actual User"" condition. DFIA Post-export (mostly), freely transferable (you can sell it), no ""Actual User"" condition after transfer."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which sectors benefit most from DFIA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is highly popular in sectors with stable SION norms like Chemicals, Textiles, Leather, and Food products (like biscuits or processed foods)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I apply for DFIA before exporting?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, you apply for the "Authorisation" before export. However, the transferability is only granted after you have completed the exports and the bank has realized the foreign exchange.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Value Addition" requirement for DFIA?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must achieve at least 20% Value Addition. For example, if you import raw materials worth ₹100, you must export the finished product for at least ₹120."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are there any items excluded from DFIA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Items that don't have a SION norm or items that fall under specific restricted categories (like certain high-risk chemicals) cannot be imported under DFIA."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does DFIA cover IGST and GST?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. As of 2026, DFIA only provides exemption from Basic Customs Duty (BCD). IGST must be paid at the time of import (though it can be claimed as Input Tax Credit)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `How do I "Sell" my DFIA license?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Once the DGFT makes the license "Transferable," it becomes a negotiable instrument. You can sell it to another importer through a simple letter of transfer. CloudDesk’s License Exchange network connects you with verified buyers.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Market Premium" for DFIA?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The premium varies based on the demand for the raw materials listed in your license. Typically, you can sell a license for a percentage of the duty-saved value. CloudDesk tracks daily market rates to get you the best deal."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -515,6 +646,7 @@ const CloudDeskDFIA = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
