@@ -1,3 +1,4 @@
+import  { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
 import TopBar from "../components/CloudDeskWarehousing/TopBar";
 import Navbar from "../components/CloudDeskWarehousing/Navbar";
@@ -48,6 +49,140 @@ const CloudDeskWarehousing = () => {
   };
 
   return (
+<>
+<Helmet>
+        <title>
+          Flexible Warehousing Solutions Near Major Ports | Warehousing Solutions Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Avoid high detention charges. Access secure Bonded and General
+            warehousing space for storage, labeling, and distribution at Nhava
+            Sheva, Mundra, and Chennai."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/warehousing-solutions"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Flexible Warehousing Solutions Near Major Ports Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Avoid high detention charges. Access secure Bonded and General
+            warehousing space for storage, labeling, and distribution at Nhava
+            Sheva, Mundra, and Chennai."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/warehousing-solutions"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Flexible Warehousing Solutions Near Major Ports",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Avoid high detention charges. Access secure Bonded and General warehousing space for storage, labeling, and distribution at Nhava Sheva, Mundra, and Chennai."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name":  `What is a "Customs Bonded Warehouse"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It is a secured area where you can store imported goods without paying duty immediately. The duty is "deferred" until you take the goods out for sale in India. If you re-export them from the warehouse, you never pay the duty.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is an FTWZ and how is it different?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `An FTWZ (Free Trade Warehousing Zone) is a category of SEZ. It offers even more flexibility than a standard bonded warehouse, including the ability to hold foreign currency transactions and simplified "Trading" operations without paying GST on the storage services.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I perform manufacturing in a warehouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Only if you have a MOOWR (Section 65) license. A standard warehouse is for storage and basic "Value Addition" (labelling/packing). For full manufacturing, CloudDesk helps you convert your storage space into a MOOWR unit.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How are warehousing charges calculated?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Usually based on (1) Area (Sq. Ft.) or Volume (CBM), (2) Duration (Per Week/Month), and (3) Handling (Inward/Outward movements). CloudDesk provides a "Pay-as-you-use" model for startups to keep overheads low.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Cross-Docking"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `This is when goods are moved directly from an incoming truck/container to an outgoing one with little to no storage time. CloudDesk uses cross-docking at port-side warehouses to slash your "Port-to-Customer" delivery time by 48 hours`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is my cargo insured in the warehouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Standard insurance only covers the building. You must take out a "Marine-cum-Storage" or "Fire & Allied Perils" policy for your specific stock. CloudDesk’s integrated platform allows you to add insurance coverage with a single click during the "Inward" process.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I track my inventory in a bonded warehouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `You get access to the CloudDesk WMS (Warehouse Management System). It gives you a real-time view of your "Bonded vs. Non-Bonded" stock levels, batch numbers, and expiry dates, synced directly with your ICEGATE records.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can Customs seize goods from a warehouse?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, if the goods are prohibited, mis-declared, or if the "Bond Validity" has expired. CloudDesk’s Bond-Sentinel alerts you 30 days before your storage permission expires to ensure you either clear the goods or extend the bond.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -698,6 +833,7 @@ const CloudDeskWarehousing = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
