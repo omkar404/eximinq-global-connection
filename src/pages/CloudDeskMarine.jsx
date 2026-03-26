@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import TopBar from "../components/CloudDeskMarine/TopBar";
 import Navbar from "../components/CloudDeskMarine/Navbar";
@@ -40,6 +41,163 @@ const CloudDeskMarine = () => {
     };
 
   return (
+<>
+<Helmet>
+        <title>
+          Zero Duty Import of Capital Goods | Zero Duty Import Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/marine-insurance"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Zero Duty Import of Capital Goods Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/marine-insurance"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Zero Duty Import of Capital Goods",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can I insure my goods for more than the invoice value?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, it is standard practice to insure for 110% of the CIF value(Cost + Insurance + Freight). The additional 10% covers incidental expenses and anticipated profit."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Marine Insurance cover War and Strikes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Standard ICC clauses exclude War and Strikes. You can add Institute War Clauses and Institute Strikes Clauses as optional riders for complete protection."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is an "Open Policy"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If you ship frequently, an Open Policy covers all your shipments automatically for a year (up to a limit). You only need to declare shipments periodically instead of obtaining individual certificates each time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are ICC-A, B, and C?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"ICC (C) The most basic. Covers only major ""Accidents"" (sinking, fire, collision).ICC (B) Mid-level. Covers (C) plus ""Natural Calamities"" (earthquakes, lightning, water entry).ICC (A) The ""All-Risk"" policy. Covers everything except specific exclusions (like war or inherent vice). CloudDesk recommends ICC (A) for 99% of shipments."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Marine Insurance cover War and Strikes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Standard policies do not. However, CloudDesk allows you to add "War & SRCC" (Strikes, Riots, and Civil Commotions) covers as an add-on, which is essential in 2026 for routes through volatile regions.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Duty Insurance"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For importers, if the goods are damaged after you paid the Customs duty, you lose the duty amount too. CloudDesk offers Duty Insurance to ensure you are reimbursed for the tax paid on damaged goods."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does Marine Insurance cost?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The premium is usually a tiny fraction of the cargo value (typically 0.05% to 0.20%). The cost is influenced by the commodity, the destination, and the mode of transport."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What value should I insure my goods for?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The standard is CIF + 10% (Cost, Insurance, Freight + 10%). The extra 10% is to cover the "Imaginary Profit" and administrative costs incurred due to the loss.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is an "Open Cover" vs. "Single Voyage" policy?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"Single Voyage For one-off shipments.Open Cover A one-year ""blanket"" policy for regular exporters. You just ""declare"" each shipment as it happens. CloudDesk manages your Open Cover Balance automatically."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "My cargo arrived damaged. What is the first thing I should do?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `My cargo arrived damaged. What is the first thing I should do?`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is "Inherent Vice" in insurance terms?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It refers to damage caused by the nature of the product itself (e.g., fruit rotting naturally or iron rusting). This is never covered by insurance. CloudDesk helps you document "External Damage" to prove the loss wasn't an inherent vice.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -688,6 +846,7 @@ const CloudDeskMarine = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
