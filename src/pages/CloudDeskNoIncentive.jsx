@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskNoDue/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskNoDue/Navbar";
 import Hero from "../components/CloudDeskNoDue/Hero";
 import Fees from "../components/CloudDeskNoDue/Fees";
@@ -30,6 +31,136 @@ import { MainNavbar } from "../components/CloudDeskNoDue/MainNavbar";
 
 const CloudDeskNoDue = () => {
   return (
+<>
+<Helmet>
+        <title>
+          No Incentive Certificate for Returned Goods | Incentive Certificate Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content={`Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`}
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/no-incentive-certificate"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="No Incentive Certificate for Returned Goods Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content={`Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`}
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/no-incentive-certificate"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Customs Warehouse License Registration",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Obtain mandatory licensing under Section 57, 58, or 65 of the Customs Act. We handle the process of converting your facility into a legally recognized Bonded Warehouse"
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": `What exactly is a "No Incentive Certificate"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "It is a formal declaration from an authority (Customs or DGFT) stating that for a particular set of Shipping Bills or a particular License, no export incentives (like RoDTEP, Drawback, or Scrips) have been claimed or disbursed."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "When is an NIC mandatory?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `"When claiming Section 74 Drawback (Re-exports).When Regularizing/Closing an Advance Authorisation or EPCG license where no exports were made.When applying for a Brand Rate Fixation (to prove you haven't taken the All Industry Rate)."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I self-declare an NIC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In some cases, a Self-Declaration + CA Certificate works. However, for high-value refunds, Customs will insist on an EDI-generated NIC from the ICEGATE system or a manual one from the DGFT."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `How does CloudDesk verify "Non-Availment"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "We scan your Electronic Duty Credit Ledger (EDCL) on ICEGATE and your E-BRC list on the DGFT portal. If a benefit was granted, we help you surrender it (with interest, if applicable) to get the NIC."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if RoDTEP was automatically scrolled in my Shipping Bill?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `This is a common 2026 problem. Even if you didn't "ask" for it, the system might have processed it. To get an NIC, you must first refund the RoDTEP amount to the government. We manage this "Benefit Reversal" process.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the NIC mention the specific amount?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `No. An NIC usually certifies that "No benefit has been availed under [Scheme Name] for Shipping Bill No. [X] dated [Y]."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is there an expiry for a No Incentive Certificate?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "The certificate itself doesn't expire, but it must be submitted to the requesting authority (like the Drawback Department) within their specific filing window (usually 30–90 days)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I get an NIC for "Deemed Exports"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. If you are a domestic supplier to an EOU/SEZ and the buyer is claiming the benefits, you need to provide an NIC to prove you haven't claimed them, ensuring the buyer’s claim is valid."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -603,6 +734,7 @@ const CloudDeskNoDue = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
