@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskIGCR/TopBar";
 import Navbar from "../components/CloudDeskIGCR/Navbar";
@@ -25,6 +26,154 @@ import { ModalEnroll } from "../components/CloudDeskIGCR/ModalEnroll";
 const CloudDeskIGCR = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   return (
+<>
+<Helmet>
+        <title>
+          Mandatory IGCR-3 Returns for Concessional Imports | IGCR Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Importing raw materials at a concessional rate? You must file a <strong>Monthly Statement</strong> on ICEGATE by the 10th of every month. We handle end-to-end compliance from IIN generation to Bond cancellation."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/igcr-returns"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Mandatory IGCR-3 Returns for Concessional Imports Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Importing raw materials at a concessional rate? You must file a <strong>Monthly Statement</strong> on ICEGATE by the 10th of every month. We handle end-to-end compliance from IIN generation to Bond cancellation."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/igcr-returns"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Mandatory IGCR-3 Returns for Concessional Imports",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Importing raw materials at a concessional rate? You must file a <strong>Monthly Statement</strong> on ICEGATE by the 10th of every month. We handle end-to-end compliance from IIN generation to Bond cancellation."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the deadline for filing IGCR returns?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must submit the Form IGCR-3 monthly statement by the 10th day of the following month. For example, February 2026 consumption must be filed by March 10, 2026."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need to file a return if I didn't import or use anything this month?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Filing a NIL Return is mandatory. Failure to file even a NIL return will result in the suspension of your IIN (IGCR Identification Number)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I file intra-quarterly returns?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, the portal allows Form IGCR-3A for intra-quarterly updates, which is useful for immediate bond re-credit if you have high-frequency imports."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I can't use the goods within 6 months?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must pay the differential duty (the amount saved) along with interest. However, in 2026, the Jurisdictional Commissioner has the power to grant a 3-month extension if the delay is beyond your control."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I re-export unutilized IGCR goods?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. You can re-export defective or unutilized goods under Rule 7, but you must record this in your monthly statement to close the entry in the system."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is IIN (IGCR Identification Number) a one-time thing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Once generated, the IIN is valid across all ports in India. However, you must update your Form IGCR-1 (Prior Intimation) if you add new items or change your manufacturing address."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the penalty for late filing of IGCR-3?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Apart from the system blocking your bond, you face penalties under the Customs Act, 1962. Repeated delays can lead to the permanent withdrawal of concessional benefits and a 100% audit of your past five years of imports."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `How does Customs verify my "Consumption"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `In 2026, Customs uses Risk-Based Data Analytics. If your "Output" (finished goods) doesn't logically match the "Input" (IGCR imports), the system triggers a Physical Audit of your factory records.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "I have made no changes to my company this year. Do I still need to update my IEC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. The DGFT regulation states that even if there are no changes, the IEC holder must `confirm` that the details are correct on the portal every year between April and June. Think of it as a mandatory annual `Check-in.`"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the exact \"effective date\" for deactivation if I miss the deadline?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Usually, the DGFT issues a public notice extending it slightly, but legally, deactivation begins on July 1st. Once deactivated, you cannot even generate a draft Shipping Bill."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -503,6 +652,7 @@ const CloudDeskIGCR = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
