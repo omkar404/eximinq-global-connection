@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskGSTLUT/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskGSTLUT/Navbar";
 import Hero from "../components/CloudDeskGSTLUT/Hero";
 import Fees from "../components/CloudDeskGSTLUT/Fees";
@@ -26,6 +27,165 @@ import { MainNavbar } from "../components/CloudDeskGSTLUT/MainNavbar";
 
 const CloudDeskGSTLUT = () => {
   return (
+<>
+<Helmet>
+        <title>
+          Export Without Paying IGST | IGST Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Save your working capital. File <strong>Letter of Undertaking (LUT)</strong> under GST for the current Financial Year and export goods/services without upfront tax payment."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/gst-lut-filing"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Export Without Paying IGST Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Save your working capital. File <strong>Letter of Undertaking (LUT)</strong> under GST for the current Financial Year and export goods/services without upfront tax payment."
+        />
+        <meta
+          property="og:url"
+          content=""
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Export Without Paying IGST",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Save your working capital. File <strong>Letter of Undertaking (LUT)</strong> under GST for the current Financial Year and export goods/services without upfront tax payment."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is LUT valid for a lifetime?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. The LUT is valid only for one Financial Year (1st April to 31st March). It must be renewed at the start of every new year."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between LUT and Bond?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "An LUT is a simple undertaking used by eligible exporters. A Bond with a Bank Guarantee is required only when the exporter is not eligible for LUT or has been prosecuted for tax evasion above ₹2.5 Crores."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is LUT required for Service Exports?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Service exporters (IT, Consultancy, BPO, SaaS, etc.) must file LUT to issue export invoices without charging IGST."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the validity of a GST LUT?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "An LUT is valid for one financial year only (April 1 to March 31). You must file a fresh renewal for FY 2026-27 immediately after the current year ends."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Who is eligible to file an LUT?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Any registered GST taxpayer who has not been prosecuted for tax evasion exceeding ₹2.5 Crore. If you are under investigation or have a history of major fraud, you must furnish a Bond (on Stamp Paper) instead of an LUT."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I file an LUT mid-year?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. But it only applies to exports made after the filing date. You cannot apply it retroactively to shipments already dispatched."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need to upload any documents on the GST portal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, the process is mostly self-declaration. You don't need to upload the IEC or GST cert, but you must have the Previous Year's LUT ARN handy if you are renewing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can a Service Exporter (SaaS/Freelancer) file an LUT?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Absolutely. Whether you export software, consulting, or car parts, the LUT route is the standard way to avoid IGST."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I forget to mention the LUT ARN on my export invoice?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Customs may reject the shipping bill, or the GST department may treat it as a "Taxable Supply," demanding IGST. CloudDesk provides a Standard Invoice Template that includes the mandatory "Export under LUT" declaration.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Export Timeline" I agree to in the LUT?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `You undertake to
+                    1. Export the goods within 3 months of the invoice date.
+                    2. Realize the payment in foreign currency within 1 year (or as per RBI rules).`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "If I fail to export within 3 months, what happens?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must pay the applicable IGST plus 18% interest within 15 days of the expiry of the 3-month period. If you don't, your LUT facility can be withdrawn."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -657,6 +817,7 @@ const CloudDeskGSTLUT = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
