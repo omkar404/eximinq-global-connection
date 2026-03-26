@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskGSTFiling/TopBar";
 import Navbar from "../components/CloudDeskGSTFiling/Navbar";
@@ -28,6 +29,164 @@ const CloudDeskGSTFiling = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+
+<Helmet>
+        <title>
+          Error-Free GST Filing for Exporters | GST Filing Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="A single mismatch in Table 6A can block your IGST Refund for months. We specialize in filing GSTR-1 and GSTR-3B that perfectly match your Shipping Bills."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/gst-returns"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Error-Free GST Filing for Exporters Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="A single mismatch in Table 6A can block your IGST Refund for months. We specialize in filing GSTR-1 and GSTR-3B that perfectly match your Shipping Bills."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/gst-returns"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Error-Free GST Filing for Exporters",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "A single mismatch in Table 6A can block your IGST Refund for months. We specialize in filing GSTR-1 and GSTR-3B that perfectly match your Shipping Bills."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the due date for GSTR-1 for exporters?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "For monthly filers, the due date is the 11th of the following month. We strongly recommend filing by this date because the export data is pushed to ICEGATE only after GSTR-1 is filed."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Should I select "Export with Payment" or "Without Payment"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `If you paid IGST on the invoice to claim a refund later, select "Export with Payment of Tax". If you are exporting under LUT (Bond), select "Export Without Payment of Tax".`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is GSTR-9 (Annual Return) mandatory?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, for businesses with a turnover above ₹2 Crores. It consolidates all monthly returns filed during the financial year."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if I forget to mention the Port Code in GSTR-1?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "In 2026, the GST portal will allow you to file, but Customs will never trigger your refund. You will have to file an Amendment (Table 9A) in the next month, delaying your cash flow by 30–60 days."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I file GSTR-1 after the deadline?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes, but with a Late Fee of ₹50 per day. More importantly, late filing delays the "Invoice Matching" for your foreign buyer (if they are a GST-registered Indian subsidiary), straining your business relationship.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I report exports made via Courier (e-commerce)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "You must use the CSB-V (Courier Shipping Bill) details. Even for small value exports, the HSN code and the courier tracking number must be mapped to the invoice in GSTR-1."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "Rule 96" Refund?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "This is the Automatic IGST Refund. If you pay IGST on export and your GSTR-1 matches your Shipping Bill, Customs will credit the refund to your bank account automatically without any separate application."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "RFD-01" Refund?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `This is for Unutilized ITC (for those exporting under LUT). This is NOT automatic. You must file a separate application on the GST portal. CloudDesk specializes in RFD-01 filing, achieving a 95% "No-Deficiency" rate.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Why is my refund stuck with "Error SB006"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `SB006 means a "Gateway EGM Error." Your goods have left the port, but the carrier (airline/shipping line) hasn't filed the Export General Manifest correctly. CloudDesk liaisons with the shipping lines to fix this.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is GSTR-9 (Annual Return) mandatory for exporters?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `n 2026, it is mandatory if your aggregate turnover exceeds ₹2 Crore. For exporters, this is a "Reconciliation Statement" where we prove that all exported goods actually left the country.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the "GST Audit" threshold in 2026?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Self-certification of GSTR-9C (Reconciliation Statement) is required for turnover above ₹5 Crore. CloudDesk provides the Certification Assistance to ensure your export data stands up to department scrutiny."
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -526,6 +685,7 @@ const CloudDeskGSTFiling = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
