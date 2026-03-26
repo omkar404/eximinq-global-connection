@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import TopBar from "../components/CloudDeskRMCC/TopBar";
 import Navbar from "../components/CloudDeskRMCC/Navbar";
@@ -31,6 +32,136 @@ const CloudDeskRMCC = () => {
   const [showEnrollModal, setShowEnrollModal] = useState(false);
   
   return (
+<>
+<Helmet>
+        <title>
+          Immediate RMCC Alert & Customs Hold Removal | RMCC Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Every hour counts. Cargo flagged for Examination or Valuation Hold incurs massive demurrage. Our experts specialize in rapid technical documentation and officer liaison."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/rmcc-alert-removal"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Immediate RMCC Alert & Customs Hold Removal Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Every hour counts. Cargo flagged for Examination or Valuation Hold incurs massive demurrage. Our experts specialize in rapid technical documentation and officer liaison."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/rmcc-alert-removal"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Immediate RMCC Alert & Customs Hold Removal",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Every hour counts. Cargo flagged for Examination or Valuation Hold incurs massive demurrage. Our experts specialize in rapid technical documentation and officer liaison."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How do I know if I have an RMCC Alert on my IEC?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `You will notice it when your Bill of Entry/Shipping Bill status on ICEGATE says "Referral to RMS" and subsequently mandates "100% Examination." In severe cases, you will see an "Alert Flag" on the ICEGATE dashboard preventing any filing.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why did the RMCC place an alert on my business?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Common triggers in 2026 include: (1) Undervaluation of goods compared to the NIDB (National Import Database) average, (2) Mis-declaration of HSN codes to bypass restrictions, (3) Linkage with a blacklisted supplier/buyer, or (4) Outstanding "Show Cause Notices" (SCN) that were ignored.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can an alert be placed automatically by the system?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. The Customs RMS uses AI to spot patterns. If your business profile suddenly changes (e.g., a leather exporter suddenly starts importing high-end electronics), the system flags it for "Profile Divergence."`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does it take to remove an RMCC alert?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `A standard alert based on data clarification takes 7 to 15 working days. However, if the alert is from the DRI or involves an investigation into fraud, it can take several months. CloudDesk focuses on "Administrative Alerts" that can be resolved via documentation.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What documents are required for alert removal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `It depends on the trigger, but usually (1) Proof of transaction value (Bank Swift/LC), (2) Manufacturer’s Invoice and Price List, (3) Last 3 years' ITR and Audit Reports, and (4) A formal undertaking of future compliance.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does removing the alert clear my past mistakes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "No. Removing the alert allows you to resume trade. Any past duty short-payments or penalties discovered during the alert period must still be settled."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I still clear my goods while the alert is active?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, but expect extreme delays. Every single box will be opened, and every document scrutinized. This usually leads to heavy Demurrage and Detention charges. CloudDesk’s goal is to remove the alert to stop these daily losses."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will an RMCC alert affect my AEO status?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `Yes. An active alert is a "Fatal Error" for AEO certification. If you are an AEO holder, your status will be suspended immediately until the alert is cleared.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
@@ -484,6 +615,7 @@ const CloudDeskRMCC = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
