@@ -1,4 +1,5 @@
 // import TopBar from "../components/CloudDeskEBRC/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskEBRC/Navbar";
 import Hero from "../components/CloudDeskEBRC/Hero";
 import Fees from "../components/CloudDeskEBRC/Fees";
@@ -29,6 +30,145 @@ import { MainNavbar } from "../components/CloudDeskEBRC/MainNavbar";
 
 const CloudDeskEBRC = () => {
   return (
+<>
+<Helmet>
+        <title>
+          Hassle-Free Quarantine Approvals | Quarantine Registration | Eximinq
+        </title>
+
+        <meta
+          name="description"
+          content="Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance."
+        />
+
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/aqcs-pqms"
+        />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Hassle-Free Quarantine Approvals Online in India | Eximinq"
+        />
+        <meta
+          property="og:description"
+          content="Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/aqcs-pqms"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Structured Data – Professional Service */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Hassle-Free Quarantine Approvals",
+            "provider": {
+              "@type": "Organization",
+              "name": "Eximinq Global Connections",
+              "url": "https://eximinq.in"
+            },
+            "areaServed": "India",
+            "description":
+              "Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance."
+          })}
+        </script>
+
+        {/* Structured Data – FAQ */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is Fumigation mandatory for all wood packaging?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, under ISPM-15 standards, all wooden pallets and crates must be fumigated and marked with the IPPC logo at the country of origin. If not, Indian PQ authorities will order fumigation at the port (with penalty) or deportation."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I bring my pet dog to India as cargo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, but it requires a DGFT Import License unless you are transferring residence to India (in which case, up to 2 pets are allowed as baggage with an AQCS NOC)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if pests are found during inspection?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "If quarantine pests are found, the consignment may be subjected to fumigation/treatment. If the pest is a critical quarantine species not present in India, the shipment will be destroyed or deported."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does my wooden furniture import need PQMS?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes. Any timber or wood-based product (including pallets/crates used for packing) must be either Heat Treated (HT) or Fumigated with Methyl Bromide (MB) as per ISPM-15 standards"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is a "Post-Entry Quarantine" (PEQ)?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `For high-risk items like live plants or seeds, the government may require you to grow them in a "PEQ Facility" (monitored greenhouse) for a specific period to ensure no dormant diseases emerge. CloudDesk helps set up and get approval for your PEQ site.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I import "Prohibited" plants for research?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Yes, but you need a specialized Import Permit for Research/Scientific Purposes and clearance from the Directorate of Plant Protection."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Can I bring my dog/cat to India as a "Tourist"?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `In 2026, you can bring up to two pets as "Accompanied Baggage" provided you have stayed abroad for at least two years. You still need an AQCS ANOC. Commercial pet import (for sale) is strictly prohibited.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Which animal products are under the "Restricted" category?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    "Items like Raw Hides, Skins, and certain Dairy products. These require a Sanitary Import Permit (SIP) issued by the Ministry of Fisheries, Animal Husbandry, and Dairying."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens if AQCS rejects my shipment?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text":
+                    `The shipment must be either re-exported or incinerated (destroyed) at the importer's cost. There is no "Repair/Rectification" allowed for failed animal health standards.`
+                }
+              },
+            ]
+          })}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
@@ -613,6 +753,7 @@ const CloudDeskEBRC = () => {
         </div>
       </footer>
     </div>
+  </>
   );
 };
 
