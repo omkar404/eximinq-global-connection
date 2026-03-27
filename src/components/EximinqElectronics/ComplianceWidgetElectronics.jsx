@@ -21,7 +21,10 @@ const ComplianceWidgetElectronics = () => {
 
         <div className="grid md:grid-cols-3 gap-6">
           {categories.map((item) => (
-            <button
+            <a
+              href="/services/bis-registration"
+              target="_blank"
+              rel="noopener noreferrer"
               key={item}
               className="group p-6 bg-slate-800 rounded-xl border border-slate-700 hover:border-cyan-500 transition text-left"
             >
@@ -34,7 +37,7 @@ const ComplianceWidgetElectronics = () => {
               <p className="text-sm text-slate-500">
                 Check CRS & ETA requirements
               </p>
-            </button>
+            </a>
           ))}
         </div>
       </div>

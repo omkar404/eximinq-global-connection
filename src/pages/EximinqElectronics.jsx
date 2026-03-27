@@ -75,7 +75,9 @@ const EximinqElectronics = () => {
 
         <CloudDeskElectronics />
 
-        <CTAElectronics />
+        <CTAElectronics
+         setShowEnrollModal={setShowEnrollModal}
+        />
 
         <FooterElectronics />
       </main>
