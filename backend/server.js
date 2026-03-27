@@ -31,6 +31,7 @@ const halalCertificationRoutes = require("./routes/halalCertificationRoutes.rout
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
+const engineeringindustryRoutes = require("./routes/engineeringindustryRoutes.routes"); // ← ADD THIS
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
@@ -468,6 +469,8 @@ app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 app.use("/api/rodtep-refund-recovery",rodtepRefundRecoveryRoutes);
 
 app.use("/api/pharmaceuticals-industry-import-export", pharmaceuticalsindustryRoutes);
+
+app.use("/api/engineering-industry-import-export", engineeringindustryRoutes);
 
 app.use("/api/contact-us", maincontactRoutes);
 

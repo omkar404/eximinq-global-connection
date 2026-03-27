@@ -76,7 +76,9 @@ const EximinqEngineering = () => {
 
         <CloudDeskEngineering />
 
-        <CTAEngineering />
+        <CTAEngineering 
+          setShowEnrollModal = {setShowEnrollModal}
+        />
 
         <FooterEngineering />
       </main>

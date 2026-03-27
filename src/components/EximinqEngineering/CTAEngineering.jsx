@@ -1,4 +1,4 @@
-const CTAEngineering = () => {
+const CTAEngineering = ({ setShowEnrollModal }) => {
   return (
     <section className="py-20 bg-blue-800 text-white relative overflow-hidden">
       <div
@@ -21,7 +21,15 @@ const CTAEngineering = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-sm font-bold text-lg shadow-xl transition-all border-b-4 border-orange-700 active:border-b-0 active:translate-y-1">
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "Consult_an_Expert",
+              }) 
+          }
+          className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-sm font-bold text-lg shadow-xl transition-all border-b-4 border-orange-700 active:border-b-0 active:translate-y-1"
+          >
             Consult an Expert
           </button>
 
