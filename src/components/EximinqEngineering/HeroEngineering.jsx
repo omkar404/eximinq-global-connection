@@ -38,11 +38,16 @@ const HeroEngineering = () => {
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-sm font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1">
+            {/* <button className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-sm font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1">
               Explore Solutions
               <ChevronRight className="w-5 h-5" />
-            </button>
-
+            </button> */}
+            <a
+              href="#solutions"
+              className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-sm font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 border-b-4 border-blue-800 active:border-b-0 active:translate-y-1"
+            >
+              Explore Solutions
+            </a>
             <button className="bg-transparent hover:bg-white/10 text-white px-8 py-4 rounded-sm font-bold text-lg transition-all flex items-center justify-center gap-2 border-2 border-slate-400">
               <Truck className="w-5 h-5" />
               ODC Logistics
