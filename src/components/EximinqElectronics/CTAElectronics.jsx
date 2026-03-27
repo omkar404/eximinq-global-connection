@@ -1,4 +1,4 @@
-const CTAElectronics = () => {
+const CTAElectronics = ({ setShowEnrollModal }) => {
   return (
     <section className="py-20 bg-indigo-600 text-white text-center">
       <h2 className="text-4xl font-bold mb-6">
@@ -9,7 +9,18 @@ const CTAElectronics = () => {
       </p>
 
       <div className="flex justify-center gap-4">
-        <button className="bg-white text-indigo-700 px-10 py-4 rounded-lg font-bold">
+        {/* <button className="bg-white text-indigo-700 px-10 py-4 rounded-lg font-bold">
+          Consult an Expert
+        </button> */}
+        <button
+          onClick={() =>
+            setShowEnrollModal({
+              open: true,
+              type: "Consult_an_Expert",
+            })
+          }
+          className="bg-white text-indigo-700 px-10 py-4 rounded-lg font-bold"
+        >
           Consult an Expert
         </button>
         <button className="border border-white px-10 py-4 rounded-lg font-bold">
