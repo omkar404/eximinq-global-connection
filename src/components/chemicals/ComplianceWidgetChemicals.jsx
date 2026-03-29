@@ -20,7 +20,10 @@ const ComplianceWidgetChemicals = () => {
           "Inorganic Chemicals (Ch 28)",
           "Dyes & Pigments (Ch 32)",
         ].map((item) => (
-          <button
+          <a
+            href="/services/cdsco-compliance"
+            target="_blank"
+            rel="noopener noreferrer"
             key={item}
             className="group p-6 bg-slate-50 border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all text-left rounded-lg"
           >
@@ -36,7 +39,7 @@ const ComplianceWidgetChemicals = () => {
             <p className="text-sm text-slate-500 pl-8">
               Check BIS, ADC & SCOMET Status
             </p>
-          </button>
+          </a>
         ))}
       </div>
 

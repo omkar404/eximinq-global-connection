@@ -46,9 +46,13 @@ const HeroChemicals = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-lg hover:shadow-emerald-500/50 flex items-center justify-center gap-2 border-b-4 border-emerald-800 active:border-b-0 active:translate-y-1">
-              Explore Services <ChevronRight className="w-5 h-5" />
-            </button>
+            <a
+            href="#services"
+            className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-lg hover:shadow-emerald-500/50 flex items-center justify-center gap-2 border-b-4 border-emerald-800 active:border-b-0 active:translate-y-1"
+            >
+              Explore Services
+            <ChevronRight className="w-5 h-5" />
+            </a>
 
             <button className="bg-transparent hover:bg-white/10 text-white px-8 py-4 rounded-md font-bold text-lg transition-all flex items-center justify-center gap-2 border-2 border-slate-400">
               <FileWarning className="w-5 h-5" />
