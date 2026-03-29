@@ -33,6 +33,7 @@ const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
 const engineeringindustryRoutes = require("./routes/engineeringindustryRoutes.routes"); // ← ADD THIS
 const electronicsindustryRoutes = require("./routes/electronicsindustryRoutes.routes");
+const chemicalindustryRoutes = require("./routes/chemicalindustryRoutes.routes");
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
@@ -474,6 +475,8 @@ app.use("/api/pharmaceuticals-industry-import-export", pharmaceuticalsindustryRo
 app.use("/api/engineering-industry-import-export", engineeringindustryRoutes);
 
 app.use("/api/electronics-it-industry-import-export", electronicsindustryRoutes);
+
+app.use("/api/chemicals-industry-import-export", chemicalindustryRoutes);
 
 app.use("/api/contact-us", maincontactRoutes);
 

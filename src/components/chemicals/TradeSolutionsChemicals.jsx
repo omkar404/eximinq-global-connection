@@ -6,27 +6,35 @@ const TradeSolutionsChemicals = ({ activeTab, setActiveTab }) => {
       title: "Import Solutions",
       items: [
         {
+          href: "/services/bis-registration",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "BIS Quality Control (QCO)",
-          desc:
-            "Mandatory ISI marking for key chemicals like Caustic Soda, Methanol, and Aniline. Complete factory audit support.",
+          desc: "Mandatory ISI marking for key chemicals like Caustic Soda, Methanol, and Aniline. Complete factory audit support.",
           tags: ["Mandatory Certification", "Lab Testing"],
         },
         {
+          href: "/services/advance-authorisation",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Advance Authorization",
-          desc:
-            "Duty-free import of raw materials and catalysts based on SION norms for export production.",
+          desc: "Duty-free import of raw materials and catalysts based on SION norms for export production.",
           tags: ["Input Duty Exemption", "Cost Saving"],
         },
         {
+          href: "/",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "ADC & Dual-Use NOC",
-          desc:
-            "Clearances from Additional Drug Controller (ADC) for dual-use precursors and Narcotics Commissioner verification.",
+          desc: "Clearances from Additional Drug Controller (ADC) for dual-use precursors and Narcotics Commissioner verification.",
           tags: ["Precursor Control", "Drug Laws"],
         },
         {
+          href: "/services/moowr-scheme",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Customs Bonding (MOOWR)",
-          desc:
-            "Defer duty on bulk chemical imports stored in bonded warehouses until domestic clearance or re-export.",
+          desc: "Defer duty on bulk chemical imports stored in bonded warehouses until domestic clearance or re-export.",
           tags: ["Working Capital", "Bulk Storage"],
         },
       ],
@@ -35,27 +43,35 @@ const TradeSolutionsChemicals = ({ activeTab, setActiveTab }) => {
       title: "Export Solutions",
       items: [
         {
+          href: "/services/scomet-licensing",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "SCOMET (CWC Chemicals)",
-          desc:
-            "Licensing for Chemical Weapons Convention (CWC) scheduled chemicals and dual-use biological agents.",
+          desc: "Licensing for Chemical Weapons Convention (CWC) scheduled chemicals and dual-use biological agents.",
           tags: ["Category 1 & 3", "Non-Proliferation"],
         },
         {
+          href: "/services/rodtep-rosctl-trading",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "RoDTEP Claims",
-          desc:
-            "Maximizing duty remission for Organic (Ch. 29) and Inorganic (Ch. 28) chemicals to boost export margins.",
+          desc: "Maximizing duty remission for Organic (Ch. 29) and Inorganic (Ch. 28) chemicals to boost export margins.",
           tags: ["Incentive Filing", "Tax Refund"],
         },
         {
+          href: "/",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Pre-Shipment Inspection",
-          desc:
-            "Arranging SGS/Intertek inspections and Certificate of Analysis (CoA) verification for sensitive markets.",
+          desc: "Arranging SGS/Intertek inspections and Certificate of Analysis (CoA) verification for sensitive markets.",
           tags: ["Quality Assurance", "Buyer Compliance"],
         },
         {
+          href: "/services/aeo-certification",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "AEO Certification",
-          desc:
-            "Secure supply chain status (T1/T2) for faster border crossing and reduced physical examination of hazardous cargo.",
+          desc: "Secure supply chain status (T1/T2) for faster border crossing and reduced physical examination of hazardous cargo.",
           tags: ["Green Channel", "Safety Security"],
         },
       ],
@@ -170,9 +186,7 @@ const TradeSolutionsChemicals = ({ activeTab, setActiveTab }) => {
                   </div>
                 </div>
 
-                <p className="text-slate-600 text-sm mb-4">
-                  {item.desc}
-                </p>
+                <p className="text-slate-600 text-sm mb-4">{item.desc}</p>
 
                 <div className="flex flex-wrap gap-2">
                   {item.tags.map((tag, tIdx) => (

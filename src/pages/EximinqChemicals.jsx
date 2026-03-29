@@ -69,7 +69,7 @@ const EximinqChemicals = () => {
 
         <CloudDeskChemicals />
 
-        <CTAChemicals />
+        <CTAChemicals setShowEnrollModal={setShowEnrollModal} />
       </main>
 
       <FooterChemicals />
