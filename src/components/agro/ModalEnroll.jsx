@@ -1,7 +1,15 @@
-import React, { useState } from "react";
-import { X, Handshake, Building, Mail } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose }) => {
+export const ModalEnroll = ({
+  show,
+  onClose,
+  onSubmit,
+  predefinedService,
+  type,
+  category,
+  issue,
+}) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -9,10 +17,20 @@ export const ModalEnroll = ({ show, onClose }) => {
     email: "",
     role: "",
     partner: false,
+    service: predefinedService || "Food-agro-industry",
   });
+
+  const isEnroll = !!predefinedService;
+  const isAgro = type === "Consult_an_Agro_Expert";
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (predefinedService) {
+      setForm((prev) => ({ ...prev, service: predefinedService }));
+    }
+  }, [predefinedService]);
 
   const resetForm = () => {
     setForm({
@@ -22,8 +40,10 @@ export const ModalEnroll = ({ show, onClose }) => {
       email: "",
       role: "",
       partner: false,
+      service: predefinedService || "Food-agro-industry",
     });
     setErrors({});
+    setLoading(false);
   };
 
   const handleClose = () => {
@@ -58,27 +78,36 @@ export const ModalEnroll = ({ show, onClose }) => {
     setErrors(v);
     if (Object.keys(v).length > 0) return;
 
-    try {
-      setLoading(true);
+    setLoading(true);
 
+    try {
       const payload = {
-        ...form,
-        type: "food_agro_industry_import_export",
+        name: form.name,
+        mobile: form.mobile,
+        entity: form.entity,
+        email: form.email,
+        role: form.role,
+        partner: form.partner,
+        service: predefinedService || form.service,
+        type: type,
       };
 
+      console.log("📤 Final payload:", payload);
+
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/individual-enroll`,
+        // `${process.env.REACT_APP_API_URL}/api/individual-enroll`,
+        "http://localhost:5000/api/food-agro-industry-import-export",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        throw new Error(data.error || "API failed");
+        throw new Error(data.error || data.message || "API failed");
       }
 
       alert("Request submitted successfully");
@@ -200,6 +229,52 @@ export const ModalEnroll = ({ show, onClose }) => {
               )}
             </div>
 
+            {isEnroll && (
+              <>
+                {/* Category + Issue or ENROLL-specific fields */}
+                <div>
+                  {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                              Category
+                            </label>
+                            <select
+                              value={category}
+                              onChange={(e) => setCategory(e.target.value)}
+                              className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                            >
+                              <option value="" disabled>
+                                Select Category
+                              </option>
+                              {IEC_OPTIONS.map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select> */}
+                </div>
+              </>
+            )}
+
+                {isAgro && (
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">
+                      CATEGORY
+                    </label>
+                    <div className="relative">
+                      <FileSignature
+                        className="absolute left-3 top-3 text-gray-400"
+                        size={16}
+                      />
+                      <input
+                        type="text"
+                        name="service"
+                        value="Consult an Agro Expert"
+                        readOnly
+                        className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
+                      />
+                    </div>
+                  </div>
+                )}
+
             {/* Role */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
@@ -207,18 +282,28 @@ export const ModalEnroll = ({ show, onClose }) => {
               </label>
               <div className="grid grid-cols-2 gap-3">
                 {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
-                  (r) => (
-                    <label key={r} className="flex items-center gap-2">
+                  (role) => (
+                    <label
+                      key={role}
+                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition ${
+                        form.role === role
+                          ? "border-teal-500 bg-teal-50"
+                          : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
+                      }`}
+                    >
                       <input
                         type="radio"
                         name="role"
-                        value={r}
-                        checked={form.role === r}
+                        value={role}
+                        checked={form.role === role}
                         onChange={handleChange}
+                        className="w-4 h-4 text-teal-600 focus:ring-teal-500"
                       />
-                      {r}
+                      <span className="ml-2 text-sm font-medium text-gray-700">
+                        {role}
+                      </span>
                     </label>
-                  )
+                  ),
                 )}
               </div>
               {errors.role && (

@@ -81,7 +81,7 @@ const EximinqAgro = () => {
 
         <CloudDeskAgro />
 
-        <CTAAgro />
+        <CTAAgro setShowEnrollModal={setShowEnrollModal}/>
       </main>
 
       <Footer />

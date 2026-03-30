@@ -13,9 +13,27 @@ const services = [
     description:
       "Comprehensive FSSAI licensing, product approval for non-specified foods, and labeling compliance.",
     features: [
-      "FSSAI Import Clearance",
-      "Label Verification",
-      "Novel Food Approval",
+      {
+        name: "FSSAI Import Clearance",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+            {
+        name: "Label Verification",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Novel Food Approval",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      // "FSSAI Import Clearance",
+      // "Label Verification",
+      // "Novel Food Approval",
     ],
   },
   {
@@ -25,9 +43,28 @@ const services = [
     description:
       "RCMC registration with APEDA (Agri), MPEDA (Marine), and Spices Board for export authorization.",
     features: [
-      "APEDA RCMC Issuance",
-      "Tracenet Registration",
-      "Spices Board CRES",
+
+      {
+        name: "APEDA RCMC Issuance",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+            {
+        name: "Tracenet Registration",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+            {
+        name: "Spices Board CRES",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      // "APEDA RCMC Issuance",
+      // "Tracenet Registration",
+      // "Spices Board CRES",
     ],
   },
   {
@@ -37,9 +74,27 @@ const services = [
     description:
       "End-to-end reefer container management for perishables with temperature data logging.",
     features: [
-      "Reefer Booking",
-      "Packhouse Operations",
-      "Port Health Clearance",
+            {
+        name: "Reefer Booking",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+            {
+        name: "Packhouse Operations",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+            {
+        name: "Port Health Clearance",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      // "Reefer Booking",
+      // "Packhouse Operations",
+      // "Port Health Clearance",
     ],
   },
   {
@@ -49,9 +104,27 @@ const services = [
     description:
       "Guidance on NPOP (India) and NOP (USA) organic standards for premium market access.",
     features: [
-      "Scope Certificate",
-      "Transaction Certificate",
-      "Residue Analysis",
+            {
+        name: "Scope Certificate",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+            {
+        name: "Transaction Certificate",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+            {
+        name: "Residue Analysis",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      // "Scope Certificate",
+      // "Transaction Certificate",
+      // "Residue Analysis",
     ],
   },
 ];
@@ -79,6 +152,9 @@ const ServicesAgro = () => {
           {services.map((service) => (
             <div
               key={service.id}
+              to={service.href}
+              target={service.target}
+              rel={service.rel}
               className="bg-[#fcfdfa] p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 group"
             >
               <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-green-700 mb-6 shadow-sm border border-stone-100 group-hover:bg-green-700 group-hover:text-white transition-colors duration-300">
@@ -100,7 +176,20 @@ const ServicesAgro = () => {
                     className="flex items-center gap-3 text-sm text-stone-500 font-medium"
                   >
                     <Leaf className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                    {feature}
+                    {typeof feature === "object" && feature.href ? (
+                      <a
+
+                        href={feature.href}
+                        target={feature.target}
+                        rel={feature.rel}
+                        onClick={(e) => e.stopPropagation()}
+                        className="hover:text-teal-600 hover:underline transition"
+                      >
+                        {feature.name}
+                      </a>
+                    ) : (
+                      <span>{feature}</span>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -1,25 +1,38 @@
 import { Anchor, Globe, Utensils } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const tradeSolutions = {
   import: {
     title: "Import Solutions",
     items: [
       {
+        href: "/services/fssai-licensing",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "FSSAI Clearance",
         desc: "Single window clearance for food imports. We manage sample testing at FSSAI-notified labs to prevent demurrage.",
         tags: ["Food Safety", "Lab Testing"],
       },
       {
+        href: "/services/aqcs-pqms",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Plant Quarantine (PQ)",
         desc: "Import Permit (IP) and Phyto-Sanitary Certificate (PSC) verification for importing seeds, fruits, and timber.",
         tags: ["Bio-Security", "Pest Risk Analysis"],
       },
       {
+        href: "/services/aqcs-pqms",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Animal Quarantine (AQ)",
         desc: "Sanitary Import Permit (SIP) processing for dairy, meat, and pet food products ensuring disease-free entry.",
         tags: ["Livestock Products", "SIP Filing"],
       },
       {
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Cold Storage Bonding",
         desc: "MOOWR scheme for temperature-controlled warehousing. Defer duty on high-value frozen foods until sale.",
         tags: ["Duty Deferment", "Inventory Mgmt"],
@@ -30,21 +43,33 @@ const tradeSolutions = {
     title: "Export Solutions",
     items: [
       {
+        href: "/services/rodtep-scheme",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "RoDTEP for Agro",
         desc: "Claiming Remission of Duties (RoDTEP) on export of fruits, vegetables, and processed foods to boost margins.",
         tags: ["Export Incentive", "Cost Competitiveness"],
       },
       {
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "TMA Scheme",
         desc: "Transport and Marketing Assistance filing to reimburse freight costs for specific agricultural produce.",
         tags: ["Freight Subsidy", "New Markets"],
       },
       {
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Phytosanitary Cert",
         desc: "Issuance of Phytosanitary Certificates for export consignments, ensuring acceptance by foreign quarantine authorities.",
         tags: ["Global Compliance", "Pest Free"],
       },
       {
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Health Certificates",
         desc: "Procuring Health Certificates from Export Inspection Council (EIC) for fish, honey, and egg products.",
         tags: ["EU Norms", "Quality Control"],
@@ -54,6 +79,61 @@ const tradeSolutions = {
 };
 
 const TradeSolutionsAgro = ({ activeTab, setActiveTab, handleImageError }) => {
+
+  const renderCard = (item) => (
+    <div className="bg-white p-6 rounded-xl shadow-sm border border-stone-100 hover:border-green-200 hover:shadow-md transition-all">
+      <div className="flex justify-between items-start mb-2">
+        <h4
+          className={`text-lg font-bold ${
+            activeTab === "import" ? "text-green-800" : "text-amber-700"
+          }`}
+        >
+          {item.head}
+        </h4>
+        <div
+          className={`p-2 rounded-lg ${
+            activeTab === "import"
+              ? "bg-green-50 text-green-700"
+              : "bg-amber-50 text-amber-700"
+          }`}
+        >
+          {activeTab === "import" ? (
+            <Utensils className="w-4 h-4" />
+          ) : (
+            <Globe className="w-4 h-4" />
+          )}
+        </div>
+      </div>
+
+      <p className="text-stone-600 text-sm mb-4">{item.desc}</p>
+
+      {/* ✅ Fixed: proper <a> tag with ternary */}
+      <div className="flex flex-wrap gap-2">
+        {item.tags.map((tag, tIdx) =>
+          typeof tag === "object" && tag.name && tag.href ? (
+            <a
+              key={tag.name}
+              href={tag.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="px-3 py-1 bg-[#f4f7f4] text-stone-600 text-xs font-bold rounded-full border border-stone-200 hover:text-teal-600 hover:underline transition"
+            >
+              {tag.name}
+            </a>
+          ) : (
+            <span
+              key={tIdx}
+              className="px-3 py-1 bg-[#f4f7f4] text-stone-600 text-xs font-bold rounded-full border border-stone-200"
+            >
+              {tag}
+            </span>
+          )
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <section id="solutions" className="py-20 bg-[#f4f7f4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,9 +180,7 @@ const TradeSolutionsAgro = ({ activeTab, setActiveTab, handleImageError }) => {
           <div className="space-y-6">
             <div
               className={`p-8 rounded-2xl border-l-8 shadow-sm bg-white ${
-                activeTab === "import"
-                  ? "border-green-600"
-                  : "border-amber-600"
+                activeTab === "import" ? "border-green-600" : "border-amber-600"
               }`}
             >
               <h3 className="text-2xl font-bold text-stone-800 mb-3">
@@ -129,52 +207,25 @@ const TradeSolutionsAgro = ({ activeTab, setActiveTab, handleImageError }) => {
             />
           </div>
 
-          {/* Right */}
+          {/* Right cards — ✅ wrapped in Link */}
           <div className="grid gap-4">
-            {tradeSolutions[activeTab].items.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white p-6 rounded-xl shadow-sm border border-stone-100 hover:border-green-200 hover:shadow-md transition-all"
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h4
-                    className={`text-lg font-bold ${
-                      activeTab === "import"
-                        ? "text-green-800"
-                        : "text-amber-700"
-                    }`}
-                  >
-                    {item.head}
-                  </h4>
-                  <div
-                    className={`p-2 rounded-lg ${
-                      activeTab === "import"
-                        ? "bg-green-50 text-green-700"
-                        : "bg-amber-50 text-amber-700"
-                    }`}
-                  >
-                    {activeTab === "import" ? (
-                      <Utensils className="w-4 h-4" />
-                    ) : (
-                      <Globe className="w-4 h-4" />
-                    )}
-                  </div>
+            {tradeSolutions[activeTab].items.map((item) =>
+              item.href && item.href !== "/" ? (
+                <Link
+                  key={item.head}
+                  to={item.href}
+                  target={item.target}
+                  rel={item.rel}
+                  className="block"
+                >
+                  {renderCard(item)}
+                </Link>
+              ) : (
+                <div key={item.head}>
+                  {renderCard(item)}
                 </div>
-
-                <p className="text-stone-600 text-sm mb-4">{item.desc}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {item.tags.map((tag, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-3 py-1 bg-[#f4f7f4] text-stone-600 text-xs font-bold rounded-full border border-stone-200"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       </div>
