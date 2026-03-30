@@ -5,6 +5,7 @@ import {
   Truck,
   ChevronRight,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -14,9 +15,24 @@ const services = [
     description:
       "End-to-end support for listing Solar PV Modules under MNRE ALMM for government and subsidized projects.",
     features: [
-      "Factory Audit Preparation",
-      "MNRE Application Filing",
-      "Model Addition & Renewal",
+      {
+        name: "Factory Audit Preparation",
+        href: "/services/factory-license",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "MNRE Application Filing",
+        href: "/",  // 🔗 Add actual URL
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Model Addition & Renewal",
+        href: "/",  // 🔗 Add actual URL
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
     ],
   },
   {
@@ -26,9 +42,24 @@ const services = [
     description:
       "BIS CRS registration for Solar Inverters, Hybrid Systems, and Energy Storage Solutions.",
     features: [
-      "IS 16221 / IS 16169",
-      "Test Lab Coordination",
-      "Surveillance Management",
+      {
+        name: "IS 16221 / IS 16169",
+        href: "/",  // 🔗 Link to BIS CRS
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Test Lab Coordination",
+        href: "/",  // 🔗 Add actual URL
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Surveillance Management",
+        href: "/",  // 🔗 Add actual URL
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
     ],
   },
   {
@@ -38,9 +69,24 @@ const services = [
     description:
       "Concessional duty clearance for Solar & Wind Power Projects under Project Import Regulations.",
     features: [
-      "Essentiality Certificate",
-      "Contract Registration",
-      "Duty Reconciliation",
+      {
+        name: "Essentiality Certificate",
+        href: "/",  // 🔗 Add actual URL
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Contract Registration",
+        href: "/services/project-cargo",  // 🔗 Link to Project Cargo
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Duty Reconciliation",
+        href: "/services/duty-payment-ecl",  // 🔗 Link to Duty Payment
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
     ],
   },
   {
@@ -50,9 +96,24 @@ const services = [
     description:
       "Specialized logistics for transformers, wind blades, and oversized renewable components.",
     features: [
-      "Route Survey & Approvals",
-      "Multi-Axle Transport",
-      "Port Handling",
+      {
+        name: "Route Survey & Approvals",
+        href: "/services/inland-transportation",  // 🔗 Link to Inland Transportation
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Multi-Axle Transport",
+        href: "/services/freight-forwarding",  // 🔗 Link to Freight Forwarding
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Port Handling",
+        href: "/services/cha-services",  // 🔗 Link to CHA Services
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
     ],
   },
 ];
@@ -97,12 +158,16 @@ const ServicesSolar = () => {
 
               <ul className="space-y-3 pt-4 border-t border-slate-200">
                 {service.features.map((feature, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm text-slate-500 font-medium"
-                  >
-                    <ChevronRight className="w-4 h-4 text-sky-500" />
-                    {feature}
+                  <li key={i}>
+                    <Link
+                      to={feature.href}
+                      target={feature.target}
+                      rel={feature.rel}
+                      className="flex items-center gap-3 text-sm text-slate-500 font-medium hover:text-amber-600 transition-colors group/link"
+                    >
+                      <ChevronRight className="w-4 h-4 text-sky-500 group-hover/link:text-amber-500 transition-colors" />
+                      {feature.name}
+                    </Link>
                   </li>
                 ))}
               </ul>

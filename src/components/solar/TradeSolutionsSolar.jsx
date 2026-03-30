@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Anchor, Globe, Factory } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const TradeSolutionsSolar = () => {
   const [activeTab, setActiveTab] = useState("import");
@@ -9,21 +10,33 @@ const TradeSolutionsSolar = () => {
       title: "Import Solutions",
       items: [
         {
+          href: "/",  // 🔗 Add actual service URL
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "BOM Import (PLI)",
           desc: "Duty-free import of raw materials (Eva, Backsheet, Glass) for solar manufacturing under Production Linked Incentive schemes.",
           tags: ["PLI Compliance", "IGCR Rules"],
         },
         {
+          href: "/services/bis-registration",  // 🔗 Link to BIS CRS
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "BIS CRS",
           desc: "Mandatory safety registration for Solar Inverters, Storage Batteries, and BOS components before arrival in India.",
           tags: ["Safety Standards", "Customs Clearance"],
         },
         {
+          href: "/services/moowr-scheme",  // 🔗 Link to MOOWR service
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "MOOWR for Manufacturing",
           desc: "Defer duty on capital goods and raw materials for solar cell/module manufacturing units.",
           tags: ["Cash Flow", "Make in India"],
         },
         {
+          href: "/",  // 🔗 Link to DCR Verification
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "DCR Verification",
           desc: "Ensuring compliance with Domestic Content Requirement (DCR) norms for subsidized solar projects.",
           tags: ["MNRE Norms", "Supply Chain Audit"],
@@ -34,21 +47,33 @@ const TradeSolutionsSolar = () => {
       title: "Export Solutions",
       items: [
         {
+          href: "/",  // 🔗 Link to Carbon Credits
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Carbon Credits",
           desc: "Advisory on registering projects for Carbon Credits (VER/CER) and trading them in international markets.",
           tags: ["Sustainability", "Revenue Stream"],
         },
         {
+          href: "/services/rodtep-rosctl-trading",  // 🔗 Link to RoDTEP
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "RoDTEP for Renewables",
           desc: "Claiming export benefits for Solar Modules, Structures, and Wind Castings to boost global price competitiveness.",
           tags: ["Export Incentive", "Duty Remission"],
         },
         {
+          href: "/",  // 🔗 Link to EPC Services
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "EPC Services Export",
           desc: "Structuring contracts for export of Solar EPC services to Africa and SE Asia, managing withholding tax and GST.",
           tags: ["Service Export", "Project Mgmt"],
         },
         {
+          href: "/services/import-export-code",  // 🔗 Link to Certifications
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Global Certifications",
           desc: "Assistance with IEC, UL, and CE certifications required for exporting modules to US and EU markets.",
           tags: ["Market Access", "Quality Assurance"],
@@ -131,12 +156,15 @@ const TradeSolutionsSolar = () => {
             />
           </div>
 
-          {/* Cards */}
+          {/* Cards - Updated with Link components */}
           <div className="grid gap-4">
             {tradeSolutions[activeTab].items.map((item, idx) => (
-              <div
+              <Link
                 key={idx}
-                className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:border-amber-200 hover:shadow-md transition-all"
+                to={item.href}
+                target={item.target}
+                rel={item.rel}
+                className="block bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:border-amber-200 hover:shadow-md transition-all cursor-pointer"
               >
                 <div className="flex justify-between items-start mb-2">
                   <h4
@@ -177,7 +205,7 @@ const TradeSolutionsSolar = () => {
                     </span>
                   ))}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
