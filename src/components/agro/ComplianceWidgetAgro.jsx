@@ -20,7 +20,10 @@ const ComplianceWidgetAgro = () => {
           "Spices & Condiments",
           "Marine Products",
         ].map((item) => (
-          <button
+          <a
+            href="/services/fssai-licensing"
+            target="_blank"
+            rel="noopener noreferrer"
             key={item}
             className="group p-6 rounded-xl border border-stone-200 hover:border-green-500 hover:bg-green-50 transition-all text-left relative overflow-hidden"
           >
@@ -37,7 +40,7 @@ const ComplianceWidgetAgro = () => {
             <p className="text-sm text-stone-500 group-hover:text-green-800 relative z-10">
               Check APEDA / MPEDA Norms
             </p>
-          </button>
+          </a>
         ))}
       </div>
     </section>

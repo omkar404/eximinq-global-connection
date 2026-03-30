@@ -1,4 +1,4 @@
-const CTAgro = () => {
+const CTAgro = ({setShowEnrollModal}) => {
   return (
     <section className="py-20 bg-green-800 text-white text-center">
       <div className="max-w-4xl mx-auto px-4">
@@ -10,7 +10,15 @@ const CTAgro = () => {
           compliant.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="bg-amber-500 px-10 py-4 rounded-lg font-bold">
+          <button 
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "Consult_an_Agro_Expert",
+              })
+            }
+          className="bg-amber-500 px-10 py-4 rounded-lg font-bold"
+          >
             Consult an Agro Expert
           </button>
           <button className="border-2 border-green-300 px-10 py-4 rounded-lg font-bold">
