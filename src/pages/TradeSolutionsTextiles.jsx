@@ -67,7 +67,7 @@ const EximinqTextiles = () => {
 
         <ServicesGridTextiles />
         <CloudDeskTextiles />
-        <CTATextiles />
+        <CTATextiles setShowEnrollModal={setShowEnrollModal} />
         <FooterTextiles />
       </main>
     </>

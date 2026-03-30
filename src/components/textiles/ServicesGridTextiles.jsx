@@ -1,9 +1,4 @@
-import {
-  TrendingUp,
-  Layers,
-  Leaf,
-  ShoppingBag
-} from "lucide-react";
+import { TrendingUp, Layers, Leaf, ShoppingBag } from "lucide-react";
 
 const services = [
   {
@@ -13,9 +8,27 @@ const services = [
     description:
       "Maximize claims under RoSCTL, RoDTEP, and Duty Drawback for garments and made-ups.",
     features: [
-      "RoSCTL Filing & Audit",
-      "Duty Drawback Fixation",
-      "Special Advance Authorization",
+      {
+        name: "RoSCTL Filing & Audit",
+        href: "/services/rodtep-rosctl-trading",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Duty Drawback Fixation",
+        href: "/services/duty-drawback",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Special Advance Authorization",
+        href: "/services/advance-authorisation",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      // "RoSCTL Filing & Audit",
+      // "Duty Drawback Fixation",
+      // "Special Advance Authorization",
     ],
   },
   {
@@ -25,6 +38,24 @@ const services = [
     description:
       "Duty-free import of trimmings, embellishments, and specialty fabrics for export production.",
     features: [
+      {
+        name: "Import of Trimmings",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Nominated Supplier Mgmt",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Fabric Quality Checks",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
       "Import of Trimmings",
       "Nominated Supplier Mgmt",
       "Fabric Quality Checks",
@@ -37,6 +68,24 @@ const services = [
     description:
       "Certification support for GOTS, Oeko-Tex, and organic cotton sourcing verification.",
     features: [
+      {
+        name: "GOTS Certification",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Traceability Audits",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Chemical Compliance (RSL)",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
       "GOTS Certification",
       "Traceability Audits",
       "Chemical Compliance (RSL)",
@@ -49,6 +98,24 @@ const services = [
     description:
       "GOH (Garment on Hanger) containers and fast-track air freight for seasonal fashion collections.",
     features: [
+      {
+        name: "GOH Container Booking",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "Sample Logistics",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+      {
+        name: "JIT Retail Delivery",
+        href: "/",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
       "GOH Container Booking",
       "Sample Logistics",
       "JIT Retail Delivery",
@@ -68,7 +135,8 @@ const ServicesGridTextiles = () => {
             Tailored for Textiles
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto text-lg font-light">
-            Services designed for yarn counts, fabric blends, and fashion seasons.
+            Services designed for yarn counts, fabric blends, and fashion
+            seasons.
           </p>
         </div>
 
@@ -76,6 +144,9 @@ const ServicesGridTextiles = () => {
           {services.map((service) => (
             <div
               key={service.id}
+              to={service.href}
+              target={service.target}
+              rel={service.rel}
               className="bg-slate-50 p-8 rounded-3xl hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all border border-slate-100"
             >
               <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-rose-600 mb-8 shadow-sm">
@@ -97,7 +168,18 @@ const ServicesGridTextiles = () => {
                     className="flex items-center gap-3 text-sm text-slate-500"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-                    {feature}
+                    { typeof feature === "object" && feature.href ?(
+                      <a
+                      href={feature.href}
+                      target={feature.target}
+                      rel={feature.rel}
+                      onClick={(e) => e.stopPropagation ()}
+                      >
+                        {feature.name}
+                      </a>
+                    ) : (
+                      <span>{feature}</span>
+                    )}
                   </li>
                 ))}
               </ul>

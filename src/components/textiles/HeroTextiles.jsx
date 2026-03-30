@@ -39,9 +39,16 @@ const HeroTextiles = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-rose-600 hover:bg-rose-500 text-white px-10 py-4 rounded-full font-bold text-lg transition-all shadow-xl hover:shadow-rose-500/30 flex items-center justify-center gap-2">
+            {/* <button className="bg-rose-600 hover:bg-rose-500 text-white px-10 py-4 rounded-full font-bold text-lg transition-all shadow-xl hover:shadow-rose-500/30 flex items-center justify-center gap-2">
               View Solutions <ChevronRight className="w-5 h-5" />
-            </button>
+            </button> */}
+
+            <a 
+              href="#solutions"
+              className="bg-rose-600 hover:bg-rose-500 text-white px-10 py-4 rounded-full font-bold text-lg transition-all shadow-xl hover:shadow-rose-500/30 flex items-center justify-center gap-2"
+            >
+              View Solutions <ChevronRight className="w-5 h-5" />
+            </a>
 
             <button className="bg-white/80 hover:bg-white backdrop-blur-sm text-slate-900 px-10 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-2 border border-slate-200">
               <Tag className="w-5 h-5 text-slate-500" />

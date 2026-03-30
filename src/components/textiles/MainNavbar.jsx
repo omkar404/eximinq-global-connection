@@ -13,7 +13,7 @@ const MainNavbar = ({ scrolled, isMenuOpen, setIsMenuOpen }) => {
           <a href="#home" className="hover:text-rose-600">
             Home
           </a>
-          <a href="#solutions" className="hover:text-rose-600">
+          <a href="c" className="hover:text-rose-600">
             Solutions
           </a>
           <a href="#services" className="hover:text-rose-600">
