@@ -228,27 +228,26 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
               <div className="h-px bg-slate-700 w-12 md:w-32"></div>
             </div>
 
-                        {/* Toggle */}
-                        <div className="flex justify-center mb-10">
-                            <div className="bg-slate-800 p-1 rounded-xl flex items-center relative">
+            {/* Toggle */}
+            <div className="flex justify-center mb-10">
+              <div className="bg-slate-800 p-1 rounded-xl flex items-center relative">
 
-                                <button
-                                    onClick={() => setBilling("monthly")}
-                                    className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${billing === "monthly"
-                                        ? "bg-blue-600 text-white shadow-lg"
-                                        : "text-slate-400 hover:text-white"
-                                        }`}
-                                >
-                                    Monthly
-                                </button>
+                <button
+                  onClick={() => setBilling("quarterly")}
+                  className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${billing === "quarterly"
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "text-slate-400 hover:text-white"
+                    }`}
+                >
+                  Quarterly
+                </button>
 
                 <button
                   onClick={() => setBilling("annual")}
-                  className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
-                    billing === "annual"
+                  className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${billing === "annual"
                       ? "bg-blue-600 text-white shadow-lg"
                       : "text-slate-400 hover:text-white"
-                  }`}
+                    }`}
                 >
                   Annually
                 </button>
@@ -259,179 +258,184 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
               </div>
             </div>
 
-                        {/* SaaS cards */}
-                        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* SaaS cards */}
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
 
-                            {/* STARTER */}
-                            <div className="bg-white text-slate-900 rounded-3xl p-8 border border-slate-200">
-                                <h3 className="font-bold text-xl">Starter</h3>
-                                <p className="text-slate-500 text-sm mt-1">For small exporters.</p>
+              {/* STARTER */}
+              <div className="bg-white text-slate-900 rounded-3xl p-8 border border-slate-200">
+                <h3 className="font-bold text-xl">Starter</h3>
+                <p className="text-slate-500 text-sm mt-1">For small exporters.</p>
 
-                                <div className="my-6">
-                                    {billing === "annual" ? (
-                                        <>
-                                            <span className="text-xs text-slate-400 line-through block">
-                                                ₹ 35,000/yr
-                                            </span>
-                                            <span className="text-4xl font-bold">₹ 25,000</span>
-                                            <span className="text-slate-500">/yr</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="text-xs text-slate-400 line-through block">
-                                                ₹ 3,500/mo
-                                            </span>
-                                            <span className="text-4xl font-bold">₹ 2,500</span>
-                                            <span className="text-slate-500">/mo</span>
-                                        </>
-                                    )}
-                                </div>
-
-                                <ul className="space-y-3 text-sm text-slate-600 mb-8">
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        <strong>500</strong> Shipment Sets / Year
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        Basic Compliance Checks
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        Service Store Access
-                                    </li>
-                                </ul>
-
-                                <button
-                                    onClick={() =>
-                                        setShowEnrollModal({
-                                            open: true,
-                                            plan: "Starter",
-                                            billing: billing,
-                                            price: billing === "annual" ? "₹ 25,000/yr" : "₹ 2,500/mo"
-                                        })
-                                    }
-                                    className="block text-center w-full py-3 rounded-xl bg-slate-100 font-bold hover:bg-slate-200 transition"
-                                >
-                                    Join Waitlist
-                                </button>
-                            </div>
-
-                            {/* GROWTH */}
-                            <div className="bg-white text-slate-900 rounded-3xl p-8 border-2 border-blue-600 relative shadow-2xl">
-                                <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
-                                    RECOMMENDED
-                                </div>
-
-                                <h3 className="font-bold text-xl">Growth</h3>
-                                <p className="text-slate-500 text-sm mt-1">
-                                    For active trading houses.
-                                </p>
-
-                                <div className="my-6">
-                                    {billing === "annual" ? (
-                                        <>
-                                            <span className="text-xs text-slate-400 line-through block">
-                                                ₹ 70,000/yr
-                                            </span>
-                                            <span className="text-4xl font-bold">₹ 50,000</span>
-                                            <span className="text-slate-500">/yr</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="text-xs text-slate-400 line-through block">
-                                                ₹ 7,000/mo
-                                            </span>
-                                            <span className="text-4xl font-bold">₹ 5,000</span>
-                                            <span className="text-slate-500">/mo</span>
-                                        </>
-                                    )}
-                                </div>
-
-                                <ul className="space-y-3 text-sm text-slate-600 mb-8">
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        <strong>1,500</strong> Shipment Sets / Year
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        <strong>Full Compliance Audit</strong>
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        EPCG & AA Tracking
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        <strong>₹ 10,000</strong> Wallet Credit Included
-                                    </li>
-                                </ul>
-
-                                <button
-                                    onClick={() =>
-                                        setShowEnrollModal({
-                                            open: true,
-                                            plan: "Growth",
-                                            billing: billing,
-                                            price: billing === "annual" ? "₹ 50,000/yr" : "₹ 5,000/mo"
-                                        })
-                                    }
-                                    className="block text-center w-full py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition"
-                                >
-                                    Join Waitlist
-                                </button>
-                            </div>
-
-                            {/* ENTERPRISE */}
-                            <div className="bg-white text-slate-900 rounded-3xl p-8 border border-slate-200">
-                                <h3 className="font-bold text-xl">Enterprise</h3>
-                                <p className="text-slate-500 text-sm mt-1">
-                                    For multinational operations.
-                                </p>
-
-                                <div className="my-6">
-                                    <span className="text-4xl font-bold">Custom</span>
-                                </div>
-
-                                <ul className="space-y-3 text-sm text-slate-600 mb-8">
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        Unlimited Shipment Sets
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        <strong>Advanced Compliance Audit</strong>
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-star text-amber-500"></i>
-                                        <strong>Quarterly Audit Strategy Review</strong>
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <i className="fas fa-check text-green-500"></i>
-                                        Dedicated Compliance Officer
-                                    </li>
-                                </ul>
-
-                                <button
-                                    onClick={() =>
-                                        setShowEnrollModal({
-                                            open: true,
-                                            plan: "Enterprise",
-                                            billing: billing,
-                                            price: "Custom"
-                                        })
-                                    }
-                                    className="block text-center w-full py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-700 transition"
-                                >
-                                    Contact Sales
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div className="my-6">
+                  {billing === "annual" ? (
+                    <>
+                      <span className="text-xs text-slate-400 line-through block">
+                        ₹ 35,000/yr
+                      </span>
+                      <span className="text-4xl font-bold">₹ 25,000</span>
+                      <span className="text-slate-500">/yr</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-xs text-slate-400 line-through block">
+                        ₹ 3,500/mo
+                      </span>
+                      <span className="text-4xl font-bold">₹ 7,500</span>
+                      <span className="text-slate-500">/qtr</span>
+                    </>
+                  )}
                 </div>
-            </section>
-        </>
-    );
+
+                <ul className="space-y-3 text-sm text-slate-600 mb-8">
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    <strong>500</strong> Shipment Sets / Year
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    Basic Compliance Checks
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    Service Store Access
+                  </li>
+                </ul>
+
+                <button
+                  onClick={() =>
+                    setShowEnrollModal({
+                      open: true,
+                      plan: "Starter",
+                      billing: billing,
+                      price: billing === "annual" ? "₹ 25,000/yr" : "₹ 7,500/qtr"
+                    })
+                  }
+                  className="block text-center w-full py-3 rounded-xl bg-slate-100 font-bold hover:bg-slate-200 transition"
+                >
+                  Join Waitlist
+                </button>
+              </div>
+
+              {/* GROWTH */}
+              <div className="bg-white text-slate-900 rounded-3xl p-8 border-2 border-blue-600 relative shadow-2xl">
+                <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
+                  RECOMMENDED
+                </div>
+
+                <h3 className="font-bold text-xl">Growth</h3>
+                <p className="text-slate-500 text-sm mt-1">
+                  For active trading houses.
+                </p>
+
+                <div className="my-6">
+                  {billing === "annual" ? (
+                    <>
+                      <span className="text-xs text-slate-400 line-through block">
+                        ₹ 70,000/yr
+                      </span>
+                      <span className="text-4xl font-bold">₹ 50,000</span>
+                      <span className="text-slate-500">/yr</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-xs text-slate-400 line-through block">
+                        ₹ 7,000/mo
+                      </span>
+                      <span className="text-4xl font-bold">₹ 15,000</span>
+                      <span className="text-slate-500">/qtr</span>
+                    </>
+                  )}
+                </div>
+
+                <ul className="space-y-3 text-sm text-slate-600 mb-8">
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    <strong>1,500</strong> Shipment Sets / Year
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    <strong>Full Compliance Audit</strong>
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    EPCG & AA Tracking
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    <strong>₹ 10,000</strong> Wallet Credit Included
+                  </li>
+                </ul>
+
+                <button
+                  onClick={() =>
+                    setShowEnrollModal({
+                      open: true,
+                      plan: "Growth",
+                      billing: billing,
+                      price: billing === "annual" ? "₹ 50,000/yr" : "₹ 15,000/qtr"
+                    })
+                  }
+                  className="block text-center w-full py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition"
+                >
+                  Join Waitlist
+                </button>
+              </div>
+
+              {/* ENTERPRISE */}
+              <div className="bg-white text-slate-900 rounded-3xl p-8 border border-slate-200">
+                <h3 className="font-bold text-xl">Enterprise</h3>
+                <p className="text-slate-500 text-sm mt-1">
+                  For multinational operations.
+                </p>
+
+                <div className="my-6">
+                  <span className="text-4xl font-bold">Custom</span>
+                </div>
+
+                <ul className="space-y-3 text-sm text-slate-600 mb-8">
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    Unlimited Shipment Sets
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    <strong>Advanced Compliance Audit</strong>
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-star text-amber-500"></i>
+                    <strong>Quarterly Audit Strategy Review</strong>
+                  </li>
+                  <li className="flex gap-2">
+                    <i className="fas fa-check text-green-500"></i>
+                    Dedicated Compliance Officer
+                  </li>
+                </ul>
+
+                <button
+                  onClick={() =>
+                    setShowEnrollModal({
+                      open: true,
+                      plan: "Enterprise",
+                      billing: billing,
+                      price: "Custom"
+                    })
+                  }
+                  className="block text-center w-full py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-700 transition"
+                >
+                  Contact Sales
+                </button>
+              </div>
+            </div>
+            <div className="text-center mt-12">
+              <span className="text-lg font-bold text-white-500">
+               One-time enrollment fee of ₹ 2,500.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default TransparentPricing;

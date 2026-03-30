@@ -52,7 +52,7 @@ const saasEnrollmentSchema = new mongoose.Schema(
 
     billing: {
       type: String,
-      enum: ["monthly", "annual", null],
+      enum: ["quarterly", "annual"],
       default: null,
     },
 

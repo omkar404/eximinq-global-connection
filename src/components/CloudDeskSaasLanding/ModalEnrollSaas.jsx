@@ -93,7 +93,7 @@ const ModalEnrollSaas = ({ show, onClose, type, plan, billing, price, onSubmit }
       console.log("final payload", payload);
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/import-export-code`,
+        `${process.env.REACT_APP_API_URL}/api/saas-enrollment`,
         // `http://localhost:5000/api/saas-enrollment`,
         {
           method: "POST",
