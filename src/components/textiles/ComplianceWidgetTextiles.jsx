@@ -20,7 +20,11 @@ const ComplianceWidgetTextiles = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {categories.map((item, idx) => (
-          <button
+          <a
+
+            href="/services/rodtep-rosctl-trading"
+            target="_blank"
+            rel="noopener noreferrer"
             key={idx}
             className="group p-8 bg-slate-50 rounded-2xl hover:bg-rose-50 transition-all text-left border border-slate-100 hover:border-rose-200 relative overflow-hidden"
           >
@@ -44,7 +48,7 @@ const ComplianceWidgetTextiles = () => {
             <p className="text-sm text-slate-500 relative z-10 group-hover:text-rose-700">
               Check RoSCTL Rates & US/EU Norms
             </p>
-          </button>
+          </a>
         ))}
       </div>
     </section>

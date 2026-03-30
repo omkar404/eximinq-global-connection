@@ -1,4 +1,5 @@
 import { Anchor, Globe, Layers } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const TradeSolutionsTextiles = ({ activeTab, setActiveTab }) => {
   const tradeSolutions = {
@@ -6,21 +7,33 @@ const TradeSolutionsTextiles = ({ activeTab, setActiveTab }) => {
       title: "Import Solutions",
       items: [
         {
+          href: "/services/advance-authorisation",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Advance Authorization",
           desc: "Import fabrics, zippers, buttons, and sewing thread duty-free against export orders. Ideal for competitive pricing.",
           tags: ["Duty Free Input", "Cost Reduction"],
         },
         {
+          href: "/services/epcg-scheme",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Capital Goods (EPCG)",
           desc: "Import high-speed sewing machines, knitting machines, and embroidery units at 0% duty to modernize your factory.",
           tags: ["Modernization", "0% Duty"],
         },
         {
+          href: "/",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Textile Chemicals (REACH)",
           desc: "Ensuring all imported dyes and auxiliaries meet EU REACH and ZDHC standards for restricted substances.",
           tags: ["Chemical Safety", "Zero Discharge"],
         },
         {
+          href: "/",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Quality Control (QCO)",
           desc: "Compliance with mandatory Quality Control Orders for Viscose Staple Fiber (VSF) and Polyester yarn imports.",
           tags: ["Mandatory BIS", "Fiber Testing"],
@@ -31,21 +44,33 @@ const TradeSolutionsTextiles = ({ activeTab, setActiveTab }) => {
       title: "Export Solutions",
       items: [
         {
+          href: "/services/rodtep-rosctl-trading",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "RoSCTL Scheme",
           desc: "Rebate of State and Central Taxes and Levies specifically for Apparel/Made-ups. We ensure 100% claim accuracy.",
           tags: ["Tax Rebate", "Apparel Specific"],
         },
         {
+          href: "/services/aeo-certification",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "AEO Tier 2/3",
           desc: "Authorized Economic Operator status for Direct Port Entry (DPE) and deferred duty payment, crucial for fast fashion.",
           tags: ["Fast Track", "Secure Supply Chain"],
         },
         {
+          href: "/services/certificate-of-origin",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Certificate of Origin",
           desc: "Issuance of GSP, SAFTA, and Preferential CoO to avail duty benefits in importing countries (EU, Japan, Australia).",
           tags: ["Duty Preference", "Trade Agreements"],
         },
         {
+          href: "/",
+          target: "_blank",
+          rel: "noopener noreferrer",
           head: "Sample Management",
           desc: "Hassle-free courier clearance for textile samples and prototypes using ATA Carnet for exhibitions.",
           tags: ["Exhibitions", "Rapid Prototyping"],
@@ -53,6 +78,47 @@ const TradeSolutionsTextiles = ({ activeTab, setActiveTab }) => {
       ],
     },
   };
+
+  const renderCard = (item) => (
+    <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+      <div className="flex justify-between items-start mb-3">
+        <h4
+          className={`text-xl font-bold font-serif ${
+            activeTab === "import" ? "text-rose-700" : "text-indigo-700"
+          }`}
+        >
+          {item.head}
+        </h4>
+
+        <div
+          className={`p-2 rounded-lg ${
+            activeTab === "import"
+              ? "bg-rose-50 text-rose-600"
+              : "bg-indigo-50 text-indigo-600"
+          }`}
+        >
+          {activeTab === "import" ? (
+            <Layers className="w-5 h-5" />
+          ) : (
+            <Globe className="w-5 h-5" />
+          )}
+        </div>
+      </div>
+
+      <p className="text-slate-600 text-sm mb-4 leading-relaxed">{item.desc}</p>
+
+      <div className="flex flex-wrap gap-2">
+        {item.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-bold rounded-full border border-slate-200"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <section id="solutions" className="py-24 bg-slate-50 font-sans">
@@ -145,55 +211,25 @@ const TradeSolutionsTextiles = ({ activeTab, setActiveTab }) => {
             />
           </div>
 
-          {/* Right cards */}
+          {/* Right cards — ✅ wrapped in Link */}
           <div className="grid gap-6">
-            {tradeSolutions[activeTab].items.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all"
-              >
-                <div className="flex justify-between items-start mb-3">
-                  <h4
-                    className={`text-xl font-bold font-serif ${
-                      activeTab === "import"
-                        ? "text-rose-700"
-                        : "text-indigo-700"
-                    }`}
-                  >
-                    {item.head}
-                  </h4>
-
-                  <div
-                    className={`p-2 rounded-lg ${
-                      activeTab === "import"
-                        ? "bg-rose-50 text-rose-600"
-                        : "bg-indigo-50 text-indigo-600"
-                    }`}
-                  >
-                    {activeTab === "import" ? (
-                      <Layers className="w-5 h-5" />
-                    ) : (
-                      <Globe className="w-5 h-5" />
-                    )}
-                  </div>
+            {tradeSolutions[activeTab].items.map((item) =>
+              item.href && item.href !== "/" ? (
+                <Link
+                  key={item.head}
+                  to={item.href}
+                  target={item.target}
+                  rel={item.rel}
+                  className="block"
+                >
+                  {renderCard(item)}
+                </Link>
+              ) : (
+                <div key={item.head}>
+                  {renderCard(item)}
                 </div>
-
-                <p className="text-slate-600 text-sm mb-4 leading-relaxed">
-                  {item.desc}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {item.tags.map((tag, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-bold rounded-full border border-slate-200"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       </div>

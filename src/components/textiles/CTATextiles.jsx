@@ -1,4 +1,4 @@
-const CTATextiles = () => {
+const CTATextiles = ({setShowEnrollModal}) => {
   return (
     <section className="py-24 bg-rose-50 relative overflow-hidden font-sans">
       <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
@@ -12,7 +12,15 @@ const CTATextiles = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-6">
-          <button className="bg-slate-900 text-white hover:bg-slate-800 px-10 py-4 rounded-full font-bold text-lg shadow-xl transition-all">
+          <button 
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "Book_Consultation"
+              })
+            }
+            className="bg-slate-900 text-white hover:bg-slate-800 px-10 py-4 rounded-full font-bold text-lg shadow-xl transition-all"
+          >
             Book Consultation
           </button>
 
