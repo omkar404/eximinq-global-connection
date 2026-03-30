@@ -67,7 +67,7 @@ const EximinqSolar = () => {
 
         <CloudDeskSolar />
 
-        <CTASolar />
+        <CTASolar setShowEnrollModal={setShowEnrollModal}/>
 
         <Footer variant="solar" />
       </main>
