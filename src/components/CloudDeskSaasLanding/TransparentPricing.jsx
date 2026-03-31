@@ -270,17 +270,17 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
                   {billing === "annual" ? (
                     <>
                       <span className="text-xs text-slate-400 line-through block">
-                        ₹ 35,000/yr
+                        ₹ 75,000/yr
                       </span>
-                      <span className="text-4xl font-bold">₹ 25,000</span>
+                      <span className="text-4xl font-bold">₹ 50,000</span>
                       <span className="text-slate-500">/yr</span>
                     </>
                   ) : (
                     <>
                       <span className="text-xs text-slate-400 line-through block">
-                        ₹ 3,500/mo
+                        ₹ 22,500/qtr
                       </span>
-                      <span className="text-4xl font-bold">₹ 7,500</span>
+                      <span className="text-4xl font-bold">₹ 15,000</span>
                       <span className="text-slate-500">/qtr</span>
                     </>
                   )}
@@ -331,17 +331,17 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
                   {billing === "annual" ? (
                     <>
                       <span className="text-xs text-slate-400 line-through block">
-                        ₹ 70,000/yr
+                        ₹ 150,000/yr
                       </span>
-                      <span className="text-4xl font-bold">₹ 50,000</span>
+                      <span className="text-4xl font-bold">₹ 1,25,000</span>
                       <span className="text-slate-500">/yr</span>
                     </>
                   ) : (
                     <>
                       <span className="text-xs text-slate-400 line-through block">
-                        ₹ 7,000/mo
+                        ₹ 45,000/qtr
                       </span>
-                      <span className="text-4xl font-bold">₹ 15,000</span>
+                      <span className="text-4xl font-bold">₹ 37,500</span>
                       <span className="text-slate-500">/qtr</span>
                     </>
                   )}
@@ -362,7 +362,7 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
                   </li>
                   <li className="flex gap-2">
                     <i className="fas fa-check text-green-500"></i>
-                    <strong>₹ 10,000</strong> Wallet Credit Included
+                    <strong>₹ 100,000 </strong> Credit Line Included
                   </li>
                 </ul>
 

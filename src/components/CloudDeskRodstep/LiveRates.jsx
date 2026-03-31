@@ -46,7 +46,7 @@ const SLABS = [
     min: 10000,
     max: 99999,
     rates: {
-      rodtep: { buy: 95.45, sell: 98.85 },
+      rodtep: { buy: 95.45, sell: 97.85 },
       rosctl: { buy: 95.35, sell: 97.55 },
     },
   },
