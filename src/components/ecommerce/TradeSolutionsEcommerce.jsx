@@ -1,26 +1,39 @@
 import React, { useState } from "react";
 import { Anchor, Globe, Truck } from "lucide-react";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 const tradeSolutions = {
   import: {
     title: "Import Solutions",
     items: [
       {
+        href: "/services/cha-services", // 🔗 Link to CHA Services
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "B2C Customs Clearance",
         desc: "Bulk clearance of B2C parcels under CSB-IV. We handle KYC collection from end-customers to prevent shipment holds.",
         tags: ["Last Mile Speed", "KYC Compliance"],
       },
       {
+        href: "/services/no-due-certificate", // 🔗 Link to No Due Certificate
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Gift & Sample Rules",
         desc: "Navigating strict 'Gift' import regulations to ensure genuine samples aren't flagged as commercial evasion.",
         tags: ["Compliance", "Duty Exemptions"],
       },
       {
+        href: "/services/duty-payment-ecl", // 🔗 Link to Duty Payment
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "De Minimis Advisory",
         desc: "Strategic advice on duty thresholds for low-value shipments across different global jurisdictions.",
         tags: ["Cost Optimization", "Global Rules"],
       },
       {
+        href: "/services/warehousing-solutions", // 🔗 Link to Warehousing
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Fulfillment Bonding",
         desc: "Bonded warehousing for imported inventory. Pay duty only when the item is sold and dispatched to the Indian customer.",
         tags: ["Cash Flow", "MOOWR for E-com"],
@@ -31,21 +44,33 @@ const tradeSolutions = {
     title: "Export Solutions",
     items: [
       {
+        href: "/services/edpms-ebrc", // 🔗 Link to EDPMS & e-BRC
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "CSB-V Commercial Export",
         desc: "Commercial export via courier mode for values up to ₹10 Lakhs. Claim GST refunds and RoDTEP benefits.",
         tags: ["GST Refund", "Formal Export"],
       },
       {
+        href: "/services/igcr-returns", // 🔗 Link to IGCR Returns
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Postal Bill of Export",
         desc: "Clearance through Dak Ghar Niryat Kendras (Post Offices) for small artisans and MSME exporters.",
         tags: ["PBE-1 Filing", "Postal Logistics"],
       },
       {
+        href: "/services/gst-returns", // 🔗 Link to GST Returns
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "IGST Refunds",
         desc: "Automated reconciliation of courier shipping bills with GST returns to ensure timely IGST refunds.",
         tags: ["Tax Benefit", "Liquidity"],
       },
       {
+        href: "/services/gem-registration", // 🔗 Link to GeM Registration
+        target: "_blank",
+        rel: "noopener noreferrer",
         head: "Global Marketplace Compliance",
         desc: "Meeting packaging and labeling standards (IOR/EOR services) for Amazon FBA and global marketplaces.",
         tags: ["Amazon Global", "IOR Services"],
@@ -140,28 +165,31 @@ const TradeSolutionsEcommerce = () => {
             />
           </div>
 
-          {/* Right Cards */}
+          {/* Right Cards - Updated with Links */}
           <div className="grid gap-6">
             {tradeSolutions[activeTab].items.map((item, idx) => (
-              <div
+              <Link
                 key={idx}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all"
+                to={item.href}
+                target={item.target}
+                rel={item.rel}
+                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all block cursor-pointer group"
               >
                 <div className="flex justify-between items-start mb-3">
                   <h4
-                    className={`text-xl font-bold ${
+                    className={`text-xl font-bold transition-colors ${
                       activeTab === "import"
-                        ? "text-violet-700"
-                        : "text-orange-600"
+                        ? "text-violet-700 group-hover:text-violet-500"
+                        : "text-orange-600 group-hover:text-orange-500"
                     }`}
                   >
                     {item.head}
                   </h4>
                   <div
-                    className={`p-2 rounded-lg ${
+                    className={`p-2 rounded-lg transition-all ${
                       activeTab === "import"
-                        ? "bg-violet-100 text-violet-600"
-                        : "bg-orange-100 text-orange-600"
+                        ? "bg-violet-100 text-violet-600 group-hover:bg-violet-200"
+                        : "bg-orange-100 text-orange-600 group-hover:bg-orange-200"
                     }`}
                   >
                     {activeTab === "import" ? (
@@ -180,13 +208,13 @@ const TradeSolutionsEcommerce = () => {
                   {item.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-slate-50 text-slate-500 text-xs font-bold uppercase tracking-wider rounded-lg border border-slate-200"
+                      className="px-3 py-1 bg-slate-50 text-slate-500 text-xs font-bold uppercase tracking-wider rounded-lg border border-slate-200 group-hover:border-violet-200 transition-colors"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
