@@ -38,6 +38,7 @@ const textilesindustryRoutes = require("./routes/textilesindustryRoutes.routes")
 const foodagroindustryRoutes = require("./routes/foodagroindustryRoutes.routes");
 const solarindustryRoutes = require("./routes/solarindustryRoutes.routes");
 const defenseindustryRoutes = require("./routes/defenseindustryRoutes.routes");
+const ecommerceindustryRoutes = require("./routes/ecommerceindustryRoutes.routes");
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
@@ -489,6 +490,8 @@ app.use("/api/food-agro-industry-import-export", foodagroindustryRoutes);
 app.use("/api/solar-and-renewables-industry-import-export",solarindustryRoutes);
 
 app.use("/api/defense-aerospace-industry-import-export",defenseindustryRoutes);
+
+app.use("/api/ecommerce-industry-import-export", ecommerceindustryRoutes);
 
 app.use("/api/contact-us", maincontactRoutes);
 
