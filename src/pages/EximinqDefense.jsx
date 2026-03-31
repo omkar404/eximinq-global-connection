@@ -78,7 +78,7 @@ const EximinqDefense = () => {
 
         <CloudDeskDefense />
 
-        <CTADefense />
+        <CTADefense setShowEnrollModal={setShowEnrollModal}/>
 
         <Footer theme="defense" />
       </main>
