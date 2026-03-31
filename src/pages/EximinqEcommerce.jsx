@@ -75,7 +75,7 @@ const EximinqEcommerce = () => {
 
         <CloudDeskEcommerce />
 
-        <CTAEcommerce />
+        <CTAEcommerce setShowEnrollModal={setShowEnrollModal}/>
 
         <Footer />
       </main>

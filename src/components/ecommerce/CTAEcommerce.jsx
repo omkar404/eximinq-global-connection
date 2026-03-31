@@ -1,6 +1,6 @@
 import React from "react";
 
-const CTAEcommerce = () => {
+const CTAEcommerce = ({setShowEnrollModal}) => {
   return (
     <section className="py-24 bg-violet-600 text-white text-center">
       <div className="max-w-4xl mx-auto px-4">
@@ -14,7 +14,14 @@ const CTAEcommerce = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-6">
-          <button className="bg-white text-violet-700 px-10 py-4 rounded-xl font-bold">
+          <button 
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "Integrate_API"
+              })
+            }
+          className="bg-white text-violet-700 px-10 py-4 rounded-xl font-bold">
             Integrate API
           </button>
           <button className="border-2 border-white px-10 py-4 rounded-xl font-bold">

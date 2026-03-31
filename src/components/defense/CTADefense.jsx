@@ -1,6 +1,6 @@
 import React from "react";
 
-const CTADefense = () => {
+const CTADefense = ({setShowEnrollModal}) => {
   return (
     <section className="py-20 bg-blue-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')] opacity-10" />
@@ -16,7 +16,15 @@ const CTADefense = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="bg-white text-blue-900 hover:bg-slate-100 px-10 py-4 rounded-sm font-bold text-lg shadow-xl transition-all">
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "Deploy_Expert_Team",
+              })
+            }
+            className="bg-white text-blue-900 hover:bg-slate-100 px-10 py-4 rounded-sm font-bold text-lg shadow-xl transition-all"
+          >
             Deploy Expert Team
           </button>
 
