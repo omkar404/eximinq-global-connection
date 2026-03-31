@@ -307,7 +307,7 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
                       open: true,
                       plan: "Starter",
                       billing: billing,
-                      price: billing === "annual" ? "₹ 25,000/yr" : "₹ 7,500/qtr"
+                      price: billing === "annual" ? "₹ 50,000/yr" : "₹ 15,000/qtr"
                     })
                   }
                   className="block text-center w-full py-3 rounded-xl bg-slate-100 font-bold hover:bg-slate-200 transition"
@@ -372,7 +372,7 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
                       open: true,
                       plan: "Growth",
                       billing: billing,
-                      price: billing === "annual" ? "₹ 50,000/yr" : "₹ 15,000/qtr"
+                      price: billing === "annual" ? "₹ 1,25,000/yr" : "₹ 37,500/qtr"
                     })
                   }
                   className="block text-center w-full py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition"
