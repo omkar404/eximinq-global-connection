@@ -45,7 +45,7 @@ const CloudDeskHalal = () => {
 <>
 <Helmet>
         <title>
-          Halal Certification for Global Trade Success | Halal Certification Registration | Eximinq
+          Halal Certification for Global Trade Success | Halal Certification Registration India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

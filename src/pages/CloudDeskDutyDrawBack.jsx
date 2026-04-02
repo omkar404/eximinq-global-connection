@@ -43,7 +43,7 @@ const CloudDeskDutyDrawBack = () => {
   return (
     <>
       <Helmet>
-        <title>Duty Drawback – Section 74 & Brand Rate Fixation</title>
+        <title>Duty Drawback – Section 74 & Brand Rate Fixation India | DGFT CUSTOMS Services | EXIMINQ</title>
 
         <meta
           name="description"

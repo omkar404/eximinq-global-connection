@@ -50,7 +50,7 @@ const CloudDeskMarine = () => {
     <>
       <Helmet>
         <title>
-          EPCG Scheme Registration | Zero Duty Capital Goods Import
+          EPCG Scheme Registration India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

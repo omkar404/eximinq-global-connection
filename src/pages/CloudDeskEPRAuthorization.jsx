@@ -37,7 +37,7 @@ const CloudDeskEPRAuthorization = () => {
 <>
 <Helmet>
         <title>
-          EPR Authorization for Responsible Business | EPR Authorization Registration | Eximinq
+          EPR Authorization for Responsible Business | EPR Authorization Registration India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

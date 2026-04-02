@@ -39,7 +39,7 @@ const CloudDeskIndustrial = () => {
 <>
 <Helmet>
         <title>
-          Industrial License for Regulated Sectors | Industrial License Registration | Eximinq
+          Industrial License for Regulated Sectors | Industrial License Registration India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

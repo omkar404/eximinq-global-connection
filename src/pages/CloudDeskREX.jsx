@@ -39,7 +39,7 @@ const CloudDeskREX = () => {
 
 <Helmet>
         <title>
-          Registered Exporter (REX) System | Registered Exporter Registration | Eximinq
+          Registered Exporter (REX) System | Registered Exporter Registration India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

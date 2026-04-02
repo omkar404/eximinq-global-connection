@@ -51,7 +51,7 @@ const CloudDeskMarine = () => {
 
 <Helmet>
         <title>
-          Zero Duty Import of Capital Goods | Capital Goods Registration | Eximinq
+          Zero Duty Import of Capital Goods | Capital Goods Registration India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta
