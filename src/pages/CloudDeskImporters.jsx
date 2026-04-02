@@ -45,7 +45,7 @@ const CloudDeskImporters = () => {
     <>
       <Helmet>
         <title>
-          Import Monitoring System (IMS) Registration in India | SIMS, PIMS, NFMIMS
+          Import Monitoring System (IMS) Registration in India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

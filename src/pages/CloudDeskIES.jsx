@@ -32,7 +32,7 @@ const CloudDeskIES = () => {
   <>
   <Helmet>
         <title>
-          Interest Equalisation Scheme (IES) on Export Credit | Interest Equalisation Registration | Eximinq
+          Interest Equalisation Scheme (IES) on Export Credit | Interest Equalisation Registration India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

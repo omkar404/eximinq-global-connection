@@ -47,7 +47,7 @@ const CloudDeskSCOMET = () => {
     <>
       <Helmet>
         <title>
-          SCOMET License in India | DGFT Export Authorization Consultancy
+          SCOMET License in India | DGFT Export Authorization Consultancy India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

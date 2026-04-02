@@ -45,7 +45,7 @@ const IECManagement = () => {
     <>
       <Helmet>
         <title>
-          IEC Registration Online in India | DGFT Import Export Code | Eximinq
+          IEC Registration Online in India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

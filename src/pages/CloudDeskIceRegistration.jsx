@@ -48,7 +48,7 @@ const IECRegistration = () => {
     <>
       <Helmet>
         <title>
-          ICEGATE Registration in India | AD Code & Full Setup | Eximinq
+          ICEGATE Registration in India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta

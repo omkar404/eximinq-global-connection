@@ -42,7 +42,7 @@ const ADCode = () => {
     <>
       <Helmet>
         <title>
-          AD Code Registration Online in India | Customs Port Mapping | Eximinq
+          AD Code Registration Online in India | DGFT CUSTOMS Services | EXIMINQ
         </title>
 
         <meta
