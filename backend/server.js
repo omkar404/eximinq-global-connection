@@ -40,6 +40,8 @@ const solarindustryRoutes = require("./routes/solarindustryRoutes.routes");
 const defenseindustryRoutes = require("./routes/defenseindustryRoutes.routes");
 const ecommerceindustryRoutes = require("./routes/ecommerceindustryRoutes.routes");
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
+// const {getCustomsData,getRawCustomsData,getCustomsDataByType,processAllCustomsData} = require("./services/customsExcel.service");
+const customsService = require("./services/customsExcel.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
@@ -67,7 +69,6 @@ hours = hours.toString().padStart(2, "0");
 
 // FINAL FORMAT
 const formattedDateTime = `${day}/${month}/${year}, ${hours}:${minutes} ${ampm}`
-
 
 const app = express();
 app.use(express.json());
@@ -102,7 +103,7 @@ const DGFTEnquiry = mongoose.model("DGFTEnquiry", new mongoose.Schema({
   email: String,
   iam: String,
   partner: Boolean,
-  context: String,        
+  context: String,
   createdAt: { type: Date, default: Date.now }
 }));
 
@@ -119,7 +120,6 @@ const ServiceEnquiry = mongoose.model(
     createdAt: { type: Date, default: Date.now },
   })
 );
-
 
 const RodtepRosctlTradingSchema = new mongoose.Schema(
   {
@@ -241,7 +241,6 @@ app.post("/api/aeo-support", async (req, res) => {
   }
 });
 
-
 app.post("/api/enquiry/dgft", async (req, res) => {
   try {
     const saved = await DGFTEnquiry.create(req.body);
@@ -337,7 +336,6 @@ app.post("/api/enquiry/services", async (req, res) => {
   }
 });
 
-
 app.post("/api/rodtep-rosctl-trading", async (req, res) => {
   try {
     const { companyName, scheme, action, mobile, email } = req.body;
@@ -420,6 +418,167 @@ app.get("/api/dgft/pdf-download", (req, res) => {
   }
 
   res.download(pdfPath);
+});
+
+// CUSTOMS
+// Static files
+app.use("/pdfs", express.static(path.join(__dirname, "PDF_DOC/CUSTOMS_PDF")));
+
+// ==================== CUSTOMS API ROUTES ====================
+
+// Get all data
+app.get("/api/customs/all", (req, res) => {
+  try {
+    res.json(customsService.getCustomsData());
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get by type (acts, rules, regulations, forms, notifications, circulars, instructions, orders)
+app.get("/api/customs/:type", (req, res) => {
+  try {
+    const { type } = req.params;
+    const data = customsService.getCustomsDataByType(type);
+    res.json({ success: true, type, count: data.length, data });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get paginated data
+app.get("/api/customs/:type/page/:page/:limit", (req, res) => {
+  try {
+    const { type, page, limit } = req.params;
+    const allData = customsService.getCustomsDataByType(type);
+    const start = (page - 1) * limit;
+    const paginated = allData.slice(start, start + parseInt(limit));
+
+    res.json({
+      success: true,
+      type,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      total: allData.length,
+      totalPages: Math.ceil(allData.length / limit),
+      data: paginated
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Search
+app.get("/api/customs/search/:type", (req, res) => {
+  try {
+    const { type } = req.params;
+    const { q } = req.query;
+    if (!q) return res.status(400).json({ success: false, message: "Search query required" });
+
+    const data = customsService.getCustomsDataByType(type);
+    const filtered = data.filter(item =>
+      (item.number && item.number.toLowerCase().includes(q.toLowerCase())) ||
+      (item.title && item.title.toLowerCase().includes(q.toLowerCase())) ||
+      (item.subject && item.subject.toLowerCase().includes(q.toLowerCase()))
+    );
+
+    res.json({ success: true, query: q, count: filtered.length, data: filtered });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get notifications by category
+app.get("/api/customs/notifications/category/:cat", (req, res) => {
+  try {
+    const { cat } = req.params;
+    const data = customsService.getNotificationsByCategory(cat);
+    res.json({ success: true, category: cat, count: data.length, data });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get statistics
+app.get("/api/customs/stats", (req, res) => {
+  try {
+    const raw = customsService.getRawCustomsData();
+    const stats = {
+      acts: raw.data.acts.length,
+      rules: raw.data.rules.length,
+      regulations: raw.data.regulations.length,
+      forms: raw.data.forms.length,
+      circulars: raw.data.circulars.length,
+      instructions: raw.data.instructionsGuidelines.length,
+      orders: raw.data.orders.length,
+      alliedActs: raw.data.alliedActs.length,
+      notifications: {
+        antiDumping: raw.data.notifications.antiDumping.length,
+        cvd: raw.data.notifications.cvd.length,
+        nonTariff: raw.data.notifications.nonTariff.length,
+        safeguards: raw.data.notifications.safeguards.length,
+        tariff: raw.data.notifications.tariff.length
+      }
+    };
+    stats.notifications.total = Object.values(stats.notifications).reduce((a,b) => a + b, 0);
+    stats.total = Object.values(stats).filter(v => typeof v === 'number').reduce((a,b) => a + b, 0) + stats.notifications.total;
+
+    res.json({ success: true, lastUpdated: raw.lastUpdated, stats });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Download PDF
+app.get("/api/customs/pdf", (req, res) => {
+  try {
+    const { noticeNo } = req.query;
+    if (!noticeNo) return res.status(400).json({ success: false, message: "Notice number required" });
+
+    const pdfPath = customsService.findPDFFile(noticeNo);
+    if (!pdfPath || !fs.existsSync(pdfPath)) {
+      return res.status(404).json({ success: false, message: "PDF not found" });
+    }
+    res.sendFile(pdfPath);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Health check
+app.get("/api/health", (req, res) => {
+  res.json({ status: "OK", timestamp: new Date().toISOString(), service: "Customs API" });
+});
+
+// Root
+app.get("/", (req, res) => {
+  res.json({
+    message: "Customs API",
+    endpoints: {
+      "GET /api/health": "Health check",
+      "GET /api/customs/all": "All data",
+      "GET /api/customs/:type": "Get by type (acts, rules, regulations, forms, notifications, circulars, instructions, orders)",
+      "GET /api/customs/:type/page/:page/:limit": "Paginated data",
+      "GET /api/customs/search/:type?q=query": "Search",
+      "GET /api/customs/notifications/category/:cat": "Notifications by category",
+      "GET /api/customs/stats": "Statistics",
+      "GET /api/customs/pdf?noticeNo=xxx": "Download PDF"
+    }
+  });
+});
+
+// ✅ Start server
+try {
+  customsService.startWatcher();
+  console.log("✅ Customs watcher started");
+} catch (error) {
+  console.error("❌ Failed to start watcher:", error.message);
+}
+
+app.listen(() => {
+  // console.log(`\n🚀 Customs API running on http://localhost:${PORT}`);
+  console.log(`📁 Excel folder: ${path.join(__dirname, "PDF_DOC/CUSTOMS_EXCEL")}`);
+  console.log(`📁 PDF folder: ${path.join(__dirname, "PDF_DOC/CUSTOMS_PDF")}\n`);
 });
 
 // Routes
