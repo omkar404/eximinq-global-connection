@@ -11,7 +11,7 @@ export function PublicNotices() {
           Public Notices
         </h3>
         <a
-          href="https://eximinq.in/foreign-trade-policy/regulatory-updates" 
+          href="https://eximinq.in/foreign-trade-policy/regulatory-updates"
           target="_blank"
           className="text-xs text-blue-600 font-bold hover:underline bg-blue-50 px-2 py-1 rounded"
         >
@@ -110,9 +110,7 @@ function NoticeItem({ type, date, title, desc, color }) {
         {title}
       </p>
 
-      <p className="text-xs text-gray-600 mt-1 line-clamp-2">
-        {desc}
-      </p>
+      <p className="text-xs text-gray-600 mt-1 line-clamp-2">{desc}</p>
     </div>
   );
 }

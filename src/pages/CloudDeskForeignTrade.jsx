@@ -36,9 +36,9 @@ export default function CloudDeskForeignTrade() {
 
   return (
     <div className="min-h-screen font-sans text-gray-800 bg-gray-50 flex flex-col relative">
-      <Navbar 
-      setShowEnrollModal={setShowEnrollModal}
-      setIsMenuOpen={setIsMenuOpen} 
+      <Navbar
+        setShowEnrollModal={setShowEnrollModal}
+        setIsMenuOpen={setIsMenuOpen}
       />
 
       <div className="h-[30px]" />

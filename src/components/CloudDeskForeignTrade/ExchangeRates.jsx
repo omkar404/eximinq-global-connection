@@ -61,10 +61,11 @@ export function ExchangeRates() {
         <span>
           <i class="fas fa-info-circle mr-1"></i>Notfn 04/2026-Cus(NT)
         </span>
-        <a 
-        href="https://eximinq.in/foreign-trade-policy/exchange-rates" 
-        target="_blank"
-        class="text-blue-600 hover:underline">
+        <a
+          href="https://eximinq.in/foreign-trade-policy/exchange-rates"
+          target="_blank"
+          class="text-blue-600 hover:underline"
+        >
           View All
         </a>
       </div>
