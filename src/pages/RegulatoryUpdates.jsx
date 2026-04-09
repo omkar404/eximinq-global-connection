@@ -1029,6 +1029,7 @@ export default function RegulatoryUpdates() {
       
       const res = await fetch(
         `${process.env.REACT_APP_API_URL}/api/dgft/notices?type=${activeTab}`,
+        // `http://localhost:5000/api/dgft/notices?type=${activeTab}`,
         { headers: { "Content-Type": "application/json" } }
       );
       const data = await res.json();
@@ -1146,8 +1147,11 @@ export default function RegulatoryUpdates() {
       <main className="flex-grow container mx-auto px-4 pt-28 pb-12 max-w-7xl">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-slate-800">
-            Centralized database for DGFT, CBIC (Customs), and RBI Trade Regulations
+            Public Notices, Circulars & Notifications
           </h1>
+          <p className="text-slate-500 mb-6">
+            Centralized database for DGFT, CBIC (Customs), and RBI Trade Regulations.
+          </p>    
         </div>
 
         <div className="flex gap-6 items-start">
@@ -1334,7 +1338,7 @@ function DGFTView({ loading, error, data, search, setSearch, activeLabel, active
 }
 
 /* ─────────────────────────────────────────────
-   UPDATED DGFT CARD - Matches Image Format
+   UPDATED DGFT CARD - New Format
 ───────────────────────────────────────────── */
 function DGFTCard({ item, activeTab }) {
   const [bookmarked, setBookmarked] = useState(false);
@@ -1346,12 +1350,12 @@ function DGFTCard({ item, activeTab }) {
   const financialYear = item.financialYear || item.fy || "2025-2026";
   const formattedDate = formatDateDDMMYYYY(noticeDate);
   
-  const typeLabel = {
-    public: "PUBLIC NOTICE",
-    notification: "NOTIFICATION",
-    circular: "POLICY CIRCULAR",
-    trade: "TRADE NOTICE"
-  }[activeTab] || "NOTICE";
+  // const typeLabel = {
+  //   public: "PUBLIC NOTICE",
+  //   notification: "NOTIFICATION",
+  //   circular: "POLICY CIRCULAR",
+  //   trade: "TRADE NOTICE"
+  // }[activeTab] || "NOTICE";
 
   const handleDownload = () => {
     const url = `${process.env.REACT_APP_API_URL}/api/dgft/pdf-download?noticeNo=${encodeURIComponent(noticeNumber)}`;
@@ -1368,26 +1372,44 @@ function DGFTCard({ item, activeTab }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-all duration-200">
-      <div className="p-5">
-        <div className="flex justify-between items-start mb-3">
-          <div className="text-sm text-slate-600">{formattedDate}</div>
-          <div className="text-sm text-slate-600">{financialYear}</div>
+    <div className="bg-white p-5 rounded-xl border-l-4 border-blue-600 shadow-sm relative hover:shadow-md transition-all duration-200">
+      <div className="absolute top-4 right-4 flex gap-2">
+        <button
+          onClick={() => setBookmarked((b) => !b)}
+          className={`transition-colors ${bookmarked ? "text-blue-600" : "text-gray-400 hover:text-blue-600"}`}
+        >
+          <Bookmark size={16} fill={bookmarked ? "currentColor" : "none"} />
+        </button>
+        <button
+          onClick={handleShare}
+          className={`transition-colors ${copied ? "text-emerald-600" : "text-gray-400 hover:text-blue-600"}`}
+        >
+          <Share2 size={16} />
+        </button>
+      </div>
+
+      <div className="flex gap-4">
+        <div className="bg-gray-50 p-2 rounded border text-center min-w-[100px]">
+          <span className="block text-xs text-gray-500">{formattedDate}</span>
+          <span className="block text-xs text-gray-400">{financialYear}</span>
         </div>
-        <div className="mb-4">
-          <h3 className="text-base font-bold text-slate-800">{typeLabel} - {noticeNumber}</h3>
-          <p className="text-sm text-slate-600 mt-2 leading-relaxed">{noticeTitle}</p>
-        </div>
-        <div className="flex items-center gap-4 pt-3 border-t border-slate-100">
-          <button onClick={handleDownload} className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
-            <FileText size={15} /> Download PDF
-          </button>
-          <div className="flex-1" />
-          <button onClick={() => setBookmarked((b) => !b)} className={`p-2 rounded-md transition-colors ${bookmarked ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-slate-600 hover:bg-slate-100"}`}>
-            <Bookmark size={16} fill={bookmarked ? "currentColor" : "none"} />
-          </button>
-          <button onClick={handleShare} className={`p-2 rounded-md transition-colors ${copied ? "text-emerald-600 bg-emerald-50" : "text-slate-400 hover:text-slate-600 hover:bg-slate-100"}`}>
-            <Share2 size={16} />
+
+        <div className="flex-1">
+          <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded">
+            DGFT
+          </span>
+          <h3 className="text-lg font-bold mt-2">
+          {noticeNumber}
+          </h3>
+          <p className="text-sm text-gray-600 mt-1 leading-relaxed">
+            {noticeTitle}
+          </p>
+          <button
+            onClick={handleDownload}
+            className="text-blue-600 text-sm font-semibold hover:underline flex items-center mt-3 transition-colors"
+          >
+            <FileText size={16} className="mr-1" />
+            Download PDF
           </button>
         </div>
       </div>
@@ -1396,8 +1418,7 @@ function DGFTCard({ item, activeTab }) {
 }
 
 /* ─────────────────────────────────────────────
-   CBIC VIEW — Table View Only
-   Now with separate view toggles for Acts, Rules, Regulations
+   CBIC VIEW — Table View Only (PDF removed for Acts, Rules, Regulations)
 ───────────────────────────────────────────── */
 function CBICView({ loading, error, data, search, setSearch, activeLabel, activeFY, activeTab }) {
   const [year, setYear] = useState("");
@@ -1406,7 +1427,6 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
   const [chapter, setChapter] = useState("");
   const [section, setSection] = useState("");
   
-  // View type based on activeTab
   const [viewType, setViewType] = useState(() => {
     if (activeTab === "acts") return "chapter";
     if (activeTab === "rules") return "ruleNumber";
@@ -1414,14 +1434,12 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
     return "chapter";
   });
 
-  // Reset viewType when activeTab changes
   useEffect(() => {
     if (activeTab === "acts") setViewType("chapter");
     else if (activeTab === "rules") setViewType("ruleNumber");
     else if (activeTab === "regulations") setViewType("regulationNumber");
   }, [activeTab]);
 
-  // Define columns based on activeTab and viewType
   const getColumns = () => {
     // FORMS
     if (activeTab === "forms") {
@@ -1455,84 +1473,52 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
       ];
     }
     
-    // ACTS
+    // ACTS - NO DOWNLOAD COLUMN
     if (activeTab === "acts") {
       if (viewType === "chapter") {
         return [
           { key: "chapter", label: "Chapter", render: (row) => row.chapter || "—" },
           { key: "title", label: "Title/Description", render: (row) => row.title || row.subject || "—" },
-          { key: "download", label: "Download", center: true, render: () => (
-            <button className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded transition-colors">
-              <FileText size={11} /> PDF
-            </button>
-          )}
         ];
       } else {
         return [
           { key: "section", label: "Section", render: (row) => row.section || "—" },
           { key: "title", label: "Title/Description", render: (row) => row.title || row.subject || "—" },
-          { key: "download", label: "Download", center: true, render: () => (
-            <button className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded transition-colors">
-              <FileText size={11} /> PDF
-            </button>
-          )}
         ];
       }
     }
     
-    // RULES
+    // RULES - NO DOWNLOAD COLUMN
     if (activeTab === "rules") {
       if (viewType === "ruleNumber") {
         return [
           { key: "number", label: "Rule Number", render: (row) => <span className="font-semibold text-[#0d3b6e]">{row.number || row.ruleNumber || "—"}</span> },
           { key: "title", label: "Rule Title / Description", render: (row) => row.title || row.subject || "—" },
-          { key: "download", label: "Download", center: true, render: () => (
-            <button className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded transition-colors">
-              <FileText size={11} /> PDF
-            </button>
-          )}
         ];
       } else {
-        // View by Chapter
         return [
           { key: "chapter", label: "Chapter", render: (row) => row.chapter || "—" },
           { key: "title", label: "Rule Title / Description", render: (row) => row.title || row.subject || "—" },
-          { key: "download", label: "Download", center: true, render: () => (
-            <button className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded transition-colors">
-              <FileText size={11} /> PDF
-            </button>
-          )}
         ];
       }
     }
     
-    // REGULATIONS
+    // REGULATIONS - NO DOWNLOAD COLUMN
     if (activeTab === "regulations") {
       if (viewType === "regulationNumber") {
         return [
           { key: "number", label: "Regulation Number", render: (row) => <span className="font-semibold text-[#0d3b6e]">{row.number || row.regulationNumber || "—"}</span> },
           { key: "title", label: "Regulation Title / Description", render: (row) => row.title || row.subject || "—" },
-          { key: "download", label: "Download", center: true, render: () => (
-            <button className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded transition-colors">
-              <FileText size={11} /> PDF
-            </button>
-          )}
         ];
       } else {
-        // View by Chapter
         return [
           { key: "chapter", label: "Chapter", render: (row) => row.chapter || "—" },
           { key: "title", label: "Regulation Title / Description", render: (row) => row.title || row.subject || "—" },
-          { key: "download", label: "Download", center: true, render: () => (
-            <button className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded transition-colors">
-              <FileText size={11} /> PDF
-            </button>
-          )}
         ];
       }
     }
     
-    // Default columns for circulars, instructions, orders, alliedActs
+    // Default columns for circulars, instructions, orders, alliedActs (keep download)
     return [
       { key: "number", label: "Number", render: (row) => <span className="font-semibold text-[#0d3b6e]">{row.number || "—"}</span> },
       { key: "date", label: "Date", render: (row) => <span className="text-slate-500 whitespace-nowrap">{parseDate(row.date)}</span> },
@@ -1576,7 +1562,6 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
   const isForms = activeTab === "forms";
   const isAlliedActs = activeTab === "alliedActs";
 
-  // Render toggle buttons based on activeTab
   const renderViewToggles = () => {
     if (activeTab === "acts") {
       return (
@@ -1650,7 +1635,7 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
       <div className="p-5">
         {/* Acts/Rules/Regulations Filter */}
         {isActsRulesRegs && (
-          <div className="rounded-md p-4 mb-4" style={{ backgroundColor: "#f5f0e8" }}>
+          <div className="rounded-md p-4 mb-4 bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: "white" }}>
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-stretch">
                 <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-l-md shadow-lg">
@@ -1701,7 +1686,7 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
 
         {/* Notifications Filter */}
         {isNotifications && (
-          <div className="rounded-md p-4 mb-4" style={{ backgroundColor: "#f5f0e8" }}>
+          <div className="rounded-md p-4 mb-4 border border-white rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: "white" }}>
             <div className="flex flex-wrap items-start gap-3">
               <div className="flex items-stretch">
                 <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-l-md shadow-lg">
@@ -1755,7 +1740,7 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
 
         {/* Circulars Filter */}
         {activeTab === "circulars" && (
-          <div className="rounded-md p-4 mb-4" style={{ backgroundColor: "#f5f0e8" }}>
+          <div className="rounded-md p-4 mb-4 border border-white rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: "white" }}>
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-stretch">
                 <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-l-md shadow-lg">
@@ -1794,7 +1779,7 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
 
         {/* Instructions & Orders Filter */}
         {(activeTab === "instructions" || activeTab === "orders") && (
-          <div className="rounded-md p-4 mb-4" style={{ backgroundColor: "#f5f0e8" }}>
+          <div className="rounded-md p-4 mb-4 border border-white rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: "white" }}>
             <div className="flex flex-wrap items-start gap-3">
               <div className="flex items-stretch">
                 <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-l-md shadow-lg">
@@ -1847,7 +1832,7 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
 
         {/* Forms Filter */}
         {isForms && (
-          <div className="rounded-md p-4 mb-4" style={{ backgroundColor: "#f5f0e8" }}>
+          <div className="rounded-md p-4 mb-4 border border-white rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: "white" }}>
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-stretch">
                 <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-l-md shadow-lg">
@@ -1896,7 +1881,7 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
 
         {/* Allied Acts Filter */}
         {isAlliedActs && (
-          <div className="rounded-md p-4 mb-4" style={{ backgroundColor: "#f5f0e8" }}>
+          <div className="rounded-md p-4 mb-4 border border-white rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: "white" }}>
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-stretch">
                 <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-l-md shadow-lg">
@@ -1947,7 +1932,6 @@ function CBICView({ loading, error, data, search, setSearch, activeLabel, active
           </div>
         )}
 
-        {/* Table View for CBIC */}
         {loading && <LoadingSkeleton />}
         {!loading && error && <ErrorState message={error} />}
         {!loading && !error && displayedItems.length === 0 && <CBICEmptyState />}
