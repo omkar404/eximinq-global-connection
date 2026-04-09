@@ -17,7 +17,7 @@ export function ExchangeRates() {
           Exchange Rates
         </h3>
         <span className="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded border border-slate-600">
-          Feb 2026
+          April 2026
         </span>
       </div>
 
@@ -34,32 +34,32 @@ export function ExchangeRates() {
           <RateRow
             icon={DollarSign}
             code="USD"
-            importRate="91.2"
-            exportRate="89.5"
+            importRate="93.8"
+            exportRate="92.1"
           />
           <RateRow
             icon={Euro}
             code="EUR"
-            importRate="107.00"
-            exportRate="103.35"
+            importRate="109.05"
+            exportRate="105.35"
           />
           <RateRow
             icon={PoundSterling}
             code="GBP"
-            importRate="123.35"
-            exportRate="119.35"
+            importRate="124.85"
+            exportRate="120.85"
           />
           <RateRow
             icon={JapaneseYen}
             code="JPY"
-            importRate="60.95"
-            exportRate="59.00"
+            importRate="59.15"
+            exportRate="57.35"
           />
         </tbody>
       </table>
       <div class="px-4 py-2 bg-gray-50 text-[10px] text-gray-400 text-center border-t border-gray-100 flex justify-between items-center">
         <span>
-          <i class="fas fa-info-circle mr-1"></i>Notfn 12/2025-Cus(NT)
+          <i class="fas fa-info-circle mr-1"></i>Notfn 04/2026-Cus(NT)
         </span>
         <a 
         href="https://eximinq.in/foreign-trade-policy/exchange-rates" 
