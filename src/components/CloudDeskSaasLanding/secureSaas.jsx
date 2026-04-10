@@ -82,7 +82,7 @@ const SecureSaas = () => {
                     <div className="text-center mb-10">
                         <h2 className="text-3xl font-bold text-slate-900 mb-4">Secure Your Launch Offer</h2>
                         <p className="text-slate-600">
-                            Join the waiting list for <strong>April 19, 2026</strong>. Early sign-ups get a <span className="text-blue-600 font-bold">20% Discount</span> on "Historical Data Clean-up" packages.
+                            Join the waiting list for <strong>May 1, 2026</strong>. Early sign-ups get a <span className="text-blue-600 font-bold">20% Discount</span> on "Historical Data Clean-up" packages.
                         </p>
                     </div>
 
