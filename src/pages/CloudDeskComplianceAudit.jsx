@@ -49,8 +49,8 @@ const App = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
 
-  // Clouddesk Launch: April 19, 2026
-  const launchDate = new Date('April 19, 2026 09:00:00');
+  // Clouddesk Launch: May 1, 2026
+  const launchDate = new Date('May 1, 2026 09:00:00');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -133,7 +133,7 @@ const App = () => {
                 <div className="flex items-center space-x-4 px-6 border-l border-slate-200 ml-2">
                   <div className="text-left">
                     <div className="text-2xl font-black text-slate-900 leading-none tracking-tighter">{timeLeft.days}d : {timeLeft.hours}h</div>
-                    <div className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">SaaS Launch: April 19, 2026</div>
+                    <div className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">SaaS Launch: May 1, 2026</div>
                   </div>
                 </div>
               </div>
@@ -260,7 +260,7 @@ const App = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="lg:w-1/2">
               <span className="text-blue-400 font-bold tracking-[0.5em] text-[10px] uppercase mb-4 block leading-none">The Operating System</span>
-              <h2 className="text-5xl md:text-6xl font-black mt-6 mb-8 tracking-tighter leading-[0.9]">Clouddesk SaaS: <br />Launching <span className="text-blue-500">April 19, 2026</span></h2>
+              <h2 className="text-5xl md:text-6xl font-black mt-6 mb-8 tracking-tighter leading-[0.9]">Clouddesk SaaS: <br />Launching <span className="text-blue-500">May 1, 2026</span></h2>
               <p className="text-slate-400 text-lg mb-12 leading-relaxed font-medium opacity-80 max-w-lg">
                 The manual spreadsheet era of EXIM is over. Clouddesk is the operating system for India's Status Holder export houses.
               </p>
