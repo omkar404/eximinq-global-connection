@@ -133,24 +133,24 @@ function App() {
         <Route path="/aeo" element={<CloudDeskAEOLanding />} />
 
         {/* ICE Management */}
-        <Route path="/services/import-export-code" element={<CloudDeskIceManagement />} />
+        <Route path="/services/import-export-code/" element={<CloudDeskIceManagement />} />
 
         {/*ICE Registration */}
-        <Route path="/services/icegate-registration" element={<CloudDeskICERegistration />} />
+        <Route path="/services/icegate-registration/" element={<CloudDeskICERegistration />} />
 
       {/* OLD URL REDIRECTS */}
         <Route
-          path="/services/iec-registration"
-          element={<Navigate to="/services/import-export-code" replace />}
+          path="/services/iec-registration/"
+          element={<Navigate to="/services/import-export-code/" replace />}
         />
 
         <Route
           path="/services/ice-registration"
-          element={<Navigate to="/services/icegate-registration" replace />}
+          element={<Navigate to="/services/icegate-registration/" replace />}
         />
 
         {/* AD CODE */}
-        <Route path="/services/ad-code-registration" element={<CloudDeskADCode />} />
+        <Route path="/services/ad-code-registration/" element={<CloudDeskADCode />} />
 
         {/* E-RCMC */}
         <Route path="/services/e-rcmc-registration" element={<CloudDeskERCMC />} />
@@ -171,7 +171,7 @@ function App() {
         <Route path="/services/aeo-certification" element={<CloudDeskAEOCertificate />} />
 
         {/* Moowr */}
-        <Route path="/services/moowr-scheme" element={<CloudDeskMoowr />} />
+        <Route path="/services/moowr-scheme/" element={<CloudDeskMoowr />} />
 
         {/* Global Trade */}
         <Route path="/services/freight-forwarding" element={<CloudDeskGlobalTrade />} />
@@ -189,10 +189,10 @@ function App() {
         <Route path="/services/marine-insurance" element={<CloudDeskMarine />} />
 
         {/* Project Cargo */}
-        <Route path="/services/project-cargo" element={<CloudDeskProjectCargo />} />
+        <Route path="/services/project-cargo/" element={<CloudDeskProjectCargo />} />
 
         {/* Advance Authority */}
-        <Route path="/services/advance-authorisation" element={<CloudDeskAdvanceAuthority />} />
+        <Route path="/services/advance-authorisation/" element={<CloudDeskAdvanceAuthority />} />
 
         {/* Zero Duty */}
         <Route path="/services/epcg-scheme" element={<CloudDeskZeroDuty />} />
@@ -207,7 +207,7 @@ function App() {
         <Route path="/services/igst-refund" element={<CloudDeskIGSTRefunds />} />
 
         {/* Duty DrawBack */}
-        <Route path="/services/duty-drawback" element={<CloudDeskDutyDrawBack />} />
+        <Route path="/services/duty-drawback/" element={<CloudDeskDutyDrawBack />} />
 
         {/* BIS Certification */}
         <Route path="/services/bis-registration" element={<CloudDeskBisRegistration />} />
@@ -234,7 +234,7 @@ function App() {
         <Route path="/services/cdsco-compliance" element={<CloudDeskCDSCO />} />
 
         {/* Certificate of Origin */}
-        <Route path="/services/certificate-of-origin" element={<CloudDeskCertificate />} />
+        <Route path="/services/certificate-of-origin/" element={<CloudDeskCertificate />} />
 
         {/* GST LUT Filing */}
         <Route path="/services/gst-lut-filing" element={<CloudDeskGSTLUT />} />
@@ -260,7 +260,7 @@ function App() {
         <Route path="/services/dsc-services" element={<CloudDeskDigitalSignatures />} />
 
         {/* Import Management */}
-        <Route path="/services/import-management-registration" element={<CloudDeskImporters />} />
+        <Route path="/services/import-management-registration/" element={<CloudDeskImporters />} />
 
         {/* No Due Certificate */}
         <Route path="/services/no-due-certificate" element={<CloudDeskNoDue />} />
@@ -272,7 +272,7 @@ function App() {
         <Route path="/services/interest-equalisation-scheme" element={<CloudDeskIES />} />
 
         {/* Export Obligation Period (EOP) */}
-        <Route path="/services/eop-extension" element={<CloudDeskEOP />} />
+        <Route path="/services/eop-extension/" element={<CloudDeskEOP />} />
 
         {/* Halal Certification */}
         <Route path="/services/halal-certification" element={<CloudDeskHalal />} />
@@ -308,7 +308,7 @@ function App() {
         <Route path="/services/dpd-registration/ " element={<CloudDeskDPD />} />
 
         {/* Factory License */}
-        <Route path="/services/factory-license" element={<CloudDeskFactory />} />
+        <Route path="/services/factory-license/" element={<CloudDeskFactory />} />
 
         {/* Factory Stuffing */}
         <Route path="/services/factory-stuffing" element={<CloudDeskFactoryStuffing />} />
@@ -414,8 +414,8 @@ function App() {
         <Route path="/foreign-trade-policy" element={<CloudDeskForeignTrade />} />
           <Route path="/foreign-trade-policy/regulatory-updates" element={<RegulatoryUpdates />} />
           <Route path="/foreign-trade-policy/exchange-rates" element={<ExchangeRates />} />
-          <Route path="/dgft-customs-consultancy" element={<CloudDeskDGFTCustoms />} />
-          <Route path="/certificate-of-origin" element={<CloudDeskCoo />} />
+          <Route path="/dgft-customs-consultancy/" element={<CloudDeskDGFTCustoms />} />
+          <Route path="/certificate-of-origin/" element={<CloudDeskCoo />} />
           <Route path="/compliance-trade-india" element={<CloudDeskCompliance />} />
         <Route path="/contact-us" element={<CloudDeskContact />} />
         <Route path="/clouddesk-saas" element={<CloudDeskSaasLanding />} />

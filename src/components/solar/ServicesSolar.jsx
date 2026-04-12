@@ -17,7 +17,7 @@ const services = [
     features: [
       {
         name: "Factory Audit Preparation",
-        href: "/services/factory-license",
+        href: "/services/factory-license/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -77,7 +77,7 @@ const services = [
       },
       {
         name: "Contract Registration",
-        href: "/services/project-cargo",  // 🔗 Link to Project Cargo
+        href: "/services/project-cargo/",  // 🔗 Link to Project Cargo
         target: "_blank",
         rel: "noopener noreferrer",
       },

@@ -50,7 +50,7 @@ const CloudDeskFactory = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/factory-license"
+          href="https://eximinq.in/services/factory-license/"
         />
 
         {/* Open Graph */}
@@ -64,7 +64,7 @@ const CloudDeskFactory = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/factory-license"
+          content="https://eximinq.in/services/factory-license/"
         />
         <meta property="og:type" content="website" />
 

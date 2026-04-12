@@ -54,7 +54,7 @@ const CloudDeskAdvanceAuthority = () => {
 
   <link
     rel="canonical"
-    href="https://eximinq.in/services/advance-authorisation"
+    href="https://eximinq.in/services/advance-authorisation/"
   />
 
   <meta
@@ -67,7 +67,7 @@ const CloudDeskAdvanceAuthority = () => {
   />
   <meta
     property="og:url"
-    content="https://eximinq.in/services/advance-authorisation"
+    content="https://eximinq.in/services/advance-authorisation/"
   />
   <meta property="og:type" content="article" />
 
@@ -88,13 +88,13 @@ const CloudDeskAdvanceAuthority = () => {
               "@type": "ListItem",
               "position": 2,
               "name": "Services",
-              "item": "https://eximinq.in/services"
+              "item": "https://eximinq.in/services/"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Advance Authorisation",
-              "item": "https://eximinq.in/services/advance-authorisation"
+              "item": "https://eximinq.in/services/advance-authorisation/"
             }
           ]
         },

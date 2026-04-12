@@ -31,8 +31,8 @@ export function Navbar() {
           <a className="hover:text-teal-500" href="/">Home</a>
           <a className="hover:text-teal-500" href="/services">Services</a>
           <a className="text-teal-600 font-bold" href="/foreign-trade-policy">Foreign Trade Policy</a > 
-          <a className="hover:text-teal-500" href="/dgft-customs-consultancy">DGFT & Customs</a>
-          <a className="hover:text-teal-500" href="/certificate-of-origin">COO</a>
+          <a className="hover:text-teal-500" href="/dgft-customs-consultancy/">DGFT & Customs</a>
+          <a className="hover:text-teal-500" href="/certificate-of-origin/">COO</a>
           <a className="hover:text-teal-500" href="/compliance-trade-india">Compliance</a>
           <a className="hover:text-teal-500" href="/contact-us">Contact</a>
           <a className="hover:text-teal-500" href="/clouddesk-saas">CloudDesk</a>

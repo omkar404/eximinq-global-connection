@@ -26,7 +26,7 @@ const TradeSolutionsSolar = () => {
           tags: ["Safety Standards", "Customs Clearance"],
         },
         {
-          href: "/services/moowr-scheme",  // 🔗 Link to MOOWR service
+          href: "/services/moowr-scheme/",  // 🔗 Link to MOOWR service
           target: "_blank",
           rel: "noopener noreferrer",
           head: "MOOWR for Manufacturing",
@@ -71,7 +71,7 @@ const TradeSolutionsSolar = () => {
           tags: ["Service Export", "Project Mgmt"],
         },
         {
-          href: "/services/import-export-code",  // 🔗 Link to Certifications
+          href: "/services/import-export-code/",  // 🔗 Link to Certifications
           target: "_blank",
           rel: "noopener noreferrer",
           head: "Global Certifications",

@@ -35,10 +35,10 @@ export const MainNavbar = ({
           <a className="hover:text-teal-500" href="/services">
             Services
           </a>
-          <a className="hover:text-teal-500" href="/dgft-customs-consultancy">
+          <a className="hover:text-teal-500" href="/dgft-customs-consultancy/">
             DGFT & Customs
           </a>
-          <a className="hover:text-teal-500" href="/certificate-of-origin">
+          <a className="hover:text-teal-500" href="/certificate-of-origin/">
             COO
           </a>
           <a className="hover:text-teal-500" href="/compliance-trade-india">

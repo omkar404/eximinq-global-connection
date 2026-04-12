@@ -7,8 +7,8 @@ const MobileMenuCompliance = ({ isMenuOpen, setIsMenuOpen, setShowModal }) => {
 
         <a href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Home</a>
         <a href="/services" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Services</a>
-        <a href="/dgft-customs-consultancy" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">DGFT & Customs</a>
-        <a href="/certificate-of-origin" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">COO</a>
+        <a href="/dgft-customs-consultancy/" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">DGFT & Customs</a>
+        <a href="/certificate-of-origin/" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">COO</a>
         <a href="/compliance-trade-india" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Compliance</a>
         <a href="/contact-us" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">Contact</a>
         <a href="/clouddesk-saas" onClick={() => setIsMenuOpen(false)} className="hover:text-teal-500">CloudDesk</a>

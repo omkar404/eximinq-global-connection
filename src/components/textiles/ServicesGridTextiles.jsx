@@ -16,13 +16,13 @@ const services = [
       },
       {
         name: "Duty Drawback Fixation",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
       {
         name: "Special Advance Authorization",
-        href: "/services/advance-authorisation",
+        href: "/services/advance-authorisation/",
         target: "_blank",
         rel: "noopener noreferrer",
       },

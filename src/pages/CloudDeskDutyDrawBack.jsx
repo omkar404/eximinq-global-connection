@@ -52,7 +52,7 @@ const CloudDeskDutyDrawBack = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/duty-drawback"
+          href="https://eximinq.in/services/duty-drawback/"
         />
 
         <script type="application/ld+json">
@@ -116,7 +116,7 @@ const CloudDeskDutyDrawBack = () => {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "Duty Drawback",
-                    "item": "https://eximinq.in/services/duty-drawback"
+                    "item": "https://eximinq.in/services/duty-drawback/"
                   }
                 ]
               }

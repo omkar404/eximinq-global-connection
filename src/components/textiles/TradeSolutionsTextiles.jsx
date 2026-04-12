@@ -7,7 +7,7 @@ const TradeSolutionsTextiles = ({ activeTab, setActiveTab }) => {
       title: "Import Solutions",
       items: [
         {
-          href: "/services/advance-authorisation",
+          href: "/services/advance-authorisation/",
           target: "_blank",
           rel: "noopener noreferrer",
           head: "Advance Authorization",
@@ -60,7 +60,7 @@ const TradeSolutionsTextiles = ({ activeTab, setActiveTab }) => {
           tags: ["Fast Track", "Secure Supply Chain"],
         },
         {
-          href: "/services/certificate-of-origin",
+          href: "/services/certificate-of-origin/",
           target: "_blank",
           rel: "noopener noreferrer",
           head: "Certificate of Origin",

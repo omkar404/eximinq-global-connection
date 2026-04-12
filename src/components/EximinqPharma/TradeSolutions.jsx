@@ -11,7 +11,7 @@
 //       "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&q=80",
 //     // items: [
 //     //   {
-//     //     href: "/services/moowr-scheme",
+//     //     href: "/services/moowr-scheme/",
 //     //     target="_blank",
 //     //     rel="noopener noreferrer",
 //     //     head: "Customs Bonding (MOOWR)",
@@ -19,19 +19,19 @@
 //     //     tags: ["Duty Deferment", "Cash Flow"],
 //     //   },
 //     //   {
-//     //     href: "/services/moowr-scheme",
+//     //     href: "/services/moowr-scheme/",
 //     //     head: "CDSCO Licensing",
 //     //     desc: "Form 11, Form 10 & Form 41 filings through the Sugam portal.",
 //     //     tags: ["Regulatory", "Sugam Portal"],
 //     //   },
 //     //   {
-//     //     href: "/services/moowr-scheme",
+//     //     href: "/services/moowr-scheme/",
 //     //     head: "Special Valuation Branch (SVB)",
 //     //     desc: "Handling related-party import investigations and valuation compliance.",
 //     //     tags: ["Transfer Pricing", "Customs"],
 //     //   },
 //     //   {
-//     //     href: "/services/moowr-scheme",
+//     //     href: "/services/moowr-scheme/",
 //     //     head: "BIS & LMPC Compliance",
 //     //     desc: "ISI marking & Legal Metrology registration for medical devices.",
 //     //     tags: ["BIS", "LMPC"],
@@ -39,7 +39,7 @@
 //     // ],
 //       items: [
 //         {
-//           href: "/services/moowr-scheme",
+//           href: "/services/moowr-scheme/",
 //           target: "_blank",
 //           rel: "noopener noreferrer",
 //           head: "Customs Bonding (MOOWR)",
@@ -250,7 +250,7 @@ const TradeSolutions = ({ activeTab, setActiveTab }) => {
         "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&q=80",
       items: [
         {
-          href: "/services/moowr-scheme",
+          href: "/services/moowr-scheme/",
           target: "_blank",
           rel: "noopener noreferrer",
           head: "Customs Bonding (MOOWR)",
@@ -336,7 +336,7 @@ const TradeSolutions = ({ activeTab, setActiveTab }) => {
             },
             {
               name: "CoO",
-              href: "/services/certificate-of-origin",
+              href: "/services/certificate-of-origin/",
               target: "_blank",
               rel: "noopener noreferrer",
             },

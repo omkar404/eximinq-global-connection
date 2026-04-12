@@ -13,7 +13,7 @@ import {
 const services = [
   {
     name: "Advance Authorisation",
-    url: "https://eximinq.in/services/advance-authorisation",
+    url: "https://eximinq.in/services/advance-authorisation/",
   },
   {
     name: "EPCG Scheme",
@@ -25,11 +25,11 @@ const services = [
   },
   {
     name: "Import Monitoring (SIMS)",
-    url: "https://eximinq.in/services/import-management-registration",
+    url: "https://eximinq.in/services/import-management-registration/",
   },
   {
     name: "Certificate of Origin (COO)",
-    url: "https://eximinq.in/services/certificate-of-origin",
+    url: "https://eximinq.in/services/certificate-of-origin/",
   },
 ];
 

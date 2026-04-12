@@ -15,19 +15,19 @@ const services = [
     features: [
       {
         name: "FSSAI Import Clearance",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
             {
         name: "Label Verification",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
       {
         name: "Novel Food Approval",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -46,19 +46,19 @@ const services = [
 
       {
         name: "APEDA RCMC Issuance",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
             {
         name: "Tracenet Registration",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
             {
         name: "Spices Board CRES",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -76,19 +76,19 @@ const services = [
     features: [
             {
         name: "Reefer Booking",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
             {
         name: "Packhouse Operations",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
             {
         name: "Port Health Clearance",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -106,19 +106,19 @@ const services = [
     features: [
             {
         name: "Scope Certificate",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
             {
         name: "Transaction Certificate",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
             {
         name: "Residue Analysis",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },

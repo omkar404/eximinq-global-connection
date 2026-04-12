@@ -115,7 +115,7 @@ const CloudDeskServices = () => {
         "Duty-free import of inputs physically incorporated in export products. Includes norm fixation and redemption.",
       icon: <FileText className="w-8 h-8 text-teal-600" />,
       popular: true,
-      link: "https://eximinq.in/services/advance-authorisation",
+      link: "https://eximinq.in/services/advance-authorisation/",
     },
     {
       id: 302,
@@ -145,7 +145,7 @@ const CloudDeskServices = () => {
         "Export Obligation Period Extension for Advance Authorization or EPCG.",
       icon: <ArrowLeftRight className="w-8 h-8 text-teal-600" />,
       popular: false,
-      link: "https://eximinq.in/services/eop-extension",
+      link: "https://eximinq.in/services/eop-extension/",
     },
     {
       id: 809,
@@ -155,7 +155,7 @@ const CloudDeskServices = () => {
         "Online issuance of Preferential (FTA/PTA) and Non-Preferential CoO.",
       icon: <BadgeCheck className="w-8 h-8 text-indigo-700" />,
       popular: true,
-      link: "https://eximinq.in/services/certificate-of-origin",
+      link: "https://eximinq.in/services/certificate-of-origin/",
     },
     {
       id: 105,
@@ -165,7 +165,7 @@ const CloudDeskServices = () => {
         "SIMS, PFIMS, NFMIMS General registration services for managing import authorizations and compliance.",
       icon: <ShoppingCart className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/import-management-registration",
+      link: "https://eximinq.in/services/import-management-registration/",
     },
     {
       id: 407,
@@ -245,7 +245,7 @@ const CloudDeskServices = () => {
         "Setup for Manufacturing and Other Operations in Warehouse Regulations to defer customs duty indefinitely.",
       icon: <Briefcase className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/moowr-scheme",
+      link: "https://eximinq.in/services/moowr-scheme/",
     },
     {
       id: 820,
@@ -295,7 +295,7 @@ const CloudDeskServices = () => {
         "Brand Rate fixation and Section 74 drawback claims for re-exports.",
       icon: <ArrowRight className="w-8 h-8 text-green-600" />,
       popular: false,
-      link: "https://eximinq.in/services/duty-drawback",
+      link: "https://eximinq.in/services/duty-drawback/",
     },
     {
       id: 101,
@@ -304,7 +304,7 @@ const CloudDeskServices = () => {
       description:
         "New Importer-Exporter Code (IEC) application, modification, annual updates, and Aadhaar linking services.",
       icon: <UserCheck className="w-8 h-8 text-blue-600" />,
-      link: "https://eximinq.in/services/import-export-code",
+      link: "https://eximinq.in/services/import-export-code/",
       popular: true,
     },
     {
@@ -315,7 +315,7 @@ const CloudDeskServices = () => {
         "Complete profile setup on ICEGATE, DSC (Digital Signature) registration, and PAN-Aadhaar linking for e-filing.",
       icon: <Database className="w-8 h-8 text-blue-600" />,
       popular: true,
-      link: "https://eximinq.in/services/icegate-registration",
+      link: "https://eximinq.in/services/icegate-registration/",
     },
     {
       id: 103,
@@ -325,7 +325,7 @@ const CloudDeskServices = () => {
         "Registration of Authorised Dealer (AD) Code with Customs ports to enable foreign remittance and export incentives.",
       icon: <Landmark className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/ad-code-registration",
+      link: "https://eximinq.in/services/ad-code-registration/",
     },
     {
       id: 401,
@@ -375,7 +375,7 @@ const CloudDeskServices = () => {
         "Approval from Chief Inspector of Factories ensuring safety and labor compliance.",
       icon: <Building className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/factory-license",
+      link: "https://eximinq.in/services/factory-license/",
     },
     {
       id: 816,
@@ -495,7 +495,7 @@ const CloudDeskServices = () => {
         "Specialized handling for Over Dimensional Cargo (ODC) and heavy machinery with route surveys.",
       icon: <Container className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/project-cargo",
+      link: "https://eximinq.in/services/project-cargo/",
     },
     {
       id: 822,

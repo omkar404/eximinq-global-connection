@@ -52,7 +52,7 @@ const ADCode = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/ad-code-registration"
+          href="https://eximinq.in/services/ad-code-registration/"
         />
 
         {/* Open Graph */}
@@ -66,7 +66,7 @@ const ADCode = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/ad-code-registration"
+          content="https://eximinq.in/services/ad-code-registration/"
         />
         <meta property="og:type" content="website" />
 

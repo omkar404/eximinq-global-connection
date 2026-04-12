@@ -55,7 +55,7 @@ const IECManagement = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/iec-registration"
+          href="https://eximinq.in/services/iec-registration/"
         />
 
         {/* Open Graph */}
@@ -69,7 +69,7 @@ const IECManagement = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/iec-registration"
+          content="https://eximinq.in/services/iec-registration/"
         />
         <meta property="og:type" content="website" />
 

@@ -430,7 +430,7 @@ const CloudDeskShippingBills = () => {
                   Register AD Code
                 </a> */}
                   <a
-                    href="/services/ad-code-registration"
+                    href="/services/ad-code-registration/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"

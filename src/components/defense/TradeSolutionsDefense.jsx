@@ -244,7 +244,7 @@ const tradeSolutions = {
         tags: ["Global Compliance", "Validation"]
       },
       {
-        href: "/services/project-cargo",  // 🔗 Added href
+        href: "/services/project-cargo/",  // 🔗 Added href
         target: "_blank",
         rel: "noopener noreferrer",
         head: "Temporary Import",

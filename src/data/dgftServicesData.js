@@ -12,7 +12,7 @@ import {
       id: 'd1',
       category: 'Issuance',
       title: 'Advance Authorisation',
-      link: "https://eximinq.in/services/advance-authorisation",
+      link: "https://eximinq.in/services/advance-authorisation/",
       desc: 'Duty-free import of inputs physically incorporated in export products. We handle SION fixation and ratification.',
       icon: <FileText className="w-6 h-6 text-teal-600" />,
       steps: ['Application Filing', 'Norms Committee (if SION undefined)', 'License Issuance', 'Import Registration']
@@ -57,7 +57,7 @@ import {
       id: 'd6',
       category: 'Issuance',
       title: 'Restricted Imports (SIMS/PIMS)',
-      link: "https://eximinq.in/services/import-management-registration",
+      link: "https://eximinq.in/services/import-management-registration/",
       desc: 'Registration for Steel, Chips, Coal, and Paper imports under the import monitoring systems.',
       icon: <Database className="w-6 h-6 text-blue-600" />,
       steps: ['Invoice Details', 'Technical Specs', 'Online Regn', 'Unique Regn Number (URN)']

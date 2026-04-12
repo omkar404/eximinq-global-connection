@@ -30,7 +30,7 @@
 //     ],
 //   },
 //   {
-//     href: "/services/factory-license",
+//     href: "/services/factory-license/",
 //     target: "_blank",
 //     rel: "noopener noreferrer",
 //     id: "factory",
@@ -179,7 +179,7 @@ const services = [
     ],
   },
   {
-    // href: "/services/factory-license",
+    // href: "/services/factory-license/",
     // target: "_blank",
     // rel: "noopener noreferrer",
     id: "factory",
@@ -189,7 +189,7 @@ const services = [
     features: [
       {
         name: "Factory Plan Approval",
-        href: "/services/factory-license",
+        href: "/services/factory-license/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -227,13 +227,13 @@ const services = [
       },
       {
         name: "Advance Authorization",
-        href: "/services/advance-authorisation",
+        href: "/services/advance-authorisation/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
       {
         name: "Duty Drawback Optimization",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },

@@ -58,7 +58,7 @@
 
 //         <link
 //           rel="canonical"
-//           href="https://eximinq.in/services/icegate-registration"
+//           href="https://eximinq.in/services/icegate-registration/"
 //         />
 
 //         {/* Open Graph (for WhatsApp / LinkedIn preview) */}
@@ -72,7 +72,7 @@
 //         />
 //         <meta
 //           property="og:url"
-//           content="https://eximinq.in/services/icegate-registration"
+//           content="https://eximinq.in/services/icegate-registration/"
 //         />
 //         <meta property="og:type" content="website" />
 

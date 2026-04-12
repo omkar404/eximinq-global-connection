@@ -115,7 +115,7 @@ const complianceItems = [
   },
   {
     title: "Wind Turbine Components",
-    href: "/services/project-cargo",  // 🔗 Link to Project Cargo / Type Certification
+    href: "/services/project-cargo/",  // 🔗 Link to Project Cargo / Type Certification
     target: "_blank",
     rel: "noopener noreferrer",
     subtitle: "Project Imports & Type Certification",
