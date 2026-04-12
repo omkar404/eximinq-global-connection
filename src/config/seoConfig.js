@@ -152,7 +152,7 @@ export const seoRoutes = {
     title: "Project Cargo & ODC Handling Agent Mumbai | EXIMINQ",
     description: "Expert clearance for Over Dimensional Cargo (ODC) & Heavy Machinery. Handle Breakbulk, Flat Racks, and Project Logistics at Nhava Sheva & Mumbai Port."
   },
-  "/services/dpd-registration": {
+  "/services/dpd-registration/ ": {
     title: "DPD Registration Consultant Nhava Sheva (JNPT) | EXIMINQ",
     description: "Save CFS costs with Direct Port Delivery (DPD). Register importers at JNPT for DPD status to get container delivery in < 48 hours."
   },

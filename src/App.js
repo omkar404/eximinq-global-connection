@@ -305,7 +305,7 @@ function App() {
         <Route path="/services/industrial-license" element={<CloudDeskIndustrial />} />
 
         {/* Direct Port Delivery (DPD) Registration */}
-        <Route path="/services/dpd-registration" element={<CloudDeskDPD />} />
+        <Route path="/services/dpd-registration/ " element={<CloudDeskDPD />} />
 
         {/* Factory License */}
         <Route path="/services/factory-license" element={<CloudDeskFactory />} />

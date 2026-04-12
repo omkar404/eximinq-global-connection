@@ -745,7 +745,7 @@ const CloudDeskServices = () => {
         "Direct Port Delivery. Clear cargo directly from port within 48h to save costs.",
       icon: <AlertTriangle className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/dpd-registration",
+      link: "https://eximinq.in/services/dpd-registration/ ",
     },
     {
       id: 808,
