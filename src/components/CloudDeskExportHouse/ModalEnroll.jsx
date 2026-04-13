@@ -143,8 +143,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         onSubmit(payload);
       }
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/star-export-house`,
-        "http://localhost:5000/api/star-export-house",
+        `${process.env.REACT_APP_API_URL}/api/star-export-house`,
+        // "http://localhost:5000/api/star-export-house",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
