@@ -39773,5 +39773,6 @@ export const exchangeRates = [
         "exportRate": 5.3,
         "notification": "12/2026",
         "pdfUrl": "02-04-2026.pdf"
-    }
+    },
+   
 ];
