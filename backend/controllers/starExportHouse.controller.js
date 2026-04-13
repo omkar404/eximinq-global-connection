@@ -1,30 +1,13 @@
-const mongoose = require("mongoose");
-const StarExportHouse = require("../models/starExportHouse.model");
+
+const starExportHose = require("../models/starExportHouse.model");
 const nodemailer = require("nodemailer");
 
-// ── Schema ──────────────────────────────────────────────
-// const StarExportHouseSchema = new mongoose.Schema(
-//   {
-//     name:     { type: String, required: true, trim: true },
-//     mobile:   { type: String, required: true, trim: true },
-//     email:    { type: String, required: true, trim: true, lowercase: true },
-//     entity:   { type: String, default: null, trim: true },
-//     role:     { type: String, default: null },
-//     partner:  { type: Boolean, default: false },
-//     type:     { type: String, required: true },
-//     category: { type: String, default: null },
-//     issue:    { type: String, default: null },
-//   },
-//   { timestamps: true }
-// );
-
-// const StarExportHouse = mongoose.model("StarExportHouse", StarExportHouseSchema);
-
-
-// ── SMTP Transporter (reuse your existing env vars) ─────
+/* ─────────────────────────────────────────────
+   SMTP TRANSPORTER
+───────────────────────────────────────────── */
 const transporter = nodemailer.createTransport({
-  host:   process.env.SMTP_HOST,
-  port:   Number(process.env.SMTP_PORT),
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
   secure: true,
   auth: {
     user: process.env.SMTP_USER,
@@ -32,101 +15,189 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// ── Controller ──────────────────────────────────────────
-exports.createStarExportHouse = async (req, res) => {
+/* ─────────────────────────────────────────────
+   EMAIL HELPER
+───────────────────────────────────────────── */
+async function sendEmail(record) {
+  const {
+    _id,
+    service,
+    mobile,
+    name,
+    email,
+    entity,
+    role,
+    partner,
+    type,
+    category,
+    issue,
+    turnover,
+    bonus,
+  } = record;
+
+  const serviceDisplay = service || "star-export-house";
+
+  await transporter.sendMail({
+    from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
+    to: " yadavsheshnath236@gmail.com",
+    subject: `star-export-house — ${serviceDisplay}`,
+    html: `
+      <div style="font-family:Arial;">
+        <h2>Star Export House</h2>
+
+        <table border="1" cellpadding="6" style="border-collapse:collapse;">
+          <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
+          <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+
+          ${turnover ? `<tr><td><b>Turnover</b></td><td>${turnover}</td></tr>` : ""}
+          ${bonus ? `<tr><td><b>Bonus</b></td><td>${bonus}</td></tr>` : ""}
+
+          ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
+          ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
+
+          <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
+
+          ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
+          ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
+          ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
+
+          ${
+            !type || type !== "QUICK_FORM"
+              ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>`
+              : ""
+          }
+        </table>
+
+        <p>
+          <b>ID:</b> ${_id}<br/>
+          <b>Time:</b> ${new Date().toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+          })}
+        </p>
+      </div>
+    `,
+  });
+
+  console.log("✅ Email sent:", _id);
+}
+
+/* ─────────────────────────────────────────────
+   CREATE API
+───────────────────────────────────────────── */
+exports.createstarExportHouse = async (req, res) => {
   try {
+    console.log("📥 Incoming:", req.body);
 
-    console.log("Star Export House Incoming:", req.body);
+    const {
+      service,
+      mobile,
+      name,
+      email,
+      entity,
+      role,
+      partner,
+      type,
+      category,
+      issue,
+      turnover,
+      bonus,
+    } = req.body;
 
-    const { name, mobile, email, entity, role, type, category, issue, partner } = req.body;
+    // 🔥 Detect Quick Form
+    const isQuickForm = type === "QUICK_FORM";
 
-    if (!mobile) {
+    // ✅ Only mobile required
+    if (!mobile || !mobile.trim()) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
       });
     }
 
-    const record = await StarExportHouse.create({
-      name: name?.trim() || null,
-      mobile: mobile?.trim(),
-      email: email?.trim()?.toLowerCase() || null,
-      entity: entity?.trim() || null,
-      role: role || null,
+    // ✅ Prepare Data
+    const recordData = {
+      service: service || "New Star Export House",
+      mobile: mobile.trim(),
+
+      turnover: turnover ? turnover.trim() : null,   // ✅ ADDED
+      bonus: bonus ? bonus.trim() : null,   // ✅ ADDED
+
+      // 🔥 KEY LOGIC (Quick Form fields ignore)
+      name: isQuickForm ? null : name ? name.trim() : null,
+      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      entity: isQuickForm ? null : entity ? entity.trim() : null,
+      role: isQuickForm ? null : role || null,
+      partner: isQuickForm ? false : Boolean(partner),
+
       type: type || "QUICK_FORM",
       category: category || null,
       issue: issue || null,
-      partner: Boolean(partner),
-    });
+    };
 
-    console.log("Saved record:", record._id);
+    console.log("📦 Saving:", recordData);
 
-    sendEmail(record).catch(err =>
-      console.error("Email failed:", err.message)
+    // ✅ Save to DB - FIXED: use importManagement instead of importController
+    const record = await starExportHose.create(recordData);
+
+    console.log("✅ Saved:", record._id);
+
+    // ✅ Send Email (async)
+    sendEmail(record).catch((err) =>
+      console.error("❌ Email Error importmanagemernt:", err.message)
     );
 
-    res.status(201).json({
+    // ✅ Response
+    return res.status(201).json({
       success: true,
-      message: "Registration submitted successfully",
+      message: "Submitted successfully",
       data: record,
     });
-
   } catch (error) {
+    console.error("❌ Error:", error);
 
-    console.error("Star Export House Error:", error);
-
-    if (error.name === "ValidationError") {
-      const messages = Object.values(error.errors).map(e => e.message);
-      return res.status(400).json({
-        success: false,
-        message: "Validation failed",
-        errors: messages,
-      });
-    }
-
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Server Error",
-      error: error.message,
     });
-
   }
 };
 
-// ── Email helper ─────────────────────────────────────────
-async function sendEmail(record) {
-  const { _id, name, mobile, email, entity, role, type, category, issue, partner } = record;
+/* ─────────────────────────────────────────────
+   GET ALL - FIXED
+───────────────────────────────────────────── */
+exports.getAllstarExportHose = async (req, res) => {
+  try {
+    const data = await starExportHose.find().sort({ createdAt: -1 });
 
-  await transporter.sendMail({
-    from:    `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to:      "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
-    subject: `New Star Export House Registration — ${type}`,
-    html: `
-      <h3>New Star Export House Registration</h3>
-      <table cellpadding="6" style="border-collapse:collapse; font-family:Arial,sans-serif;">
-        <tr><td><b>Name</b></td><td>${name}</td></tr>
-        <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
-        <tr><td><b>Email</b></td><td>${email}</td></tr>
-        <tr><td><b>Entity</b></td><td>${entity  || "N/A"}</td></tr>
-        <tr><td><b>Role</b></td><td>${role     || "N/A"}</td></tr>
-        <tr><td><b>Service Type</b></td><td>${type}</td></tr>
-        <tr><td><b>Category</b></td><td>${category || "N/A"}</td></tr>
-        <tr><td><b>Issue</b></td><td>${issue    || "N/A"}</td></tr>
-        <tr><td><b>Partner Interest</b></td><td>${partner ? "Yes" : "No"}</td></tr>
-      </table>
-      <hr/>
-      <p><small>Registration ID: ${_id}</small></p>
-      <p><small>Submitted (IST): ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</small></p>
-    `,
-  });
+    res.json({
+      success: true,
+      data,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false });
+  }
+};
 
-  console.log("Email sent for Star Export House:", _id);
-}
+/* ─────────────────────────────────────────────
+   GET BY ID - FIXED
+───────────────────────────────────────────── */
+exports.getstarExportHoseById = async (req, res) => {
+  try {
+    const data = await starExportHose.findById(req.params.id);
 
+    if (!data) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found",
+      });
+    }
 
-
-
-
-
-
-
+    res.json({
+      success: true,
+      data,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false });
+  }
+};

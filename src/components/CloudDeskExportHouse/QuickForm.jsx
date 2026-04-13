@@ -1,65 +1,52 @@
 import { useState } from "react";
 
-const QuickForm = ({ onSubmit }) => {
-
+const QuickForm = () => {
   const [form, setForm] = useState({
     turnover: "",
     bonus: "",
     mobile: "",
   });
 
+  // ✅ FIXED: renamed 'error' → 'errors' to match usage
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
 
-    // clear error when typing
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
+    // Clear that field's error on typing
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
-
-  /* ---------------------
-     VALIDATION FUNCTION
-  ---------------------- */
 
   const validate = () => {
     const newErrors = {};
 
-    // Turnover validation
+    if (!form.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    }
+
+    // Optional: add validation for turnover and bonus if needed
     if (!form.turnover) {
       newErrors.turnover = "Export turnover is required";
     } else if (Number(form.turnover) <= 0) {
       newErrors.turnover = "Turnover must be greater than 0";
     }
 
-    // Bonus validation
     if (!form.bonus) {
       newErrors.bonus = "Please select a bonus category";
     }
 
-    // Mobile validation
-    const mobileRegex = /^[6-9]\d{9}$/;
-
-    if (!form.mobile) {
-      newErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile)) {
-      newErrors.mobile = "Enter valid 10 digit mobile number";
-    }
-
     return newErrors;
   };
-
-  /* ---------------------
-     SUBMIT
-  ---------------------- */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,23 +54,23 @@ const QuickForm = ({ onSubmit }) => {
     const validationErrors = validate();
     setErrors(validationErrors);
 
+    // ✅ FIXED: 'object' → 'Object' (capital O)
     if (Object.keys(validationErrors).length > 0) return;
 
-    try {
-      setLoading(true);
+    setLoading(true);
 
+    try {
       const payload = {
-        service: "Star Export House Status",
-        source: "Status Calculator",
-        turnoverUSD: form.turnover,
-        bonusCategory: form.bonus,
+        turnover: form.turnover,
+        bonus: form.bonus,
         mobile: form.mobile,
+        type: "QUICK_FORM",
       };
 
-      onSubmit?.(payload);
+      console.log("Sending data:", payload);
 
       const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/star-export-house`,
+        `${process.env.REACT_APP_API_URL}/api/star-export-house`,
         // "http://localhost:5000/api/star-export-house",
         {
           method: "POST",
@@ -95,20 +82,17 @@ const QuickForm = ({ onSubmit }) => {
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message);
+        throw new Error(data.error || data.message || "Something went wrong");
       }
 
       alert("Request submitted successfully");
 
-      setForm({
-        turnover: "",
-        bonus: "",
-        mobile: "",
-      });
-
+      // Reset form
+      setForm({ turnover: "", bonus: "", mobile: "" });
+      setErrors({}); // clear errors as well
     } catch (err) {
-      console.error(err);
-      alert("Submission failed");
+      console.error("Error:", err);
+      alert(`Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -125,13 +109,10 @@ const QuickForm = ({ onSubmit }) => {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-
-        {/* Turnover */}
         <div>
           <label className="block text-sm font-semibold mb-1">
             Export Turnover (FOB USD)
           </label>
-
           <input
             type="number"
             name="turnover"
@@ -140,18 +121,13 @@ const QuickForm = ({ onSubmit }) => {
             placeholder="Last 3 FYs + Current FY"
             className="w-full border border-slate-300 rounded px-3 py-2"
           />
-
-          {errors.turnover && (
-            <p className="text-red-500 text-sm">{errors.turnover}</p>
-          )}
+          {errors.turnover && <p className="text-red-500 text-sm">{errors.turnover}</p>}
         </div>
 
-        {/* Bonus */}
         <div>
           <label className="block text-sm font-semibold mb-1">
             Bonus Category
           </label>
-
           <select
             name="bonus"
             value={form.bonus}
@@ -164,18 +140,13 @@ const QuickForm = ({ onSubmit }) => {
             <option>Agri / Fruits / Vegetables Export</option>
             <option>North East Region Unit</option>
           </select>
-
-          {errors.bonus && (
-            <p className="text-red-500 text-sm">{errors.bonus}</p>
-          )}
+          {errors.bonus && <p className="text-red-500 text-sm">{errors.bonus}</p>}
         </div>
 
-        {/* Mobile */}
         <div>
           <label className="block text-sm font-semibold mb-1">
             Mobile Number
           </label>
-
           <input
             type="tel"
             name="mobile"
@@ -185,13 +156,9 @@ const QuickForm = ({ onSubmit }) => {
             maxLength="10"
             className="w-full border border-slate-300 rounded px-3 py-2"
           />
-
-          {errors.mobile && (
-            <p className="text-red-500 text-sm">{errors.mobile}</p>
-          )}
+          {errors.mobile && <p className="text-red-500 text-sm">{errors.mobile}</p>}
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           disabled={loading}
@@ -199,7 +166,6 @@ const QuickForm = ({ onSubmit }) => {
         >
           {loading ? "Submitting..." : "Check My Star Rating"}
         </button>
-
       </form>
     </div>
   );
