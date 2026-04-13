@@ -28,7 +28,7 @@ const CTA = ({ setShowEnrollModal }) => {
           </button>
 
           <a
-            href="https://eximinq.in/services"
+            href="https://eximinq.in/services/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block border-2 border-white/30 hover:bg-white/10 px-8 py-4 rounded-lg font-bold text-lg transition-all"

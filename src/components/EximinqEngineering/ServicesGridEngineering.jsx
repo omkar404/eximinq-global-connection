@@ -119,7 +119,7 @@
 //       },
 //       {
 //         name: "Duty Drawback Fixation",
-//         href: "/services/duty-drawback",
+//         href: "/services/duty-drawback/",
 //         target: "_blank",
 //         rel: "noopener noreferrer",
 //       },
@@ -244,7 +244,7 @@ const services = [
     features: [
       {
         name: "Heavy Machinery Transport",
-        href: "/services/project-cargo",
+        href: "/services/project-cargo/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -316,7 +316,7 @@ const services = [
       },
       {
         name: "Duty Drawback Fixation",
-        href: "/services/duty-drawback",
+        href: "/services/duty-drawback/",
         target: "_blank",
         rel: "noopener noreferrer",
       },

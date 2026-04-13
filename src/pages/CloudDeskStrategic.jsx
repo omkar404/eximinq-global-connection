@@ -309,7 +309,7 @@ export default function StrategicSolutions() {
                                     <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></span>
                                     {/* Section 74 Re-Export Drawback */}
                                     <a
-                                        href="/services/duty-drawback"
+                                        href="/services/duty-drawback/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-slate-600 text-sm hover:text-indigo-600 transition"
@@ -337,7 +337,7 @@ export default function StrategicSolutions() {
                                 </span>
                                 {/* <button className="text-orange-600 font-bold text-sm">
                                     <a
-                                        href="/services/duty-drawback"
+                                        href="/services/duty-drawback/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-teal-600 font-bold text-sm"
@@ -401,7 +401,7 @@ export default function StrategicSolutions() {
                         
                         <button className="text-indigo-600 font-bold text-sm">
                                     <a
-                                        href="/services/import-management-registration"
+                                        href="/services/import-management-registration/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-teal-600 font-bold text-sm"
@@ -662,7 +662,7 @@ export default function StrategicSolutions() {
                                 {/* <li>• Factory License</li> */}
                                 <li>
                                  <a
-                                        href="/services/factory-license"
+                                        href="/services/factory-license/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -672,7 +672,7 @@ export default function StrategicSolutions() {
                                 </li>
                             </ul>
 
-                            {/* <a href="/services/factory-license"
+                            {/* <a href="/services/factory-license/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-teal-600 text-sm font-bold">
@@ -846,7 +846,7 @@ export default function StrategicSolutions() {
                                         />
                                     </svg>
                                     <a
-                                        href="/services/moowr-scheme"
+                                        href="/services/moowr-scheme/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -992,7 +992,7 @@ export default function StrategicSolutions() {
                                 {/* <li>• Certificate of Origin (Preferential/Non-Pref)</li> */}
                                  <li>
                                  <a
-                                        href="/services/certificate-of-origin"
+                                        href="/services/certificate-of-origin/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -1003,7 +1003,7 @@ export default function StrategicSolutions() {
                                 {/* <li>• AD Code Registration</li> */}
                                 <li>
                                 <a
-                                        href="/services/ad-code-registration"
+                                        href="/services/ad-code-registration/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -1014,7 +1014,7 @@ export default function StrategicSolutions() {
                                 {/* <li>• ICEGATE Profile Management</li> */}
                                 <li>
                                  <a
-                                        href="/services/icegate-registration"
+                                        href="/services/icegate-registration/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -1094,7 +1094,7 @@ export default function StrategicSolutions() {
                     <button className="px-8 py-4 bg-white text-indigo-900 font-bold rounded-xl hover:bg-slate-100 transition shadow-lg">
                         {/* Get Retainer Quote (Starts ₹25k/per months) */}
                          <a
-                                        href="/services/certificate-of-origin"
+                                        href="/services/certificate-of-origin/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -1194,7 +1194,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/dpd-registration" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/dpd-registration/ " target="_blank" rel="noopener noreferrer">
                                     Direct Port Delivery
                                 </a>
                             </div>
@@ -1209,7 +1209,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/project-cargo" target="_blank" rel="noopener noreferrer">
+                                <a href="/services/project-cargo/" target="_blank" rel="noopener noreferrer">
                                     ODC Handling
                                 </a>
                             </div>
@@ -1268,7 +1268,7 @@ export default function StrategicSolutions() {
                                     <td className="px-6 py-4 font-medium text-slate-900">
                                         {/* IEC (Import Export Code) */}
                                 <a
-                                        href="/services/import-export-code"
+                                        href="/services/import-export-code/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -1279,7 +1279,7 @@ export default function StrategicSolutions() {
                                     <td className="px-6 py-4">
                                         {/* DSC (Digital Signature) */}
                                 <a
-                                        href="/services/icegate-registration"
+                                        href="/services/icegate-registration/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"

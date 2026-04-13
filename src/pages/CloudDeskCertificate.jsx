@@ -53,12 +53,12 @@ const CloudDeskCertificate = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/certificate-of-origin"
+          href="https://eximinq.in/services/certificate-of-origin/"
         />
 
         <meta property="og:title" content="Certificate of Origin (CoO) Services" />
         <meta property="og:description" content="Preferential & Non-Preferential CoO filing under FTA agreements." />
-        <meta property="og:url" content="https://eximinq.in/services/certificate-of-origin" />
+        <meta property="og:url" content="https://eximinq.in/services/certificate-of-origin/" />
         <meta property="og:type" content="article" />
 
         <script type="application/ld+json">
@@ -122,7 +122,7 @@ const CloudDeskCertificate = () => {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "Certificate of Origin",
-                    "item": "https://eximinq.in/services/certificate-of-origin"
+                    "item": "https://eximinq.in/services/certificate-of-origin/"
                   }
                 ]
               }

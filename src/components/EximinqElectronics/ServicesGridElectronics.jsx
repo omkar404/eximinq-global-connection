@@ -261,7 +261,7 @@ const services = [
   },
   {
     id: "manufacturing",
-    href: "/services/moowr-scheme",
+    href: "/services/moowr-scheme/",
     target: "_blank",
     rel: "noopener noreferrer",
     title: "EMS Solutions",
@@ -271,7 +271,7 @@ const services = [
     features: [
       {
         name: "MOOWR Licensing",
-        href: "/services/moowr-scheme",
+        href: "/services/moowr-scheme/",
         target: "_blank",
         rel: "noopener noreferrer",
       },

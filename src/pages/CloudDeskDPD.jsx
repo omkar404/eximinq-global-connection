@@ -45,7 +45,7 @@ const CloudDeskDPD = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/dpd-registration"
+          href="https://eximinq.in/services/dpd-registration/ "
         />
 
         {/* Open Graph */}
@@ -59,7 +59,7 @@ const CloudDeskDPD = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/dpd-registration"
+          content="https://eximinq.in/services/dpd-registration/ "
         />
         <meta property="og:type" content="website" />
 

@@ -52,7 +52,7 @@ const CloudDeskEOP = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/eop-extension"
+          href="https://eximinq.in/services/eop-extension/"
         />
 
         <meta property="og:title" content="EOP Extension Consultancy in India" />
@@ -62,7 +62,7 @@ const CloudDeskEOP = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/eop-extension"
+          content="https://eximinq.in/services/eop-extension/"
         />
         <meta property="og:type" content="article" />
 
@@ -89,7 +89,7 @@ const CloudDeskEOP = () => {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "EOP Extension",
-                    "item": "https://eximinq.in/services/eop-extension"
+                    "item": "https://eximinq.in/services/eop-extension/"
                   }
                 ]
               },

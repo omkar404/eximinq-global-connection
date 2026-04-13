@@ -62,7 +62,7 @@ const CloudDeskAEOCertificate = () => {
 
   <link
     rel="canonical"
-    href="https://eximinq.in/services/moowr-scheme"
+    href="https://eximinq.in/services/moowr-scheme/"
   />
 
   <meta
@@ -75,7 +75,7 @@ const CloudDeskAEOCertificate = () => {
   />
   <meta
     property="og:url"
-    content="https://eximinq.in/services/moowr-scheme"
+    content="https://eximinq.in/services/moowr-scheme/"
   />
   <meta property="og:type" content="article" />
 
@@ -102,7 +102,7 @@ const CloudDeskAEOCertificate = () => {
               "@type": "ListItem",
               "position": 3,
               "name": "MOOWR Scheme",
-              "item": "https://eximinq.in/services/moowr-scheme"
+              "item": "https://eximinq.in/services/moowr-scheme/"
             }
           ]
         },

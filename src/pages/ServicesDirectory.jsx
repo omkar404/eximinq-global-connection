@@ -12,12 +12,12 @@ export default function ServicesDirectory() {
         {
           title: "IEC Registration & Updates",
           desc: "New Issuance, Amendment, Activation",
-          path: "/services/import-export-code",
+          path: "/services/import-export-code/",
         },
         {
           title: "EOP Extension",
           desc: "Extension of Export Obligation Period",
-          path: "/services/eop-extension",
+          path: "/services/eop-extension/",
         },
       ],
     },
@@ -28,7 +28,7 @@ export default function ServicesDirectory() {
         {
           title: "ICEGATE Registration",
           desc: "User Registration & Profile Management",
-          path: "/services/icegate-registration",
+          path: "/services/icegate-registration/",
         },
         {
           title: "AEO Certification",

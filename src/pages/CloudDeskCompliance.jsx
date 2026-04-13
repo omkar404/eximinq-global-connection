@@ -76,7 +76,7 @@ const CloudDeskCompliance = () => {
     {
       id: "i5",
       title: "SIMS / PIMS / CIMS",
-      link: "https://eximinq.in/services/import-management-registration",
+      link: "https://eximinq.in/services/import-management-registration/",
       desc: "Technical compliance and registration under Steel, Paper, Coal, and Chip Import Monitoring Systems.",
       icon: <Factory className="w-6 h-6 text-blue-600" />,
       risk: "High: Clearance Hold",

@@ -50,11 +50,11 @@ export const seoRoutes = {
   },
 
   // --- DGFT SERVICES ---
-    "/services/import-export-code": {
+    "/services/import-export-code/": {
     title: "IEC Profile Deactivation & KYC Update | DGFT Helpdesk Mumbai",
     description: "Fix IEC Profile Deactivation, Duplicate IEC issues, and IEC Surrender Process. Expert help for IEC KYC Update and Merger and Acquisition IEC transfer."
   },
-  "/services/advance-authorisation": {
+  "/services/advance-authorisation/": {
     title: "Advance Authorisation Consultant Mumbai | EXIMINQ",
     description: "Zero Duty Import of raw materials. Handle SION Norms, License issuance, and Redemption (EODC) to close files without penalties."
   },
@@ -82,7 +82,7 @@ export const seoRoutes = {
     title: "RoDTEP Scheme Application & Scroll Generation | EXIMINQ",
     description: "Scrip not generated? Fix Class Mapping errors, Invoice mismatches, and Scroll Generation issues on ICEGATE to credit RoDTEP to the ledger."
   },
-  "/services/duty-drawback": {
+  "/services/duty-drawback/": {
     title: "Duty Drawback Consultant Mumbai - AIR & Brand Rate | EXIMINQ",
     description: "Claim unclaimed Duty Drawback on exports. Handle All Industry Rate (AIR) claims and Brand Rate Fixation with Ministry of Finance for Mumbai exporters."
   },
@@ -110,7 +110,7 @@ export const seoRoutes = {
     title: "Policy Relaxation Committee (PRC) Representation | EXIMINQ",
     description: "Rejected by DGFT? Get representation at the Policy Relaxation Committee (PRC) in New Delhi to condone delays and fix genuine procedural errors."
   },
-  "/services/eop-extension": {
+  "/services/eop-extension/": {
     title: "Export Obligation (EOP) Extension Consultant | EXIMINQ",
     description: "Missed export deadline? File EOP Extension for Advance & EPCG licenses at DGFT to save on heavy Customs Duty & Interest penalties."
   },
@@ -120,11 +120,11 @@ export const seoRoutes = {
   },
 
   // --- CUSTOMS SERVICES ---
-  "/services/icegate-registration": {
+  "/services/icegate-registration/": {
     title: "ICEGATE Registration Process, Fees & Documents (2026 Guide) | Eximinq",
     description: "Learn how to complete ICEGATE registration online. Get the step-by-step portal process, exact document checklist, and professional fees for fast customs clearance."
   },
-  "/services/ad-code-registration": {
+  "/services/ad-code-registration/": {
     title: "AD Code Registration at Customs & ICEGATE Mumbai | EXIMINQ",
     description: "Mandatory AD Code Registration for Exporters. Register Bank AD Code at Nhava Sheva, Mundra, & Air Cargo. Fix 'AD Code Not Found' errors instantly."
   },
@@ -136,7 +136,7 @@ export const seoRoutes = {
     title: "AEO T1, T2, T3 Certification Consultant Mumbai | EXIMINQ",
     description: "Get AEO Status for faster Customs clearance. Handle AEO T1, T2 & LO Application, Annexure filling, and Physical Verification support."
   },
-  "/services/moowr-scheme": {
+  "/services/moowr-scheme/": {
     title: "MOOWR Scheme Consultant Mumbai - Bonded Warehouse | EXIMINQ",
     description: "Defer Customs Duty on raw materials with MOOWR Scheme. Expert consultancy for Section 65 Bonded Warehouse manufacturing in Mumbai."
   },
@@ -148,11 +148,11 @@ export const seoRoutes = {
     title: "RMCC Alert & Customs Hold Removal Consultant | EXIMINQ",
     description: "Shipment stuck due to RMCC Alert? Handle immediate Alert Revocation and legal replies to DGFT/Customs to clear cargo at Mumbai ports."
   },
-  "/services/project-cargo": {
+  "/services/project-cargo/": {
     title: "Project Cargo & ODC Handling Agent Mumbai | EXIMINQ",
     description: "Expert clearance for Over Dimensional Cargo (ODC) & Heavy Machinery. Handle Breakbulk, Flat Racks, and Project Logistics at Nhava Sheva & Mumbai Port."
   },
-  "/services/dpd-registration": {
+  "/services/dpd-registration/ ": {
     title: "DPD Registration Consultant Nhava Sheva (JNPT) | EXIMINQ",
     description: "Save CFS costs with Direct Port Delivery (DPD). Register importers at JNPT for DPD status to get container delivery in < 48 hours."
   },
@@ -264,7 +264,7 @@ export const seoRoutes = {
     title: "CDSCO Import Registration (Form 41/10) Agent | EXIMINQ",
     description: "Importing Cosmetics, Drugs, or Medical Devices? Handle CDSCO Port Registration, ADC NOC, and Test License (Form 11) for fast clearance."
   },
-  "/services/certificate-of-origin": {
+  "/services/certificate-of-origin/": {
     title: "Certificate of Origin (CoO) - Preferential & Non-Pref | EXIMINQ",
     description: "Get CoO from Chamber of Commerce or Export Council. Handle GSP, SAPTA, APTA, and Generic CoO issuance for reduced import duty abroad."
   },
@@ -292,7 +292,7 @@ export const seoRoutes = {
     title: "Industrial License Consultant (IDRA) India | EXIMINQ",
     description: "Manufacturing Explosives, Chemicals, or Defence items? Secure Compulsory Industrial License (IL) from DPIIT and Ministry of Home Affairs."
   },
-  "/services/factory-license": {
+  "/services/factory-license/": {
     title: "Factory License Registration (DISH) Consultant Mumbai | EXIMINQ",
     description: "Get Factory Plan Approval & License from DISH (Directorate of Industrial Safety). Handle compliance for factories with >10 workers in Maharashtra."
   },

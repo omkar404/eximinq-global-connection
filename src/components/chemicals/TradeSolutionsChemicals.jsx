@@ -14,7 +14,7 @@ const TradeSolutionsChemicals = ({ activeTab, setActiveTab }) => {
           tags: ["Mandatory Certification", "Lab Testing"],
         },
         {
-          href: "/services/advance-authorisation",
+          href: "/services/advance-authorisation/",
           target: "_blank",
           rel: "noopener noreferrer",
           head: "Advance Authorization",
@@ -30,7 +30,7 @@ const TradeSolutionsChemicals = ({ activeTab, setActiveTab }) => {
           tags: ["Precursor Control", "Drug Laws"],
         },
         {
-          href: "/services/moowr-scheme",
+          href: "/services/moowr-scheme/",
           target: "_blank",
           rel: "noopener noreferrer",
           head: "Customs Bonding (MOOWR)",

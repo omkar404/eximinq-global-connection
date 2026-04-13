@@ -242,7 +242,7 @@ const services = [
       },
       {
         name: "AOG Clearance",
-        href: "/services/project-cargo",
+        href: "/services/project-cargo/",
         target: "_blank",
         rel: "noopener noreferrer",
       },

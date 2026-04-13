@@ -25,7 +25,7 @@
 //         tags: ["Wireless", "Frequency Spectrum"],
 //       },
 //       {
-//         href: "/services/moowr-scheme",
+//         href: "/services/moowr-scheme/",
 //         target: "_blank",
 //         rel: "noopener noreferrer",
 //         head: "MOOWR for EMS",
@@ -244,7 +244,7 @@ const tradeSolutions = {
         tags: ["Wireless", "Frequency Spectrum"],
       },
       {
-        href: "/services/moowr-scheme",
+        href: "/services/moowr-scheme/",
         target: "_blank",
         rel: "noopener noreferrer",
         head: "MOOWR for EMS",

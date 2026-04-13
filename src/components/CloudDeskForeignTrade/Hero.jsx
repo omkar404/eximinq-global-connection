@@ -2,10 +2,10 @@ import React from "react";
 import { Search, IdCard, Receipt, Package, Globe } from "lucide-react";
 
 const SERVICE_LINKS = {
-  "Apply for IEC": "https://eximinq.in/services/import-export-code",
+  "Apply for IEC": "https://eximinq.in/services/import-export-code/",
   "E-Scrip / RoDTEP": "https://eximinq.in/services/rodtep-scheme",
-  "Advance Authorization": "https://eximinq.in/services/advance-authorisation",
-  "Certificate of Origin": "https://eximinq.in/services/certificate-of-origin",
+  "Advance Authorization": "https://eximinq.in/services/advance-authorisation/",
+  "Certificate of Origin": "https://eximinq.in/services/certificate-of-origin/",
 };
 
 export function Hero() {
@@ -60,12 +60,12 @@ export function Hero() {
 
             <HeroLink
               label="Advance Auth"
-              href="https://eximinq.in/services/advance-authorisation"
+              href="https://eximinq.in/services/advance-authorisation/"
             />
 
             <HeroLink
               label="IEC"
-              href="https://eximinq.in/services/import-export-code"
+              href="https://eximinq.in/services/import-export-code/"
             />
           </div>
         </div>
