@@ -246,8 +246,9 @@ async function sendEmail(record) {
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
 
-          ${portName ? `<tr><td><b>Port Name</b></td><td>${portName}</td></tr>` : ""}
 
+          ${portName ? `<tr><td><b>Port Name</b></td><td>${portName}</td></tr>` : ""}
+           ${service ? `<tr><td><b>Service Name</b></td><td>${service}</td></tr>` : ""} 
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
 

@@ -1,134 +1,71 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // ✅ This line was missing
 
-// const VALID_TYPES = [
-//   "QUICK_FORM",
-//   "Enroll",
-//   "Start_Application",
-// ];
-
-
-
-// const StarExportHouseSchema = new mongoose.Schema(
-// {
-//   name: {
-//     type: String,
-//     trim: true,
-//     default: null
-//   },
-
-//   mobile: {
-//     type: String,
-//     required: true,
-//     trim: true
-//   },
-
-//   email: {
-//     type: String,
-//     trim: true,
-//     lowercase: true,
-//     default: null
-//   },
-
-//   entity: {
-//     type: String,
-//     default: null,
-//     trim: true
-//   },
-
-//   role: {
-//     type: String,
-//     default: null
-//   },
-
-//   partner: {
-//     type: Boolean,
-//     default: false
-//   },
-
-//   type: {
-//     type: String,
-//     enum: VALID_TYPES,
-//     default: "QUICK_FORM"
-//   },
-
-//   category: {
-//     type: String,
-//     default: null
-//   },
-
-//   issue: {
-//     type: String,
-//     default: null
-//   }
-// },
-// { timestamps: true }
-// );
-
-// mongoose.model("StarExportHouseSchema", StarExportHouseSchema)
-
-const mongoose = require("mongoose");
-
-const VALID_TYPES = [
-  "QUICK_FORM",
-  "Enroll",
-  "Start_Application",
-];
-
-const StarExportHouseSchema = new mongoose.Schema(
-{
-  name: {
-    type: String,
-    trim: true,
-    default: null
+const starExportHouseSchema = new mongoose.Schema(
+  {
+    service: {
+      type: String,
+      trim: true,
+      default: "New Star Export House Request",
+    },
+    turnover: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    bonus: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    name: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    mobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    entity: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    role: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,  
+      trim: true,
+      default: null,
+    },
   },
-
-  mobile: {
-    type: String,
-    required: true,
-    trim: true
-  },
-
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    default: null
-  },
-
-  entity: {
-    type: String,
-    trim: true,
-    default: null
-  },
-
-  role: {
-    type: String,
-    default: null
-  },
-
-  partner: {
-    type: Boolean,
-    default: false
-  },
-
-  type: {
-    type: String,
-    enum: VALID_TYPES,
-    default: "QUICK_FORM"
-  },
-
-  category: {
-    type: String,
-    default: null
-  },
-
-  issue: {
-    type: String,
-    default: null
-  }
-
-},
-{ timestamps: true }
+  { timestamps: true }
 );
 
-module.exports = mongoose.model("StarExportHouse", StarExportHouseSchema);
+module.exports = mongoose.model(
+  "starExportHouse",
+  starExportHouseSchema
+);

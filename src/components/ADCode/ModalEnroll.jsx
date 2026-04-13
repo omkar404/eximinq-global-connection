@@ -240,8 +240,8 @@ const handleSubmit = async (e) => {
     }
 
     const res = await fetch(
-      // `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
-       "http://localhost:5000/api/ad-code-registration",
+      `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
+      //  "http://localhost:5000/api/ad-code-registration",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
