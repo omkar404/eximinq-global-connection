@@ -101,11 +101,11 @@ const Fees = ({ setShowEnrollModal }) => {
               </div>
               <div className="flex justify-between py-2 border-b">
                 <span className="text-slate-600">Professional Fees</span>
-                <span className="font-bold text-green-700">₹ 3,000</span>
+                <span className="font-bold text-green-700">₹ 3,500</span>
               </div>
               <div className="flex justify-between pt-4">
                 <span className="font-bold">Total</span>
-                <span className="text-xl font-bold text-green-700">₹ 3,000</span>
+                <span className="text-xl font-bold text-green-700">₹ 3,500</span>
               </div>
 
               <p className="text-xs text-slate-500 mt-2">
