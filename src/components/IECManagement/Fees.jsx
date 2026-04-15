@@ -22,12 +22,12 @@ const Fees = ({ setShowEnrollModal }) => {
               </div>
               <div className="flex justify-between py-2 border-b">
                 <span className="text-slate-600">Professional Fees</span>
-                <span className="font-bold">₹ 1,000</span>
+                <span className="font-bold">₹ 3,500</span>
               </div>
               <div className="flex justify-between pt-4">
                 <span className="font-bold">Total</span>
                 <span className="text-xl font-bold text-brand-600">
-                  ₹ 1,200
+                  ₹ 3,700
                 </span>
               </div>
 
@@ -60,12 +60,12 @@ const Fees = ({ setShowEnrollModal }) => {
               </div>
               <div className="flex justify-between py-3 border-b">
                 <span className="text-slate-600">Professional Fees</span>
-                <span className="font-bold">₹ 1,500</span>
+                <span className="font-bold">₹ 4,500</span>
               </div>
               <div className="flex justify-between pt-4">
                 <span className="text-lg font-bold">Total</span>
                 <span className="text-2xl font-bold text-accent-600">
-                  ₹ 2,000
+                  ₹ 5,000
                 </span>
               </div>
 
@@ -97,15 +97,15 @@ const Fees = ({ setShowEnrollModal }) => {
             <div className="p-6">
               <div className="flex justify-between py-2 border-b">
                 <span className="text-slate-600">Govt Fees</span>
-                <span className="font-bold text-green-700">Free</span>
+                <span className="font-bold text-green-700">₹ Free</span>
               </div>
               <div className="flex justify-between py-2 border-b">
                 <span className="text-slate-600">Professional Fees</span>
-                <span className="font-bold text-green-700">Free</span>
+                <span className="font-bold text-green-700">₹ 3,000</span>
               </div>
               <div className="flex justify-between pt-4">
                 <span className="font-bold">Total</span>
-                <span className="text-xl font-bold text-green-700">₹ 0</span>
+                <span className="text-xl font-bold text-green-700">₹ 3,000</span>
               </div>
 
               <p className="text-xs text-slate-500 mt-2">
