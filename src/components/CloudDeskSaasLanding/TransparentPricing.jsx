@@ -5,7 +5,7 @@ const TransparentPricing = ({ setShowEnrollModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("You are on the list! We will contact you before March 19, 2026.");
+    alert("You are on the list! We will contact you beforeMat 15, 2026.");
   };
 
   return (
