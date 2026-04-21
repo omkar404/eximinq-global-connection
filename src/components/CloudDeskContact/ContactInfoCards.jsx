@@ -227,11 +227,10 @@ const ContactInfoCards = () => {
                     Location Detected
                   </p>
                   <p className="text-sm font-semibold text-white">
-                    1010, 10th Floor,
-                    Hubtown Viva, Om Asthavinayak,
-                    CH Society, Saraswati Baug,
-                    Shankarwadi, Jogeshwari East,
-                    Mumbai, Maharashtra 400060
+                    EXIMINQ, 1010, 
+                    Hubtown Viva,
+                    Near Mogra Metro Station, 
+                    Jogeshwari East, Mumbai, Maharashtra 400060
                   </p>
                 </div>
 
