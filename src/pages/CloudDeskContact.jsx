@@ -207,7 +207,7 @@ const CloudDeskContact = () => {
               </h3>
 
               <p className="text-slate-400 text-sm mb-6">
-                #2, Navketan Ind. Est., Mahakali Caves Road, Andheri East, Mumbai
+                Hubtown Viva office, 10th Floor, Flat 1010, Om Asthavinayak, CH Society, Saraswati Baug, Shankarwadi, Jogeshwari East, Mumbai, Maharashtra 400060
               </p>
 
               <a
