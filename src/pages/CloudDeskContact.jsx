@@ -207,7 +207,10 @@ const CloudDeskContact = () => {
               </h3>
 
               <p className="text-slate-400 text-sm mb-6">
-                EXIMINQ, 1010, Hubtown Viva, Near Mogra Metro Station, Jogeshwari East, Mumbai, Maharashtra 400060
+                EXIMINQ, 1010, Hubtown Viva, <br />
+                Near Mogra Metro Station, <br />
+                Jogeshwari East, Mumbai, <br />
+                Maharashtra 400060
               </p>
 
               <a

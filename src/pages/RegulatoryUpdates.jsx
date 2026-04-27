@@ -77,6 +77,11 @@ const cbic = {
   btnBg: "#0946ecde",
 };
 
+const API_BASE = (
+  process.env.REACT_APP_API_URL ||
+  (typeof window !== "undefined" ? window.location.origin : "")
+).replace(/\/$/, "");
+
 /* ─────────────────────────────────────────────
     TABLE VIEW COMPONENT (Only for CBIC)
   ───────────────────────────────────────────── */
@@ -153,13 +158,18 @@ export default function RegulatoryUpdates() {
       setError(null);
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/dgft/notices?type=${activeTab}`,
+        `${API_BASE}/api/dgft/notices?type=${activeTab}`,
         { headers: { "Content-Type": "application/json" } }
       );
       const data = await res.json();
       if (!res.ok || !data.success)
         throw new Error(data.message || "Failed to fetch DGFT data");
-      setNotifications(data.data);
+
+      const filteredData = Array.isArray(data.data)
+        ? data.data.filter((item) => item.type === activeTab)
+        : [];
+
+      setNotifications(filteredData);
     } catch (err) {
       setError(err.message);
       setNotifications([]);
@@ -173,25 +183,18 @@ export default function RegulatoryUpdates() {
       setLoading(true);
       setError(null);
 
-      const apiTypeMap = {
-        acts: "acts",
-        rules: "rules",
-        regulations: "regulations",
-        "notifications-tariff": "notifications-tariff",
-        "notifications-antiDumping": "notifications-antiDumping",
-        "notifications-cvd": "notifications-cvd",
-        "notifications-nonTariff": "notifications-nonTariff",
-        "notifications-safeguards": "notifications-safeguards",
-        circulars: "circulars",
-        instructions: "instructions",
-        orders: "orders",
-        forms: "forms",
-        alliedActs: "alliedActs",
+      const notificationCategoryMap = {
+        "notifications-tariff": "tariff",
+        "notifications-antiDumping": "antiDumping",
+        "notifications-cvd": "cvd",
+        "notifications-nonTariff": "nonTariff",
+        "notifications-safeguards": "safeguards",
       };
 
-      const apiType = apiTypeMap[activeTab] || activeTab;
-      const url = `${process.env.REACT_APP_API_URL}/api/customs/${apiType}`;
-      // const url = `http://localhost:5000/api/customs/${apiType}`;
+      const notificationCategory = notificationCategoryMap[activeTab];
+      const url = notificationCategory
+        ? `${API_BASE}/api/customs/notifications/category/${notificationCategory}`
+        : `${API_BASE}/api/customs/${activeTab}`;
 
       const res = await fetch(url, {
         headers: { "Content-Type": "application/json" },
@@ -960,7 +963,7 @@ function CBICView({
     setLoadingHistory(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}api/customs/amendment-history?act=${encodeURIComponent(actName)}`
+        `${API_BASE}/api/customs/amendment-history?act=${encodeURIComponent(actName)}`
         // `http://localhost:5000/api/customs/amendment-history?act=${encodeURIComponent(actName)}`
       );
       const result = await response.json();

@@ -435,6 +435,46 @@ app.get("/api/customs/all", (req, res) => {
   }
 });
 
+// Diagnostics
+app.get("/api/customs/diagnostics", (req, res) => {
+  try {
+    const diagnostics = customsService.getCustomsDiagnostics();
+    res.json({ success: true, diagnostics });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get statistics
+app.get("/api/customs/stats", (req, res) => {
+  try {
+    const raw = customsService.getRawCustomsData();
+    const stats = {
+      acts: raw.data.acts.length,
+      rules: raw.data.rules.length,
+      regulations: raw.data.regulations.length,
+      forms: raw.data.forms.length,
+      circulars: raw.data.circulars.length,
+      instructions: raw.data.instructionsGuidelines.length,
+      orders: raw.data.orders.length,
+      alliedActs: raw.data.alliedActs.length,
+      notifications: {
+        antiDumping: raw.data.notifications.antiDumping.length,
+        cvd: raw.data.notifications.cvd.length,
+        nonTariff: raw.data.notifications.nonTariff.length,
+        safeguards: raw.data.notifications.safeguards.length,
+        tariff: raw.data.notifications.tariff.length
+      }
+    };
+    stats.notifications.total = Object.values(stats.notifications).reduce((a,b) => a + b, 0);
+    stats.total = Object.values(stats).filter(v => typeof v === 'number').reduce((a,b) => a + b, 0) + stats.notifications.total;
+
+    res.json({ success: true, lastUpdated: raw.lastUpdated, stats });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // Get by type (acts, rules, regulations, forms, notifications, circulars, instructions, orders)
 app.get("/api/customs/:type", (req, res) => {
   try {
@@ -499,36 +539,6 @@ app.get("/api/customs/notifications/category/:cat", (req, res) => {
   }
 });
 
-// Get statistics
-app.get("/api/customs/stats", (req, res) => {
-  try {
-    const raw = customsService.getRawCustomsData();
-    const stats = {
-      acts: raw.data.acts.length,
-      rules: raw.data.rules.length,
-      regulations: raw.data.regulations.length,
-      forms: raw.data.forms.length,
-      circulars: raw.data.circulars.length,
-      instructions: raw.data.instructionsGuidelines.length,
-      orders: raw.data.orders.length,
-      alliedActs: raw.data.alliedActs.length,
-      notifications: {
-        antiDumping: raw.data.notifications.antiDumping.length,
-        cvd: raw.data.notifications.cvd.length,
-        nonTariff: raw.data.notifications.nonTariff.length,
-        safeguards: raw.data.notifications.safeguards.length,
-        tariff: raw.data.notifications.tariff.length
-      }
-    };
-    stats.notifications.total = Object.values(stats.notifications).reduce((a,b) => a + b, 0);
-    stats.total = Object.values(stats).filter(v => typeof v === 'number').reduce((a,b) => a + b, 0) + stats.notifications.total;
-
-    res.json({ success: true, lastUpdated: raw.lastUpdated, stats });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
-
 // Download PDF
 app.get("/api/customs/pdf", (req, res) => {
   try {
@@ -561,6 +571,7 @@ app.get("/", (req, res) => {
       "GET /api/customs/:type/page/:page/:limit": "Paginated data",
       "GET /api/customs/search/:type?q=query": "Search",
       "GET /api/customs/notifications/category/:cat": "Notifications by category",
+      "GET /api/customs/diagnostics": "Folder and in-memory load diagnostics",
       "GET /api/customs/stats": "Statistics",
       "GET /api/customs/pdf?noticeNo=xxx": "Download PDF"
     }

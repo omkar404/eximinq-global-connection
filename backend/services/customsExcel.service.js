@@ -28,6 +28,23 @@ let customsData = {
 
 let lastUpdated = "";
 
+function getNotificationCountMap() {
+  return {
+    antiDumping: customsData.notifications.antiDumping.length,
+    cvd: customsData.notifications.cvd.length,
+    nonTariff: customsData.notifications.nonTariff.length,
+    safeguards: customsData.notifications.safeguards.length,
+    tariff: customsData.notifications.tariff.length
+  };
+}
+
+function getTotalNotificationCount() {
+  var notificationCounts = getNotificationCountMap();
+  return Object.values(notificationCounts).reduce(function(total, count) {
+    return total + count;
+  }, 0);
+}
+
 // Create folders if not exist
 if (!fs.existsSync(CUSTOMS_BASE_FOLDER)) {
   fs.mkdirSync(CUSTOMS_BASE_FOLDER, { recursive: true });
@@ -694,6 +711,8 @@ function processAllCustomsData() {
     if (fs.existsSync(actsPath)) {
       customsData.acts = processActsFolder(actsPath);
       console.log("✅ Acts loaded: " + customsData.acts.length + " records\n");
+    } else {
+      console.log("Acts folder not found at:", actsPath);
     }
     
     // Process Rules
@@ -701,6 +720,8 @@ function processAllCustomsData() {
     if (fs.existsSync(rulesPath)) {
       customsData.rules = processRulesFolder(rulesPath);
       console.log("✅ Rules loaded: " + customsData.rules.length + " records\n");
+    } else {
+      console.log("Rules folder not found at:", rulesPath);
     }
     
     // Process Regulations
@@ -708,6 +729,8 @@ function processAllCustomsData() {
     if (fs.existsSync(regulationsPath)) {
       customsData.regulations = processRegulationsFolder(regulationsPath);
       console.log("✅ Regulations loaded: " + customsData.regulations.length + " records\n");
+    } else {
+      console.log("Regulations folder not found at:", regulationsPath);
     }
     
     // Process Forms
@@ -715,6 +738,8 @@ function processAllCustomsData() {
     if (fs.existsSync(formsPath)) {
       customsData.forms = processFormsFolder(formsPath);
       console.log("✅ Forms loaded: " + customsData.forms.length + " records\n");
+    } else {
+      console.log("Forms folder not found at:", formsPath);
     }
     
     // Process Notifications
@@ -722,6 +747,8 @@ function processAllCustomsData() {
     if (fs.existsSync(notificationsPath)) {
       customsData.notifications = processNotificationsFolder(notificationsPath);
       console.log("✅ Notifications loaded\n");
+    } else {
+      console.log("Notifications folder not found at:", notificationsPath);
     }
     
     // Process Circulars
@@ -729,6 +756,8 @@ function processAllCustomsData() {
     if (fs.existsSync(circularsPath)) {
       customsData.circulars = processCircularsFolder(circularsPath);
       console.log("✅ Circulars loaded: " + customsData.circulars.length + " records\n");
+    } else {
+      console.log("Circulars folder not found at:", circularsPath);
     }
     
     // Process Instructions/Guidelines - CORRECTED PATH
@@ -745,6 +774,8 @@ function processAllCustomsData() {
     if (fs.existsSync(ordersPath)) {
       customsData.orders = processOrdersFolder(ordersPath);
       console.log("✅ Orders loaded: " + customsData.orders.length + " records\n");
+    } else {
+      console.log("Orders folder not found at:", ordersPath);
     }
     
     // Process Allied Acts
@@ -752,6 +783,8 @@ function processAllCustomsData() {
     if (fs.existsSync(alliedActsPath)) {
       customsData.alliedActs = processAlliedActsFolder(alliedActsPath);
       console.log("✅ Allied Acts loaded: " + customsData.alliedActs.length + " records\n");
+    } else {
+      console.log("Allied Acts folder not found at:", alliedActsPath);
     }
     
     lastUpdated = new Date().toISOString();
@@ -766,12 +799,7 @@ function processAllCustomsData() {
     console.log("  Orders: " + customsData.orders.length);
     console.log("  Allied Acts: " + customsData.alliedActs.length);
     
-    var totalNotifications = 
-      customsData.notifications.antiDumping.length +
-      customsData.notifications.cvd.length +
-      customsData.notifications.nonTariff.length +
-      customsData.notifications.safeguards.length +
-      customsData.notifications.tariff.length;
+    var totalNotifications = getTotalNotificationCount();
     console.log("  Notifications: " + totalNotifications);
     console.log("  TOTAL RECORDS: " + (
       customsData.acts.length + customsData.rules.length + 
@@ -884,6 +912,58 @@ function getNotificationsByCategory(category) {
   return categoryMap[category] || [];
 }
 
+function getCustomsDiagnostics() {
+  var notificationCounts = getNotificationCountMap();
+  var totalNotifications = getTotalNotificationCount();
+  var folderMap = {
+    base: CUSTOMS_BASE_FOLDER,
+    pdf: PDF_FOLDER,
+    acts: path.join(CUSTOMS_BASE_FOLDER, "acts"),
+    rules: path.join(CUSTOMS_BASE_FOLDER, "rules"),
+    regulations: path.join(CUSTOMS_BASE_FOLDER, "regulations"),
+    forms: path.join(CUSTOMS_BASE_FOLDER, "forms"),
+    notifications: path.join(CUSTOMS_BASE_FOLDER, "notifications"),
+    circulars: path.join(CUSTOMS_BASE_FOLDER, "circulars"),
+    instructionsGuidelines: path.join(CUSTOMS_BASE_FOLDER, "Instruction and Guidelines"),
+    orders: path.join(CUSTOMS_BASE_FOLDER, "orders"),
+    alliedActs: path.join(CUSTOMS_BASE_FOLDER, "allied_acts")
+  };
+
+  return {
+    lastUpdated: lastUpdated,
+    paths: folderMap,
+    folders: Object.fromEntries(
+      Object.entries(folderMap).map(function(entry) {
+        return [entry[0], fs.existsSync(entry[1])];
+      })
+    ),
+    counts: {
+      acts: customsData.acts.length,
+      rules: customsData.rules.length,
+      regulations: customsData.regulations.length,
+      forms: customsData.forms.length,
+      circulars: customsData.circulars.length,
+      instructions: customsData.instructionsGuidelines.length,
+      orders: customsData.orders.length,
+      alliedActs: customsData.alliedActs.length,
+      notifications: notificationCounts
+    },
+    totals: {
+      notifications: totalNotifications,
+      records:
+        customsData.acts.length +
+        customsData.rules.length +
+        customsData.regulations.length +
+        customsData.forms.length +
+        customsData.circulars.length +
+        customsData.instructionsGuidelines.length +
+        customsData.orders.length +
+        customsData.alliedActs.length +
+        totalNotifications
+    }
+  };
+}
+
 // Export all functions
 module.exports = {
   startWatcher: startWatcher,
@@ -891,6 +971,7 @@ module.exports = {
   getRawCustomsData: getRawCustomsData,
   getCustomsDataByType: getCustomsDataByType,
   getNotificationsByCategory: getNotificationsByCategory,
+  getCustomsDiagnostics: getCustomsDiagnostics,
   findPDFFile: findPDFFile,
   processAllCustomsData: processAllCustomsData
 };
