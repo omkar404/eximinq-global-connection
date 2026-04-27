@@ -208,7 +208,7 @@ const ContactInfoCards = () => {
             <div className="h-full bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 min-h-[500px] relative group">
 
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.870634288077!2d72.8675!3d19.1136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzQ5LjAiTiA3MsKwNTInMDMuMCJF!5e0!3m2!1sen!2sin!4v1635760000000!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6822.328794049008!2d72.84620049357912!3d19.1313594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7cecfe0f0fd%3A0x82655eeb16d16558!2sHubtown%20Viva!5e1!3m2!1sen!2sin!4v1776704877694!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{
@@ -227,7 +227,10 @@ const ContactInfoCards = () => {
                     Location Detected
                   </p>
                   <p className="text-sm font-semibold text-white">
-                    Navketan Industrial Estate, Mumbai
+                    EXIMINQ, 1010, 
+                    Hubtown Viva,
+                    Near Mogra Metro Station, 
+                    Jogeshwari East, Mumbai, Maharashtra 400060
                   </p>
                 </div>
 

@@ -60,7 +60,7 @@ const CloudDeskDefenceEXIM = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/warehouse-license"
+          content="https://eximinq.in/services/defence-exim-license"
         />
         <meta property="og:type" content="website" />
 

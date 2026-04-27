@@ -1194,7 +1194,7 @@ export default function StrategicSolutions() {
                             </div>
 
                             <div className="text-xs text-slate-500">
-                                <a href="/services/dpd-registration/ " target="_blank" rel="noopener noreferrer">
+                                <a href="/services/dpd-registration/" target="_blank" rel="noopener noreferrer">
                                     Direct Port Delivery
                                 </a>
                             </div>

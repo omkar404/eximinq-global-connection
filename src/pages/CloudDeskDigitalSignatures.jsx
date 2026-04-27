@@ -50,12 +50,12 @@ const CloudDeskDigitalSignatures = () => {
 
   <link
     rel="canonical"
-    href="https://eximinq.in/services/digital-signature"
+    href="https://eximinq.in/services/dsc-services"
   />
 
   <meta property="og:title" content="Class 3 DSC for DGFT & ICEGATE" />
   <meta property="og:description" content="Secure Class 3 Digital Signature for exporters, customs filings and e-tenders." />
-  <meta property="og:url" content="https://eximinq.in/services/digital-signature" />
+  <meta property="og:url" content="https://eximinq.in/services/dsc-services" />
   <meta property="og:type" content="article" />
 
   <script type="application/ld+json">
@@ -119,7 +119,7 @@ const CloudDeskDigitalSignatures = () => {
               "@type": "ListItem",
               "position": 3,
               "name": "Digital Signature",
-              "item": "https://eximinq.in/services/digital-signature"
+              "item": "https://eximinq.in/services/dsc-services"
             }
           ]
         }

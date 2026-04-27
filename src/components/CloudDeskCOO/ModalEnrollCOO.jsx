@@ -16,6 +16,11 @@ const NON_PREFERENTIAL_OPTIONS = [
   "Middle East Export Documentation",
 ];
 
+const TYPE_MAP = {
+  PREFERENTIAL: "PREFERENTIAL_COO",
+  NON_PREFERENTIAL: "NON_PREFERENTIAL_COO",
+};
+
 const initialFormState = {
   name: "",
   mobile: "",
@@ -28,7 +33,7 @@ const initialFormState = {
 }
 
 const ModalEnrollCOO = ({ show, onClose, type }) => {
-const [form, setForm] = useState(initialFormState);
+  const [form, setForm] = useState(initialFormState);
 
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -51,6 +56,8 @@ const [form, setForm] = useState(initialFormState);
     if (!form.role) e.role = "Role required";
 
     if (type === "HERO" && !form.flow) e.flow = "Please select a flow";
+
+    if (type === 'CTA' && !form.flow) e.flow = "Please select a flow";
 
     if (
       (type === "PREFERENTIAL" || type === "NON_PREFERENTIAL") &&
@@ -78,12 +85,16 @@ const [form, setForm] = useState(initialFormState);
         email: form.email,
         role: form.role,
         partner: form.partner,
-        type,
+        // type,
+        type: TYPE_MAP[type] || type, 
         flow: form.flow || undefined,
         cooType: form.cooType || undefined,
       };
 
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/main-coo-enroll`, {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/main-coo-enroll`, 
+        // 'http://localhost:5000/api/main-coo-enroll',
+        {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -104,9 +115,9 @@ const [form, setForm] = useState(initialFormState);
   };
 
   const handleClose = () => {
-  setForm(initialFormState);
-  onClose();
-};
+    setForm(initialFormState);
+    onClose();
+  };
 
 
   return (
@@ -134,175 +145,195 @@ const [form, setForm] = useState(initialFormState);
 
         {/* Body */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
-<form onSubmit={handleSubmit} className="space-y-5">
-  {/* Name + Mobile */}
-  <div className="grid grid-cols-2 gap-4">
-    <div>
-      <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-        Name
-      </label>
-      <input
-        type="text"
-        name="name"
-        value={form.name}
-        onChange={handleChange}
-        placeholder="Your Name"
-        className="w-full p-3 rounded-lg border border-gray-300"
-      />
-    </div>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name + Mobile */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  className="w-full p-3 rounded-lg border border-gray-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-        Mobile No
-      </label>
-      <input
-        type="tel"
-        name="mobile"
-        value={form.mobile}
-        onChange={handleChange}
-        placeholder="+91 XXXXX XXXXX"
-        className="w-full p-3 rounded-lg border border-gray-300"
-      />
-    </div>
-  </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Mobile No
+                </label>
+                <input
+                  type="tel"
+                  name="mobile"
+                  value={form.mobile}
+                  onChange={handleChange}
+                  placeholder="+91 XXXXX XXXXX"
+                  className="w-full p-3 rounded-lg border border-gray-300"
+                />
+              </div>
+            </div>
 
-  {/* Entity */}
-  <div>
-    <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-      Entity Name
-    </label>
-    <input
-      type="text"
-      name="entity"
-      value={form.entity}
-      onChange={handleChange}
-      placeholder="Company / Firm Name"
-      className="w-full p-3 rounded-lg border border-gray-300"
-    />
-  </div>
+            {/* Entity */}
+            <div>
+              <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                Entity Name
+              </label>
+              <input
+                type="text"
+                name="entity"
+                value={form.entity}
+                onChange={handleChange}
+                placeholder="Company / Firm Name"
+                className="w-full p-3 rounded-lg border border-gray-300"
+              />
+            </div>
 
-  {/* Email */}
-  <div>
-    <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-      Email ID
-    </label>
-    <input
-      type="email"
-      name="email"
-      value={form.email}
-      onChange={handleChange}
-      placeholder="official@domain.com"
-      className="w-full p-3 rounded-lg border border-gray-300"
-    />
-  </div>
+            {/* Email */}
+            <div>
+              <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                Email ID
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="official@domain.com"
+                className="w-full p-3 rounded-lg border border-gray-300"
+              />
+            </div>
 
-  {/* HERO FLOW */}
-  {type === "HERO" && (
-    <select
-      name="flow"
-      value={form.flow}
-      onChange={handleChange}
-      className="w-full p-3 border rounded-lg"
-    >
-      <option value="">Select Certificate Type</option>
-      <option value="preferential">
-        Apply Preferential Certificate of Origin
-      </option>
-      <option value="non_preferential">
-        Apply Non-Preferential Certificate of Origin
-      </option>
-    </select>
-  )}
+            {/* HERO FLOW */}
+            {type === "HERO" && (
+              <select
+                name="flow"
+                value={form.flow}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+              >
+                <option value="">Select Certificate Type</option>
+                <option value="PREFERENTIAL_COO">
+                  Apply Preferential Certificate of Origin
+                </option>
+                <option value="NON_PREFERENTIAL_COO">
+                  Apply Non-Preferential Certificate of Origin
+                </option>
+              </select>
+            )}
 
-  {/* Preferential */}
-  {type === "PREFERENTIAL" && (
-    <select
-      name="cooType"
-      value={form.cooType}
-      onChange={handleChange}
-      className="w-full p-3 border rounded-lg"
-    >
-      <option value="">Select Preferential COO Type</option>
-      {PREFERENTIAL_OPTIONS.map((opt) => (
-        <option key={opt} value={opt}>
-          {opt}
-        </option>
-      ))}
-    </select>
-  )}
+            {type === "CTA" && (
+              <select
+                name="flow"
+                value={form.flow}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+              >
+                <option value="">Select Certificate Type</option>
+                <option value="PREFERENTIAL_COO">
+                  Apply Preferential Certificate of Origin
+                </option>
+                <option value="NON_PREFERENTIAL_COO">
+                  Apply Non-Preferential Certificate of Origin
+                </option>
+              </select>
+            )}
 
-  {/* Non-Preferential */}
-  {type === "NON_PREFERENTIAL" && (
-    <select
-      name="cooType"
-      value={form.cooType}
-      onChange={handleChange}
-      className="w-full p-3 border rounded-lg"
-    >
-      <option value="">Select Non-Preferential COO Type</option>
-      {NON_PREFERENTIAL_OPTIONS.map((opt) => (
-        <option key={opt} value={opt}>
-          {opt}
-        </option>
-      ))}
-    </select>
-  )}
 
-  {/* Role */}
-  <div>
-    <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
-      I am a:
-    </label>
 
-    <div className="grid grid-cols-2 gap-3">
-      {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map((role) => (
-        <label
-          key={role}
-          className="flex items-center p-3 border rounded-lg cursor-pointer"
-        >
-          <input
-            type="radio"
-            name="role"
-            value={role}
-            checked={form.role === role}
-            onChange={handleChange}
-            className="w-4 h-4"
-          />
-          <span className="ml-2 text-sm">{role}</span>
-        </label>
-      ))}
-    </div>
-  </div>
 
-  {/* Partner */}
-  <div className="bg-teal-50 p-4 rounded-lg border">
-    <label className="flex items-start cursor-pointer">
-      <input
-        type="checkbox"
-        name="partner"
-        checked={form.partner}
-        onChange={handleChange}
-        className="mt-1 w-5 h-5"
-      />
-      <span className="ml-3 text-sm">
-        I am interested in being a{" "}
-        <strong className="text-teal-700">
-          Partner with EXIMINQ CLOUDDESK
-        </strong>
-      </span>
-    </label>
-  </div>
+            {/* Preferential */}
+            {type === "PREFERENTIAL" && (
+              <select
+                name="cooType"
+                value={form.cooType}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+              >
+                <option value="">Select Preferential COO Type</option>
+                {PREFERENTIAL_OPTIONS.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
+            )}
 
-  {/* Submit */}
-  <button
-    type="submit"
-    disabled={loading}
-    className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 
+            {/* Non-Preferential */}
+            {type === "NON_PREFERENTIAL" && (
+              <select
+                name="cooType"
+                value={form.cooType}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+              >
+                <option value="">Select Non-Preferential COO Type</option>
+                {NON_PREFERENTIAL_OPTIONS.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            {/* Role */}
+            <div>
+              <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
+                I am a:
+              </label>
+
+              <div className="grid grid-cols-2 gap-3">
+                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map((role) => (
+                  <label
+                    key={role}
+                    className="flex items-center p-3 border rounded-lg cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      name="role"
+                      value={role}
+                      checked={form.role === role}
+                      onChange={handleChange}
+                      className="w-4 h-4"
+                    />
+                    <span className="ml-2 text-sm">{role}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Partner */}
+            <div className="bg-teal-50 p-4 rounded-lg border">
+              <label className="flex items-start cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="partner"
+                  checked={form.partner}
+                  onChange={handleChange}
+                  className="mt-1 w-5 h-5"
+                />
+                <span className="ml-3 text-sm">
+                  I am interested in being a{" "}
+                  <strong className="text-teal-700">
+                    Partner with EXIMINQ CLOUDDESK
+                  </strong>
+                </span>
+              </label>
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 
                text-white font-bold rounded-xl"
-  >
-    {loading ? "Submitting..." : "Submit Enrollment"}
-  </button>
-</form>
+            >
+              {loading ? "Submitting..." : "Submit Enrollment"}
+            </button>
+          </form>
 
         </div>
       </div>

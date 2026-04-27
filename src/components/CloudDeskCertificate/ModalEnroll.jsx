@@ -79,8 +79,8 @@ export const ModalEnroll = ({ show, onClose, type }) => {
       };
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/coo-enroll`,
-        'http://localhost:5000/api/coo-enroll',
+        `${process.env.REACT_APP_API_URL}/api/coo-enroll`,
+        // 'http://localhost:5000/api/coo-enroll',
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

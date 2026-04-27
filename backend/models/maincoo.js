@@ -45,6 +45,7 @@ const MainCooSchema = new mongoose.Schema(
         "ENROLL",
         "certificate_of_origin_enroll",
         "HERO",
+        "CTA",
         "PREFERENTIAL_COO",
         "NON_PREFERENTIAL_COO",
         "CTA",

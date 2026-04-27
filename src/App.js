@@ -14,7 +14,6 @@ import CloudDeskStartupLanding from "./pages/CloudDeskStartupLanding";
 import PageNotFound from "./pages/PageNotFound";
 import CloudDeskAEOLanding from "./pages/CloudDeskAEOLanding"
 import CloudDeskHSN from "./pages/CloudDeskHSN";
-import DutyCalculator from "./components/CloudDeskDutyCalculator/DutyCalculator";
 import CloudDeskDutyCalculator from "./pages/CloudDeskDutyCalculator";
 import CloudDeskIceManagement from "./pages/CloudDeskIceManagement"
 import CloudDeskICERegistration from "./pages/CloudDeskIceRegistration"
@@ -117,7 +116,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <AnalyticsTracker /> */}
-      {/* <SEOManager /> */}
+      <SEOManager />
       <Routes>
         {/* Charates Routes */}
         <Route path="/charates" element={<Home />} />
@@ -305,7 +304,7 @@ function App() {
         <Route path="/services/industrial-license" element={<CloudDeskIndustrial />} />
 
         {/* Direct Port Delivery (DPD) Registration */}
-        <Route path="/services/dpd-registration/ " element={<CloudDeskDPD />} />
+        <Route path="/services/dpd-registration/" element={<CloudDeskDPD />} />
 
         {/* Factory License */}
         <Route path="/services/factory-license/" element={<CloudDeskFactory />} />
