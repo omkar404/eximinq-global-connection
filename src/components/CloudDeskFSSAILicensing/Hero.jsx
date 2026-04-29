@@ -1,6 +1,6 @@
 import QuickForm from "./QuickForm";
 
-const Hero = () => {
+const Hero = ({ setShowEnrollModal }) => {
   return (
     <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">

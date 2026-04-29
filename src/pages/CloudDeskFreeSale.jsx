@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskFreeSale/TopBar";
+import TopBar from "../components/CloudDeskFreeSale/TopBar";
 import Navbar from "../components/CloudDeskFreeSale/Navbar";
 import Hero from "../components/CloudDeskFreeSale/Hero";
 import Fees from "../components/CloudDeskFreeSale/Fees";
@@ -31,7 +31,18 @@ import { MainNavbar } from "../components/CloudDeskFreeSale/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskFreeSale/ModalEnroll";
 
 const CloudDeskFreeSale = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+        // TODO → send API call
+        // axios.post("/api/enroll", formData)
+    alert("Form submitted - check console for data.")
+  }
   return (
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
@@ -41,8 +52,10 @@ const CloudDeskFreeSale = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -349,7 +362,7 @@ const CloudDeskFreeSale = () => {
   </div>
 </section>
 
-<Fees/>
+<Fees setShowEnrollModal={setShowEnrollModal}/>
 
 {/* --- WHY CLOUDDESK SECTION (FSC) --- */}
 <section className="py-20 bg-white">

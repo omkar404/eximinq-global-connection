@@ -18,12 +18,12 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    DFIA_Consultancy: {
-      service: "DFIA Consultancy",
+    Appoint_Indian_Rep: {
+      service: "Appoint Indian Rep",
     },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
-    // },
+    Buy_Credits: {
+      service: "Buy Credits"
+    },
   };
 
   const serviceConfig = SERVICE_MAP[type];
@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/dfia-license`,
-        // "http://localhost:5000/api/dfia-license",
+        `${process.env.REACT_APP_API_URL}/api/epr-authorization`,
+        // "http://localhost:5000/api/epr-authorization",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

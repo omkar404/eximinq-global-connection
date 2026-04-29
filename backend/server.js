@@ -28,6 +28,13 @@ const igstrefundRoutes = require("./routes/igstrefundRoutes.routes");
 const dutydrawbackRoutes = require("./routes/dutydrawbackRoutes.routes");
 const dscServiceRoutes = require("./routes/dscServicesRoutes.routes");
 const halalCertificationRoutes = require("./routes/halalCertificationRoutes.routes");
+const fssailicensingRoutes = require("./routes/fssailicensingRoutes.routes");
+const eprauthorizationRoutes = require("./routes/eprauthorizationRoutes.routes");
+const dfialicenseRoutes = require("./routes/dfialicenseRoutes.routes");
+const freesaleCertificateRoutes = require("./routes/freesaleCertificateRoutes.routes");
+const svbRegistrationRoutes = require("./routes/svbRegistrationRoutes.routes");
+
+
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
@@ -640,6 +647,16 @@ app.use("/api/duty-drawback", dutydrawbackRoutes);
 app.use("/api/dsc-services", dscServiceRoutes);
 
 app.use("/api/halal-certification", halalCertificationRoutes);
+
+app.use("/api/fssai-licensing", fssailicensingRoutes);
+
+app.use("/api/epr-authorization", eprauthorizationRoutes);
+
+app.use("/api/dfia-license", dfialicenseRoutes);
+
+app.use("/api/free-sale-certificate", freesaleCertificateRoutes);
+
+app.use("/api/svb-registration", svbRegistrationRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 

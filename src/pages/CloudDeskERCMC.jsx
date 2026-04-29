@@ -934,6 +934,7 @@ const CloudDeskERCMC = () => {
             </div>
           </div>
         </section>
+        
         {/* Dynamic Fees Section */}
         <Fees setShowEnrollModal={setShowEnrollModal} />
 
