@@ -33,7 +33,10 @@ const eprauthorizationRoutes = require("./routes/eprauthorizationRoutes.routes")
 const dfialicenseRoutes = require("./routes/dfialicenseRoutes.routes");
 const freesaleCertificateRoutes = require("./routes/freesaleCertificateRoutes.routes");
 const svbRegistrationRoutes = require("./routes/svbRegistrationRoutes.routes");
-
+const factoryStuffingRoutes = require("./routes/factoryStuffingRoutes.routes");
+const warehouseLicenseRoutes = require("./routes/warehouseLicenseRoutes.routes");
+const interestequalisationSchemeRoutes = require("./routes/interestequalisationSchemeRoutes.routes");
+const edpmsEbrcRoutes = require("./routes/edpmsEbrcRoutes.routes");
 
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -657,6 +660,14 @@ app.use("/api/dfia-license", dfialicenseRoutes);
 app.use("/api/free-sale-certificate", freesaleCertificateRoutes);
 
 app.use("/api/svb-registration", svbRegistrationRoutes);
+
+app.use("/api/factory-stuffing",factoryStuffingRoutes);
+
+app.use("/api/warehouse-license",warehouseLicenseRoutes);
+
+app.use("/api/interest-equalisation-scheme",interestequalisationSchemeRoutes);
+
+app.use("/api/edpms-ebrc",edpmsEbrcRoutes );
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 

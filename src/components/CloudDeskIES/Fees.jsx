@@ -39,12 +39,23 @@ const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
             </ul>
 
             {/* CTA */}
-            <a
+            {/* <a
               href="#Home"
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Start Recovery
-            </a>
+            </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "IES_Consultancy",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Start Application
+          </button>
           </div>
         </div>
       </div>

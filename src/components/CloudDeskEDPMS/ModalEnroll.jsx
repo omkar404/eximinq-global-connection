@@ -18,8 +18,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    IES_Consultancy: {
-      service: "IES Consultancy",
+    EDPMS_e_BRC_Support: {
+      service: "EDPMS & e-BRC Support",
     },
     // Central_Annual_Returns: {
     //   service: "Central Annual Returns",
@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/interest-equalisation-scheme`,
-        // "http://localhost:5000/api/interest-equalisation-scheme",
+        `${process.env.REACT_APP_API_URL}/api/edpms-ebrc`,
+        // "http://localhost:5000/api/edpms-ebrc",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
