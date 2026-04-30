@@ -39,9 +39,9 @@ const interestequalisationSchemeRoutes = require("./routes/interestequalisationS
 const edpmsEbrcRoutes = require("./routes/edpmsEbrcRoutes.routes");
 const factoryLicenseRoutes = require("./routes/factoryLicenseRoutes.routes");
 const industriaLlicenseRoutes = require("./routes/industriaLlicenseRoutes.routes");
-const iemRegistrationRoutes =require("./routes/iemRegistrationRoutes.routes");
-
-
+const iemRegistrationRoutes = require("./routes/iemRegistrationRoutes.routes");
+const defenceeximLicenseRoutes = require("./routes/defenceeximLicenseRoutes.routes");
+const customsAdjudicationRoutes = require("./routes/customsAdjudicationRoutes.routes");
 
 
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
@@ -680,6 +680,11 @@ app.use("/api/factory-license",factoryLicenseRoutes);
 app.use("/api/industrial-license",industriaLlicenseRoutes);
 
 app.use("/api/iem-registration",iemRegistrationRoutes);
+
+app.use("/api/defence-exim-license",defenceeximLicenseRoutes);
+
+app.use("/api/customs-adjudication",customsAdjudicationRoutes);
+
 
 
 

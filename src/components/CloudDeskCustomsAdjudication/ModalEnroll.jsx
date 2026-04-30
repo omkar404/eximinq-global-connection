@@ -18,12 +18,12 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    Defence_EXIM_Support: {
-      service: "Defence EXIM Support",
+    Drafting_Filing: {
+      service: "Drafting & Filing",
     },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
-    // },
+    Personal_Representation: {
+      service: "Personal Representation",
+    },
   };
 
   const serviceConfig = SERVICE_MAP[type];
@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/defence-exim-license`,
-        // "http://localhost:5000/api/defence-exim-license",
+        `${process.env.REACT_APP_API_URL}/api/customs-adjudication`,
+        // "http://localhost:5000/api/customs-adjudication",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

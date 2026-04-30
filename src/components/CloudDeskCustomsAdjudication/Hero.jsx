@@ -23,7 +23,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
-              href="#contact"
+              href="#pricing"
               className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
               Submit Case Details
