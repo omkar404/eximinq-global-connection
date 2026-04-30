@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskFactory/TopBar";
+import TopBar from "../components/CloudDeskFactory/TopBar";
 import Navbar from "../components/CloudDeskFactory/Navbar";
 import Hero from "../components/CloudDeskFactory/Hero";
 import Fees from "../components/CloudDeskFactory/Fees";
@@ -34,8 +34,16 @@ import { MainNavbar } from "../components/CloudDeskFactory/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskFactory/ModalEnroll";
 
 const CloudDeskFactory = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
   
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 <>
 <Helmet>
@@ -179,8 +187,10 @@ const CloudDeskFactory = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -490,7 +500,7 @@ const CloudDeskFactory = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 

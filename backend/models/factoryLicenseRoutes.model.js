@@ -1,18 +1,18 @@
 const mongoose = require("mongoose"); // ✅ This line was missing
 
-const edpmsEbrcRoutesSchema = new mongoose.Schema(
+const factoryLicenseRoutesSchema = new mongoose.Schema(
   {
     service: {
       type: String,
       trim: true,
-      default: "EDPMS  Registration",
+      default: "Factory  Registration",
     },
-    iec: {
+    workers: {
       type: String,
       trim: true,
       default: null,
     },
-    bank: {
+    state: {
       type: String,
       trim: true,
       default: null,
@@ -71,6 +71,6 @@ const edpmsEbrcRoutesSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model(
-  "edpmsEbrcRoutes",
-  edpmsEbrcRoutesSchema
+  "factoryLicenseRoutes",
+  factoryLicenseRoutesSchema
 );

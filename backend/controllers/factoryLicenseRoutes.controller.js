@@ -1,4 +1,4 @@
-const edpmsEbrcRoutes = require("../models/edpmsEbrcRoutes.model");
+const factoryLicenseRoutes = require("../models/factoryLicenseRoutes.model");
 const nodemailer = require("nodemailer");
 
 /* SMTP TRANSPORTER */
@@ -26,24 +26,24 @@ async function sendEmail(record) {
     type,
     category,
     issue,
-    iec,
-    bank,
+    workers,
+    state,
   } = record;
 
-  const serviceDisplay = service || "EDPMS Registration";
+  const serviceDisplay = service || "Factory Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to: "crm@eximinq.com, omkarmhetar100@gmail.com,yadavsheshnath236@gmail.com",
-    subject: `EDPMS Registration — ${serviceDisplay}`,
+    to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
+    subject: `Factory Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>EDPMS Registration</h2>
+        <h2>Factory Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
-          ${iec ? `<tr><td><b>Product Type</b></td><td>${iec}</td></tr>` : ""}
-          ${bank ? `<tr><td><b>Port of Import</b></td><td>${bank}</td></tr>` : ""}
+          ${workers ? `<tr><td><b>Product Type</b></td><td>${workers}</td></tr>` : ""}
+          ${state ? `<tr><td><b>Port of Import</b></td><td>${state}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -62,7 +62,7 @@ async function sendEmail(record) {
 }
 
 /* CREATE API */
-exports.createedpmsEbrcRoutes = async (req, res) => {
+exports.createfactoryLicenseRoutes = async (req, res) => {
   try {
     console.log("📥 Incoming:", req.body);
 
@@ -77,8 +77,8 @@ exports.createedpmsEbrcRoutes = async (req, res) => {
       type,
       category,
       issue,
-      iec, // ✅ camelCase
-      bank, // ✅ camelCase
+      workers, // ✅ camelCase
+      state, // ✅ camelCase
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -91,10 +91,10 @@ exports.createedpmsEbrcRoutes = async (req, res) => {
     }
 
     const recordData = {
-      service: service || "EDPMS Registration",
+      service: service || "Factory Registration",
       mobile: mobile.trim(),
-      iec: iec ? iec.trim() : null, // ✅ use the correct variable
-      bank: bank ? bank.trim() : null, // ✅ use correct variable
+      workers: workers ? workers.trim() : null, // ✅ use the correct variable
+      state: state ? state.trim() : null, // ✅ use correct variable
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
@@ -107,7 +107,7 @@ exports.createedpmsEbrcRoutes = async (req, res) => {
 
     console.log("📦 Saving:", recordData);
 
-    const record = await edpmsEbrcRoutes.create(recordData);
+    const record = await factoryLicenseRoutes.create(recordData);
     console.log("✅ Saved:", record._id);
 
     sendEmail(record).catch((err) =>
@@ -130,9 +130,9 @@ exports.createedpmsEbrcRoutes = async (req, res) => {
 };
 
 /* GET ALL */
-exports.edpmsEbrcRoutes = async (req, res) => {
+exports.factoryLicenseRoutes = async (req, res) => {
   try {
-    const data = await edpmsEbrcRoutes.find().sort({ createdAt: -1 });
+    const data = await factoryLicenseRoutes.find().sort({ createdAt: -1 });
     res.json({ success: true, data });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -140,9 +140,9 @@ exports.edpmsEbrcRoutes = async (req, res) => {
 };
 
 /* GET BY ID */
-exports.edpmsEbrcRoutesById = async (req, res) => {
+exports.factoryLicenseRoutesById = async (req, res) => {
   try {
-    const data = await edpmsEbrcRoutes.findById(req.params.id);
+    const data = await factoryLicenseRoutess.findById(req.params.id);
     if (!data) {
       return res.status(404).json({ success: false, message: "Not found" });
     }
