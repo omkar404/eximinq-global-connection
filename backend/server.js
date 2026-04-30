@@ -38,7 +38,7 @@ const warehouseLicenseRoutes = require("./routes/warehouseLicenseRoutes.routes")
 const interestequalisationSchemeRoutes = require("./routes/interestequalisationSchemeRoutes.routes");
 const edpmsEbrcRoutes = require("./routes/edpmsEbrcRoutes.routes");
 const factoryLicenseRoutes = require("./routes/factoryLicenseRoutes.routes");
-
+const industriaLlicenseRoutes = require("./routes/industriaLlicenseRoutes.routes");
 
 
 
@@ -676,6 +676,8 @@ app.use("/api/interest-equalisation-scheme",interestequalisationSchemeRoutes);
 app.use("/api/edpms-ebrc",edpmsEbrcRoutes );
 
 app.use("/api/factory-license",factoryLicenseRoutes);
+
+app.use("/api/industrial-license",industriaLlicenseRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 
