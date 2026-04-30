@@ -1,5 +1,6 @@
-// import TopBar from "../components/CloudDeskLegalMetrology/TopBar";
+import TopBar from "../components/CloudDeskLegalMetrology/TopBar";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskLegalMetrology/Navbar";
 import Hero from "../components/CloudDeskLegalMetrology/Hero";
 import Fees from "../components/CloudDeskLegalMetrology/Fees";
@@ -24,8 +25,22 @@ import {
   Stamp,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskLegalMetrology/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskLegalMetrology/ModalEnroll";
 
 const CloudDeskLegalMetrology = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 
 <>
@@ -194,9 +209,16 @@ const CloudDeskLegalMetrology = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal}/>
+      <Navbar setShowEnrollModal={setShowEnrollModal}/>
+      <Hero setShowEnrollModal={setShowEnrollModal}/>
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -450,7 +472,7 @@ const CloudDeskLegalMetrology = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 {/* --- WHY CLOUDDESK SECTION (LMPC) --- */}
 <section className="py-20 bg-white">

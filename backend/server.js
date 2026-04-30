@@ -42,10 +42,13 @@ const industriaLlicenseRoutes = require("./routes/industriaLlicenseRoutes.routes
 const iemRegistrationRoutes = require("./routes/iemRegistrationRoutes.routes");
 const defenceeximLicenseRoutes = require("./routes/defenceeximLicenseRoutes.routes");
 const customsAdjudicationRoutes = require("./routes/customsAdjudicationRoutes.routes");
+const lmpcRegistrationRoutes = require("./routes/lmpcRegistrationRoutes.routes");
 
-
+{/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
+
+{/* ----------Home page inner page ---------------------- */}
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
 const engineeringindustryRoutes = require("./routes/engineeringindustryRoutes.routes"); // ← ADD THIS
 const electronicsindustryRoutes = require("./routes/electronicsindustryRoutes.routes");
@@ -685,7 +688,7 @@ app.use("/api/defence-exim-license",defenceeximLicenseRoutes);
 
 app.use("/api/customs-adjudication",customsAdjudicationRoutes);
 
-
+app.use("/api/lmpc-registration",lmpcRegistrationRoutes);
 
 
 

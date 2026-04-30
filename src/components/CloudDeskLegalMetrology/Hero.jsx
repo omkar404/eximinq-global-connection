@@ -17,7 +17,7 @@ const Hero = () => {
                     Ensure your pre-packaged goods comply with Rule 27 of the Legal Metrology Act. Avoid customs detention and market seizures with correct MRP labeling.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#process" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Apply for LMPC
                     </a>
                     <a href="#declarations" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
