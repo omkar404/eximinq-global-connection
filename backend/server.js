@@ -39,7 +39,7 @@ const interestequalisationSchemeRoutes = require("./routes/interestequalisationS
 const edpmsEbrcRoutes = require("./routes/edpmsEbrcRoutes.routes");
 const factoryLicenseRoutes = require("./routes/factoryLicenseRoutes.routes");
 const industriaLlicenseRoutes = require("./routes/industriaLlicenseRoutes.routes");
-
+const iemRegistrationRoutes =require("./routes/iemRegistrationRoutes.routes");
 
 
 
@@ -678,6 +678,11 @@ app.use("/api/edpms-ebrc",edpmsEbrcRoutes );
 app.use("/api/factory-license",factoryLicenseRoutes);
 
 app.use("/api/industrial-license",industriaLlicenseRoutes);
+
+app.use("/api/iem-registration",iemRegistrationRoutes);
+
+
+
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 

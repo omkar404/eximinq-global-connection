@@ -17,10 +17,10 @@ const Hero = ({ setShowEnrollModal }) => {
                     Have you outgrown the MSME limit? Industrial undertakings exempted from Compulsory Licensing must file an Industrial Entrepreneur Memorandum (IEM) to secure government recognition.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#parts" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         File Part A (Intent)
                     </a>
-                    <a href="#authorities" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
+                    <a href="#parts" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         File Paert B (Production)
                     </a>
                 </div>
