@@ -47,7 +47,7 @@ const customsAdjudicationRoutes = require("./routes/customsAdjudicationRoutes.ro
 const lmpcRegistrationRoutes = require("./routes/lmpcRegistrationRoutes.routes");
 const uniipCertificationRoutes = require("./routes/uniipCertificationRoutes.routes");
 const rexRegistrationRoutes = require("./routes/rexRegistrationRoutes.routes");
-
+const wpcLicenseRoutes = require("./routes/wpcLicenseRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -698,6 +698,7 @@ app.use("/api/un-iip-certification",uniipCertificationRoutes);
 
 app.use("/api/rex-registration",rexRegistrationRoutes);
 
+app.use("/api/wpc-license",wpcLicenseRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 

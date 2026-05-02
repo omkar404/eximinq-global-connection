@@ -58,7 +58,7 @@ export default function Fees({setShowEnrollModal}) {
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
-                Start Application
+                Get REX Number
           </button>
 
           </div>
