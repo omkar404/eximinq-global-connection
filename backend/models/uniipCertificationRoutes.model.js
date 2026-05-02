@@ -5,7 +5,7 @@ const uniipCertificationRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "EDPMS  Registration",
+      default: "UNIIP  Registration",
     },
     unNumber: {
       type: String,
