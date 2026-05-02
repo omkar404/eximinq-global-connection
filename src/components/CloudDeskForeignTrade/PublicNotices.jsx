@@ -34,16 +34,16 @@ export function PublicNotices() {
 const NOTICES = [
   {
     type: "DGFT Policy",
-    date: "Today",
-    title: "Policy Circular No. 10/2025-26",
-    desc: "EPCG Scheme - Relief in Average EO in terms of the para 5.17(a) of Hand Book of Procedures (HBP) of FTP, 2023.",
+    date: "15 Apr 2026",
+    title: "Policy Circular No. 01/2026-27",
+    desc: "Clarification on Eligibility of New ECGC Whole Turnover Policy under Component II of the Resilience & Logistics Intervention for Export Facilitation (RELIEF) under Export Promotion Mission (EPM)",
     color: "blue",
   },
   {
     type: "Customs",
-    date: "Yesterday",
-    title: "Notification No. 03/2026-Customs (Anti-Dumping Duty)",
-    desc: "Seeks to continue levy of anti-dumping duty on Toluene Di-Isocyanate (TDI) for 5 years pursuant to Sunset Review Final Findings issued by DGTR.",
+    date: "27 Apr 2026",
+    title: "Instruction No. 06/2026-Customs",
+    desc: "Drawback for re-export of duty paid goods supplied by SEZ to DTA",
     color: "green",
   },
   // {
@@ -76,16 +76,16 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "2 Days ago",
-    title: "Trade Notice 32/2025-26",
-    desc: "Guidelines-Support for Emerging Export Opportunities under Export Promotion Mission (EPM) – NIRYAT PROTSAHAN.",
+    date: "21 Apr 2026",
+    title: "Trade Notice 02/2026-27",
+    desc: "Instructions regarding Issuance/Re-issuance/Extension of Validity of Post Export EPCG Scrips – Activation of Post Export EPCG Module - regarding.",
     color: "purple",
   },
   {
     type: "Public Notice",
-    date: "07 Apr 2026",
-    title: "Public Notice 01/2026-27",
-    desc: "Amendments to Para 2.90 of Handbook of Procedures 2023",
+    date: "17 Apr 2026",
+    title: "Public Notice 04/2026-27",
+    desc: "Amendment in Appendix 4B of Handbook of Procedures, 2023 - reg",
     color: "gray",
   },
 ];
