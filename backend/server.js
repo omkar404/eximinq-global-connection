@@ -46,7 +46,7 @@ const defenceeximLicenseRoutes = require("./routes/defenceeximLicenseRoutes.rout
 const customsAdjudicationRoutes = require("./routes/customsAdjudicationRoutes.routes");
 const lmpcRegistrationRoutes = require("./routes/lmpcRegistrationRoutes.routes");
 const uniipCertificationRoutes = require("./routes/uniipCertificationRoutes.routes");
-
+const rexRegistrationRoutes = require("./routes/rexRegistrationRoutes.routes");
 
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
@@ -695,6 +695,9 @@ app.use("/api/customs-adjudication",customsAdjudicationRoutes);
 app.use("/api/lmpc-registration",lmpcRegistrationRoutes);
 
 app.use("/api/un-iip-certification",uniipCertificationRoutes);
+
+app.use("/api/rex-registration",rexRegistrationRoutes);
+
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 

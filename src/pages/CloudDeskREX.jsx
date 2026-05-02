@@ -1,5 +1,6 @@
-// import TopBar from "../components/CloudDeskREX/TopBar";
+import TopBar from "../components/CloudDeskREX/TopBar";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskREX/Navbar";
 import Hero from "../components/CloudDeskREX/Hero";
 import Fees from "../components/CloudDeskREX/Fees";
@@ -31,8 +32,21 @@ import {
   Landmark,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskREX/MainNavbar";
-
+import { ModalEnroll } from "../components/CloudDeskREX/ModalEnroll";
 const CloudDeskREX = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: ""
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 
 <>
@@ -169,9 +183,16 @@ const CloudDeskREX = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal}/>
+      <Hero setShowEnrollModal={setShowEnrollModal}/>
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -447,7 +468,7 @@ const CloudDeskREX = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 {/* --- WHY CLOUDDESK SECTION (REX) --- */}
