@@ -72,13 +72,13 @@ const Fees = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/un-iip-certification`,
+        `${process.env.REACT_APP_API_URL}/api/un-iip-certification`,
         // "http://localhost:5000/api/un-iip-certification", // ✅ http:// is required
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const data = await response.json();
@@ -101,7 +101,6 @@ const Fees = () => {
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-
       {/* Heading */}
       <div className="flex items-center gap-3 mb-2">
         <AlertTriangle className="text-brand-600" size={26} />
@@ -115,7 +114,6 @@ const Fees = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
-
         {/* UN Number */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
@@ -199,7 +197,6 @@ const Fees = () => {
         >
           {loading ? "Submitting..." : "Get Packaging Specification"}
         </button>
-
       </form>
     </div>
   );
