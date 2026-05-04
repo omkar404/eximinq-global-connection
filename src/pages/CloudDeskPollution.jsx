@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskPollution/TopBar";
+import TopBar from "../components/CloudDeskPollution/TopBar";
 import Navbar from "../components/CloudDeskPollution/Navbar";
 import Hero from "../components/CloudDeskPollution/Hero";
 import Fees from "../components/CloudDeskPollution/Fees";
@@ -26,7 +26,19 @@ import { MainNavbar } from "../components/CloudDeskPollution/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskPollution/ModalEnroll";
 
 const CloudDeskPollution = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.");
+  }
   
   return (
 
@@ -168,8 +180,10 @@ const CloudDeskPollution = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -449,7 +463,7 @@ const CloudDeskPollution = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 {/* --- WHY CLOUDDESK SECTION (POLLUTION CONTROL) --- */}
