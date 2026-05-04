@@ -50,6 +50,7 @@ const rexRegistrationRoutes = require("./routes/rexRegistrationRoutes.routes");
 const wpcLicenseRoutes = require("./routes/wpcLicenseRoutes.routes");
 const nodueCertificateRoutes = require("./routes/nodueCertificateRoutes.routes");
 const pollutionControlRoutes = require("./routes/pollutionControlRoutes.routes");
+const cacertificationexportImportRoutes = require("./routes/cacertificationexportImportRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -704,7 +705,9 @@ app.use("/api/wpc-license",wpcLicenseRoutes);
 
 app.use("/api/no-due-certificate",nodueCertificateRoutes);
 
-app.use("/api/pollution-control",pollutionControlRoutes)
+app.use("/api/pollution-control",pollutionControlRoutes);
+
+app.use("/api/ca-certification-export-import",cacertificationexportImportRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 
