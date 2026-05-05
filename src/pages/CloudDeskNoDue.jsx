@@ -551,7 +551,6 @@ const CloudDeskNoDue = () => {
               </div>
             </div>
           </div>
-        </div>
       </section>      
 
       <section id="non-availment" className="py-20 bg-slate-50">
@@ -648,122 +647,93 @@ const CloudDeskNoDue = () => {
               </a>
             </div>
           </div>
-        </section>
 
-        {/* Footer */}
-        <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
-          <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-            {/* BRAND */}
-            <div>
-              <a className="text-2xl font-bold text-white mb-4 block">
-                EXIMINQ
-              </a>
-
-              <p className="text-sm mb-6">
-                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
-                Logistics compliance.
-              </p>
-
-              <div className="flex gap-4">
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                  <Linkedin size={18} />
+          {/* QUICK LINKS */}
+          <div>
+            <h4 className="text-white font-bold mb-6">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  DEL Removal
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                  <Twitter size={18} />
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  IEC Update
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                  <Facebook size={18} />
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  EODC Redemption
                 </a>
-              </div>
-            </div>
-
-            {/* QUICK LINKS */}
-            <div>
-              <h4 className="text-white font-bold mb-6">Quick Links</h4>
-              <ul class="space-y-2 text-sm">
-                <ul class="space-y-2 text-sm">
-                  <li>
-                    <a href="#" class="hover:text-white transition">
-                      DEL Removal
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="hover:text-white transition">
-                      IEC Update
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="hover:text-white transition">
-                      EODC Redemption
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="hover:text-white transition">
-                      Legal Adjudication
-                    </a>
-                  </li>
-                </ul>
-              </ul>
-            </div>
-
-            {/* OTHER SERVICES */}
-            <div>
-              <h4 className="text-white font-bold mb-6">Other Services</h4>
-              <ul class="space-y-2 text-sm">
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    DEL List Check
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    Penalty Calculator
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    DGFT Public Notices
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    Amnesty Scheme
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* CONTACT */}
-            <div>
-              <h4 className="text-white font-bold mb-6">Contact Us</h4>
-              <ul className="space-y-4 text-sm">
-                <li className="flex gap-3 items-center">
-                  <Phone size={18} className="text-brand-500" />
-                  +917400096950
-                </li>
-
-                <li className="flex gap-3 items-center">
-                  <Mail size={18} className="text-brand-500" />
-                  clouddesk@eximinq.in
-                </li>
-
-                <li className="flex gap-3 items-center">
-                  <MapPin size={18} className="text-brand-500" />
-                  Mumbai, India
-                </li>
-              </ul>
-            </div>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  Legal Adjudication
+                </a>
+              </li>
+            </ul>
           </div>
 
-          {/* COPYRIGHT */}
-          <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
-            DGFT.
+          {/* OTHER SERVICES */}
+          <div>
+            <h4 className="text-white font-bold mb-6">Other Services</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  DEL List Check
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  Penalty Calculator
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  DGFT Public Notices
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition">
+                  Amnesty Scheme
+                </a>
+              </li>
+            </ul>
           </div>
-        </footer>
-      </div>
-    </>
+
+          {/* CONTACT */}
+          <div>
+            <h4 className="text-white font-bold mb-6">Contact Us</h4>
+            <ul className="space-y-4 text-sm">
+              <li className="flex gap-3 items-center">
+                <Phone size={18} className="text-brand-500" />
+                +917400096950
+              </li>
+
+              <li className="flex gap-3 items-center">
+                <Mail size={18} className="text-brand-500" />
+                clouddesk@eximinq.in
+              </li>
+
+              <li className="flex gap-3 items-center">
+                <MapPin size={18} className="text-brand-500" />
+                Mumbai, India
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* COPYRIGHT */}
+        <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
+          © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+          DGFT.
+        </div>
+      </footer>
+    </div>
+  </>
   );
 };
 
 export default CloudDeskNoDue;
+
