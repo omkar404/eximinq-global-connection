@@ -604,7 +604,7 @@
 
 /*----------------------------*/
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
 import Marquee from "react-fast-marquee";
 import {
@@ -620,8 +620,9 @@ import { exchangeRates } from "../data/exchangeRates";
 
 /* ---------------- UTILITIES ---------------- */
 
-// Safe filter for exchange rates
-const safeExchangeRates = exchangeRates.filter(
+const API_BASE_URL = process.env.REACT_APP_API_URL || "";
+
+const fallbackExchangeRates = exchangeRates.filter(
   (r) => r.effectiveDate && typeof r.effectiveDate === "string"
 );
 
@@ -705,13 +706,20 @@ const isRateValidForDate = (rate, targetDate) => {
     }
   }
   
-  // If no tillDate, rate is valid only on the effective date
-  return targetDateObj.getTime() === effectiveDate.getTime();
+  // If no tillDate, the latest rate stays valid from WEF onward.
+  return targetDateObj >= effectiveDate;
 };
 
 // Get the rate valid for a specific date
 const getRateValidForDate = (rates, targetDate) => {
-  const validRate = rates.find(rate => isRateValidForDate(rate, targetDate));
+  const validRate = [...rates]
+    .sort((a, b) => {
+      const dateA = parseDMY(a.effectiveDate);
+      const dateB = parseDMY(b.effectiveDate);
+      if (!dateA || !dateB) return 0;
+      return dateB - dateA;
+    })
+    .find((rate) => isRateValidForDate(rate, targetDate));
   return validRate;
 };
 
@@ -770,133 +778,191 @@ const formatToDDMMYYYY = (input) => {
   }
 };
 
-// Validate DD/MM/YYYY format
-const isValidDate = (dateStr) => {
-  if (!dateStr) return false;
-  const pattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-  if (!pattern.test(dateStr)) return false;
-  
-  const [day, month, year] = dateStr.split('/').map(Number);
-  const date = new Date(year, month - 1, day);
-  return date.getDate() === day && 
-         date.getMonth() === month - 1 && 
-         date.getFullYear() === year;
-};
-
-// Format user input for DD/MM/YYYY
-const formatUserDate = (input) => {
-  let formatted = input.replace(/[^\d]/g, '');
-  
-  if (formatted.length > 2) {
-    formatted = formatted.slice(0, 2) + '/' + formatted.slice(2);
-  }
-  if (formatted.length > 5) {
-    formatted = formatted.slice(0, 5) + '/' + formatted.slice(5, 9);
-  }
-  if (formatted.length > 10) {
-    formatted = formatted.slice(0, 10);
-  }
-  
-  return formatted;
-};
-
 // Get all unique years from exchange rates
-const getAllYears = () => {
+const getAllYears = (rates) => {
   const years = new Set();
-  safeExchangeRates.forEach(rate => {
+  rates.forEach((rate) => {
     const year = getYear(rate.effectiveDate);
     if (year) years.add(year);
   });
   return Array.from(years).sort().reverse();
 };
 
+const getDownloadHref = (rate) => {
+  if (rate.downloadUrl) {
+    return rate.downloadUrl.startsWith("http")
+      ? rate.downloadUrl
+      : `${API_BASE_URL}${rate.downloadUrl}`;
+  }
+
+  if (rate.notification) {
+    return `${API_BASE_URL}/api/exchange-rates/download?notification=${encodeURIComponent(
+      rate.notification
+    )}`;
+  }
+
+  if (rate.pdfUrl) {
+    return rate.pdfUrl.startsWith("http") ? rate.pdfUrl : `/pdfs/${rate.pdfUrl}`;
+  }
+
+  return null;
+};
+
+const dmyToIso = (dmy) => {
+  if (!dmy || typeof dmy !== "string") return "";
+  const separator = dmy.includes("-") ? "-" : "/";
+  const parts = dmy.split(separator);
+  if (parts.length !== 3) return "";
+  const [day, month, year] = parts;
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+};
+
+const isoToDmy = (isoDate) => {
+  if (!isoDate) return "";
+  const [year, month, day] = isoDate.split("-");
+  if (!year || !month || !day) return "";
+  return `${day}-${month}-${year}`;
+};
+
+const getDefaultSearchDate = (rates) => {
+  if (!rates.length) return "";
+
+  const today = new Date();
+  today.setHours(23, 59, 59, 999);
+  const currentMonth = today.getMonth();
+  const currentYear = today.getFullYear();
+
+  const effectiveRatesUpToToday = rates.filter((rate) => {
+    const effectiveDate = parseDMY(rate.effectiveDate);
+    return effectiveDate && effectiveDate <= today;
+  });
+
+  const currentMonthRates = effectiveRatesUpToToday.filter((rate) => {
+    const effectiveDate = parseDMY(rate.effectiveDate);
+    return (
+      effectiveDate &&
+      effectiveDate.getUTCMonth() === currentMonth &&
+      effectiveDate.getUTCFullYear() === currentYear
+    );
+  });
+
+  const candidateRates = currentMonthRates.length
+    ? currentMonthRates
+    : effectiveRatesUpToToday.length
+      ? effectiveRatesUpToToday
+      : rates;
+  const latestRate = [...candidateRates].sort((a, b) => {
+    const dateA = parseDMY(a.effectiveDate);
+    const dateB = parseDMY(b.effectiveDate);
+    if (!dateA || !dateB) return 0;
+    return dateB - dateA;
+  })[0];
+
+  return latestRate ? dmyToIso(latestRate.effectiveDate) : "";
+};
+
 /* ---------------- COMPONENT ---------------- */
 
 export default function ExchangeRates() {
-  const [currency, setCurrency] = useState("USD");
-  const [year, setYear] = useState("2026");
+  const [ratesData, setRatesData] = useState(fallbackExchangeRates);
+  const [currency, setCurrency] = useState("");
+  const [year, setYear] = useState("");
   const [date, setDate] = useState("");
-  const [displayDate, setDisplayDate] = useState("");
-  const [dateError, setDateError] = useState('');
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadExchangeRates = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/exchange-rates`);
+        if (!response.ok) {
+          return;
+        }
+
+        const payload = await response.json();
+        if (isMounted && payload.success && Array.isArray(payload.data) && payload.data.length) {
+          setRatesData(payload.data);
+        }
+      } catch (error) {
+        console.error("Exchange rates API fallback in use:", error);
+      }
+    };
+
+    loadExchangeRates();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const safeExchangeRates = useMemo(
+    () => ratesData.filter((r) => r.effectiveDate && typeof r.effectiveDate === "string"),
+    [ratesData]
+  );
 
   // Get available years from data
-  const availableYears = getAllYears();
+  const availableYears = useMemo(() => getAllYears(safeExchangeRates), [safeExchangeRates]);
 
-  // Handle custom date input change
-  const handleDateChange = (e) => {
-    const value = e.target.value;
-    setDisplayDate(value);
-    setDateError('');
-    
-    let formatted = formatUserDate(value);
-    setDisplayDate(formatted);
-    
-    if (formatted.replace(/\//g, '').length === 8) {
-      if (isValidDate(formatted)) {
-        const [day, month, year] = formatted.split('/');
-        const paddedDay = day.padStart(2, '0');
-        const paddedMonth = month.padStart(2, '0');
-        // Store in DD-MM-YYYY format to match your data
-        const ddmmyyyy = `${paddedDay}-${paddedMonth}-${year}`;
-        setDate(ddmmyyyy);
-        setDateError('');
-      } else {
-        setDateError('Please enter a valid date (dd/mm/yyyy)');
-      }
-    } else if (formatted.length === 0) {
-      setDate('');
-      setDateError('');
+  useEffect(() => {
+    if (!date && safeExchangeRates.length) {
+      setDate(getDefaultSearchDate(safeExchangeRates));
     }
-  };
-
-  // Handle date input blur
-  const handleDateBlur = () => {
-    if (displayDate && isValidDate(displayDate)) {
-      const [day, month, year] = displayDate.split('/');
-      const paddedDay = day.padStart(2, '0');
-      const paddedMonth = month.padStart(2, '0');
-      // Store in DD-MM-YYYY format to match your data
-      const ddmmyyyy = `${paddedDay}-${paddedMonth}-${year}`;
-      setDate(ddmmyyyy);
-      setDateError('');
-    } else if (displayDate && displayDate.length > 0) {
-      setDateError('Please use format: dd/mm/yyyy (e.g., 19/03/2026)');
-    }
-  };
+  }, [date, safeExchangeRates]);
 
   // Reset date
   const resetDate = () => {
-    setDate('');
-    setDisplayDate('');
-    setDateError('');
+    setCurrency("");
+    setYear("");
+    setDate(getDefaultSearchDate(safeExchangeRates));
   };
 
-  /* ---- GET SINGLE RATE VALID ON SELECTED DATE ---- */
+  /* ---- GET RATES VALID ON SELECTED DATE ---- */
   const filteredRates = useMemo(() => {
-    // Get all rates for selected currency
-    const allCurrencyRates = safeExchangeRates.filter((r) => r.currency === currency);
-    
-    // If date is selected, find the single rate valid on that date
-    if (date) {
-      const validRate = getRateValidForDate(allCurrencyRates, date);
-      return validRate ? [validRate] : [];
-    } 
-    // If no date selected, show all rates for the selected year
-    else {
-      if (year) {
-        return allCurrencyRates.filter((r) => {
-          const d = parseDMY(r.effectiveDate);
-          return d && d.getFullYear() === Number(year);
-        }).sort((a, b) => {
-          const dateA = parseDMY(a.effectiveDate);
-          const dateB = parseDMY(b.effectiveDate);
-          if (!dateA || !dateB) return 0;
-          return dateB - dateA;
-        });
-      }
+    const dmyDate = isoToDmy(date);
+    if (!dmyDate) {
       return [];
     }
-  }, [currency, date, year]);
+
+    let validRates = currency
+      ? (() => {
+          const currencyRates = safeExchangeRates.filter((r) => r.currency === currency);
+          const validRate = getRateValidForDate(currencyRates, dmyDate);
+          return validRate ? [validRate] : [];
+        })()
+      : Array.from(
+          safeExchangeRates.reduce((ratesByCurrency, rate) => {
+            const currencyCode = String(rate.currency || "").trim();
+            if (!currencyCode) {
+              return ratesByCurrency;
+            }
+
+            if (!ratesByCurrency.has(currencyCode)) {
+              ratesByCurrency.set(currencyCode, []);
+            }
+
+            ratesByCurrency.get(currencyCode).push(rate);
+            return ratesByCurrency;
+          }, new Map()).values()
+        )
+          .map((currencyRates) => getRateValidForDate(currencyRates, dmyDate))
+          .filter(Boolean);
+
+    if (year) {
+      validRates = validRates.filter((rate) => getYear(rate.effectiveDate) === year);
+    }
+
+    return validRates.sort((a, b) => {
+      const dateA = parseDMY(a.effectiveDate);
+      const dateB = parseDMY(b.effectiveDate);
+
+      if (!dateA || !dateB) return 0;
+      if (dateB.getTime() !== dateA.getTime()) {
+        return dateB - dateA;
+      }
+
+      return String(a.currency || "").localeCompare(String(b.currency || ""));
+    });
+  }, [currency, date, safeExchangeRates, year]);
 
   /* ---- MAP TABLE DATA WITH TREND ---- */
   const tableRates = filteredRates.map((r, index, array) => {
@@ -904,11 +970,13 @@ export default function ExchangeRates() {
     return {
       date: r.effectiveDate,
       notification: r.notification || "-",
+      notificationDate: r.notificationDate || "",
       currency: r.currency,
       import: r.importRate,
       export: r.exportRate,
       trend: getTrend(r.importRate, prev?.importRate),
       pdfUrl: r.pdfUrl,
+      downloadUrl: r.downloadUrl,
       unit: r.unit,
       currencyName: r.currencyName,
       tillDate: r.tillDate,
@@ -917,6 +985,7 @@ export default function ExchangeRates() {
 
   /* ---- CURRENT RATE CARD ---- */
   const latest = tableRates[0];
+  const selectedDisplayYear = year || (date ? getYear(isoToDmy(date)) : "") || availableYears[0] || "";
 
   // Get unique currencies for the marquee
   const marqueeRates = useMemo(() => {
@@ -925,7 +994,7 @@ export default function ExchangeRates() {
     safeExchangeRates
       .filter((r) => {
         const rateYear = getYear(r.effectiveDate);
-        return rateYear === year;
+        return selectedDisplayYear ? rateYear === selectedDisplayYear : true;
       })
       .sort((a, b) => parseDMY(b.effectiveDate) - parseDMY(a.effectiveDate))
       .forEach(rate => {
@@ -934,7 +1003,7 @@ export default function ExchangeRates() {
         }
       });
     return Array.from(ratesMap.values());
-  }, [year]);
+  }, [safeExchangeRates, selectedDisplayYear]);
 
   return (
     <>
@@ -969,6 +1038,7 @@ export default function ExchangeRates() {
                 onChange={(e) => setCurrency(e.target.value)}
                 className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
               >
+                <option value="">Select currency</option>
                 <option value="AED">AED – UAE Dirham</option>
                 <option value="AUD">AUD – Australian Dollar</option>
                 <option value="BHD">BHD – Bahraini Dinar</option>
@@ -1004,30 +1074,24 @@ export default function ExchangeRates() {
                 onChange={(e) => setYear(e.target.value)}
                 className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
               >
+                <option value="">Select year</option>
                 {availableYears.map(yr => (
                   <option key={yr} value={yr}>{yr}</option>
                 ))}
               </select>
             </div>
 
-            {/* Date - Custom with DD/MM/YYYY format */}
+            {/* Date Picker */}
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1">
-                Date (Optional)
+                Search Date
               </label>
               <input
-                type="text"
-                value={displayDate}
-                onChange={handleDateChange}
-                onBlur={handleDateBlur}
-                placeholder="dd/mm/yyyy"
-                className={`w-full px-4 py-2.5 bg-gray-50 border rounded-lg text-sm ${
-                  dateError ? 'border-red-500' : 'border-gray-300'
-                }`}
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
               />
-              {dateError && (
-                <p className="text-xs text-red-500 mt-1">{dateError}</p>
-              )}
             </div>
 
             <button
@@ -1035,7 +1099,7 @@ export default function ExchangeRates() {
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-2"
             >
               <Filter className="w-4 h-4" />
-              Reset Date
+              Reset Filters
             </button>
           </div>
         </div>
@@ -1044,10 +1108,10 @@ export default function ExchangeRates() {
         <div className="mb-8 bg-white rounded-xl shadow-md border border-gray-200 p-4">
           <div className="flex justify-between items-center mb-3 px-2">
             <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider">
-              Live Exchange Rates Ticker - All Currencies ({year})
+              Live Exchange Rates Ticker - All Currencies ({selectedDisplayYear})
             </h3>
             <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
-              {marqueeRates.length} rates in {year}
+              {marqueeRates.length} rates in {selectedDisplayYear}
             </span>
           </div>
 
@@ -1110,7 +1174,11 @@ export default function ExchangeRates() {
             <div className="flex justify-between items-start mb-4">
               <div>
                 <p className="text-blue-200 text-xs font-bold uppercase">
-                  {date ? `Rate on ${formatToDDMMYYYY(date)}` : `Current ${currency} Rate`}
+                  {date
+                    ? currency
+                      ? `${currency} rate on ${formatToDDMMYYYY(date)}`
+                      : `Latest snapshot on ${formatToDDMMYYYY(date)}`
+                    : "Select a date"}
                 </p>
                 <div className="grid grid-cols-2 gap-4 mt-3">
                   <div>
@@ -1146,6 +1214,9 @@ export default function ExchangeRates() {
             </div>
             {latest?.date && (
               <p className="text-[10px] text-blue-300 mt-4">
+                {latest.notificationDate
+                  ? `Notification Date: ${formatToDDMMYYYY(latest.notificationDate)} | `
+                  : ""}
                 Effective from: {formatToDDMMYYYY(latest.date)}
                 {latest.tillDate && latest.tillDate !== "" && ` to ${formatToDDMMYYYY(latest.tillDate)}`}
               </p>
@@ -1177,7 +1248,7 @@ export default function ExchangeRates() {
             <h3 className="font-bold text-gray-800">Exchange Rate Archive</h3>
             <div className="flex items-center gap-3">
               <span className="text-xs text-gray-500 bg-white border px-3 py-1 rounded-full">
-                {currency} {date ? `(valid on ${formatToDDMMYYYY(date)})` : `(${year})`}
+                {currency || "All currencies"} {date ? `(valid on ${formatToDDMMYYYY(date)})` : selectedDisplayYear ? `(${selectedDisplayYear})` : ""}
               </span>
               <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
                 {tableRates.length} {tableRates.length === 1 ? 'record found' : 'records found'}
@@ -1190,19 +1261,23 @@ export default function ExchangeRates() {
               <table className="w-full text-sm">
                 <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
                   <tr>
+                    <th className="px-6 py-4 text-left">Notification Date</th>
                     <th className="px-6 py-4 text-left">Effective Date</th>
                     <th className="px-6 py-4 text-left">Notification</th>
                     <th className="px-6 py-4">Currency</th>
                     <th className="px-6 py-4 text-right">Import</th>
                     <th className="px-6 py-4 text-right">Export</th>
                     <th className="px-6 py-4 text-center">Trend</th>
-                    <th className="px-6 py-4 text-center">PDF</th>
+                    <th className="px-6 py-4 text-center">Download</th>
                   </tr>
                 </thead>
 
                 <tbody className="divide-y">
                   {tableRates.map((r, i) => (
                     <tr key={i} className="hover:bg-blue-50">
+                      <td className="px-6 py-4 font-medium">
+                        {r.notificationDate ? formatToDDMMYYYY(r.notificationDate) : "-"}
+                      </td>
                       <td className="px-6 py-4 font-medium">
                         {formatToDDMMYYYY(r.date)}
                       </td>
@@ -1228,9 +1303,9 @@ export default function ExchangeRates() {
                         )}
                       </td>
                       <td className="px-6 py-4 text-center">
-                        {r.pdfUrl ? (
+                        {getDownloadHref(r) ? (
                           <a
-                            href={`https://eximinq.in/pdfs/${r.pdfUrl}`}
+                            href={getDownloadHref(r)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-block"
@@ -1248,7 +1323,7 @@ export default function ExchangeRates() {
             </div>
           ) : (
             <div className="p-8 text-center text-gray-500">
-              No exchange rates found {date ? `valid on ${formatToDDMMYYYY(date)}` : `for ${year}`}
+              No exchange rates found {date ? `valid on ${formatToDDMMYYYY(date)}` : selectedDisplayYear ? `for ${selectedDisplayYear}` : ""}
             </div>
           )}
         </div>

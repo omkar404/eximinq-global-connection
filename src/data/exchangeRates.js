@@ -39512,7 +39512,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "AED",
         "currencyName": "UAE Dirham",
@@ -39524,7 +39524,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "AUD",
         "currencyName": "Australian Dollar",
@@ -39536,7 +39536,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "BHD",
         "currencyName": "Bahraini Dinar",
@@ -39548,7 +39548,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "CAD",
         "currencyName": "Canadian Dollar",
@@ -39560,7 +39560,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "CHF",
         "currencyName": "Swiss Franc",
@@ -39572,7 +39572,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "CNY",
         "currencyName": "Chinese Yuan",
@@ -39584,7 +39584,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "DKK",
         "currencyName": "Danish Kroner ",
@@ -39596,7 +39596,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "EUR",
         "currencyName": "Euro",
@@ -39608,7 +39608,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "GBP",
         "currencyName": "Pound Sterling",
@@ -39620,7 +39620,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "HKD",
         "currencyName": "Hongkong Dollar",
@@ -39632,7 +39632,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "JPY",
         "currencyName": "Japanese Yen",
@@ -39644,7 +39644,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "KRW",
         "currencyName": "Korean Won",
@@ -39656,7 +39656,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "KWD",
         "currencyName": "Kuwaiti Dinar",
@@ -39668,7 +39668,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "NOK",
         "currencyName": "Norwegian Kroner",
@@ -39680,7 +39680,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "NZD",
         "currencyName": "New Zealand Dollar",
@@ -39692,7 +39692,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "QAR",
         "currencyName": "Qatari Riyal",
@@ -39704,7 +39704,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "SAR",
         "currencyName": "Saudi Arabian Riyal",
@@ -39716,7 +39716,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "SEK",
         "currencyName": "Swedish Kroner",
@@ -39728,7 +39728,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "SGD",
         "currencyName": "Singapore Dollar",
@@ -39740,7 +39740,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "TRY",
         "currencyName": "Turkish Lira",
@@ -39752,7 +39752,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "USD",
         "currencyName": "US Dollar",
@@ -39764,7 +39764,7 @@ export const exchangeRates = [
     },
     {
         "notificationDate": "02-04-2026",
-        "effectiveDate": "04-03-2026",
+        "effectiveDate": "03-04-2026",
         "tillDate":"",
         "currency": "ZAR",
         "currencyName": "South African Rand",
@@ -39774,5 +39774,269 @@ export const exchangeRates = [
         "notification": "12/2026",
         "pdfUrl": "02-04-2026.pdf"
     },
-   
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "AED",
+        "currencyName": "UAE Dirham",
+        "unit": 1,
+        "importRate": 26.2,
+        "exportRate": 24.7,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "AUD",
+        "currencyName": "Australian Dollar",
+        "unit": 1,
+        "importRate": 68.6,
+        "exportRate": 65.65,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "BHD",
+        "currencyName": "Bahraini Dinar",
+        "unit": 1,
+        "importRate": 256.6,
+        "exportRate": 238.75,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "CAD",
+        "currencyName": "Canadian Dollar",
+        "unit": 1,
+        "importRate": 69.2,
+        "exportRate": 66.95,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "CHF",
+        "currencyName": "Swiss Franc",
+        "unit": 1,
+        "importRate": 122.35,
+        "exportRate": 117,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "CNY",
+        "currencyName": "Chinese Yuan",
+        "unit": 1,
+        "importRate": 13.9,
+        "exportRate": 13.45,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "DKK",
+        "currencyName": "Danish Kroner",
+        "unit": 1,
+        "importRate": 14.95,
+        "exportRate": 14.55,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "EUR",
+        "currencyName": "Euro",
+        "unit": 1,
+        "importRate": 112.2,
+        "exportRate": 108.45,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "GBP",
+        "currencyName": "Pound Sterling",
+        "unit": 1,
+        "importRate": 128.85,
+        "exportRate": 124.8,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "HKD",
+        "currencyName": "Hongkong Dollar",
+        "unit": 1,
+        "importRate": 12.05,
+        "exportRate": 11.75,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "JPY",
+        "currencyName": "Japanese Yen",
+        "unit": 100,
+        "importRate": 59.85,
+        "exportRate": 58,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "KRW",
+        "currencyName": "Korean Won",
+        "unit": 100,
+        "importRate": 6.55,
+        "exportRate": 6.15,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "KWD",
+        "currencyName": "Kuwaiti Dinar",
+        "unit": 1,
+        "importRate": 311.9,
+        "exportRate": 293.15,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "NOK",
+        "currencyName": "Norwegian Kroner",
+        "unit": 1,
+        "importRate": 10.1,
+        "exportRate": 9.85,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "NZD",
+        "currencyName": "New Zealand Dollar",
+        "unit": 1,
+        "importRate": 56.65,
+        "exportRate": 53.9,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "QAR",
+        "currencyName": "Qatari Riyal",
+        "unit": 1,
+        "importRate": 27.4,
+        "exportRate": 24.1,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "SAR",
+        "currencyName": "Saudi Arabian Riyal",
+        "unit": 1,
+        "importRate": 25.65,
+        "exportRate": 24.25,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "SEK",
+        "currencyName": "Swedish Kroner",
+        "unit": 1,
+        "importRate": 10.35,
+        "exportRate": 10.1,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "SGD",
+        "currencyName": "Singapore Dollar",
+        "unit": 1,
+        "importRate": 74.85,
+        "exportRate": 72.25,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "TRY",
+        "currencyName": "Turkish Lira",
+        "unit": 1,
+        "importRate": 2.15,
+        "exportRate": 2.05,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "USD",
+        "currencyName": "US Dollar",
+        "unit": 1,
+        "importRate": 94.2,
+        "exportRate": 92.5,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+    {
+        "notificationDate": "16-04-2026",
+        "effectiveDate": "17-04-2026",
+        "tillDate":"",
+        "currency": "ZAR",
+        "currencyName": "South African Rand",
+        "unit": 1,
+        "importRate": 5.9,
+        "exportRate": 5.55,
+        "notification": "13/2026",
+        "pdfUrl": "16-04-2026.pdf"
+    },
+
 ];

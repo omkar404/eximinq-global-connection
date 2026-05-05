@@ -32,12 +32,12 @@ const CloudDeskNoDue = () => {
 <>
 <Helmet>
         <title>
-          No Incentive Certificate for Returned Goods | No Incentive Registration India | DGFT CUSTOMS Services | EXIMINQ
+          No Due & No Incentive Certificate Services | DGFT and Customs Closure Support | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content={`Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`}
+          content={`Get No Due Certificate and No Incentive Certificate support for IEC surrender, DGFT closure, returned goods, and export benefit reversal.`}
         />
 
         <link
@@ -48,11 +48,11 @@ const CloudDeskNoDue = () => {
         {/* Open Graph */}
         <meta
           property="og:title"
-          content="No Incentive Certificate for Returned Goods Online in India | Eximinq"
+          content="No Due & No Incentive Certificate Services Online in India | Eximinq"
         />
         <meta
           property="og:description"
-          content={`Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`}
+          content={`Get No Due Certificate and No Incentive Certificate support for IEC surrender, DGFT closure, returned goods, and export benefit reversal.`}
         />
         <meta
           property="og:url"
@@ -621,6 +621,76 @@ const CloudDeskNoDue = () => {
           </div>
         </div>
       </section>      
+
+      <section id="non-availment" className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-12">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Consolidated Closure Guide
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+              No Due Certificate vs No Incentive Certificate
+            </h2>
+            <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+              We consolidated our older no-incentive page into this master URL
+              so one page now covers DGFT clean-exit certificates, non-availment
+              declarations, and returned-goods benefit reversal.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                When you need a No Due Certificate
+              </h3>
+              <p className="text-slate-600 mb-4">
+                A No Due Certificate is your closure document when DGFT or a
+                related authority needs proof that your IEC, license book, bond,
+                or penalty ledger is clean. This is the route used for IEC
+                surrender, DEL removal, and final clean-up of old compliance
+                baggage.
+              </p>
+              <ul className="space-y-3 text-slate-700">
+                <li className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
+                  Ideal for IEC closure, DGFT redemption, and post-obligation
+                  clean-up.
+                </li>
+                <li className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
+                  Used when customs or DGFT needs a clean dues certificate
+                  before releasing bonds or clearing records.
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                When you need a No Incentive Certificate
+              </h3>
+              <p className="text-slate-600 mb-4">
+                A No Incentive Certificate is narrower. It proves that a
+                shipping bill, return shipment, or license-linked export did not
+                retain RoDTEP, drawback, IGST refund, or similar export
+                incentives. This matters most for re-imports, repair returns,
+                and benefit reversals.
+              </p>
+              <ul className="space-y-3 text-slate-700">
+                <li className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
+                  Used for returned goods, Section 74 workflows, and repair or
+                  rejection re-imports.
+                </li>
+                <li className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
+                  Often requires ledger checks and, if needed, reversal of
+                  scroll-based benefits before the certificate can be issued.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">

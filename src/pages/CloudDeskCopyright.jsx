@@ -439,6 +439,84 @@ const CloudDeskCopyright = () => {
       </div>
     </section>
 
+    <section id="logo-brand-copyright" className="py-20 bg-slate-50">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="text-center mb-12">
+          <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+            Consolidated Protection
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+            Logo Copyright, Brand Assets, and TM-C Strategy
+          </h2>
+          <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+            We merged our older logo-copyright and brand-copyright pages into
+            this master guide so one URL now covers artwork ownership, TM-C
+            clearance, and the trademark-versus-copyright decision for founders,
+            agencies, and exporters.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">
+              When a logo needs both copyright and trademark
+            </h3>
+            <p className="text-slate-600 mb-4">
+              A trademark protects how the mark functions in commerce. Copyright
+              protects the artistic expression itself. If your exporter brand is
+              built around a custom symbol, mascot, packaging illustration, or
+              stylized lettering, relying on only one regime leaves an avoidable
+              enforcement gap.
+            </p>
+            <ul className="space-y-3 text-slate-700">
+              <li className="flex gap-3">
+                <Check className="w-5 h-5 text-brand-500 mt-0.5" />
+                Trademark stops confusingly similar commercial use in your class
+                of goods or services.
+              </li>
+              <li className="flex gap-3">
+                <Check className="w-5 h-5 text-brand-500 mt-0.5" />
+                Copyright stops copying of the creative artwork, including reuse
+                in collaterals, marketplaces, product inserts, and websites.
+              </li>
+              <li className="flex gap-3">
+                <Check className="w-5 h-5 text-brand-500 mt-0.5" />
+                The combined filing path gives stronger licensing, valuation,
+                and takedown leverage when the asset becomes commercially
+                important.
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">
+              What we collect before filing
+            </h3>
+            <div className="space-y-4 text-slate-600">
+              <p>
+                For logo-heavy cases, we validate the author chain first. That
+                means checking whether the artwork was created by an employee, a
+                freelancer, an agency, or a founder, and making sure the
+                assignment language is clean before we file.
+              </p>
+              <p>
+                We also evaluate whether a TM-C or trademark registrar NOC is
+                needed because the Copyright Office will scrutinize artistic
+                works capable of functioning as marks. That cross-filing step is
+                where many applicants lose time.
+              </p>
+              <p>
+                The result is a single filing strategy for logo art, website
+                copy, brochures, software screens, packaging creatives, and
+                campaign assets instead of fragmenting the work across multiple
+                weak URLs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">

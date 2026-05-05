@@ -198,7 +198,7 @@ export default function StrategicSolutions() {
                                     TAT: 45 Days
                                 </span>
                                 <a
-                                    href="/epcg-closure-services"
+                                    href="/services/epcg-scheme"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-teal-600 font-bold text-sm"
@@ -261,7 +261,7 @@ export default function StrategicSolutions() {
                                 </span>
                                 <button className="text-indigo-600 font-bold text-sm">
                                     <a
-                                        href="/rodtep-refund-recovery"
+                                        href="/services/rodtep-scheme"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-teal-600 font-bold text-sm"
@@ -499,7 +499,7 @@ export default function StrategicSolutions() {
                             </p>
                         {/* <button className="text-indigo-600 font-bold text-sm">
                                     <a
-                                        href="/rodtep-refund-recovery"
+                                        href="/services/rodtep-scheme"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-teal-600 font-bold text-sm"
@@ -558,7 +558,7 @@ export default function StrategicSolutions() {
                             </p>
                         {/* <button className="text-indigo-600 font-bold text-sm ">
                                     <a
-                                        href="/rodtep-refund-recovery"
+                                        href="/services/rodtep-scheme"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-teal-600 font-bold text-sm"
@@ -769,7 +769,7 @@ export default function StrategicSolutions() {
                         </a>
 
                         <a
-                            href="/services/no-incentive-certificate"
+                            href="/services/no-due-certificate"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
@@ -1395,7 +1395,7 @@ export default function StrategicSolutions() {
                                     <td className="px-6 py-4">
                                         {/* Brand Registration */}
                                  <a
-                                        href="/services/brand-copyright"
+                                        href="/services/copyright-registration"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"
@@ -1409,7 +1409,7 @@ export default function StrategicSolutions() {
                                     <td className="px-6 py-4 font-medium text-slate-900">
                                         {/* Customs License */}
                                  <a
-                                        href="/services/customs-license-registration"
+                                        href="/services/epcg-scheme"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-blue-600 transition"

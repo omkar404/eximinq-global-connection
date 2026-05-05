@@ -45,7 +45,7 @@ const ComplianceWidget = () => {
           </div>
 
           {/* <a
-            href="/epcg-closure-services"
+            href="/services/epcg-scheme"
             target="_blank"
             rel="noopener noreferrer"
             className="text-teal-600 font-bold text-sm"

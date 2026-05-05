@@ -24,6 +24,14 @@
       name="description"
       content="EXIMINQ provides DGFT, customs, ICEGATE, logistics, and trade compliance support for importers and exporters across India."
     />
+    <script>
+      window.__REGULATORY_UPDATES_READY__ = false;
+      window.__REGULATORY_UPDATES_PRERENDER__ =
+        window.__REGULATORY_UPDATES_PRERENDER__ || null;
+      window.addEventListener("regulatory-updates:snapshot-ready", function () {
+        window.__REGULATORY_UPDATES_READY__ = true;
+      });
+    </script>
 
     <!-- Google Analytics -->
     <script
