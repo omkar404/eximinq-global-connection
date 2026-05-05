@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import React, { useState } from "react";
-// import TopBar from "../components/CloudDeskDutyPayment/TopBar";
+import TopBar from "../components/CloudDeskDutyPayment/TopBar";
 import Navbar from "../components/CloudDeskDutyPayment/Navbar";
 import Hero from "../components/CloudDeskDutyPayment/Hero";
 import Fees from "../components/CloudDeskDutyPayment/Fees";
@@ -399,8 +399,8 @@ const CloudDeskDutyPayment = () => {
       </section>
 
       {/* Dynamic Fees Section */}
-      <Fees />
-
+      <Fees setShowEnrollModal={setShowEnrollModal}/>
+                  
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
               <section className="py-20 bg-white">
                 <div className="container mx-auto px-4 max-w-5xl">
