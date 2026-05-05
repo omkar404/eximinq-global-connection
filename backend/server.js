@@ -54,6 +54,7 @@ const cacertificationexportImportRoutes = require("./routes/cacertificationexpor
 const esanchitFilingRoutes = require("./routes/esanchitFilingRoutes.routes");
 const dutypaymentEclRoutes = require("./routes/dutypaymentEclRoutes.routes");
 const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
+const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -717,6 +718,8 @@ app.use("/api/e-sanchit-filing",esanchitFilingRoutes);
 app.use("/api/duty-payment-ecl",dutypaymentEclRoutes);
 
 app.use("/api/cha-services",chaServicesRoutes);
+
+app.use("/api/freight-forwarding",freightForwardingRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 
