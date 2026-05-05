@@ -354,12 +354,23 @@ const CloudDeskWarehousing = () => {
                 </ul>
 
                 <div className="mt-8">
-                  <a
+                  {/* <a
                     href="#hero"
                     className="block w-full bg-brand-600 text-white text-center font-bold py-3 rounded hover:bg-brand-700 transition"
                   >
                     Enquire Bonded Space
-                  </a>
+                  </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Customs_Bonded"
+                  })
+                }
+                className="block w-full bg-brand-600 text-white text-center font-bold py-3 rounded hover:bg-brand-700 transition"
+              >
+                Enquire Bonded Space
+          </button>
                 </div>
               </div>
             </div>
@@ -430,12 +441,23 @@ const CloudDeskWarehousing = () => {
                 </ul>
 
                 <div className="mt-8">
-                  <a
+                  {/* <a
                     href="#hero"
                     className="block w-full bg-accent-500 text-brand-900 text-center font-bold py-3 rounded hover:bg-accent-600 transition"
                   >
                     Enquire General Space
-                  </a>
+                  </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "General_3PL"
+                  })
+                }
+                className="block w-full bg-accent-500 text-brand-900 text-center font-bold py-3 rounded hover:bg-accent-600 transition"
+              >
+                Enquire General Space
+          </button>
                 </div>
               </div>
             </div>
