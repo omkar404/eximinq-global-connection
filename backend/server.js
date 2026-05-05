@@ -53,6 +53,7 @@ const pollutionControlRoutes = require("./routes/pollutionControlRoutes.routes")
 const cacertificationexportImportRoutes = require("./routes/cacertificationexportImportRoutes.routes");
 const esanchitFilingRoutes = require("./routes/esanchitFilingRoutes.routes");
 const dutypaymentEclRoutes = require("./routes/dutypaymentEclRoutes.routes");
+const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -713,7 +714,9 @@ app.use("/api/ca-certification-export-import",cacertificationexportImportRoutes)
 
 app.use("/api/e-sanchit-filing",esanchitFilingRoutes);
 
-app.use("/api/duty-payment-ecl",dutypaymentEclRoutes)
+app.use("/api/duty-payment-ecl",dutypaymentEclRoutes);
+
+app.use("/api/cha-services",chaServicesRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 
