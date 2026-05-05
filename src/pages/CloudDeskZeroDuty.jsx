@@ -55,7 +55,7 @@ const CloudDeskMarine = () => {
 
         <meta
           name="description"
-          content="EPCG Scheme consultancy in India. Import capital goods at zero customs duty with export obligation planning, compliance tracking and EODC redemption support."
+          content="EPCG Scheme consultancy in India. Import capital goods at zero customs duty with export obligation planning, compliance tracking, customs cell coordination, and EODC redemption support."
         />
 
         <link
@@ -69,7 +69,7 @@ const CloudDeskMarine = () => {
         />
         <meta
           property="og:description"
-          content="Apply for EPCG license under DGFT with export obligation tracking and compliance management."
+          content="Apply for EPCG license under DGFT with export obligation tracking, customs cell coordination, and closure support."
         />
         <meta
           property="og:url"
@@ -729,6 +729,64 @@ const CloudDeskMarine = () => {
                   If you don't want to take the risk of future obligations, you pay the duty upfront, do the exports, and then claim the duty back as a "Duty Credit Scrip." CloudDesk manages the scrip application to ensure you get your cash back.
                 </p>
               </details>
+            </div>
+          </div>
+        </section>
+
+        <section id="epcg-closure-support" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Consolidated Support
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                EPCG License Closure, Customs Cell Work, and EODC Recovery
+              </h2>
+              <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+                We merged the weaker EPCG support URLs into this page so the
+                main EPCG guide now covers both the front-end application and
+                the painful back-end closure work that usually traps bank
+                guarantees and blocks fresh trade benefits.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-6">
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  Customs registration and debit alignment
+                </h3>
+                <p className="text-slate-600">
+                  If your EPCG imports were handled at multiple ports, the
+                  customs license cell entries, installation certificates, and
+                  debit records need to reconcile before closure. We now handle
+                  that workflow under this master page instead of splitting it
+                  into a separate weak URL.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  EOP extension and default management
+                </h3>
+                <p className="text-slate-600">
+                  When the obligation window slips, the real work is not the
+                  original application but the salvage plan: EOP extension,
+                  shortfall computation, clubbing, and evidence assembly before
+                  a demand hardens into duty plus interest.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  EODC retrieval and BG release
+                </h3>
+                <p className="text-slate-600">
+                  The end-state is clean closure: EODC issuance, customs bond
+                  cancellation, and bank guarantee release. That closure intent
+                  used to live on its own page; it now strengthens this core
+                  EPCG URL instead.
+                </p>
+              </div>
             </div>
           </div>
         </section>

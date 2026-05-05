@@ -22,15 +22,17 @@
   },
   "scripts": {
     "dev": "react-scripts start",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
     "build": "react-scripts build",
+    "prebuild": "npm run generate:sitemap",
     "postbuild": "npx react-snap",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "reactSnap": {
     "crawl": false,
+    "cacheAjaxRequests": true,
     "include": [
-      "/",
       "/charates",
       "/contact-us-support",
       "/corp",
@@ -39,8 +41,8 @@
       "/services/import-export-code/",
       "/services/icegate-registration/",
       "/services/ad-code-registration/",
-      "/services/bill-of-entry-filing",
       "/services/e-rcmc-registration",
+      "/services/bill-of-entry-filing",
       "/services/shipping-bill-filing",
       "/services/e-sanchit-filing",
       "/services/duty-payment-ecl",
@@ -74,10 +76,9 @@
       "/invoice",
       "/services/dsc-services",
       "/services/import-management-registration/",
-      "/services/eop-extension/",
       "/services/no-due-certificate",
-      "/services/no-incentive-certificate",
       "/services/interest-equalisation-scheme",
+      "/services/eop-extension/",
       "/services/halal-certification",
       "/services/igcr-returns",
       "/services/iso-certification",
@@ -97,8 +98,6 @@
       "/services/pollution-control",
       "/services/trademark-registration",
       "/services/copyright-registration",
-      "/services/brand-copyright",
-      "/services/logo-copyright",
       "/services/barcode-registration",
       "/services/design-registration",
       "/services/rmcc-alert-removal",
@@ -106,7 +105,6 @@
       "/services/warehouse-license",
       "/services/un-iip-certification",
       "/services/ca-certification-export-import",
-      "/services/customs-license-registration",
       "/services/rodtep-rosctl-trading",
       "/services/compliance-audit",
       "/pharmaceuticals-industry-import-export",
@@ -121,6 +119,7 @@
       "/trade-compliance-calendar",
       "/bis-epr-wpc-lmpc",
       "/demo-of-clouddesk",
+      "/",
       "/about-us",
       "/strategic-solutions",
       "/services",
@@ -136,9 +135,7 @@
       "/disclaimer",
       "/privacy-policy",
       "/terms-of-service",
-      "/tools/duty-calculator-finder",
-      "/rodtep-refund-recovery",
-      "/epcg-closure-services"
+      "/tools/duty-calculator-finder"
     ]
   },
   "eslintConfig": {

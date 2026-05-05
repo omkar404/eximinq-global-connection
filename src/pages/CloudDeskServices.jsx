@@ -525,7 +525,7 @@ const CloudDeskServices = () => {
         "Verifies no other incentives were claimed to avoid double-dipping.",
       icon: <AlertTriangle className="w-8 h-8 text-green-600" />,
       popular: false,
-      link: "https://eximinq.in/services/no-incentive-certificate",
+      link: "https://eximinq.in/services/no-due-certificate",
     },
     {
       id: 819,
@@ -705,7 +705,7 @@ const CloudDeskServices = () => {
         "Specific legal protection for unique brand identity elements.",
       icon: <Lightbulb className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/brand-copyright",
+      link: "https://eximinq.in/services/copyright-registration",
     },
     {
       id: 703,
@@ -725,7 +725,7 @@ const CloudDeskServices = () => {
         "LICENSES REGISTRATION AT CUSTOMS",
       icon: <FileText className="w-8 h-8 text-teal-600" />,
       popular: false,
-      link: "https://eximinq.in/services/customs-license-registration",
+      link: "https://eximinq.in/services/epcg-scheme",
     },
     {
       id: 707,
@@ -785,7 +785,7 @@ const CloudDeskServices = () => {
         "Specific legal protection for visual logos and graphic symbols.",
       icon: <Image className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/logo-copyright",
+      link: "https://eximinq.in/services/copyright-registration",
     },
     {
       id: 702,

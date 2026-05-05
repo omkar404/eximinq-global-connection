@@ -75,6 +75,7 @@ const ecommerceindustryRoutes = require("./routes/ecommerceindustryRoutes.routes
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 // const {getCustomsData,getRawCustomsData,getCustomsDataByType,processAllCustomsData} = require("./services/customsExcel.service");
 const customsService = require("./services/customsExcel.service");
+const exchangeRatesService = require("./services/exchangeRates.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
@@ -453,6 +454,51 @@ app.get("/api/dgft/pdf-download", (req, res) => {
   res.download(pdfPath);
 });
 
+app.get("/api/exchange-rates", (req, res) => {
+  try {
+    res.json(exchangeRatesService.getExchangeRatesData());
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.get("/api/exchange-rates/download", (req, res) => {
+  try {
+    const { notification } = req.query;
+
+    if (!notification) {
+      return res.status(400).json({
+        success: false,
+        message: "notification is required",
+      });
+    }
+
+    const workbook = exchangeRatesService.buildNotificationWorkbook(notification);
+
+    if (!workbook) {
+      return res.status(404).json({
+        success: false,
+        message: "Exchange rate notification not found",
+      });
+    }
+
+    const safeNotification = String(notification).replace(/[^\dA-Za-z]+/g, "-");
+    const fileName = `exchange-rates-${safeNotification}.xlsx`;
+    const buffer = Buffer.from(
+      require("xlsx").write(workbook, { type: "buffer", bookType: "xlsx" })
+    );
+
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
+    res.send(buffer);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // CUSTOMS
 // Static files
 app.use("/pdfs", express.static(path.join(__dirname, "PDF_DOC/CUSTOMS_PDF")));
@@ -617,6 +663,13 @@ try {
   console.log("✅ Customs watcher started");
 } catch (error) {
   console.error("❌ Failed to start watcher:", error.message);
+}
+
+try {
+  exchangeRatesService.startWatcher();
+  console.log("✅ Exchange rates watcher started");
+} catch (error) {
+  console.error("❌ Failed to start exchange rates watcher:", error.message);
 }
 
 app.listen(() => {

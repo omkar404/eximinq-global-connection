@@ -56,7 +56,7 @@ const CloudDeskRodtep = () => {
 
         <meta
           name="description"
-          content="RoDTEP consultancy in India. Claim duty credit scrips, manage ICEGATE ledger, check HS code rates and monetize transferable scrips efficiently."
+          content="RoDTEP consultancy in India. Claim duty credit scrips, manage ICEGATE ledger, recover missed benefits, and monetize transferable scrips efficiently."
         />
 
         <link
@@ -67,7 +67,7 @@ const CloudDeskRodtep = () => {
         <meta property="og:title" content="RoDTEP Scheme Consultancy in India" />
         <meta
           property="og:description"
-          content="Expert support for RoDTEP claims, rate verification, scrip transfer and ICEGATE ledger management."
+          content="Expert support for RoDTEP claims, recovery audits, rate verification, scrip transfer, and ICEGATE ledger management."
         />
         <meta
           property="og:url"
@@ -682,6 +682,61 @@ const CloudDeskRodtep = () => {
                   Scrips usually sell at a discount. For example, a ₹100 scrip might sell for ₹97 or ₹98 in the market. CloudDesk finds the buyer with the lowest discount (highest premium) for you.
                 </p>
               </details>
+            </div>
+          </div>
+        </section>
+        <section id="rodtep-recovery" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Consolidated Recovery
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                RoDTEP Recovery Audits, Scroll Reversal, and Scrip Monetization
+              </h2>
+              <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+                We folded the weaker refund-recovery URL into this main RoDTEP
+                page so the ranking URL covers the full lifecycle: claim,
+                credit, reconciliation, recovery, and sale.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-6">
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  Missed or expired scroll recovery
+                </h3>
+                <p className="text-slate-600">
+                  If your shipping bills carried intent but the scroll expired,
+                  landed in the wrong ledger, or stalled behind EGM mismatch,
+                  the recovery job belongs inside the RoDTEP master service, not
+                  on a separate orphan URL.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  Benefit reversal and ledger cleanup
+                </h3>
+                <p className="text-slate-600">
+                  Re-imports, audit objections, and duplicated incentives often
+                  require partial reversal before the exporter can move forward.
+                  We treat those reversals as part of the same operational
+                  RoDTEP workflow.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  Scrip sale and cash realization
+                </h3>
+                <p className="text-slate-600">
+                  Once credits are valid, the next question is utilization or
+                  sale. This consolidated page now captures the high-intent
+                  “sell my RoDTEP scrip” journey alongside the claim strategy
+                  itself.
+                </p>
+              </div>
             </div>
           </div>
         </section>

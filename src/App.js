@@ -53,7 +53,6 @@ import CloudDeskPolicyRelaxation from "./pages/CloudDeskPolicyRelaxation"
 import CloudDeskDigitalSignatures from "./pages/CloudDeskDigitalSignatures"
 import CloudDeskImporters from "./pages/CloudDeskImporters"
 import CloudDeskNoDue from "./pages/CloudDeskNoDue"
-import CloudDeskNoIncentive from "./pages/CloudDeskNoIncentive"
 import CloudDeskDisclaimer from "./pages/CloudDeskDisclaimer"
 import CloudDeskPrivacy from "./pages/CloudDeskPrivacy"
 import CloudDeskIES from "./pages/CloudDeskIES"
@@ -82,8 +81,6 @@ import CloudDeskHorticulture from "./pages/CloudDeskHorticulture"
 import CloudDeskPollution from "./pages/CloudDeskPollution"
 import CloudDeskBrand from "./pages/CloudDeskBrand";
 import CloudDeskCopyright from "./pages/CloudDeskCopyright"
-import CloudDeskBrandCopyright from "./pages/CloudDeskBrandCopyright"
-import CloudDeskLogoDesign from "./pages/CloudDeskLogoDesign";
 import CloudDeskBarcode from "./pages/CloudDeskBarcode"
 import CloudDeskDesign from "./pages/CloudDeskDesign";
 import CloudDeskRMCC from "./pages/CloudDeskRMCC";
@@ -91,7 +88,6 @@ import CloudDeskSVB from "./pages/CloudDeskSVB"
 import CloudDeskWarehouse from "./pages/CloudDeskWarehouse"
 import CloudDeskUN from "./pages/CloudDeskUN";
 import CloudDeskCA from "./pages/CloudDeskCA";
-import CloudDeskEPCG from "./pages/CloudDeskEPCG"
 import CloudDeskRodstep from "./pages/CloudDeskRodstep";
 import EximinqPharma from "./pages/EximinqPharma";
 import EximinqEngineering from "./pages/EximinqEngineering";
@@ -109,8 +105,6 @@ import CloudDeskDemo from "./pages/CloudDeskDemo";
 import SEOManager from "./components/SEOManager";
 import CloudDeskAbout from "./pages/CloudDeskAbout";
 import CloudDeskStrategic from "./pages/CloudDeskStrategic";
-import CloudDeskRefund from "./pages/CloudDeskRefund";
-import CloudDeskEPCGClosure from "./pages/CloudDeskEPCGClosure";
 
 function App() {
   return (
@@ -264,8 +258,11 @@ function App() {
         {/* No Due Certificate */}
         <Route path="/services/no-due-certificate" element={<CloudDeskNoDue />} />
 
-        {/* No Incentive Certificate */}
-        <Route path="/services/no-incentive-certificate" element={<CloudDeskNoIncentive />} />
+        {/* Consolidated URL redirects */}
+        <Route
+          path="/services/no-incentive-certificate"
+          element={<Navigate to="/services/no-due-certificate" replace />}
+        />
 
         {/* Interest Equalisation  */}
         <Route path="/services/interest-equalisation-scheme" element={<CloudDeskIES />} />
@@ -330,11 +327,15 @@ function App() {
         {/* Copyright Registration */}
         <Route path="/services/copyright-registration" element={<CloudDeskCopyright />} />
 
-        {/* Logo Design */}
-        <Route path="/services/brand-copyright" element={<CloudDeskBrandCopyright />} />
+        <Route
+          path="/services/brand-copyright"
+          element={<Navigate to="/services/copyright-registration" replace />}
+        />
 
-        {/* Logo Design  */}
-        <Route path="/services/logo-copyright" element={<CloudDeskLogoDesign />} />
+        <Route
+          path="/services/logo-copyright"
+          element={<Navigate to="/services/copyright-registration" replace />}
+        />
 
         {/* Official Barcode Registration */}
         <Route path="/services/barcode-registration" element={<CloudDeskBarcode />} />
@@ -357,8 +358,10 @@ function App() {
         {/* ca-certification-export-import */}
         <Route path="/services/ca-certification-export-import" element={<CloudDeskCA />} />
 
-        {/* Customs Registration for EPCG */}
-        <Route path="/services/customs-license-registration" element={<CloudDeskEPCG />} />
+        <Route
+          path="/services/customs-license-registration"
+          element={<Navigate to="/services/epcg-scheme" replace />}
+        />
 
         {/* rodtep-rosctl-trading */}
         <Route path="/services/rodtep-rosctl-trading" element={<CloudDeskRodstep />} />
@@ -432,9 +435,15 @@ function App() {
         {/* {DutyCalculator} */}
         <Route path="/tools/duty-calculator-finder" element={<CloudDeskDutyCalculator />} />
 
-        <Route path="/rodtep-refund-recovery" element={<CloudDeskRefund />} />
+        <Route
+          path="/rodtep-refund-recovery"
+          element={<Navigate to="/services/rodtep-scheme" replace />}
+        />
 
-        <Route path="/epcg-closure-services" element={<CloudDeskEPCGClosure />} />
+        <Route
+          path="/epcg-closure-services"
+          element={<Navigate to="/services/epcg-scheme" replace />}
+        />
 
         {/* Thank You Page */}
         <Route path="*" element={<PageNotFound />} />

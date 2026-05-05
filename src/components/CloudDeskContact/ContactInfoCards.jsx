@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 const ContactInfoCards = () => {
+  const [showMapEmbed, setShowMapEmbed] = useState(false);
   const [form, setForm] = useState({
     firstname: "",
     lastName: "",
@@ -56,6 +57,11 @@ const ContactInfoCards = () => {
       resetForm();
     }
   };
+
+  useEffect(() => {
+    setShowMapEmbed(true);
+  }, []);
+
   return (
     <section id="consult-form" className="py-24 bg-slate-950 relative">
       <div className="max-w-7xl mx-auto px-4">
@@ -207,19 +213,36 @@ const ContactInfoCards = () => {
           <div id="map" className="lg:w-1/2 reveal">
             <div className="h-full bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 min-h-[500px] relative group">
 
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6822.328794049008!2d72.84620049357912!3d19.1313594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7cecfe0f0fd%3A0x82655eeb16d16558!2sHubtown%20Viva!5e1!3m2!1sen!2sin!4v1776704877694!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{
-                  border: 0,
-                  filter: "invert(90%) hue-rotate(180deg) contrast(90%)",
-                }}
-                allowFullScreen=""
-                loading="lazy"
-                className="opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                title="Google Map"
-              ></iframe>
+              {showMapEmbed ? (
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6822.328794049008!2d72.84620049357912!3d19.1313594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7cecfe0f0fd%3A0x82655eeb16d16558!2sHubtown%20Viva!5e1!3m2!1sen!2sin!4v1776704877694!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{
+                    border: 0,
+                    filter: "invert(90%) hue-rotate(180deg) contrast(90%)",
+                  }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  className="opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                  title="Google Map"
+                ></iframe>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center bg-slate-950/80 px-8 text-center">
+                  <div>
+                    <p className="text-xs font-bold text-teal-400 uppercase tracking-wide">
+                      Mumbai Operations Base
+                    </p>
+                    <p className="mt-3 text-sm font-semibold text-white">
+                      EXIMINQ, 1010, Hubtown Viva, Near Mogra Metro Station,
+                      Jogeshwari East, Mumbai, Maharashtra 400060
+                    </p>
+                    <p className="mt-3 text-sm text-slate-400">
+                      Interactive map loads after the page becomes active in the browser.
+                    </p>
+                  </div>
+                </div>
+              )}
 
               <div className="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-xl flex items-center justify-between">
                 <div>

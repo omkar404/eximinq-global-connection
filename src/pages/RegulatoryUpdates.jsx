@@ -1,5 +1,5 @@
 /*-------------------------------*/
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
 import { Footer } from "../components/CloudDeskForeignTrade/Footer";
 import {
@@ -82,6 +82,52 @@ const API_BASE = (
   (typeof window !== "undefined" ? window.location.origin : "")
 ).replace(/\/$/, "");
 
+const SNAPSHOT_EVENT = "regulatory-updates:snapshot-ready";
+
+function getDGFTUrl(tabKey) {
+  return `${API_BASE}/api/dgft/notices?type=${tabKey}`;
+}
+
+function getCustomsUrl(tabKey) {
+  const notificationCategoryMap = {
+    "notifications-tariff": "tariff",
+    "notifications-antiDumping": "antiDumping",
+    "notifications-cvd": "cvd",
+    "notifications-nonTariff": "nonTariff",
+    "notifications-safeguards": "safeguards",
+  };
+
+  const notificationCategory = notificationCategoryMap[tabKey];
+  return notificationCategory
+    ? `${API_BASE}/api/customs/notifications/category/${notificationCategory}`
+    : `${API_BASE}/api/customs/${tabKey}`;
+}
+
+function getInitialRegulatorySnapshot() {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  if (window.__REGULATORY_UPDATES_PRERENDER__) {
+    return window.__REGULATORY_UPDATES_PRERENDER__;
+  }
+
+  const cachedCustoms = window.snapStore?.[getCustomsUrl("acts")];
+  if (!cachedCustoms?.success || !Array.isArray(cachedCustoms.data)) {
+    return null;
+  }
+
+  return {
+    activeAuthority: "customs",
+    activeTab: "acts",
+    activeFY: "2025-26",
+    activeLabel: "CBIC › Acts",
+    notifications: cachedCustoms.data,
+    search: "",
+    selectedAct: "",
+  };
+}
+
 /* ─────────────────────────────────────────────
     TABLE VIEW COMPONENT (Only for CBIC)
   ───────────────────────────────────────────── */
@@ -140,13 +186,23 @@ const TableView = ({ items, columns }) => (
     MAIN PAGE
   ───────────────────────────────────────────── */
 export default function RegulatoryUpdates() {
-  const [loading, setLoading] = useState(true);
+  const initialSnapshot = getInitialRegulatorySnapshot();
+  const skipInitialFetch = useRef(Boolean(initialSnapshot));
+  const [loading, setLoading] = useState(!initialSnapshot);
   const [error, setError] = useState(null);
-  const [notifications, setNotifications] = useState([]);
-  const [activeTab, setActiveTab] = useState("acts");
-  const [search, setSearch] = useState("");
-  const [activeAuthority, setActiveAuthority] = useState("customs");
-  const [activeFY, setActiveFY] = useState("2025-26");
+  const [notifications, setNotifications] = useState(
+    initialSnapshot?.notifications || []
+  );
+  const [activeTab, setActiveTab] = useState(
+    initialSnapshot?.activeTab || "acts"
+  );
+  const [search, setSearch] = useState(initialSnapshot?.search || "");
+  const [activeAuthority, setActiveAuthority] = useState(
+    initialSnapshot?.activeAuthority || "customs"
+  );
+  const [activeFY, setActiveFY] = useState(
+    initialSnapshot?.activeFY || "2025-26"
+  );
   const [openGroups, setOpenGroups] = useState(new Set(["acts"]));
   const [activeLabel, setActiveLabel] = useState("CBIC › Acts");
   const [selectedAct, setSelectedAct] = useState("");
@@ -157,10 +213,9 @@ export default function RegulatoryUpdates() {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(
-        `${API_BASE}/api/dgft/notices?type=${activeTab}`,
-        { headers: { "Content-Type": "application/json" } }
-      );
+      const res = await fetch(getDGFTUrl(activeTab), {
+        headers: { "Content-Type": "application/json" },
+      });
       const data = await res.json();
       if (!res.ok || !data.success)
         throw new Error(data.message || "Failed to fetch DGFT data");
@@ -183,20 +238,7 @@ export default function RegulatoryUpdates() {
       setLoading(true);
       setError(null);
 
-      const notificationCategoryMap = {
-        "notifications-tariff": "tariff",
-        "notifications-antiDumping": "antiDumping",
-        "notifications-cvd": "cvd",
-        "notifications-nonTariff": "nonTariff",
-        "notifications-safeguards": "safeguards",
-      };
-
-      const notificationCategory = notificationCategoryMap[activeTab];
-      const url = notificationCategory
-        ? `${API_BASE}/api/customs/notifications/category/${notificationCategory}`
-        : `${API_BASE}/api/customs/${activeTab}`;
-
-      const res = await fetch(url, {
+      const res = await fetch(getCustomsUrl(activeTab), {
         headers: { "Content-Type": "application/json" },
       });
       const data = await res.json();
@@ -216,12 +258,76 @@ export default function RegulatoryUpdates() {
   }, [activeTab]);
 
   useEffect(() => {
+    if (skipInitialFetch.current) {
+      skipInitialFetch.current = false;
+      return;
+    }
+
     if (activeAuthority === "dgft") {
       fetchDGFTData();
     } else {
       fetchCustomsData();
     }
   }, [activeTab, activeAuthority, fetchDGFTData, fetchCustomsData]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
+    const snapshot = {
+      activeAuthority,
+      activeTab,
+      activeFY,
+      activeLabel,
+      notifications,
+      search,
+      selectedAct,
+    };
+
+    window.__REGULATORY_UPDATES_PRERENDER__ = snapshot;
+    window.snapSaveState = () => ({
+      __REGULATORY_UPDATES_PRERENDER__: snapshot,
+    });
+
+    if (!loading) {
+      window.__REGULATORY_UPDATES_READY__ = true;
+      document.documentElement.setAttribute(
+        "data-regulatory-updates-ready",
+        "true"
+      );
+      window.dispatchEvent(
+        new CustomEvent(SNAPSHOT_EVENT, {
+          detail: {
+            activeAuthority,
+            activeTab,
+            count: notifications.length,
+          },
+        })
+      );
+    } else {
+      window.__REGULATORY_UPDATES_READY__ = false;
+      document.documentElement.setAttribute(
+        "data-regulatory-updates-ready",
+        "false"
+      );
+    }
+
+    return () => {
+      if (window.__REGULATORY_UPDATES_READY__ !== true) {
+        document.documentElement.removeAttribute("data-regulatory-updates-ready");
+      }
+    };
+  }, [
+    activeAuthority,
+    activeFY,
+    activeLabel,
+    activeTab,
+    loading,
+    notifications,
+    search,
+    selectedAct,
+  ]);
 
   const displayedData = notifications.filter((item) => {
     const q = search.toLowerCase();
