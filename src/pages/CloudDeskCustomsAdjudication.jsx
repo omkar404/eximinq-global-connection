@@ -1,5 +1,6 @@
-// import TopBar from "../components/CloudDeskCustomsAdjudication/TopBar";
+import TopBar from "../components/CloudDeskCustomsAdjudication/TopBar";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskCustomsAdjudication/Navbar";
 import Hero from "../components/CloudDeskCustomsAdjudication/Hero";
 import Fees from "../components/CloudDeskCustomsAdjudication/Fees";
@@ -28,8 +29,21 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskCustomsAdjudication/MainNavbar";
-
+import { ModalEnroll } from "../components/CloudDeskCustomsAdjudication/ModalEnroll";
 const CloudDeskCustomsAdjudication = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: ""
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 <>
 <Helmet>
@@ -196,9 +210,17 @@ const CloudDeskCustomsAdjudication = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal}/>
+      <Navbar setShowEnrollModal={setShowEnrollModal}/>
+      <Hero setShowEnrollModal={setShowEnrollModal}/>
+
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })} 
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -368,7 +390,7 @@ const CloudDeskCustomsAdjudication = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 {/* --- WHY CLOUDDESK FOR CUSTOMS ADJUDICATION --- */}
 <section className="py-20 bg-white">

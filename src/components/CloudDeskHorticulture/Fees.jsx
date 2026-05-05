@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
     <section id="contact" className="py-20 bg-horti-50">
       <div className="container mx-auto px-4 text-center">
@@ -43,12 +43,23 @@ const Fees = () => {
                 </li>
               </ul>
 
-              <a
+              {/* <a
                 href="#home"
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
                 Apply Now
-              </a>
+              </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Registration_Services",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Apply Now
+          </button>
             </div>
           </div>
 
@@ -86,12 +97,23 @@ const Fees = () => {
                 </li>
               </ul>
 
-              <a
+              {/* <a
                 href="#home"
                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
                 Start Project
-              </a>
+              </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Subsidy_Consultancy",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Start Project
+          </button>
             </div>
           </div>
         </div>

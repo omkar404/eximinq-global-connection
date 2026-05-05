@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskUN/TopBar";
+import TopBar from "../components/CloudDeskUN/TopBar";
 import Navbar from "../components/CloudDeskUN/Navbar";
 import Hero from "../components/CloudDeskUN/Hero";
 import Fees from "../components/CloudDeskUN/Fees";
@@ -28,8 +28,20 @@ import { ModalEnroll } from "../components/CloudDeskUN/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
 
 const CloudDeskUN = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
-  
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 <>
 <Helmet>
@@ -178,8 +190,10 @@ const CloudDeskUN = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -452,7 +466,7 @@ const CloudDeskUN = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 

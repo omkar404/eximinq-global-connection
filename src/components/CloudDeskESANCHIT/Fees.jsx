@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
 //    <!-- Pricing Section -->
    <section id="pricing" className="py-20 bg-slate-50">
@@ -56,12 +56,23 @@ const Fees = () => {
             </ul>
 
             {/* CTA */}
-            <a
+            {/* <a
               href="#contact"
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Start Upload
-            </a>
+            </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "e_Sanchit_Support",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Start Upload
+          </button>
           </div>
         </div>
 

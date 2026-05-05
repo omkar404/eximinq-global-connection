@@ -28,8 +28,41 @@ const igstrefundRoutes = require("./routes/igstrefundRoutes.routes");
 const dutydrawbackRoutes = require("./routes/dutydrawbackRoutes.routes");
 const dscServiceRoutes = require("./routes/dscServicesRoutes.routes");
 const halalCertificationRoutes = require("./routes/halalCertificationRoutes.routes");
+
+{/*{new form concept } */}
+const fssailicensingRoutes = require("./routes/fssailicensingRoutes.routes");
+const eprauthorizationRoutes = require("./routes/eprauthorizationRoutes.routes");
+const dfialicenseRoutes = require("./routes/dfialicenseRoutes.routes");
+const freesaleCertificateRoutes = require("./routes/freesaleCertificateRoutes.routes");
+const svbRegistrationRoutes = require("./routes/svbRegistrationRoutes.routes");
+const factoryStuffingRoutes = require("./routes/factoryStuffingRoutes.routes");
+const warehouseLicenseRoutes = require("./routes/warehouseLicenseRoutes.routes");
+const interestequalisationSchemeRoutes = require("./routes/interestequalisationSchemeRoutes.routes");
+const edpmsEbrcRoutes = require("./routes/edpmsEbrcRoutes.routes");
+const factoryLicenseRoutes = require("./routes/factoryLicenseRoutes.routes");
+const industriaLlicenseRoutes = require("./routes/industriaLlicenseRoutes.routes");
+const iemRegistrationRoutes = require("./routes/iemRegistrationRoutes.routes");
+const defenceeximLicenseRoutes = require("./routes/defenceeximLicenseRoutes.routes");
+const customsAdjudicationRoutes = require("./routes/customsAdjudicationRoutes.routes");
+const lmpcRegistrationRoutes = require("./routes/lmpcRegistrationRoutes.routes");
+const uniipCertificationRoutes = require("./routes/uniipCertificationRoutes.routes");
+const rexRegistrationRoutes = require("./routes/rexRegistrationRoutes.routes");
+const wpcLicenseRoutes = require("./routes/wpcLicenseRoutes.routes");
+const nodueCertificateRoutes = require("./routes/nodueCertificateRoutes.routes");
+const pollutionControlRoutes = require("./routes/pollutionControlRoutes.routes");
+const cacertificationexportImportRoutes = require("./routes/cacertificationexportImportRoutes.routes");
+const esanchitFilingRoutes = require("./routes/esanchitFilingRoutes.routes");
+const dutypaymentEclRoutes = require("./routes/dutypaymentEclRoutes.routes");
+const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
+const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes");
+const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.routes");
+const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
+const horticultureRoutes = require("./routes/horticultureRoutes.routes");
+{/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
+
+{/* ----------Home page inner page ---------------------- */}
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
 const engineeringindustryRoutes = require("./routes/engineeringindustryRoutes.routes"); // ← ADD THIS
 const electronicsindustryRoutes = require("./routes/electronicsindustryRoutes.routes");
@@ -693,6 +726,62 @@ app.use("/api/duty-drawback", dutydrawbackRoutes);
 app.use("/api/dsc-services", dscServiceRoutes);
 
 app.use("/api/halal-certification", halalCertificationRoutes);
+
+app.use("/api/fssai-licensing", fssailicensingRoutes);
+
+app.use("/api/epr-authorization", eprauthorizationRoutes);
+
+app.use("/api/dfia-license", dfialicenseRoutes);
+
+app.use("/api/free-sale-certificate", freesaleCertificateRoutes);
+
+app.use("/api/svb-registration", svbRegistrationRoutes);
+
+app.use("/api/factory-stuffing",factoryStuffingRoutes);
+
+app.use("/api/warehouse-license",warehouseLicenseRoutes);
+
+app.use("/api/interest-equalisation-scheme",interestequalisationSchemeRoutes);
+
+app.use("/api/edpms-ebrc",edpmsEbrcRoutes );
+
+app.use("/api/factory-license",factoryLicenseRoutes);
+
+app.use("/api/industrial-license",industriaLlicenseRoutes);
+
+app.use("/api/iem-registration",iemRegistrationRoutes);
+
+app.use("/api/defence-exim-license",defenceeximLicenseRoutes);
+
+app.use("/api/customs-adjudication",customsAdjudicationRoutes);
+
+app.use("/api/lmpc-registration",lmpcRegistrationRoutes);
+
+app.use("/api/un-iip-certification",uniipCertificationRoutes);
+
+app.use("/api/rex-registration",rexRegistrationRoutes);
+
+app.use("/api/wpc-license",wpcLicenseRoutes);
+
+app.use("/api/no-due-certificate",nodueCertificateRoutes);
+
+app.use("/api/pollution-control",pollutionControlRoutes);
+
+app.use("/api/ca-certification-export-import",cacertificationexportImportRoutes);
+
+app.use("/api/e-sanchit-filing",esanchitFilingRoutes);
+
+app.use("/api/duty-payment-ecl",dutypaymentEclRoutes);
+
+app.use("/api/cha-services",chaServicesRoutes);
+
+app.use("/api/freight-forwarding",freightForwardingRoutes);
+
+app.use("/api/warehousing-solutions",warehousingSolutionsRoutes);
+
+app.use("/api/inland-transportation",inlandTransportationRoutes);
+
+app.use("/api/horticulture",horticultureRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 

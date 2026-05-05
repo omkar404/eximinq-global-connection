@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskWarehouse/TopBar";
+import TopBar from "../components/CloudDeskWarehouse/TopBar";
 import Navbar from "../components/CloudDeskWarehouse/Navbar";
 import Hero from "../components/CloudDeskWarehouse/Hero";
 import Fees from "../components/CloudDeskWarehouse/Fees";
@@ -30,7 +30,19 @@ import { ModalEnroll } from "../components/CloudDeskWarehouse/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
 
 const CloudDeskWarehouse = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   
   return (
   <> 
@@ -172,8 +184,10 @@ const CloudDeskWarehouse = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -385,7 +399,7 @@ const CloudDeskWarehouse = () => {
       </div>
     </section>
 
-<Fees/>
+<Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 {/* --- WHY CLOUDDESK SECTION (WAREHOUSE LICENSE) --- */}

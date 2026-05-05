@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskFactoryStuffing/TopBar";
+import TopBar from "../components/CloudDeskFactoryStuffing/TopBar";
 import Navbar from "../components/CloudDeskCertifiedGovernment/Navbar";
 import Hero from "../components/CloudDeskCertifiedGovernment/Hero";
 import Fees from "../components/CloudDeskFactoryStuffing/Fees";
@@ -26,7 +26,18 @@ import { MainNavbar } from "../components/CloudDeskFactoryStuffing/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskFactoryStuffing/ModalEnroll";
 
 const CloudDeskFactoryStuffing = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+        // TODO → send API call
+        // axios.post("/api/enroll", formData)
+    alert("Form submitted - check console for data.")
+  }
   
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -37,8 +48,10 @@ const CloudDeskFactoryStuffing = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -320,7 +333,7 @@ const CloudDeskFactoryStuffing = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
               <section className="py-20 bg-white">

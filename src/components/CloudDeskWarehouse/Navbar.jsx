@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const Navbar = ({
-  setShowEnrollModal 
-}) => {
+const Navbar = ({ setShowEnrollModal }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -10,22 +8,39 @@ const Navbar = ({
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-                <a href="#about" class="hover:text-brand-600 transition">Overview</a>
-                <a href="#types" class="hover:text-brand-600 transition">License Types</a>
-                <a href="#bonded" class="hover:text-brand-600 transition">Bonded Benefits</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Process</a>
+          <a href="#home" class="hover:text-brand-600 transition">
+            Home
+          </a>
+          <a href="#about" class="hover:text-brand-600 transition">
+            Overview
+          </a>
+          <a href="#types" class="hover:text-brand-600 transition">
+            License Types
+          </a>
+          <a href="#bonded" class="hover:text-brand-600 transition">
+            Bonded Benefits
+          </a>
+          <a href="#contact" class="hover:text-brand-600 transition">
+            Process
+          </a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
+        {/* <button
   onClick={() => setShowEnrollModal(true)}
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
   Get Licensed
-</button>
+</button> */}
 
+        <a
+          href="#contact"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Get Licensed
+        </a>
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -39,16 +54,26 @@ const Navbar = ({
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-                <a href="#about" class="hover:text-brand-600 transition">Overview</a>
-                <a href="#types" class="hover:text-brand-600 transition">License Types</a>
-                <a href="#bonded" class="hover:text-brand-600 transition">Bonded Benefits</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Process</a>
-          <a 
+          <a href="#home" class="hover:text-brand-600 transition">
+            Home
+          </a>
+          <a href="#about" class="hover:text-brand-600 transition">
+            Overview
+          </a>
+          <a href="#types" class="hover:text-brand-600 transition">
+            License Types
+          </a>
+          <a href="#bonded" class="hover:text-brand-600 transition">
+            Bonded Benefits
+          </a>
+          <a href="#contact" class="hover:text-brand-600 transition">
+            Process
+          </a>
+          <a
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
-             Get Licensed
+            Get Licensed
           </a>
         </div>
       )}

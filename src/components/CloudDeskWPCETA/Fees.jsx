@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
 //    <!-- Pricing Section -->
       <section id="contact" className="py-20 bg-slate-50">
@@ -35,12 +35,23 @@ const Fees = () => {
                 ))}
               </ul>
 
-              <a
+              {/* <a
                 href="tel:+917400096950"
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
                 Start Process
-              </a>
+              </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "WPC_ETA_Consultancy",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Start Process
+          </button>              
             </div>
           </div>
 

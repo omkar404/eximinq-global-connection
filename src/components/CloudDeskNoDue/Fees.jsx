@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-export default function Fees() {
+export default function Fees({setShowEnrollModal}) {
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
@@ -47,12 +47,23 @@ export default function Fees() {
 
             </ul>
 
-            <a
+            {/* <a
               href="#home"
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Start Process
-            </a>
+            </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Certification_Service",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Start Process
+          </button>
           </div>
         </div>
 

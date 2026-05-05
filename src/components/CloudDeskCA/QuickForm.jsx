@@ -1,32 +1,105 @@
 import { useState } from "react";
 import { FileCheck, Phone } from "lucide-react";
 
-const Fees = ({ onSubmit }) => {
+const Fees = () => {
   const [form, setForm] = useState({
     certificateType: "",
     financialYear: "",
     mobile: "",
   });
 
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+
+    // Clear that field's error on typing
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSubmit = (e) => {
+  /*----------------------
+    VALIDATION
+  -----------------------*/
+  const validate = () => {
+    const newErrors = {};
+
+    if (!form.certificateType) {
+      newErrors.certificateType = "Certificate type is required";
+    }
+
+    if (!form.financialYear) {
+      newErrors.financialYear = "Financial year is required";
+    }
+
+    if (!form.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    }
+
+    return newErrors;
+  };
+
+  /*----------------------
+    SUBMIT HANDLER (API CALL)
+  -----------------------*/
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.certificateType || !form.financialYear || !form.mobile) return;
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
 
-    onSubmit?.(form);
+    setLoading(true);
 
-    alert("We will send you the document checklist and quotation.");
+    try {
+      const payload = {
+        certificateType: form.certificateType,
+        financialYear: form.financialYear,
+        mobile: form.mobile,
+        type: "QUICK_FORM",
+      };
 
-    setForm({
-      certificateType: "",
-      financialYear: "",
-      mobile: "",
-    });
+      console.log("📤 Sending data:", payload);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/ca-certification-export-import`,
+    // "http://localhost:5000/api/ca-certification-export-import", // ✅ http:// is required   
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || data.message || "Something went wrong");
+      }
+
+      alert("✅ CA service request submitted successfully");
+
+      // Reset form
+      setForm({
+        certificateType: "",
+        financialYear: "",
+        mobile: "",
+      });
+    } catch (err) {
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,7 +126,9 @@ const Fees = ({ onSubmit }) => {
             name="certificateType"
             value={form.certificateType}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.certificateType ? "border-red-500" : "border-slate-300"
+            }`}
           >
             <option value="">Select certificate</option>
             <option>Annual Export Turnover</option>
@@ -62,6 +137,9 @@ const Fees = ({ onSubmit }) => {
             <option>Status Holder Application (3 Years)</option>
             <option>Average Export Performance</option>
           </select>
+          {errors.certificateType && (
+            <p className="text-red-500 text-xs mt-1">{errors.certificateType}</p>
+          )}
         </div>
 
         {/* Financial Year */}
@@ -75,11 +153,16 @@ const Fees = ({ onSubmit }) => {
             value={form.financialYear}
             onChange={handleChange}
             placeholder="e.g. 2023–24"
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.financialYear ? "border-red-500" : "border-slate-300"
+            }`}
           />
+          {errors.financialYear && (
+            <p className="text-red-500 text-xs mt-1">{errors.financialYear}</p>
+          )}
         </div>
 
-        {/* Mobile */}
+        {/* Mobile Number */}
         <div className="mb-6">
           <label className="block text-sm font-semibold mb-1">
             Mobile Number
@@ -94,19 +177,29 @@ const Fees = ({ onSubmit }) => {
               name="mobile"
               value={form.mobile}
               onChange={handleChange}
-              placeholder="+91 74000 96950"
-              required
-              className="w-full pl-9 border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+              placeholder="e.g. 9876543210"
+              maxLength={10}
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.mobile ? "border-red-500" : "border-slate-300"
+              }`}
             />
           </div>
+          {errors.mobile && (
+            <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+          )}
         </div>
 
-        {/* Submit */}
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition"
+          disabled={loading}
+          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+            loading
+              ? "bg-brand-400 cursor-not-allowed"
+              : "bg-brand-600 hover:bg-brand-700"
+          }`}
         >
-          Get Checklist &amp; Quote
+          {loading ? "Submitting..." : "Get Checklist & Quote"}
         </button>
       </form>
     </div>

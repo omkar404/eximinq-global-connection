@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskIndustrial/TopBar";
+import TopBar from "../components/CloudDeskIndustrial/TopBar";
 import Navbar from "../components/CloudDeskIndustrial/Navbar";
 import Hero from "../components/CloudDeskIndustrial/Hero";
 import Fees from "../components/CloudDeskIndustrial/Fees";
@@ -32,7 +32,19 @@ import { MainNavbar } from "../components/CloudDeskIndustrial/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskIndustrial/ModalEnroll";
 
 const CloudDeskIndustrial = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type:"",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+  
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+  
+    alert("Form submitted — check console for data.");
+  };
   
   return (
 
@@ -175,8 +187,10 @@ const CloudDeskIndustrial = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -380,7 +394,7 @@ const CloudDeskIndustrial = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 

@@ -1,5 +1,6 @@
-// import TopBar from "../components/CloudDeskEPRAuthorization/TopBar";
+import TopBar from "../components/CloudDeskEPRAuthorization/TopBar";
 import { Helmet } from "react-helmet-async";
+import React, { useState } from "react";
 import Navbar from "../components/CloudDeskEPRAuthorization/Navbar";
 import Hero from "../components/CloudDeskEPRAuthorization/Hero";
 import Fees from "../components/CloudDeskEPRAuthorization/Fees";
@@ -31,8 +32,21 @@ import {
   Recycle,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskEPRAuthorization/MainNavbar";
-
+import { ModalEnroll } from "../components/CloudDeskEPRAuthorization/ModalEnroll";
 const CloudDeskEPRAuthorization = () => {
+    const [showEnrollModal, setShowEnrollModal] = useState({
+      open: false,
+      type: "",
+    });
+  
+    const handleEnrollmentSubmit = (formData) => {
+      console.log("Enrollment Submitted:", formData);
+  
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+  
+      alert("Form submitted — check console for data.");
+    };
   return (
 <>
 <Helmet>
@@ -131,9 +145,16 @@ const CloudDeskEPRAuthorization = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal}/>
+      <Navbar setShowEnrollModal={setShowEnrollModal}/>
+      <Hero setShowEnrollModal={setShowEnrollModal}/>
+
+      <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -345,12 +366,18 @@ const CloudDeskEPRAuthorization = () => {
               </ul>
 
               <div className="mt-6 text-center">
-                <a
+                {/* <a
                   href="#contact"
                   className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
                 >
                   Appoint Indian Rep
-                </a>
+                </a> */}
+          <button
+            onClick={() => setShowEnrollModal({ open: true, type: "Appoint_Indian_Rep" })}
+            className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
+          >
+            Appoint Indian Rep
+          </button>
               </div>
             </div>
           </div>
@@ -526,18 +553,26 @@ const CloudDeskEPRAuthorization = () => {
                 <p className="text-slate-400 mt-2">
                   No problem. Buy credits and stay compliant.
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="mt-6 inline-block bg-white text-brand-900 font-bold py-2 px-6 rounded hover:bg-slate-200 transition"
                 >
                   Buy Credits
-                </a>
+                </a> */}
+                <button
+                onClick={() => setShowEnrollModal({ open: true, type: "Buy_Credits" })}
+                className="mt-6 inline-block bg-white text-brand-900 font-bold py-2 px-6 rounded hover:bg-slate-200 transition"
+                >
+                Buy Credits
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+        {/* Dynamic Fees Section */}
+        <Fees setShowEnrollModal={setShowEnrollModal} />
 
 {/* --- WHY CLOUDDESK SECTION (EPR) --- */}
 <section className="py-20 bg-white">
