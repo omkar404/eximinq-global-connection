@@ -57,6 +57,7 @@ const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
 const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes");
 const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.routes");
 const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
+const horticultureRoutes = require("./routes/horticultureRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -725,7 +726,9 @@ app.use("/api/freight-forwarding",freightForwardingRoutes);
 
 app.use("/api/warehousing-solutions",warehousingSolutionsRoutes);
 
-app.use("/api/inland-transportation",inlandTransportationRoutes)
+app.use("/api/inland-transportation",inlandTransportationRoutes);
+
+app.use("/api/horticulture",horticultureRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 
