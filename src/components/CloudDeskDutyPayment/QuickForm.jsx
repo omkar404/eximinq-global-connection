@@ -76,8 +76,8 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/duty-payment-ecl`,
-        "http://localhost:5000/api/duty-payment-ecl", // ✅ http:// is required  
+        `${process.env.REACT_APP_API_URL}/api/duty-payment-ecl`,
+        // "http://localhost:5000/api/duty-payment-ecl", // ✅ http:// is required  
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
