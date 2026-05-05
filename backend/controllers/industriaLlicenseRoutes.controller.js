@@ -43,9 +43,9 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
-          ${product ? `<tr><td><b>Product Type</b></td><td>${product}</td></tr>` : ""}
+          ${product ? `<tr><td><b>Proposed Product</b></td><td>${product}</td></tr>` : ""}
           ${location ? `<tr><td><b>Location</b></td><td>${location}</td></tr>` : ""}
-          ${investment ? `<tr><td><b>Port of Import</b></td><td>${investment}</td></tr>` : ""}
+          ${investment ? `<tr><td><b>Investment (₹ Crores)</b></td><td>${investment}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>

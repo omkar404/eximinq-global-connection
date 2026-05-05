@@ -43,7 +43,7 @@ async function sendEmail(record) {
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${certificateType ? `<tr><td><b>Certificate Type</b></td><td>${certificateType}</td></tr>` : ""}
-          ${financialYear ? `<tr><td><b>Financial Year</b></td><td>${financialYear}</td></tr>` : ""}
+          ${financialYear ? `<tr><td><b>Financial Year (FY)</b></td><td>${financialYear}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>

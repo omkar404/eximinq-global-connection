@@ -34,7 +34,7 @@ async function sendEmail(record) {
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to: "yadavsheshnath236@gmail.com",
+    to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
     subject: `Customs Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
@@ -42,8 +42,8 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
-          ${issueCategory ? `<tr><td><b>Product Type</b></td><td>${issueCategory}</td></tr>` : ""}
-          ${regionalAuthority ? `<tr><td><b>Port of Import</b></td><td>${regionalAuthority}</td></tr>` : ""}
+          ${issueCategory ? `<tr><td><b>Issue Category</b></td><td>${issueCategory}</td></tr>` : ""}
+          ${regionalAuthority ? `<tr><td><b>Regional Authority (RA)</b></td><td>${regionalAuthority}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
