@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskCopyright/TopBar";
+import TopBar from "../components/CloudDeskCopyright/TopBar";
 import Navbar from "../components/CloudDeskCopyright/Navbar";
 import Hero from "../components/CloudDeskCopyright/Hero";
 import Fees from "../components/CloudDeskCopyright/Fees";
@@ -26,7 +26,19 @@ import { MainNavbar } from "../components/CloudDeskCopyright/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskCopyright/ModalEnroll";
 
 const CloudDeskCopyright = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   
   return (
 <>
@@ -122,8 +134,10 @@ const CloudDeskCopyright = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false , type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -385,7 +399,7 @@ const CloudDeskCopyright = () => {
     </section>
 
 
-    <Fees />
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
         <section className="py-20 bg-white" id="faq">
       <div className="container mx-auto px-4 max-w-3xl">

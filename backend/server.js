@@ -57,6 +57,7 @@ const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
 const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes");
 const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.routes");
 const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
+const copyrightRegistrationRoutes = require("./routes/copyrightRegistrationRoutes.routes");
 const trademarkRegistrationRoutes = require("./routes/trademarkRegistrationRoutes.routes");
 const fertiliserimportLicenseRoutes = require("./routes/fertiliserimportLicenseRoutes.routes");
 const horticultureRoutes = require("./routes/horticultureRoutes.routes");
@@ -782,6 +783,8 @@ app.use("/api/freight-forwarding",freightForwardingRoutes);
 app.use("/api/warehousing-solutions",warehousingSolutionsRoutes);
 
 app.use("/api/inland-transportation",inlandTransportationRoutes);
+
+app.use("/api/copyright-registration",copyrightRegistrationRoutes)
 
 app.use("/api/trademark-registration",trademarkRegistrationRoutes)
 
