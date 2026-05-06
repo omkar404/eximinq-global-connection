@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskISO/TopBar";
+import TopBar from "../components/CloudDeskISO/TopBar";
 import Navbar from "../components/CloudDeskISO/Navbar";
 import Hero from "../components/CloudDeskISO/Hero";
 import Fees from "../components/CloudDeskISO/Fees";
@@ -35,7 +35,19 @@ import { MainNavbar } from "../components/CloudDeskISO/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskISO/ModalEnroll";
 
 const CloudDeskISO = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 
 <>
@@ -177,8 +189,10 @@ const CloudDeskISO = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false , type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -486,7 +500,7 @@ const CloudDeskISO = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 {/* --- WHY CLOUDDESK SECTION (ISO CERTIFICATION) --- */}

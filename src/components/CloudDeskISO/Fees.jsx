@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
@@ -47,12 +47,23 @@ const Fees = () => {
                 </li>
               </ul>
 
-              <a
+              {/* <a
                 href="#Home"
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
                 Get Quote
-              </a>
+              </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Non_IAF_ISO",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Get Quote
+          </button>
             </div>
           </div>
 
@@ -90,12 +101,23 @@ const Fees = () => {
                 </li>
               </ul>
 
-              <a
+              {/* <a
                 href="#Home"
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
                 Get Quote
-              </a>
+              </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "IAF_ISO",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Get Quote
+          </button>
             </div>
           </div>
 
