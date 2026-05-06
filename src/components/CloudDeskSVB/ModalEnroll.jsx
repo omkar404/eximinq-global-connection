@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/svb-registration`,
-        "http://localhost:5000/api/svb-registration",
+        `${process.env.REACT_APP_API_URL}/api/svb-registration`,
+        // "http://localhost:5000/api/svb-registration",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
