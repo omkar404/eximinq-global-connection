@@ -57,6 +57,7 @@ const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
 const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes");
 const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.routes");
 const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
+const fertiliserimportLicenseRoutes = require("./routes/fertiliserimportLicenseRoutes.routes");
 const horticultureRoutes = require("./routes/horticultureRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
@@ -780,6 +781,8 @@ app.use("/api/freight-forwarding",freightForwardingRoutes);
 app.use("/api/warehousing-solutions",warehousingSolutionsRoutes);
 
 app.use("/api/inland-transportation",inlandTransportationRoutes);
+
+app.use("/api/fertiliser-import-license",fertiliserimportLicenseRoutes);
 
 app.use("/api/horticulture",horticultureRoutes);
 
