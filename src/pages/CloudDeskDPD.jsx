@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskDPD/TopBar";
+import TopBar from "../components/CloudDeskDPD/TopBar";
 import Navbar from "../components/CloudDeskDPD/Navbar";
 import Hero from "../components/CloudDeskDPD/Hero";
 import Fees from "../components/CloudDeskDPD/Fees";
@@ -29,8 +29,19 @@ import { MainNavbar } from "../components/CloudDeskDPD/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskDPD/ModalEnroll";
 
 const CloudDeskDPD = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
-  
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: ""
+  });
+ 
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }  
   return (
 <>
 <Helmet>
@@ -170,8 +181,10 @@ const CloudDeskDPD = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}        
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -429,7 +442,7 @@ const CloudDeskDPD = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
