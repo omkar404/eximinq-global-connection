@@ -1,8 +1,8 @@
 import { Check } from "lucide-react";
 
-const Fees = () => {
+const Fees = ({setShowEnrollModal}) => {
   return (
-    <section id="pricing" className="py-20 bg-brand-50">
+    <section id="fees" className="py-20 bg-brand-50">
       <div className="container mx-auto px-4 text-center">
         {/* Heading */}
         <h2 className="text-3xl font-bold text-brand-900 mb-8">
@@ -49,12 +49,23 @@ const Fees = () => {
             </ul>
 
             {/* CTA */}
-            <a
+            {/* <a
               href="#home"
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Start Filing
-            </a>
+            </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Design_Registration",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Start Filing
+          </button>
           </div>
         </div>
 

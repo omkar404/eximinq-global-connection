@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
-// import TopBar from "../components/CloudDeskCDSCO/TopBar";
+import { useState } from "react";
+import TopBar from "../components/CloudDeskCDSCO/TopBar";
 import Navbar from "../components/CloudDeskCDSCO/Navbar";
 import Hero from "../components/CloudDeskCDSCO/Hero";
 import Fees from "../components/CloudDeskCDSCO/Fees";
@@ -26,8 +27,22 @@ import {
   Factory,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskCDSCO/MainNavbar";
-
+import { ModalEnroll} from "../components/CloudDeskCDSCO/ModalEnroll";
 const CloudDeskCDSCO = () => {
+const [showEnrollModal, setShowEnrollModal] = useState({ 
+  open: false, 
+  type: "", 
+});
+
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 <>
 <Helmet>
@@ -147,9 +162,16 @@ const CloudDeskCDSCO = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal}/>
+      <Navbar setShowEnrollModal={setShowEnrollModal}/>
+      <Hero setShowEnrollModal={setShowEnrollModal}/>
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -520,7 +542,7 @@ const CloudDeskCDSCO = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 {/* --- WHY CLOUDDESK SECTION (CDSCO) --- */}
 <section className="py-20 bg-white">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskBrand/TopBar";
+import TopBar from "../components/CloudDeskBrand/TopBar";
 import Navbar from "../components/CloudDeskBrand/Navbar";
 import Hero from "../components/CloudDeskBrand/Hero";
 import Fees from "../components/CloudDeskBrand/Fees";
@@ -23,7 +23,19 @@ import { MainNavbar } from "../components/CloudDeskBrand/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskBrand/ModalEnroll";
 
 const CloudDeskBrand = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -34,8 +46,10 @@ const CloudDeskBrand = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -284,7 +298,7 @@ const CloudDeskBrand = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
         <section className="py-20 bg-white" id="faq">
       <div className="container mx-auto px-4 max-w-3xl">

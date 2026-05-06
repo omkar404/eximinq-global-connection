@@ -57,6 +57,13 @@ const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
 const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes");
 const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.routes");
 const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
+const designRegistrationRoutes = require("./routes/designRegistrationRoutes.routes");
+const dpdRegistrationRoutes = require("./routes/dpdRegistrationRoutes.routes");
+const cdscoComplianceRoutes = require("./routes/cdscoComplianceRoutes.routes");
+const isoCertificationRoutes = require("./routes/isoCertificationRoutes.routes");
+const copyrightRegistrationRoutes = require("./routes/copyrightRegistrationRoutes.routes");
+const trademarkRegistrationRoutes = require("./routes/trademarkRegistrationRoutes.routes");
+const fertiliserimportLicenseRoutes = require("./routes/fertiliserimportLicenseRoutes.routes");
 const horticultureRoutes = require("./routes/horticultureRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
@@ -780,6 +787,20 @@ app.use("/api/freight-forwarding",freightForwardingRoutes);
 app.use("/api/warehousing-solutions",warehousingSolutionsRoutes);
 
 app.use("/api/inland-transportation",inlandTransportationRoutes);
+
+app.use("/api/design-registration",designRegistrationRoutes);
+
+app.use("/api/dpd-registration",dpdRegistrationRoutes);
+
+app.use("/api/cdsco-compliance", cdscoComplianceRoutes);
+
+app.use("/api/iso-certification",isoCertificationRoutes);
+
+app.use("/api/copyright-registration",copyrightRegistrationRoutes)
+
+app.use("/api/trademark-registration",trademarkRegistrationRoutes)
+
+app.use("/api/fertiliser-import-license",fertiliserimportLicenseRoutes);
 
 app.use("/api/horticulture",horticultureRoutes);
 

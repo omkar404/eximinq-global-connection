@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskFertilizer/TopBar";
+import TopBar from "../components/CloudDeskFertilizer/TopBar";
 import Navbar from "../components/CloudDeskFertilizer/Navbar";
 import Hero from "../components/CloudDeskFertilizer/Hero";
 import Fees from "../components/CloudDeskFertilizer/Fees";
@@ -33,7 +33,19 @@ import { MainNavbar } from "../components/CloudDeskFertilizer/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskFertilizer/ModalEnroll";
 
 const CloudDeskFertilizer = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")    
+  }
   return (
 <>
 <Helmet>
@@ -174,8 +186,10 @@ const CloudDeskFertilizer = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -487,7 +501,7 @@ const CloudDeskFertilizer = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

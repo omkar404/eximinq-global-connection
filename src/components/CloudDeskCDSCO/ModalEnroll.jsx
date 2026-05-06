@@ -18,8 +18,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    TM_Registration: {
-      service: "TM Registration",
+    CDSCO_Registration: {
+      service: "CDSCO Registration",
     },
     // Central_Annual_Returns: {
     //   service: "Central Annual Returns",
@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/trademark-registration`,
-        // "http://localhost:5000/api/trademark-registration",
+        `${process.env.REACT_APP_API_URL}/api/cdsco-compliance`,
+        // "http://localhost:5000/api/cdsco-compliance",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

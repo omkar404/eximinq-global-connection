@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskBarcode/TopBar";
+import TopBar from "../components/CloudDeskBarcode/TopBar";
 import Navbar from "../components/CloudDeskBarcode/Navbar";
 import Hero from "../components/CloudDeskBarcode/Hero";
 import Fees from "../components/CloudDeskBarcode/Fees";
@@ -24,7 +24,19 @@ import { ModalEnroll } from "../components/CloudDeskBarcode/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
 
 const CloudDeskBarcode = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -35,8 +47,10 @@ const CloudDeskBarcode = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}        
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -277,7 +291,7 @@ const CloudDeskBarcode = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
