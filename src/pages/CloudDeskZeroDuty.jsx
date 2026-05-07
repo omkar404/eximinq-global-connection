@@ -1,10 +1,9 @@
-// import TopBar from "../components/CloudDeskMarine/TopBar";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import Navbar from "../components/CloudDeskMarine/Navbar";
-import Hero from "../components/CloudDeskMarine/Hero";
-import Fees from "../components/CloudDeskMarine/Fees";
-import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
+import Navbar from "../components/CloudDeskZeroDuty/Navbar";
+import Hero from "../components/CloudDeskZeroDuty/Hero";
+import Fees from "../components/CloudDeskZeroDuty/Fees";
+import { ModalEnroll } from "../components/CloudDeskZeroDuty/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -30,9 +29,9 @@ import {
   Mail,
   MapPin
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskMarine/MainNavbar";
+import { MainNavbar } from "../components/CloudDeskZeroDuty/MainNavbar";
 
-const CloudDeskMarine = () => {
+const CloudDeskZeroDuty = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
     actionType: "",
@@ -198,6 +197,7 @@ const CloudDeskMarine = () => {
           type="epcg_scheme_enroll"
           actionType={showEnrollModal.actionType}
           source={showEnrollModal.source}
+          onSubmit={handleEnrollmentSubmit}
           onClose={() =>
             setShowEnrollModal({
               open: false,
@@ -911,4 +911,4 @@ const CloudDeskMarine = () => {
   );
 };
 
-export default CloudDeskMarine;
+export default CloudDeskZeroDuty;
