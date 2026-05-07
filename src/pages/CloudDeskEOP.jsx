@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskEOP/TopBar";
+import TopBar from "../components/CloudDeskEOP/TopBar";
 import Navbar from "../components/CloudDeskEOP/Navbar";
 import Hero from "../components/CloudDeskEOP/Hero";
 import Fees from "../components/CloudDeskEOP/Fees";

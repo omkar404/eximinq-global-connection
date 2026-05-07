@@ -8,7 +8,7 @@ const QuickForm = ({
   resetForm: externalResetForm,
 }) => {
   const [form, setForm] = useState({
-    licenseType: "", // Changed from default value to empty string
+    licenseType: "",
     pendingExport: "",
     mobile: "",
     companyName: "",
@@ -21,19 +21,19 @@ const QuickForm = ({
 
   const LICENSE_TYPES = ["Advance Authorisation", "EPCG Scheme"];
 
+  // Handle change with mobile sanitization (like first QuickForm)
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
 
-    // Clear error when typing
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
+    // Clear error for that field on typing
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   // Internal reset function
@@ -48,26 +48,22 @@ const QuickForm = ({
     });
     setErrors({});
 
-    // Call external reset if provided
     if (typeof externalResetForm === "function") {
       externalResetForm();
     }
   };
 
   /* -------------------------
-     VALIDATION FUNCTION
+     VALIDATION (matches first QuickForm style)
   -------------------------- */
-
   const validate = () => {
     const newErrors = {};
 
-    // License Type validation
     if (!form.licenseType) {
       newErrors.licenseType = "Please select a license type";
     }
 
-    // Pending Export validation
-    if (!form.pendingExport.trim()) {
+    if (!form.pendingExport) {
       newErrors.pendingExport = "Pending export percentage is required";
     } else {
       const pendingValue = parseFloat(form.pendingExport);
@@ -78,13 +74,9 @@ const QuickForm = ({
       }
     }
 
-    // Mobile validation
-    const mobileRegex = /^[6-9]\d{9}$/;
-    const cleanMobile = form.mobile.replace(/\D/g, "");
-
-    if (!form.mobile.trim()) {
+    if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(cleanMobile)) {
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
       newErrors.mobile = "Enter valid 10 digit Indian mobile number";
     }
 
@@ -92,18 +84,16 @@ const QuickForm = ({
   };
 
   /* -------------------------
-     SUBMIT
+     SUBMIT HANDLER
   -------------------------- */
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validate();
     setErrors(validationErrors);
-
     if (Object.keys(validationErrors).length > 0) return;
 
-    // Send data out if callback provided
+    // Call external onSubmit callback if provided
     if (typeof onSubmit === "function") {
       onSubmit({
         ...form,
@@ -112,18 +102,15 @@ const QuickForm = ({
       });
     }
 
+    setLoading(true);
+
     try {
-      setLoading(true);
-
       const finalType = type || "EOP_EXTENSION";
-
-      // Clean mobile number (remove non-digits)
-      const cleanMobile = form.mobile.replace(/\D/g, "");
 
       const payload = {
         name: form.companyName || form.contactPerson || "EOP Extension Lead",
         email: form.email || "lead@eximinq.com",
-        mobile: cleanMobile,
+        mobile: form.mobile, // already sanitized
         type: finalType,
         service: "EOP Extension",
         licenseType: form.licenseType,
@@ -133,16 +120,15 @@ const QuickForm = ({
         contactPerson: form.contactPerson,
       };
 
-      // Add eopLicense if it exists and type is EOP_MANAGEMENT
       if (type === "EOP_MANAGEMENT" && eopLicense) {
         payload.eopLicense = eopLicense;
       }
 
-      console.log("Final payload:", payload);
+      console.log("📤 Sending data:", payload);
 
-      const res = await fetch(
-       `${process.env.REACT_APP_API_URL}/api/eop-extension`,
-        // "http://localhost:5000/api/eop-extension",
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/eop-extension`,
+        // "http://localhost:5000/api/eop-extension", // ✅ http:// is required        
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -150,28 +136,24 @@ const QuickForm = ({
         }
       );
 
-      const data = await res.json();
+      const data = await response.json();
 
-      console.log("API Response:", data);
-
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || data.message || "API failed");
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || data.message || "Something went wrong");
       }
 
       alert(
         data.message ||
-          "EOP extension request submitted successfully. We will calculate the fees and revert."
+          "✅ EOP extension request submitted successfully. We will calculate the fees and revert."
       );
 
-      // Reset form and close modal
       resetForm();
-
       if (typeof onClose === "function") {
         onClose();
       }
     } catch (err) {
-      console.error("EOP Extension error:", err);
-      alert(err.message || "Submission failed. Please try again.");
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -190,16 +172,15 @@ const QuickForm = ({
         {/* License Type */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            License Type <span className="text-red-500"></span>
+            License Type
           </label>
           <select
             name="licenseType"
             value={form.licenseType}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 
-                       focus:outline-none focus:border-brand-500
-                       ${errors.licenseType ? "border-red-500" : "border-slate-300"}`}
-            disabled={loading}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.licenseType ? "border-red-500" : "border-slate-300"
+            }`}
           >
             <option value="" disabled>
               -- Select License Type --
@@ -211,14 +192,14 @@ const QuickForm = ({
             ))}
           </select>
           {errors.licenseType && (
-            <p className="text-red-500 text-sm mt-1">{errors.licenseType}</p>
+            <p className="text-red-500 text-xs mt-1">{errors.licenseType}</p>
           )}
         </div>
 
         {/* Pending Export Percentage */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Pending Export % <span className="text-red-500"></span>
+            Pending Export %
           </label>
           <input
             type="number"
@@ -229,37 +210,35 @@ const QuickForm = ({
             min="0"
             max="100"
             step="0.1"
-            className={`w-full border rounded px-3 py-2 
-                       focus:outline-none focus:border-brand-500
-                       ${errors.pendingExport ? "border-red-500" : "border-slate-300"}`}
-            disabled={loading}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.pendingExport ? "border-red-500" : "border-slate-300"
+            }`}
           />
           {errors.pendingExport && (
-            <p className="text-red-500 text-sm mt-1">{errors.pendingExport}</p>
+            <p className="text-red-500 text-xs mt-1">{errors.pendingExport}</p>
           )}
         </div>
 
-        {/* Mobile */}
-        <div className="mb-6">
+        {/* Mobile Number */}
+        <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Mobile Number <span className="text-red-500"></span>
+            Mobile Number
           </label>
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            placeholder="9876543210"
-            className={`w-full border rounded px-3 py-2 
-                       focus:outline-none focus:border-brand-500
-                       ${errors.mobile ? "border-red-500" : "border-slate-300"}`}
-            disabled={loading}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.mobile ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. 9876543210"
+            maxLength={10}
           />
           {errors.mobile && (
-            <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>
+            <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
           )}
         </div>
-
 
         {/* Submit Button */}
         <button
