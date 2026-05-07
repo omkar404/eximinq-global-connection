@@ -29,7 +29,6 @@ const Navbar = ({ setShowEnrollModal }) => {
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<<<<<<< HEAD
         <button
           onClick={() =>
             setShowEnrollModal({
@@ -42,14 +41,6 @@ const Navbar = ({ setShowEnrollModal }) => {
         >
           Apply Now
         </button>
-=======
-        <a 
-          href="#home"
-          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
-        >
-          Buy Policy
-        </a>
->>>>>>> 7ea1273a655ab8ab1be74a22582e4c8f07a66585
 
 {/* <button
   onClick={() => setShowEnrollModal({open:true , type: "Buy_Policy"})}
@@ -91,7 +82,6 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#contact" class="block py-2 text-brand-600 font-bold">
             Apply License
           </a>
-<<<<<<< HEAD
           <button
             onClick={() =>
               setShowEnrollModal({
@@ -100,10 +90,6 @@ const Navbar = ({ setShowEnrollModal }) => {
                 source: "services/epcg-scheme",
               })
             }
-=======
-          <a
-            href="#contact"
->>>>>>> 7ea1273a655ab8ab1be74a22582e4c8f07a66585
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now

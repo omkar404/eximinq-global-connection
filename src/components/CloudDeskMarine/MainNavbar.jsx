@@ -135,7 +135,6 @@ export const MainNavbar = ({
           </div>
 
           <button
-<<<<<<< HEAD
             onClick={() =>
               setShowEnrollModal({
                 open: true,
@@ -143,9 +142,6 @@ export const MainNavbar = ({
                 source: "services/epcg-scheme",
               })
             }
-=======
-            onClick={() => setShowEnrollModal({open:true , type:"Enroll"})}
->>>>>>> 7ea1273a655ab8ab1be74a22582e4c8f07a66585
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now
