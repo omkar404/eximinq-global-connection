@@ -1,29 +1,76 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // ✅ This line was missing
 
-const VALID_TYPES = [
-  "Enroll",
-  "Pending_EODC",
-  "New_Advance_License_Request",
-  "QUICK_FORM",
-];
-
-const advanceAuthorisationSchema = new mongoose.Schema(
+const advanceAuthorisationRoutesSchema = new mongoose.Schema(
   {
-    name:     { type: String, required: true, trim: true },
-    mobile:   { type: String, required: true, trim: true },
-    email:    { type: String, required: true, trim: true, lowercase: true }, // ✅ Fix: default:null → required:true
-    entity:   { type: String, default: null, trim: true },
+    service: {
+      type: String,
+      trim: true,
+      default: "Advance Authorisation Registration",
+    },
+    exportProduct: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    importRawMaterial: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    name: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    mobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    entity: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     role: {
       type: String,
+      trim: true,
       default: null,
-      enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
     },
-    type:     { type: String, required: true, enum: VALID_TYPES },
-    category: { type: String, default: null },
-    issue:    { type: String, default: null },
-    partner:  { type: Boolean, default: false },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
+    portName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("AdvanceAuthorisation", advanceAuthorisationSchema); // ✅ Fix: clean model name
+module.exports = mongoose.model(
+  "advanceAuthorisationRoutes",
+  advanceAuthorisationRoutesSchema
+);

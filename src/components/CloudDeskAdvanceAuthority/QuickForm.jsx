@@ -10,12 +10,22 @@ const QuickForm = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  // Handle change with mobile sanitization (like QuickForm)
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+
+    // Clear error for that field on typing
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  // Validation (same pattern as QuickForm, with all three fields)
   const validate = () => {
     const newErrors = {};
 
@@ -31,10 +41,9 @@ const QuickForm = () => {
       newErrors.importRawMaterial = "Material name must be at least 3 characters";
     }
 
-    const mobileRegex = /^[6-9]\d{9}$/;
-    if (!form.mobile.trim()) {
+    if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile)) {
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
       newErrors.mobile = "Enter valid 10 digit Indian mobile number";
     }
 
@@ -48,9 +57,9 @@ const QuickForm = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
-    try {
-      setLoading(true);
+    setLoading(true);
 
+    try {
       const payload = {
         name: form.exportProduct,
         email: "lead@eximinq.com",
@@ -61,9 +70,11 @@ const QuickForm = () => {
         importRawMaterial: form.importRawMaterial,
       };
 
+      console.log("📤 Sending data:", payload);
+
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/advance-authorisation`,
-        // "http://localhost:5000/api/advance-authorisation",
+        // "http://localhost:5000/api/advance-authorisation", // ✅ http:// is required        
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -74,16 +85,16 @@ const QuickForm = () => {
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message);
+        throw new Error(data.error || data.message || "Something went wrong");
       }
 
-      alert("Benefit calculation request submitted successfully!");
+      alert("✅ Benefit calculation request submitted successfully!");
 
+      // Reset form
       setForm({ exportProduct: "", importRawMaterial: "", mobile: "" });
-
     } catch (err) {
-      console.error(err);
-      alert("Submission failed. Please try again.");
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -91,8 +102,7 @@ const QuickForm = () => {
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-
-      <h3 className="text-2xl font-bold text-brand-900 mb-1">
+      <h3 className="text-2xl font-bold text-brand-900 mb-2">
         Benefit Calculator
       </h3>
       <p className="text-slate-500 mb-6 text-sm">
@@ -100,8 +110,7 @@ const QuickForm = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
-
-        {/* EXPORT PRODUCT */}
+        {/* Export Product */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
             Export Product
@@ -111,17 +120,17 @@ const QuickForm = () => {
             name="exportProduct"
             value={form.exportProduct}
             onChange={handleChange}
-            placeholder="e.g. Stainless Steel Utensils"
-            className={`w-full border rounded px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.exportProduct ? "border-red-400" : "border-slate-300"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.exportProduct ? "border-red-500" : "border-slate-300"
             }`}
+            placeholder="e.g. Stainless Steel Utensils"
           />
           {errors.exportProduct && (
             <p className="text-red-500 text-xs mt-1">{errors.exportProduct}</p>
           )}
         </div>
 
-        {/* IMPORT RAW MATERIAL */}
+        {/* Import Raw Material */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
             Import Raw Material
@@ -131,18 +140,18 @@ const QuickForm = () => {
             name="importRawMaterial"
             value={form.importRawMaterial}
             onChange={handleChange}
-            placeholder="e.g. SS Coils Grade 304"
-            className={`w-full border rounded px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.importRawMaterial ? "border-red-400" : "border-slate-300"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.importRawMaterial ? "border-red-500" : "border-slate-300"
             }`}
+            placeholder="e.g. SS Coils Grade 304"
           />
           {errors.importRawMaterial && (
             <p className="text-red-500 text-xs mt-1">{errors.importRawMaterial}</p>
           )}
         </div>
 
-        {/* MOBILE */}
-        <div className="mb-6">
+        {/* Mobile Number (with sanitization) */}
+        <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
             Mobile Number
           </label>
@@ -151,29 +160,29 @@ const QuickForm = () => {
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            placeholder="+91 74000 96950"
-            className={`w-full border rounded px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.mobile ? "border-red-400" : "border-slate-300"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
+            placeholder="e.g. 9876543210"
+            maxLength={10}
           />
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
           )}
         </div>
 
-        {/* SUBMIT */}
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
           className={`w-full text-white font-bold py-3 rounded-lg transition ${
             loading
-              ? "bg-blue-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-brand-400 cursor-not-allowed"
+              : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
           {loading ? "Submitting..." : "Calculate Savings"}
         </button>
-
       </form>
     </div>
   );
