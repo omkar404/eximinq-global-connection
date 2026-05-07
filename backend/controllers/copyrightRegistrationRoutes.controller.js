@@ -28,6 +28,7 @@ async function sendEmail(record) {
     issue,
     workType,
     title,
+    source,
   } = record;
 
 const serviceDisplay = service || "Logo Copyright Registration";
@@ -40,7 +41,8 @@ const serviceDisplay = service || "Logo Copyright Registration";
       <div style="font-family:Arial;">
         <h2>Logo Copyright Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
-          <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
+          <tr><td><b>Type</b></td><td>${type}</td></tr>
+          ${source ? `<tr><td><b>Source</b></td><td>${source}</td></tr>` : ""}
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${workType ? `<tr><td><b>Type of Work</b></td><td>${workType}</td></tr>` : ""}
           ${title ? `<tr><td><b>Title of Work</b></td><td>${title}</td></tr>` : ""}
@@ -79,6 +81,7 @@ exports.createcopyrightRegistrationRoutes = async (req, res) => {
       issue,
       workType, // ✅ camelCase
       title, // ✅ camelCase
+      source,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -101,6 +104,7 @@ exports.createcopyrightRegistrationRoutes = async (req, res) => {
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),
       type: type || "QUICK_FORM_COMPLIANCE",
+      source: source ? source.trim() : null,
       category: category || null,
       issue: issue || null,
     };

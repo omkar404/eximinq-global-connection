@@ -17,9 +17,18 @@ const Hero = ({ setShowEnrollModal }) => {
                     Every hour counts. Cargo flagged for Examination or Valuation Hold incurs massive demurrage. Our experts specialize in rapid technical documentation and officer liaison.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <button
+                      onClick={() =>
+                        setShowEnrollModal({
+                          open: true,
+                          actionType: "Get 24/7 Help",
+                          source: "services/rmcc-alert-removal",
+                        })
+                      }
+                      className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+                    >
                         Get 24/7 Help
-                    </a>
+                    </button>
                     <a href="#reasons" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Identify Hold Reason
                     </a>

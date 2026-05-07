@@ -26,7 +26,11 @@ import { MainNavbar } from "../components/CloudDeskGSTFiling/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 
 const CloudDeskGSTFiling = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    actionType: "",
+    source: "services/gst-returns/",
+  });
   
   return (
 <>
@@ -195,8 +199,16 @@ const CloudDeskGSTFiling = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        actionType={showEnrollModal.actionType}
+        source={showEnrollModal.source}
+        onClose={() =>
+          setShowEnrollModal({
+            open: false,
+            actionType: "",
+            source: "services/gst-returns/",
+          })
+        }
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}

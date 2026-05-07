@@ -12,6 +12,14 @@ const ALLOWED_LANDING_TYPES = [
   "services_enroll",
   "foreign_trade_policy_enroll",
   "dgft_customs_consultancy_enroll",
+  "gst_filing_enroll",
+  "gst_lut_filing_enroll",
+  "rmcc_alert_removal_enroll",
+  "igcr_returns_enroll",
+  "aqcs_pqms_enroll",
+  "barcode_registration_enroll",
+  "bis_registration_enroll",
+  "epcg_scheme_enroll",
   "compliance_trade_india_enroll",
   "contact-us_enroll",
   "clouddesk_saas_enroll",
@@ -25,6 +33,14 @@ const LANDING_TYPE_LABELS = {
   services_enroll: "Services Page Enrollment",
   "foreign_trade_policy_enroll": "Foreign Trade Policy Enrollment",
   dgft_customs_consultancy_enroll: "DGFT & Customs Consultancy Enrollment",
+  gst_filing_enroll: "GST Filing Enrollment",
+  gst_lut_filing_enroll: "GST LUT Filing Enrollment",
+  rmcc_alert_removal_enroll: "RMCC Alert Removal Enrollment",
+  igcr_returns_enroll: "IGCR Returns Enrollment",
+  aqcs_pqms_enroll: "AQCS / PQMS Enrollment",
+  barcode_registration_enroll: "Barcode Registration Enrollment",
+  bis_registration_enroll: "BIS Registration Enrollment",
+  epcg_scheme_enroll: "EPCG Scheme Enrollment",
   compliance_trade_india_enroll: "Compliance & Trade India Enrollment",
   "contact-us_enroll": "Contact Us Enrollment",
   clouddesk_saas_enroll: "CloudDesk SaaS Enrollment",
@@ -48,7 +64,7 @@ const transporter = nodemailer.createTransport({
 =========================== */
 exports.createEnroll = async (req, res) => {
   try {
-    const { name, mobile, entity, email, role, partner, type } = req.body;
+    const { name, mobile, entity, email, role, partner, type, actionType, source } = req.body;
 
     // 🔒 BASE VALIDATION
     if (!name || !mobile || !email || !role || !type) {
@@ -78,6 +94,8 @@ exports.createEnroll = async (req, res) => {
       role,
       partner,
       type,
+      actionType: actionType || null,
+      source: source || null,
     });
 
     await transporter.sendMail({
@@ -86,7 +104,9 @@ exports.createEnroll = async (req, res) => {
       subject: `New Enrollment – ${serviceLabel}`,
       html: `
         <h2>New Enrollment Request</h2>
-        <p><strong>Source:</strong> ${serviceLabel}</p>
+        <p><strong>Type:</strong> ${actionType || "Enroll Now"}</p>
+        <p><strong>Source:</strong> ${source || serviceLabel}</p>
+        <p><strong>Landing Category:</strong> ${serviceLabel}</p>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Entity:</strong> ${entity || "NA"}</p>
         <p><strong>Mobile:</strong> ${mobile}</p>

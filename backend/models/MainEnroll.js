@@ -8,9 +8,9 @@ const EnrollSchema = new mongoose.Schema(
     email: { type: String, required: true },
     role: { type: String, required: true },
     partner: { type: Boolean, default: false },
-
-    // 🔑 page-based enrollment source
     type: { type: String, required: true },
+    actionType: { type: String, default: null },
+    source: { type: String, default: null },
   },
   { timestamps: true }
 );

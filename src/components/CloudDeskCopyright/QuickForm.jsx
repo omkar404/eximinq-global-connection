@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+const SUBMIT_TYPE = "Check Feasibility";
+const SOURCE = "services/copyright-registration";
+
 const QuickForm = () => {
   const [form, setForm] = useState({
     workType: "",
@@ -59,7 +62,8 @@ const QuickForm = () => {
         workType: form.workType,
         title: form.title,
         mobile: form.mobile,
-        type: "QUICK_FORM",
+        type: SUBMIT_TYPE,
+        source: SOURCE,
       };
 
       console.log("📤 Sending data:", payload);
@@ -177,7 +181,7 @@ const QuickForm = () => {
               : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : "Check Feasibility"}
+          {loading ? "Submitting..." : SUBMIT_TYPE}
         </button>
       </form>
     </div>

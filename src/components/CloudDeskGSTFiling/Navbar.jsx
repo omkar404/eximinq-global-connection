@@ -19,7 +19,13 @@ const Navbar = ({
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
 <button
-  onClick={() => setShowEnrollModal(true)}
+  onClick={() =>
+    setShowEnrollModal({
+      open: true,
+      actionType: "File Returns",
+      source: "services/gst-returns/",
+    })
+  }
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
@@ -46,6 +52,14 @@ const Navbar = ({
             <a href="#contact" class="block py-2 text-brand-600 font-bold">File Returns</a>
           <a 
             href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowEnrollModal({
+                open: true,
+                actionType: "File Returns",
+                source: "services/gst-returns/",
+              });
+            }}
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
              File Returns

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Navbar from "../components/CloudDeskMarine/Navbar";
 import Hero from "../components/CloudDeskMarine/Hero";
 import Fees from "../components/CloudDeskMarine/Fees";
-import { ModalEnroll } from "../components/CloudDeskMarine/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 import {
   ChevronDown,
   Linkedin,
@@ -35,7 +35,8 @@ import { MainNavbar } from "../components/CloudDeskMarine/MainNavbar";
 const CloudDeskMarine = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    type: "",
+    actionType: "",
+    source: "services/epcg-scheme",
   });
 
   const handleEnrollmentSubmit = (formData) => {
@@ -194,9 +195,16 @@ const CloudDeskMarine = () => {
 
         <ModalEnroll
           show={showEnrollModal.open}
-          type={showEnrollModal.type}
-          onClose={() => setShowEnrollModal({ open: false, type: "" })}
-          onSubmit={handleEnrollmentSubmit}
+          type="epcg_scheme_enroll"
+          actionType={showEnrollModal.actionType}
+          source={showEnrollModal.source}
+          onClose={() =>
+            setShowEnrollModal({
+              open: false,
+              actionType: "",
+              source: "services/epcg-scheme",
+            })
+          }
         />
 
         {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}

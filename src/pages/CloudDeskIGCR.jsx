@@ -21,10 +21,14 @@ import {
   Calculator,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskIGCR/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskIGCR/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 
 const CloudDeskIGCR = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    actionType: "",
+    source: "services/igcr-returns",
+  });
   return (
 <>
 <Helmet>
@@ -182,8 +186,17 @@ const CloudDeskIGCR = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type="igcr_returns_enroll"
+        actionType={showEnrollModal.actionType}
+        source={showEnrollModal.source}
+        onClose={() =>
+          setShowEnrollModal({
+            open: false,
+            actionType: "",
+            source: "services/igcr-returns",
+          })
+        }
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -385,7 +398,7 @@ const CloudDeskIGCR = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal} />
 
 
 {/* --- WHY CLOUDDESK SECTION (IGCR) --- */}

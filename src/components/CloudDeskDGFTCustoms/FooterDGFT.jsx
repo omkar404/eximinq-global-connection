@@ -47,7 +47,12 @@ const FooterDGFT = ({ setShowEnrollModal }) => {
           <h5 className="text-white font-bold mb-4">Support</h5>
 
           <button
-            onClick={() => setShowEnrollModal({ open: true, type: "certificate_of_origin_enroll" })}
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "dgft_customs_consultancy_enroll",
+              })
+            }
             className="w-full px-4 py-2 bg-teal-600 text-white text-sm font-bold rounded 
                        hover:bg-teal-500 transition"
           >

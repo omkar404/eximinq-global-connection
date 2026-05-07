@@ -17,9 +17,18 @@ const Hero = ({ setShowEnrollModal }) => {
                     Secure your Industrial Design. We register the unique aesthetic features (shape, configuration, ornamentation) of manufactured articles like watches, furniture, and packaging.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#fees" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <button
+                      onClick={() =>
+                        setShowEnrollModal({
+                          open: true,
+                          actionType: "Start Design Search",
+                          source: "services/barcode-registration",
+                        })
+                      }
+                      className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+                    >
                         Start Design Search
-                    </a>
+                    </button>
                     <a href="#coverage" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         View Coverage
                     </a>

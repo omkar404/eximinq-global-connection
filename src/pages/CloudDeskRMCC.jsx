@@ -25,11 +25,15 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskRMCC/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskRMCC/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
 
 const CloudDeskRMCC = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    actionType: "",
+    source: "services/rmcc-alert-removal",
+  });
   
   return (
 <>
@@ -170,8 +174,17 @@ const CloudDeskRMCC = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type="rmcc_alert_removal_enroll"
+        actionType={showEnrollModal.actionType}
+        source={showEnrollModal.source}
+        onClose={() =>
+          setShowEnrollModal({
+            open: false,
+            actionType: "",
+            source: "services/rmcc-alert-removal",
+          })
+        }
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -338,7 +351,7 @@ const CloudDeskRMCC = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal} />
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
               <section className="py-20 bg-white">

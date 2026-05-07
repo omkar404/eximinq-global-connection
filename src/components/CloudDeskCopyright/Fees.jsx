@@ -58,6 +58,8 @@ const Fees = ({setShowEnrollModal}) => {
                   setShowEnrollModal({
                     open: true,
                     type: "Copyright_Filing",
+                    actionType: "File Application",
+                    source: "services/copyright-registration",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"

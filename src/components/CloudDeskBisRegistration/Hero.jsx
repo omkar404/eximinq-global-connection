@@ -1,8 +1,8 @@
 import QuickForm from "./QuickForm";
 
-const Hero = () => {
+const Hero = ({ setShowEnrollModal }) => {
   return (
-    <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
+    <section id="home" className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
 
         {/* TEXT SECTION */}
@@ -17,10 +17,19 @@ const Hero = () => {
                     Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <button
+                      onClick={() =>
+                        setShowEnrollModal({
+                          open: true,
+                          actionType: "Request Quote",
+                          source: "services/bis-registration",
+                        })
+                      }
+                      className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+                    >
                         Request Quote
-                    </a>
-                    <a href="#contact" className="bg-white text-brand-900 hover:bg-slate-100 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    </button>
+                    <a href="#home" className="bg-white text-brand-900 hover:bg-slate-100 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Verify Your Product
                     </a>
                     <a href="#schemes" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">

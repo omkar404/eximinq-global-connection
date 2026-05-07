@@ -1,6 +1,6 @@
 import QuickForm from "./QuickForm";
 
-const Hero = () => {
+const Hero = ({ setShowEnrollModal }) => {
   return (
     <section className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
@@ -17,9 +17,18 @@ const Hero = () => {
                     Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#plant" class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <button
+                      onClick={() =>
+                        setShowEnrollModal({
+                          open: true,
+                          actionType: "Plant Quarantine",
+                          source: "services/aqcs-pqms",
+                        })
+                      }
+                      class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+                    >
                         Plant Quarantine
-                    </a>
+                    </button>
                     <a href="#animal" class="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Animal Quarantine
                     </a>

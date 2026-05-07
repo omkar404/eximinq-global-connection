@@ -1,5 +1,6 @@
 // import TopBar from "../components/CloudDeskEBRC/TopBar";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskEBRC/Navbar";
 import Hero from "../components/CloudDeskEBRC/Hero";
 import Fees from "../components/CloudDeskEBRC/Fees";
@@ -27,8 +28,14 @@ import {
   FlaskRound,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskEBRC/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 
 const CloudDeskEBRC = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    actionType: "",
+    source: "services/aqcs-pqms",
+  });
   return (
 <>
 <Helmet>
@@ -172,9 +179,22 @@ const CloudDeskEBRC = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type="aqcs_pqms_enroll"
+        actionType={showEnrollModal.actionType}
+        source={showEnrollModal.source}
+        onClose={() =>
+          setShowEnrollModal({
+            open: false,
+            actionType: "",
+            source: "services/aqcs-pqms",
+          })
+        }
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -454,7 +474,7 @@ const CloudDeskEBRC = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
 
 {/* --- WHY CLOUDDESK SECTION (AQCS / PQMS) --- */}
 <section className="py-20 bg-white">

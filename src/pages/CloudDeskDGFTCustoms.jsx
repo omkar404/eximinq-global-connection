@@ -1,61 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-// ---------------------- COMPONENTS ----------------------
 import NavbarDGFT from "../components/CloudDeskDGFTCustoms/NavbarDGFT";
 import MobileMenuDGFT from "../components/CloudDeskDGFTCustoms/MobileMenuDGFT";
-import {ModalEnrollDGFT} from "../components/CloudDeskDGFTCustoms/ModalEnrollDGFT";
-
+import { ModalEnrollDGFT } from "../components/CloudDeskDGFTCustoms/ModalEnrollDGFT";
 import NotificationTicker from "../components/CloudDeskDGFTCustoms/NotificationTicker";
 import HeroDGFT from "../components/CloudDeskDGFTCustoms/HeroDGFT";
 import SubCategoryTabs from "../components/CloudDeskDGFTCustoms/SubCategoryTabs";
-
 import DGFTServicesList from "../components/CloudDeskDGFTCustoms/DGFTServicesList";
-import { dgftServices } from "../data/dgftServicesData";
-
 import CustomsServicesList from "../components/CloudDeskDGFTCustoms/CustomsServicesList";
-import { customsServices } from "../data/customsServicesData";
-
 import SidebarTools from "../components/CloudDeskDGFTCustoms/SidebarTools";
 import DocsChecklist from "../components/CloudDeskDGFTCustoms/DocsChecklist";
 import NoticeHelpBox from "../components/CloudDeskDGFTCustoms/NoticeHelpBox";
-
 import FooterDGFT from "../components/CloudDeskDGFTCustoms/FooterDGFT";
 import CustomAlert from "../Common/CustomAlert";
+import { dgftServices } from "../data/dgftServicesData";
+import { customsServices } from "../data/customsServicesData";
 
-// ---------------------- MAIN ----------------------
+const ENROLL_TYPE = "dgft_customs_consultancy_enroll";
+
 const CloudDeskDGFTCustoms = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    type: null,
+    type: ENROLL_TYPE,
   });
-
-  // UI States
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("DGFT"); // DGFT | Customs
+  const [activeTab, setActiveTab] = useState("DGFT");
   const [activeSubCategory, setActiveSubCategory] = useState("All");
-  const [showModal, setShowModal] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  const [selectedService, setSelectedService] = useState(null);
   const [alert, setAlert] = useState(null);
 
-  // Scroll listener for navbar
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleEnrollmentSubmit = (formData) => {
-    console.log("Enrollment Submitted:", formData);
-
-    // TODO → send API call
-    // axios.post("/api/enroll", formData)
-
-    alert("Form submitted — check console for data.");
+  const openEnrollModal = () => {
+    setShowEnrollModal({
+      open: true,
+      type: ENROLL_TYPE,
+    });
   };
 
-  // Notifications
   const notifications = [
     "DGFT Public Notice 45/2023: Amnesty Scheme extended till Dec 31st.",
     "Customs Circular 12/2024: Mandatory IGCR monthly return deadline update.",
@@ -63,14 +49,7 @@ const CloudDeskDGFTCustoms = () => {
     "USD/INR import rate for this fortnight: 84.50.",
   ];
 
-  // Sub-categories
-  const dgftSubCats = [
-    "All",
-    "Issuance",
-    "Incentives",
-    "Closure",
-    "Regulatory",
-  ];
+  const dgftSubCats = ["All", "Issuance", "Incentives", "Closure", "Regulatory"];
   const customsSubCats = ["All", "Clearance", "Facilitation", "Refunds"];
 
   return (
@@ -83,90 +62,65 @@ const CloudDeskDGFTCustoms = () => {
         />
       )}
 
-      {/* ---------------- NAVBAR ---------------- */}
       <NavbarDGFT
         scrolled={scrolled}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        // setShowModal={setShowModal}
         setShowEnrollModal={setShowEnrollModal}
       />
 
-      {/* ---------------- MOBILE MENU ---------------- */}
       <MobileMenuDGFT
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        // setShowModal={setShowModal}
         setShowEnrollModal={setShowEnrollModal}
       />
 
-      {/* ---------------- MODAL ---------------- */}
       <ModalEnrollDGFT
         show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: null })}
-        onSubmit={handleEnrollmentSubmit}
+        type={showEnrollModal.type || ENROLL_TYPE}
+        onClose={() => setShowEnrollModal({ open: false, type: ENROLL_TYPE })}
       />
 
-      {/* ---------------- NOTIFICATION TICKER ---------------- */}
       <NotificationTicker notifications={notifications} />
 
-      {/* ---------------- HERO ---------------- */}
       <HeroDGFT
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         setActiveSubCategory={setActiveSubCategory}
       />
 
-      {/* ---------------- SUB-CATEGORY TABS ---------------- */}
       <SubCategoryTabs
         subCategories={activeTab === "DGFT" ? dgftSubCats : customsSubCats}
         activeSubCategory={activeSubCategory}
         setActiveSubCategory={setActiveSubCategory}
       />
 
-      {/* ---------------- MAIN CONTENT ---------------- */}
       <div className="container mx-auto px-4 mt-10 pb-20 flex flex-col lg:flex-row gap-10">
-        {/* ---- SERVICES LIST (LEFT) ---- */}
         <div className="lg:w-3/4">
           {activeTab === "DGFT" ? (
             <DGFTServicesList
-              services={dgftServices} // All DGFT Data Stored
+              services={dgftServices}
               activeSubCategory={activeSubCategory}
-              openModal={() => setShowModal(true)}
-              onStartProcess={(service) => {
-                setSelectedService(service); // <- store which card user clicked
-                setShowModal(true); // <- open modal
-              }}
+              openModal={openEnrollModal}
+              onStartProcess={openEnrollModal}
             />
           ) : (
             <CustomsServicesList
               services={customsServices}
               activeSubCategory={activeSubCategory}
-              onStartProcess={(service) => {
-                setSelectedService(service);
-                setShowModal(true);
-              }}
+              onStartProcess={openEnrollModal}
             />
           )}
         </div>
 
-        {/* ---- SIDEBAR (RIGHT) ---- */}
         <div className="lg:w-1/4 space-y-8">
           <SidebarTools />
           <DocsChecklist activeTab={activeTab} />
-          <NoticeHelpBox
-            activeTab={activeTab}
-            openModal={() => setShowModal(true)}
-          />
+          <NoticeHelpBox activeTab={activeTab} openModal={openEnrollModal} />
         </div>
       </div>
 
-      {/* ---------------- FOOTER ---------------- */}
-      <FooterDGFT
-        openModal={() => setShowModal(true)}
-        setShowEnrollModal={setShowEnrollModal}
-      />
+      <FooterDGFT setShowEnrollModal={setShowEnrollModal} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ setShowEnrollModal }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -39,13 +39,18 @@ const Navbar = () => {
             <a href="#about" class="block py-2 text-slate-600">What is LUT?</a>
             <a href="#benefits" class="block py-2 text-slate-600">Benefits</a>
             <a href="#documents" class="block py-2 text-slate-600">Documents</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">File LUT Now</a>
-          {/* <a 
-            href="#contact"
-            className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
-          >
-            Apply Now
-          </a> */}
+            <button
+              onClick={() =>
+                setShowEnrollModal({
+                  open: true,
+                  actionType: "File LUT Now",
+                  source: "services/gst-lut-filing",
+                })
+              }
+              className="block w-full py-2 text-brand-600 font-bold"
+            >
+              File LUT Now
+            </button>
         </div>
       )}
     </header>

@@ -86,6 +86,8 @@ const exchangeRatesService = require("./services/exchangeRates.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
+const gstFilingRoutes = require("./routes/gstFilingRoutes.routes");
+const serviceQuickFormLeadRoutes = require("./routes/serviceQuickFormLead.routes");
 
 // const pdfPath = findPDFFile(noticeNo);
 
@@ -831,6 +833,10 @@ app.use("/api/contact-us", maincontactRoutes);
 app.use("/api/submit-audit-form", auditcomplianceformRoutes);
 
 app.use("/api/saas-enrollment", saasEnrollmentRoutes);
+
+app.use("/api/gst-filing", gstFilingRoutes);
+
+app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
 
 startWatcher();
 

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 // import TopBar from "../components/CloudDeskBisRegistration/TopBar";
 import Navbar from "../components/CloudDeskBisRegistration/Navbar";
 import Hero from "../components/CloudDeskBisRegistration/Hero";
@@ -25,8 +26,14 @@ import {
   MapPin,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskBisRegistration/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 
 const CloudDeskBisRegistration = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    actionType: "",
+    source: "services/bis-registration",
+  });
   return (
 <>
 <Helmet>
@@ -163,9 +170,22 @@ const CloudDeskBisRegistration = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type="bis_registration_enroll"
+        actionType={showEnrollModal.actionType}
+        source={showEnrollModal.source}
+        onClose={() =>
+          setShowEnrollModal({
+            open: false,
+            actionType: "",
+            source: "services/bis-registration",
+          })
+        }
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -344,12 +364,18 @@ const CloudDeskBisRegistration = () => {
               </ul>
 
               <div className="mt-6 text-center">
-                <a
-                  href="#contact"
+                <button
+                  onClick={() =>
+                    setShowEnrollModal({
+                      open: true,
+                      actionType: "Appoint Indian Rep",
+                      source: "services/bis-registration",
+                    })
+                  }
                   className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
                 >
                   Appoint Indian Rep
-                </a>
+                </button>
               </div>
             </div>
           </div>

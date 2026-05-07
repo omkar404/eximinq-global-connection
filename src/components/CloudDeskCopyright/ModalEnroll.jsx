@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
+export const ModalEnroll = ({
+  show,
+  onClose,
+  type,
+  actionType = "Enroll Now",
+  source = "services/copyright-registration",
+}) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -28,8 +34,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
-  const isEnroll = type === "Enroll";
-
   /* Only show category dropdown for IEC profile update (not for fee services) */
   const showCategory = type === "IEC_PROFILE_UPDATE";
 
@@ -96,17 +100,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         entity: form.entity,
         role: form.role,
         partner: form.partner,
-        type: finalType,
+        type: actionType || finalType,
+        source,
         category: category || "",   // will be empty for fee services
         issue: issue || "",
         service: predefinedService || finalType,
       };
 
       console.log("Final Payload:", payload);
-
-      if (typeof onSubmit === "function") {
-        onSubmit(payload);
-      }
 
       const res = await fetch(
         `${process.env.REACT_APP_API_URL}/api/copyright-registration`,
@@ -247,21 +248,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
               )}
             </div>
-
-            {/* SERVICE TYPE (readonly) */}
-            {predefinedService && (
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Service Type
-                </label>
-                <input
-                  type="text"
-                  value={predefinedService}
-                  readOnly
-                  className="w-full p-3 rounded-lg border bg-gray-100 text-sm"
-                />
-              </div>
-            )}
 
             {/* CATEGORY DROPDOWN - ONLY FOR IEC_PROFILE_UPDATE */}
             {showCategory && (

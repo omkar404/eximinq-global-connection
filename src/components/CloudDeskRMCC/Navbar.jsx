@@ -26,12 +26,18 @@ const Navbar = ({
   Get Immediate Help
 </button> */}
 
-        <a 
-          href="#pricing"
+        <button
+          onClick={() =>
+            setShowEnrollModal({
+              open: true,
+              actionType: "Get Immediate Help",
+              source: "services/rmcc-alert-removal",
+            })
+          }
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Get Immediate Help
-        </a>
+        </button>
 
 
         {/* MOBILE MENU BUTTON */}
@@ -51,12 +57,18 @@ const Navbar = ({
                 <a href="#reasons" class="hover:brand-600 transition">Why the Hold?</a>
                 <a href="#services" class="hover:brand-600 transition">Resolution Services</a>
                 <a href="#contact" class="hover:text-brand-600 transition">Action Plan</a>
-          <a 
-            href="#contact"
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                actionType: "Get Immediate Help",
+                source: "services/rmcc-alert-removal",
+              })
+            }
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
              Get Immediate Help
-          </a>
+          </button>
         </div>
       )}
     </header>

@@ -1,4 +1,4 @@
-const MobileMenuDGFT = ({ isMenuOpen, setIsMenuOpen, setShowModal }) => {
+const MobileMenuDGFT = ({ isMenuOpen, setIsMenuOpen, setShowEnrollModal }) => {
   if (!isMenuOpen) return null;
 
   return (
@@ -23,7 +23,10 @@ const MobileMenuDGFT = ({ isMenuOpen, setIsMenuOpen, setShowModal }) => {
         <button
           className="w-11/12 py-3 bg-gradient-to-r from-teal-600 to-indigo-700 text-white text-sm font-bold rounded-lg shadow-lg hover:shadow-xl"
           onClick={() => {
-            setShowModal(true);
+            setShowEnrollModal({
+              open: true,
+              type: "dgft_customs_consultancy_enroll",
+            });
             setIsMenuOpen(false);
           }}
         >

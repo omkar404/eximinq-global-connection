@@ -19,11 +19,15 @@ import {
   Barcode ,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskBarcode/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskBarcode/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 import { BiRegistered } from "react-icons/bi";
 
 const CloudDeskBarcode = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    actionType: "",
+    source: "services/barcode-registration",
+  });
   
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -34,8 +38,17 @@ const CloudDeskBarcode = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type="barcode_registration_enroll"
+        actionType={showEnrollModal.actionType}
+        source={showEnrollModal.source}
+        onClose={() =>
+          setShowEnrollModal({
+            open: false,
+            actionType: "",
+            source: "services/barcode-registration",
+          })
+        }
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -193,7 +206,7 @@ const CloudDeskBarcode = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal} />
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
