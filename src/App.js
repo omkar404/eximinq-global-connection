@@ -15,6 +15,8 @@ import PageNotFound from "./pages/PageNotFound";
 import CloudDeskAEOLanding from "./pages/CloudDeskAEOLanding"
 import CloudDeskHSN from "./pages/CloudDeskHSN";
 import CloudDeskDutyCalculator from "./pages/CloudDeskDutyCalculator";
+import CloudDeskEPCGClosure from "./pages/CloudDeskEPCGClosure";
+import CloudDeskRefund from "./pages/CloudDeskRefund";
 import CloudDeskIceManagement from "./pages/CloudDeskIceManagement"
 import CloudDeskICERegistration from "./pages/CloudDeskIceRegistration"
 import CloudDeskADCode from "./pages/CloudDeskADCode"
@@ -435,15 +437,18 @@ function App() {
         {/* {DutyCalculator} */}
         <Route path="/tools/duty-calculator-finder" element={<CloudDeskDutyCalculator />} />
 
+        {/*strategic-solutions*/}
         <Route
-          path="/rodtep-refund-recovery"
-          element={<Navigate to="/services/rodtep-scheme" replace />}
+          path="/strategic-solutions/rodtep-refund-recovery"
+          element={<CloudDeskRefund/>}
         />
 
         <Route
-          path="/epcg-closure-services"
-          element={<Navigate to="/services/epcg-scheme" replace />}
+          path="/strategic-solutions/epcg-closure-services"
+          element={<CloudDeskEPCGClosure/>}
         />
+
+
 
         {/* Thank You Page */}
         <Route path="*" element={<PageNotFound />} />
