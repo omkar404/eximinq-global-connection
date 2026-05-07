@@ -57,6 +57,7 @@ const chaServicesRoutes = require("./routes/chaServicesRoutes.routes");
 const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes");
 const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.routes");
 const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
+const marineInsuranceRoutes = require ("./routes/marineInsuranceRoutes.routes");
 const designRegistrationRoutes = require("./routes/designRegistrationRoutes.routes");
 const dpdRegistrationRoutes = require("./routes/dpdRegistrationRoutes.routes");
 const cdscoComplianceRoutes = require("./routes/cdscoComplianceRoutes.routes");
@@ -787,6 +788,8 @@ app.use("/api/freight-forwarding",freightForwardingRoutes);
 app.use("/api/warehousing-solutions",warehousingSolutionsRoutes);
 
 app.use("/api/inland-transportation",inlandTransportationRoutes);
+
+app.use("/api/marine-insurance",marineInsuranceRoutes);
 
 app.use("/api/design-registration",designRegistrationRoutes);
 
