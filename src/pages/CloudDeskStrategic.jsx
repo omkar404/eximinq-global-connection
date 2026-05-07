@@ -198,7 +198,7 @@ export default function StrategicSolutions() {
                                     TAT: 45 Days
                                 </span>
                                 <a
-                                    href="/services/epcg-scheme"
+                                    href="/strategic-solutions/epcg-closure-services"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-teal-600 font-bold text-sm"
@@ -261,7 +261,7 @@ export default function StrategicSolutions() {
                                 </span>
                                 <button className="text-indigo-600 font-bold text-sm">
                                     <a
-                                        href="/services/rodtep-scheme"
+                                        href="/strategic-solutions/rodtep-refund-recovery"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-teal-600 font-bold text-sm"

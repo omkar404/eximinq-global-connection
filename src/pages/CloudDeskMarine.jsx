@@ -283,7 +283,7 @@ const CloudDeskMarine = () => {
         </div>
       </section>
 
-      <section id="clauses" className="py-20 bg-slate-50">
+      <section id="coverage" className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-16">
@@ -409,7 +409,7 @@ const CloudDeskMarine = () => {
         </div>
       </section>
 
-      <section id="claims" className="py-20 bg-brand-900 text-white">
+      <section id="obligation" className="py-20 bg-brand-900 text-white">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-16">

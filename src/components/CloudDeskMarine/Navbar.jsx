@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Navbar = ({setShowEnrollModal}) => {
+const Navbar = ({ setShowEnrollModal }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -8,24 +8,28 @@ const Navbar = ({setShowEnrollModal}) => {
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
+          <a href="#home" class="hover:text-brand-600 transition">
+            Home
+          </a> 
           <a href="#about" class="hover:text-brand-600 transition">
-            What is EPCG?
+            Why Insure?
           </a>
           <a href="#coverage" class="hover:text-brand-600 transition">
-            Coverage
+            Coverage Types
           </a>
           <a href="#obligation" class="hover:text-brand-600 transition">
-            Export Obligation
+            Claims Process
           </a>
-          <a href="#process" class="hover:text-brand-600 transition">
-            Process
+          <a href="#home" class="hover:text-brand-600 transition">
+            Get Quote
           </a>
-          <a href="#fees" class="hover:text-brand-600 transition">
+          {/* <a href="#fees" class="hover:text-brand-600 transition">
             Fees
-          </a>
+          </a> */}
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
+<<<<<<< HEAD
         <button
           onClick={() =>
             setShowEnrollModal({
@@ -38,6 +42,22 @@ const Navbar = ({setShowEnrollModal}) => {
         >
           Apply Now
         </button>
+=======
+        <a 
+          href="#home"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Buy Policy
+        </a>
+>>>>>>> 7ea1273a655ab8ab1be74a22582e4c8f07a66585
+
+{/* <button
+  onClick={() => setShowEnrollModal({open:true , type: "Buy_Policy"})}
+  className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+>
+  Buy Policy
+</button> */}
 
         {/* <button
         href=
@@ -71,6 +91,7 @@ const Navbar = ({setShowEnrollModal}) => {
           <a href="#contact" class="block py-2 text-brand-600 font-bold">
             Apply License
           </a>
+<<<<<<< HEAD
           <button
             onClick={() =>
               setShowEnrollModal({
@@ -79,6 +100,10 @@ const Navbar = ({setShowEnrollModal}) => {
                 source: "services/epcg-scheme",
               })
             }
+=======
+          <a
+            href="#contact"
+>>>>>>> 7ea1273a655ab8ab1be74a22582e4c8f07a66585
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now
