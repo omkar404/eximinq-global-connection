@@ -1,28 +1,76 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // ✅ This line was missing
 
-const VALID_TYPES = [
-  "Enroll",
-  "EOP_MANAGEMENT",
-  "QUICK_FORM",
-];
-
-const eopextensionSchema = new mongoose.Schema( // ✅ Fix: scometlicensingSchema → eopextensionSchema
+const eopextensionRoutesSchema = new mongoose.Schema(
   {
-    name:     { type: String, required: true, trim: true },
-    mobile:   { type: String, required: true, trim: true },
-    email:    { type: String, required: true, trim: true, lowercase: true },
-    entity:   { type: String, default: null, trim: true },
+    service: {
+      type: String,
+      trim: true,
+      default: "EOP Services Registration",
+    },
+    licenseType: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    pendingExport: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    name: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    mobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    entity: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     role: {
       type: String,
+      trim: true,
       default: null,
-      enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
     },
-    type:     { type: String, required: true, enum: VALID_TYPES },
-    category: { type: String, default: null },
-    issue:    { type: String, default: null },
-    partner:  { type: Boolean, default: false },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
+    portName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("EopExtension", eopextensionSchema); // ✅ Fix: ScometLicensing → EopExtension
+module.exports = mongoose.model(
+  "eopextensionRoutes",
+  eopextensionRoutesSchema
+);

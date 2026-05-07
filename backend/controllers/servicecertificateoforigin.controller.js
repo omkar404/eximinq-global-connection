@@ -60,7 +60,7 @@ exports.servicecertificateoforigin = async (req, res) => {
 
     await transporter.sendMail({
       from: `"Contact – Duty Benefit" <${process.env.SMTP_USER}>`,
-      to: "crm@eximinq.com, omkarmhetar100@gmail.com",
+      to: "crm@eximinq.com, omkarmhetar100@gmail.com,yadavsheshnath236@gmail.com",
       subject: "New Duty Benefit Check Request",
       html: `
         <h2>Duty Benefit Check Request</h2>

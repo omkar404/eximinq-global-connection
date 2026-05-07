@@ -1,83 +1,153 @@
+const advanceAuthorisationRoutes = require("../models/advanceAuthorisationRoutes.model");
 const nodemailer = require("nodemailer");
-const advanceAuthorisationRoutes = require("../models/advanceAuthorisationRoutes.model"); // ✅ Fix: model naam match karo
 
+/* SMTP TRANSPORTER */
 const transporter = nodemailer.createTransport({
-  host:   process.env.SMTP_HOST,
-  port:   Number(process.env.SMTP_PORT),
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
   secure: true,
-  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
 });
-
+    
+/* EMAIL HELPER */
 async function sendEmail(record) {
-  const { _id, name, mobile, email, entity, role, type, category, issue, partner } = record;
+  const {
+    _id,
+    service,
+    mobile,
+    name,
+    email,
+    entity,
+    role,
+    partner,
+    type,
+    category,
+    issue,
+    exportProduct,
+    importRawMaterial,
+  } = record;
+
+  const serviceDisplay = service || "Advance Authorisation Registration";
 
   await transporter.sendMail({
-    from:    `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to:      "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
-    subject: `New Advance Authorisation Registration — ${type}`, // ✅ Fix: subject updated
+    from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
+    to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
+    subject: `Advance Authorisation Registration — ${serviceDisplay}`,
     html: `
-      <h3>New Advance Authorisation Registration</h3>
-      <table cellpadding="6" style="border-collapse:collapse; font-family:Arial,sans-serif;">
-        <tr><td><b>Name</b></td><td>${name}</td></tr>
-        <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
-        <tr><td><b>Email</b></td><td>${email}</td></tr>
-        <tr><td><b>Entity</b></td><td>${entity   || "N/A"}</td></tr>
-        <tr><td><b>Role</b></td><td>${role      || "N/A"}</td></tr>
-        <tr><td><b>Service Type</b></td><td>${type}</td></tr>
-        <tr><td><b>Category</b></td><td>${category || "N/A"}</td></tr>
-        <tr><td><b>Issue / Update Type</b></td><td>${issue    || "N/A"}</td></tr>
-        <tr><td><b>Partner Interest</b></td><td>${partner ? "Yes" : "No"}</td></tr>
-      </table>
-      <hr/>
-      <p><small>Registration ID: ${_id}</small></p>
-      <p><small>Submitted (IST): ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</small></p>
+      <div style="font-family:Arial;">
+        <h2>Advance Authorisation Registration</h2>
+        <table border="1" cellpadding="6" style="border-collapse:collapse;">
+          <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
+          <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${exportProduct ? `<tr><td><b>Export Product</b></td><td>${exportProduct}</td></tr>` : ""}
+          ${importRawMaterial ? `<tr><td><b>Import Raw Material</b></td><td>${importRawMaterial}</td></tr>` : ""}
+          ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
+          ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
+          <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
+          ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
+          ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
+          ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
+          ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
+        </table>
+        <p><b>ID:</b> ${_id}<br/><b>Time:</b> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
+      </div>
     `,
   });
-  console.log("Email sent for Advance Authorisation:", _id); // ✅ Fix: log updated
+
+  console.log("✅ Email sent:", _id);
 }
 
+/* CREATE API */
 exports.createadvanceAuthorisationRoutes = async (req, res) => {
   try {
-    console.log("Advance Authorisation Incoming:", req.body);
+    console.log("📥 Incoming:", req.body);
 
-    const { name, mobile, email, entity, role, type, category, issue, partner } = req.body;
+    const {
+      service,
+      mobile,
+      name,
+      email,
+      entity,
+      role,
+      partner,
+      type,
+      category,
+      issue,
+      exportProduct, // ✅ camelCase
+      importRawMaterial, // ✅ camelCase
+    } = req.body;
 
-    if (!name || !mobile || !email || !type) {
-      return res.status(400).json({ success: false, message: "Name, Mobile, Email and Type are required" });
+    const isQuickForm = type === "QUICK_FORM";
+
+    if (!mobile || !mobile.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Mobile is required",
+      });
     }
 
-    const record = await advanceAuthorisationRoutes.create({
-      name:     name.trim(),
-      mobile:   mobile.trim(),
-      email:    email.trim().toLowerCase(),
-      entity:   entity ? entity.trim() : null,
-      role:     role   || null,
-      type,
+    const recordData = {
+      service: service || "Advance Authorisation Registration",
+      mobile: mobile.trim(),
+      importRawMaterial: importRawMaterial ? importRawMaterial.trim() : null, // ✅ use the correct variable
+      exportProduct: exportProduct ? exportProduct.trim() : null, // ✅ use correct variable
+      name: isQuickForm ? null : name ? name.trim() : null,
+      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      entity: isQuickForm ? null : entity ? entity.trim() : null,
+      role: isQuickForm ? null : role || null,
+      partner: isQuickForm ? false : Boolean(partner),
+      type: type || "QUICK_FORM_COMPLIANCE",
       category: category || null,
-      issue:    issue    || null,
-      partner:  Boolean(partner),
-    });
+      issue: issue || null,
+    };
 
-    console.log("Saved Advance Authorisation record:", record._id);
+    console.log("📦 Saving:", recordData);
+
+    const record = await advanceAuthorisationRoutes.create(recordData);
+    console.log("✅ Saved:", record._id);
 
     sendEmail(record).catch((err) =>
-      console.error("Email failed (record was saved):", err.message)
+      console.error("❌ Email Error:", err.message),
     );
 
     return res.status(201).json({
       success: true,
-      message: "Advance Authorisation registration submitted successfully",
+      message: "Submitted successfully",
       data: record,
     });
-
   } catch (error) {
-    console.error("Advance Authorisation Error:", error.message);
+    console.error("❌ Server Error:", error);
+    // For debugging – show real error (remove in production)
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Server Error",
+    });
+  }
+};
 
-    if (error.name === "ValidationError") {
-      const messages = Object.values(error.errors).map((e) => e.message);
-      return res.status(400).json({ success: false, message: "Validation failed", errors: messages });
+/* GET ALL */
+exports.advanceAuthorisationRoutes = async (req, res) => {
+  try {
+    const data = await advanceAuthorisationRoutes.find().sort({ createdAt: -1 });
+    res.json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+/* GET BY ID */
+exports.advanceAuthorisationRoutesById = async (req, res) => {
+  try {
+    const data = await advanceAuthorisationRoutes.findById(req.params.id);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "Not found" });
     }
-
-    return res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    res.json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
