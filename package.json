@@ -135,7 +135,9 @@
       "/disclaimer",
       "/privacy-policy",
       "/terms-of-service",
-      "/tools/duty-calculator-finder"
+      "/tools/duty-calculator-finder",
+      "/strategic-solutions/rodtep-refund-recovery",
+      "/strategic-solutions/epcg-closure-services"
     ]
   },
   "eslintConfig": {

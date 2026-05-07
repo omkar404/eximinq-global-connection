@@ -89,6 +89,7 @@ const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes")
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
 const gstFilingRoutes = require("./routes/gstFilingRoutes.routes");
 const serviceQuickFormLeadRoutes = require("./routes/serviceQuickFormLead.routes");
+const epcgSchemeRoutes = require("./routes/epcgSchemeRoutes.routes");
 
 // const pdfPath = findPDFFile(noticeNo);
 
@@ -840,6 +841,7 @@ app.use("/api/saas-enrollment", saasEnrollmentRoutes);
 app.use("/api/gst-filing", gstFilingRoutes);
 
 app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
+app.use("/api/epcg-scheme", epcgSchemeRoutes);
 
 startWatcher();
 
