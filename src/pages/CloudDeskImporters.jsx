@@ -267,7 +267,7 @@ const CloudDeskImporters = () => {
                   Register Copper <ArrowRight size={12} className="ml-1" />
                 </a> */}
                 <button
-                 onClick={() => setShowEnrollModal({ open: true, type: "Copper_(NFMIMS)" })}
+                 onClick={() => setShowEnrollModal({ open: true, type: "Copper_NFMIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                 Register Copper <ArrowRight size={12} className="ml-1" />
@@ -293,7 +293,7 @@ const CloudDeskImporters = () => {
                   Register Aluminium <ArrowRight size={12} className="ml-1" />
                 </a> */}
                 <button
-                 onClick={() => setShowEnrollModal({ open: true, type: "Register_Aluminium" })}
+                 onClick={() => setShowEnrollModal({ open: true, type: "Aluminium_NFMIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                 Register Aluminium <ArrowRight size={12} className="ml-1" />
@@ -319,7 +319,7 @@ const CloudDeskImporters = () => {
                   Get CIMS No <ArrowRight size={12} className="ml-1" />
                 </a> */}
                 <button
-                 onClick={() => setShowEnrollModal({ open: true, type: "Get_CIMS_No" })}
+                 onClick={() => setShowEnrollModal({ open: true, type: "Coal_CIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                 Get CIMS No <ArrowRight size={12} className="ml-1" />
@@ -345,7 +345,7 @@ const CloudDeskImporters = () => {
                   Get PIMS No <ArrowRight size={12} className="ml-1" />
                 </a> */}
                 <button
-                 onClick={() => setShowEnrollModal({ open: true, type: "Get_PIMS_No" })}
+                 onClick={() => setShowEnrollModal({ open: true, type: "Paper_PIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                 Get PIMS No <ArrowRight size={12} className="ml-1" />
@@ -372,7 +372,7 @@ const CloudDeskImporters = () => {
                   Register Chips <ArrowRight size={12} className="ml-1" />
                 </a> */}
                 <button
-                 onClick={() => setShowEnrollModal({ open: true, type: "Register_Chips" })}
+                 onClick={() => setShowEnrollModal({ open: true, type: "Chip_CHIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
                 >
                 Register Chips <ArrowRight size={12} className="ml-1" />
@@ -386,12 +386,23 @@ const CloudDeskImporters = () => {
                 <p className="text-xs text-slate-300 mb-4">
                   Not sure which IMS applies to your HS Code?
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   className="bg-white text-brand-900 px-4 py-2 rounded-lg font-bold text-xs hover:bg-accent-400 transition"
                 >
                   Contact Expert
-                </a>
+                </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "NEED_HELP",
+                  })
+                }
+                className="bg-white text-brand-900 px-4 py-2 rounded-lg font-bold text-xs hover:bg-accent-400 transition"
+              >
+                Contact Expert
+          </button>                
               </div>
             </div>
           </div>

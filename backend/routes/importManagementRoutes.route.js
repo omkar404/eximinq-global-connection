@@ -12,8 +12,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { createimportController } = require("../controllers/importManagement.controller");
+const { createimportManagementRoutes } = require("../controllers/importManagement.controller");
 
-router.post("/", createimportController);
+router.post("/", createimportManagementRoutes);
 
 module.exports = router;
