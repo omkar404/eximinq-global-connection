@@ -1,20 +1,19 @@
-const mongoose = require("mongoose"); // ✅ This line was missing
+const mongoose = require("mongoose");
 
-const copyrightRegistrationRoutesSchema = new mongoose.Schema(
+const gstFilingRoutesSchema = new mongoose.Schema(
   {
     service: {
       type: String,
       trim: true,
-      default: "Logo Copyright Registration",
+      default: "GST Filing Health Check",
     },
-    workType: {
+    exportType: {
       type: String,
       trim: true,
       default: null,
     },
-    title: {
-      type: String,
-      trim: true,
+    invoices: {
+      type: Number,
       default: null,
     },
     name: {
@@ -46,11 +45,6 @@ const copyrightRegistrationRoutesSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    portName: {
-      type: String,
-      trim: true,
-      default: null,
-    },
     type: {
       type: String,
       required: true,
@@ -61,21 +55,8 @@ const copyrightRegistrationRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
-    category: {
-      type: String,
-      trim: true,
-      default: null,
-    },
-    issue: {
-      type: String,
-      trim: true,
-      default: null,
-    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model(
-  "copyrightRegistrationRoutes",
-  copyrightRegistrationRoutesSchema
-);
+module.exports = mongoose.model("gstFilingRoutes", gstFilingRoutesSchema);

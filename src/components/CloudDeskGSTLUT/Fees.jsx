@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-export default function Fees() {
+export default function Fees({ setShowEnrollModal }) {
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
@@ -44,12 +44,18 @@ export default function Fees() {
             </ul>
 
             {/* Call to action */}
-            <a
-              href="tel:+917400096950"
+            <button
+              onClick={() =>
+                setShowEnrollModal({
+                  open: true,
+                  actionType: "File Now",
+                  source: "services/gst-lut-filing",
+                })
+              }
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               File Now
-            </a>
+            </button>
           </div>
         </div>
 

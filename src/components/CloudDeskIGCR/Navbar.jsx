@@ -19,7 +19,13 @@ const Navbar = ({
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
 <button
-  onClick={() => setShowEnrollModal(true)}
+  onClick={() =>
+    setShowEnrollModal({
+      open: true,
+      actionType: "Extend Licence",
+      source: "services/igcr-returns",
+    })
+  }
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
@@ -45,12 +51,18 @@ const Navbar = ({
             <a href="#process" class="block py-2 text-slate-600">Compliance</a>
             <a href="#contact" class="block py-2 text-brand-600 font-bold">File Return</a>
 
-          <a 
-            href="#contact"
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                actionType: "File Return",
+                source: "services/igcr-returns",
+              })
+            }
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Verify Benefit
-          </a>
+          </button>
         </div>
       )}
     </header>

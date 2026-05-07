@@ -25,13 +25,20 @@ const Navbar = ({
 >
   File Copyright
 </button> */}
-          <a 
-            href="#contact"
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "Copyright_Filing",
+                actionType: "File Copyright",
+                source: "services/copyright-registration",
+              })
+            }
             className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
           >
              File Copyright
-          </a>
+          </button>
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -50,12 +57,19 @@ const Navbar = ({
             <a href="#categories" class="block py-2 text-slate-600">Categories</a>
             <a href="#process" class="block py-2 text-slate-600">Process</a>
             <a href="#contact" class="block py-2 text-brand-600 font-bold">File Copyright</a>
-          <a 
-            href="#contact"
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                type: "Copyright_Filing",
+                actionType: "File Copyright",
+                source: "services/copyright-registration",
+              })
+            }
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
              File Copyright
-          </a>
+          </button>
         </div>
       )}
     </header>

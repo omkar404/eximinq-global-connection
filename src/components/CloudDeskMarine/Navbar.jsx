@@ -29,12 +29,18 @@ const Navbar = ({ setShowEnrollModal }) => {
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        <a 
-          href="#home"
+        <button
+          onClick={() =>
+            setShowEnrollModal({
+              open: true,
+              actionType: "Apply Now",
+              source: "services/epcg-scheme",
+            })
+          }
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
-          Buy Policy
-        </a>
+          Apply Now
+        </button>
 
 {/* <button
   onClick={() => setShowEnrollModal({open:true , type: "Buy_Policy"})}
@@ -76,12 +82,18 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#contact" class="block py-2 text-brand-600 font-bold">
             Apply License
           </a>
-          <a
-            href="#contact"
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                actionType: "Apply Now",
+                source: "services/epcg-scheme",
+              })
+            }
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now
-          </a>
+          </button>
         </div>
       )}
     </header>

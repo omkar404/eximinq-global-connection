@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ setShowEnrollModal }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -39,7 +39,7 @@ const Navbar = () => {
             <a href="#about" class="block py-2 text-slate-600">Overview</a>
             <a href="#schemes" class="block py-2 text-slate-600">Schemes</a>
             <a href="#products" class="block py-2 text-slate-600">Mandatory List</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Check Product</a>
+            <a href="#home" class="block py-2 text-brand-600 font-bold">Check Product</a>
           {/* <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"

@@ -26,13 +26,19 @@ const Navbar = ({
 >
   File Registration
 </button> */}
-          <a 
-            href="#fees"
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                actionType: "File Registration",
+                source: "services/barcode-registration",
+              })
+            }
             className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
           >
              File Registration
-          </a>
+          </button>
 
 
         {/* MOBILE MENU BUTTON */}
@@ -52,12 +58,18 @@ const Navbar = ({
                 <a href="#coverage" class="hover:text-design-600 transition">Scope & Exclusions</a>
                 <a href="#process" class="hover:text-design-600 transition">Process</a>
             <a href="#contact" class="block py-2 text-brand-600 font-bold">Get Barcodes</a>
-          <a 
-            href="#contact"
+          <button
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                actionType: "File Registration",
+                source: "services/barcode-registration",
+              })
+            }
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
              File Registration
-          </a>
+          </button>
         </div>
       )}
     </header>

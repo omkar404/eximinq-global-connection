@@ -16,9 +16,18 @@ const Hero = ({ setShowEnrollModal }) => {
                     Importing raw materials at a concessional rate? You must file a <strong>Monthly Statement</strong> on ICEGATE by the 10th of every month. We handle end-to-end compliance from IIN generation to Bond cancellation.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <button
+                      onClick={() =>
+                        setShowEnrollModal({
+                          open: true,
+                          actionType: "File IGCR-3",
+                          source: "services/igcr-returns",
+                        })
+                      }
+                      className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+                    >
                         File IGCR-3
-                    </a>
+                    </button>
                     <a href="#about" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Learn More
                     </a>

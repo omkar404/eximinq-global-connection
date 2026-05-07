@@ -18,9 +18,19 @@ const Hero = ({ setShowEnrollModal }) => {
                   Secure your ownership over Software Code, Books, Artistic Logos, Music, and Videos. Prevent unauthorized copying and piracy with legal protection under the Copyright Act, 1957.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <button
+                      onClick={() =>
+                        setShowEnrollModal({
+                          open: true,
+                          type: "Copyright_Filing",
+                          actionType: "Start Application",
+                          source: "services/copyright-registration",
+                        })
+                      }
+                      className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+                    >
                         Start Application
-                    </a>
+                    </button>
                     <a href="#categories" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         View Categories
                     </a>

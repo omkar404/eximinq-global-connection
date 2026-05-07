@@ -1,5 +1,6 @@
 // import TopBar from "../components/CloudDeskGSTLUT/TopBar";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskGSTLUT/Navbar";
 import Hero from "../components/CloudDeskGSTLUT/Hero";
 import Fees from "../components/CloudDeskGSTLUT/Fees";
@@ -24,8 +25,15 @@ import {
   Laptop,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskGSTLUT/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 
 const CloudDeskGSTLUT = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    actionType: "",
+    source: "services/gst-lut-filing",
+  });
+
   return (
 <>
 <Helmet>
@@ -189,9 +197,22 @@ const CloudDeskGSTLUT = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      <Navbar setShowEnrollModal={setShowEnrollModal} />
+      <Hero setShowEnrollModal={setShowEnrollModal} />
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type="gst_lut_filing_enroll"
+        actionType={showEnrollModal.actionType}
+        source={showEnrollModal.source}
+        onClose={() =>
+          setShowEnrollModal({
+            open: false,
+            actionType: "",
+            source: "services/gst-lut-filing",
+          })
+        }
+      />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -475,7 +496,7 @@ const CloudDeskGSTLUT = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal} />
 
 {/* --- WHY CLOUDDESK SECTION (GST LUT) --- */}
 <section className="py-20 bg-white">

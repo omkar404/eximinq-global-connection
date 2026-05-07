@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
+const Fees = ({ setShowEnrollModal }) => {
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 text-center">
@@ -45,9 +45,18 @@ const Fees = ({ setShowEnrollModal, setEnrollSource }) => {
             </ul>
 
             {/* CTA */}
-                     <a href="#Home" class="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition">
-                         Start Filing
-                    </a>
+                    <button
+                      onClick={() =>
+                        setShowEnrollModal({
+                          open: true,
+                          actionType: "IGCR Compliance Monthly",
+                          source: "services/igcr-returns",
+                        })
+                      }
+                      className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+                    >
+                      Start Filing
+                    </button>
           </div>
         </div>
 
