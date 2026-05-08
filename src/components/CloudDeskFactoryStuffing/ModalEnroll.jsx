@@ -18,8 +18,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    GeM_Consultancy: {
-      service: "GeM Consultancy",
+    Permission_Liaison: {
+      service: "Permission Liaison",
     },
     // Central_Annual_Returns: {
     //   service: "Central Annual Returns",

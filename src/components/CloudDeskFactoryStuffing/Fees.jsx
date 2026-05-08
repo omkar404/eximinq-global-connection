@@ -11,8 +11,8 @@ const Fees = ({setShowEnrollModal}) => {
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
           {/* Header */}
           <div className="bg-brand-800 text-white py-4">
-            <h3 className="text-xl font-bold">GeM Consultancy</h3>
-            <p className="text-sm opacity-80">Full Setup & Support</p>
+            <h3 className="text-xl font-bold">Permission Liaison</h3>
+            <p className="text-sm opacity-80">One-Time Registration</p>
           </div>
 
           {/* Body */}
@@ -21,29 +21,29 @@ const Fees = ({setShowEnrollModal}) => {
               Request Quote
             </div>
             <p className="text-slate-500 text-sm mb-6">
-              Tailored to Profile
+              Per Factory Location
             </p>
 
             <ul className="text-left space-y-3 mb-8 text-sm text-slate-600 pl-8">
               <li className="flex gap-2">
                 <Check className="text-green-500 mt-0.5" size={18} />
-                Profile Creation & Validation
+                Application Drafting
               </li>
               <li className="flex gap-2">
                 <Check className="text-green-500 mt-0.5" size={18} />
-                Brand Approval Assistance
+                Liaison with AC/DC Exports
               </li>
               <li className="flex gap-2">
                 <Check className="text-green-500 mt-0.5" size={18} />
-                Vendor Assessment Filing (OEM)
+                Site Inspection Coordination
               </li>
               <li className="flex gap-2">
                 <Check className="text-green-500 mt-0.5" size={18} />
-                Product Catalog Upload
+                NOC Procurement from GST
               </li>
               <li className="flex gap-2">
                 <Check className="text-green-500 mt-0.5" size={18} />
-                Bid Participation Support
+                EDI Registration Assistance
               </li>
             </ul>
 
@@ -57,12 +57,12 @@ const Fees = ({setShowEnrollModal}) => {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "GeM_Consultancy",
+                    type: "Permission_Liaison",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
-                Get Started
+                Start Process
           </button>
           </div>
         </div>
