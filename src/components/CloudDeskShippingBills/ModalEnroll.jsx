@@ -17,7 +17,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [loading, setLoading] = useState("");
 
   const isEnroll = type === "Enroll";
-  const Applyapplication = type === "Submit_Documents";
+  const Applyapplication = type === "Export_Filing_Charges";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
@@ -115,8 +115,8 @@ const handleSubmit = async (e) => {
     console.log("Final payload:", payload);
 
     const res = await fetch(
-      // `${process.env.REACT_APP_API_URL}/api/shipping-bill-filing`,
-      `http://localhost:5000/api/shipping-bill-filing`,
+      `${process.env.REACT_APP_API_URL}/api/shipping-bill-filing`,
+      // `http://localhost:5000/api/shipping-bill-filing`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

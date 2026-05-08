@@ -59,7 +59,7 @@ const Fees = ({setShowEnrollModal}) => {
               onClick={() =>
                   setShowEnrollModal({
                   open: true,
-                  type: "Submit_Documents",
+                  type: "Export_Filing_Charges",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"

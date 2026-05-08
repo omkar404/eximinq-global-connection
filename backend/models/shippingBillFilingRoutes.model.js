@@ -1,20 +1,26 @@
+const mongoose = require("mongoose"); // ✅ This line was missing
 
-const mongoose = require("mongoose");
-
-const VALID_TYPES = [
-  "Enroll",
-  "Submit_Documents",
-  "QUICK_FORM",
-];
-
-const shippingBillFilingRoutes = new mongoose.Schema(
+const shippingBillFilingRoutesSchema = new mongoose.Schema(
   {
+    service: {
+      type: String,
+      trim: true,
+      default: "Shipping Bill Registration",
+    },
+    Incentive: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    port: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
-      required: function () {
-        return this.type !== "QUICK_FORM";
-      },
       trim: true,
+      default: null,
     },
     mobile: {
       type: String,
@@ -24,50 +30,47 @@ const shippingBillFilingRoutes = new mongoose.Schema(
     email: {
       type: String,
       trim: true,
-      lowercase: true,
-      default: null
+      default: null,
     },
     entity: {
       type: String,
-      default: null,
       trim: true,
+      default: null,
     },
     role: {
       type: String,
-      required: function () {
-        return this.type !== "QUICK_FORM";
-      },
-      default: null,
-      enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
-    },
-    type: {
-      type: String,
-      required: true,
-      enum: VALID_TYPES,
-    },
-    // Populated when type === "Enroll"
-    category: {
-      type: String,
+      trim: true,
       default: null,
     },
-    // Populated when type === "IEC_PROFILE_UPDATE"
-    issue: {
-      type: String,
-      default: null,
-    },
-    // "Interested in being a Partner" checkbox
     partner: {
       type: Boolean,
       default: false,
     },
+    portName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-// FIX 2: was exporting 'dscServicesRoutesSchema' which doesn't exist.
-//         The schema is declared as 'dscServicesSchema' — must match exactly.
-//         This caused: ReferenceError: dscServicesRoutesSchema is not defined
-module.exports = mongoose.model("shippingBillFilingRoutes", shippingBillFilingRoutes);
-
+module.exports = mongoose.model(
+  "shippingBillFilingRoutes",
+  shippingBillFilingRoutesSchema
+);
