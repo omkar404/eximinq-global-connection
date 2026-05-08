@@ -1,35 +1,76 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // ✅ This line was missing
 
-// ✅ Fix: VALID_TYPES updated to match all types controller handles
-const VALID_TYPES = [
-  "Enroll",
-  "Process_Payment",
-  "QUICK_FORM",
-  "IEC_PROFILE_UPDATE",
-  "IEC_REGISTRATION",
-  "IEC_ANNUAL_UPDATE",
-  "AD_Code_Registration",
-  "IFSC_Registration",
-];
-
-const moowrSchemeSchema = new mongoose.Schema(
+const MoowrSchemeSchema = new mongoose.Schema(
   {
-    name:     { type: String, required: true, trim: true },
-    mobile:   { type: String, required: true, trim: true },
-    email:    { type: String, default: null , trim: true, lowercase: true },
-    entity:   { type: String, default: null, trim: true },
+    service: {
+      type: String,
+      trim: true,
+      default: "New Moowr Scheme  Registration",
+    },
+    sector: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    importValue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    name: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    mobile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    entity: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     role: {
       type: String,
+      trim: true,
       default: null,
-      enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
     },
-    type:     { type: String, required: true, enum: VALID_TYPES },
-    category: { type: String, default: null },
-    issue:    { type: String, default: null },
-    partner:  { type: Boolean, default: false },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
+    portName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
   },
   { timestamps: true }
 );
 
-// ✅ Fix: consistent variable name
-module.exports = mongoose.model("MoowrScheme", moowrSchemeSchema);
+module.exports = mongoose.model(
+  "MoowrScheme",
+  MoowrSchemeSchema
+);
