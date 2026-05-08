@@ -114,8 +114,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       console.log("final payload", payload);
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/aeo-certification`,
-        `http://localhost:5000/api/aeo-certification`,
+        `${process.env.REACT_APP_API_URL}/api/aeo-certification`,
+        // `http://localhost:5000/api/aeo-certification`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
