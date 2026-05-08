@@ -21,7 +21,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   ───────────────────────────────────────── */
   const isEnroll = type === "Enroll";
   const Applyapplication = type === "File_Advance_Bill";
-  const isApplyapplication = type === "Submit_Documents";
+  const isApplyapplication = type === "Import_Filing_Charges";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
   const isRegistration =
     type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
@@ -119,7 +119,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/bill-of-entry-filing",
+        `${process.env.REACT_APP_API_URL}/api/bill-of-entry-filing`,        
+        // "http://localhost:5000/api/bill-of-entry-filing",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -377,7 +378,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <input
                     type="text"
                     name="service"
-                    value="Bill of Entry Filling"
+                    value="Import Filing Charges"
                     readOnly
                     className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
                   />

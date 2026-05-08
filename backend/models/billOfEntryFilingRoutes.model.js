@@ -1,21 +1,26 @@
-// models/billOfEntryFiling.model.js
+const mongoose = require("mongoose"); // ✅ This line was missing
 
-const mongoose = require("mongoose");
-
-const VALID_TYPES = [
-  "Enroll",
-  "QUICK_FORM",
-  "File_Bill_Of_Entry",
-  "Submit_Documents",
-];
-
-const billOfEntryFilingSchema = new mongoose.Schema(
+const billOfEntryFilingRoutesSchema = new mongoose.Schema(
   {
+    service: {
+      type: String,
+      trim: true,
+      default: "Bill of Entry Registration",
+    },
+    port: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    cargo: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
-      // required: true,
       trim: true,
-      default: null
+      default: null,
     },
     mobile: {
       type: String,
@@ -24,46 +29,48 @@ const billOfEntryFilingSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      // required: true,
       trim: true,
-      lowercase: true,
-      default: null
+      default: null,
     },
     entity: {
       type: String,
-      default: null,
       trim: true,
+      default: null,
     },
     role: {
       type: String,
-      default: null,
-      enum: ["Importer / Exporter", "CHA", "Logistics", "Forwarder", null],
-    },
-    type: {
-      type: String,
-      required: true,
-      enum: ["BILL_OF_ENTRY", "EXPORT", "IMPORT", "QUICK_FORM"],
-      default: "QUICK_FORM"
-    },
-    // Populated when type === "Enroll"
-    category: {
-      type: String,
+      trim: true,
       default: null,
     },
-    // Populated when type === "File_Bill_Of_Entry"
-    issue: {
-      type: String,
-      default: null,
-    },
-    // "Interested in being a Partner" checkbox
     partner: {
       type: Boolean,
       default: false,
     },
+    portName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-module.exports = mongoose.model("BillOfEntryFiling", billOfEntryFilingSchema);
+module.exports = mongoose.model(
+  "billOfEntryFilingRoutes",
+  billOfEntryFilingRoutesSchema
+);

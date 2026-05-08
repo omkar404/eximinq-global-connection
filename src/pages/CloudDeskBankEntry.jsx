@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-// import TopBar from "../components/CloudDeskBankEntry/TopBar";
+import TopBar from "../components/CloudDeskBankEntry/TopBar";
 import Navbar from "../components/CloudDeskBankEntry/Navbar";
 import Hero from "../components/CloudDeskBankEntry/Hero";
 import Fees from "../components/CloudDeskBankEntry/Fees";
@@ -37,7 +37,7 @@ const CloudDeskBankEntry = () => {
     // TODO → send API call
     // axios.post("/api/enroll", formData)
 
-    // alert("Form submitted — check console for data.");
+     alert("Form submitted — check console for data.");
   };
   return (
     <>
