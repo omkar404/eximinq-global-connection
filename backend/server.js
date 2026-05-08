@@ -710,7 +710,7 @@ app.use("/api/icegate-registration", icegateRoutes);
 
 app.use("/api/ad-code-registration", adcodeRoutes);
 
-app.use("/api/e-rcmc-registration", ercmcregistrationRoutes)
+app.use("/api/e-rcmc-registration", ercmcregistrationRoutes);
 
 app.use("/api/import-management-registration", importManagementRoutes);
 

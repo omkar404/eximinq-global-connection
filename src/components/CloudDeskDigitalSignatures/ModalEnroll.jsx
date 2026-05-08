@@ -1,13 +1,7 @@
-// components/ModalEnroll.jsx
-
 import React, { useState } from "react";
-import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
+import { X, Handshake, Building, Mail } from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
-
-  /* ─────────────────────────────────────────
-     STATE — all hooks before early return
-  ───────────────────────────────────────── */
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -18,22 +12,28 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   });
 
   const [category, setCategory] = useState("");
-  const [issue, setIssue]       = useState("");
-  const [errors, setErrors]     = useState({});
-  const [loading, setLoading]   = useState(false);
+  const [issue, setIssue] = useState("");
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  /* ─────────────────────────────────────────
-     FORM TYPE FLAGS
-  ───────────────────────────────────────── */
-  const isEnroll          = type === "Enroll";
-  const isApplyDgft       = type === "DGFT_ICEGATE";
-  const isApplyComboPack  = type === "Combo_Pack";
-  const isProfileUpdate   = type === "IEC_PROFILE_UPDATE";
-  const isRegistration    = type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
+  /* SERVICE CONFIGURATION */
+  const SERVICE_MAP = {
+    DGFT_ICEGATE: {
+      service: "DGFT ICEGATE",
+    },
+    Combo_Pack: {
+      service: "Combo Pack",
+    },
+  };
 
-  /* ─────────────────────────────────────────
-     OPTIONS
-  ───────────────────────────────────────── */
+  const serviceConfig = SERVICE_MAP[type];
+  const predefinedService = serviceConfig?.service;
+  const isEnroll = type === "Enroll";
+
+  /* Only show category dropdown for IEC profile update (not for fee services) */
+  const showCategory = type === "IEC_PROFILE_UPDATE";
+
+  /* Options for category (still available if needed) */
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
     "IEC PROFILE UPDATATION",
@@ -41,89 +41,73 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "IEC SUSPENSION",
   ];
 
-  const PROFILE_UPDATE_OPTIONS = [
-    "Steel Import NOC (SIMS)",
-    "Copper (NFMIMS)",
-    "Aluminium (NFMIMS)",
-    "Coal (CIMS)",
-    "Paper (PIMS)",
-    "Chip (CHIMS)",
-  ];
-
-  /* ─────────────────────────────────────────
-     RESET
-     FIX 3: Two reset functions existed — 'resetFrom' (typo, no error clear)
-     and 'resetForm' (correct). handleClose was calling 'resetFrom' which
-     didn't clear errors, so old validation messages stayed visible on reopen.
-     Removed 'resetFrom' entirely, handleClose now calls 'resetForm'.
-  ───────────────────────────────────────── */
   const resetForm = () => {
-    setForm({ name: "", mobile: "", entity: "", email: "", role: "", partner: false });
+    setForm({
+      name: "",
+      mobile: "",
+      entity: "",
+      email: "",
+      role: "",
+      partner: false,
+    });
     setCategory("");
     setIssue("");
-    setErrors({});
   };
 
   const handleClose = () => {
-    resetForm(); // FIX 3: was calling resetFrom() (typo)
+    resetForm();
     onClose();
   };
 
   if (!show) return null;
 
-  /* ─────────────────────────────────────────
-     CHANGE HANDLER
-     FIX 2: Destructured 'type' from e.target was shadowing the
-     'type' prop. So `type === "checkbox"` was comparing against
-     "Enroll" / "DGFT_ICEGATE" — partner checkbox never toggled.
-     Fixed by renaming to 'inputType'.
-  ───────────────────────────────────────── */
   const handleChange = (e) => {
-    const { name, value, type: inputType, checked } = e.target; // ← renamed
+    const { name, value, type, checked } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: inputType === "checkbox" ? checked : value,       // ← used here
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  /* ─────────────────────────────────────────
-     VALIDATION
-  ───────────────────────────────────────── */
   const validate = () => {
     const newErrors = {};
-    if (!form.name.trim())   newErrors.name   = "Name is required.";
+    if (!form.name.trim()) newErrors.name = "Name is required.";
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
-    if (!form.email.trim())  newErrors.email  = "Email is required.";
-    if (!form.role)          newErrors.role   = "Please select your role.";
+    if (!form.email.trim()) newErrors.email = "Email is required.";
+    if (!form.role) newErrors.role = "Please select your role.";
+    // No category validation for fee services
     return newErrors;
   };
 
-  /* ─────────────────────────────────────────
-     SUBMIT
-     FIX 1: handleSubmit was a regular function but used 'await' inside.
-     This is a SyntaxError — 'await' is only valid inside async functions.
-     The form would never submit and the page would break on click.
-     Fixed by adding 'async' keyword.
-  ───────────────────────────────────────── */
-  const handleSubmit = async (e) => {   // ← FIX 1: 'async' was missing
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const validationErrors = validate();
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length > 0) return;
+    const v = validate();
+    setErrors(v);
+    if (Object.keys(v).length > 0) return;
 
     setLoading(true);
 
-    const payload = {
-      ...form,
-      type,
-      category: isEnroll       ? category : null,
-      issue:    isProfileUpdate ? issue    : null,
-    };
-
-    console.log("Final Payload:", payload);
-
     try {
+      const finalType = type || "Enroll";
+      const payload = {
+        name: form.name,
+        mobile: form.mobile,
+        email: form.email,
+        entity: form.entity,
+        role: form.role,
+        partner: form.partner,
+        type: finalType,
+        category: category || "",   // will be empty for fee services
+        issue: issue || "",
+        service: predefinedService || finalType,
+      };
+
+      console.log("Final Payload:", payload);
+
+      if (typeof onSubmit === "function") {
+        onSubmit(payload);
+      }
+
       const res = await fetch(
         `${process.env.REACT_APP_API_URL}/api/dsc-services`,
         // "http://localhost:5000/api/dsc-services",
@@ -138,53 +122,29 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       console.log("API Response:", data);
 
       if (res.ok) {
-        alert("Registration submitted successfully");
-        if (typeof onSubmit === "function") onSubmit(payload);
+        alert("Registration submitted successfully!");
         resetForm();
         onClose();
       } else {
         alert(data.message || "Submission failed");
       }
     } catch (error) {
-      console.error("Fetch error:", error.name, error.message);
+      console.error("Submission error:", error);
       alert("Submission failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  /* ─────────────────────────────────────────
-     REUSABLE: Locked service category field
-  ───────────────────────────────────────── */
-  const ServiceCategoryField = ({ value }) => (
-    <div>
-      <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-        Service Category
-      </label>
-      <div className="relative">
-        <FileSignature className="absolute left-3 top-3 text-gray-400" size={16} />
-        <input
-          type="text"
-          value={value}
-          readOnly
-          className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm text-gray-600"
-        />
-      </div>
-    </div>
-  );
-
-  /* ─────────────────────────────────────────
-     RENDER
-  ───────────────────────────────────────── */
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-
-        {/* ── Header ── */}
+        {/* HEADER */}
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
           <div>
             <h2 className="text-2xl font-bold flex items-center">
-              <Handshake className="mr-2 text-teal-400" /> Enroll Now
+              <Handshake className="mr-2 text-teal-400" />
+              Enroll Now
             </h2>
             <p className="text-indigo-200 text-sm mt-1">
               Join the CloudDesk Network
@@ -193,17 +153,15 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
           <button
             onClick={handleClose}
             className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-1 transition"
-            aria-label="Close modal"
           >
             <X size={20} />
           </button>
         </div>
 
-        {/* ── Body ── */}
+        {/* BODY */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
-
-            {/* Name + Mobile */}
+            {/* NAME + MOBILE */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
@@ -225,7 +183,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <p className="text-xs text-red-500 mt-1">{errors.name}</p>
                 )}
               </div>
-
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Mobile No
@@ -248,7 +205,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             </div>
 
-            {/* Entity Name */}
+            {/* ENTITY NAME */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                 Entity Name
@@ -266,7 +223,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             </div>
 
-            {/* Email ID */}
+            {/* EMAIL */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                 Email ID
@@ -291,55 +248,44 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               )}
             </div>
 
-            {/* IEC Profile Update — issue dropdown */}
-            {isProfileUpdate && (
+            {/* SERVICE TYPE (readonly) */}
+            {predefinedService && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Update Type
+                  Service Type
                 </label>
-                <select
-                  value={issue}
-                  onChange={(e) => setIssue(e.target.value)}
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
-                >
-                  <option value="" disabled>Select Update Type</option>
-                  {PROFILE_UPDATE_OPTIONS.map((option) => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
+                <input
+                  type="text"
+                  value={predefinedService}
+                  readOnly
+                  className="w-full p-3 rounded-lg border bg-gray-100 text-sm"
+                />
               </div>
             )}
 
-            {/* Enroll — category dropdown (currently hidden, uncomment when needed) */}
-            {isEnroll && (
+            {/* CATEGORY DROPDOWN - ONLY FOR IEC_PROFILE_UPDATE */}
+            {showCategory && (
               <div>
-                {/* <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Category
                 </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 text-sm"
                 >
-                  <option value="" disabled>Select Category</option>
+                  <option value="">Select Category</option>
                   {IEC_OPTIONS.map((option) => (
-                    <option key={option} value={option}>{option}</option>
+                    <option key={option}>{option}</option>
                   ))}
-                </select> */}
+                </select>
+                {errors.category && (
+                  <p className="text-xs text-red-500 mt-1">{errors.category}</p>
+                )}
               </div>
             )}
 
-            {/* Combo Pack — locked service field */}
-            {isApplyComboPack && (
-              <ServiceCategoryField value="DSC Service Combo Pack" />
-            )}
-
-            {/* DGFT / ICEGATE — locked service field */}
-            {isApplyDgft && (
-              <ServiceCategoryField value="DSC Service for DGFT / ICEGATE" />
-            )}
-
-            {/* Role Selection */}
+            {/* ROLE SELECTION */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
                 I am a:
@@ -350,10 +296,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   return (
                     <label
                       key={role}
-                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition ${
+                      className={`flex items-center p-3 border rounded-lg cursor-pointer ${
                         selected
                           ? "border-teal-500 bg-teal-50"
-                          : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
+                          : "border-gray-200 hover:bg-indigo-50"
                       }`}
                     >
                       <input
@@ -362,7 +308,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                         value={role}
                         checked={form.role === role}
                         onChange={handleChange}
-                        className="w-4 h-4 text-teal-600 focus:ring-teal-500"
+                        className="w-4 h-4 text-teal-600"
                       />
                       <span className="ml-2 text-sm font-medium text-gray-700">
                         {role}
@@ -376,7 +322,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               )}
             </div>
 
-            {/* Partner Checkbox */}
+            {/* PARTNER CHECKBOX */}
             <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
               <label className="flex items-start cursor-pointer">
                 <input
@@ -384,58 +330,25 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   name="partner"
                   checked={form.partner}
                   onChange={handleChange}
-                  className="mt-1 w-5 h-5 text-teal-600 rounded border-gray-300 focus:ring-teal-500"
+                  className="mt-1 w-5 h-5 text-teal-600"
                 />
                 <span className="ml-3 text-sm text-gray-800">
-                  I am interested in being a{" "}
+                  I am interested in being a
                   <span className="font-bold text-teal-700">
-                    Partner with EXIMINQ CLOUDDESK
-                  </span>{" "}
-                  and agree to the terms of enrollment.
+                    {" "}Partner with EXIMINQ CLOUDDESK
+                  </span>
                 </span>
               </label>
             </div>
 
-            {/* FIX 4: Submit button now disables + shows spinner during loading.
-                       Previously loading state was tracked but button ignored it
-                       — double-submits were possible. */}
+            {/* SUBMIT BUTTON */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700
-                text-white font-bold rounded-xl shadow-lg hover:shadow-xl
-                transition flex items-center justify-center text-lg
-                ${loading
-                  ? "opacity-60 cursor-not-allowed"
-                  : "transform hover:-translate-y-0.5"
-                }`}
+              className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl text-lg"
             >
-              {loading ? (
-                <>
-                  <svg
-                    className="animate-spin h-5 w-5 mr-2 text-white"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12" cy="12" r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v8z"
-                    />
-                  </svg>
-                  Submitting...
-                </>
-              ) : (
-                "Submit Enrollment"
-              )}
+              {loading ? "Submitting..." : "Submit Enrollment"}
             </button>
-
           </form>
         </div>
       </div>
