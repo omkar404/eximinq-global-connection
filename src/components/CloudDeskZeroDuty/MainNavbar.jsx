@@ -10,12 +10,12 @@ export const MainNavbar = ({
   setIsMenuOpen,
   setShowEnrollModal,
 }) => {
-  const openModal = (actionType) =>
-    setShowEnrollModal({
-      open: true,
-      actionType,
-      source: "services/epcg-scheme",
-    });
+  // const openModal = (actionType) =>
+  //   setShowEnrollModal({
+  //     open: true,
+  //     actionType,
+  //     source: "services/epcg-scheme",
+  //   });
 
   return (
     <nav
@@ -127,7 +127,7 @@ export const MainNavbar = ({
           </div>
 
           <button
-            onClick={() => openModal("Enroll Now")}
+            onClick={() => setShowEnrollModal({ open:true , type:"Enroll"})}
             className="rounded-lg bg-gradient-to-r from-teal-600 to-indigo-700 px-5 py-2 text-sm font-bold text-white shadow-lg hover:shadow-xl"
           >
             Enroll Now

@@ -13,11 +13,11 @@ const mainenrollRoutes = require("./routes/mainenroll.routes");
 const mainCooRoutes = require("./routes/maincoo.routes");
 const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes");
 const icegateRoutes = require("./routes/icegateRegistrationRoutes.routes");
-const adcodeRoutes = require("./routes/adcodeRegistrationRoutes.route");
+const AdcodeRegistrationRoutes = require("./routes/adcodeRegistrationRoutes.route");
 const ercmcregistrationRoutes = require("./routes/ercmcregistrationRoutes.route");
 const importManagementRoutes = require("./routes/importManagementRoutes.route");
 const starExportHouseRoutes = require("./routes/starExportHouse.routes");
-const billOfEntryFilingRoutes = require("./routes/billOfEntryFiling.routes");
+const billOfEntryFilingRoutes = require("./routes/billOfEntryFilingRoutes.routes.js");
 const shippingBillFilingRoutes = require("./routes/shippingBillFilingRoutes.routes");
 const moowrschemeRoutes = require("./routes/moowrschemeRoutes.routes");
 const advanceAuthorisationRoutes = require("./routes/advanceAuthorisationRoutes.routes");
@@ -708,9 +708,9 @@ app.use("/api/import-export-code", importExportCodeRoutes);
 
 app.use("/api/icegate-registration", icegateRoutes);
 
-app.use("/api/ad-code-registration", adcodeRoutes);
+app.use("/api/ad-code-registration", AdcodeRegistrationRoutes);
 
-app.use("/api/e-rcmc-registration", ercmcregistrationRoutes)
+app.use("/api/e-rcmc-registration", ercmcregistrationRoutes);
 
 app.use("/api/import-management-registration", importManagementRoutes);
 
@@ -841,6 +841,7 @@ app.use("/api/saas-enrollment", saasEnrollmentRoutes);
 app.use("/api/gst-filing", gstFilingRoutes);
 
 app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
+
 app.use("/api/epcg-scheme", epcgSchemeRoutes);
 
 startWatcher();

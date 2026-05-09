@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {
-  serviceaeocertification,
+  createserviceaeocertification,
 } = require("../controllers/serviceaeocertification.controller");
 
-router.post("/", serviceaeocertification);
-
+router.post("/", createserviceaeocertification);
 module.exports = router;

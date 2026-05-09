@@ -38,7 +38,7 @@ const CloudDeskDutyDrawBack = () => {
       // TODO → send API call
       // axios.post("/api/enroll", formData)
   
-      // alert("Form submitted — check console for data.");
+      alert("Form submitted — check console for data.");
     };
   return (
     <>

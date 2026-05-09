@@ -101,8 +101,8 @@ const PROFILE_UPDATE_OPTIONS = [
       };
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/rodtep-scheme`,
-        "http://localhost:5000/api/rodtep-scheme",
+        `${process.env.REACT_APP_API_URL}/api/rodtep-scheme`,
+        // "http://localhost:5000/api/rodtep-scheme",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -313,7 +313,7 @@ const PROFILE_UPDATE_OPTIONS = [
       <input
         type="text"
         name="service"
-        value="RodTep Scheme"
+        value="RoDTEP Management"
         readOnly
         className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
       />

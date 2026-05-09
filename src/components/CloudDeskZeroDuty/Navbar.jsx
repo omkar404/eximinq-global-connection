@@ -31,12 +31,19 @@ const Navbar = ({ setShowEnrollModal }) => {
           </a>
         </div>
 
-        <button
+        {/* <button
           onClick={() => openModal("Apply Now")}
           className="absolute right-4 hidden rounded-md bg-accent-500 px-6 py-2 font-bold text-white shadow-md transition hover:bg-accent-600 md:inline-block"
         >
           Apply Now
-        </button>
+        </button> */}
+
+        <a 
+          href="#fees"
+          className="absolute right-4 hidden rounded-md bg-accent-500 px-6 py-2 font-bold text-white shadow-md transition hover:bg-accent-600 md:inline-block"
+        >
+          Apply Now
+        </a>
 
         <button
           className="absolute right-4 text-2xl text-brand-900 md:hidden"

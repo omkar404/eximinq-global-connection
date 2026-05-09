@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 // ✅ Fix: "controll" → "controller"
-const rodtepschemeRoutes = require("../controllers/rodtepschemeRoutes.controller");
+const {createrodtepschemeRoutes} = require("../controllers/rodtepschemeRoutes.controller");
 
-router.post("/", rodtepschemeRoutes.createrodtepschemeRoutes);
+router.post("/", createrodtepschemeRoutes);
 
 module.exports = router;

@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 // ✅ Fix: "controll" → "controller"
-const  dutydrawbackRoutes = require("../controllers/dutydrawbackRoutes.controller");
+const  {createdutydrawbackRoutes} = require("../controllers/dutydrawbackRoutes.controller");
 
-router.post("/", dutydrawbackRoutes.createdutydrawbackRoutes);
+router.post("/", createdutydrawbackRoutes);
 
 module.exports = router;

@@ -34,8 +34,8 @@ import { MainNavbar } from "../components/CloudDeskZeroDuty/MainNavbar";
 const CloudDeskZeroDuty = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    actionType: "",
-    source: "services/epcg-scheme",
+    type: "",
+    // source: "services/epcg-scheme",
   });
 
   const handleEnrollmentSubmit = (formData) => {
@@ -194,15 +194,15 @@ const CloudDeskZeroDuty = () => {
 
         <ModalEnroll
           show={showEnrollModal.open}
-          type="epcg_scheme_enroll"
-          actionType={showEnrollModal.actionType}
-          source={showEnrollModal.source}
+          type={showEnrollModal.type}
+          // actionType={showEnrollModal.actionType}
+          // source={showEnrollModal.source}
           onSubmit={handleEnrollmentSubmit}
           onClose={() =>
             setShowEnrollModal({
               open: false,
-              actionType: "",
-              source: "services/epcg-scheme",
+              type: "",
+              // source: "services/epcg-scheme",
             })
           }
         />

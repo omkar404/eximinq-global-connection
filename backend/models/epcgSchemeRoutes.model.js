@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const epcgSchemeRoutesSchema = new mongoose.Schema(
+const EpcgSchemeLeadSchema = new mongoose.Schema(
   {
     service: {
       type: String,
       trim: true,
-      default: "EPCG Scheme",
+      default: "EPCG Scheme Enquiry Registration",
     },
     machineValue: {
       type: String,
@@ -22,10 +22,44 @@ const epcgSchemeRoutesSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    name: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    email: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    entity: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    role: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String,
       required: true,
       trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
     },
     source: {
       type: String,
@@ -36,4 +70,4 @@ const epcgSchemeRoutesSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("epcgSchemeRoutes", epcgSchemeRoutesSchema);
+module.exports = mongoose.model("EpcgSchemeLead", EpcgSchemeLeadSchema);

@@ -26,7 +26,7 @@ const QuickForm = () => {
         mobile: form.mobile,
         entity: form.port,
         issue:  form.cargo,
-        type:   "BILL_OF_ENTRY",
+        type:   "QUICK_FORM",
       };
 
       // FIX 1: fetch result was stored as 'res' but then read as 'response'

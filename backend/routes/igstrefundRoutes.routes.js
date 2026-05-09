@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 // ✅ Fix: "controll" → "controller"
-const igstrefundRoutes = require("../controllers/igstrefundRoutes.controller");
+const {createigstrefundRoutes} = require("../controllers/igstrefundRoutes.controller");
 
-router.post("/", igstrefundRoutes.createigstrefundRoutes);
+router.post("/", createigstrefundRoutes);
 
 module.exports = router;

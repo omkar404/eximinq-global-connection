@@ -1,4 +1,4 @@
-// import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
+import TopBar from "../components/CloudDeskDigitalSignatures/TopBar";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskDigitalSignatures/Navbar";
@@ -34,7 +34,7 @@ const CloudDeskDigitalSignatures = () => {
       // TODO → send API call
       // axios.post("/api/enroll", formData)
   
-      // alert("Form submitted — check console for data.");
+      alert("Form submitted — check console for data.");
     };
   return (
     <>
