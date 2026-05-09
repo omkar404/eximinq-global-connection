@@ -38,7 +38,7 @@ const Fees = ({ setShowEnrollModal }) => {
               </li>
             </ul>
 
-            <button
+            {/* <button
               onClick={() =>
                 setShowEnrollModal({
                   open: true,
@@ -49,7 +49,18 @@ const Fees = ({ setShowEnrollModal }) => {
               className="block w-full rounded-lg bg-brand-600 py-3 font-bold text-white transition hover:bg-brand-700"
             >
               Consult Now
-            </button>
+            </button> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "EPCG_Management",
+                  })
+                }
+                className="block w-full rounded-lg bg-brand-600 py-3 font-bold text-white transition hover:bg-brand-700"
+              >
+                Consult Now
+          </button>
           </div>
         </div>
       </div>

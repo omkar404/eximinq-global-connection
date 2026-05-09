@@ -7,176 +7,262 @@ const DEFAULT_FORM = {
   mobile: "",
 };
 
-const SUBMIT_TYPE = "Calculate Savings";
-const SOURCE = "services/epcg-scheme";
-
 const QuickForm = () => {
+
   const [form, setForm] = useState(DEFAULT_FORM);
+
   const [errors, setErrors] = useState({});
+
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
+
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
+
+    if (name === "mobile") {
+
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+
+      setForm((prev) => ({
+        ...prev,
+        [name]: digitsOnly,
+      }));
+
+    } else {
+
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+
+    }
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
   };
 
+  /* -----------------------------
+      VALIDATION
+  ------------------------------ */
   const validate = () => {
-    const nextErrors = {};
-    const mobileRegex = /^[6-9]\d{9}$/;
+
+    const newErrors = {};
 
     if (!form.machineValue.trim()) {
-      nextErrors.machineValue = "Machine value is required";
+      newErrors.machineValue = "Machine value is required";
     }
 
     if (!form.dutyRate.trim()) {
-      nextErrors.dutyRate = "Applicable duty is required";
+      newErrors.dutyRate = "Applicable duty is required";
     }
 
     if (!form.mobile.trim()) {
-      nextErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile.trim())) {
-      nextErrors.mobile = "Enter valid 10 digit Indian mobile number";
+
+      newErrors.mobile = "Mobile number is required";
+
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+
     }
 
-    return nextErrors;
+    return newErrors;
   };
 
+  /* -----------------------------
+      SUBMIT HANDLER
+  ------------------------------ */
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
+    const validationErrors = validate();
 
-    if (Object.keys(nextErrors).length > 0) return;
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setLoading(true);
 
     try {
-      setLoading(true);
+
+      const payload = {
+        service: "EPCG Scheme",
+        machineValue: form.machineValue,
+        dutyRate: form.dutyRate,
+        mobile: form.mobile,
+        type: "Calculate Savings",
+      };
+
+      console.log("📤 Sending data:", payload);
+
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/epcg-scheme`,
+        // "http://localhost:5000/api/epcg-scheme",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            service: "EPCG Scheme",
-            machineValue: form.machineValue.trim(),
-            dutyRate: form.dutyRate.trim(),
-            mobile: form.mobile.trim(),
-            type: SUBMIT_TYPE,
-            source: SOURCE,
-          }),
+          body: JSON.stringify(payload),
         }
       );
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.message || data.error || "Failed to submit request");
+        throw new Error(
+          data.error || data.message || "Something went wrong"
+        );
       }
 
-      alert("We will calculate your EPCG duty savings and contact you shortly.");
+      alert("✅ Request submitted successfully");
+
+      // Reset Form
       setForm(DEFAULT_FORM);
-      setErrors({});
-    } catch (error) {
-      console.error("EPCG quick form error:", error);
-      alert("Submission failed. Please try again.");
+
+    } catch (err) {
+
+      console.error("❌ Error:", err);
+
+      alert(`❌ Submission failed: ${err.message}`);
+
     } finally {
+
       setLoading(false);
+
     }
   };
 
   return (
-    <div className="rounded-2xl bg-white p-6 text-slate-800 shadow-2xl ring-1 ring-slate-200 md:p-8">
-      <div className="mb-5 flex items-center gap-2">
-        <div className="rounded-lg bg-sky-50 p-2 text-sky-600">
-          <Calculator size={18} />
+
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+
+      {/* HEADER */}
+      <div className="flex items-center gap-3 mb-5">
+
+        <div className="bg-sky-100 p-2 rounded-lg">
+          <Calculator className="text-sky-600" size={20} />
         </div>
+
         <div>
           <h3 className="text-2xl font-bold text-brand-900">
             Duty Savings Calculator
           </h3>
-          <p className="text-sm text-slate-500">
+
+          <p className="text-slate-500 text-sm">
             See how much you save on machine import.
           </p>
         </div>
+
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="mb-1 block text-sm font-semibold text-slate-700">
+      <form onSubmit={handleSubmit}>
+
+        {/* MACHINE VALUE */}
+        <div className="mb-4">
+
+          <label className="block text-sm font-semibold mb-1">
             Machine Value (CIF)
           </label>
+
           <input
             type="text"
             name="machineValue"
             value={form.machineValue}
             onChange={handleChange}
             placeholder="e.g. Rs 50,00,000"
-            className={`w-full rounded-md border px-3 py-2.5 text-sm outline-none transition ${
+            className={`w-full border rounded px-3 py-2 focus:outline-none ${
               errors.machineValue
-                ? "border-red-400"
-                : "border-slate-300 focus:border-sky-500"
+                ? "border-red-500"
+                : "border-slate-300"
             }`}
           />
+
           {errors.machineValue && (
-            <p className="mt-1 text-xs text-red-500">{errors.machineValue}</p>
+            <p className="text-red-500 text-xs mt-1">
+              {errors.machineValue}
+            </p>
           )}
+
         </div>
 
-        <div>
-          <label className="mb-1 block text-sm font-semibold text-slate-700">
+        {/* DUTY RATE */}
+        <div className="mb-4">
+
+          <label className="block text-sm font-semibold mb-1">
             Applicable Duty %
           </label>
+
           <input
             type="text"
             name="dutyRate"
             value={form.dutyRate}
             onChange={handleChange}
             placeholder="e.g. 28% (BCD + IGST)"
-            className={`w-full rounded-md border px-3 py-2.5 text-sm outline-none transition ${
+            className={`w-full border rounded px-3 py-2 focus:outline-none ${
               errors.dutyRate
-                ? "border-red-400"
-                : "border-slate-300 focus:border-sky-500"
+                ? "border-red-500"
+                : "border-slate-300"
             }`}
           />
+
           {errors.dutyRate && (
-            <p className="mt-1 text-xs text-red-500">{errors.dutyRate}</p>
+            <p className="text-red-500 text-xs mt-1">
+              {errors.dutyRate}
+            </p>
           )}
+
         </div>
 
-        <div>
-          <label className="mb-1 block text-sm font-semibold text-slate-700">
+        {/* MOBILE */}
+        <div className="mb-4">
+
+          <label className="block text-sm font-semibold mb-1">
             Mobile Number
           </label>
+
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            placeholder="+91 74000 96950"
-            className={`w-full rounded-md border px-3 py-2.5 text-sm outline-none transition ${
+            placeholder="Enter 10 digit mobile number"
+            maxLength={10}
+            className={`w-full border rounded px-3 py-2 focus:outline-none ${
               errors.mobile
-                ? "border-red-400"
-                : "border-slate-300 focus:border-sky-500"
+                ? "border-red-500"
+                : "border-slate-300"
             }`}
           />
+
           {errors.mobile && (
-            <p className="mt-1 text-xs text-red-500">{errors.mobile}</p>
+            <p className="text-red-500 text-xs mt-1">
+              {errors.mobile}
+            </p>
           )}
+
         </div>
 
+        {/* SUBMIT BUTTON */}
         <button
           type="submit"
           disabled={loading}
-          className={`w-full rounded-lg py-3 text-sm font-bold text-white transition ${
+          className={`w-full text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2 ${
             loading
-              ? "cursor-not-allowed bg-sky-400"
+              ? "bg-sky-400 cursor-not-allowed"
               : "bg-sky-600 hover:bg-sky-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+
+          <Calculator size={18} />
+
+          {loading ? "Submitting..." : "Calculate Savings"}
+
         </button>
+
       </form>
+
     </div>
   );
 };
