@@ -148,11 +148,8 @@ const handleSubmit = async (e) => {
 
     // Create payload with ALL required fields
     const payload = {
-      name: form.productName,                    // Required: Product name as name
-      mobile: form.mobile || "9876543210",       // Required: Mobile number
-      email: "lead@eximinq.com",                  // Required: Email
+      // Required: Mobile number                // Required: Email
       type: "QUICK_FORM",                // Required: Type (changed from QUICK_FORM)
-      service: "SCOMET Licensing",                // Service name
       productName: form.productName,              // Additional field
       technicalSpec: form.technicalSpec,          // Additional field
       endUserCountry: form.endUserCountry,        // Additional field
