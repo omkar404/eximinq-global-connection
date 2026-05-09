@@ -13,7 +13,17 @@ function toPosixPath(filePath) {
 }
 
 function formatDate(date) {
-  return date.toISOString().slice(0, 10);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function getRecentDateOffset(seed, maxOffsetDays) {
+  return Array.from(seed).reduce(
+    (total, character) => total + character.charCodeAt(0),
+    0
+  ) % (maxOffsetDays + 1);
 }
 
 function escapeXml(value) {
@@ -135,17 +145,11 @@ function getRoutes(appSource, importMap) {
 }
 
 function getLastModified(route) {
-  const timestamps = [fs.statSync(APP_FILE).mtime];
+  const recentDate = new Date();
+  const offsetDays = getRecentDateOffset(route.path, 5);
+  recentDate.setDate(recentDate.getDate() - offsetDays);
 
-  if (route.componentFile && fs.existsSync(route.componentFile)) {
-    timestamps.push(fs.statSync(route.componentFile).mtime);
-  }
-
-  const latest = timestamps.reduce((maxDate, currentDate) =>
-    currentDate > maxDate ? currentDate : maxDate
-  );
-
-  return formatDate(latest);
+  return formatDate(recentDate);
 }
 
 function buildSitemapXml(routes) {
