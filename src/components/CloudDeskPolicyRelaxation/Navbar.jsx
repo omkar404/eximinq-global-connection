@@ -4,25 +4,24 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm sticky top-32 z-30">
+    <header className="bg-white shadow-sm sticky top-24 z-30">
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#services" className="hover:text-brand-600 transition">Services</a>
-          <a href="#ad-code" className="hover:text-brand-600 transition">AD Code</a>
-          <a href="#documents" className="hover:text-brand-600 transition">Documents</a>
-          <a href="#process" className="hover:text-brand-600 transition">Process</a>
-          <a href="#pricing" className="hover:text-brand-600 transition">Pricing</a>
+          <a href="#about" className="hover:text-brand-600 transition">What is PRC?</a>
+          <a href="#cases" className="hover:text-brand-600 transition">Case Types</a>
+          <a href="#process" className="hover:text-brand-600 transition">Appeal Process</a>
+          <a href="#pricing" className="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        {/* <a 
-          href="#contact"
+        <a 
+          href="#pricing"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
-        </a> */}
+        </a>
 
         {/* MOBILE MENU BUTTON */}
         <button

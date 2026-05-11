@@ -66,6 +66,7 @@ const copyrightRegistrationRoutes = require("./routes/copyrightRegistrationRoute
 const trademarkRegistrationRoutes = require("./routes/trademarkRegistrationRoutes.routes");
 const fertiliserimportLicenseRoutes = require("./routes/fertiliserimportLicenseRoutes.routes");
 const horticultureRoutes = require("./routes/horticultureRoutes.routes");
+const prcRelaxationRoutes = require("./routes/prcRelaxationRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -809,6 +810,8 @@ app.use("/api/trademark-registration",trademarkRegistrationRoutes)
 app.use("/api/fertiliser-import-license",fertiliserimportLicenseRoutes);
 
 app.use("/api/horticulture",horticultureRoutes);
+
+app.use("/api/prc-relaxation",prcRelaxationRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 

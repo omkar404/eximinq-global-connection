@@ -8,20 +8,20 @@ const Hero = () => {
         {/* TEXT SECTION */}
         <div>
                 <span class="inline-block bg-brand-800 text-accent-400 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-brand-600">
-                    INDIAN CUSTOMS GATEWAY
+                    PARA 2.58 OF FTP
                 </span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                    Seamless <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">ICEGATE Registration</span> & AD Code Approval
+                    Policy Relaxation Committee <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">(PRC)</span> Representation
                 </h1>
                 <p class="text-lg text-slate-200 mb-8 leading-relaxed">
-                    Unlock the power of paperless trade. We handle your ICEGATE ID creation, Digital Signature (DSC) linking, and Authorized Dealer (AD) Code registration at all Indian ports.
+                    Has your application been rejected by the Regional Authority due to a procedural lapse? We represent your case at DGFT Headquarters to condone delays and relax policy provisions.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
-                        Get ICEGATE ID
+                    <a href="#pricing" class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                        Submit Case Details
                     </a>
-                    <a href="#ad-code" class="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
-                        Link AD Code
+                    <a href="#about" class="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
+                        Learn About PRC
                     </a>
                 </div>
             </div>
