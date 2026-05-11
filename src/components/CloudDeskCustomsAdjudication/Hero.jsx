@@ -7,32 +7,29 @@ const Hero = () => {
         {/* TEXT SECTION */}
         <div>
           <span className="inline-block bg-accent-500 text-brand-900 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-accent-400">
-            PARA 2.58 OF FTP
+            DISPUTE RESOLUTION
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Policy Relaxation Committee{" "}
+            Expert Defense for{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">
-              (PRC)
-            </span>{" "}
-            Representation
+              Customs Adjudication
+            </span>
           </h1>
           <p className="text-lg text-slate-200 mb-8 leading-relaxed">
-            Has your application been rejected by the Regional Authority due to
-            a procedural lapse? We represent your case at DGFT Headquarters to
-            condone delays and relax policy provisions.
+            Received a Show Cause Notice (SCN)? Facing valuation loading or HS Code re-classification? We provide strong legal representation to protect your interests.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="#pricing"
               className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
             >
-              Submit Case Details
+              Draft SCN Reply
             </a>
             <a
               href="#about"
               className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition"
             >
-              Learn About PRC
+              Our Expertise
             </a>
           </div>
         </div>

@@ -2,8 +2,8 @@ import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
-    issueCategory: "Late Submission of EODC Documents",
-    regionalAuthority: "",
+    issueType: "",              // 👈 starts empty, user must select
+    noticeDate: "",
     mobile: "",
   });
 
@@ -20,28 +20,30 @@ const QuickForm = () => {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
 
-    // Clear that field's error on typing
+    // Clear error for this field
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  /*----------------------
-    VALIDATION
-  -----------------------*/
+  // Validation
   const validate = () => {
     const newErrors = {};
 
+    if (!form.issueType) {
+      newErrors.issueType = "Please select an issue type";
+    }
+    if (!form.noticeDate) {
+      newErrors.noticeDate = "Notice date is required";
+    }
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
-      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+      newErrors.mobile = "Enter a valid 10-digit Indian mobile number";
     }
 
     return newErrors;
   };
 
-  /*----------------------
-    SUBMIT HANDLER (API CALL)
-  -----------------------*/
+  // Submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -53,8 +55,8 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        issueCategory: form.issueCategory,
-        regionalAuthority: form.regionalAuthority,
+        issueType: form.issueType,
+        noticeDate: form.noticeDate,
         mobile: form.mobile,
         type: "QUICK_FORM",
       };
@@ -68,21 +70,21 @@ const QuickForm = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        },
+        }
       );
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message || "Something went wrong");
+        throw new Error(data.error || data.message || "Submission failed");
       }
 
-      alert("✅ Case assessment submitted successfully");
+      alert("✅ Our legal team will review your case details and contact you.");
 
-      // Reset form (keep default issueCategory)
+      // Reset form (keep default empty issueType)
       setForm({
-        issueCategory: "Late Submission of EODC Documents",
-        regionalAuthority: "",
+        issueType: "",
+        noticeDate: "",
         mobile: "",
       });
     } catch (err) {
@@ -96,45 +98,55 @@ const QuickForm = () => {
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
       <h3 className="text-2xl font-bold text-brand-900 mb-2">
-        Case Assessment
+        Legal Consultation
       </h3>
       <p className="text-slate-500 mb-6 text-sm">
-        Tell us why your case was rejected.
+        Brief us about your case.
       </p>
 
       <form onSubmit={handleSubmit}>
-        {/* Issue Category */}
+        {/* Issue Type */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Issue Category
+            Issue Type
           </label>
           <select
-            name="issueCategory"
-            value={form.issueCategory}
+            name="issueType"
+            value={form.issueType}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.issueType ? "border-red-500" : "border-slate-300"
+            }`}
           >
-            <option>Late Submission of EODC Documents</option>
-            <option>EO Extension Rejection</option>
-            <option>Clubbing of License Rejection</option>
-            <option>Name/Address Correction Delay</option>
-            <option>Other Procedural Lapse</option>
+            <option value="" disabled>Select the issue</option>  {/* 👈 default option */}
+            <option>Show Cause Notice (SCN)</option>
+            <option>Personal Hearing (PH)</option>
+            <option>Order In Original (OIO) Appeal</option>
+            <option>IGST Refund Withheld</option>
+            <option>DRI / SIIB Investigation</option>
           </select>
+          {errors.issueType && (
+            <p className="text-red-500 text-xs mt-1">{errors.issueType}</p>
+          )}
         </div>
 
-        {/* Regional Authority (RA) */}
+        {/* Notice Date */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Regional Authority (RA)
+            Notice Date
           </label>
           <input
-            type="text"
-            name="regionalAuthority"
-            value={form.regionalAuthority}
+            type="date"
+            name="noticeDate"
+            value={form.noticeDate}
             onChange={handleChange}
-            placeholder="e.g. DGFT Mumbai / Delhi"
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.noticeDate ? "border-red-500" : "border-slate-300"
+            }`}
           />
+          {errors.noticeDate && (
+            <p className="text-red-500 text-xs mt-1">{errors.noticeDate}</p>
+          )}
         </div>
 
         {/* Mobile Number */}
@@ -147,11 +159,11 @@ const QuickForm = () => {
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
+            placeholder="e.g. 9876543210"
+            maxLength={10}
             className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
               errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
-            placeholder="e.g. 9876543210"
-            maxLength={10}
           />
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
@@ -168,7 +180,7 @@ const QuickForm = () => {
               : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : "Evaluate Case"}
+          {loading ? "Submitting..." : "Get Legal Advice"}
         </button>
       </form>
     </div>

@@ -7,12 +7,12 @@ const customsAdjudicationRoutesSchema = new mongoose.Schema(
       trim: true,
       default: "Customs Adjudication  Registration",
     },
-    issueCategory: {
+    issueType: {
       type: String,
       trim: true,
       default: null,
     },
-    regionalAuthority: {
+    noticeDate: {
       type: String,
       trim: true,
       default: null,

@@ -18,10 +18,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    Drafting_Filing: {
-      service: "Drafting & Filing",
+    SCN_Reply_Drafting: {
+      service: "SCN Reply Drafting",
     },
-    Personal_Representation: {
+    Personal_Hearing: {
       service: "Personal Representation",
     },
   };
