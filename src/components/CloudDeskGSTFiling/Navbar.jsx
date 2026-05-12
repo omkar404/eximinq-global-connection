@@ -18,7 +18,7 @@ const Navbar = ({
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
+{/* <button
   onClick={() =>
     setShowEnrollModal({
       open: true,
@@ -30,7 +30,15 @@ const Navbar = ({
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
   File Returns
-</button>
+</button> */}
+
+        <a 
+          href="#contact"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          File Returns
+        </a>
 
 
         {/* MOBILE MENU BUTTON */}
