@@ -1,9 +1,9 @@
 import  { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskFactoryStuffing/TopBar";
-import Navbar from "../components/CloudDeskFactoryStuffing/Navbar";
-import Hero from "../components/CloudDeskFactoryStuffing/Hero";
-import Fees from "../components/CloudDeskFactoryStuffing/Fees";
+import TopBar from "../components/CloudDeskCertifiedGovernment/TopBar";
+import Navbar from "../components/CloudDeskCertifiedGovernment/Navbar";
+import Hero from "../components/CloudDeskCertifiedGovernment/Hero";
+import Fees from "../components/CloudDeskCertifiedGovernment/Fees";
 import {
   Check,
   ChevronDown,
@@ -25,11 +25,23 @@ import {
   XCircle,
   Gavel 
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskFactoryStuffing/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskFactoryStuffing/ModalEnroll";
+import { MainNavbar } from "../components/CloudDeskCertifiedGovernment/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskCertifiedGovernment/ModalEnroll";
 
-const CloudDeskFactoryStuffing = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+const CloudDeskCertifiedGovernment = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit  = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   
   return (
 <>
@@ -176,8 +188,10 @@ const CloudDeskFactoryStuffing = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit }
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -468,7 +482,7 @@ const CloudDeskFactoryStuffing = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
             {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
                   <section className="py-20 bg-white">
@@ -763,4 +777,4 @@ const CloudDeskFactoryStuffing = () => {
   );
 };
 
-export default CloudDeskFactoryStuffing;
+export default CloudDeskCertifiedGovernment;
