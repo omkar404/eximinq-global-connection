@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskBarcode/TopBar";
+import TopBar from "../components/CloudDeskBarcode/TopBar";
 import Navbar from "../components/CloudDeskBarcode/Navbar";
 import Hero from "../components/CloudDeskBarcode/Hero";
 import Fees from "../components/CloudDeskBarcode/Fees";
@@ -19,7 +19,7 @@ import {
   Barcode ,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskBarcode/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskBarcode/ModalEnroll";
 import { BiRegistered } from "react-icons/bi";
 
 const CloudDeskBarcode = () => {
@@ -72,7 +72,7 @@ const CloudDeskBarcode = () => {
     </section>
 
 
-    <section id="benefits" className="py-20 bg-slate-50">
+    <section id="coverage" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">

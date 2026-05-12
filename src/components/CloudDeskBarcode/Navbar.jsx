@@ -11,10 +11,9 @@ const Navbar = ({
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
                 <a href="#home" class="hover:text-brand-600 transition">Home</a>
-                <a href="#about" class="hover:text-design-600 transition">What is Design?</a>
-                <a href="#coverage" class="hover:text-design-600 transition">Scope & Exclusions</a>
+                <a href="#about" class="hover:text-design-600 transition">What is GTIN?</a>
+                <a href="#coverage" class="hover:text-design-600 transition">Benefits</a>
                 <a href="#process" class="hover:text-design-600 transition">Process</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Plans</a>
                 <a href="#fees" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
@@ -26,7 +25,7 @@ const Navbar = ({
 >
   File Registration
 </button> */}
-          <button
+          {/* <button
             onClick={() =>
               setShowEnrollModal({
                 open: true,
@@ -38,7 +37,14 @@ const Navbar = ({
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
           >
              File Registration
-          </button>
+          </button> */}
+        <a 
+          href="#fees"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Get Barcodes
+        </a>          
 
 
         {/* MOBILE MENU BUTTON */}
