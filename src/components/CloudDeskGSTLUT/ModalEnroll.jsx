@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/gst-lut-filing`,
-        "http://localhost:5000/api/gst-lut-filing",
+        `${process.env.REACT_APP_API_URL}/api/gst-lut-filing`,
+        // "http://localhost:5000/api/gst-lut-filing",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

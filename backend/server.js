@@ -847,7 +847,7 @@ app.use("/api/submit-audit-form", auditcomplianceformRoutes);
 
 app.use("/api/saas-enrollment", saasEnrollmentRoutes);
 
-app.use("/api/gst-filing", gstFilingRoutes);
+app.use("/api/gst-lut-filing", gstFilingRoutes);
 
 app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
 

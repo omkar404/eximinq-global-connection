@@ -17,7 +17,7 @@ const Hero = ({ setShowEnrollModal }) => {
                     Save your working capital. File <strong>Letter of Undertaking (LUT)</strong> under GST for the current Financial Year and export goods/services without upfront tax payment.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <button
+                    {/* <button
                       onClick={() =>
                         setShowEnrollModal({
                           open: true,
@@ -28,7 +28,11 @@ const Hero = ({ setShowEnrollModal }) => {
                       className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
                     >
                         File for FY 2025-2026
-                    </button>
+                    </button> */}
+
+                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                        File for FY 2025-2026
+                    </a>                   
                     <a href="#about" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Learn More
                     </a>
