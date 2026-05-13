@@ -59,6 +59,8 @@ const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.
 const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
 const marineInsuranceRoutes = require ("./routes/marineInsuranceRoutes.routes");
 const gstReturnsRoutes = require("./routes/gstReturnsRoutes.routes");
+const gstFilingRoutes = require("./routes/gstFilingRoutes.routes");
+const rmccalertRemovalRoutes = require("./routes/rmccalertRemovalRoutes.routes");
 const designRegistrationRoutes = require("./routes/designRegistrationRoutes.routes");
 const dpdRegistrationRoutes = require("./routes/dpdRegistrationRoutes.routes");
 const cdscoComplianceRoutes = require("./routes/cdscoComplianceRoutes.routes");
@@ -90,7 +92,6 @@ const exchangeRatesService = require("./services/exchangeRates.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
-const gstFilingRoutes = require("./routes/gstFilingRoutes.routes");
 const serviceQuickFormLeadRoutes = require("./routes/serviceQuickFormLead.routes");
 const epcgSchemeRoutes = require("./routes/epcgSchemeRoutes.routes");
 
@@ -797,7 +798,11 @@ app.use("/api/inland-transportation",inlandTransportationRoutes);
 
 app.use("/api/marine-insurance",marineInsuranceRoutes);
 
-app.use("/api/gst-returns",gstReturnsRoutes)
+app.use("/api/gst-returns",gstReturnsRoutes);
+
+app.use("/api/gst-lut-filing", gstFilingRoutes);
+
+app.use("/api/rmcc-alert-removal",rmccalertRemovalRoutes);
 
 app.use("/api/design-registration",designRegistrationRoutes);
 
@@ -846,8 +851,6 @@ app.use("/api/contact-us", maincontactRoutes);
 app.use("/api/submit-audit-form", auditcomplianceformRoutes);
 
 app.use("/api/saas-enrollment", saasEnrollmentRoutes);
-
-app.use("/api/gst-lut-filing", gstFilingRoutes);
 
 app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
 

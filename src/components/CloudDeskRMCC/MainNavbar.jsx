@@ -140,8 +140,8 @@ export const MainNavbar = ({
             onClick={() =>
               setShowEnrollModal({
                 open: true,
-                actionType: "Enroll Now",
-                source: "services/rmcc-alert-removal",
+                type: "Enroll",
+                // source: "services/rmcc-alert-removal",
               })
             }
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
