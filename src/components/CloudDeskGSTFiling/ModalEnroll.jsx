@@ -18,8 +18,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    GST_LUT_iling: {
-      service: "GST LUT iling",
+    Monthly_Retainership: {
+      service: "Monthly Retainership",
     },
     // Central_Annual_Returns: {
     //   service: "Central Annual Returns",
@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/gst-lut-filing`,
-        "http://localhost:5000/api/gst-lut-filing",
+        `${process.env.REACT_APP_API_URL}/api/gst-returns`,
+        // "http://localhost:5000/api/gst-returns",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
