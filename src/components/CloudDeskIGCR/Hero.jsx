@@ -2,7 +2,7 @@ import QuickForm from "./QuickForm";
 
 const Hero = ({ setShowEnrollModal }) => {
   return (
-    <section id = "Home" className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
+    <section id = "home" className="relative bg-gradient-to-br from-brand-900 to-[#164e96] text-white pt-40 pb-24 overflow-hidden">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         {/* TEXT SECTION */}
 <div>
@@ -16,7 +16,7 @@ const Hero = ({ setShowEnrollModal }) => {
                     Importing raw materials at a concessional rate? You must file a <strong>Monthly Statement</strong> on ICEGATE by the 10th of every month. We handle end-to-end compliance from IIN generation to Bond cancellation.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <button
+                    {/* <button
                       onClick={() =>
                         setShowEnrollModal({
                           open: true,
@@ -27,7 +27,11 @@ const Hero = ({ setShowEnrollModal }) => {
                       className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
                     >
                         File IGCR-3
-                    </button>
+                    </button> */}
+                    <a href="#fees" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                        File IGCR-3
+                    </a>
+
                     <a href="#about" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Learn More
                     </a>
