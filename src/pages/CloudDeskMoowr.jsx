@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskAEOCertificate/TopBar";
-import Navbar from "../components/CloudDeskAEOCertificate/Navbar";
-import Hero from "../components/CloudDeskAEOCertificate/Hero";
-import Fees from "../components/CloudDeskAEOCertificate/Fees";
+import TopBar from "../components/CloudDeskMoowr/TopBar";
+import Navbar from "../components/CloudDeskMoowr/Navbar";
+import Hero from "../components/CloudDeskMoowr/Hero";
+import Fees from "../components/CloudDeskMoowr/Fees";
 import {
   ChevronDown,
   Linkedin,
@@ -30,10 +30,10 @@ import {
   Factory,
   PackageIcon,
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskAEOCertificate/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskAEOCertificate/ModalEnroll";
+import { MainNavbar } from "../components/CloudDeskMoowr/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskMoowr/ModalEnroll";
 
-const CloudDeskAEOCertificate = () => {
+const CloudDeskMoowr = () => {
     const [showEnrollModal, setShowEnrollModal] = useState({
       open: false,
       type: "",
@@ -796,4 +796,4 @@ const CloudDeskAEOCertificate = () => {
   );
 };
 
-export default CloudDeskAEOCertificate;
+export default CloudDeskMoowr;

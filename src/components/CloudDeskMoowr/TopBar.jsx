@@ -17,10 +17,10 @@ const TopBar = () => {
           </span>
         </div>
 
-        <div className="flex gap-4 ml-auto">
+        {/* <div className="flex gap-4 ml-auto">
           <a href="#" className="hover:text-accent-400">DGFT Notifications</a>
           <a href="#" className="hover:text-accent-400">Contact Login</a>
-        </div>
+        </div> */}
 
       </div>
     </div>
