@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskRMCC/TopBar";
+import TopBar from "../components/CloudDeskRMCC/TopBar";
 import Navbar from "../components/CloudDeskRMCC/Navbar";
 import Hero from "../components/CloudDeskRMCC/Hero";
 import Fees from "../components/CloudDeskRMCC/Fees";
@@ -25,16 +25,23 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskRMCC/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskRMCC/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
 
 const CloudDeskRMCC = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    actionType: "",
-    source: "services/rmcc-alert-removal",
+    type: "",
   });
-  
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }  
   return (
 <>
 <Helmet>
@@ -175,16 +182,9 @@ const CloudDeskRMCC = () => {
 
       <ModalEnroll
         show={showEnrollModal.open}
-        type="rmcc_alert_removal_enroll"
-        actionType={showEnrollModal.actionType}
-        source={showEnrollModal.source}
-        onClose={() =>
-          setShowEnrollModal({
-            open: false,
-            actionType: "",
-            source: "services/rmcc-alert-removal",
-          })
-        }
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}

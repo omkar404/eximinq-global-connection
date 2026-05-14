@@ -44,7 +44,7 @@ export default function Fees({ setShowEnrollModal }) {
             </ul>
 
             {/* Call to action */}
-            <button
+            {/* <button
               onClick={() =>
                 setShowEnrollModal({
                   open: true,
@@ -55,7 +55,19 @@ export default function Fees({ setShowEnrollModal }) {
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               File Now
-            </button>
+            </button> */}
+
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "GST_LUT_iling",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                File Now
+          </button>
           </div>
         </div>
 

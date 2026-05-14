@@ -23,32 +23,37 @@ async function sendEmail(record) {
     entity,
     role,
     partner,
-    type,
-    source,
+    gstin,
+    financialYear,
+    type,       // ✅ added
+    category,   // ✅ added
+    issue,      // ✅ added
   } = record;
+
+  const serviceDisplay = service || "GST Filing Health Check"; // ✅ added
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
     subject: `GST Filing Enquiry - ${service || "GST Filing Health Check"}`,
     html: `
-      <div style="font-family:Arial,sans-serif;">
+      <div style="font-family:Arial;">
         <h2>GST Filing Enquiry</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
-          <tr><td><b>Type</b></td><td>${type}</td></tr>
-          ${source ? `<tr><td><b>Source</b></td><td>${source}</td></tr>` : ""}
-          <tr><td><b>Service</b></td><td>${service || "GST Filing Health Check"}</td></tr>
-          ${exportType ? `<tr><td><b>Export Type</b></td><td>${exportType}</td></tr>` : ""}
-          ${invoices !== null && invoices !== undefined ? `<tr><td><b>Monthly Invoices</b></td><td>${invoices}</td></tr>` : ""}
+          <tr><td><b>Submission Type</b></td><td>${type || "N/A"}</td></tr>
+          <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${gstin ? `<tr><td><b>GSTIN Number</b></td><td>${gstin}</td></tr>` : ""}
+          ${financialYear ? `<tr><td><b>Financial Year</b></td><td>${financialYear}</td></tr>` : ""}
+          ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
+          ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
           ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
-          ${type !== "QUICK_FORM" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
+          ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
         </table>
-        <p><b>ID:</b> ${_id}</p>
-        <p><b>Time:</b> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
+        <p><b>ID:</b> ${_id}<br/><b>Time:</b> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
       </div>
     `,
   });
@@ -66,8 +71,10 @@ exports.creategstFilingRoutes = async (req, res) => {
       entity,
       role,
       partner,
-      type,
-      source,
+      gstin,
+      financialYear,
+      type,     // ✅ added
+      source,   // ✅ added
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -93,8 +100,8 @@ exports.creategstFilingRoutes = async (req, res) => {
 
     const recordData = {
       service: service || "GST Filing Health Check",
-      exportType: exportType ? exportType.trim() : null,
-      invoices: invoiceCount,
+      gstin: gstin ? gstin.trim() : null,
+      financialYear: financialYear ? financialYear.trim() : null,
       mobile: mobile.trim(),
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,

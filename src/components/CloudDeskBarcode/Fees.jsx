@@ -12,8 +12,8 @@ const Fees = ({setShowEnrollModal}) => {
         {/* Card */}
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
           <div className="bg-brand-800 text-white py-4">
-            <h3 className="text-xl font-bold">Design Registration</h3>
-            <p className="text-sm opacity-80">Consultancy & Filing</p>
+            <h3 className="text-xl font-bold">Registration Assistance</h3>
+            <p className="text-sm opacity-80">Full GS1 Support</p>
           </div>
 
           <div className="p-8">
@@ -21,30 +21,30 @@ const Fees = ({setShowEnrollModal}) => {
               Request Quote
             </div>
             <p className="text-slate-500 text-sm mb-6">
-              Govt Fees Separate*
+              Based on Turnover & SKU Count
             </p>
 
             {/* Features */}
             <ul className="text-left space-y-3 mb-8 text-sm text-slate-600 pl-8">
               <li className="flex gap-2 items-start">
                 <Check className="text-green-500 mt-0.5" size={16} />
-                Novelty Search & Opinion
+                Document Verification
               </li>
               <li className="flex gap-2 items-start">
                 <Check className="text-green-500 mt-0.5" size={16} />
-                Locarno Classification
+                Capacity Planning (100/1k/10k)
               </li>
               <li className="flex gap-2 items-start">
                 <Check className="text-green-500 mt-0.5" size={16} />
-                Drawing Preparation Guidance
+                Online Filing Support
               </li>
               <li className="flex gap-2 items-start">
                 <Check className="text-green-500 mt-0.5" size={16} />
-                Examination Report Reply
+                DataKart Product Upload
               </li>
               <li className="flex gap-2 items-start">
                 <Check className="text-green-500 mt-0.5" size={16} />
-                Registration of Proprietorship / Company
+                Barcode Image Generation
               </li>
             </ul>
 
@@ -59,26 +59,18 @@ const Fees = ({setShowEnrollModal}) => {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "Design_Registration",
+                    type: "Registration_Assistance",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
-                Start Filing
+                Start Process
           </button>
           </div>
         </div>
 
         {/* Govt Fees */}
-        <div className="mt-8 text-sm text-slate-500 max-w-2xl mx-auto bg-white p-4 rounded border">
-          <strong>*Government Fees:</strong>
-          <br />
-          Natural Person: ₹ 1,000
-          <br />
-          Small Entity / Start-up: ₹ 2,000
-          <br />
-          Other (Large Entity): ₹ 4,000
-        </div>
+        <p className="text-sm text-slate-500 mt-8">*Official GS1 fees vary (e.g., approx ₹ 50k for 100 SKUs for 10 years). Consult us for the exact slab.</p>
       </div>
     </section>
   );

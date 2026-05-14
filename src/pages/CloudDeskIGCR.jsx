@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskIGCR/TopBar";
+import TopBar from "../components/CloudDeskIGCR/TopBar";
 import Navbar from "../components/CloudDeskIGCR/Navbar";
 import Hero from "../components/CloudDeskIGCR/Hero";
 import Fees from "../components/CloudDeskIGCR/Fees";
@@ -21,14 +21,22 @@ import {
   Calculator,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskIGCR/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskIGCR/ModalEnroll";
 
 const CloudDeskIGCR = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    actionType: "",
-    source: "services/igcr-returns",
+    type: "",
   });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   return (
 <>
 <Helmet>
@@ -187,16 +195,9 @@ const CloudDeskIGCR = () => {
 
       <ModalEnroll
         show={showEnrollModal.open}
-        type="igcr_returns_enroll"
-        actionType={showEnrollModal.actionType}
-        source={showEnrollModal.source}
-        onClose={() =>
-          setShowEnrollModal({
-            open: false,
-            actionType: "",
-            source: "services/igcr-returns",
-          })
-        }
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}

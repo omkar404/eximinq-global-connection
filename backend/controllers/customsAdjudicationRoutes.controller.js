@@ -26,24 +26,24 @@ async function sendEmail(record) {
     type,
     category,
     issue,
-    issueCategory,
-    regionalAuthority,
+    issueType,
+    noticeDate,
   } = record;
 
-  const serviceDisplay = service || "Customs Registration";
+  const serviceDisplay = service || "Customs Adjudication Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
-    subject: `Customs Registration — ${serviceDisplay}`,
+    subject: `Customs Adjudication Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>Customs Registration</h2>
+        <h2>Customs Adjudication Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
-          ${issueCategory ? `<tr><td><b>Issue Category</b></td><td>${issueCategory}</td></tr>` : ""}
-          ${regionalAuthority ? `<tr><td><b>Regional Authority (RA)</b></td><td>${regionalAuthority}</td></tr>` : ""}
+          ${issueType ? `<tr><td><b>Issue Type</b></td><td>${issueType}</td></tr>` : ""}
+          ${noticeDate ? `<tr><td><b>Notice Date</b></td><td>${noticeDate}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -77,8 +77,8 @@ exports.createcustomsAdjudicationRoutes = async (req, res) => {
       type,
       category,
       issue,
-      issueCategory, // ✅ camelCase
-      regionalAuthority, // ✅ camelCase
+      issueType, // ✅ camelCase
+      noticeDate, // ✅ camelCase
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -93,8 +93,8 @@ exports.createcustomsAdjudicationRoutes = async (req, res) => {
     const recordData = {
       service: service || "Customs Registration",
       mobile: mobile.trim(),
-      issueCategory: issueCategory ? issueCategory.trim() : null, // ✅ use the correct variable
-      regionalAuthority: regionalAuthority ? regionalAuthority.trim() : null, // ✅ use correct variable
+      issueType: issueType ? issueType.trim() : null, // ✅ use the correct variable
+      noticeDate: noticeDate ? noticeDate.trim() : null, // ✅ use correct variable
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,

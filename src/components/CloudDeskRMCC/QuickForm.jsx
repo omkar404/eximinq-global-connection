@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { AlertTriangle, Phone } from "lucide-react";
-import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 const DEFAULT_FORM = {
   boe: "",
   portCode: "",
   mobile: "",
 };
-
-const SUBMIT_TYPE = "Check Status & Intervene";
-const SOURCE = "services/rmcc-alert-removal";
 
 const QuickForm = () => {
   const [form, setForm] = useState(DEFAULT_FORM);
@@ -18,55 +14,85 @@ const QuickForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else if (name === "portCode") {
+      setForm((prev) => ({ ...prev, [name]: value.toUpperCase() }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  /* VALIDATION */
   const validate = () => {
-    const nextErrors = {};
-    const mobileRegex = /^[6-9]\d{9}$/;
+    const newErrors = {};
 
-    if (!form.boe.trim()) nextErrors.boe = "BOE number is required";
-    if (!form.portCode.trim()) nextErrors.portCode = "Port code is required";
-
-    if (!form.mobile.trim()) {
-      nextErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile.trim())) {
-      nextErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    if (!form.boe.trim()) {
+      newErrors.boe = "BOE number is required";
     }
 
-    return nextErrors;
+    if (!form.portCode.trim()) {
+      newErrors.portCode = "Port code is required";
+    }
+
+    if (!form.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    }
+
+    return newErrors;
   };
 
+  /* SUBMIT HANDLER */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setLoading(true);
 
     try {
-      setLoading(true);
-      await submitServiceQuickForm({
-        serviceKey: "rmcc-alert-removal",
-        serviceLabel: "RMCC Alert Removal",
-        mobile: form.mobile.trim(),
-        type: SUBMIT_TYPE,
-        source: SOURCE,
-        details: {
-          "Bill of Entry Number": form.boe.trim(),
-          "Port Code": form.portCode.trim().toUpperCase(),
-        },
-      });
+      const payload = {
+        boe: form.boe.trim(),
+        portCode: form.portCode.trim(),
+        mobile: form.mobile,
+        type: "QUICK_FORM",
+      };
+
+      console.log("📤 Sending data:", payload);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/rmcc-alert-removal`,
+        // "http://localhost:5000/api/rmcc-alert-removal", // ✅ http:// is required
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || data.message || "Something went wrong");
+      }
 
       alert(
-        "We are checking your Bill of Entry status on ICEGATE and will call you back within 15 minutes."
+        "✅ Registration submitted successfully!"
       );
+
       setForm(DEFAULT_FORM);
       setErrors({});
-    } catch (error) {
-      console.error("RMCC quick form error:", error);
-      alert("Submission failed. Please try again.");
+    } catch (err) {
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -74,6 +100,7 @@ const QuickForm = () => {
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+      {/* Header */}
       <div className="flex items-center gap-3 mb-2">
         <AlertTriangle className="text-alert-600" size={28} />
         <h3 className="text-2xl font-bold text-alert-900">
@@ -86,6 +113,7 @@ const QuickForm = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* BOE Number */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
             Bill of Entry (BOE) Number
@@ -100,9 +128,12 @@ const QuickForm = () => {
               errors.boe ? "border-red-400" : "border-slate-300"
             }`}
           />
-          {errors.boe && <p className="text-red-500 text-xs mt-1">{errors.boe}</p>}
+          {errors.boe && (
+            <p className="text-red-500 text-xs mt-1">{errors.boe}</p>
+          )}
         </div>
 
+        {/* Port Code */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">Port Code</label>
           <input
@@ -120,8 +151,11 @@ const QuickForm = () => {
           )}
         </div>
 
+        {/* Mobile Number */}
         <div className="mb-6">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number
+          </label>
           <div className="relative">
             <Phone
               size={16}
@@ -133,6 +167,7 @@ const QuickForm = () => {
               value={form.mobile}
               onChange={handleChange}
               placeholder="9876543210"
+              maxLength={10}
               className={`w-full pl-9 border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
                 errors.mobile ? "border-red-400" : "border-slate-300"
               }`}
@@ -143,14 +178,17 @@ const QuickForm = () => {
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
           className={`w-full text-white font-bold py-3 rounded-lg transition ${
-            loading ? "bg-brand-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-700"
+            loading
+              ? "bg-brand-400 cursor-not-allowed"
+              : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+          {loading ? "Submitting..." : "Check Status & Intervene"}
         </button>
       </form>
     </div>

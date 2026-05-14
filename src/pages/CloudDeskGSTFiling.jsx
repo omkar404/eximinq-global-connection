@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskGSTFiling/TopBar";
+import TopBar from "../components/CloudDeskGSTFiling/TopBar";
 import Navbar from "../components/CloudDeskGSTFiling/Navbar";
 import Hero from "../components/CloudDeskGSTFiling/Hero";
 import Fees from "../components/CloudDeskGSTFiling/Fees";
@@ -28,10 +28,17 @@ import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
 const CloudDeskGSTFiling = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    actionType: "",
-    source: "services/gst-returns/",
+    type: "",
   });
-  
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }  
   return (
 <>
 
@@ -200,15 +207,9 @@ const CloudDeskGSTFiling = () => {
 
       <ModalEnroll
         show={showEnrollModal.open}
-        actionType={showEnrollModal.actionType}
-        source={showEnrollModal.source}
-        onClose={() =>
-          setShowEnrollModal({
-            open: false,
-            actionType: "",
-            source: "services/gst-returns/",
-          })
-        }
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -386,7 +387,7 @@ const CloudDeskGSTFiling = () => {
     </section>
 
 
-<Fees/>
+<Fees setShowEnrollModal={setShowEnrollModal}/>
 
 
 {/* --- WHY CLOUDDESK SECTION (GST RETURNS) --- */}

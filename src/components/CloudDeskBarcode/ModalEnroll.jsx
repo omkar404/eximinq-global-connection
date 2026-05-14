@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
+export const ModalEnroll = ({
+  show,
+  onClose,
+  type = "barcode_registration_enroll",
+  actionType = "Enroll Now",
+  source = "services/barcode-registration/",
+  title = "Enroll Now",
+  subtitle = "Join the CloudDesk Network",
+}) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -10,36 +18,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     role: "",
     partner: false,
   });
-
-  const [category, setCategory] = useState("");
-  const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
-  /* SERVICE CONFIGURATION */
-  const SERVICE_MAP = {
-    Design_Registration: {
-      service: "Design Registration",
-    },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
-    // },
-  };
-
-  const serviceConfig = SERVICE_MAP[type];
-  const predefinedService = serviceConfig?.service;
-  const isEnroll = type === "Enroll";
-
-  /* Only show category dropdown for IEC profile update (not for fee services) */
-  const showCategory = type === "IEC_PROFILE_UPDATE";
-
-  /* Options for category (still available if needed) */
-  const IEC_OPTIONS = [
-    "NEW IEC REGISTRATION",
-    "IEC PROFILE UPDATATION",
-    "IEC ANNUAL UPDATE",
-    "IEC SUSPENSION",
-  ];
 
   const resetForm = () => {
     setForm({
@@ -50,8 +30,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       role: "",
       partner: false,
     });
-    setCategory("");
-    setIssue("");
+    setErrors({});
   };
 
   const handleClose = () => {
@@ -62,74 +41,52 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   if (!show) return null;
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type: inputType, checked } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: inputType === "checkbox" ? checked : value,
     }));
   };
 
   const validate = () => {
-    const newErrors = {};
-    if (!form.name.trim()) newErrors.name = "Name is required.";
-    if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
-    if (!form.email.trim()) newErrors.email = "Email is required.";
-    if (!form.role) newErrors.role = "Please select your role.";
-    // No category validation for fee services
-    return newErrors;
+    const nextErrors = {};
+
+    if (!form.name.trim()) nextErrors.name = "Name is required.";
+    if (!form.mobile.trim()) nextErrors.mobile = "Mobile number is required.";
+    if (!form.email.trim()) nextErrors.email = "Email is required.";
+    if (!form.role) nextErrors.role = "Please select your role.";
+
+    return nextErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const v = validate();
-    setErrors(v);
-    if (Object.keys(v).length > 0) return;
 
-    setLoading(true);
+    const nextErrors = validate();
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) return;
 
     try {
-      const finalType = type || "Enroll";
-      const payload = {
-        name: form.name,
-        mobile: form.mobile,
-        email: form.email,
-        entity: form.entity,
-        role: form.role,
-        partner: form.partner,
-        type: finalType,
-        category: category || "",   // will be empty for fee services
-        issue: issue || "",
-        service: predefinedService || finalType,
-      };
+      setLoading(true);
 
-      console.log("Final Payload:", payload);
-
-      if (typeof onSubmit === "function") {
-        onSubmit(payload);
-      }
-
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/design-registration`,
-        // "http://localhost:5000/api/design-registration",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/main-enroll`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, type, actionType, source }),
+      });
 
       const data = await res.json();
-      console.log("API Response:", data);
 
-      if (res.ok) {
-        alert("Registration submitted successfully!");
-        resetForm();
-        onClose();
-      } else {
-        alert(data.message || "Submission failed");
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to submit enrollment");
       }
+
+      alert("Request submitted successfully");
+      resetForm();
+      onClose();
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error("Enrollment submit failed:", error);
       alert("Submission failed. Please try again.");
     } finally {
       setLoading(false);
@@ -139,29 +96,25 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-        {/* HEADER */}
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
           <div>
             <h2 className="text-2xl font-bold flex items-center">
-              <Handshake className="mr-2 text-teal-400" />
-              Enroll Now
+              <Handshake className="mr-2 text-teal-400" /> {title}
             </h2>
-            <p className="text-indigo-200 text-sm mt-1">
-              Join the CloudDesk Network
-            </p>
+            <p className="text-indigo-200 text-sm mt-1">{subtitle}</p>
           </div>
+
           <button
             onClick={handleClose}
             className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-1 transition"
+            aria-label="Close modal"
           >
             <X size={20} />
           </button>
         </div>
 
-        {/* BODY */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
-            {/* NAME + MOBILE */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
@@ -183,6 +136,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <p className="text-xs text-red-500 mt-1">{errors.name}</p>
                 )}
               </div>
+
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Mobile No
@@ -205,7 +159,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             </div>
 
-            {/* ENTITY NAME */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                 Entity Name
@@ -223,7 +176,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             </div>
 
-            {/* EMAIL */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                 Email ID
@@ -248,81 +200,45 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               )}
             </div>
 
-            {/* SERVICE TYPE (readonly) */}
-            {predefinedService && (
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Service Type
-                </label>
-                <input
-                  type="text"
-                  value={predefinedService}
-                  readOnly
-                  className="w-full p-3 rounded-lg border bg-gray-100 text-sm"
-                />
-              </div>
-            )}
-
-            {/* CATEGORY DROPDOWN - ONLY FOR IEC_PROFILE_UPDATE */}
-            {showCategory && (
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Category
-                </label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 text-sm"
-                >
-                  <option value="">Select Category</option>
-                  {IEC_OPTIONS.map((option) => (
-                    <option key={option}>{option}</option>
-                  ))}
-                </select>
-                {errors.category && (
-                  <p className="text-xs text-red-500 mt-1">{errors.category}</p>
-                )}
-              </div>
-            )}
-
-            {/* ROLE SELECTION */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
                 I am a:
               </label>
               <div className="grid grid-cols-2 gap-3">
-                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map((role) => {
-                  const selected = form.role === role;
-                  return (
-                    <label
-                      key={role}
-                      className={`flex items-center p-3 border rounded-lg cursor-pointer ${
-                        selected
-                          ? "border-teal-500 bg-teal-50"
-                          : "border-gray-200 hover:bg-indigo-50"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="role"
-                        value={role}
-                        checked={form.role === role}
-                        onChange={handleChange}
-                        className="w-4 h-4 text-teal-600"
-                      />
-                      <span className="ml-2 text-sm font-medium text-gray-700">
-                        {role}
-                      </span>
-                    </label>
-                  );
-                })}
+                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
+                  (role) => {
+                    const selected = form.role === role;
+
+                    return (
+                      <label
+                        key={role}
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition ${
+                          selected
+                            ? "border-teal-500 bg-teal-50"
+                            : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="role"
+                          value={role}
+                          checked={selected}
+                          onChange={handleChange}
+                          className="w-4 h-4 text-teal-600 focus:ring-teal-500"
+                        />
+                        <span className="ml-2 text-sm font-medium text-gray-700">
+                          {role}
+                        </span>
+                      </label>
+                    );
+                  }
+                )}
               </div>
               {errors.role && (
                 <p className="text-xs text-red-500 mt-2">{errors.role}</p>
               )}
             </div>
 
-            {/* PARTNER CHECKBOX */}
             <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
               <label className="flex items-start cursor-pointer">
                 <input
@@ -330,22 +246,22 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   name="partner"
                   checked={form.partner}
                   onChange={handleChange}
-                  className="mt-1 w-5 h-5 text-teal-600"
+                  className="mt-1 w-5 h-5 text-teal-600 rounded border-gray-300 focus:ring-teal-500"
                 />
                 <span className="ml-3 text-sm text-gray-800">
-                  I am interested in being a
+                  I am interested in being a{" "}
                   <span className="font-bold text-teal-700">
-                    {" "}Partner with EXIMINQ CLOUDDESK
-                  </span>
+                    Partner with EXIMINQ CLOUDDESK
+                  </span>{" "}
+                  and agree to the terms of enrollment.
                 </span>
               </label>
             </div>
 
-            {/* SUBMIT BUTTON */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl text-lg"
+              className="w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition flex items-center justify-center text-lg disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? "Submitting..." : "Submit Enrollment"}
             </button>

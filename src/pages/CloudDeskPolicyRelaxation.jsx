@@ -1,8 +1,9 @@
-// import TopBar from "../components/CloudDeskCustomsAdjudication/TopBar";
+import TopBar from "../components/CloudDeskPolicyRelaxation/TopBar";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/CloudDeskCustomsAdjudication/Navbar";
-import Hero from "../components/CloudDeskCustomsAdjudication/Hero";
-import Fees from "../components/CloudDeskCustomsAdjudication/Fees";
+import Navbar from "../components/CloudDeskPolicyRelaxation/Navbar";
+import Hero from "../components/CloudDeskPolicyRelaxation/Hero";
+import Fees from "../components/CloudDeskPolicyRelaxation/Fees";
 import {
   ChevronDown,
   Linkedin,
@@ -17,9 +18,22 @@ import {
   MapPin,
   Check,
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskCustomsAdjudication/MainNavbar";
+import { MainNavbar } from "../components/CloudDeskPolicyRelaxation/MainNavbar";
+import { ModalEnroll} from "../components/CloudDeskPolicyRelaxation/ModalEnroll";
+const CloudDeskPolicyRelaxation = () => {
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
 
-const CloudDeskCustomsAdjudication = () => {
+  const handleEnrollmentSubmit =  (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+    
+    alert("Form submitted - check console for data.")
+  }
   return (
 
 <>
@@ -191,9 +205,16 @@ const CloudDeskCustomsAdjudication = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       {/* <TopBar /> */}
-      <MainNavbar />
-      <Navbar />
-      <Hero />
+      <MainNavbar setShowEnrollModal={setShowEnrollModal}/>
+      <Navbar setShowEnrollModal={setShowEnrollModal}/>
+      <Hero setShowEnrollModal={setShowEnrollModal}/>
+
+      <ModalEnroll
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
+      />      
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
       <section id="about" className="py-20 bg-white">
@@ -391,7 +412,7 @@ const CloudDeskCustomsAdjudication = () => {
         </div>
       </section>
 
-      <Fees />
+      <Fees setShowEnrollModal={setShowEnrollModal}/>
 
 {/* --- WHY CLOUDDESK SECTION (PRC) --- */}
 <section className="py-20 bg-white">
@@ -742,4 +763,4 @@ const CloudDeskCustomsAdjudication = () => {
   );
 };
 
-export default CloudDeskCustomsAdjudication;
+export default CloudDeskPolicyRelaxation;

@@ -14,11 +14,11 @@ const Navbar = ({
                 <a href="#about" class="hover:text-brand-600 transition">What is IGCR?</a>
                 <a href="#forms" class="hover:text-brand-600 transition">Forms (1/2/3)</a>
                 <a href="#process" class="hover:text-brand-600 transition">Compliance</a>
-                <a href="#deadlines" class="hover:text-brand-600 transition">Due Dates</a>
+                <a href="#fees" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
+{/* <button
   onClick={() =>
     setShowEnrollModal({
       open: true,
@@ -30,7 +30,15 @@ const Navbar = ({
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
   Extend License
-</button>
+</button> */}
+
+        <a
+          href="#fees"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          Extend License
+        </a>
 
 
         {/* MOBILE MENU BUTTON */}

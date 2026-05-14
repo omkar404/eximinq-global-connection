@@ -26,6 +26,7 @@ import {
 import { MainNavbar } from "../components/CloudDeskDFIA/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskDFIA/ModalEnroll";
 
+
 const CloudDeskDFIA = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,

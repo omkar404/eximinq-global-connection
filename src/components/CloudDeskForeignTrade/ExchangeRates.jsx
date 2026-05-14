@@ -34,32 +34,32 @@ export function ExchangeRates() {
           <RateRow
             icon={DollarSign}
             code="USD"
-            importRate="94.2"
-            exportRate="92.5"
+            importRate="95.15"
+            exportRate="93.45"
           />
           <RateRow
             icon={Euro}
             code="EUR"
-            importRate="112.2"
-            exportRate="108.45"
+            importRate="111.65"
+            exportRate="108.25"
           />
           <RateRow
             icon={PoundSterling}
             code="GBP"
-            importRate="128.85"
-            exportRate="124.8"
+            importRate="128.9"
+            exportRate="124.85"
           />
           <RateRow
             icon={JapaneseYen}
             code="JPY"
-            importRate="59.85"
-            exportRate="58"
+            importRate="59.9"
+            exportRate="58.1"
           />
         </tbody>
       </table>
       <div class="px-4 py-2 bg-gray-50 text-[10px] text-gray-400 text-center border-t border-gray-100 flex justify-between items-center">
         <span>
-          <i class="fas fa-info-circle mr-1"></i>Notfn 13/2026
+          <i class="fas fa-info-circle mr-1"></i>Notfn 14/2026
         </span>
         <a
           href="https://eximinq.in/foreign-trade-policy/exchange-rates"

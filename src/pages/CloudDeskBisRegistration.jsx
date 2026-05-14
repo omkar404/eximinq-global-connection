@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskBisRegistration/TopBar";
+import TopBar from "../components/CloudDeskBisRegistration/TopBar";
 import Navbar from "../components/CloudDeskBisRegistration/Navbar";
 import Hero from "../components/CloudDeskBisRegistration/Hero";
 import Fees from "../components/CloudDeskBisRegistration/Fees";
@@ -26,7 +26,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskBisRegistration/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskBisRegistration/ModalEnroll";
 
 const CloudDeskBisRegistration = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({

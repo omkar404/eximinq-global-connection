@@ -1,73 +1,91 @@
 import { useState } from "react";
-import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
-const DEFAULT_FORM = {
-  gstin: "",
-  financialYear: "2024-2025 (Current)",
-  mobile: "",
-};
+const LUTEligibilityCheck = () => {
+  const [form, setForm] = useState({
+    gstin: "",
+    financialYear: "2024-2025",
+    mobile: "",
+  });
 
-const SUBMIT_TYPE = "Check Status";
-const SOURCE = "services/gst-lut-filing";
-
-export default function QuickForm() {
-  const [form, setForm] = useState(DEFAULT_FORM);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else if (name === "gstin") {
+      setForm((prev) => ({ ...prev, [name]: value.toUpperCase() }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  /* VALIDATION */
   const validate = () => {
-    const nextErrors = {};
-    const mobileRegex = /^[6-9]\d{9}$/;
-    const gstinRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}Z[A-Z0-9]{1}$/i;
+    const newErrors = {};
 
-    if (!form.gstin.trim()) {
-      nextErrors.gstin = "GSTIN is required";
-    } else if (!gstinRegex.test(form.gstin.trim())) {
-      nextErrors.gstin = "Enter a valid GSTIN";
+    if (!form.gstin) {
+      newErrors.gstin = "GSTIN number is required";
+    } else if (!/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(form.gstin)) {
+      newErrors.gstin = "Enter a valid 15-character GSTIN";
     }
 
-    if (!form.mobile.trim()) {
-      nextErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile.trim())) {
-      nextErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    if (!form.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
     }
 
-    return nextErrors;
+    return newErrors;
   };
 
+  /* SUBMIT HANDLER */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setLoading(true);
 
     try {
-      setLoading(true);
-      await submitServiceQuickForm({
-        serviceKey: "gst-lut-filing",
-        serviceLabel: "GST LUT Filing",
-        mobile: form.mobile.trim(),
-        type: SUBMIT_TYPE,
-        source: SOURCE,
-        details: {
-          GSTIN: form.gstin.trim().toUpperCase(),
-          "Financial Year": form.financialYear,
-        },
-      });
+      const payload = {
+        gstin: form.gstin,
+        financialYear: form.financialYear,
+        mobile: form.mobile,
+        type: "QUICK_FORM",
+      };
 
-      alert("Our GST expert will contact you shortly.");
-      setForm(DEFAULT_FORM);
-      setErrors({});
-    } catch (error) {
-      console.error("GST LUT quick form error:", error);
-      alert("Submission failed. Please try again.");
+      console.log("📤 Sending data:", payload);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/gst-lut-filing`,
+        // "http://localhost:5000/api/gst-lut-filing", // ✅ http:// is required        
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || data.message || "Something went wrong");
+      }
+
+      alert("✅ Eligibility checked successfully – we'll contact you shortly.");
+
+      setForm({ gstin: "", financialYear: "2024-2025", mobile: "" });
+    } catch (err) {
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -83,16 +101,20 @@ export default function QuickForm() {
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* GSTIN Number */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">GSTIN Number</label>
+          <label className="block text-sm font-semibold mb-1">
+            GSTIN Number
+          </label>
           <input
             type="text"
             name="gstin"
             value={form.gstin}
             onChange={handleChange}
             placeholder="e.g. 27ABCDE1234F1Z5"
-            className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.gstin ? "border-red-400" : "border-slate-300"
+            maxLength={15}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.gstin ? "border-red-500" : "border-slate-300"
             }`}
           />
           {errors.gstin && (
@@ -100,46 +122,61 @@ export default function QuickForm() {
           )}
         </div>
 
+        {/* Financial Year */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Financial Year</label>
+          <label className="block text-sm font-semibold mb-1">
+            Financial Year
+          </label>
           <select
             name="financialYear"
             value={form.financialYear}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
+            className="w-full border border-slate-300 rounded px-3 py-2
+                       focus:outline-none focus:border-brand-500 bg-white"
           >
-            <option>2024-2025 (Current)</option>
-            <option>2023-2024 (Previous)</option>
+            <option value="2024-2025">2024-2025 (Current)</option>
+            <option value="2023-2024">2023-2024</option>
+            <option value="2022-2023">2022-2023</option>
+            <option value="2021-2022">2021-2022</option>
           </select>
         </div>
 
+        {/* Mobile Number */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number
+          </label>
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            placeholder="9876543210"
-            className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.mobile ? "border-red-400" : "border-slate-300"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
+            placeholder="9876543210"
+            maxLength={10}
           />
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
           className={`w-full text-white font-bold py-3 rounded-lg transition ${
-            loading ? "bg-brand-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-700"
+            loading
+              ? "bg-brand-400 cursor-not-allowed"
+              : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+          {loading ? "Checking..." : "Check Status"}
         </button>
       </form>
     </div>
   );
-}
+};
+
+export default LUTEligibilityCheck;

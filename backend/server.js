@@ -58,6 +58,10 @@ const freightForwardingRoutes = require("./routes/freightForwardingRoutes.routes
 const warehousingSolutionsRoutes = require("./routes/warehousingSolutionsRoutes.routes");
 const inlandTransportationRoutes = require("./routes/inlandTransportationRoutes.routes");
 const marineInsuranceRoutes = require ("./routes/marineInsuranceRoutes.routes");
+const gstReturnsRoutes = require("./routes/gstReturnsRoutes.routes");
+const gstFilingRoutes = require("./routes/gstFilingRoutes.routes");
+const rmccalertRemovalRoutes = require("./routes/rmccalertRemovalRoutes.routes");
+const igcrReturnsRoutes = require("./routes/igcrReturnsRoutes.routes");
 const designRegistrationRoutes = require("./routes/designRegistrationRoutes.routes");
 const dpdRegistrationRoutes = require("./routes/dpdRegistrationRoutes.routes");
 const cdscoComplianceRoutes = require("./routes/cdscoComplianceRoutes.routes");
@@ -66,6 +70,8 @@ const copyrightRegistrationRoutes = require("./routes/copyrightRegistrationRoute
 const trademarkRegistrationRoutes = require("./routes/trademarkRegistrationRoutes.routes");
 const fertiliserimportLicenseRoutes = require("./routes/fertiliserimportLicenseRoutes.routes");
 const horticultureRoutes = require("./routes/horticultureRoutes.routes");
+const prcRelaxationRoutes = require("./routes/prcRelaxationRoutes.routes");
+const gemRegistrationRoutes = require("./routes/gemRegistrationRoutes.routes");
 {/* {DutyCalculator} */}
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
@@ -87,7 +93,6 @@ const exchangeRatesService = require("./services/exchangeRates.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
-const gstFilingRoutes = require("./routes/gstFilingRoutes.routes");
 const serviceQuickFormLeadRoutes = require("./routes/serviceQuickFormLead.routes");
 const epcgSchemeRoutes = require("./routes/epcgSchemeRoutes.routes");
 
@@ -794,6 +799,14 @@ app.use("/api/inland-transportation",inlandTransportationRoutes);
 
 app.use("/api/marine-insurance",marineInsuranceRoutes);
 
+app.use("/api/gst-returns",gstReturnsRoutes);
+
+app.use("/api/gst-lut-filing", gstFilingRoutes);
+
+app.use("/api/rmcc-alert-removal",rmccalertRemovalRoutes);
+
+app.use("/api/igcr-returns",igcrReturnsRoutes);
+
 app.use("/api/design-registration",designRegistrationRoutes);
 
 app.use("/api/dpd-registration",dpdRegistrationRoutes);
@@ -808,7 +821,11 @@ app.use("/api/trademark-registration",trademarkRegistrationRoutes)
 
 app.use("/api/fertiliser-import-license",fertiliserimportLicenseRoutes);
 
+app.use("/api/gem-registration",gemRegistrationRoutes)
+
 app.use("/api/horticulture",horticultureRoutes);
+
+app.use("/api/prc-relaxation",prcRelaxationRoutes);
 
 app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 
@@ -837,8 +854,6 @@ app.use("/api/contact-us", maincontactRoutes);
 app.use("/api/submit-audit-form", auditcomplianceformRoutes);
 
 app.use("/api/saas-enrollment", saasEnrollmentRoutes);
-
-app.use("/api/gst-filing", gstFilingRoutes);
 
 app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
 

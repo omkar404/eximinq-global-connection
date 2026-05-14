@@ -2,15 +2,14 @@ import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
-    companyType: "Manufacturer Exporter",
-    aeoStatus: "No AEO Status",
+    businessType: "",
+    productCategory: "", // renamed from ProductCategory
     mobile: "",
   });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // Handle input changes with mobile number sanitisation
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -21,14 +20,20 @@ const QuickForm = () => {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
 
-    // Clear error for this field when user types
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  // Validation (same as your first component)
+  // ✅ Full validation – all fields
   const validate = () => {
     const newErrors = {};
 
+    if (!form.businessType) {
+      newErrors.businessType = "Please select a business type";
+    }
+    // Optional: make productCategory required if needed
+    // if (!form.productCategory.trim()) {
+    //   newErrors.productCategory = "Product category is required";
+    // }
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -38,7 +43,6 @@ const QuickForm = () => {
     return newErrors;
   };
 
-  // Submit handler with API call, loading, error handling
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,22 +54,22 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        companyType: form.companyType,
-        aeoStatus: form.aeoStatus,
+        businessType: form.businessType,
+        productCategory: form.productCategory,
         mobile: form.mobile,
-        type: "QUICK_FORM",   // or any type your backend expects
+        type: "QUICK_FORM",
       };
 
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/factory-stuffing`,
-        // "http://localhost:5000/api/factory-stuffing",
+        `${process.env.REACT_APP_API_URL}/api/gem-registration`,
+        // "http://localhost:5000/api/gem-registration", // ✅ http:// is required
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const data = await response.json();
@@ -74,12 +78,11 @@ const QuickForm = () => {
         throw new Error(data.error || data.message || "Something went wrong");
       }
 
-      alert("✅ Eligibility verified successfully");
+      alert("✅ Seller Assessment verified successfully");
 
-      // Reset form to defaults (same as original)
       setForm({
-        companyType: "Manufacturer Exporter",
-        aeoStatus: "No AEO Status",
+        businessType: "",
+        productCategory: "",
         mobile: "",
       });
     } catch (err) {
@@ -93,47 +96,61 @@ const QuickForm = () => {
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8 border border-slate-200">
       <h3 className="text-2xl font-bold text-logistics-900 mb-2">
-        Eligibility Check
+        Seller Assessment
       </h3>
       <p className="text-slate-500 mb-6 text-sm">
-        Can you self‑seal your cargo?
+        Determine your seller category.
       </p>
 
       <form onSubmit={handleSubmit}>
-        {/* Company Type */}
+        {/* Business Type */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Company Type
+            Business Type
           </label>
           <select
-            name="companyType"
-            value={form.companyType}
+            name="businessType"
+            value={form.businessType}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.businessType ? "border-red-500" : "border-slate-300"
+            }`}
           >
-            <option>Manufacturer Exporter</option>
-            <option>Merchant Exporter</option>
-            <option>Warehouse / 3PL</option>
+            <option value="" disabled>
+              Select the Business
+            </option>
+            <option>OEM (Manufacturer)</option>
+            <option>Reseller (Authorized Dealer)</option>
+            <option>Service Provider (Manpower/Taxi etc.)</option>
           </select>
+          {errors.businessType && (
+            <p className="text-red-500 text-xs mt-1">{errors.businessType}</p>
+          )}
         </div>
 
-        {/* AEO Status */}
+        {/* Product Category */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            AEO Status
+            Product Category
           </label>
-          <select
-            name="aeoStatus"
-            value={form.aeoStatus}
+          <input
+            type="text"
+            name="productCategory" // ✅ removed extra }
+            value={form.productCategory}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-          >
-            <option>No AEO Status</option>
-            <option>AEO T1 / T2 / T3</option>
-          </select>
+            placeholder="e.g. Computers / Furniture / Office Supplies"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.productCategory ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.productCategory && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.productCategory}
+            </p>
+          )}
         </div>
 
-        {/* Mobile Number (with validation & error display) */}
+        {/* Mobile Number */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
             Mobile Number
@@ -154,7 +171,6 @@ const QuickForm = () => {
           )}
         </div>
 
-        {/* Submit Button with loading state */}
         <button
           type="submit"
           disabled={loading}
@@ -164,7 +180,7 @@ const QuickForm = () => {
               : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : "Verify Eligibility"}
+          {loading ? "Submitting..." : "Verify Profile"}
         </button>
       </form>
     </div>

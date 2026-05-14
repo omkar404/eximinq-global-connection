@@ -1,77 +1,96 @@
 import { useState } from "react";
-import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
+import { AlertTriangle, Phone } from "lucide-react";
 
-const DEFAULT_FORM = {
+const QuickForm = () => {
+  const [form ,setForm] = useState({
   iec: "",
   notification: "",
   mobile: "",
-};
+});
 
-const SUBMIT_TYPE = "Check Status";
-const SOURCE = "services/igcr-returns";
-
-const QuickForm = () => {
-  const [form, setForm] = useState(DEFAULT_FORM);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else if (name === "notification") {
+      setForm((prev) => ({ ...prev, [name]: value.toUpperCase() }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  /* VALIDATION */
   const validate = () => {
-    const nextErrors = {};
-    const mobileRegex = /^[6-9]\d{9}$/;
-    const iecRegex = /^\d{10}$/;
+    const newErrors = {};
 
     if (!form.iec.trim()) {
-      nextErrors.iec = "IEC is required";
-    } else if (!iecRegex.test(form.iec.trim())) {
-      nextErrors.iec = "Enter valid 10 digit IEC";
+      newErrors.iec = "iec number is required";
     }
 
     if (!form.notification.trim()) {
-      nextErrors.notification = "Notification number is required";
+      newErrors.notification = "notification is required";
     }
 
-    if (!form.mobile.trim()) {
-      nextErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile.trim())) {
-      nextErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    if (!form.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
     }
 
-    return nextErrors;
+    return newErrors;
   };
 
+  /* SUBMIT HANDLER */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setLoading(true);
 
     try {
-      setLoading(true);
-      await submitServiceQuickForm({
-        serviceKey: "igcr-returns",
-        serviceLabel: "IGCR Returns",
-        mobile: form.mobile.trim(),
-        type: SUBMIT_TYPE,
-        source: SOURCE,
-        details: {
-          IEC: form.iec.trim(),
-          "Notification Number": form.notification.trim(),
-        },
-      });
+      const payload = {
+        iec: form.iec.trim(),
+        notification: form.notification.trim(),
+        mobile: form.mobile,
+        type: "QUICK_FORM",
+      };
 
-      alert("We will verify your pending returns status and contact you shortly.");
-      setForm(DEFAULT_FORM);
-      setErrors({});
-    } catch (error) {
-      console.error("IGCR quick form error:", error);
-      alert("Submission failed. Please try again.");
+      console.log("📤 Sending data:", payload);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/igcr-returns`,
+        // "http://localhost:5000/api/igcr-returns", // ✅ http:// is required        
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || data.message || "Something went wrong");
+      }
+
+      alert(
+        "✅ Compliance Check Submission successfully!"
+      ); 
+
+      setForm({ iec: "", notification: "", mobile: ""  });
+    } catch (err) {
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -79,17 +98,23 @@ const QuickForm = () => {
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-brand-900 mb-2">
-        Compliance Check
-      </h3>
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-2">
+        <h3 className="text-2xl font-bold text-alert-900">
+          Compliance Check
+        </h3>
+      </div>
 
       <p className="text-slate-500 mb-6 text-sm">
         Verify your pending returns status.
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* BOE Number */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Company IEC</label>
+          <label className="block text-sm font-semibold mb-1">
+            Company IEC
+          </label>
           <input
             type="text"
             name="iec"
@@ -100,9 +125,12 @@ const QuickForm = () => {
               errors.iec ? "border-red-400" : "border-slate-300"
             }`}
           />
-          {errors.iec && <p className="text-red-500 text-xs mt-1">{errors.iec}</p>}
+          {errors.iec && (
+            <p className="text-red-500 text-xs mt-1">{errors.iec}</p>
+          )}
         </div>
 
+        {/* Port Code */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">Notification No.</label>
           <input
@@ -120,31 +148,44 @@ const QuickForm = () => {
           )}
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
-          <input
-            type="tel"
-            name="mobile"
-            value={form.mobile}
-            onChange={handleChange}
-            placeholder="9876543210"
-            className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.mobile ? "border-red-400" : "border-slate-300"
-            }`}
-          />
+        {/* Mobile Number */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number
+          </label>
+          <div className="relative">
+            <Phone
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="tel"
+              name="mobile"
+              value={form.mobile}
+              onChange={handleChange}
+              placeholder="9876543210"
+              maxLength={10}
+              className={`w-full pl-9 border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
+                errors.mobile ? "border-red-400" : "border-slate-300"
+              }`}
+            />
+          </div>
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
           className={`w-full text-white font-bold py-3 rounded-lg transition ${
-            loading ? "bg-brand-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-700"
+            loading
+              ? "bg-brand-400 cursor-not-allowed"
+              : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+          {loading ? "Submitting..." : "Check Status"}
         </button>
       </form>
     </div>

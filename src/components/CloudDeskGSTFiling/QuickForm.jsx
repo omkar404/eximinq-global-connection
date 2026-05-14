@@ -1,155 +1,248 @@
 import { useState } from "react";
 
-const DEFAULT_FORM = {
-  exportType: "With Payment of IGST (Refund)",
-  invoices: "",
-  mobile: "",
-};
-
-const SUBMIT_TYPE = "Check Compliance";
-const SOURCE = "services/gst-returns/";
-
 const QuickForm = () => {
-  const [form, setForm] = useState(DEFAULT_FORM);
+  const [form, setForm] = useState({
+    export: "",
+    invoices: "",
+    mobile: "",
+  });
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  /*----------------------
+    HANDLE CHANGE
+  -----------------------*/
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setForm((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+
+      setForm((prev) => ({
+        ...prev,
+        [name]: digitsOnly,
+      }));
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+
+    // Clear field error
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
   };
 
+  /*----------------------
+    VALIDATION
+  -----------------------*/
   const validate = () => {
-    const nextErrors = {};
-    const mobileRegex = /^[6-9]\d{9}$/;
+    const newErrors = {};
 
-    if (!form.exportType) {
-      nextErrors.exportType = "Please select an export type";
+    if (!form.export) {
+      newErrors.export = "Please select export type";
     }
 
-    if (form.invoices && (!Number.isInteger(Number(form.invoices)) || Number(form.invoices) < 0)) {
-      nextErrors.invoices = "Enter a valid invoice count";
+    if (!form.invoices) {
+      newErrors.invoices = "Please enter invoice count";
     }
 
-    if (!form.mobile.trim()) {
-      nextErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile.trim())) {
-      nextErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    if (!form.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile =
+        "Enter valid 10 digit Indian mobile number";
     }
 
-    return nextErrors;
+    return newErrors;
   };
 
+  /*----------------------
+    SUBMIT
+  -----------------------*/
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
+    const validationErrors = validate();
 
-    if (Object.keys(nextErrors).length > 0) return;
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
+
+    setLoading(true);
 
     try {
-      setLoading(true);
-
       const payload = {
-        service: "GST Filing Health Check",
-        exportType: form.exportType,
-        invoices: form.invoices ? Number(form.invoices) : "",
-        mobile: form.mobile.trim(),
-        type: SUBMIT_TYPE,
-        source: SOURCE,
+        export: form.export,
+        invoices: form.invoices,
+        mobile: form.mobile,
+        type: "QUICK_FORM",
       };
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/gst-filing`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      console.log("📤 Sending:", payload);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/gst-returns`,
+        // "http://localhost:5000/api/gst-returns", // ✅ http:// is required        
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.message || data.error || "Failed to submit request");
+        throw new Error(
+          data.message || "Something went wrong"
+        );
       }
 
-      alert("We will audit your last return and contact you shortly.");
-      setForm(DEFAULT_FORM);
-      setErrors({});
-    } catch (error) {
-      console.error("GST filing quick form error:", error);
-      alert("Submission failed. Please try again.");
+      alert("✅ Request submitted successfully");
+
+      // Reset form
+      setForm({
+        export: "",
+        invoices: "",
+        mobile: "",
+      });
+
+    } catch (err) {
+
+      console.error("❌ Error:", err);
+
+      alert(`❌ Submission failed: ${err.message}`);
+
     } finally {
+
       setLoading(false);
     }
   };
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-tax-900 mb-2">Filing Health Check</h3>
+
+      <h3 className="text-2xl font-bold text-brand-900 mb-2">
+        Filing Health Check
+      </h3>
+
       <p className="text-slate-500 mb-6 text-sm">
         Verify your export data accuracy.
       </p>
 
       <form onSubmit={handleSubmit}>
+
+        {/* Export Type */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Export Type</label>
+          <label className="block text-sm font-semibold mb-1">
+            Export Type
+          </label>
+
           <select
-            name="exportType"
-            value={form.exportType}
+            name="export"
+            value={form.export}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand-500 ${
-              errors.exportType ? "border-red-400" : "border-slate-300"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.export
+                ? "border-red-500"
+                : "border-slate-300"
             }`}
           >
-            <option>With Payment of IGST (Refund)</option>
-            <option>Without Payment of IGST (LUT)</option>
-            <option>Deemed Export (EOU/EPCG)</option>
-            <option>Service Export</option>
+            <option value="">
+              Select Export Type
+            </option>
+
+            <option value="With Payment of IGST (Refund)">
+              With Payment of IGST (Refund)
+            </option>
+
+            <option value="Without Payment of IGST (LUT/Bond)">
+              Without Payment of IGST (LUT/Bond)
+            </option>
+
+            <option value="Deemed Export (EOU/EPCG)">
+              Deemed Export (EOU/EPCG)
+            </option>
+
+            <option value="Service Export">
+              Service Export
+            </option>
           </select>
-          {errors.exportType && (
-            <p className="text-red-500 text-xs mt-1">{errors.exportType}</p>
+
+          {errors.export && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.export}
+            </p>
           )}
         </div>
 
+        {/* Monthly Invoices */}
         <div className="mb-4">
+
           <label className="block text-sm font-semibold mb-1">
             Monthly Invoices (Approx)
           </label>
+
           <input
             type="number"
             min="0"
             name="invoices"
+            placeholder="e.g. 50"
             value={form.invoices}
             onChange={handleChange}
-            placeholder="e.g. 50"
             className={`w-full border rounded px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand-500 ${
-              errors.invoices ? "border-red-400" : "border-slate-300"
+              errors.invoices
+                ? "border-red-500"
+                : "border-slate-300"
             }`}
           />
+
           {errors.invoices && (
-            <p className="text-red-500 text-xs mt-1">{errors.invoices}</p>
+            <p className="text-red-500 text-xs mt-1">
+              {errors.invoices}
+            </p>
           )}
         </div>
 
-        <div className="mb-6">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+        {/* Mobile Number */}
+        <div className="mb-4">
+
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number
+            <span className="text-red-500"> *</span>
+          </label>
+
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            placeholder="9876543210"
-            className={`w-full border rounded px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand-500 ${
-              errors.mobile ? "border-red-400" : "border-slate-300"
+            placeholder="e.g. 9876543210"
+            maxLength={10}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.mobile
+                ? "border-red-500"
+                : "border-slate-300"
             }`}
           />
+
           {errors.mobile && (
-            <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+            <p className="text-red-500 text-xs mt-1">
+              {errors.mobile}
+            </p>
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
@@ -159,8 +252,11 @@ const QuickForm = () => {
               : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+          {loading
+            ? "Submitting..."
+            : "Check Compliance"}
         </button>
+
       </form>
     </div>
   );

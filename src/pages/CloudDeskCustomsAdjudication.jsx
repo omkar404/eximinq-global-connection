@@ -252,7 +252,7 @@ const CloudDeskCustomsAdjudication = () => {
         </div>
       </section>
 
-      <section id="services" className="py-20 bg-slate-50">
+      <section id="cases" className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-16">
@@ -321,7 +321,7 @@ const CloudDeskCustomsAdjudication = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-brand-900 text-white">
+      <section id = "process" className="py-20 bg-brand-900 text-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Left Side */}

@@ -9,9 +9,9 @@ const Navbar = () => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#about" class="hover:text-brand-600 transition">What is PRC?</a>
-                <a href="#cases" class="hover:text-brand-600 transition">Case Types</a>
-                <a href="#process" class="hover:text-brand-600 transition">Appeal Process</a>
+                <a href="#about" class="hover:text-brand-600 transition">What is SCN?</a>
+                <a href="#cases" class="hover:text-brand-600 transition">Legal Services</a>
+                <a href="#process" class="hover:text-brand-600 transition">Procedure</a>
                 <a href="#pricing" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
@@ -20,7 +20,7 @@ const Navbar = () => {
           href="#pricing"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
-          Apply Now
+          Reply to Notice
         </a>
 
         {/* MOBILE MENU BUTTON */}
@@ -36,10 +36,10 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">What is PRC?</a>
-            <a href="#cases" class="block py-2 text-slate-600">Case Types</a>
-            <a href="#process" class="block py-2 text-slate-600">Appeal Process</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">File Appeal</a>
+            <a href="#about" class="block py-2 text-slate-600">What is SCN?</a>
+            <a href="#cases" class="block py-2 text-slate-600">Legal Services</a>
+            <a href="#process" class="block py-2 text-slate-600">Procedure</a>
+            <a href="#contact" class="block py-2 text-brand-600 font-bold">Fees</a>
           {/* <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"

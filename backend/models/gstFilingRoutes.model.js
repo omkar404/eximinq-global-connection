@@ -7,13 +7,13 @@ const gstFilingRoutesSchema = new mongoose.Schema(
       trim: true,
       default: "GST Filing Health Check",
     },
-    exportType: {
+    gstin: {
       type: String,
       trim: true,
       default: null,
     },
-    invoices: {
-      type: Number,
+    financialYear: {
+      type: String,
       default: null,
     },
     name: {

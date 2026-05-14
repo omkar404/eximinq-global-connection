@@ -49,7 +49,7 @@ const Fees = ({ setShowEnrollModal }) => {
             </ul>
 
             {/* CTA */}
-            <button
+            {/* <button
               onClick={() =>
                 setShowEnrollModal({
                   open: true,
@@ -60,7 +60,18 @@ const Fees = ({ setShowEnrollModal }) => {
               className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
             >
               Call Emergency Line
-            </button>
+            </button> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "RMCC_Alert_Resolution",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Call Emergency Line
+          </button>            
           </div>
         </div>
 
