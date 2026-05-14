@@ -22,14 +22,13 @@ import {
   MapPin,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskMarine/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
+import { ModalEnroll } from "../components/CloudDeskMarine/ModalEnroll";
 
 const CloudDeskMarine = () => {
 
     const [showEnrollModal, setShowEnrollModal] = useState({
       open: false,
-      actionType: "",
-      source: "services/epcg-scheme",
+      type: "",
     });
   
     const handleEnrollmentSubmit = (formData) => {
@@ -207,16 +206,9 @@ const CloudDeskMarine = () => {
 
       <ModalEnroll
         show={showEnrollModal.open}
-        type="epcg_scheme_enroll"
-        actionType={showEnrollModal.actionType}
-        source={showEnrollModal.source}
-        onClose={() =>
-          setShowEnrollModal({
-            open: false,
-            actionType: "",
-            source: "services/epcg-scheme",
-          })
-        }
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
