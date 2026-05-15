@@ -12,7 +12,7 @@ const designRegistrationRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
-    portLocation: {
+    publicationDate: {
       type: String,
       trim: true,
       default: null,
