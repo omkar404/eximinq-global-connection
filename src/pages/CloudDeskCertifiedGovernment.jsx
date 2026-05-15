@@ -265,12 +265,23 @@ const CloudDeskCertifiedGovernment = () => {
                 </li>
               </ul>
 
-              <a
+              {/* <a
                 href="#contact"
                 className="block w-full bg-brand-600 text-white text-center font-bold py-3 rounded hover:bg-gov-700 transition"
               >
                 Register as OEM
-              </a>
+              </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "OEM_Manufacturer",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white text-center font-bold py-3 rounded hover:bg-gov-700 transition"
+              >
+                Register as OEM
+          </button>              
             </div>
           </div>
 
@@ -311,12 +322,23 @@ const CloudDeskCertifiedGovernment = () => {
                 </li>
               </ul>
 
-              <a
+              {/* <a
                 href="#contact"
                 className="block w-full bg-blue-500 text-white text-center font-bold py-3 rounded hover:bg-blue-600 transition"
               >
                 Register as Reseller
-              </a>
+              </a> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Reseller_Trader",
+                  })
+                }
+                className="block w-full bg-blue-500 text-white text-center font-bold py-3 rounded hover:bg-blue-600 transition"
+              >
+                Register as Reseller
+          </button>
             </div>
           </div>
         </div>
