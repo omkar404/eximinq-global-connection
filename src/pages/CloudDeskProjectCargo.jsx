@@ -1,8 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import React, { useState } from "react";
-import TopBar from "../components/CloudDeskMarine/TopBar";
-import Navbar from "../components/CloudDeskMarine/Navbar";
-import Hero from "../components/CloudDeskMarine/Hero";
+import { useState } from "react";
+// ✅ Jaise file ka naam hai waise import karo
+import TopBar from "../components/CloudDeskProjectCargo/ToBar";
+import Navbar from "../components/CloudDeskProjectCargo/Navbar";
+import Hero from "../components/CloudDeskProjectCargo/Hero";
 import {
   ChevronDown,
   Linkedin,
@@ -24,14 +25,14 @@ import {
   HardHat,
   Car,
   Projector,
-  FlagIcon,
+  Flag,
   Phone,
   Mail,
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskMarine/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskMarine/ModalEnroll";
+import { MainNavbar } from "../components/CloudDeskProjectCargo/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskProjectCargo/ModalEnroll";
 
-const CloudDeskMarine = () => {
+const CloudDeskProjectCargo = () => {
     const [showEnrollModal, setShowEnrollModal] = useState({
       open: false,
       type: "",
@@ -181,6 +182,7 @@ const CloudDeskMarine = () => {
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+      {/* <TopBar /> */}
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
@@ -190,6 +192,7 @@ const CloudDeskMarine = () => {
         onClose={() => setShowEnrollModal({ open: false, type: "" })}
         onSubmit={handleEnrollmentSubmit}
       />
+
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -220,7 +223,7 @@ const CloudDeskMarine = () => {
         </div>
       </section>
 
-      <section id="services" className="py-20 bg-slate-50">
+      <section id="benefits" className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
@@ -324,7 +327,7 @@ const CloudDeskMarine = () => {
         </div>
       </section>
 
-      <section id="sectors" className="py-20 bg-brand-900 text-white">
+      <section id="process" className="py-20 bg-brand-900 text-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
@@ -404,7 +407,7 @@ const CloudDeskMarine = () => {
         </div>
       </section>
 
-      <section id="process" className="py-20 bg-slate-50">
+      <section id="contact" className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-16">
@@ -484,7 +487,7 @@ const CloudDeskMarine = () => {
                 className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center 
                         mx-auto mb-4 border-4 border-white shadow-sm"
               >
-                <FlagIcon className="w-7 h-7 text-white" />
+                <Flag className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-lg font-bold mb-2">Deliver</h3>
               <p className="text-sm text-slate-500">
@@ -807,4 +810,4 @@ const CloudDeskMarine = () => {
   );
 };
 
-export default CloudDeskMarine;
+export default CloudDeskProjectCargo;
