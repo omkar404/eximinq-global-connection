@@ -1,8 +1,8 @@
 import { useState } from "react";
-import TopBar from "../components/CloudDeskBarcode/TopBar";
-import Navbar from "../components/CloudDeskBarcode/Navbar";
-import Hero from "../components/CloudDeskBarcode/Hero";
-import Fees from "../components/CloudDeskBarcode/Fees";
+import TopBar from "../components/CloudDeskDesign/ToBar";
+import Navbar from "../components/CloudDeskDesign/Navbar";
+import Hero from "../components/CloudDeskDesign/Hero";
+import Fees from "../components/CloudDeskDesign/Fees";
 import {
   Check,
   ChevronDown,
@@ -19,11 +19,11 @@ import {
   Wrench,
   Megaphone,
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskBarcode/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskBarcode/ModalEnroll";
+import { MainNavbar } from "../components/CloudDeskDesign/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskDesign/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
 
-const CloudDeskBarcode = () => {
+const CloudDeskDesign = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
     type: "",
@@ -48,8 +48,8 @@ const CloudDeskBarcode = () => {
 
       <ModalEnroll
         show={showEnrollModal.open}
-        type={showEnrollModal.type}        
-        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
         onSubmit={handleEnrollmentSubmit}
       />
 
@@ -372,4 +372,5 @@ const CloudDeskBarcode = () => {
   );
 };
 
-export default CloudDeskBarcode;
+export default CloudDeskDesign;
+
