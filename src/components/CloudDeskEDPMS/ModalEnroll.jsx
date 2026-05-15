@@ -18,12 +18,12 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    EDPMS_e_BRC_Support: {
-      service: "EDPMS & e-BRC Support",
+    EDPMS_Support: {
+      service: "EDPMS Support",
     },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
-    // },
+    EBRC_Support: {
+      service: "EBRC Support",
+    },
   };
 
   const serviceConfig = SERVICE_MAP[type];
