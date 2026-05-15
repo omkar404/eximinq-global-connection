@@ -62,6 +62,7 @@ const gstReturnsRoutes = require("./routes/gstReturnsRoutes.routes");
 const gstFilingRoutes = require("./routes/gstFilingRoutes.routes");
 const rmccalertRemovalRoutes = require("./routes/rmccalertRemovalRoutes.routes");
 const igcrReturnsRoutes = require("./routes/igcrReturnsRoutes.routes");
+const aqcsPqmsRoutes = require("./routes/aqcsPqmsRoutes.routes");
 const designRegistrationRoutes = require("./routes/designRegistrationRoutes.routes");
 const dpdRegistrationRoutes = require("./routes/dpdRegistrationRoutes.routes");
 const cdscoComplianceRoutes = require("./routes/cdscoComplianceRoutes.routes");
@@ -807,6 +808,8 @@ app.use("/api/gst-lut-filing", gstFilingRoutes);
 app.use("/api/rmcc-alert-removal",rmccalertRemovalRoutes);
 
 app.use("/api/igcr-returns",igcrReturnsRoutes);
+
+app.use("/api/aqcs-pqms",aqcsPqmsRoutes);
 
 app.use("/api/design-registration",designRegistrationRoutes);
 

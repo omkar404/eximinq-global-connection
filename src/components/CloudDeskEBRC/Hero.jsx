@@ -17,7 +17,7 @@ const Hero = ({ setShowEnrollModal }) => {
                     Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button
+                    {/* <button
                       onClick={() =>
                         setShowEnrollModal({
                           open: true,
@@ -28,7 +28,12 @@ const Hero = ({ setShowEnrollModal }) => {
                       class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
                     >
                         Plant Quarantine
-                    </button>
+                    </button> */}
+
+                    <a href="#plant" class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                        Plant Quarantine
+                    </a>
+
                     <a href="#animal" class="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Animal Quarantine
                     </a>
