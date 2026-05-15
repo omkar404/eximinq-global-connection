@@ -21,9 +21,12 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     Permission_Liaison: {
       service: "Permission Liaison",
     },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
-    // },
+    OEM_Manufacturer: {
+      service: "OEM (Manufacturer)",
+    },
+    Reseller_Trader: {
+      service: "Reseller / Trader",
+    },
   };
 
   const serviceConfig = SERVICE_MAP[type];

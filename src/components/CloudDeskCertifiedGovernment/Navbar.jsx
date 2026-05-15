@@ -15,6 +15,7 @@ const Navbar = ({
                 <a href="#types" class="hover:text-brand-600 transition">OEM vs Reseller</a>
                 <a href="#assessment" class="hover:text-brand-600 transition">Vendor Assessment</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
