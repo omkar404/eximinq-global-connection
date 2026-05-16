@@ -27,15 +27,15 @@ async function sendEmail(record) {
     productType,
     fobValue,
   } = record;
-  const serviceDisplay = service || "dfialicense Registration";
+  const serviceDisplay = service || "DFIA license Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
-    subject: `dfialicense Registration — ${serviceDisplay}`,
+    subject: `DFIA license Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>dfialicense Registration</h2>
+        <h2>DFIA license Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
@@ -83,7 +83,7 @@ exports.createdfialicenseRoutes = async (req, res) => {
 
     const isQuickForm = type === "QUICK_FORM_COMPLIANCE";
     const recordData = {
-      service: service || "dfialicense Registration",
+      service: service || "DFIA license Registration",
       mobile: mobile.trim(),
       productType: productType ? productType.trim() : null,
       fobValue: fobValue ? fobValue.trim() : null,
