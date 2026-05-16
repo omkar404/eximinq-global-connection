@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // ─────────────────────────────────────────────────────────────────────────
 //  COMPLETE PORT DATA (Sea, Air, ICD, CFS, LCS)
@@ -312,18 +312,60 @@ export default function QuickForm() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  // Custom autocomplete state
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [filteredCodes, setFilteredCodes] = useState([]);
+  const inputRef = useRef(null);
+  const wrapperRef = useRef(null);
+
+  // Get the list of codes for the selected category
+  const currentCodes = portCategory ? (portData[portCategory] || []).map(p => p.code) : [];
+
+  // Filter codes based on input
+  useEffect(() => {
+    if (selectedPortCode.trim() === "") {
+      setFilteredCodes(currentCodes);
+    } else {
+      const filtered = currentCodes.filter(code =>
+        code.toLowerCase().includes(selectedPortCode.toLowerCase())
+      );
+      setFilteredCodes(filtered);
+    }
+  }, [selectedPortCode, currentCodes]);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleCategoryChange = (e) => {
     setPortCategory(e.target.value);
     setSelectedPortCode("");
     setPortLocation("");
+    setShowSuggestions(false);
     setErrors((p) => ({ ...p, portCategory: "", selectedPortCode: "" }));
   };
 
   const handlePortCodeChange = (e) => {
-    const code = e.target.value;
+    const code = e.target.value.toUpperCase().trim();
     setSelectedPortCode(code);
     const found = (portData[portCategory] || []).find((p) => p.code === code);
     setPortLocation(found ? found.location : "");
+    setErrors((p) => ({ ...p, selectedPortCode: "" }));
+    setShowSuggestions(true);
+  };
+
+  const handleSuggestionClick = (code) => {
+    setSelectedPortCode(code);
+    const found = (portData[portCategory] || []).find((p) => p.code === code);
+    setPortLocation(found ? found.location : "");
+    setShowSuggestions(false);
     setErrors((p) => ({ ...p, selectedPortCode: "" }));
   };
 
@@ -336,7 +378,13 @@ export default function QuickForm() {
   const validate = () => {
     const newErrors = {};
     if (!portCategory) newErrors.portCategory = "Please select a port category";
-    if (!selectedPortCode) newErrors.selectedPortCode = "Please select a port code";
+    if (!selectedPortCode) newErrors.selectedPortCode = "Please select/enter a port code";
+    else {
+      const validCodes = (portData[portCategory] || []).map(p => p.code);
+      if (!validCodes.includes(selectedPortCode)) {
+        newErrors.selectedPortCode = "Invalid port code for selected category";
+      }
+    }
     if (!bank.trim()) newErrors.bank = "Bank name is required";
     if (!mobile) {
       newErrors.mobile = "Mobile number is required";
@@ -367,7 +415,7 @@ export default function QuickForm() {
 
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
-        //  "http://localhost:5000/api/ad-code-registration", // ✅ http:// is required        
+        // "http://localhost:5000/api/ad-code-registration", // ✅ http:// is required        
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -421,24 +469,35 @@ export default function QuickForm() {
           {errors.portCategory && <p className="text-red-500 text-xs mt-1">{errors.portCategory}</p>}
         </div>
 
-        {/* Port Code (only if category selected) */}
+        {/* Port Code with custom left-aligned dropdown */}
         {portCategory && (
-          <div className="mb-4">
+          <div className="mb-4 relative" ref={wrapperRef}>
             <label className="block text-sm font-semibold mb-1">Port Code</label>
-            <select
+            <input
+              ref={inputRef}
+              type="text"
               value={selectedPortCode}
               onChange={handlePortCodeChange}
-              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              onFocus={() => setShowSuggestions(true)}
+              placeholder="Type or select port code"
+              className={`w-full border rounded px-3 py-2 text-left focus:outline-none focus:border-brand-500 ${
                 errors.selectedPortCode ? "border-red-500" : "border-slate-300"
               }`}
-            >
-              <option value="">-- Select Port Code --</option>
-              {(portData[portCategory] || []).map((port) => (
-                <option key={port.code} value={port.code}>
-                  {port.code}
-                </option>
-              ))}
-            </select>
+              autoComplete="off"
+            />
+            {showSuggestions && filteredCodes.length > 0 && (
+              <ul className="absolute z-10 w-full bg-white border border-slate-300 rounded mt-1 max-h-60 overflow-auto shadow-lg">
+                {filteredCodes.map(code => (
+                  <li
+                    key={code}
+                    onClick={() => handleSuggestionClick(code)}
+                    className="px-3 py-2 hover:bg-brand-50 cursor-pointer text-left"
+                  >
+                    {code}
+                  </li>
+                ))}
+              </ul>
+            )}
             {errors.selectedPortCode && <p className="text-red-500 text-xs mt-1">{errors.selectedPortCode}</p>}
           </div>
         )}
