@@ -5,7 +5,7 @@ const dfialicenseRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "dfialicense Registration",
+      default: "DFIA license Registration",
     },
     productType: {
       type: String,
