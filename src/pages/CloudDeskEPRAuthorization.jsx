@@ -592,12 +592,14 @@ const CloudDeskEPRAuthorization = () => {
                 Why CloudDesk for Epr-Authorization?
               </h2>
               <p className="text-slate-500">
-                <Link
-                  to="/epr-annual-returns"
+                <a
+                  href="/epr-annual-returns"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:underline cursor-pointer"
                 >
                   Click here to view EPR Annual Returns details
-                </Link>
+                </a>
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
