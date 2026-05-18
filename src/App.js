@@ -107,6 +107,7 @@ import CloudDeskDemo from "./pages/CloudDeskDemo";
 import SEOManager from "./components/SEOManager";
 import CloudDeskAbout from "./pages/CloudDeskAbout";
 import CloudDeskStrategic from "./pages/CloudDeskStrategic";
+import CloudDeskEPRLanding from "./pages/CloudDeskEPRLanding";
 
 function App() {
   return (
@@ -126,6 +127,7 @@ function App() {
 
         {/*AEO Routes  */}
         <Route path="/aeo" element={<CloudDeskAEOLanding />} />
+
 
         {/* ICE Management */}
         <Route path="/services/import-export-code/" element={<CloudDeskIceManagement />} />
@@ -448,6 +450,8 @@ function App() {
           element={<CloudDeskEPCGClosure/>}
         />
 
+        {/*epr-annual-returns Routes*/}
+        <Route path="/epr-annual-returns" element={<CloudDeskEPRLanding />} />
 
 
         {/* Thank You Page */}

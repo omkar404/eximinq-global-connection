@@ -78,6 +78,8 @@ const gemRegistrationRoutes = require("./routes/gemRegistrationRoutes.routes");
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
 
+const eprannualReturnsRoutes = require("./routes/eprannualReturnsRoutes.routes.js")
+
 {/* ----------Home page inner page ---------------------- */}
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
 const engineeringindustryRoutes = require("./routes/engineeringindustryRoutes.routes"); // ← ADD THIS
@@ -837,6 +839,8 @@ app.use("/api/epcg-closure-services", epcgClosureServicesRoutes);
 
 app.use("/api/rodtep-refund-recovery",rodtepRefundRecoveryRoutes);
 
+app.use("/api/epr-annual-returns",eprannualReturnsRoutes );
+
 app.use("/api/pharmaceuticals-industry-import-export", pharmaceuticalsindustryRoutes);
 
 app.use("/api/engineering-industry-import-export", engineeringindustryRoutes);
@@ -864,6 +868,8 @@ app.use("/api/saas-enrollment", saasEnrollmentRoutes);
 app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
 
 app.use("/api/epcg-scheme", epcgSchemeRoutes);
+
+
 
 startWatcher();
 
