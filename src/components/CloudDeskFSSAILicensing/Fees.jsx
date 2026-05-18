@@ -129,7 +129,7 @@ export default function Fees({setShowEnrollModal}) {
             </div>
             <div className="p-8">
               <div className="text-4xl font-bold text-slate-900 mb-2">
-                ₹ 3,000
+                ₹ 2,500 
               </div>
               <p className="text-slate-500 text-sm mb-6">+ GST (Excl. Govt Fees)</p>
               <ul className="text-left space-y-3 mb-8 text-sm text-slate-600 pl-8">
@@ -152,7 +152,7 @@ export default function Fees({setShowEnrollModal}) {
               >
                 Start Application
               </a> */}
-              <button
+              {/* <button
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
@@ -162,7 +162,15 @@ export default function Fees({setShowEnrollModal}) {
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
                 Start Application
-              </button>
+              </button> */}
+              <a
+                href="/fssai-annual-returns"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+                >
+                  Start Application
+              </a>              
             </div>
           </div>
         </div>

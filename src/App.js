@@ -108,6 +108,7 @@ import SEOManager from "./components/SEOManager";
 import CloudDeskAbout from "./pages/CloudDeskAbout";
 import CloudDeskStrategic from "./pages/CloudDeskStrategic";
 import CloudDeskEPRLanding from "./pages/CloudDeskEPRLanding";
+import CloudDeskFSSAILanding from "./pages/CloudDeskFSSAILanding";
 
 function App() {
   return (
@@ -453,7 +454,8 @@ function App() {
         {/*epr-annual-returns Routes*/}
         <Route path="/epr-annual-returns" element={<CloudDeskEPRLanding />} />
 
-        
+        {/*fssai-annual-returns Routes*/}
+        <Route path="/fssai-annual-returns" element={<CloudDeskFSSAILanding />} />
 
 
         {/* Thank You Page */}

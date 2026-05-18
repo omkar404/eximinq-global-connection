@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
-export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
+export const ModalEnrollFSSAI = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -18,11 +18,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   /* SERVICE CONFIGURATION */
   const SERVICE_MAP = {
-    Central_FSSAI_License: {
-      service: "Central FSSAI License",
+    fssai_annual_returns: {
+      service: "fssai annual returns",
     },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
+    // Request_Callback: {
+    //   service: "Request Callback",
     // },
   };
 
@@ -109,8 +109,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/fssai-licensing`,
-        // "http://localhost:5000/api/fssai-licensing",
+        `${process.env.REACT_APP_API_URL}/api/fssai-annual-returns`,
+        // "http://localhost:5000/api/fssai-annual-returns",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
