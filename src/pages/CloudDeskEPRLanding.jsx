@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavbarEPR from "../components/CloudDeskEPRLanding/NavbarEPR";
 import HeroEPR from "../components/CloudDeskEPRLanding/HeroEPR";
-import DeadlineCardEPR from "../components/CloudDeskEPRLanding/DeadlineCardEPR";
+// import DeadlineCardEPR from "../components/CloudDeskEPRLanding/DeadlineCardEPR";
 import EPRServices from "../components/CloudDeskEPRLanding/EPRServices";
 import ContactEPR from "../components/CloudDeskEPRLanding/ContactEPR";
 import { FooterEPR } from "../components/CloudDeskEPRLanding/FooterEPR";
@@ -46,10 +46,10 @@ export default function CloudDeskEPRLanding() {
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
       />
-      <HeroEPR />
-      <DeadlineCardEPR setShowEnrollModal={setShowEnrollModal} />
+      <HeroEPR setShowEnrollModal={setShowEnrollModal}/>
+      {/* <DeadlineCardEPR setShowEnrollModal={setShowEnrollModal} /> */}
       {/* Importer EPR Details (custom section not yet extracted) */}
-      <section id="details" className="py-20 bg-white">
+      <section id="guidelines" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">

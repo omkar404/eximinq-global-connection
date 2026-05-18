@@ -51,8 +51,6 @@
 //   );
 // }
 
-
-
 import { Link } from "react-router-dom";
 import BrandLogo from "../BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
@@ -63,8 +61,10 @@ const NavbarEPR = ({
   scrolled,
   isMenuOpen,
   setIsMenuOpen,
-}) => { // ✅ Fix 1: was `=> return { (` — should be `=> {`
-  return ( // ✅ Fix 2: return is inside the function body
+}) => {
+  // ✅ Fix 1: was `=> return { (` — should be `=> {`
+  return (
+    // ✅ Fix 2: return is inside the function body
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled ? "bg-white shadow-md py-2" : "bg-white py-3"
@@ -77,7 +77,6 @@ const NavbarEPR = ({
             <BrandLogo />
           </Link>
         </div>
-
         {/* Desktop menu */}
         <div className="hidden md:flex items-center gap-8 font-smedium text-gray-800">
           {navLinks.map((link) =>
@@ -110,10 +109,9 @@ const NavbarEPR = ({
               >
                 {link.name}
               </Link>
-            )
+            ),
           )}
         </div>
-
         {/* Desktop buttons */}
         <div className="hidden md:flex items-center space-x-6">
           {/* Contact Dropdown */}
@@ -131,8 +129,13 @@ const NavbarEPR = ({
                     <Phone className="text-blue-600" />
                   </div>
                   <p className="font-semibold">Call</p>
-                  <p className="text-sm text-gray-500">Connect with us for legal assistance</p>
-                  <a href="tel:+917400096950" className="text-blue-600 font-medium text-sm hover:underline">
+                  <p className="text-sm text-gray-500">
+                    Connect with us for legal assistance
+                  </p>
+                  <a
+                    href="tel:+917400096950"
+                    className="text-blue-600 font-medium text-sm hover:underline"
+                  >
                     +91 74000 96950 →
                   </a>
                 </div>
@@ -142,8 +145,13 @@ const NavbarEPR = ({
                     <Mail className="text-indigo-600" />
                   </div>
                   <p className="font-semibold">Email</p>
-                  <p className="text-sm text-gray-500">Need help? Drop us an email</p>
-                  <a href="mailto:clouddesk@eximinq.in" className="text-blue-600 font-medium text-sm hover:underline">
+                  <p className="text-sm text-gray-500">
+                    Need help? Drop us an email
+                  </p>
+                  <a
+                    href="mailto:clouddesk@eximinq.in"
+                    className="text-blue-600 font-medium text-sm hover:underline"
+                  >
                     Email Us →
                   </a>
                 </div>
@@ -153,8 +161,15 @@ const NavbarEPR = ({
                     <MessageCircle className="text-green-600" />
                   </div>
                   <p className="font-semibold">WhatsApp</p>
-                  <p className="text-sm text-gray-500">Need a quick help? Leave a message</p>
-                  <a href="https://wa.me/917400096950" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium text-sm hover:underline">
+                  <p className="text-sm text-gray-500">
+                    Need a quick help? Leave a message
+                  </p>
+                  <a
+                    href="https://wa.me/917400096950"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 font-medium text-sm hover:underline"
+                  >
                     Text Us →
                   </a>
                 </div>
@@ -169,8 +184,8 @@ const NavbarEPR = ({
           >
             Enroll Now
           </button>
-        </div> {/* ✅ Fix 3: closing div for "Desktop buttons" missing tha */}
-
+        </div>{" "}
+        {/* ✅ Fix 3: closing div for "Desktop buttons" missing tha */}
         {/* Hamburger */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -180,8 +195,34 @@ const NavbarEPR = ({
         >
           {isMenuOpen ? "✕" : "☰"}
         </button>
-
       </div>
+
+        <div className="container mx-auto px-4 md:px-8 py-3 flex flex-wrap gap-6 justify-center">
+          <a
+            href="#guidelines"
+            className="text-gray-700 hover:text-teal-600 font-medium"
+          >
+            EPR Guidelines
+          </a>
+          <a
+            href="#fees"
+            className="text-gray-700 hover:text-teal-600 font-medium"
+          >
+            Official Fees
+          </a>
+          <a
+            href="#consequences"
+            className="text-gray-700 hover:text-teal-600 font-medium"
+          >
+            Customs Risks
+          </a>
+          <a
+            href="#expertise"
+            className="text-gray-700 hover:text-teal-600 font-medium"
+          >
+            Our Expertise
+          </a>
+        </div>
     </nav>
   );
 };
