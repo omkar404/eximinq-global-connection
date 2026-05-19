@@ -76,16 +76,16 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "21 Apr 2026",
-    title: "Trade Notice 02/2026-27",
-    desc: "Instructions regarding Issuance/Re-issuance/Extension of Validity of Post Export EPCG Scrips – Activation of Post Export EPCG Module - regarding.",
+    date: "19 May 2026",
+    title: "Trade Notice 03/2026-27",
+    desc: "Clarifications on Interest Subvention Support for Pre- and Post-Shipment Export Credit under Export Promotion Mission – Niryat Protsahan.",
     color: "purple",
   },
   {
     type: "Public Notice",
-    date: "17 Apr 2026",
-    title: "Public Notice 04/2026-27",
-    desc: "Amendment in Appendix 4B of Handbook of Procedures, 2023 - reg",
+    date: "14 May 2026",
+    title: "Public Notice 11/2026-27",
+    desc: "Insertion of SION notes below the SIONs M1 to M8– reg.",
     color: "gray",
   },
 ];
