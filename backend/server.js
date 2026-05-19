@@ -78,8 +78,11 @@ const gemRegistrationRoutes = require("./routes/gemRegistrationRoutes.routes");
 const epcgClosureServicesRoutes = require("./routes/epcgClosureServicesRoutes.routes");
 const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.routes.js");
 
+
+{/* {NewPage 16-05-2026} */}
 const eprannualReturnsRoutes = require("./routes/eprannualReturnsRoutes.routes.js");
 const fssaiannualReturnsRoutes = require("./routes/fssaiannualReturnsRoutes.routes.js");
+const epcgRedemptionRoutes = require("./routes/epcgRedemptionRoutes.routes.js");
 
 {/* ----------Home page inner page ---------------------- */}
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
@@ -843,6 +846,8 @@ app.use("/api/rodtep-refund-recovery",rodtepRefundRecoveryRoutes);
 app.use("/api/epr-annual-returns",eprannualReturnsRoutes );
 
 app.use("/api/fssai-annual-returns",fssaiannualReturnsRoutes);
+
+app.use("/api/epcg-redemption",epcgRedemptionRoutes);
 
 app.use("/api/pharmaceuticals-industry-import-export", pharmaceuticalsindustryRoutes);
 

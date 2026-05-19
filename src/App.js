@@ -109,6 +109,7 @@ import CloudDeskAbout from "./pages/CloudDeskAbout";
 import CloudDeskStrategic from "./pages/CloudDeskStrategic";
 import CloudDeskEPRLanding from "./pages/CloudDeskEPRLanding";
 import CloudDeskFSSAILanding from "./pages/CloudDeskFSSAILanding";
+import CloudDeskEPCGLanding from "./pages/CloudDeskEPCGLanding";
 
 function App() {
   return (
@@ -456,6 +457,9 @@ function App() {
 
         {/*fssai-annual-returns Routes*/}
         <Route path="/fssai-annual-returns" element={<CloudDeskFSSAILanding />} />
+
+        {/*epcg-redemption Routes*/}
+        <Route path="/epcg-redemption" element={<CloudDeskEPCGLanding />} />
 
 
         {/* Thank You Page */}
