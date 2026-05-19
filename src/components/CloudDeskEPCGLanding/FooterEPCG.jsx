@@ -115,7 +115,7 @@ const FooterEPCG = ({ onEnrollClick }) => {
       <div className="container mx-auto px-4 mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
         © {new Date().getFullYear()} EXIMINQ CloudDesk. All Rights Reserved.
         <br />
-        Disclaimer: Information provided is for guidance purposes only.
+        DGFT Compliance | EPCG Closure & EOP Extension Specialists
       </div>
     </footer>
   );

@@ -83,7 +83,7 @@ const rodtepRefundRecoveryRoutes = require("./routes/rodtepRefundRecoveryRoutes.
 const eprannualReturnsRoutes = require("./routes/eprannualReturnsRoutes.routes.js");
 const fssaiannualReturnsRoutes = require("./routes/fssaiannualReturnsRoutes.routes.js");
 const epcgRedemptionRoutes = require("./routes/epcgRedemptionRoutes.routes.js");
-
+const advanceauthorizationRedemptionRoutes = require("./routes/advanceauthorizationRedemptionRoutes.routes.js");
 {/* ----------Home page inner page ---------------------- */}
 const pharmaceuticalsindustryRoutes = require("./routes/pharmaceuticalsindustryRoutes.routes.js");
 const engineeringindustryRoutes = require("./routes/engineeringindustryRoutes.routes"); // ← ADD THIS
@@ -848,6 +848,8 @@ app.use("/api/epr-annual-returns",eprannualReturnsRoutes );
 app.use("/api/fssai-annual-returns",fssaiannualReturnsRoutes);
 
 app.use("/api/epcg-redemption",epcgRedemptionRoutes);
+
+app.use("/api/advance-authorization-redemption",advanceauthorizationRedemptionRoutes);
 
 app.use("/api/pharmaceuticals-industry-import-export", pharmaceuticalsindustryRoutes);
 

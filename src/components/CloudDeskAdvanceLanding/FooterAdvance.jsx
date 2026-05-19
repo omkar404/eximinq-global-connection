@@ -1,7 +1,7 @@
 import React from "react";
 import { Phone, Mail } from "lucide-react";
 
-export const FooterEPR = ({ onEnrollClick }) => {
+const FooterAdvance = ({ onEnrollClick }) => {
   return (
     <footer className="bg-gray-900 text-gray-300 pt-12 pb-8 border-t border-gray-800 mt-0">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -115,8 +115,11 @@ export const FooterEPR = ({ onEnrollClick }) => {
       <div className="container mx-auto px-4 mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
         © {new Date().getFullYear()} EXIMINQ CloudDesk. All Rights Reserved.
         <br />
-        Avoid Customs Hold | Importer Annual Returns Filing Specialists
+        DGFT Compliance | Advance Authorisation Closure Specialists
       </div>
     </footer>
   );
 };
+
+
+export default FooterAdvance;
