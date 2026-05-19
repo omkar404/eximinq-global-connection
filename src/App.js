@@ -110,6 +110,7 @@ import CloudDeskStrategic from "./pages/CloudDeskStrategic";
 import CloudDeskEPRLanding from "./pages/CloudDeskEPRLanding";
 import CloudDeskFSSAILanding from "./pages/CloudDeskFSSAILanding";
 import CloudDeskEPCGLanding from "./pages/CloudDeskEPCGLanding";
+import CloudDeskAdvanceLanding from "./pages/CloudDeskAdvanceLanding";
 
 function App() {
   return (
@@ -461,6 +462,8 @@ function App() {
         {/*epcg-redemption Routes*/}
         <Route path="/epcg-redemption" element={<CloudDeskEPCGLanding />} />
 
+        {/*advance-authorization-redemption Routes*/}
+        <Route path="/advance-authorization-redemption" element={<CloudDeskAdvanceLanding />} />
 
         {/* Thank You Page */}
         <Route path="*" element={<PageNotFound />} />
