@@ -129,7 +129,7 @@ export default function Fees({setShowEnrollModal}) {
             </div>
             <div className="p-8">
               <div className="text-4xl font-bold text-slate-900 mb-2">
-                ₹ 2,500 
+                ₹ 3,500 
               </div>
               <p className="text-slate-500 text-sm mb-6">+ GST (Excl. Govt Fees)</p>
               <ul className="text-left space-y-3 mb-8 text-sm text-slate-600 pl-8">

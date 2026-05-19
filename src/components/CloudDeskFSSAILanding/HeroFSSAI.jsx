@@ -85,7 +85,7 @@ export default function HeroFSSAI({ setShowEnrollModal }) {
               </div>
               <div className="p-8 text-center">
                 <div className="text-slate-400 font-semibold mb-2 uppercase tracking-wide">Professional Filing Service</div>
-                <div className="text-5xl font-black text-white mb-2">₹2500/-</div>
+                <div className="text-5xl font-black text-white mb-2">₹3500/-</div>
                 <div className="text-sm text-slate-500 mb-6">Fixed Rate (No Hidden Processing Fees)</div>
                 <ul className="space-y-3 text-left mb-8">
                   {[
