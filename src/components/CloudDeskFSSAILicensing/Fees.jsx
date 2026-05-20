@@ -169,7 +169,7 @@ export default function Fees({setShowEnrollModal}) {
                 rel="noopener noreferrer"
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
                 >
-                  Start Application
+                  Now More
               </a>              
             </div>
           </div>

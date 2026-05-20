@@ -592,14 +592,14 @@ const CloudDeskEPRAuthorization = () => {
                 Why CloudDesk for Epr-Authorization?
               </h2>
               <p className="text-slate-500">
-                <a
+                {/* <a
                   href="/epr-annual-returns"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline cursor-pointer"
                 >
                   Click here to view EPR Annual Returns details
-                </a>
+                </a> */}
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
@@ -682,6 +682,19 @@ const CloudDeskEPRAuthorization = () => {
             </div>
           </div>
         </section>
+
+        {/* Sticky Top Urgency Banner */}
+        <div className="bg-red-600 text-white py-2 px-4 text-center text-sm font-bold tracking-wide z-50 relative flex items-center justify-center gap-2">
+          <AlertTriangle className="w-4 h-4 blink" />
+          <a
+            href="/epr-annual-returns"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline cursor-pointer blink"
+          >
+            Click here to view EPR Annual Returns details
+          </a>
+        </div>
 
         {/* --- FAQ SECTION (EPR) --- */}
         <section className="py-20 bg-white">
