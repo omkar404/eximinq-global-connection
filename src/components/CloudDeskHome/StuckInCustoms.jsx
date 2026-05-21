@@ -24,7 +24,7 @@ export const StuckInCustoms = ({ setShowEnrollModal }) => {
           className="px-6 py-2 bg-teal-500 hover:bg-teal-400 text-white font-bold rounded-lg transition flex items-center"
         >
           <Phone size={18} className="mr-2" />
-          Need Help
+          Enroll Now
         </button>
       </div>
 
