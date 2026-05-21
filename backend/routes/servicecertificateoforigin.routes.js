@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+
 const {
-  servicecertificateoforigin,
+    createservicecertificateoforigin,
 } = require("../controllers/servicecertificateoforigin.controller");
 
-router.post("/", servicecertificateoforigin);
+router.post("/", createservicecertificateoforigin);
 
 module.exports = router;

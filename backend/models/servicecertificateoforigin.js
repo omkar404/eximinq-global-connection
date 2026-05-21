@@ -1,23 +1,76 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // ✅ This line was missing
 
-const servicecertificateoforigin = new mongoose.Schema(
+const servicecertificateoforiginSchema = new mongoose.Schema(
   {
+    service: {
+      type: String,
+      trim: true,
+      default: "Certificate of Origin Registration",
+    },
     destinationCountry: {
       type: String,
-      required: true,
       trim: true,
+      default: null,
     },
     hsCode: {
       type: String,
-      required: true,
-      length: 6,
+      trim: true,
+      default: null,
+    },
+    name: {
+      type: String,
+      trim: true,
+      default: null,
     },
     mobile: {
       type: String,
       required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    entity: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    role: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
+    portName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: null,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("servicecertificateoforigin", servicecertificateoforigin);
+module.exports = mongoose.model(
+  "servicecertificateoforigin",
+  servicecertificateoforiginSchema
+);
