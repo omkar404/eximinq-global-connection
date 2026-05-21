@@ -179,14 +179,22 @@ const BentoGrid = () => {
                 <div className="w-10 h-10 bg-orange-900/30 rounded-xl flex items-center justify-center text-orange-400 mb-4">
                   <Shield className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Risk Audit</h3>
+                <h3 className="text-lg font-bold text-white">Compliance Audit</h3>
                 <p className="text-xs text-slate-400 mt-2">
                   Identify compliance gaps before customs does.
                 </p>
               </div>
               <div className="mt-4 pt-4 border-t border-slate-800">
                 <div className="flex items-center justify-between text-slate-300 text-sm group-hover:text-orange-400 transition-colors cursor-pointer">
-                  <span>Start Audit</span>
+                  {/* <span>Start Audit</span>
+                  <ArrowRight className="w-4 h-4" /> */}
+                  <a
+                    href="https://eximinq.in/services/compliance-audit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Start Audit
+                  </a>
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </div>
