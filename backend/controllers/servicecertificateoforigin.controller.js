@@ -1,86 +1,153 @@
 const servicecertificateoforigin = require("../models/servicecertificateoforigin");
 const nodemailer = require("nodemailer");
 
-const nowIST = new Date().toLocaleString("en-IN", {
-  timeZone: "Asia/Kolkata",
-});
-
-const d = new Date(nowIST);
-
-// DATE
-const day = d.getDate().toString().padStart(2, "0");
-const month = (d.getMonth() + 1).toString().padStart(2, "0");
-const year = d.getFullYear();
-
-// TIME
-let hours = d.getHours();
-let minutes = d.getMinutes().toString().padStart(2, "0");
-let ampm = hours >= 12 ? "pm" : "am";
-
-hours = hours % 12 || 12; // convert 0 → 12, 13 → 1
-hours = hours.toString().padStart(2, "0");
-
-// FINAL FORMAT
-const formattedDateTime = `${day}/${month}/${year}, ${hours}:${minutes} ${ampm}`
-
-
+/* SMTP TRANSPORTER */
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  port: Number(process.env.SMTP_PORT),
   secure: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 });
+    
+/* EMAIL HELPER */
+async function sendEmail(record) {
+  const {
+    _id,
+    service,
+    mobile,
+    name,
+    email,
+    entity,
+    role,
+    partner,
+    type,
+    category,
+    issue,
+    destinationCountry,
+    hsCode,
+  } = record;
 
+  const serviceDisplay = service || "Certificate of Origin Registration";
+
+  await transporter.sendMail({
+    from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
+    to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
+    subject: `Certificate of Origin Registration — ${serviceDisplay}`,
+    html: `
+      <div style="font-family:Arial;">
+        <h2>Certificate of Origin Registration</h2>
+        <table border="1" cellpadding="6" style="border-collapse:collapse;">
+          <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
+          <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${destinationCountry ? `<tr><td><b>Destination Country</b></td><td>${destinationCountry}</td></tr>` : ""}
+          ${hsCode ? `<tr><td><b>HS Code (First 6 digits)</b></td><td>${hsCode}</td></tr>` : ""}
+          ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
+          ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
+          <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
+          ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
+          ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
+          ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
+          ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
+        </table>
+        <p><b>ID:</b> ${_id}<br/><b>Time:</b> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
+      </div>
+    `,
+  });
+
+  console.log("✅ Email sent:", _id);
+}
+
+/* CREATE API */
+exports.createservicecertificateoforigin = async (req, res) => {
+  try {
+    console.log("📥 Incoming:", req.body);
+
+    const {
+      service,
+      mobile,
+      name,
+      email,
+      entity,
+      role,
+      partner,
+      type,
+      category,
+      issue,
+      destinationCountry, // ✅ camelCase
+      hsCode, // ✅ camelCase
+    } = req.body;
+
+    const isQuickForm = type === "QUICK_FORM";
+
+    if (!mobile || !mobile.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Mobile is required",
+      });
+    }
+
+    const recordData = {
+      service: service || "Certificate of Origin Registration",
+      mobile: mobile.trim(),
+      destinationCountry: destinationCountry ? destinationCountry.trim() : null, // ✅ use the correct variable
+      hsCode: hsCode ? hsCode.trim() : null, // ✅ use correct variable
+      name: isQuickForm ? null : name ? name.trim() : null,
+      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      entity: isQuickForm ? null : entity ? entity.trim() : null,
+      role: isQuickForm ? null : role || null,
+      partner: isQuickForm ? false : Boolean(partner),
+      type: type || "QUICK_FORM_COMPLIANCE",
+      category: category || null,
+      issue: issue || null,
+    };
+
+    console.log("📦 Saving:", recordData);
+
+    const record = await servicecertificateoforigin.create(recordData);
+    console.log("✅ Saved:", record._id);
+
+    sendEmail(record).catch((err) =>
+      console.error("❌ Email Error:", err.message),
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "Submitted successfully",
+      data: record,
+    });
+  } catch (error) {
+    console.error("❌ Server Error:", error);
+    // For debugging – show real error (remove in production)
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Server Error",
+    });
+  }
+};
+
+/* GET ALL */
 exports.servicecertificateoforigin = async (req, res) => {
   try {
-    const { destinationCountry, hsCode, mobile } = req.body;
-
-    if (!destinationCountry || !hsCode || !mobile) {
-      return res.status(400).json({
-        success: false,
-        error: "destinationCountry, hsCode and mobile are required",
-      });
-    }
-
-    if (hsCode.length !== 6) {
-      return res.status(400).json({
-        success: false,
-        error: "HS Code must be exactly 6 digits",
-      });
-    }
-
-    const saved = await servicecertificateoforigin.create({
-      destinationCountry,
-      hsCode,
-      mobile,
-    });
-
-    await transporter.sendMail({
-      from: `"Contact – Duty Benefit" <${process.env.SMTP_USER}>`,
-      to: "crm@eximinq.com, omkarmhetar100@gmail.com,yadavsheshnath236@gmail.com",
-      subject: "New Duty Benefit Check Request",
-      html: `
-        <h2>Duty Benefit Check Request</h2>
-        <p><strong>Destination Country:</strong> ${destinationCountry}</p>
-        <p><strong>HS Code:</strong> ${hsCode}</p>
-        <p><strong>Mobile:</strong> ${mobile}</p>
-        <p><strong>Submitted (IST):</strong> ${formattedDateTime}</p>
-      `,
-    });
-
-    res.json({
-      success: true,
-      id: saved._id,
-      message: "Request submitted successfully",
-    });
+    const data = await servicecertificateoforigin.find().sort({ createdAt: -1 });
+    res.json({ success: true, data });
   } catch (err) {
-    console.error("Duty Check API Error:", err);
-    res.status(500).json({
-      success: false,
-      error: "Internal server error",
-    });
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+/* GET BY ID */
+exports.servicecertificateoforiginById = async (req, res) => {
+  try {
+    const data = await servicecertificateoforigin.findById(req.params.id);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "Not found" });
+    }
+    res.json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
