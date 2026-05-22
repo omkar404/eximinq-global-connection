@@ -137,7 +137,11 @@
       "/terms-of-service",
       "/tools/duty-calculator-finder",
       "/strategic-solutions/rodtep-refund-recovery",
-      "/strategic-solutions/epcg-closure-services"
+      "/strategic-solutions/epcg-closure-services",
+      "/epr-annual-returns",
+      "/fssai-annual-returns",
+      "/epcg-redemption",
+      "/advance-authorization-redemption"
     ]
   },
   "eslintConfig": {
