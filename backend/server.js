@@ -808,7 +808,7 @@ app.use("/api/inland-transportation",inlandTransportationRoutes);
 app.use("/api/marine-insurance",marineInsuranceRoutes);
 
 app.use("/api/gst-returns",gstReturnsRoutes);
-app.use("/api/gst-filing", gstReturnsRoutes);
+
 
 app.use("/api/gst-lut-filing", gstFilingRoutes);
 
