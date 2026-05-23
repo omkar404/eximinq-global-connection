@@ -1,68 +1,14 @@
 import React from "react";
 import { RefreshCw } from "lucide-react";
-
-/* =======================
-   SLAB CONFIG
-======================= */
-const SLABS = [
-  {
-    label: "₹15,00,000 & above",
-    min: 1500000,
-    max: null,
-    rates: {
-      rodtep: { buy: 98.05, sell: 98.85 },
-      rosctl: { buy: 97.95, sell: 98.55 },
-    },
-  },
-  {
-    label: "₹10,00,000 – ₹14,99,999",
-    min: 1000000,
-    max: 1499999,
-    rates: {
-      rodtep: { buy: 97.40, sell: 98.60 },
-      rosctl: { buy: 97.30, sell: 98.30 },
-    },
-  },
-  {
-    label: "₹5,00,000 – ₹9,99,999",
-    min: 500000,
-    max: 999999,
-    rates: {
-      rodtep: { buy: 96.75, sell: 98.35 },
-      rosctl: { buy: 96.65, sell: 98.05 },
-    },
-  },
-  {
-    label: "₹1,00,000 – ₹4,99,999",
-    min: 100000,
-    max: 499999,
-    rates: {
-      rodtep: { buy: 96.10, sell: 98.10 },
-      rosctl: { buy: 96.00, sell: 97.80 },
-    },
-  },
-  {
-    label: "₹10,000 – ₹99,999",
-    min: 10000,
-    max: 99999,
-    rates: {
-      rodtep: { buy: 95.45, sell: 97.85 },
-      rosctl: { buy: 95.35, sell: 97.55 },
-    },
-  },
-];
+import { SLABS } from "./slabs";
 
 const formatRange = (slab) => {
-  if (!slab.max) return "₹15,00,000 & above";
-  return `₹${slab.min.toLocaleString()} – ₹${slab.max.toLocaleString()}`;
+  if (!slab.max) return "Rs 15,00,000 and above";
+  return slab.label;
 };
 
 const formatRate = (value) => Number(value).toFixed(2);
 
-
-/* =======================
-   RATE CARD
-======================= */
 const RateCard = ({
   title,
   description,
@@ -101,18 +47,15 @@ const RateCard = ({
             We Sell At
           </span>
           <span className="text-3xl font-extrabold text-slate-900">
-            {formatRate(sell)}%
+            {formatRate(sell)}
             <span className="text-lg text-slate-400 ml-1">%</span>
           </span>
         </div>
       </div>
 
-      {/* CALCULATION INFO */}
       <p className="mt-4 text-sm text-slate-600 text-center">
         Calculate Your Scrip Value at{" "}
-        <span className="font-semibold text-slate-800">
-          {effectiveRate}%
-        </span>{" "}
+        <span className="font-semibold text-slate-800">{formatRate(effectiveRate)}%</span>{" "}
         ({actionType === "SELL" ? "We Buy Rate" : "We Sell Rate"})
       </p>
 
@@ -128,13 +71,10 @@ const RateCard = ({
   );
 };
 
-/* =======================
-   LIVE RATES
-======================= */
 const LiveRates = ({ onSellClick }) => {
   const [selectedSlab, setSelectedSlab] = React.useState(SLABS[0]);
   const [lastUpdated, setLastUpdated] = React.useState(new Date());
-  const [actionType, setActionType] = React.useState("SELL"); // SELL | BUY
+  const [actionType] = React.useState("SELL");
 
   const handleRefresh = () => {
     setSelectedSlab(SLABS[0]);
@@ -151,7 +91,6 @@ const LiveRates = ({ onSellClick }) => {
       className="relative -mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-20"
     >
       <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden">
-        {/* HEADER */}
         <div className="bg-slate-50 border-b border-slate-100 p-4 sm:p-6 flex justify-between items-center gap-4 flex-wrap">
           <div>
             <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
@@ -167,22 +106,11 @@ const LiveRates = ({ onSellClick }) => {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* <select
-              className="border rounded-lg px-3 py-1 text-sm bg-white"
-              value={actionType}
-              onChange={(e) => setActionType(e.target.value)}
-            >
-              <option value="SELL">Sell Scrip</option>
-              <option value="BUY">Buy Scrip</option>
-            </select> */}
-
             <select
               className="border rounded-lg px-3 py-1 text-sm bg-white"
               value={selectedSlab.min}
               onChange={(e) =>
-                setSelectedSlab(
-                  SLABS.find((s) => s.min === Number(e.target.value))
-                )
+                setSelectedSlab(SLABS.find((slab) => slab.min === Number(e.target.value)))
               }
             >
               {SLABS.map((slab) => (
@@ -202,7 +130,6 @@ const LiveRates = ({ onSellClick }) => {
           </div>
         </div>
 
-        {/* CARDS */}
         <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
           <RateCard
             title="RODTEP"
@@ -210,13 +137,9 @@ const LiveRates = ({ onSellClick }) => {
             tag="Scrip"
             buy={selectedSlab.rates.rodtep.buy}
             sell={selectedSlab.rates.rodtep.sell}
-            effectiveRate={getEffectiveRate(
-              selectedSlab.rates.rodtep
-            )}
+            effectiveRate={getEffectiveRate(selectedSlab.rates.rodtep)}
             actionType={actionType}
-            onAction={() =>
-              onSellClick?.("RODTEP", actionType)
-            }
+            onAction={() => onSellClick?.("RODTEP", actionType)}
           />
 
           <RateCard
@@ -225,13 +148,9 @@ const LiveRates = ({ onSellClick }) => {
             tag="Scrip"
             buy={selectedSlab.rates.rosctl.buy}
             sell={selectedSlab.rates.rosctl.sell}
-            effectiveRate={getEffectiveRate(
-              selectedSlab.rates.rosctl
-            )}
+            effectiveRate={getEffectiveRate(selectedSlab.rates.rosctl)}
             actionType={actionType}
-            onAction={() =>
-              onSellClick?.("ROSCTL", actionType)
-            }
+            onAction={() => onSellClick?.("ROSCTL", actionType)}
           />
         </div>
       </div>
