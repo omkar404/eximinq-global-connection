@@ -134,11 +134,11 @@ export default function Fees({setShowEnrollModal}) {
               <p className="text-slate-500 text-sm mb-6">+ GST (Excl. Govt Fees)</p>
               <ul className="text-left space-y-3 mb-8 text-sm text-slate-600 pl-8">
                 {[
-                  "FoSCoS Portal Registration",
-                  "Category Selection Advice",
-                  "Document Upload",
-                  "Query Resolution",
-                  "Valid for 1-5 Years",
+                  "FY Data Compilation (April - March)",
+                  "Accurate Category-wise Quantity Tally",
+                  "FoSCoS Form D-1 Online Submission",
+                  "₹100/Day Late Penalty Prevention",
+                  "Final Filing Acknowledgment Receipt",
                 ].map((item) => (
                   <li key={item} className="flex gap-2 items-start">
                     <Check className="text-green-500 mt-0.5" size={18} />
