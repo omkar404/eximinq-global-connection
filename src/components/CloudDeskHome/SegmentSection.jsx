@@ -88,7 +88,7 @@ const SegmentSection = () => {
               <button className="mt-8 text-cyan-400 font-medium hover:text-cyan-300 flex items-center gap-2 group">
                 {/* Explore Solutions  */}
                 <a
-                  href="https://eximinq.in/services/"
+                  href="https://eximinq.in/services"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
