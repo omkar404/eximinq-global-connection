@@ -45,6 +45,29 @@ const CBIC_NAV = [
   { label: "Allied Acts", key: "alliedActs" },
 ];
 
+const GST_NAV = [
+  { label: "Acts", key: "acts" },
+  { label: "Rules", key: "rules" },
+  { label: "Forms", key: "forms" },
+  {
+    label: "Notifications",
+    key: "notifications",
+    children: [
+      { label: "Central Tax", key: "notifications-centralTax" },
+      { label: "Central Tax (Rate)", key: "notifications-centralTaxRate" },
+      { label: "Integrated Tax", key: "notifications-integratedTax" },
+      { label: "Integrated Tax (Rate)", key: "notifications-integratedTaxRate" },
+      { label: "Union Territory Tax", key: "notifications-unionTerritoryTax" },
+      { label: "Union Territory Tax (Rate)", key: "notifications-unionTerritoryTaxRate" },
+      { label: "Compensation Cess", key: "notifications-compensationcess" },
+      { label: "Compensation Cess (Rate)", key: "notifications-compensationcessRate" },
+    ],
+  },
+  { label: "Circulars", key: "circulars" },
+  { label: "Instructions / Guidelines", key: "instructions" },
+  { label: "Orders", key: "orders" },
+];
+
 const FINANCIAL_YEARS = ["2025-26", "2024-25", "2023-24", "2022-23"];
 
 /* ─────────────────────────────────────────────
@@ -103,6 +126,22 @@ function getCustomsUrl(tabKey) {
     : `${API_BASE}/api/customs/${tabKey}`;
 }
 
+function getGSTUrl(tabKey) {
+  const notificationCategoryMap = {
+    "notifications-centralTax": "centralTax",
+    "notifications-centralTaxRate": "centralTaxRate",
+    "notifications-integratedTax": "integratedTax",
+    "notifications-integratedTaxRate": "integratedTaxRate",
+    "notifications-unionTerritoryTax": "unionTerritoryTax",
+    "notifications-unionTerritoryTaxRate": "unionTerritoryTaxRate",
+  };
+
+  const notificationCategory = notificationCategoryMap[tabKey];
+  return notificationCategory
+    ? `${API_BASE}/api/gst/notifications/category/${notificationCategory}`
+    : `${API_BASE}/api/gst/${tabKey}`;
+}
+
 function getInitialRegulatorySnapshot() {
   if (typeof window === "undefined") {
     return null;
@@ -129,7 +168,7 @@ function getInitialRegulatorySnapshot() {
 }
 
 /* ─────────────────────────────────────────────
-    TABLE VIEW COMPONENT (Only for CBIC)
+    TABLE VIEW COMPONENT (Only for CBIC / GST)
   ───────────────────────────────────────────── */
 const TableView = ({ items, columns }) => (
   <div className="overflow-x-auto rounded-xl border border-gray-200">
@@ -139,7 +178,7 @@ const TableView = ({ items, columns }) => (
           {columns.map((col) => (
             <th
               key={col.key}
-              className={`px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded shadow-lg hover:shadow-xl ${col.center ? "text-center" : ""}`}
+              className={`px-6 py-3 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded shadow-lg hover:shadow-xl ${col.center ? "text-center" : ""}`}
             >
               {col.label}
             </th>
@@ -165,7 +204,7 @@ const TableView = ({ items, columns }) => (
               {columns.map((col) => (
                 <td
                   key={col.key}
-                  className={`px-5 py-3 text-sm ${col.center ? "text-center" : ""}`}
+                  className={`px-6 py-4 text-sm ${col.center ? "text-center" : ""}`}
                 >
                   {col.render ? (
                     col.render(row)
@@ -257,6 +296,30 @@ export default function RegulatoryUpdates() {
     }
   }, [activeTab]);
 
+  const fetchGSTData = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const res = await fetch(getGSTUrl(activeTab), {
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to fetch GST data");
+      }
+
+      setNotifications(data.data);
+    } catch (err) {
+      console.error("GST fetch error:", err);
+      setError(err.message);
+      setNotifications([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [activeTab]);
+
   useEffect(() => {
     if (skipInitialFetch.current) {
       skipInitialFetch.current = false;
@@ -265,10 +328,12 @@ export default function RegulatoryUpdates() {
 
     if (activeAuthority === "dgft") {
       fetchDGFTData();
+    } else if (activeAuthority === "gst") {
+      fetchGSTData();
     } else {
       fetchCustomsData();
     }
-  }, [activeTab, activeAuthority, fetchDGFTData, fetchCustomsData]);
+  }, [activeTab, activeAuthority, fetchDGFTData, fetchCustomsData, fetchGSTData]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -347,7 +412,11 @@ export default function RegulatoryUpdates() {
     setActiveAuthority(auth);
     const defaultKey = auth === "dgft" ? "public" : "acts";
     const defaultLabel =
-      auth === "dgft" ? "DGFT › Public Notices" : "CBIC › Acts";
+      auth === "dgft"
+        ? "DGFT › Public Notices"
+        : auth === "gst"
+        ? "GST › Acts"
+        : "CBIC › Acts";
     setActiveTab(defaultKey);
     setOpenGroups(new Set([defaultKey]));
     setActiveLabel(defaultLabel);
@@ -374,25 +443,30 @@ export default function RegulatoryUpdates() {
     setSelectedAct("");
   };
 
-  const nav = activeAuthority === "dgft" ? DGFT_NAV : CBIC_NAV;
+  const nav =
+    activeAuthority === "dgft"
+      ? DGFT_NAV
+      : activeAuthority === "gst"
+      ? GST_NAV
+      : CBIC_NAV;
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Navbar />
 
-      <main className="flex-grow container mx-auto px-4 pt-28 pb-12 max-w-7xl">
+      <main className="flex-grow w-full px-6 pt-28 pb-12 max-w-[1600px] mx-auto">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-slate-800">
+          <h1 className="text-3xl font-bold text-slate-800">
             Public Notices, Circulars & Notifications
           </h1>
           <p className="text-slate-500 mb-6">
-            Centralized database for DGFT, CBIC (Customs), and RBI Trade
+            Centralized database for DGFT, CBIC (Customs), and GST Trade
             Regulations.
           </p>
         </div>
 
-        <div className="flex gap-6 items-start">
-          <aside className="w-64 flex-shrink-0 sticky top-24">
+        <div className="flex gap-8 items-start">
+          <aside className="w-56 flex-shrink-0 sticky top-24">
             <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
               <div className="flex p-3 gap-2 border-b border-slate-100">
                 <AuthBtn
@@ -406,6 +480,12 @@ export default function RegulatoryUpdates() {
                   onClick={() => switchAuthority("customs")}
                 >
                   CBIC
+                </AuthBtn>
+                <AuthBtn
+                  active={activeAuthority === "gst"}
+                  onClick={() => switchAuthority("gst")}
+                >
+                  GST
                 </AuthBtn>
               </div>
 
@@ -515,6 +595,20 @@ export default function RegulatoryUpdates() {
                 activeFY={activeFY}
                 activeTab={activeTab}
               />
+            ) : activeAuthority === "gst" ? (
+              <CBICView
+                loading={loading}
+                error={error}
+                data={displayedData}
+                search={search}
+                setSearch={setSearch}
+                activeLabel={activeLabel}
+                activeFY={activeFY}
+                activeTab={activeTab}
+                selectedAct={selectedAct}
+                setSelectedAct={setSelectedAct}
+                authority="gst"
+              />
             ) : (
               <CBICView
                 loading={loading}
@@ -527,6 +621,7 @@ export default function RegulatoryUpdates() {
                 activeTab={activeTab}
                 selectedAct={selectedAct}
                 setSelectedAct={setSelectedAct}
+                authority="customs"
               />
             )}
           </div>
@@ -680,7 +775,7 @@ function DGFTCard({ item, activeTab }) {
 }
 
 /* ─────────────────────────────────────────────
-    CBIC VIEW — Table View with Amendment History Modal
+    CBIC / GST VIEW — Table View with Amendment History Modal
   ───────────────────────────────────────────── */
 function CBICView({
   loading,
@@ -693,6 +788,7 @@ function CBICView({
   setSelectedAct,
   activeFY,
   activeTab,
+  authority, // "customs" | "gst"
 }) {
   const [year, setYear] = useState("");
   const [category, setCategory] = useState("");
@@ -723,7 +819,7 @@ function CBICView({
     setRuleNumber("");
     setSelectedRegulation("");
     setRegulationNumber("");
-    
+
     if (activeTab === "acts") {
       setViewType("chapter");
       setEntries("10");
@@ -906,7 +1002,7 @@ function CBICView({
       }
     }
 
-    // REGULATIONS - NO DOWNLOAD COLUMN
+    // REGULATIONS - NO DOWNLOAD COLUMN (CBIC only)
     if (activeTab === "regulations") {
       if (viewType === "regulationNumber") {
         return [
@@ -1043,49 +1139,71 @@ function CBICView({
   const isActsRulesRegs = ["acts", "rules", "regulations"].includes(activeTab);
   const isNotifications = activeTab.includes("notifications");
   const isForms = activeTab === "forms";
-  const isAlliedActs = activeTab === "alliedActs";
+  const isAlliedActs = activeTab === "alliedActs"; // CBIC only
 
-  // ---- FIX: "View Complete" section always visible on Acts/Rules/Regulations ----
+  // "View Complete" section always visible on Acts/Rules/Regulations
   let completeLabel = "";
   let selectedDocument = "";
   let showCompleteSection = false;
 
   if (activeTab === "acts") {
     completeLabel = "Act";
-    selectedDocument = selectedAct || (uniqueActs.length > 0 ? uniqueActs[0] : "Customs Act, 1962");
+    selectedDocument =
+      selectedAct ||
+      (uniqueActs.length > 0
+        ? uniqueActs[0]
+        : authority === "gst"
+        ? "Central Goods and Services Tax Act, 2017"
+        : "Customs Act, 1962");
     showCompleteSection = true;
   } else if (activeTab === "rules") {
     completeLabel = "Rule";
-    selectedDocument = selectedRule || (uniqueRules.length > 0 ? uniqueRules[0] : "Customs Rules");
+    selectedDocument =
+      selectedRule ||
+      (uniqueRules.length > 0
+        ? uniqueRules[0]
+        : authority === "gst"
+        ? "Central Goods and Services Tax Rules, 2017"
+        : "Customs Rules");
     showCompleteSection = true;
   } else if (activeTab === "regulations") {
+    // regulations only exists in CBIC
     completeLabel = "Regulation";
-    selectedDocument = selectedRegulation || (uniqueRegulations.length > 0 ? uniqueRegulations[0] : "Customs Regulations");
+    selectedDocument =
+      selectedRegulation ||
+      (uniqueRegulations.length > 0
+        ? uniqueRegulations[0]
+        : "Customs Regulations");
     showCompleteSection = true;
   }
 
-  // Fetch amendment history from API (only for Acts)
-  const fetchAmendmentHistory = useCallback(async (actName) => {
-    setLoadingHistory(true);
-    try {
-      const response = await fetch(
-        `${API_BASE}/api/customs/amendment-history?act=${encodeURIComponent(actName)}`
-        // `http://localhost:5000/api/customs/amendment-history?act=${encodeURIComponent(actName)}`
-      );
-      const result = await response.json();
-      if (result.success) {
-        setAmendmentHistory(result.data);
-      } else {
-        console.error("Failed to fetch amendment history");
+  // Fetch amendment history from API
+  const fetchAmendmentHistory = useCallback(
+    async (actName) => {
+      setLoadingHistory(true);
+      try {
+        const endpoint =
+          authority === "gst"
+            ? `${API_BASE}/api/gst/amendment-history?act=${encodeURIComponent(actName)}`
+            : `${API_BASE}/api/customs/amendment-history?act=${encodeURIComponent(actName)}`;
+
+        const response = await fetch(endpoint);
+        const result = await response.json();
+        if (result.success) {
+          setAmendmentHistory(result.data);
+        } else {
+          console.error("Failed to fetch amendment history");
+          setAmendmentHistory([]);
+        }
+      } catch (err) {
+        console.error("Error fetching amendment history:", err);
         setAmendmentHistory([]);
+      } finally {
+        setLoadingHistory(false);
       }
-    } catch (err) {
-      console.error("Error fetching amendment history:", err);
-      setAmendmentHistory([]);
-    } finally {
-      setLoadingHistory(false);
-    }
-  }, []);
+    },
+    [authority]
+  );
 
   const handleAmendmentHistory = async () => {
     if (activeTab === "acts" && selectedDocument) {
@@ -1101,17 +1219,17 @@ function CBICView({
   };
 
   return (
-    <div className="bg-white border border-slate-300 rounded-xl shadow-sm overflow-hidden w-full p-6">
+    <div className="bg-white border-2 border-slate-200 rounded-2xl shadow-md overflow-hidden w-full p-8">
       <div
-        className="px-5 pt-4 pb-0"
+        className="px-6 pt-5 pb-0"
         style={{ borderBottom: `2px solid ${cbic.accentGold}` }}
       >
         <div className="mb-3">
-          <p className="text-xs text-slate-500">
-            <span className="text-[#3b82f6] font-medium">{activeLabel}</span>
+          <p className="text-sm text-slate-500">
+            <span className="text-[#3b82f6] font-semibold">{activeLabel}</span>
           </p>
           {selectedDocument && (
-            <h2 className="text-xl font-bold text-slate-800 mt-2">
+            <h2 className="text-2xl font-bold text-slate-800 mt-2">
               {selectedDocument}
             </h2>
           )}
@@ -1121,9 +1239,9 @@ function CBICView({
               <span className="font-medium">View Complete {completeLabel}:</span>
               <button
                 onClick={() => {
-                  // Replace with actual PDF download logic
-                  console.log(`Download PDF for ${completeLabel}: ${selectedDocument}`);
-                  // window.open(`/api/pdf?doc=${encodeURIComponent(selectedDocument)}`)
+                  console.log(
+                    `Download PDF for ${completeLabel}: ${selectedDocument}`
+                  );
                 }}
                 className="text-blue-600 hover:underline focus:outline-none"
               >
@@ -1132,8 +1250,9 @@ function CBICView({
               <span className="text-slate-300">|</span>
               <button
                 onClick={() => {
-                  console.log(`Open HTML for ${completeLabel}: ${selectedDocument}`);
-                  // window.open(`/api/html?doc=${encodeURIComponent(selectedDocument)}`)
+                  console.log(
+                    `Open HTML for ${completeLabel}: ${selectedDocument}`
+                  );
                 }}
                 className="text-blue-600 hover:underline focus:outline-none"
               >
@@ -1146,30 +1265,27 @@ function CBICView({
               >
                 Amendment History
               </button>
-              {/* {activeTab === "acts" && !selectedAct && uniqueActs.length > 0 && (
-                // <span className="text-xs text-amber-600 ml-2">
-                //   (Showing default Act – use dropdown to change)
-                // </span>
-              )} */}
               {activeTab === "rules" && !selectedRule && uniqueRules.length > 0 && (
                 <span className="text-xs text-amber-600 ml-2">
                   (Showing default Rule – use dropdown to change)
                 </span>
               )}
-              {activeTab === "regulations" && !selectedRegulation && uniqueRegulations.length > 0 && (
-                <span className="text-xs text-amber-600 ml-2">
-                  (Showing default Regulation – use dropdown to change)
-                </span>
-              )}
+              {activeTab === "regulations" &&
+                !selectedRegulation &&
+                uniqueRegulations.length > 0 && (
+                  <span className="text-xs text-amber-600 ml-2">
+                    (Showing default Regulation – use dropdown to change)
+                  </span>
+                )}
             </div>
           )}
         </div>
       </div>
 
-      <div className="p-6">
-        {/* Acts/Rules/Regulations Filter - Dynamic based on activeTab */}
+      <div className="p-8">
+        {/* Acts/Rules/Regulations Filter */}
         {isActsRulesRegs && (
-          <div className="rounded-md p-4 mb-4 bg-white border border-slate-200 shadow-sm">
+          <div className="rounded-md p-8 mb-8 bg-white border border-slate-200 shadow-sm">
             <div className="flex flex-wrap items-center gap-3">
               {activeTab === "acts" && (
                 <>
@@ -1271,6 +1387,7 @@ function CBICView({
                 </>
               )}
 
+              {/* Regulations — CBIC only */}
               {activeTab === "regulations" && (
                 <>
                   <div className="flex items-stretch">
@@ -1525,8 +1642,8 @@ function CBICView({
         {/* Forms Filter */}
         {isForms && (
           <div className="rounded-md p-4 mb-4 bg-white border border-slate-200 shadow-sm">
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-stretch">
+            <div className="flex flex-wrap items-center gap-2">
+              {/* <div className="flex items-stretch">
                 <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-l-md shadow-lg">
                   Forms Category
                 </span>
@@ -1542,7 +1659,7 @@ function CBICView({
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
               <div className="flex-1 max-w-xs">
                 <input
@@ -1576,7 +1693,7 @@ function CBICView({
           </div>
         )}
 
-        {/* Allied Acts Filter */}
+        {/* Allied Acts Filter — CBIC only */}
         {isAlliedActs && (
           <div className="rounded-md p-4 mb-4 bg-white border border-slate-200 shadow-sm">
             <div className="flex flex-wrap items-center gap-3">
@@ -1622,7 +1739,6 @@ function CBICView({
 
         {/* Entries and View By row */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-          {/* "show entries" dropdown - always visible for Regulations tab, otherwise when data > 10 */}
           {(activeTab === "regulations" || filteredData.length > 10) && (
             <div className="flex items-center gap-2 text-sm text-slate-600">
               <span>show</span>
@@ -1694,7 +1810,7 @@ function CBICView({
                   </label>
                 </>
               )}
-              
+
               {activeTab === "regulations" && (
                 <>
                   <label className="flex items-center gap-1 text-sm text-slate-700 cursor-pointer">
