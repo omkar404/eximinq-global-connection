@@ -5,23 +5,18 @@ const nodueCertificateRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "Nodue  Registration",
+      default: "No Due Registration",
     },
-    reason: {
+    iecCode: {
       type: String,
       trim: true,
       default: null,
     },
-    shippingBill: {
+    portLocation: {
       type: String,
       trim: true,
       default: null,
     },
-    portOfExport: {
-      type: String,
-      trim: true,
-      default: null,
-    },    
     name: {
       type: String,
       trim: true,

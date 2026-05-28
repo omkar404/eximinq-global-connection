@@ -10,39 +10,39 @@ export default function Fees({setShowEnrollModal}) {
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
           
           <div className="bg-brand-900 text-white py-4">
-            <h3 className="text-xl font-bold">Certification Service</h3>
-            <p className="text-sm opacity-80">Liaison & Documentation</p>
+            <h3 className="text-xl font-bold">Liability Clearance</h3>
+            <p className="text-sm opacity-80">Full Audit & Resolution</p>
           </div>
 
           <div className="p-8">
             <div className="text-3xl font-bold text-slate-900 mb-2">Request Quote</div>
-            <p className="text-slate-500 text-sm mb-6">Depends on Port & Complexity</p>
+            <p className="text-slate-500 text-sm mb-6">Based on Liability Amount  </p>
 
             <ul className="text-left space-y-3 mb-8 text-sm text-slate-600 pl-8">
 
               <li className="flex gap-2">
                 <Check className="text-green-500 w-5 h-5" />
-                Incentive Refund Calculation
+                Full Liability Audit
               </li>
 
               <li className="flex gap-2">
                 <Check className="text-green-500 w-5 h-5" />
-                Challan Generation
+                Case-by-Case Closure Strategy
               </li>
 
               <li className="flex gap-2">
                 <Check className="text-green-500 w-5 h-5" />
-                Application Filing with AC/DC
+                Duty/Interest Calculation
               </li>
 
               <li className="flex gap-2">
                 <Check className="text-green-500 w-5 h-5" />
-                Follow-up for Certificate
+                DEL Removal Filing
               </li>
 
               <li className="flex gap-2">
                 <Check className="text-green-500 w-5 h-5" />
-                Chartered Engineer (Optional)
+                NDC Issuance Coordination
               </li>
 
             </ul>
@@ -57,12 +57,12 @@ export default function Fees({setShowEnrollModal}) {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "Certification_Service",
+                    type: "Liability_Clearance",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
-                Start Process
+                Start Audit
           </button>
           </div>
         </div>
