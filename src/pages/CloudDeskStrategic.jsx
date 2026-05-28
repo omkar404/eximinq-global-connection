@@ -421,7 +421,7 @@ export default function StrategicSolutions() {
                     rel="noopener noreferrer"
                     className="hover:text-white transition"
                   >               
-                    • SIMS (Steel Import)
+                    • Steel Import (SIMS)
                     </Link>
                 </li>
 
@@ -432,7 +432,7 @@ export default function StrategicSolutions() {
                     rel="noopener noreferrer"
                     className="hover:text-white transition"
                   >                
-                    • NIMS (Coal Import)
+                    • Coal Import (NIMS)
                   </Link>
                 </li>
 
@@ -443,18 +443,18 @@ export default function StrategicSolutions() {
                     rel="noopener noreferrer"
                     className="hover:text-white transition"
                   >                     
-                    • PIMS (Paper/Chip Import)
+                    • Paper Import (PIMS)
                 </Link>
                 </li>
 
-                {/* <li>
+                <li>
                   <Link
                     to="/services/import-management-registration"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-white transition"
                   >                     
-                    • NFMIMS (Aluminium)
+                    • Aluminium Import (NFMIMS)
                 </Link>
                 </li>
             
@@ -465,7 +465,7 @@ export default function StrategicSolutions() {
                     rel="noopener noreferrer"
                     className="hover:text-white transition"
                   >                     
-                    • CIMS (Coal)
+                    • Copper Import (NFMIMS)
                 </Link>
                 </li>
 
@@ -476,9 +476,9 @@ export default function StrategicSolutions() {
                     rel="noopener noreferrer"
                     className="hover:text-white transition"
                   >                     
-                    • CHIMS (Chip Import)
+                    • Chip Import (CHIMS)
                 </Link>
-                </li> */}
+                </li>
               </ul>
 
               <p className="text-xs text-slate-500">
