@@ -11,102 +11,93 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
-    
+
 /* EMAIL HELPER */
 async function sendEmail(record) {
   const {
-    _id,
-    service,
-    mobile,
-    name,
-    email,
-    entity,
-    role,
-    partner,
-    type,
-    category,
-    issue,
-    reason,
-    shippingBill,
-    portOfExport,
+    _id, service, mobile, name, email,
+    entity, role, partner, type,
+    category, issue, iecCode, issueType,
   } = record;
 
-  const serviceDisplay = service || "Nodue Registration";
+  const serviceDisplay = service || "No due Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
-    subject: `Nodue Registration — ${serviceDisplay}`,
+    subject: `No due Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>Nodue Registration</h2>
+        <h2>No due Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
-          ${reason ? `<tr><td><b>Reason for Return</b></td><td>${reason}</td></tr>` : ""}
-          ${shippingBill ? `<tr><td><b>Original Shipping Bill No.</b></td><td>${shippingBill}</td></tr>` : ""}
-          ${portOfExport ? `<tr><td><b>Port of Export</b></td><td>${portOfExport}</td></tr>` : ""}
-          ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
-          ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
+          ${iecCode   ? `<tr><td><b>Company IEC Code</b></td><td>${iecCode}</td></tr>`   : ""}
+          ${issueType ? `<tr><td><b>Issue Type</b></td><td>${issueType}</td></tr>`       : ""}
+          ${category  ? `<tr><td><b>Category</b></td><td>${category}</td></tr>`          : ""}
+          ${issue     ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>`                : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
-          ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
+          ${name   ? `<tr><td><b>Name</b></td><td>${name}</td></tr>`     : ""}
+          ${email  ? `<tr><td><b>Email</b></td><td>${email}</td></tr>`   : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
-          ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
-          ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
+          ${role   ? `<tr><td><b>Role</b></td><td>${role}</td></tr>`     : ""}
+          ${type !== "QUICK_FORM_COMPLIANCE"
+            ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>`
+            : ""}
         </table>
-        <p><b>ID:</b> ${_id}<br/><b>Time:</b> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
+        <p>
+          <b>ID:</b> ${_id}<br/>
+          <b>Time:</b> ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
+        </p>
       </div>
     `,
   });
 
-  console.log("✅ Email sent:", _id);
+  console.log("✅ Email sent for ID:", _id);
 }
 
-/* CREATE API */
+/* CREATE */
 exports.createnodueCertificateRoutes = async (req, res) => {
   try {
     console.log("📥 Incoming:", req.body);
 
     const {
-      service,
-      mobile,
-      name,
-      email,
-      entity,
-      role,
-      partner,
-      type,
-      category,
-      issue,
-      reason, // ✅ camelCase
-      shippingBill, // ✅ camelCase
-      portOfExport,
+      service, mobile, name, email, entity,
+      role, partner, type, category, issue,
+      iecCode, issueType,
     } = req.body;
 
-    const isQuickForm = type === "QUICK_FORM";
-
-    if (!mobile || !mobile.trim()) {
+    // ✅ Mobile validation
+    if (!mobile || !/^[6-9]\d{9}$/.test(mobile.trim())) {
       return res.status(400).json({
         success: false,
-        message: "Mobile is required",
+        message: "Enter valid 10 digit Indian mobile number",
       });
     }
 
+    // ✅ IssueType validation
+    if (!issueType || !issueType.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Issue type is required",
+      });
+    }
+
+    const isQuickForm = type === "QUICK_FORM";
+
     const recordData = {
-      service: service || "Nodue Registration",
-      mobile: mobile.trim(),
-      reason: reason ? reason.trim() : null, // ✅ use the correct variable
-      shippingBill: shippingBill ? shippingBill.trim() : null, // ✅ use correct variable
-      portOfExport: portOfExport ? portOfExport.trim() : null,
-      name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
-      entity: isQuickForm ? null : entity ? entity.trim() : null,
-      role: isQuickForm ? null : role || null,
-      partner: isQuickForm ? false : Boolean(partner),
-      type: type || "QUICK_FORM_COMPLIANCE",
-      category: category || null,
-      issue: issue || null,
+      service:   service || "No due Registration",
+      mobile:    mobile.trim(),
+      iecCode:   iecCode   ? iecCode.trim()                 : null,
+      issueType: issueType ? issueType.trim()               : null,
+      name:      isQuickForm ? null : name   ? name.trim()  : null,
+      email:     isQuickForm ? null : email  ? email.trim().toLowerCase() : null,
+      entity:    isQuickForm ? null : entity ? entity.trim(): null,
+      role:      isQuickForm ? null : role   || null,
+      partner:   isQuickForm ? false : Boolean(partner),
+      type:      type || "QUICK_FORM_COMPLIANCE",
+      category:  category || null,
+      issue:     issue    || null,
     };
 
     console.log("📦 Saving:", recordData);
@@ -114,8 +105,9 @@ exports.createnodueCertificateRoutes = async (req, res) => {
     const record = await nodueCertificateRoutes.create(recordData);
     console.log("✅ Saved:", record._id);
 
+    // Non-blocking email
     sendEmail(record).catch((err) =>
-      console.error("❌ Email Error:", err.message),
+      console.error("❌ Email failed for ID:", record._id, err.message)
     );
 
     return res.status(201).json({
@@ -125,7 +117,6 @@ exports.createnodueCertificateRoutes = async (req, res) => {
     });
   } catch (error) {
     console.error("❌ Server Error:", error);
-    // For debugging – show real error (remove in production)
     return res.status(500).json({
       success: false,
       message: error.message || "Server Error",
@@ -134,7 +125,7 @@ exports.createnodueCertificateRoutes = async (req, res) => {
 };
 
 /* GET ALL */
-exports.nodueCertificateRoutes = async (req, res) => {
+exports.getAllnodueCertificateRoutes = async (req, res) => {
   try {
     const data = await nodueCertificateRoutes.find().sort({ createdAt: -1 });
     res.json({ success: true, data });

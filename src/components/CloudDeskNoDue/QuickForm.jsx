@@ -2,9 +2,8 @@ import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
-    reason: "Quality Rejection",
-    shippingBill: "",
-    portOfExport: "",
+    iecCode: "",
+    issueType: "", // ← was "Placed in DEL (Denied Entity List)"
     mobile: "",
   });
 
@@ -31,6 +30,10 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
+    if (!form.issueType) {
+      newErrors.issueType = "Please select an issue type";
+    }
+
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -41,7 +44,7 @@ const QuickForm = () => {
   };
 
   /*----------------------
-    SUBMIT HANDLER (API CALL)
+    SUBMIT HANDLER
   -----------------------*/
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,9 +57,8 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        reason: form.reason,
-        shippingBill: form.shippingBill,
-        portOfExport: form.portOfExport,
+        iecCode: form.iecCode,
+        issueType: form.issueType,
         mobile: form.mobile,
         type: "QUICK_FORM",
       };
@@ -64,13 +66,13 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-     `${process.env.REACT_APP_API_URL}/api/no-due-certificate`,
-        // "http://localhost:5000/api/no-due-certificate", // ✅ http:// is required 
+        `${process.env.REACT_APP_API_URL}/api/no-due-certificate`,
+        // "http://localhost:5000/api/no-due-certificate", // ✅ http:// is required
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const data = await response.json();
@@ -79,13 +81,12 @@ const QuickForm = () => {
         throw new Error(data.error || data.message || "Something went wrong");
       }
 
-      alert("✅ Re-import assessment submitted successfully");
+      alert("✅ Liability check submitted successfully");
 
-      // Reset form (keep default reason)
+      // Reset form (keep default issueType)
       setForm({
-        reason: "Quality Rejection",
-        shippingBill: "",
-        portOfExport: "",
+        iecCode: "",
+        issueType: "", // ← reset back to empty so placeholder shows again
         mobile: "",
       });
     } catch (err) {
@@ -99,65 +100,57 @@ const QuickForm = () => {
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
       <h3 className="text-2xl font-bold text-brand-900 mb-2">
-        Re-import Assessment
+        Liability Assessment
       </h3>
       <p className="text-slate-500 mb-6 text-sm">
-        Did you claim incentives during export?
+        Find out pending dues against your IEC.
       </p>
 
       <form onSubmit={handleSubmit}>
-        {/* Reason for Return */}
+        {/* IEC Code */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Reason for Return
+            Company IEC Code
+          </label>
+          <input
+            type="text"
+            name="iecCode"
+            value={form.iecCode}
+            onChange={handleChange}
+            className="w-full border border-slate-300 rounded px-3 py-2
+                       focus:outline-none focus:border-brand-500"
+            placeholder="e.g. 0513456789"
+          />
+        </div>
+
+        {/* Issue Type */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-1">
+            Issue Type 
           </label>
           <select
-            name="reason"
-            value={form.reason}
+            name="issueType"
+            value={form.issueType}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.issueType ? "border-red-500" : "border-slate-300"
+            }`}
           >
-            <option>Quality Rejection</option>
-            <option>Repair & Return</option>
-            <option>Exhibition Return</option>
-            <option>Wrong Shipment</option>
+            <option value="">Select the options</option>
+            <option>Placed in DEL (Denied Entity List)</option>
+            <option>Pending Advance/EPCG Obligation</option>
+            <option>IEC Surrender Request</option>
+            <option>Merger / Acquisition Due Diligence</option>
           </select>
-        </div>
-
-        {/* Shipping Bill */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
-            Original Shipping Bill No.
-          </label>
-          <input
-            type="text"
-            name="shippingBill"
-            value={form.shippingBill}
-            onChange={handleChange}
-            placeholder="e.g. 7894561"
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-          />
-        </div>
-
-        {/* Port of Export */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
-            Port of Export
-          </label>
-          <input
-            type="text"
-            name="portOfExport"
-            value={form.portOfExport}
-            onChange={handleChange}
-            placeholder="e.g. Nhava Sheva"
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-          />
+          {errors.issueType && (
+            <p className="text-red-500 text-xs mt-1">{errors.issueType}</p>
+          )}
         </div>
 
         {/* Mobile Number */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Mobile Number
+            Mobile Number 
           </label>
           <input
             type="tel"
@@ -185,7 +178,7 @@ const QuickForm = () => {
               : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : "Check Duty Liability"}
+          {loading ? "Submitting..." : "Check Liability"}
         </button>
       </form>
     </div>
