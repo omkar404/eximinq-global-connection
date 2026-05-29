@@ -55,6 +55,7 @@ import CloudDeskPolicyRelaxation from "./pages/CloudDeskPolicyRelaxation"
 import CloudDeskDigitalSignatures from "./pages/CloudDeskDigitalSignatures"
 import CloudDeskImporters from "./pages/CloudDeskImporters"
 import CloudDeskNoDue from "./pages/CloudDeskNoDue"
+import CloudDeskNoINC from "./pages/CloudDeskNoINC";
 import CloudDeskDisclaimer from "./pages/CloudDeskDisclaimer"
 import CloudDeskPrivacy from "./pages/CloudDeskPrivacy"
 import CloudDeskIES from "./pages/CloudDeskIES"
@@ -265,11 +266,14 @@ function App() {
         {/* No Due Certificate */}
         <Route path="/services/no-due-certificate" element={<CloudDeskNoDue />} />
 
+        {/* No Incentive Certificate */}
+        <Route path="/services/no-incentive-certificate" element={<CloudDeskNoINC />} />
+
         {/* Consolidated URL redirects */}
-        <Route
+        {/* <Route
           path="/services/no-incentive-certificate"
           element={<Navigate to="/services/no-due-certificate" replace />}
-        />
+        /> */}
 
         {/* Interest Equalisation  */}
         <Route path="/services/interest-equalisation-scheme" element={<CloudDeskIES />} />

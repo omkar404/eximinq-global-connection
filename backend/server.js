@@ -49,6 +49,7 @@ const uniipCertificationRoutes = require("./routes/uniipCertificationRoutes.rout
 const rexRegistrationRoutes = require("./routes/rexRegistrationRoutes.routes");
 const wpcLicenseRoutes = require("./routes/wpcLicenseRoutes.routes");
 const nodueCertificateRoutes = require("./routes/nodueCertificateRoutes.routes");
+const noincentiveCertificateRoutes = require("./routes/noincentiveCertificateRoutes.routes") 
 const pollutionControlRoutes = require("./routes/pollutionControlRoutes.routes");
 const cacertificationexportImportRoutes = require("./routes/cacertificationexportImportRoutes.routes");
 const esanchitFilingRoutes = require("./routes/esanchitFilingRoutes.routes");
@@ -788,6 +789,8 @@ app.use("/api/rex-registration",rexRegistrationRoutes);
 app.use("/api/wpc-license",wpcLicenseRoutes);
 
 app.use("/api/no-due-certificate",nodueCertificateRoutes);
+
+app.use("/api/no-incentive-certificate",noincentiveCertificateRoutes);
 
 app.use("/api/pollution-control",pollutionControlRoutes);
 
