@@ -45,7 +45,7 @@ const CloudDeskNoDue = () => {
     <>
       <Helmet>
         <title>
-          No Due & No Incentive Certificate Services | DGFT and Customs Closure Support | EXIMINQ
+          No Due Certificate Services | DGFT and Customs Closure Support | EXIMINQ
         </title>
 
         <meta
@@ -61,7 +61,7 @@ const CloudDeskNoDue = () => {
         {/* Open Graph */}
         <meta
           property="og:title"
-          content="No Due & No Incentive Certificate Services Online in India | Eximinq"
+          content="No Due Certificate Services Online in India | Eximinq"
         />
         <meta
           property="og:description"
@@ -78,14 +78,14 @@ const CloudDeskNoDue = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "No Incentive Certificate for Returned Goods",
+            name: "Obtain No Due Certificate & Clear DEL Status",
             provider: {
               "@type": "Organization",
               name: "Eximinq Global Connections",
               url: "https://eximinq.in",
             },
             areaServed: "India",
-            description: `Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`,
+            description: `Is your IEC on the Denied Entity List (Blacklist)? Or are you closing your business? We help you resolve old liabilities, pay penalties, and get a formal No Due Certificate from DGFT.`,
           })}
         </script>
 
@@ -455,7 +455,7 @@ const CloudDeskNoDue = () => {
                 Why CloudDesk for No-Due-Certificate?
               </h2>
               <p className="text-slate-500">
-                IGetting an NDC is like an audit. CloudDesk ensures your records
+                Getting an NDC is like an audit. CloudDesk ensures your records
                 are so clean that the certificate is a formality.
               </p>
             </div>
@@ -553,75 +553,137 @@ const CloudDeskNoDue = () => {
           </div>
       </section>      
 
-      <section id="non-availment" className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-12">
-            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-              Consolidated Closure Guide
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-              No Due Certificate vs No Incentive Certificate
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-3xl">
+            {/* Heading */}
+            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+              Frequently Asked Questions
             </h2>
-            <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
-              We consolidated our older no-incentive page into this master URL
-              so one page now covers DGFT clean-exit certificates, non-availment
-              declarations, and returned-goods benefit reversal.
-            </p>
-          </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                When you need a No Due Certificate
-              </h3>
-              <p className="text-slate-600 mb-4">
-                A No Due Certificate is your closure document when DGFT or a
-                related authority needs proof that your IEC, license book, bond,
-                or penalty ledger is clean. This is the route used for IEC
-                surrender, DEL removal, and final clean-up of old compliance
-                baggage.
-              </p>
-              <ul className="space-y-3 text-slate-700">
-                <li className="flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
-                  Ideal for IEC closure, DGFT redemption, and post-obligation
-                  clean-up.
-                </li>
-                <li className="flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
-                  Used when customs or DGFT needs a clean dues certificate
-                  before releasing bonds or clearing records.
-                </li>
-              </ul>
-            </div>
+            {/* FAQ Items */}
+            <div className="space-y-4">
+              {/* Question 1 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Why do I need an NDC for my EPCG/AA license?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
 
-            <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                When you need a No Incentive Certificate
-              </h3>
-              <p className="text-slate-600 mb-4">
-                A No Incentive Certificate is narrower. It proves that a
-                shipping bill, return shipment, or license-linked export did not
-                retain RoDTEP, drawback, IGST refund, or similar export
-                incentives. This matters most for re-imports, repair returns,
-                and benefit reversals.
-              </p>
-              <ul className="space-y-3 text-slate-700">
-                <li className="flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
-                  Used for returned goods, Section 74 workflows, and repair or
-                  rejection re-imports.
-                </li>
-                <li className="flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5" />
-                  Often requires ledger checks and, if needed, reversal of
-                  scroll-based benefits before the certificate can be issued.
-                </li>
-              </ul>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  The NDC proves that you have not only fulfilled the "Export Obligation" but have also paid any administrative fees, late fees, or penalties that might have been levied during the 6-year license tenure.
+                </p>
+              </details>
+
+              {/* Question 2 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I get my Bank Guarantee back without an NDC?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                No. Customs will only "Cancel" the bond and release the BG once the License Cell issues a "Closure Order," which is contingent upon an NDC from the Fine & Penalty (F&P) section.
+                </p>
+              </details>
+
+              {/* Question 3 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  How long does it take to get a No Due Certificate from Customs?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  If your records are clear, it takes 7–15 working days. If there are pending "Queries" or unpaid "Demands," it can take months. CloudDesk’s Pre-Check identifies these demands before you apply.
+                </p>
+              </details>
+
+              {/* Question 4 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is a "Shipping Line NDC"?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  It is a digital or physical document issued by the carrier (e.g., Maersk, MSC) confirming that ocean freight, local charges, and "Detention" (if any) are paid. Without this, you cannot get the Delivery Order (DO).
+                </p>
+              </details>
+
+              {/* Question 5 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Does a CFS issue an NDC for every container?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. The CFS NDC (or "Pass-out") confirms that handling, scanning, and "Demurrage" (storage) charges are settled. CloudDesk integrates these payments into your dashboard for one-click clearance.
+                </p>
+              </details>
+
+              {/* Question 6 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  I want to close my IEC. Do I need an NDC?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                Yes. You must prove to the DGFT that there are no "Incomplete Export Obligations" linked to your IEC. If you have open licenses, you must either fulfill them or "Regularize" them (pay duty + interest) to get the NDC.
+                </p>
+              </details>
+
+              {/* Question 7 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can a "Show Cause Notice" block my NDC? 
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Absolutely. Even an unproven notice will block your NDC. CloudDesk helps you file an "Ad-hoc Bond" or resolve the notice through the Adjudication process to clear the path for the NDC.
+                </p>
+              </details>
+
+              {/* Question 8 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is an "Internal NDC" in a large company?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  For large corporates, the EXIM department must provide an NDC to the Finance department before an "Export Incentive" is booked as profit. CloudDesk provides the Compliance Report that serves as this internal NDC.
+                </p>
+              </details>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
