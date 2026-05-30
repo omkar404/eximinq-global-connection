@@ -17,7 +17,7 @@ const Hero = ({ setShowEnrollModal }) => {
                   Protect the artistic design of your Logo, the code of your Website, and the content of your Marketing Material. Get legal ownership of your creativity.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#pricing" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Start Filing
                     </a>
                     <a href="#assets" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">

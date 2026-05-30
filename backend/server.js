@@ -103,6 +103,7 @@ const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
 const serviceQuickFormLeadRoutes = require("./routes/serviceQuickFormLead.routes");
+const brandCopyrightRoutes = require("./routes/brandCopyrightRoutes.routes")
 const epcgSchemeRoutes = require("./routes/epcgSchemeRoutes.routes");
 
 // const pdfPath = findPDFFile(noticeNo);
@@ -879,7 +880,9 @@ app.use("/api/submit-audit-form", auditcomplianceformRoutes);
 
 app.use("/api/saas-enrollment", saasEnrollmentRoutes);
 
-app.use("/api/service-quick-form", serviceQuickFormLeadRoutes);
+app.use("/api/service-quick-form", serviceQuickFormLeadRoutes); //bis-registration
+
+app.use("/api/brand-copyright", brandCopyrightRoutes);
 
 app.use("/api/epcg-scheme", epcgSchemeRoutes);
 
