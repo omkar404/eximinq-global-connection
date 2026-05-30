@@ -83,7 +83,8 @@ import CloudDeskGSTFiling from "./pages/CloudDeskGSTFiling"
 import CloudDeskHorticulture from "./pages/CloudDeskHorticulture"
 import CloudDeskPollution from "./pages/CloudDeskPollution"
 import CloudDeskBrand from "./pages/CloudDeskBrand";
-import CloudDeskCopyright from "./pages/CloudDeskCopyright"
+import CloudDeskCopyright from "./pages/CloudDeskCopyright";
+import CloudDeskBrandCopyright from "./pages/CloudDeskBrandCopyright";
 import CloudDeskBarcode from "./pages/CloudDeskBarcode"
 import CloudDeskDesign from "./pages/CloudDeskDesign";
 import CloudDeskRMCC from "./pages/CloudDeskRMCC";
@@ -338,10 +339,12 @@ function App() {
         {/* Copyright Registration */}
         <Route path="/services/copyright-registration" element={<CloudDeskCopyright />} />
 
-        <Route
+        {/* Brand-Copyright Registration */}
+        <Route path="/services/brand-copyright" element={<CloudDeskBrandCopyright />} />
+        {/* <Route
           path="/services/brand-copyright"
           element={<Navigate to="/services/copyright-registration" replace />}
-        />
+        /> */}
 
         <Route
           path="/services/logo-copyright"

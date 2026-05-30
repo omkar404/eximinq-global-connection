@@ -1,109 +1,3 @@
-// import { useState } from "react";
-
-// const QuickForm = ({ onSubmit }) => {
-//   const [form, setForm] = useState({
-//     workType: "",
-//     title: "",
-//     mobile: "",
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setForm((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (!form.mobile) return;
-
-//     onSubmit?.(form);
-
-//     // same intent as original inline alert
-//     alert("We will analyze your work category and contact you.");
-
-//     setForm({
-//       workType: "",
-//       title: "",
-//       mobile: "",
-//     });
-//   };
-
-//   return (
-//     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-//       <h3 className="text-2xl font-bold text-legal-900 mb-2">
-//         Work Assessment
-//       </h3>
-//       <p className="text-slate-500 mb-6 text-sm">
-//         What do you want to protect?
-//       </p>
-
-//       <form onSubmit={handleSubmit}>
-//         {/* Type of Work */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Type of Work
-//           </label>
-//           <select
-//             name="workType"
-//             value={form.workType}
-//             onChange={handleChange}
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           >
-//             <option value="">Select type</option>
-//             <option>Literary (Books / Software Code)</option>
-//             <option>Artistic (Logo / Design)</option>
-//             <option>Cinematograph Film (Video)</option>
-//             <option>Sound Recording (Music)</option>
-//             <option>Musical Work (Composition)</option>
-//           </select>
-//         </div>
-
-//         {/* Title */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Title of Work
-//           </label>
-//           <input
-//             type="text"
-//             name="title"
-//             value={form.title}
-//             onChange={handleChange}
-//             placeholder="e.g. My App v1.0 / Brand Logo"
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           />
-//         </div>
-
-//         {/* Mobile */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Mobile Number
-//           </label>
-//           <input
-//             type="tel"
-//             name="mobile"
-//             value={form.mobile}
-//             onChange={handleChange}
-//             placeholder="+91 74000 96950"
-//             required
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           />
-//         </div>
-
-//         {/* Submit */}
-//         <button
-//           type="submit"
-//           className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition"
-//         >
-//           Check Feasibility
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default QuickForm;
-
 import { useState } from "react";
 
 const QuickForm = ({ onSubmit }) => {
@@ -113,37 +7,152 @@ const QuickForm = ({ onSubmit }) => {
     mobile: "",
   });
 
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+
+  /* -------------------------
+      HANDLE CHANGE
+  ------------------------- */
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "mobile") {
+      const digitsOnly = value
+        .replace(/\D/g, "")
+        .slice(0, 10);
+
+      setForm((prev) => ({
+        ...prev,
+        [name]: digitsOnly,
+      }));
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+
+    // Clear field error while typing
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
   };
 
-  const handleSubmit = (e) => {
+  /* -------------------------
+      VALIDATION
+  ------------------------- */
+  const validate = () => {
+    const newErrors = {};
+
+    // Asset Type
+    if (!form.assetType) {
+      newErrors.assetType =
+        "Please select an asset type";
+    }
+
+    // Asset Title
+    if (!form.assetTitle.trim()) {
+      newErrors.assetTitle =
+        "Asset title is required";
+    }
+
+    // Mobile
+    if (!form.mobile) {
+      newErrors.mobile =
+        "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile =
+        "Enter valid 10 digit Indian mobile number";
+    }
+
+    return newErrors;
+  };
+
+  /* -------------------------
+      SUBMIT
+  ------------------------- */
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.mobile) return;
+    const validationErrors = validate();
 
-    onSubmit?.(form);
+    setErrors(validationErrors);
 
-    // same intent as original inline alert
-    alert("We will analyze your brand assets and contact you.");
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
 
-    setForm({
-      assetType: "",
-      assetTitle: "",
-      mobile: "",
-    });
+    setLoading(true);
+
+    try {
+      const payload = {
+        assetType: form.assetType,
+        assetTitle: form.assetTitle,
+        mobile: form.mobile,
+        type: "QUICK_FORM",
+      };
+
+      console.log("📤 Sending Data:", payload);
+
+      // Optional API call
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/brand-copyright`,
+        // "http://localhost:5000/api/brand-copyright", // ✅ http:// is required
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.error ||
+            data.message ||
+            "Something went wrong"
+        );
+      }
+
+      // Parent callback
+      onSubmit?.(payload);
+
+      alert(
+        "✅ We will analyze your brand assets and contact you."
+      );
+
+      // Reset form
+      setForm({
+        assetType: "",
+        assetTitle: "",
+        mobile: "",
+      });
+
+      setErrors({});
+    } catch (err) {
+      console.error("❌ Error:", err);
+
+      alert(`❌ Submission failed: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+      {/* Heading */}
       <h3 className="text-2xl font-bold text-creative-900 mb-2">
         Asset Assessment
       </h3>
+
       <p className="text-slate-500 mb-6 text-sm">
         Identify protectable IP in your brand.
       </p>
 
+      {/* Form */}
       <form onSubmit={handleSubmit}>
         {/* Asset Type */}
         <div className="mb-4">
@@ -197,9 +206,12 @@ const QuickForm = ({ onSubmit }) => {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition"
+          disabled={loading}
+          className={`w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition"`}
         >
-          Check Eligibility
+          {loading
+            ? "Submitting..."
+            : "Check Eligibility"}
         </button>
       </form>
     </div>

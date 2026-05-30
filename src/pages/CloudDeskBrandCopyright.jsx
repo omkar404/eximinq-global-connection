@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskBrandCopyright/TopBar";
+import TopBar from "../components/CloudDeskBrandCopyright/TopBar";
 import Navbar from "../components/CloudDeskBrandCopyright/Navbar";
 import Hero from "../components/CloudDeskBrandCopyright/Hero";
 import Fees from "../components/CloudDeskBrandCopyright/Fees";
@@ -24,7 +24,19 @@ import { ModalEnroll } from "../components/CloudDeskBrandCopyright/ModalEnroll";
 import { BiRegistered } from "react-icons/bi";
 
 const CloudDeskBrandCopyright = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data")
+  }
   
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -35,8 +47,10 @@ const CloudDeskBrandCopyright = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -290,7 +304,7 @@ const CloudDeskBrandCopyright = () => {
       </div>
     </section>
 
-    <Fees />
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
