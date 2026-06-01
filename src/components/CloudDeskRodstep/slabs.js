@@ -4,8 +4,8 @@ export const SLABS = [
     min: 1500000,
     max: null,
     rates: {
-      rodtep: { buy: 98.0, sell: 98.9 },
-      rosctl: { buy: 97.9, sell: 98.6 },
+      rodtep: { buy: 97.25, sell: 99.05 },
+      rosctl: { buy: 97.15, sell: 98.75 },
     },
   },
   {
@@ -13,8 +13,8 @@ export const SLABS = [
     min: 1000000,
     max: 1499999,
     rates: {
-      rodtep: { buy: 97.35, sell: 98.65 },
-      rosctl: { buy: 97.25, sell: 98.35 },
+      rodtep: { buy: 96.6, sell: 98.8 },
+      rosctl: { buy: 96.5, sell: 98.5 },
     },
   },
   {
@@ -22,8 +22,8 @@ export const SLABS = [
     min: 500000,
     max: 999999,
     rates: {
-      rodtep: { buy: 96.7, sell: 98.4 },
-      rosctl: { buy: 96.6, sell: 98.1 },
+      rodtep: { buy: 95.95, sell: 98.55 },
+      rosctl: { buy: 95.85, sell: 98.25 },
     },
   },
   {
@@ -31,8 +31,8 @@ export const SLABS = [
     min: 100000,
     max: 499999,
     rates: {
-      rodtep: { buy: 96.05, sell: 98.15 },
-      rosctl: { buy: 95.95, sell: 97.85 },
+      rodtep: { buy: 95.3, sell: 98.3 },
+      rosctl: { buy: 95.2, sell: 98.0 },
     },
   },
   {
@@ -40,8 +40,8 @@ export const SLABS = [
     min: 10000,
     max: 99999,
     rates: {
-      rodtep: { buy: 95.4, sell: 97.9 },
-      rosctl: { buy: 95.3, sell: 97.6 },
+      rodtep: { buy: 94.65, sell: 98.05 },
+      rosctl: { buy: 94.55, sell: 97.75 },
     },
   },
 ];
