@@ -16,6 +16,10 @@ const services = [
     url: "https://eximinq.in/services/advance-authorisation/",
   },
   {
+    name: "Advance Authorisation Redemption",
+    url: "https://eximinq.in/advance-authorization-redemption",
+  },
+  {
     name: "EPCG Scheme",
     url: "https://eximinq.in/services/epcg-scheme",
   },

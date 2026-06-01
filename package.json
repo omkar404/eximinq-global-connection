@@ -32,7 +32,12 @@
   "reactSnap": {
     "crawl": false,
     "cacheAjaxRequests": true,
+    "skipThirdPartyRequests": true,
     "include": [
+      "/advance-authorization-redemption",
+      "/services/advance-authorisation/",
+      "/services",
+      "/",
       "/charates",
       "/contact-us-support",
       "/corp",
@@ -40,7 +45,6 @@
       "/aeo",
       "/services/import-export-code/",
       "/services/icegate-registration/",
-      "/services/ad-code-registration/",
       "/services/e-rcmc-registration",
       "/services/bill-of-entry-filing",
       "/services/shipping-bill-filing",
@@ -54,7 +58,6 @@
       "/services/inland-transportation",
       "/services/marine-insurance",
       "/services/project-cargo/",
-      "/services/advance-authorisation/",
       "/services/epcg-scheme",
       "/services/scomet-licensing",
       "/services/rodtep-scheme",
@@ -77,6 +80,7 @@
       "/services/dsc-services",
       "/services/import-management-registration/",
       "/services/no-due-certificate",
+      "/services/no-incentive-certificate",
       "/services/interest-equalisation-scheme",
       "/services/eop-extension/",
       "/services/halal-certification",
@@ -98,6 +102,7 @@
       "/services/pollution-control",
       "/services/trademark-registration",
       "/services/copyright-registration",
+      "/services/brand-copyright",
       "/services/barcode-registration",
       "/services/design-registration",
       "/services/rmcc-alert-removal",
@@ -119,10 +124,8 @@
       "/trade-compliance-calendar",
       "/bis-epr-wpc-lmpc",
       "/demo-of-clouddesk",
-      "/",
       "/about-us",
       "/strategic-solutions",
-      "/services",
       "/foreign-trade-policy",
       "/foreign-trade-policy/regulatory-updates",
       "/foreign-trade-policy/exchange-rates",
@@ -140,8 +143,7 @@
       "/strategic-solutions/epcg-closure-services",
       "/epr-annual-returns",
       "/fssai-annual-returns",
-      "/epcg-redemption",
-      "/advance-authorization-redemption"
+      "/epcg-redemption"
     ]
   },
   "eslintConfig": {

@@ -472,6 +472,17 @@ const CloudDeskAdvanceAuthority = () => {
                 <strong>Redemption</strong> process to get your{" "}
                 <strong>Export Obligation Discharge Certificate (EODC)</strong>.
               </p>
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                Need dedicated closure support for an existing license? Visit our{" "}
+                <a
+                  href="/advance-authorization-redemption"
+                  className="font-semibold text-brand-700 underline underline-offset-4 hover:text-brand-900"
+                >
+                  Advance Authorisation redemption and EODC closure service
+                </a>{" "}
+                for ANF 4F filing, value addition review, customs bond cancellation,
+                and bank guarantee release.
+              </p>
 
               {/* Checklist Box */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
@@ -771,24 +782,29 @@ const CloudDeskAdvanceAuthority = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/advance-authorisation/" className="hover:text-white transition">
                   Advance Authorisation
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/advance-authorization-redemption" className="hover:text-white transition">
+                  Advance Authorisation Redemption
+                </a>
+              </li>
+              <li>
+                <a href="/services/epcg-scheme" className="hover:text-white transition">
                   EPCG Scheme
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/rodtep-rosctl-trading" className="hover:text-white transition">
                   RoDTEP Scrips
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/star-export-house" className="hover:text-white transition">
                   Star Export House
                 </a>
               </li>

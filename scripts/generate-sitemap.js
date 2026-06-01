@@ -7,6 +7,15 @@ const PACKAGE_FILE = path.join(ROOT_DIR, "package.json");
 const SITEMAP_FILE = path.join(ROOT_DIR, "public", "sitemap.xml");
 
 const SITE_URL = "https://eximinq.in";
+const REACT_SNAP_EXCLUDED_ROUTES = new Set([
+  "/services/ad-code-registration/",
+]);
+const REACT_SNAP_PRIORITY_ROUTES = [
+  "/advance-authorization-redemption",
+  "/services/advance-authorisation/",
+  "/services",
+  "/",
+];
 
 function toPosixPath(filePath) {
   return filePath.replace(/\\/g, "/");
@@ -49,7 +58,8 @@ function getRouteMetadata(routePath) {
     routePath === "/dgft-customs-consultancy/" ||
     routePath === "/certificate-of-origin/" ||
     routePath === "/compliance-trade-india" ||
-    routePath === "/clouddesk-saas"
+    routePath === "/clouddesk-saas" ||
+    routePath === "/advance-authorization-redemption"
   ) {
     return { changefreq: "weekly", priority: "0.8" };
   }
@@ -177,7 +187,13 @@ function buildSitemapXml(routes) {
 function updateReactSnapInclude(routePaths) {
   const packageJson = JSON.parse(fs.readFileSync(PACKAGE_FILE, "utf8"));
   packageJson.reactSnap = packageJson.reactSnap || {};
-  packageJson.reactSnap.include = routePaths;
+  const routeSet = new Set(
+    routePaths.filter((routePath) => !REACT_SNAP_EXCLUDED_ROUTES.has(routePath))
+  );
+  packageJson.reactSnap.include = [
+    ...REACT_SNAP_PRIORITY_ROUTES.filter((routePath) => routeSet.delete(routePath)),
+    ...routeSet,
+  ];
   fs.writeFileSync(PACKAGE_FILE, `${JSON.stringify(packageJson, null, 2)}\n`);
 }
 

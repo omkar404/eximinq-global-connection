@@ -34,6 +34,10 @@ export const seoRoutes = {
     title: "CloudDesk SaaS - Export Compliance Software | EXIMINQ",
     description: "India's first SaaS CloudDesk for Exporters. Automate Advance Authorisation, run RoDTEP audits, and buy expert DGFT services in Mumbai.",
   },
+  "/advance-authorization-redemption": {
+    title: "Advance Authorisation Redemption & EODC Closure | EXIMINQ",
+    description: "Close pending Advance Authorisation licenses with EODC filing, ANF 4F documentation, value addition checks, customs bond cancellation, and bank guarantee release support.",
+  },
 
   // --- SAAS FEATURES ---
   "/features/compliance-audit": {

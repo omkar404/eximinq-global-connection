@@ -55,10 +55,10 @@ const FooterAdvance = ({ onEnrollClick }) => {
         <div>
           <h5 className="text-white font-bold mb-4">Services</h5>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-teal-400">DGFT Consultancy</a></li>
-            <li><a href="#" className="hover:text-teal-400">Customs Clearance Support</a></li>
-            <li><a href="#" className="hover:text-teal-400">Logistics Coordination</a></li>
-            <li><a href="#" className="hover:text-teal-400">Compliance Audit</a></li>
+            <li><a href="/services/advance-authorisation/" className="hover:text-teal-400">Advance Authorisation</a></li>
+            <li><a href="/advance-authorization-redemption" className="hover:text-teal-400">Advance Authorisation Redemption</a></li>
+            <li><a href="/services/eop-extension/" className="hover:text-teal-400">EOP Extension</a></li>
+            <li><a href="/services/compliance-audit" className="hover:text-teal-400">Compliance Audit</a></li>
           </ul>
         </div>
 

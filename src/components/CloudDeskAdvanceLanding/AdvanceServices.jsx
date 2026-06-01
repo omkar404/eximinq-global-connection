@@ -143,6 +143,117 @@ export default function AdvanceServices({ setShowEnrollModal }) {
         </div>
       </section>
 
+      {/* EODC Requirements */}
+      <section className="py-24 bg-slate-50 border-b border-slate-200">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="max-w-3xl mb-14">
+            <span className="text-blue-600 font-bold uppercase tracking-wider text-sm">
+              EODC Closure Support
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-3 mb-5">
+              Advance Authorisation Redemption Documents We Audit
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Google and exporters both need a clear distinction between a license
+              application page and a redemption page. This service is specifically
+              for pending Advance Authorisation closure, DGFT EODC filing, and
+              customs bond cancellation after export obligation fulfillment.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "DGFT Filing Set",
+                points: [
+                  "ANF 4F redemption application",
+                  "Advance Authorisation license copy",
+                  "Appendix 4H or 4I CA certificate",
+                  "Deficiency reply drafting",
+                ],
+              },
+              {
+                title: "Export Obligation Proof",
+                points: [
+                  "Shipping bill and invoice mapping",
+                  "e-BRC reconciliation",
+                  "FOB value and VA calculation",
+                  "SION or ad-hoc norms review",
+                ],
+              },
+              {
+                title: "Customs Closure",
+                points: [
+                  "Bill of entry linkage",
+                  "EODC registration at port",
+                  "Bond and LUT cancellation",
+                  "Bank guarantee release follow-up",
+                ],
+              },
+            ].map((item) => (
+              <div key={item.title} className="bg-white rounded-xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-5">{item.title}</h3>
+                <ul className="space-y-3">
+                  {item.points.map((point) => (
+                    <li key={point} className="flex items-start gap-3 text-sm text-slate-600">
+                      <FileText className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Advance Authorisation Redemption FAQs
+            </h2>
+            <p className="text-slate-600 text-lg">
+              Common issues that delay EODC issuance and customs bond closure.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                question: "Can an expired Advance Authorisation still be redeemed?",
+                answer:
+                  "Yes, but the closure path depends on export obligation fulfillment, extension status, value addition, and whether DGFT has already issued a deficiency or demand. We first audit shipping bills, e-BRCs, bills of entry, and SION consumption before filing.",
+              },
+              {
+                question: "Why does DGFT raise deficiency letters during EODC?",
+                answer:
+                  "Common reasons include missing e-BRCs, unmatched shipping bills, incorrect FOB/CIF value addition, excess imported inputs, wrong appendix certificates, or incomplete bill of entry linkage.",
+              },
+              {
+                question: "Is DGFT EODC enough to release the bank guarantee?",
+                answer:
+                  "No. After DGFT issues the EODC, it must be registered with the relevant customs port so the bond or LUT can be cancelled and the bank guarantee can be released.",
+              },
+              {
+                question: "Should this page be separate from the Advance Authorisation application page?",
+                answer:
+                  "Yes, when it covers a separate search intent: exporters who already have a license and now need redemption, EODC, bond cancellation, or bank guarantee release support.",
+              },
+            ].map((item) => (
+              <details key={item.question} className="group rounded-xl border border-slate-200 bg-slate-50 p-6">
+                <summary className="cursor-pointer list-none font-bold text-slate-900 flex items-center justify-between gap-4">
+                  {item.question}
+                  <span className="text-blue-600 group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <p className="text-slate-600 mt-4 leading-relaxed">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section id="pricing" className="py-24 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
