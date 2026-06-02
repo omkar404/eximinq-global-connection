@@ -577,26 +577,26 @@ const CloudDeskServices = () => {
       popular: false,
       link: "https://eximinq.in/services/duty-payment-ecl",
     },
-    {
-      id: 702,
-      category: "Logistics",
-      title: "CHA Services",
-      description:
-        "Dedicated Customs House Agent support for physical examination, sealing, and clearance at ports.",
-      icon: <Anchor className="w-8 h-8 text-orange-600" />,
-      popular: true,
-      link: "https://eximinq.in/services/cha-services",
-    },
-    {
-      id: "logistics-701",
-      category: "Logistics",
-      title: "Freight Forwarding",
-      description:
-        "End-to-end cargo booking for Sea (FCL/LCL) and Air shipments with competitive rate negotiation.",
-      icon: <Plane className="w-8 h-8 text-orange-600" />,
-      popular: true,
-      link: "https://eximinq.in/services/freight-forwarding",
-    },
+    // {
+    //   id: 702,
+    //   category: "Logistics",
+    //   title: "CHA Services",
+    //   description:
+    //     "Dedicated Customs House Agent support for physical examination, sealing, and clearance at ports.",
+    //   icon: <Anchor className="w-8 h-8 text-orange-600" />,
+    //   popular: true,
+    //   link: "https://eximinq.in/services/cha-services",
+    // },
+    // {
+    //   id: "logistics-701",
+    //   category: "Logistics",
+    //   title: "Freight Forwarding",
+    //   description:
+    //     "End-to-end cargo booking for Sea (FCL/LCL) and Air shipments with competitive rate negotiation.",
+    //   icon: <Plane className="w-8 h-8 text-orange-600" />,
+    //   popular: true,
+    //   link: "https://eximinq.in/services/freight-forwarding",
+    // },
     {
       id: 703,
       category: "Logistics",
