@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskEPCG/TopBar";
-import Navbar from "../components/CloudDeskEPCG/Navbar";
-import Hero from "../components/CloudDeskEPCG/Hero";
-import Fees from "../components/CloudDeskEPCG/Fees";
+import TopBar from "../components/CloudDeskCustoms/TopBar";
+import Navbar from "../components/CloudDeskCustoms/Navbar";
+import Hero from "../components/CloudDeskCustoms/Hero";
+import Fees from "../components/CloudDeskCustoms/Fees";
 import {
 Check,
 ChevronDown,
@@ -21,12 +21,24 @@ FileText,
 Building2, 
 Download,
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskEPCG/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskEPCG/ModalEnroll";
+import { MainNavbar } from "../components/CloudDeskCustoms/MainNavbar";
+import { ModalEnroll } from "../components/CloudDeskCustoms/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
 
 const CloudDeskEPCG = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: ""
+  });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.");
+  };
   
   return (
 <>
@@ -167,8 +179,10 @@ const CloudDeskEPCG = () => {
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
       <ModalEnroll
-        show={showEnrollModal}
-        onClose={() => setShowEnrollModal(false)}
+        show={showEnrollModal.open}
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: ""})}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
@@ -337,7 +351,7 @@ const CloudDeskEPCG = () => {
       </div>
     </section>
 
-    <Fees/>
+    <Fees setShowEnrollModal={setShowEnrollModal}/>
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
               <section className="py-20 bg-white">

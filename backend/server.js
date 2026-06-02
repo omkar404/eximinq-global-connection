@@ -69,6 +69,7 @@ const dpdRegistrationRoutes = require("./routes/dpdRegistrationRoutes.routes");
 const cdscoComplianceRoutes = require("./routes/cdscoComplianceRoutes.routes");
 const isoCertificationRoutes = require("./routes/isoCertificationRoutes.routes");
 const copyrightRegistrationRoutes = require("./routes/copyrightRegistrationRoutes.routes");
+const customsLicenseRoutes = require("./routes/customsLicenseRoutes.routes");
 const trademarkRegistrationRoutes = require("./routes/trademarkRegistrationRoutes.routes");
 const fertiliserimportLicenseRoutes = require("./routes/fertiliserimportLicenseRoutes.routes");
 const horticultureRoutes = require("./routes/horticultureRoutes.routes");
@@ -831,7 +832,9 @@ app.use("/api/cdsco-compliance", cdscoComplianceRoutes);
 
 app.use("/api/iso-certification",isoCertificationRoutes);
 
-app.use("/api/copyright-registration",copyrightRegistrationRoutes)
+app.use("/api/copyright-registration",copyrightRegistrationRoutes);
+
+app.use("/api/customs-license-registration",customsLicenseRoutes);
 
 app.use("/api/trademark-registration",trademarkRegistrationRoutes)
 
