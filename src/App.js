@@ -93,6 +93,7 @@ import CloudDeskSVB from "./pages/CloudDeskSVB"
 import CloudDeskWarehouse from "./pages/CloudDeskWarehouse"
 import CloudDeskUN from "./pages/CloudDeskUN";
 import CloudDeskCA from "./pages/CloudDeskCA";
+import CloudDeskCustoms from "./pages/CloudDeskCustoms";
 import CloudDeskRodstep from "./pages/CloudDeskRodstep";
 import EximinqPharma from "./pages/EximinqPharma";
 import EximinqEngineering from "./pages/EximinqEngineering";
@@ -375,10 +376,13 @@ function App() {
         {/* ca-certification-export-import */}
         <Route path="/services/ca-certification-export-import" element={<CloudDeskCA />} />
 
-        <Route
+        {/* <Route
           path="/services/customs-license-registration"
           element={<Navigate to="/services/epcg-scheme" replace />}
-        />
+        /> */}
+
+        {/* customs-license-registration  */}
+        <Route path="/services/customs-license-registration" element={<CloudDeskCustoms />} />
 
         {/* rodtep-rosctl-trading */}
         <Route path="/services/rodtep-rosctl-trading" element={<CloudDeskRodstep />} />
