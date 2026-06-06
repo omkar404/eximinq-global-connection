@@ -115,6 +115,7 @@ import CloudDeskEPRLanding from "./pages/CloudDeskEPRLanding";
 import CloudDeskFSSAILanding from "./pages/CloudDeskFSSAILanding";
 import CloudDeskEPCGLanding from "./pages/CloudDeskEPCGLanding";
 import CloudDeskAdvanceLanding from "./pages/CloudDeskAdvanceLanding";
+import CloudDeskDuty from "./pages/CloudDeskDuty.jsx";
 
 function App() {
   return (
@@ -479,6 +480,9 @@ function App() {
         {/*advance-authorization-redemption Routes*/}
         <Route path="/advance-authorization-redemption" element={<CloudDeskAdvanceLanding />} />
 
+
+        {/*Customs Duty Calculator Routes*/}
+        <Route path="/duty-calculator" element={<CloudDeskDuty />} />
         {/* Thank You Page */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
