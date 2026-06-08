@@ -6,6 +6,11 @@ export const defaultSEO = {
 };
 
 export const seoRoutes = {
+  "/charates/": {
+    title: "CHA Special Rates & Export-Import Service Pricing | EXIMINQ",
+    description: "View EXIMINQ CHA special rates for IEC, RCMC, DSC, ICEGATE, DGFT, customs, export incentives, GST, FSSAI, EPR, and compliance services.",
+  },
+
   // --- CORE PAGES ---
   // "/": {
   //   title: "EXIMINQ - DGFT Consultant & Export CloudDesk Mumbai",

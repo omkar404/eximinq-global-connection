@@ -122,7 +122,8 @@ function App() {
       <SEOManager />
       <Routes>
         {/* Charates Routes */}
-        <Route path="/charates" element={<Home />} />
+        <Route path="/charates" element={<Navigate to="/charates/" replace />} />
+        <Route path="/charates/" element={<Home />} />
         <Route path="/contact-us-support" element={<ContactSupport />} />
 
         {/* Corp Routes */}
