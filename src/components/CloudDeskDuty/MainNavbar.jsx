@@ -4,13 +4,12 @@ import BrandLogo from "../BrandLogo/BrandLogo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { navLinks } from "../../Common/navLinks";
 
-export const MainNavbar = ({ 
+export const MainNavbar = ({
   scrolled,
   isMenuOpen,
   setIsMenuOpen,
   setShowEnrollModal,
-}) => 
-  {
+}) => {
   return (
     <nav
       className={`fixed w-full z-40 transition-all duration-300 top-0 ${
@@ -70,9 +69,9 @@ export const MainNavbar = ({
             )
           )}
         </div>
+
         {/* Desktop buttons */}
         <div className="hidden md:flex items-center space-x-6">
-          {/* Contact Dropdown */}
           <div className="relative group hidden md:block">
             <div className="flex items-center gap-3 px-4 py-2 border border-blue-400 rounded-full cursor-pointer hover:bg-blue-50 transition">
               <Phone size={18} className="text-blue-600" />
@@ -136,7 +135,13 @@ export const MainNavbar = ({
           </div>
 
           <button
-            onClick={() => setShowEnrollModal(true)}
+            onClick={() =>
+              setShowEnrollModal({
+                open: true,
+                actionType: "Enroll Now",
+                source: "services/bis-registration",
+              })
+            }
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now

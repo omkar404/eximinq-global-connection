@@ -30,7 +30,7 @@ const Navbar = ({
           href="#contact"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
-          Apply Now
+          Get Customs Ready
         </a>
 
 

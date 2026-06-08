@@ -41,9 +41,9 @@ const NOTICES = [
   },
   {
     type: "Customs",
-    date: "27 Apr 2026",
-    title: "Instruction No. 06/2026-Customs",
-    desc: "Drawback for re-export of duty paid goods supplied by SEZ to DTA",
+    date: "02 Jun 2026",
+    title: "Instruction No. 07/2026-Customs",
+    desc: "Streamlining of mechanism for seeking clarification on interpretation of Foreign Trade Policy (FTP) provisions from DGFT.",
     color: "green",
   },
   // {
@@ -76,16 +76,16 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "19 May 2026",
-    title: "Trade Notice 03/2026-27",
-    desc: "Clarifications on Interest Subvention Support for Pre- and Post-Shipment Export Credit under Export Promotion Mission – Niryat Protsahan.",
+    date: "03 Jun 2026",
+    title: "Trade Notice 07/2026-27",
+    desc: "Request for comments on alignment of Schedule-II (Export Policy) of ITC (HS), 2022 consequent to amendments introduced under the Finance Act, 2026 – regarding.",
     color: "purple",
   },
   {
     type: "Public Notice",
-    date: "14 May 2026",
-    title: "Public Notice 11/2026-27",
-    desc: "Insertion of SION notes below the SIONs M1 to M8– reg.",
+    date: "04 Jun 2026",
+    title: "Public Notice 17/2026-27",
+    desc: "Enlistment under Appendix 2E of FTP, 2023-Agency Authorised to issue Certificate of Origin (Non-Preferential)-regarding.",
     color: "gray",
   },
 ];

@@ -93,6 +93,7 @@ import CloudDeskSVB from "./pages/CloudDeskSVB"
 import CloudDeskWarehouse from "./pages/CloudDeskWarehouse"
 import CloudDeskUN from "./pages/CloudDeskUN";
 import CloudDeskCA from "./pages/CloudDeskCA";
+import CloudDeskCustoms from "./pages/CloudDeskCustoms";
 import CloudDeskRodstep from "./pages/CloudDeskRodstep";
 import EximinqPharma from "./pages/EximinqPharma";
 import EximinqEngineering from "./pages/EximinqEngineering";
@@ -114,6 +115,7 @@ import CloudDeskEPRLanding from "./pages/CloudDeskEPRLanding";
 import CloudDeskFSSAILanding from "./pages/CloudDeskFSSAILanding";
 import CloudDeskEPCGLanding from "./pages/CloudDeskEPCGLanding";
 import CloudDeskAdvanceLanding from "./pages/CloudDeskAdvanceLanding";
+import CloudDeskDuty from "./pages/CloudDeskDuty.jsx";
 
 function App() {
   return (
@@ -376,10 +378,13 @@ function App() {
         {/* ca-certification-export-import */}
         <Route path="/services/ca-certification-export-import" element={<CloudDeskCA />} />
 
-        <Route
+        {/* <Route
           path="/services/customs-license-registration"
           element={<Navigate to="/services/epcg-scheme" replace />}
-        />
+        /> */}
+
+        {/* customs-license-registration  */}
+        <Route path="/services/customs-license-registration" element={<CloudDeskCustoms />} />
 
         {/* rodtep-rosctl-trading */}
         <Route path="/services/rodtep-rosctl-trading" element={<CloudDeskRodstep />} />
@@ -476,6 +481,9 @@ function App() {
         {/*advance-authorization-redemption Routes*/}
         <Route path="/advance-authorization-redemption" element={<CloudDeskAdvanceLanding />} />
 
+
+        {/*Customs Duty Calculator Routes*/}
+        <Route path="/duty-calculator" element={<CloudDeskDuty />} />
         {/* Thank You Page */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
