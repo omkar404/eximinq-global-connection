@@ -5,7 +5,7 @@ const uniipCertificationRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "UNIIP  Registration",
+      default: "UN IIP  Registration",
     },
     unNumber: {
       type: String,
@@ -57,6 +57,11 @@ const uniipCertificationRoutesSchema = new mongoose.Schema(
       trim: true,
     },
     category: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    subCategory: {          // ✅ NEW — Packaging Type (e.g. "1A1: Steel drum...")
       type: String,
       trim: true,
       default: null,

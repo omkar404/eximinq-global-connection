@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
-    
+
 /* EMAIL HELPER */
 async function sendEmail(record) {
   const {
@@ -25,6 +25,7 @@ async function sendEmail(record) {
     partner,
     type,
     category,
+    subCategory,   // ✅ ADDED
     issue,
     unNumber,
     packagingType,
@@ -45,6 +46,7 @@ async function sendEmail(record) {
           ${unNumber ? `<tr><td><b>UN Number / Name</b></td><td>${unNumber}</td></tr>` : ""}
           ${packagingType ? `<tr><td><b>Packaging Type</b></td><td>${packagingType}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
+          ${subCategory ? `<tr><td><b>Packaging Type (Selected)</b></td><td>${subCategory}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
@@ -76,9 +78,10 @@ exports.createuniipCertificationRoutes = async (req, res) => {
       partner,
       type,
       category,
+      subCategory,   // ✅ ADDED
       issue,
-      unNumber, // ✅ camelCase
-      packagingType, // ✅ camelCase
+      unNumber,
+      packagingType,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -93,8 +96,8 @@ exports.createuniipCertificationRoutes = async (req, res) => {
     const recordData = {
       service: service || "UNIIP Registration",
       mobile: mobile.trim(),
-      unNumber: unNumber ? unNumber.trim() : null, // ✅ use the correct variable
-      packagingType: packagingType ? packagingType.trim() : null, // ✅ use correct variable
+      unNumber: unNumber ? unNumber.trim() : null,
+      packagingType: packagingType ? packagingType.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
@@ -102,6 +105,7 @@ exports.createuniipCertificationRoutes = async (req, res) => {
       partner: isQuickForm ? false : Boolean(partner),
       type: type || "QUICK_FORM_COMPLIANCE",
       category: category || null,
+      subCategory: subCategory || null,   // ✅ ADDED
       issue: issue || null,
     };
 
@@ -121,7 +125,6 @@ exports.createuniipCertificationRoutes = async (req, res) => {
     });
   } catch (error) {
     console.error("❌ Server Error:", error);
-    // For debugging – show real error (remove in production)
     return res.status(500).json({
       success: false,
       message: error.message || "Server Error",
