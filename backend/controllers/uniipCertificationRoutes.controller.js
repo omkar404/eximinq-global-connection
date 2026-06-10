@@ -31,15 +31,15 @@ async function sendEmail(record) {
     packagingType,
   } = record;
 
-  const serviceDisplay = service || "UNIIP Registration";
+  const serviceDisplay = service || "UN IIP Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
-    subject: `UNIIP Registration — ${serviceDisplay}`,
+    subject: `UN IIP Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>UNIIP Registration</h2>
+        <h2>UN IIP Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
@@ -94,7 +94,7 @@ exports.createuniipCertificationRoutes = async (req, res) => {
     }
 
     const recordData = {
-      service: service || "UNIIP Registration",
+      service: service || "UN IIP Registration",
       mobile: mobile.trim(),
       unNumber: unNumber ? unNumber.trim() : null,
       packagingType: packagingType ? packagingType.trim() : null,
