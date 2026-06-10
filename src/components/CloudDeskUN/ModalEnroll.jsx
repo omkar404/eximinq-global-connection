@@ -12,6 +12,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   });
 
   const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -21,25 +22,91 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     UN_IIP_Coordination: {
       service: "UN IIP Coordination",
     },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
-    // },
   };
 
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
-  const isEnroll = type === "Enroll";
 
-  /* Only show category dropdown for IEC profile update (not for fee services) */
-  const showCategory = type === "IEC_PROFILE_UPDATE";
+  /* Show category dropdown for UN IIP Coordination */
+  const showCategory = type === "UN_IIP_Coordination";
 
-  /* Options for category (still available if needed) */
-  const IEC_OPTIONS = [
-    "NEW IEC REGISTRATION",
-    "IEC PROFILE UPDATATION",
-    "IEC ANNUAL UPDATE",
-    "IEC SUSPENSION",
+  /* Two-level UN IIP OPTIONS — label is used as the key */
+  const UN_IIP_CATEGORIES = [
+    {
+      label: "Drums (Code: 1) - Cylindrical packagings with flat or convex heads",
+      options: [
+        "1A1: Steel drum, non-removable head (tight head)",
+        "1A2: Steel drum, removable head (open head)",
+        "1B1: Aluminum drum, non-removable head",
+        "1B2: Aluminum drum, removable head",
+        "1D: Plywood drum",
+        "1G: Fibre drum",
+        "1H1: Plastic drum, non-removable head",
+        "1H2: Plastic drum, removable head",
+        "1N1: Metal drum (other than steel/aluminum), non-removable head",
+        "1N2: Metal drum (other than steel/aluminum), removable head",
+      ],
+    },
+    {
+      label: "Wooden Barrels (Code: 2) - Originally for wooden barrels (largely obsolete/reserved in modern usage)",
+      options: [
+        "2C1: Wooden barrel, bung type",
+        "2C2: Wooden barrel, slack type",
+      ],
+    },
+    {
+      label: "Jerricans (Code: 3) - Rectangular or polygonal cross-section containers (often used for fuels/chemicals)",
+      options: [
+        "3A1: Steel jerrican, non-removable head",
+        "3A2: Steel jerrican, removable head",
+        "3B1: Aluminum jerrican, non-removable head",
+        "3B2: Aluminum jerrican, removable head",
+        "3H1: Plastic jerrican, non-removable head",
+        "3H2: Plastic jerrican, removable head",
+      ],
+    },
+    {
+      label: "Boxes (Code: 4) - Rectangular containers with solid sides",
+      options: [
+        "4A: Steel box",
+        "4B: Aluminum box",
+        "4C1: Natural wood box, ordinary",
+        "4C2: Natural wood box, with sift-proof walls",
+        "4D: Plywood box",
+        "4F: Reconstituted wood box",
+        "4G: Fibreboard box (Most common cardboard carton for dangerous goods)",
+        "4H1: Plastic box, expanded",
+        "4H2: Plastic box, solid",
+        "4N: Metal box (other than steel/aluminum)",
+      ],
+    },
+    {
+      label: "Bags (Code: 5) - Flexible packaging made of paper, plastic film, textiles, etc.",
+      options: [
+        "5H1: Woven plastic bag, unlined",
+        "5H2: Woven plastic bag, sift-proof",
+        "5H3: Woven plastic bag, water-resistant",
+        "5H4: Plastic film bag",
+        "5L1: Textile bag, unlined",
+        "5L2: Textile bag, sift-proof",
+        "5L3: Textile bag, water-resistant",
+        "5M1: Paper bag, multi-wall",
+        "5M2: Paper bag, multi-wall, water-resistant",
+      ],
+    },
+    {
+      label: "Composite Packaging (Code: 6) - Consists of an inner receptacle and an outer packaging (single unit)",
+      options: [
+        "6HA1: Plastic inner receptacle with Steel outer drum",
+        "6HA2: Plastic inner receptacle with Steel outer crate/box",
+        "6HG1: Plastic inner receptacle with Fibre outer drum",
+        "6HG2: Plastic inner receptacle with Fibreboard outer box",
+      ],
+    },
   ];
+
+  /* Find selected category using label as key */
+  const selectedCategoryData = UN_IIP_CATEGORIES.find((c) => c.label === category);
 
   const resetForm = () => {
     setForm({
@@ -51,6 +118,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       partner: false,
     });
     setCategory("");
+    setSubCategory("");
     setIssue("");
   };
 
@@ -69,13 +137,19 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     }));
   };
 
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+    setSubCategory(""); // reset sub-category when category changes
+  };
+
   const validate = () => {
     const newErrors = {};
     if (!form.name.trim()) newErrors.name = "Name is required.";
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-    // No category validation for fee services
+    if (showCategory && !category) newErrors.category = "Please select a packaging category.";
+    if (showCategory && category && !subCategory) newErrors.subCategory = "Please select a packaging type.";
     return newErrors;
   };
 
@@ -97,7 +171,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         role: form.role,
         partner: form.partner,
         type: finalType,
-        category: category || "",   // will be empty for fee services
+        category: category || "",
+        subCategory: subCategory || "",
         issue: issue || "",
         service: predefinedService || finalType,
       };
@@ -109,8 +184,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/un-iip-certification`,
-        // "http://localhost:5000/api/un-iip-certification",
+        // `${process.env.REACT_APP_API_URL}/api/un-iip-certification`,
+        "http://localhost:5000/api/un-iip-certification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -161,6 +236,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         {/* BODY */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
+
             {/* NAME + MOBILE */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -263,24 +339,66 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             )}
 
-            {/* CATEGORY DROPDOWN - ONLY FOR IEC_PROFILE_UPDATE */}
+            {/* STEP 1: PACKAGING CATEGORY — full label shown, full label stored as value */}
             {showCategory && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Category
+                  Packaging Category
                 </label>
                 <select
                   value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 text-sm"
+                  onChange={handleCategoryChange}
+                  className={`w-full p-3 rounded-lg border text-sm outline-none ${
+                    errors.category
+                      ? "border-red-400"
+                      : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+                  }`}
                 >
                   <option value="">Select Category</option>
-                  {IEC_OPTIONS.map((option) => (
-                    <option key={option}>{option}</option>
+                  {UN_IIP_CATEGORIES.map((cat) => (
+                    <option key={cat.label} value={cat.label}>
+                      {cat.label}
+                    </option>
                   ))}
                 </select>
                 {errors.category && (
                   <p className="text-xs text-red-500 mt-1">{errors.category}</p>
+                )}
+              </div>
+            )}
+
+            {/* SELECTED CATEGORY DISPLAY BOX */}
+            {showCategory && category && (
+              <div className="bg-indigo-50 border border-indigo-200 rounded-lg px-4 py-2">
+                <p className="text-xs font-bold text-indigo-700 uppercase mb-0.5">Selected Category</p>
+                <p className="text-sm text-indigo-900 font-medium">{category}</p>
+              </div>
+            )}
+
+            {/* STEP 2: PACKAGING TYPE SUB-DROPDOWN */}
+            {showCategory && category && selectedCategoryData && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Packaging Type
+                </label>
+                <select
+                  value={subCategory}
+                  onChange={(e) => setSubCategory(e.target.value)}
+                  className={`w-full p-3 rounded-lg border text-sm outline-none ${
+                    errors.subCategory
+                      ? "border-red-400"
+                      : "border-gray-300 focus:ring-2 focus:ring-teal-500"
+                  }`}
+                >
+                  <option value="">Select Packaging Type</option>
+                  {selectedCategoryData.options.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+                {errors.subCategory && (
+                  <p className="text-xs text-red-500 mt-1">{errors.subCategory}</p>
                 )}
               </div>
             )}
