@@ -22,7 +22,7 @@ const Fees = ({ setShowEnrollModal }) => {
           {/* Body */}
           <div className="p-8">
             <div className="text-4xl font-bold text-slate-900 mb-2">
-              ₹ 3,500
+              ₹ 7,500
             </div>
 
             <p className="text-slate-500 text-sm mb-6">
