@@ -111,7 +111,7 @@ const Calculator = ({
                     : "text-slate-500 hover:text-slate-700"
                 }`}
               >
-                Buy from Eximinq
+                Sell to Eximinq
               </button>
 
               <button
@@ -122,7 +122,7 @@ const Calculator = ({
                     : "text-slate-500 hover:text-slate-700"
                 }`}
               >
-                Sell to Eximinq
+                Buy from Eximinq
               </button>
             </div>
 
