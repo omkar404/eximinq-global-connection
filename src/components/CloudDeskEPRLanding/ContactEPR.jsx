@@ -191,7 +191,7 @@ export default function ContactEPR() {
         notifyEmails: [
           'crm@eximinq.com',
           'omkarmhetar100@gmail.com',
-          'yadavsheshnath236@gmail.com',
+          'sheshnathyadav1827499@gmail.com',
         ],
       };
 
