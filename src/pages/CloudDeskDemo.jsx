@@ -2918,6 +2918,7 @@ const StatusBadge = ({ status }) => {
     'Medium': 'bg-amber-100 text-amber-700 border-amber-200',
     'Online': 'bg-green-100 text-green-700 border-green-200',
     'Busy': 'bg-amber-100 text-amber-700 border-amber-200',
+    'Invoice Write-Off': 'bg-slate-100 text-slate-700 border-slate-300',
     'Unpaid': 'bg-red-50 text-red-700 border-red-200',
     'Open': 'bg-red-50 text-red-700 border-red-200',
     'Quote Required': 'bg-purple-100 text-purple-700 border-purple-200',
@@ -3186,6 +3187,7 @@ const InvoiceBillingDashboard = ({ invoices }) => {
 
     const totalDue = filteredInvoices.filter(i => i.status === 'Unpaid').reduce((acc, curr) => acc + curr.amount, 0);
     const totalPaid = filteredInvoices.filter(i => i.status === 'Paid').reduce((acc, curr) => acc + curr.amount, 0);
+    const totalWriteOff = filteredInvoices.filter(i => i.status === 'Invoice Write-Off').reduce((acc, curr) => acc + curr.amount, 0);
 
     return (
         <div className="space-y-6 animate-in fade-in">
@@ -3218,17 +3220,12 @@ const InvoiceBillingDashboard = ({ invoices }) => {
                     <h3 className="text-2xl font-bold text-red-600 mt-2">₹ {totalDue.toLocaleString()}</h3>
                 </div>
                 <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <p className="text-xs text-slate-500 uppercase font-bold">Collected (Filtered)</p>
+                    <p className="text-xs text-slate-500 uppercase font-bold">Paid (Filtered)</p>
                     <h3 className="text-2xl font-bold text-green-600 mt-2">₹ {totalPaid.toLocaleString()}</h3>
                 </div>
-                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-end">
-                    <div className="flex gap-2 items-end w-full h-12">
-                        {[40, 70, 30, 80, 50, 90, 60].map((h, i) => (
-                            <div key={i} className="flex-1 bg-blue-100 rounded-t h-full relative">
-                                <div className="absolute bottom-0 w-full bg-blue-600 rounded-t" style={{height: `${h}%`}}></div>
-                            </div>
-                        ))}
-                    </div>
+                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <p className="text-xs text-slate-500 uppercase font-bold">Invoice Write-Off (Filtered)</p>
+                    <h3 className="text-2xl font-bold text-slate-700 mt-2">₹ {totalWriteOff.toLocaleString()}</h3>
                 </div>
             </div>
 
@@ -3299,7 +3296,7 @@ const DashboardViewComponent = ({ requests, quotes, setActiveTab, openQuoteModal
         actions={<button onClick={() => setActiveTab('finance_billing')} className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200">View Invoices</button>} 
       />
       <StatCard title="Workforce" value={`${ADMIN_STATS.agentsOnline} Online`} subtext="Avg Productivity: 94%" icon={Users} color="purple" actions={<button onClick={() => setActiveTab('workforce')} className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200">Track Agents</button>} />
-      <StatCard title="Requests" value={requests.filter(r => r.status !== 'Completed').length} subtext="5 Critical SLA Risk" icon={Layers} color="amber" actions={<button onClick={() => setActiveTab('requests')} className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded hover:bg-amber-200">Board</button>} />
+      <StatCard title="Requests" value={requests.filter(r => !['Completed', 'Invoice Write-Off'].includes(r.status)).length} subtext="5 Critical SLA Risk" icon={Layers} color="amber" actions={<button onClick={() => setActiveTab('requests')} className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded hover:bg-amber-200">Board</button>} />
       <StatCard title="System Health" value={ADMIN_STATS.systemHealth} subtext="DGFT API: 42ms Latency" icon={Activity} />
     </div>
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -3411,7 +3408,7 @@ const RequestsViewComponent = ({ requests, openChat, setSelectedRequest, handleS
 
             {viewMode === 'active' ? (
                 <>
-                    <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 justify-between items-center"><div className="relative w-full md:w-80"><Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} /><input type="text" placeholder="Search requests..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" /></div><div className="flex items-center gap-2 w-full md:w-auto"><select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"><option value="All">All Categories</option><option value="Licensing">Licensing</option><option value="Transactional">Transactional</option><option value="Legal">Legal</option></select><select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"><option value="All">All Status</option><option value="Submitted">Submitted</option><option value="Needs Clarification">Clarification</option><option value="Completed">Completed</option></select></div></div>
+                    <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 justify-between items-center"><div className="relative w-full md:w-80"><Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} /><input type="text" placeholder="Search requests..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" /></div><div className="flex items-center gap-2 w-full md:w-auto"><select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"><option value="All">All Categories</option><option value="Licensing">Licensing</option><option value="Transactional">Transactional</option><option value="Legal">Legal</option></select><select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"><option value="All">All Status</option><option value="Submitted">Submitted</option><option value="Needs Clarification">Clarification</option><option value="Invoice Write-Off">Invoice Write-Off</option><option value="Completed">Completed</option></select></div></div>
                     <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden"><div className="overflow-x-auto"><table className="w-full text-sm text-left"><thead className="bg-slate-50 text-slate-500 uppercase text-xs font-bold tracking-wider"><tr><th className="px-6 py-4">Request ID</th><th className="px-6 py-4">Client</th><th className="px-6 py-4">Service</th><th className="px-6 py-4">Submission Time</th><th className="px-6 py-4">SLA Tracker</th><th className="px-6 py-4">Status</th><th className="px-6 py-4">Issuance</th><th className="px-6 py-4 text-right">Actions</th></tr></thead><tbody className="divide-y divide-slate-100">{filteredReqs.map(req => {const sla = calculateSlaStatus(req.submissionTime, req.slaHours); return (<tr key={req.id} className="hover:bg-blue-50/30 transition-colors"><td className="px-6 py-4 font-mono font-medium text-blue-600">{req.id}</td><td className="px-6 py-4"><div className="font-medium text-slate-800">{req.clientName}</div><div className="text-xs text-slate-500 font-mono">{req.clientId}</div></td><td className="px-6 py-4"><div className="text-slate-800">{req.service}</div><div className="text-xs text-slate-400">{req.category}</div></td><td className="px-6 py-4 text-xs text-slate-500">{new Date(req.submissionTime).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</td><td className="px-6 py-4"><span className={`text-[10px] font-bold px-2 py-0.5 rounded ${sla.color} border border-transparent`}>{sla.label}</span></td><td className="px-6 py-4"><StatusBadge status={req.status} /></td><td className="px-6 py-4 text-xs font-mono">{req.outputs?.[0]?.docNo || '-'}</td><td className="px-6 py-4 text-right"><div className="flex justify-end gap-2"><button onClick={() => openChat(req)} className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded"><MessageSquare size={16} /></button><button onClick={() => setSelectedRequest(req)} className="p-1.5 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded"><MoreVertical size={16} /></button></div></td></tr>);})}</tbody></table></div></div>
                 </>
             ) : (
@@ -3538,10 +3535,42 @@ export default function AdminPanel() {
   // --- HANDLERS ---
 
   const handleStatusChange = (reqId, newStatus) => {
+    const request = requests.find(r => r.id === reqId);
+
     setRequests(prev => prev.map(r => r.id === reqId ? { ...r, status: newStatus } : r));
     if (selectedRequest && selectedRequest.id === reqId) {
       setSelectedRequest(prev => ({ ...prev, status: newStatus }));
     }
+
+    setInvoices(prev => {
+      const existingInvoice = prev.find(inv => inv.reqNo === reqId);
+
+      if (newStatus !== 'Invoice Write-Off') {
+        return prev.filter(inv => !(inv.reqNo === reqId && inv.status === 'Invoice Write-Off' && inv.mode === 'Write-Off'));
+      }
+
+      if (!request) return prev;
+
+      const writeOffInvoice = {
+        id: existingInvoice?.id || `WO-${reqId.replace(/^REQ-/, '')}`,
+        client: request.clientName,
+        reqNo: request.id,
+        service: request.service,
+        category: request.category,
+        date: new Date().toISOString().slice(0, 10),
+        amount: request.cost || 0,
+        status: 'Invoice Write-Off',
+        mode: 'Write-Off',
+        dueDate: '-',
+        details: [{ item: 'Invoice Write-Off', cost: request.cost || 0 }]
+      };
+
+      if (existingInvoice) {
+        return prev.map(inv => inv.reqNo === reqId ? { ...inv, ...writeOffInvoice } : inv);
+      }
+
+      return [writeOffInvoice, ...prev];
+    });
   };
 
   const handleApproveQuote = (quote) => {
@@ -3847,7 +3876,7 @@ export default function AdminPanel() {
                 </div>
             )}
             </div>
-            <div className="space-y-4"><div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"><label className="text-sm font-bold text-slate-700 block mb-2">Update Status</label><select value={selectedRequest.status} onChange={(e) => handleStatusChange(selectedRequest.id, e.target.value)} className="w-full p-2.5 border border-slate-300 rounded-lg text-sm bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"><option value="Submitted">Submitted</option><option value="In Process">In Process</option><option value="Quote Requested">Quote Requested</option><option value="Approval Pending">Approval Pending</option><option value="Needs Clarification">Needs Clarification</option><option value="Completed">Completed</option></select>{selectedRequest.status === 'Needs Clarification' && (<div className="mt-4 animate-in fade-in"><label className="text-xs font-bold text-orange-700 mb-1 block">Required Details / Missing Docs</label><textarea value={clarificationNote} onChange={(e) => setClarificationNote(e.target.value)} className="w-full p-2 text-sm border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500 bg-orange-50 placeholder-orange-300" rows="3" placeholder="E.g., Please upload original EODC copy..." /></div>)}</div><div className="bg-blue-50 p-4 rounded-xl border border-blue-100"><h4 className="text-sm font-bold text-blue-800 mb-2">Admin Actions</h4><div className="flex flex-col gap-2"><button className="w-full bg-white border border-blue-200 text-blue-700 py-2 rounded font-medium text-xs hover:bg-blue-100">Generate Invoice</button><button className="w-full bg-white border border-blue-200 text-blue-700 py-2 rounded font-medium text-xs hover:bg-blue-100">Upload Output Doc</button></div></div><button onClick={() => setSelectedRequest(null)} className="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800">Save Changes</button></div>
+            <div className="space-y-4"><div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"><label className="text-sm font-bold text-slate-700 block mb-2">Update Status</label><select value={selectedRequest.status} onChange={(e) => handleStatusChange(selectedRequest.id, e.target.value)} className="w-full p-2.5 border border-slate-300 rounded-lg text-sm bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"><option value="Submitted">Submitted</option><option value="In Process">In Process</option><option value="Quote Requested">Quote Requested</option><option value="Approval Pending">Approval Pending</option><option value="Needs Clarification">Needs Clarification</option><option value="Invoice Write-Off">Invoice Write-Off</option><option value="Completed">Completed</option></select>{selectedRequest.status === 'Needs Clarification' && (<div className="mt-4 animate-in fade-in"><label className="text-xs font-bold text-orange-700 mb-1 block">Required Details / Missing Docs</label><textarea value={clarificationNote} onChange={(e) => setClarificationNote(e.target.value)} className="w-full p-2 text-sm border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500 bg-orange-50 placeholder-orange-300" rows="3" placeholder="E.g., Please upload original EODC copy..." /></div>)}</div><div className="bg-blue-50 p-4 rounded-xl border border-blue-100"><h4 className="text-sm font-bold text-blue-800 mb-2">Admin Actions</h4><div className="flex flex-col gap-2"><button className="w-full bg-white border border-blue-200 text-blue-700 py-2 rounded font-medium text-xs hover:bg-blue-100">Generate Invoice</button><button className="w-full bg-white border border-blue-200 text-blue-700 py-2 rounded font-medium text-xs hover:bg-blue-100">Upload Output Doc</button></div></div><button onClick={() => setSelectedRequest(null)} className="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800">Save Changes</button></div>
           </div>
         )}
       </Modal>

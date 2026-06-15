@@ -26,6 +26,8 @@
   },
   "scripts": {
     "dev": "react-scripts start",
+    "dev:frontend": "react-scripts start",
+    "dev:backend": "npm --prefix backend run start",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "build": "react-scripts build",
     "prebuild": "npm run generate:sitemap",
@@ -42,7 +44,7 @@
       "/services/advance-authorisation/",
       "/services",
       "/",
-      "/charates",
+      "/charates/",
       "/contact-us-support",
       "/corp",
       "/startup",
@@ -115,6 +117,7 @@
       "/services/warehouse-license",
       "/services/un-iip-certification",
       "/services/ca-certification-export-import",
+      "/services/customs-license-registration",
       "/services/rodtep-rosctl-trading",
       "/services/compliance-audit",
       "/pharmaceuticals-industry-import-export",
@@ -148,7 +151,8 @@
       "/strategic-solutions/epcg-closure-services",
       "/epr-annual-returns",
       "/fssai-annual-returns",
-      "/epcg-redemption"
+      "/epcg-redemption",
+      "/duty-calculator"
     ]
   },
   "eslintConfig": {

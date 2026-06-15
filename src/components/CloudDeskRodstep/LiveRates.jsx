@@ -15,8 +15,6 @@ const RateCard = ({
   tag,
   buy,
   sell,
-  effectiveRate,
-  actionType,
   onAction,
 }) => {
   return (
@@ -34,7 +32,7 @@ const RateCard = ({
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-green-50 border border-green-100 rounded-2xl p-4 text-center">
           <span className="text-green-600 text-sm font-bold uppercase block mb-1">
-            We Buy At
+            EXIMINQ BUYING RATE
           </span>
           <span className="text-3xl font-extrabold text-slate-900">
             {formatRate(buy)}
@@ -44,7 +42,7 @@ const RateCard = ({
 
         <div className="bg-red-50 border border-red-100 rounded-2xl p-4 text-center">
           <span className="text-red-600 text-sm font-bold uppercase block mb-1">
-            We Sell At
+            EXIMINQ SELLING RATE
           </span>
           <span className="text-3xl font-extrabold text-slate-900">
             {formatRate(sell)}
@@ -53,18 +51,25 @@ const RateCard = ({
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-slate-600 text-center">
-        Calculate Your Scrip Value at{" "}
-        <span className="font-semibold text-slate-800">{formatRate(effectiveRate)}%</span>{" "}
-        ({actionType === "SELL" ? "We Buy Rate" : "We Sell Rate"})
-      </p>
+      <div className="mt-4 space-y-1 text-sm text-slate-600 text-center">
+        <p>
+          Calculate Your Scrip Value at{" "}
+          <span className="font-semibold text-slate-800">{formatRate(buy)}%</span>{" "}
+          (We Buy Rate)
+        </p>
+        <p>
+          Calculate Your Scrip Value at{" "}
+          <span className="font-semibold text-slate-800">{formatRate(sell)}%</span>{" "}
+          (We Sell Rate)
+        </p>
+      </div>
 
       <div className="mt-6">
         <button
           onClick={onAction}
           className="w-full bg-slate-900 text-white py-3 rounded-xl font-semibold hover:bg-slate-800 transition shadow-lg"
         >
-          {actionType === "SELL" ? "Sell" : "Buy"} {title} Scrip
+          Check {title} Value Now
         </button>
       </div>
     </div>
@@ -79,10 +84,6 @@ const LiveRates = ({ onSellClick }) => {
   const handleRefresh = () => {
     setSelectedSlab(SLABS[0]);
     setLastUpdated(new Date());
-  };
-
-  const getEffectiveRate = (rates) => {
-    return actionType === "SELL" ? rates.buy : rates.sell;
   };
 
   return (
@@ -137,8 +138,6 @@ const LiveRates = ({ onSellClick }) => {
             tag="Scrip"
             buy={selectedSlab.rates.rodtep.buy}
             sell={selectedSlab.rates.rodtep.sell}
-            effectiveRate={getEffectiveRate(selectedSlab.rates.rodtep)}
-            actionType={actionType}
             onAction={() => onSellClick?.("RODTEP", actionType)}
           />
 
@@ -148,8 +147,6 @@ const LiveRates = ({ onSellClick }) => {
             tag="Scrip"
             buy={selectedSlab.rates.rosctl.buy}
             sell={selectedSlab.rates.rosctl.sell}
-            effectiveRate={getEffectiveRate(selectedSlab.rates.rosctl)}
-            actionType={actionType}
             onAction={() => onSellClick?.("ROSCTL", actionType)}
           />
         </div>

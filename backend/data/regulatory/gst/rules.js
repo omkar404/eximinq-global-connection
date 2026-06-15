@@ -1,0 +1,31 @@
+module.exports = [
+  {
+    id: "gst-rule-1",
+    type: "rules",
+    ruleName: "Central Goods and Services Tax Rules, 2017",
+    ruleSet: "Central Goods and Services Tax Rules, 2017",
+    ruleNumber: "Rule 1",
+    number: "Rule 1",
+    chapter: "Chapter I",
+    title: "Short title, extent and commencement",
+    description: "Sets out the title, extent and commencement of the rules.",
+    financialYear: "2025-26",
+    pdfUrl: "https://taxinformation.cbic.gov.in/view-pdf/1001460/ENG/Rules",
+    htmlUrl: "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/rules_index.htm",
+  },
+  {
+    id: "gst-rule-2",
+    type: "rules",
+    ruleName: "Central Goods and Services Tax Rules, 2017",
+    ruleSet: "Central Goods and Services Tax Rules, 2017",
+    ruleNumber: "Rule 32",
+    number: "Rule 32",
+    chapter: "Chapter IV",
+    title: "Determination of value in respect of certain supplies",
+    description: "Explains valuation methods for specified categories of supply.",
+    financialYear: "2025-26",
+    pdfUrl: "https://taxinformation.cbic.gov.in/view-pdf/1001460/ENG/Rules",
+    htmlUrl: "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/rules_index.htm",
+  },
+];
+

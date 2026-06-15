@@ -100,6 +100,7 @@ const serviceQuickFormLeadRoutes = require("./routes/serviceQuickFormLead.routes
 const brandCopyrightRoutes = require("./routes/brandCopyrightRoutes.routes");
 const logoCopyrightRoutes = require("./routes/logoCopyrightRoutes.routes");
 const epcgSchemeRoutes = require("./routes/epcgSchemeRoutes.routes");
+const gstRegulatoryRoutes = require("./routes/gstRegulatory.route");
 
 // ✅ FTP — require at top with other requires
 const ftpService = require("./services/foreigntradepolicy.service.js");
@@ -160,13 +161,31 @@ const ServiceEnquiry = mongoose.model("ServiceEnquiry", new mongoose.Schema({
 }));
 
 const RodtepRosctlTrading = mongoose.model("RodtepRosctlTrading", new mongoose.Schema({
+  name:        { type: String, default: null, trim: true },
   companyName: { type: String, required: true, trim: true },
   scheme:      { type: String, enum: ["RODTEP", "RoSCTL"], required: true },
   action:      { type: String, enum: ["Selling", "Buying"], required: true },
   mobile:      { type: String, required: true, trim: true },
   email:       { type: String, default: null, lowercase: true, trim: true },
+  icegateId:   { type: String, default: null, trim: true },
+  iecNo:       { type: String, default: null, trim: true },
+  quoteDetails:{ type: mongoose.Schema.Types.Mixed, default: null },
   source:      { type: String, default: "website" },
 }, { timestamps: true }));
+
+const isValidEmail = (value) =>
+  !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value).trim());
+
+const normalizeMobile = (value) => String(value || "").replace(/[^\d]/g, "");
+
+const validateQuoteDetails = (quoteDetails) => {
+  if (quoteDetails == null) return { valid: true, value: null };
+  if (typeof quoteDetails !== "object" || Array.isArray(quoteDetails)) {
+    return { valid: false, error: "quoteDetails must be an object or null" };
+  }
+
+  return { valid: true, value: quoteDetails };
+};
 
 /* ─────────────────────────────────────────────
    EMAIL TRANSPORTER
@@ -282,19 +301,58 @@ app.post("/api/enquiry/services", async (req, res) => {
 
 app.post("/api/rodtep-rosctl-trading", async (req, res) => {
   try {
-    const { companyName, scheme, action, mobile, email } = req.body;
-    if (!companyName || !scheme || !action || !mobile)
+    const { name, companyName, scheme, action, mobile, email, icegateId, iecNo, quoteDetails } = req.body;
+    if (!companyName || !scheme || !action || !mobile) {
       return res.status(400).json({ success: false, error: "companyName, scheme, action and mobile are required" });
-    const saved = await RodtepRosctlTrading.create({ companyName, scheme, action, mobile, email: email || null });
+    }
+
+    if (!["RODTEP", "RoSCTL"].includes(scheme)) {
+      return res.status(400).json({ success: false, error: "scheme must be either RODTEP or RoSCTL" });
+    }
+
+    if (!["Selling", "Buying"].includes(action)) {
+      return res.status(400).json({ success: false, error: "action must be either Selling or Buying" });
+    }
+
+    const cleanMobile = normalizeMobile(mobile);
+    if (cleanMobile.length < 10 || cleanMobile.length > 15) {
+      return res.status(400).json({ success: false, error: "mobile must contain 10 to 15 digits" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ success: false, error: "email is invalid" });
+    }
+
+    const quoteValidation = validateQuoteDetails(quoteDetails);
+    if (!quoteValidation.valid) {
+      return res.status(400).json({ success: false, error: quoteValidation.error });
+    }
+
+    const saved = await RodtepRosctlTrading.create({
+      name: name ? String(name).trim() : null,
+      companyName: String(companyName).trim(),
+      scheme,
+      action,
+      mobile: cleanMobile,
+      email: email ? String(email).trim().toLowerCase() : null,
+      icegateId: icegateId ? String(icegateId).trim() : null,
+      iecNo: iecNo ? String(iecNo).trim() : null,
+      quoteDetails: quoteValidation.value
+    });
     await transporter.sendMail({
       from: `"Contact Trading" <${process.env.SMTP_USER}>`,
       to: "crm@eximinq.com, omkarmhetar100@gmail.com",
       subject: `New ${scheme} Trading Request`,
       html: `<h2>${scheme} Trading Request</h2>
+        <p><strong>Name:</strong> ${name || "Not provided"}</p>
         <p><strong>Company:</strong> ${companyName}</p>
         <p><strong>Action:</strong> ${action}</p>
         <p><strong>Mobile:</strong> ${mobile}</p>
         <p><strong>Email:</strong> ${email || "Not provided"}</p>
+        <p><strong>ICEGATE ID:</strong> ${icegateId || "Not provided"}</p>
+        <p><strong>IEC No:</strong> ${iecNo || "Not provided"}</p>
+        <p><strong>Quote Details:</strong></p>
+        <pre>${JSON.stringify(quoteDetails || {}, null, 2)}</pre>
         <p><strong>Submitted (IST):</strong> ${formattedDateTime}</p>`
     });
     res.json({ success: true, id: saved._id });
@@ -424,6 +482,10 @@ app.get("/api/customs/:type", (req, res) => {
   } catch (error) { res.status(500).json({ success: false, error: error.message }); }
 });
 
+app.get("/api/customs/amendment-history", (_req, res) => {
+  res.json({ success: true, count: 0, data: [] });
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString(), service: "Customs API" });
 });
@@ -448,6 +510,7 @@ startWatcher(); // DGFT
 
 // ✅ FTP route
 app.use("/api/ftp", ftpRoutes);
+app.use("/api/gst", gstRegulatoryRoutes);
 
 
 

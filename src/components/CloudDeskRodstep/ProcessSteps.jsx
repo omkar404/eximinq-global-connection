@@ -51,7 +51,7 @@ const ProcessSteps = () => {
           <Step
             icon={<FileCheck size={32} />}
             title="2. Transfer Scrip"
-            description="Securely transfer your e-scrips to our registered DGFT ledger details."
+            description="Securely transfer your e-scrips to our registered ICEGATE ledger details."
           />
 
           <Step

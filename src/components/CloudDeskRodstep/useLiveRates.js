@@ -22,6 +22,9 @@ const useLiveRates = () => {
   const [calcAmount, setCalcAmount] = useState(100000);
   const [calcType, setCalcType] = useState("buy");
   const [calcScheme, setCalcScheme] = useState("rodtep");
+  const [buyRows, setBuyRows] = useState([
+    { id: 1, scripNo: "", scripDate: "", port: "", scripValue: 127000 },
+  ]);
 
   const selectedSlab = useMemo(() => getSlabByAmount(Number(calcAmount) || 0), [calcAmount]);
 
@@ -38,6 +41,27 @@ const useLiveRates = () => {
     return formatCurrency(total);
   };
 
+  const getRowRate = (scripValue) => {
+    const slab = getSlabByAmount(Number(scripValue) || 0);
+    if (!slab) return 0;
+    return slab.rates[calcScheme].buy;
+  };
+
+  const getRowComputedValue = (scripValue) => {
+    const numericValue = Number(scripValue) || 0;
+    return (numericValue * getRowRate(numericValue)) / 100;
+  };
+
+  const buySummary = useMemo(() => {
+    const totalFaceValue = buyRows.reduce((sum, row) => sum + (Number(row.scripValue) || 0), 0);
+    const totalQuoteValue = buyRows.reduce((sum, row) => sum + getRowComputedValue(row.scripValue), 0);
+
+    return {
+      totalFaceValue,
+      totalQuoteValue,
+    };
+  }, [buyRows, calcScheme]);
+
   return {
     rates: SLABS[0].rates,
     calcAmount,
@@ -48,6 +72,12 @@ const useLiveRates = () => {
     setCalcScheme,
     appliedRate,
     calculateTotal,
+    buyRows,
+    setBuyRows,
+    getRowRate,
+    getRowComputedValue,
+    buySummary,
+    formatCurrency,
   };
 };
 

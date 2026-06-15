@@ -230,7 +230,7 @@ const ModalEnrollSaas = ({ show, onClose, type, plan, billing, price, onSubmit }
             {(isEnroll) && (
               <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
                 <p className="text-sm text-yellow-800">
-                  You are on the list! We will contact you before May 15, 2026.
+                  You are on the list! We will contact you before August 15, 2026.
                 </p>
               </div>
             )}

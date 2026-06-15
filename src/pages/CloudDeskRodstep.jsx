@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 
 import {Navbar} from "../components/CloudDeskRodstep/Navbar";
 import SecondaryNavbar from "../components/CloudDeskRodstep/SecondaryNavbar";
@@ -21,9 +21,9 @@ import {
 } from "lucide-react";
 const CloudDeskRodstep = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [quoteDetails, setQuoteDetails] = useState(null);
 
   const {
-    rates,
     calcAmount,
     setCalcAmount,
     calcType,
@@ -32,7 +32,23 @@ const CloudDeskRodstep = () => {
     setCalcScheme,
     calculateTotal,
     appliedRate,
+    buyRows,
+    setBuyRows,
+    getRowRate,
+    getRowComputedValue,
+    buySummary,
+    formatCurrency,
   } = useLiveRates();
+
+  const selectedAction = calcType === "buy" ? "Buying" : "Selling";
+  const selectedScheme = calcScheme === "rodtep" ? "RODTEP" : "RoSCTL";
+
+  const rates = useMemo(() => {
+    return {
+      rodtep: { buy: 97.25, sell: 99.05 },
+      rosctl: { buy: 97.15, sell: 98.75 },
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -44,12 +60,44 @@ const CloudDeskRodstep = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleQuoteRequest = () => {
+    const nextQuoteDetails =
+      calcType === "buy"
+        ? {
+            action: selectedAction,
+            scheme: selectedScheme,
+            rows: buyRows.map((row) => ({
+              ...row,
+              rate: getRowRate(row.scripValue),
+              quoteValue: getRowComputedValue(row.scripValue),
+            })),
+            totalFaceValue: formatCurrency(buySummary.totalFaceValue),
+            totalQuoteValue: formatCurrency(buySummary.totalQuoteValue),
+          }
+        : {
+            action: selectedAction,
+            scheme: selectedScheme,
+            faceValue: formatCurrency(calcAmount),
+            appliedRate: `${Number(appliedRate).toFixed(2)}%`,
+            totalQuoteValue: calculateTotal(),
+          };
+
+    setQuoteDetails(nextQuoteDetails);
+    scrollToSection("contact");
+  };
+
+  const handleLiveRateAction = (scheme, actionType) => {
+    setCalcScheme(String(scheme).toLowerCase() === "rosctl" ? "rosctl" : "rodtep");
+    setCalcType(String(actionType).toLowerCase() === "buy" ? "buy" : "sell");
+    scrollToSection("calculator");
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar scrolled={scrolled} />
       <SecondaryNavbar scrollToSection={scrollToSection} />
       <Hero onViewRates={() => scrollToSection("rates")} />
-      <LiveRates rates={rates} />
+      <LiveRates rates={rates} onSellClick={handleLiveRateAction} />
       <ProcessSteps />
       <Features />
       <Calculator
@@ -62,9 +110,19 @@ const CloudDeskRodstep = () => {
         setCalcScheme={setCalcScheme}
         calculateTotal={calculateTotal}
         appliedRate={appliedRate}
+        buyRows={buyRows}
+        setBuyRows={setBuyRows}
+        getRowRate={getRowRate}
+        getRowComputedValue={getRowComputedValue}
+        buySummary={buySummary}
+        onSendQuote={handleQuoteRequest}
       />
       <InfoSection />
-      <ContactCTA />
+      <ContactCTA
+        selectedAction={selectedAction}
+        selectedScheme={selectedScheme}
+        quoteDetails={quoteDetails}
+      />
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
