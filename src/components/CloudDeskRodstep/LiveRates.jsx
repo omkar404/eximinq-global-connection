@@ -3,8 +3,7 @@ import { RefreshCw } from "lucide-react";
 import { SLABS } from "./slabs";
 
 const formatRange = (slab) => {
-  if (!slab.max) return "Rs 15,00,000 and above";
-  return slab.label;
+  return slab?.label ?? "";
 };
 
 const formatRate = (value) => Number(value).toFixed(2);
@@ -55,12 +54,12 @@ const RateCard = ({
         <p>
           Calculate Your Scrip Value at{" "}
           <span className="font-semibold text-slate-800">{formatRate(buy)}%</span>{" "}
-          (We Buy Rate)
+          (Eximinq Buy Rate)
         </p>
         <p>
           Calculate Your Scrip Value at{" "}
           <span className="font-semibold text-slate-800">{formatRate(sell)}%</span>{" "}
-          (We Sell Rate)
+          (Eximinq Sell Rate)
         </p>
       </div>
 
@@ -101,7 +100,7 @@ const LiveRates = ({ onSellClick }) => {
             <p className="text-sm text-slate-600 mt-1">
               Script Value Between:{" "}
               <span className="font-semibold text-slate-800">
-                {formatRange(selectedSlab)}
+                {formatRange(selectedSlab)}drop down which shown in image slaps update in and even the rates will update as per the selected range
               </span>
             </p>
           </div>
