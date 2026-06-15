@@ -100,7 +100,7 @@ const LiveRates = ({ onSellClick }) => {
             <p className="text-sm text-slate-600 mt-1">
               Script Value Between:{" "}
               <span className="font-semibold text-slate-800">
-                {formatRange(selectedSlab)}drop down which shown in image slaps update in and even the rates will update as per the selected range
+                {formatRange(selectedSlab)}
               </span>
             </p>
           </div>
