@@ -101,7 +101,7 @@
 
 //     await transporter.sendMail({
 //       from: `"ICEGATE Registration" <${process.env.SMTP_USER}>`,
-//       to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
+//       to: "crm@eximinq.com, omkarmhetar100@gmail.com, sheshnathyadav1827499@gmail.com",
 //       subject: "New ICEGATE Request",
 //       html: `
 //         <h2>New ICEGATE Registration Request</h2>
@@ -163,7 +163,7 @@
 
 //   await transporter.sendMail({
 //     from:    `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-//     to:      "yadavsheshnath236@gmail.com",
+//     to:      "sheshnathyadav1827499@gmail.com",
 //     subject: `New ICEGATE Registration — ${service}`,
 //     html: `
 //       <h3>New ICEGATE Registration Request</h3>
@@ -310,7 +310,7 @@ async function sendEmail(record) {
   await transporter.sendMail({
    
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to: "crm@eximinq.com, omkarmhetar100@gmail.com, yadavsheshnath236@gmail.com",
+    to: "crm@eximinq.com, omkarmhetar100@gmail.com, sheshnathyadav1827499@gmail.com",
     subject: `New ICEGATE Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">

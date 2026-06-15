@@ -33,7 +33,7 @@ export default function QuickEPCG() {
       const payload = {
         ...formData,
         type: "QUICK_FORM",
-        notifyEmails: ["crm@eximinq.com", "omkarmhetar100@gmail.com", "yadavsheshnath236@gmail.com"],
+        notifyEmails: ["crm@eximinq.com", "omkarmhetar100@gmail.com", "sheshnathyadav1827499@gmail.com"],
       };
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/epcg-redemption`,
