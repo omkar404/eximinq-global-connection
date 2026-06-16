@@ -109,16 +109,147 @@ const ftpRoutes  = require("./routes/ftp.route");
 /* ─────────────────────────────────────────────
    IST DATE/TIME
 ───────────────────────────────────────────── */
-const nowIST = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-const d = new Date(nowIST);
-const day   = d.getDate().toString().padStart(2, "0");
-const month = (d.getMonth() + 1).toString().padStart(2, "0");
-const year  = d.getFullYear();
-let hours   = d.getHours();
-let minutes = d.getMinutes().toString().padStart(2, "0");
-let ampm    = hours >= 12 ? "pm" : "am";
-hours = (hours % 12 || 12).toString().padStart(2, "0");
-const formattedDateTime = `${day}/${month}/${year}, ${hours}:${minutes} ${ampm}`;
+const formatISTDateTime = (date = new Date()) => {
+  const parts = new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  }).formatToParts(date);
+
+  const lookup = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${lookup.day} ${lookup.month} ${lookup.year}, ${lookup.hour}:${lookup.minute}:${lookup.second} ${String(lookup.dayPeriod || "").toUpperCase()} IST`;
+};
+
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+const formatCurrencyINR = (value) => {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return value ?? "-";
+
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  }).format(numericValue);
+};
+
+const formatPercentValue = (value) => {
+  if (value === null || value === undefined || value === "") return "-";
+  if (typeof value === "string" && value.includes("%")) return value;
+
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return String(value);
+  return `${numericValue.toFixed(2)}%`;
+};
+
+const normalizeQuoteDetails = (quoteDetails) => {
+  if (!quoteDetails) return null;
+
+  const baseDetails = {
+    scheme: quoteDetails.scheme || null,
+    action: quoteDetails.action || null,
+  };
+
+  if (Array.isArray(quoteDetails.rows) && quoteDetails.rows.length > 0) {
+    return {
+      ...baseDetails,
+      type: "portfolio",
+      rows: quoteDetails.rows.map((row, index) => ({
+        lineNo: index + 1,
+        scripNo: row.scripNo || null,
+        scripDate: row.scripDate || null,
+        port: row.port || null,
+        scripValue: formatCurrencyINR(row.scripValue),
+        rate: formatPercentValue(row.rate),
+        quoteValue: formatCurrencyINR(row.quoteValue),
+      })),
+      totals: {
+        totalFaceValue: quoteDetails.totalFaceValue || formatCurrencyINR(0),
+        totalQuoteValue: quoteDetails.totalQuoteValue || formatCurrencyINR(0),
+      },
+    };
+  }
+
+  return {
+    ...baseDetails,
+    type: "single",
+    faceValue: quoteDetails.faceValue || formatCurrencyINR(0),
+    appliedRate: formatPercentValue(quoteDetails.appliedRate),
+    totalQuoteValue: quoteDetails.totalQuoteValue || formatCurrencyINR(0),
+  };
+};
+
+const buildQuoteDetailsEmailHtml = (normalizedQuoteDetails) => {
+  if (!normalizedQuoteDetails) {
+    return "<p><strong>Quote Details:</strong> Not provided</p>";
+  }
+
+  const summaryHtml = `
+    <p><strong>Scheme:</strong> ${escapeHtml(normalizedQuoteDetails.scheme || "-")}</p>
+    <p><strong>Action:</strong> ${escapeHtml(normalizedQuoteDetails.action || "-")}</p>
+  `;
+
+  if (normalizedQuoteDetails.type === "portfolio") {
+    const rowsHtml = normalizedQuoteDetails.rows
+      .map(
+        (row) => `
+          <tr>
+            <td style="padding:10px;border:1px solid #dbe3f0;">${row.lineNo}</td>
+            <td style="padding:10px;border:1px solid #dbe3f0;">${escapeHtml(row.scripNo || "-")}</td>
+            <td style="padding:10px;border:1px solid #dbe3f0;">${escapeHtml(row.scripDate || "-")}</td>
+            <td style="padding:10px;border:1px solid #dbe3f0;">${escapeHtml(row.port || "-")}</td>
+            <td style="padding:10px;border:1px solid #dbe3f0;">${escapeHtml(row.scripValue)}</td>
+            <td style="padding:10px;border:1px solid #dbe3f0;">${escapeHtml(row.rate)}</td>
+            <td style="padding:10px;border:1px solid #dbe3f0;">${escapeHtml(row.quoteValue)}</td>
+          </tr>
+        `
+      )
+      .join("");
+
+    return `
+      <p><strong>Quote Details:</strong></p>
+      ${summaryHtml}
+      <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;">
+        <thead>
+          <tr style="background:#f4f7fb;text-align:left;">
+            <th style="padding:10px;border:1px solid #dbe3f0;">#</th>
+            <th style="padding:10px;border:1px solid #dbe3f0;">Scrip No</th>
+            <th style="padding:10px;border:1px solid #dbe3f0;">Scrip Date</th>
+            <th style="padding:10px;border:1px solid #dbe3f0;">Port</th>
+            <th style="padding:10px;border:1px solid #dbe3f0;">Face Value</th>
+            <th style="padding:10px;border:1px solid #dbe3f0;">Rate</th>
+            <th style="padding:10px;border:1px solid #dbe3f0;">Quote Value</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+      <p style="margin-top:12px;"><strong>Total Face Value:</strong> ${escapeHtml(normalizedQuoteDetails.totals.totalFaceValue)}</p>
+      <p><strong>Total Quote Value:</strong> ${escapeHtml(normalizedQuoteDetails.totals.totalQuoteValue)}</p>
+    `;
+  }
+
+  return `
+    <p><strong>Quote Details:</strong></p>
+    ${summaryHtml}
+    <p><strong>Face Value:</strong> ${escapeHtml(normalizedQuoteDetails.faceValue)}</p>
+    <p><strong>Applied Rate:</strong> ${escapeHtml(normalizedQuoteDetails.appliedRate)}</p>
+    <p><strong>Total Quote Value:</strong> ${escapeHtml(normalizedQuoteDetails.totalQuoteValue)}</p>
+  `;
+};
+
+const formattedDateTime = formatISTDateTime();
 
 /* ─────────────────────────────────────────────
    APP INIT  ← sab kuch yahan ke BAAD
@@ -328,6 +459,8 @@ app.post("/api/rodtep-rosctl-trading", async (req, res) => {
       return res.status(400).json({ success: false, error: quoteValidation.error });
     }
 
+    const normalizedQuoteDetails = normalizeQuoteDetails(quoteValidation.value);
+
     const saved = await RodtepRosctlTrading.create({
       name: name ? String(name).trim() : null,
       companyName: String(companyName).trim(),
@@ -351,12 +484,33 @@ app.post("/api/rodtep-rosctl-trading", async (req, res) => {
         <p><strong>Email:</strong> ${email || "Not provided"}</p>
         <p><strong>ICEGATE ID:</strong> ${icegateId || "Not provided"}</p>
         <p><strong>IEC No:</strong> ${iecNo || "Not provided"}</p>
-        <p><strong>Quote Details:</strong></p>
-        <pre>${JSON.stringify(quoteDetails || {}, null, 2)}</pre>
-        <p><strong>Submitted (IST):</strong> ${formattedDateTime}</p>`
+        ${buildQuoteDetailsEmailHtml(normalizedQuoteDetails)}
+        <p><strong>Submitted (IST):</strong> ${formatISTDateTime(saved.createdAt)}</p>`
     });
-    res.json({ success: true, id: saved._id });
-  } catch (err) { res.status(500).json({ success: false, error: "Internal server error" }); }
+
+    res.json({
+      success: true,
+      message: `${scheme} ${action.toLowerCase()} request submitted successfully.`,
+      data: {
+        id: saved._id,
+        name: saved.name,
+        companyName: saved.companyName,
+        scheme: saved.scheme,
+        action: saved.action,
+        mobile: saved.mobile,
+        email: saved.email,
+        icegateId: saved.icegateId,
+        iecNo: saved.iecNo,
+        quoteDetails: normalizedQuoteDetails,
+        submittedAt: {
+          iso: saved.createdAt.toISOString(),
+          ist: formatISTDateTime(saved.createdAt),
+        },
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
 });
 
 /* ── DGFT ── */

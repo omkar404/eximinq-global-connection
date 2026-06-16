@@ -372,15 +372,24 @@ const TradeSolutionsDefense = () => {
 
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-80 z-10" />
-              <img
-                src={
+              <div
+                className={`rounded-sm shadow-lg w-full h-64 border overflow-hidden relative ${
                   activeTab === "import"
-                    ? "https://images.unsplash.com/photo-1542259682-1c05d094f06f?auto=format&fit=crop&q=80" 
-                    : "https://images.unsplash.com/photo-1578635811029-7c85848c4149?auto=format&fit=crop&q=80"
-                }
-                alt="Defense Logistics"
-                className="rounded-sm shadow-lg w-full h-64 object-cover grayscale opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-              />
+                    ? "border-blue-900 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950"
+                    : "border-emerald-900 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950"
+                }`}
+              >
+                <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(148,163,184,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.25)_1px,transparent_1px)] [background-size:28px_28px]" />
+                <div className={`absolute -right-6 top-8 h-28 w-28 rounded-full blur-3xl ${activeTab === "import" ? "bg-blue-400/35" : "bg-emerald-400/35"}`} />
+                <div className="absolute inset-x-5 bottom-5 z-20 rounded-sm border border-slate-700/70 bg-black/40 px-4 py-4 backdrop-blur">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-slate-400">
+                    {activeTab === "import" ? "Supply Shield" : "Offset Command"}
+                  </p>
+                  <p className="mt-2 text-xl font-black text-white">
+                    {activeTab === "import" ? "Mission inventory secured" : "Export controls monitored"}
+                  </p>
+                </div>
+              </div>
               <div className="absolute bottom-4 left-4 z-20">
                 <div className="flex items-center gap-2 text-xs font-mono text-white bg-black/50 px-2 py-1 rounded-sm border border-slate-600">
                   <Activity className="w-3 h-3 text-emerald-500" />

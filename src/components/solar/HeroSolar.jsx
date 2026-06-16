@@ -1,5 +1,4 @@
 import { 
-  Sun,
   Zap,
   ChevronRight,
   TrendingUp,
@@ -8,12 +7,6 @@ import {
 } from "lucide-react";
 
 const HeroSolar = () => {
-  const handleImageError = (e) => {
-    e.target.onerror = null;
-    e.target.src =
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=1600";
-  };
-
   return (
     <section
       id="home"
@@ -22,12 +15,9 @@ const HeroSolar = () => {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-sky-900/40 to-amber-500/20 z-10" />
-        <img
-          src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=2000"
-          alt="Solar Power Plant"
-          className="w-full h-full object-cover"
-          onError={handleImageError}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(251,191,36,0.28),transparent_20%),radial-gradient(circle_at_80%_30%,rgba(56,189,248,0.18),transparent_24%),linear-gradient(135deg,#0f172a_0%,#11355c_45%,#945f17_100%)]" />
+        <div className="absolute left-12 top-20 h-24 w-24 rounded-full border border-amber-200/40 bg-amber-300/10 shadow-[0_0_50px_rgba(251,191,36,0.2)]" />
+        <div className="absolute right-24 bottom-16 h-44 w-44 rounded-full border border-sky-200/20 bg-sky-300/10 blur-2xl" />
       </div>
 
       {/* Content */}

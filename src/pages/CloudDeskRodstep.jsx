@@ -117,12 +117,13 @@ const CloudDeskRodstep = () => {
         buySummary={buySummary}
         onSendQuote={handleQuoteRequest}
       />
-      <InfoSection />
+      {/* <InfoSection /> */}
       <ContactCTA
         selectedAction={selectedAction}
         selectedScheme={selectedScheme}
         quoteDetails={quoteDetails}
       />
+      <InfoSection />
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

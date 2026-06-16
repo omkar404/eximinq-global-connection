@@ -78,7 +78,7 @@ const tradeSolutions = {
   },
 };
 
-const TradeSolutionsAgro = ({ activeTab, setActiveTab, handleImageError }) => {
+const TradeSolutionsAgro = ({ activeTab, setActiveTab }) => {
 
   const renderCard = (item) => (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-stone-100 hover:border-green-200 hover:shadow-md transition-all">
@@ -195,16 +195,29 @@ const TradeSolutionsAgro = ({ activeTab, setActiveTab, handleImageError }) => {
               </p>
             </div>
 
-            <img
-              src={
+            <div
+              className={`relative overflow-hidden rounded-2xl border shadow-lg w-full h-64 ${
                 activeTab === "import"
-                  ? "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80"
-                  : "https://images.unsplash.com/photo-1595246140625-573b715d11dc?auto=format&fit=crop&q=80"
-              }
-              alt="Agro Logistics"
-              className="rounded-2xl shadow-lg w-full h-64 object-cover border border-stone-200"
-              onError={handleImageError}
-            />
+                  ? "border-green-200 bg-gradient-to-br from-emerald-100 via-white to-lime-100"
+                  : "border-amber-200 bg-gradient-to-br from-amber-100 via-white to-orange-100"
+              }`}
+            >
+              <div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.38)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.38)_1px,transparent_1px)] [background-size:28px_28px]" />
+              <div className={`absolute -right-10 top-6 h-36 w-36 rounded-full blur-3xl ${activeTab === "import" ? "bg-green-300/50" : "bg-amber-300/50"}`} />
+              <div className={`absolute left-6 bottom-6 rounded-2xl px-5 py-4 shadow-sm ${activeTab === "import" ? "bg-white/90 text-green-900" : "bg-white/90 text-amber-900"}`}>
+                <p className="text-xs font-bold uppercase tracking-[0.18em]">
+                  {activeTab === "import" ? "Inbound Control" : "Outbound Assurance"}
+                </p>
+                <p className="mt-2 text-2xl font-extrabold">
+                  {activeTab === "import" ? "Cold Chain Ready" : "Export Margin Protected"}
+                </p>
+                <p className="mt-2 text-sm font-medium opacity-80">
+                  {activeTab === "import"
+                    ? "FSSAI, quarantine and storage checkpoints aligned."
+                    : "Incentives, certificates and foreign acceptance streamlined."}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Right cards — ✅ wrapped in Link */}

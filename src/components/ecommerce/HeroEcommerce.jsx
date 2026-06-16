@@ -7,12 +7,6 @@ import {
 } from "lucide-react";
 
 const HeroEcommerce = () => {
-  const handleImageError = (e) => {
-    e.target.onerror = null;
-    e.target.src =
-      "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=2000";
-  };
-
   return (
     <section
       id="home"
@@ -21,13 +15,9 @@ const HeroEcommerce = () => {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-violet-900/90 to-orange-500/80 z-10" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 z-10" />
-        <img
-          src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&q=80&w=2000"
-          alt="Ecommerce Logistics"
-          className="w-full h-full object-cover mix-blend-multiply"
-          onError={handleImageError}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.14),transparent_18%),radial-gradient(circle_at_80%_25%,rgba(251,191,36,0.24),transparent_22%),linear-gradient(135deg,#4c1d95_0%,#7c3aed_40%,#ea580c_100%)]" />
+        <div className="absolute inset-0 opacity-15 [background-image:linear-gradient(rgba(255,255,255,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.22)_1px,transparent_1px)] [background-size:30px_30px]" />
+        <div className="absolute left-10 bottom-10 h-48 w-48 rounded-full bg-orange-300/20 blur-3xl" />
       </div>
 
       {/* Content */}

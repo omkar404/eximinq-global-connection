@@ -145,15 +145,29 @@ const TradeSolutionsSolar = () => {
               </p>
             </div>
 
-            <img
-              src={
+            <div
+              className={`relative overflow-hidden rounded-2xl shadow-lg w-full h-64 border ${
                 activeTab === "import"
-                  ? "https://images.unsplash.com/photo-1545208942-e0c451af7c98?auto=format&fit=crop&q=80"
-                  : "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80"
-              }
-              alt="Renewable Energy"
-              className="rounded-2xl shadow-lg w-full h-64 object-cover border border-slate-200"
-            />
+                  ? "border-amber-200 bg-gradient-to-br from-amber-50 via-white to-sky-100"
+                  : "border-sky-200 bg-gradient-to-br from-sky-50 via-white to-emerald-100"
+              }`}
+            >
+              <div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(148,163,184,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.18)_1px,transparent_1px)] [background-size:30px_30px]" />
+              <div className={`absolute top-6 right-8 h-24 w-24 rounded-full ${activeTab === "import" ? "bg-amber-300/50" : "bg-sky-300/50"} blur-2xl`} />
+              <div className="absolute inset-x-5 bottom-5 rounded-2xl bg-white/85 px-5 py-4 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
+                  {activeTab === "import" ? "Project Imports" : "Green Exports"}
+                </p>
+                <p className="mt-2 text-2xl font-extrabold text-slate-900">
+                  {activeTab === "import" ? "ALMM & BIS Ready" : "Carbon Value Optimized"}
+                </p>
+                <p className="mt-2 text-sm font-medium text-slate-600">
+                  {activeTab === "import"
+                    ? "Critical components mapped to duty, compliance and manufacturing benefits."
+                    : "Renewable shipments aligned for incentives and global market access."}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Cards - Updated with Link components */}

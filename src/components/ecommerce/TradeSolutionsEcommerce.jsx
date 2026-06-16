@@ -154,15 +154,29 @@ const TradeSolutionsEcommerce = () => {
               </div>
             </div>
 
-            <img
-              src={
+            <div
+              className={`relative overflow-hidden rounded-3xl shadow-xl w-full h-80 border ${
                 activeTab === "import"
-                  ? "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80"
-                  : "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80"
-              }
-              alt="E-commerce Logistics"
-              className="rounded-3xl shadow-xl w-full h-80 object-cover"
-            />
+                  ? "border-violet-200 bg-gradient-to-br from-violet-100 via-white to-fuchsia-100"
+                  : "border-orange-200 bg-gradient-to-br from-orange-100 via-white to-amber-100"
+              }`}
+            >
+              <div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(148,163,184,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.18)_1px,transparent_1px)] [background-size:30px_30px]" />
+              <div className={`absolute right-8 top-8 h-24 w-24 rounded-full blur-2xl ${activeTab === "import" ? "bg-violet-300/55" : "bg-orange-300/55"}`} />
+              <div className="absolute inset-x-6 bottom-6 rounded-3xl bg-white/88 px-6 py-5 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
+                  {activeTab === "import" ? "Courier Imports" : "Cross-Border Exports"}
+                </p>
+                <p className="mt-2 text-3xl font-black text-slate-900">
+                  {activeTab === "import" ? "Parcel flow without customs friction" : "Brand expansion with refund control"}
+                </p>
+                <p className="mt-2 text-sm font-medium text-slate-600">
+                  {activeTab === "import"
+                    ? "KYC, de minimis checks and bonded fulfillment kept in sync."
+                    : "CSB-V, GST reconciliation and marketplace standards mapped together."}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Right Cards - Updated with Links */}

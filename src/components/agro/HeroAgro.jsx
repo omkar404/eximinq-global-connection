@@ -1,12 +1,6 @@
 import { Wheat, ChevronRight, Utensils, Sun, CheckCircle } from "lucide-react";
 
 const HeroAgro = () => {
-  const handleImageError = (e) => {
-    e.target.onerror = null;
-    e.target.src =
-      "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=2000";
-  };
-
   return (
     <section
       id="home"
@@ -15,12 +9,10 @@ const HeroAgro = () => {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-green-900/60 to-transparent z-10" />
-        <img
-          src="https://images.unsplash.com/photo-1625246333195-58197bd47d26?auto=format&fit=crop&q=80&w=2000"
-          alt="Agriculture Field"
-          className="w-full h-full object-cover"
-          onError={handleImageError}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(251,191,36,0.26),_transparent_26%),linear-gradient(135deg,_#163020_0%,_#2f5233_45%,_#7c6a2f_100%)]" />
+        <div className="absolute -right-16 top-14 h-64 w-64 rounded-full bg-amber-300/15 blur-3xl" />
+        <div className="absolute left-1/3 bottom-0 h-56 w-56 rounded-full bg-green-400/10 blur-3xl" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,transparent_0%,rgba(15,23,42,0.1)_20%,rgba(120,113,54,0.55)_100%)]" />
       </div>
 
       {/* Content */}

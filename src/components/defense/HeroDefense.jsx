@@ -5,23 +5,15 @@ import {
   FileKey,
   Radar
 } from "lucide-react";
-  const handleImageError = (e) => {
-    e.target.onerror = null; 
-    e.target.src = "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&q=80&w=800";
-  };
 
 const HeroDefense = () => {
   return (
       <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-blue-950/40 z-10"></div>
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 z-10"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1559627755-667dc004dd2b?auto=format&fit=crop&q=80&w=2000" 
-            alt="Aerospace Technology" 
-            className="w-full h-full object-cover grayscale opacity-60"
-            onError={handleImageError}
-          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(59,130,246,0.18),transparent_18%),radial-gradient(circle_at_85%_20%,rgba(16,185,129,0.12),transparent_24%),linear-gradient(135deg,#020617_0%,#0f172a_45%,#172554_100%)]"></div>
+          <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(148,163,184,0.28)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.28)_1px,transparent_1px)] [background-size:32px_32px]"></div>
+          <div className="absolute right-10 top-16 h-72 w-72 rounded-full border border-blue-400/20 bg-blue-500/10 blur-3xl" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

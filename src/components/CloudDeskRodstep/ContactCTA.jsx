@@ -34,6 +34,86 @@ const getApiBase = () => {
   return raw || "http://localhost:5000";
 };
 
+const renderFieldValue = (value) => value || "Not provided";
+
+const QuoteDetailsSummary = ({ quoteDetails }) => {
+  if (!quoteDetails) return null;
+
+  if (quoteDetails.type === "portfolio") {
+    return (
+      <div className="space-y-4">
+        <div className="grid gap-3 md:grid-cols-2">
+          <SummaryLine label="Scheme" value={quoteDetails.scheme} />
+          <SummaryLine label="Action" value={quoteDetails.action} />
+          <SummaryLine
+            label="Total Face Value"
+            value={quoteDetails.totals?.totalFaceValue}
+          />
+          <SummaryLine
+            label="Total Quote Value"
+            value={quoteDetails.totals?.totalQuoteValue}
+          />
+        </div>
+
+        <div className="overflow-x-auto rounded-2xl border border-emerald-100">
+          <table className="min-w-full text-sm">
+            <thead className="bg-emerald-50 text-slate-700">
+              <tr>
+                <th className="px-3 py-3 text-left font-semibold">#</th>
+                <th className="px-3 py-3 text-left font-semibold">Scrip No</th>
+                <th className="px-3 py-3 text-left font-semibold">Scrip Date</th>
+                <th className="px-3 py-3 text-left font-semibold">Port</th>
+                <th className="px-3 py-3 text-left font-semibold">Face Value</th>
+                <th className="px-3 py-3 text-left font-semibold">Rate</th>
+                <th className="px-3 py-3 text-left font-semibold">Quote Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {quoteDetails.rows?.map((row) => (
+                <tr key={`${row.lineNo}-${row.scripNo || "row"}`} className="border-t border-emerald-100 bg-white">
+                  <td className="px-3 py-3">{row.lineNo}</td>
+                  <td className="px-3 py-3">{renderFieldValue(row.scripNo)}</td>
+                  <td className="px-3 py-3">{renderFieldValue(row.scripDate)}</td>
+                  <td className="px-3 py-3">{renderFieldValue(row.port)}</td>
+                  <td className="px-3 py-3">{renderFieldValue(row.scripValue)}</td>
+                  <td className="px-3 py-3">{renderFieldValue(row.rate)}</td>
+                  <td className="px-3 py-3">{renderFieldValue(row.quoteValue)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-3 md:grid-cols-2">
+      <SummaryLine label="Scheme" value={quoteDetails.scheme} />
+      <SummaryLine label="Action" value={quoteDetails.action} />
+      <SummaryLine label="Face Value" value={quoteDetails.faceValue} />
+      <SummaryLine label="Applied Rate" value={quoteDetails.appliedRate} />
+      <SummaryLine
+        label="Total Quote Value"
+        value={quoteDetails.totalQuoteValue}
+      />
+    </div>
+  );
+};
+
+function SummaryLine({ label, value }) {
+  return (
+    <div className="rounded-xl bg-white/80 px-4 py-3">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+        {label}
+      </p>
+      <p className="mt-1 text-sm font-semibold text-slate-900">
+        {renderFieldValue(value)}
+      </p>
+    </div>
+  );
+}
+
 const ContactCTA = ({
   selectedAction = "Selling",
   selectedScheme = "RODTEP",
@@ -50,6 +130,7 @@ const ContactCTA = ({
     action: selectedAction,
   });
   const [loading, setLoading] = useState(false);
+  const [submissionResult, setSubmissionResult] = useState(null);
 
   useEffect(() => {
     setForm((previous) => ({
@@ -113,7 +194,7 @@ const ContactCTA = ({
         throw new Error(data.error || "API failed");
       }
 
-      alert("Request submitted successfully");
+      setSubmissionResult(data.data || null);
       setForm((previous) => ({
         ...previous,
         name: "",
@@ -125,6 +206,7 @@ const ContactCTA = ({
       }));
     } catch (error) {
       console.error("Submit error:", error);
+      setSubmissionResult(null);
       alert("Submission failed. Please try again.");
     } finally {
       setLoading(false);
@@ -290,6 +372,41 @@ const ContactCTA = ({
             >
               {loading ? "Submitting..." : actionCopy.button}
             </button>
+
+            {submissionResult && (
+              <div className="rounded-[1.5rem] border border-emerald-200 bg-emerald-50 p-5">
+                <div className="flex flex-col gap-2 border-b border-emerald-200 pb-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">
+                    Submission Received
+                  </p>
+                  <h4 className="text-xl font-bold text-slate-900">
+                    Quote request submitted successfully
+                  </h4>
+                  <p className="text-sm text-slate-600">
+                    Request ID: {submissionResult.id}
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Submitted (IST): {submissionResult.submittedAt?.ist || "Not available"}
+                  </p>
+                </div>
+
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  <SummaryLine label="Contact Name" value={submissionResult.name} />
+                  <SummaryLine label="Company Name" value={submissionResult.companyName} />
+                  <SummaryLine label="Mobile Number" value={submissionResult.mobile} />
+                  <SummaryLine label="Email ID" value={submissionResult.email} />
+                  <SummaryLine label="Icegate ID" value={submissionResult.icegateId} />
+                  <SummaryLine label="IEC No" value={submissionResult.iecNo} />
+                </div>
+
+                <div className="mt-5 rounded-2xl border border-emerald-100 bg-white/70 p-4">
+                  <p className="text-sm font-bold text-slate-900 mb-3">
+                    Quote Details
+                  </p>
+                  <QuoteDetailsSummary quoteDetails={submissionResult.quoteDetails} />
+                </div>
+              </div>
+            )}
           </form>
         </div>
       </div>

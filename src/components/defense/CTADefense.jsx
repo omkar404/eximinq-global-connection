@@ -3,7 +3,8 @@ import React from "react";
 const CTADefense = ({setShowEnrollModal}) => {
   return (
     <section className="py-20 bg-blue-900 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')] opacity-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(96,165,250,0.28),transparent_22%),linear-gradient(135deg,#1d4ed8_0%,#1e3a8a_50%,#0f172a_100%)]" />
+      <div className="absolute inset-0 opacity-15 [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:26px_26px]" />
 
       <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
