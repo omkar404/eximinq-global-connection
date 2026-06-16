@@ -98,8 +98,8 @@ export const ModalEnroll = ({
       console.log("📤 Final payload:", payload);
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/defense-aerospace-industry-import-export`,
-        "http://localhost:5000/api/defense-aerospace-industry-import-export",
+        `${process.env.REACT_APP_API_URL}/api/defense-aerospace-industry-import-export`,
+        // "http://localhost:5000/api/defense-aerospace-industry-import-export",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
