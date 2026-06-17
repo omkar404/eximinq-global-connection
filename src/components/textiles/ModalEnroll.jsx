@@ -94,8 +94,8 @@ export const ModalEnroll = ({
       console.log("📤 Final payload:", payload);
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/textiles-apparels-industry-import-export`,
-        "http://localhost:5000/api/textiles-apparels-industry-import-export",
+        `${process.env.REACT_APP_API_URL}/api/textiles-apparels-industry-import-export`,
+        // "http://localhost:5000/api/textiles-apparels-industry-import-export",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
