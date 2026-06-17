@@ -188,8 +188,8 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/svb-registration`,
-        "http://localhost:5000/api/svb-registration", // fallback for local dev
+        `${process.env.REACT_APP_API_URL}/api/svb-registration`,
+        // "http://localhost:5000/api/svb-registration", // fallback for local dev
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
