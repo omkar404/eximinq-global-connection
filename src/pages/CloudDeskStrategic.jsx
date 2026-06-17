@@ -896,7 +896,7 @@ export default function StrategicSolutions() {
             </a>
 
             <a
-              href="/services/no-due-certificate"
+              href="/services/no-incentive-certificate"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white p-4 rounded-lg shadow-sm border border-slate-200 text-center hover:border-indigo-500 transition block"
