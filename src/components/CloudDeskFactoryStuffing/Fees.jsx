@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 
 const Fees = ({setShowEnrollModal}) => {
   return (
-    <section id="contact" className="py-20 bg-industrial-50">
+    <section id="fees" className="py-20 bg-industrial-50">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-logistics-900 mb-8">
           Professional Services

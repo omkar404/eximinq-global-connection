@@ -10,21 +10,29 @@ const Navbar = ({
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-                <a href="#about" class="hover:text-brand-600 transition">What is GeM?</a>
-                <a href="#types" class="hover:text-brand-600 transition">OEM vs Reseller</a>
-                <a href="#assessment" class="hover:text-brand-600 transition">Vendor Assessment</a>
+                <a href="#about" class="hover:text-brand-600 transition">What is FSP?</a>
+                <a href="#methods" class="hover:text-brand-600 transition">Methods (RFID/Officer)</a>
+                <a href="#benefits" class="hover:text-brand-600 transition">Benefits</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#fees" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-<button
+{/* <button
   onClick={() => setShowEnrollModal(true)}
   className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
 >
-  Register Now
-</button>
+  Get Permission
+</button> */}
+
+            <a
+              href="#fees"
+              className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+            >
+              Get Permission
+            </a>
 
 
         {/* MOBILE MENU BUTTON */}
@@ -40,15 +48,15 @@ const Navbar = ({
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
           <a href="#home" class="hover:text-brand-600 transition">Home</a>
-            <a href="#about" class="block py-2 text-slate-600">What is GeM?</a>
-            <a href="#types" class="block py-2 text-slate-600">OEM vs Reseller</a>
-            <a href="#assessment" class="block py-2 text-slate-600">Vendor Assessment</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Register Now</a>
+            <a href="#about" class="block py-2 text-slate-600">What is FSP?</a>
+            <a href="#types" class="block py-2 text-slate-600">Methods (RFID/Officer)</a>
+            <a href="#assessment" class="block py-2 text-slate-600">Benefits</a>
+            <a href="#contact" class="block py-2 text-brand-600 font-bold">Process</a>
           <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
-             Register Now
+             Get Permission
           </a>
         </div>
       )}
