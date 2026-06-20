@@ -25,9 +25,18 @@ import { BiRegistered } from "react-icons/bi";
 const CloudDeskBarcode = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    actionType: "",
-    source: "services/barcode-registration",
+    type: "",
+    // source: "services/barcode-registration",
   });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+      // TODO → send API call
+      // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.")
+  }
   
   return (
     <div className="bg-slate-50 text-slate-800">
@@ -36,20 +45,13 @@ const CloudDeskBarcode = () => {
       {/* <TopBar /> */}
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
-
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type="barcode_registration_enroll"
-        actionType={showEnrollModal.actionType}
-        source={showEnrollModal.source}
-        onClose={() =>
-          setShowEnrollModal({
-            open: false,
-            actionType: "",
-            source: "services/barcode-registration",
-          })
-        }
-      />
+      
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 

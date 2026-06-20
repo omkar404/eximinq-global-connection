@@ -12,7 +12,7 @@ const Fees = ({setShowEnrollModal}) => {
         {/* Card */}
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
           <div className="bg-brand-800 text-white py-4">
-            <h3 className="text-xl font-bold">Registration Assistance</h3>
+            <h3 className="text-xl font-bold">Bar Code Registration</h3>
             <p className="text-sm opacity-80">Full GS1 Support</p>
           </div>
 
@@ -59,7 +59,7 @@ const Fees = ({setShowEnrollModal}) => {
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
-                    type: "Registration_Assistance",
+                    type: "Bar_Code_Registration",
                   })
                 }
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
