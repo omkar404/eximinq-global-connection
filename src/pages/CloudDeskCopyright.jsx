@@ -29,8 +29,8 @@ const CloudDeskCopyright = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
     type: "",
-    actionType: "",
-    source: "services/copyright-registration",
+    type: "",
+    // source: "services/copyright-registration",
   });
 
   const handleEnrollmentSubmit = (formData) => {
@@ -138,16 +138,8 @@ const CloudDeskCopyright = () => {
       <ModalEnroll
         show={showEnrollModal.open}
         type={showEnrollModal.type}
-        actionType={showEnrollModal.actionType}
-        source={showEnrollModal.source}
-        onClose={() =>
-          setShowEnrollModal({
-            open: false,
-            type: "",
-            actionType: "",
-            source: "services/copyright-registration",
-          })
-        }
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}

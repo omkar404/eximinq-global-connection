@@ -53,7 +53,7 @@ const Fees = ({setShowEnrollModal}) => {
             >
               File Application
             </a> */}
-            <button
+            {/* <button
                 onClick={() =>
                   setShowEnrollModal({
                     open: true,
@@ -65,6 +65,18 @@ const Fees = ({setShowEnrollModal}) => {
                 className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
               >
                 File Application
+          </button> */}
+
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Copyright_Filing",
+                  })
+                }
+                className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
+              >
+                Start Audit
           </button>
           </div>
         </div>

@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-const SUBMIT_TYPE = "Check Feasibility";
-const SOURCE = "services/copyright-registration";
-
 const QuickForm = () => {
   const [form, setForm] = useState({
     workType: "",
@@ -23,7 +20,7 @@ const QuickForm = () => {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
 
-    // Clear field error on typing
+    // Clear that field's error on typing
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
@@ -34,8 +31,13 @@ const QuickForm = () => {
     const newErrors = {};
 
     if (!form.workType) {
-      newErrors.workType = "Please select a work type";
+      newErrors.workType = "Please select work type";
     }
+
+    if (!form.title) {
+      newErrors.title = "Please select title";
+    }
+
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -46,13 +48,14 @@ const QuickForm = () => {
   };
 
   /*----------------------
-    SUBMIT HANDLER (API CALL)
+    SUBMIT HANDLER
   -----------------------*/
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validate();
     setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length > 0) return;
 
     setLoading(true);
@@ -62,8 +65,7 @@ const QuickForm = () => {
         workType: form.workType,
         title: form.title,
         mobile: form.mobile,
-        type: SUBMIT_TYPE,
-        source: SOURCE,
+        type: "QUICK_FORM",
       };
 
       console.log("📤 Sending data:", payload);
@@ -75,7 +77,7 @@ const QuickForm = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const data = await response.json();
@@ -84,14 +86,10 @@ const QuickForm = () => {
         throw new Error(data.error || data.message || "Something went wrong");
       }
 
-      alert("✅ Work assessment submitted successfully");
+      alert("✅ Work assessment submitted successfully.");
 
       // Reset form
-      setForm({
-        workType: "",
-        title: "",
-        mobile: "",
-      });
+      setForm({ workType: "",title: "", mobile: "" });
     } catch (err) {
       console.error("❌ Error:", err);
       alert(`❌ Submission failed: ${err.message}`);
@@ -102,7 +100,7 @@ const QuickForm = () => {
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-legal-900 mb-2">
+      <h3 className="text-2xl font-bold text-scan-900 mb-2">
         Work Assessment
       </h3>
       <p className="text-slate-500 mb-6 text-sm">
@@ -110,7 +108,7 @@ const QuickForm = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
-        {/* Type of Work */}
+        {/* Number of SKUs */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
             Type of Work
@@ -119,11 +117,13 @@ const QuickForm = () => {
             name="workType"
             value={form.workType}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
               errors.workType ? "border-red-500" : "border-slate-300"
             }`}
           >
-            <option value="">Select type</option>
+            <option value="" disabled>
+              Select type
+            </option>
             <option>Literary (Books / Software Code)</option>
             <option>Artistic (Logo / Design)</option>
             <option>Cinematograph Film (Video)</option>
@@ -153,7 +153,7 @@ const QuickForm = () => {
         {/* Mobile Number */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Mobile Number
+            Mobile Number <span className="text-red-500"></span>
           </label>
           <input
             type="tel"
@@ -181,11 +181,10 @@ const QuickForm = () => {
               : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+          {loading ? "Submitting..." : "Check Feasibility"}
         </button>
       </form>
     </div>
   );
 };
-
 export default QuickForm;
