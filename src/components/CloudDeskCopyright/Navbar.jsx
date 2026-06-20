@@ -25,7 +25,15 @@ const Navbar = ({
 >
   File Copyright
 </button> */}
-          <button
+
+        <a 
+          href="#contact"
+          className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 
+             text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
+        >
+          File Copyright
+        </a>
+          {/* <button
             onClick={() =>
               setShowEnrollModal({
                 open: true,
@@ -38,7 +46,7 @@ const Navbar = ({
              text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
           >
              File Copyright
-          </button>
+          </button> */}
 
         {/* MOBILE MENU BUTTON */}
         <button
