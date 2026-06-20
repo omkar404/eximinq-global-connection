@@ -1,17 +1,12 @@
 import { useState } from "react";
-import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
-
-const DEFAULT_FORM = {
-  skus: "",
-  turnover: "",
-  mobile: "",
-};
-
-const SUBMIT_TYPE = "See Packages";
-const SOURCE = "services/barcode-registration";
 
 const QuickForm = () => {
-  const [form, setForm] = useState(DEFAULT_FORM);
+  const [form, setForm] = useState({
+    skus: "",
+    turnover: "",
+    mobile: "",
+  });
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -19,61 +14,85 @@ const QuickForm = () => {
     const { name, value } = e.target;
 
     if (name === "mobile") {
-      setForm((prev) => ({ ...prev, [name]: value.replace(/\D/g, "").slice(0, 10) }));
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
 
+    // Clear that field's error on typing
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  /*----------------------
+    VALIDATION
+  -----------------------*/
   const validate = () => {
-    const nextErrors = {};
+    const newErrors = {};
 
     if (!form.skus) {
-      nextErrors.skus = "Please select SKU volume";
+      newErrors.skus = "Please select SKU volume";
     }
 
     if (!form.turnover) {
-      nextErrors.turnover = "Please select company turnover";
+      newErrors.turnover = "Please select company turnover";
     }
 
     if (!form.mobile) {
-      nextErrors.mobile = "Mobile number is required";
+      newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
-      nextErrors.mobile = "Enter valid 10 digit Indian mobile number";
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
     }
 
-    return nextErrors;
+    return newErrors;
   };
 
+  /*----------------------
+    SUBMIT HANDLER
+  -----------------------*/
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setLoading(true);
 
     try {
-      setLoading(true);
-      await submitServiceQuickForm({
-        serviceKey: "barcode-registration",
-        serviceLabel: "Barcode Registration",
+      const payload = {
+        skus: form.skus,
+        turnover: form.turnover,
         mobile: form.mobile,
-        type: SUBMIT_TYPE,
-        source: SOURCE,
-        details: {
-          "SKU Volume": form.skus,
-          "Company Turnover": form.turnover,
-        },
-      });
+        type: "QUICK_FORM",
+      };
 
-      alert("We will send the barcode package details to you shortly.");
-      setForm(DEFAULT_FORM);
-      setErrors({});
-    } catch (error) {
-      console.error("Barcode quick form error:", error);
-      alert("Submission failed. Please try again.");
+      console.log("📤 Sending data:", payload);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/barcode-registration`,
+        // "http://localhost:5000/api/barcode-registration", // ✅ http:// is required
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || data.message || "Something went wrong");
+      }
+
+      alert("✅ We will send the barcode package details to you shortly.");
+
+      // Reset form
+      setForm({ skus: "", turnover: "", mobile: "" });
+    } catch (err) {
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -89,6 +108,7 @@ const QuickForm = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Number of SKUs */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
             Number of SKUs (Products)
@@ -98,29 +118,38 @@ const QuickForm = () => {
             value={form.skus}
             onChange={handleChange}
             className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.skus ? "border-red-400" : "border-slate-300"
+              errors.skus ? "border-red-500" : "border-slate-300"
             }`}
           >
-            <option value="">Select</option>
+            <option value="" disabled>
+              Select
+            </option>
             <option>Up to 100 SKUs</option>
             <option>100 to 1,000 SKUs</option>
             <option>1,000 to 10,000 SKUs</option>
             <option>10,000+ SKUs</option>
           </select>
-          {errors.skus && <p className="text-red-500 text-xs mt-1">{errors.skus}</p>}
+          {errors.skus && (
+            <p className="text-red-500 text-xs mt-1">{errors.skus}</p>
+          )}
         </div>
 
+        {/* Company Turnover */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Company Turnover</label>
+          <label className="block text-sm font-semibold mb-1">
+            Company Turnover
+          </label>
           <select
             name="turnover"
             value={form.turnover}
             onChange={handleChange}
             className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.turnover ? "border-red-400" : "border-slate-300"
+              errors.turnover ? "border-red-500" : "border-slate-300"
             }`}
           >
-            <option value="">Select</option>
+            <option value="" disabled>
+              Select
+            </option>
             <option>Up to Rs 50 Crores</option>
             <option>Rs 50 - Rs 250 Crores</option>
             <option>Rs 250 - Rs 500 Crores</option>
@@ -131,35 +160,41 @@ const QuickForm = () => {
           )}
         </div>
 
+        {/* Mobile Number */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number <span className="text-red-500"></span>
+          </label>
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            placeholder="9876543210"
-            className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.mobile ? "border-red-400" : "border-slate-300"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
+            placeholder="e.g. 9876543210"
+            maxLength={10}
           />
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
           className={`w-full text-white font-bold py-3 rounded-lg transition ${
-            loading ? "bg-brand-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-700"
+            loading
+              ? "bg-brand-400 cursor-not-allowed"
+              : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+          {loading ? "Submitting..." : "See Packages"}
         </button>
       </form>
     </div>
   );
 };
-
 export default QuickForm;
