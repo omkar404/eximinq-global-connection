@@ -22,7 +22,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       service: "SCN Reply Drafting",
     },
     Personal_Hearing: {
-      service: "Personal Representation",
+      service: "Personal Hearing",
     },
   };
 
