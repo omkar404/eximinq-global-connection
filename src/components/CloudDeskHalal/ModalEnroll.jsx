@@ -125,8 +125,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       console.log("📤 FINAL PAYLOAD:", payload);
 
       const res = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/halal-certification`, // ✅ Use env var, semicolon → comma
-        "http://localhost:5000/api/halal-certification",
+        `${process.env.REACT_APP_API_URL}/api/halal-certification`, // ✅ Use env var, semicolon → comma
+        // "http://localhost:5000/api/halal-certification",
         {
           method: "POST",
           headers: {
