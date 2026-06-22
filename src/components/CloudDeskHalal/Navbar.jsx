@@ -23,6 +23,9 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#accreditation" class="hover:text-brand-600 transition">
             Global Recognition
           </a>
+          <a href="#fees" class="hover:text-brand-600 transition">
+            Fees
+          </a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
