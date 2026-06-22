@@ -1,71 +1,90 @@
 import { useState } from "react";
-import { ShieldCheck } from "lucide-react";
-import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
-
-const DEFAULT_FORM = {
-  productName: "",
-  hsCode: "",
-  mobile: "",
-};
-
-const SUBMIT_TYPE = "Check Status";
-const SOURCE = "services/bis-registration";
 
 const QuickForm = () => {
-  const [form, setForm] = useState(DEFAULT_FORM);
+  const [form, setForm] = useState({
+    product: "",
+    hsnCode: "",
+    mobile: "",
+  });
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+
+    // Clear that field's error on typing
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  /*----------------------
+    VALIDATION
+  -----------------------*/
   const validate = () => {
-    const nextErrors = {};
-    const mobileRegex = /^[6-9]\d{9}$/;
+    const newErrors = {};
 
-    if (!form.productName.trim()) {
-      nextErrors.productName = "Product name is required";
+    if (!form.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
     }
 
-    if (!form.mobile.trim()) {
-      nextErrors.mobile = "Mobile number is required";
-    } else if (!mobileRegex.test(form.mobile.trim())) {
-      nextErrors.mobile = "Enter valid 10 digit Indian mobile number";
-    }
-
-    return nextErrors;
+    return newErrors;
   };
 
+  /*----------------------
+    SUBMIT HANDLER
+  -----------------------*/
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setLoading(true);
 
     try {
-      setLoading(true);
-      await submitServiceQuickForm({
-        serviceKey: "bis-registration",
-        serviceLabel: "BIS Registration",
-        mobile: form.mobile.trim(),
-        type: SUBMIT_TYPE,
-        source: SOURCE,
-        details: {
-          "Product Name": form.productName.trim(),
-          "HS Code": form.hsCode.trim(),
-        },
-      });
+      const payload = {
+        product: form.product,
+        hsnCode: form.hsnCode,
+        mobile: form.mobile,
+        type: "QUICK_FORM",
+      };
 
-      alert("We will check the BIS applicability for your product.");
-      setForm(DEFAULT_FORM);
-      setErrors({});
-    } catch (error) {
-      console.error("BIS quick form error:", error);
-      alert("Submission failed. Please try again.");
+      console.log("📤 Sending data:", payload);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/bis-registration`,
+        // "http://localhost:5000/api/bis-registration", // ✅ http:// is required
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || data.message || "Something went wrong");
+      }
+
+      alert("✅ Request submitted successfully");
+
+      // Reset form
+      setForm({ product: "", hsnCode: "", mobile: "" });
+    } catch (err) {
+      console.error("❌ Error:", err);
+      alert(`❌ Submission failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -73,74 +92,81 @@ const QuickForm = () => {
 
   return (
     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <div className="flex items-center gap-3 mb-4">
-        <ShieldCheck className="text-brand-600 w-7 h-7" />
-        <h3 className="text-2xl font-bold text-brand-900">Compliance Check</h3>
-      </div>
-
-      <p className="text-slate-500 mb-6 text-sm">Is your HS Code under QCO?</p>
+      <h3 className="text-2xl font-bold text-brand-900 mb-2">
+        Identify Your EPC
+      </h3>
+      <p className="text-slate-500 mb-6 text-sm">
+        Not sure which council to register with?
+      </p>
 
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Product Name</label>
-          <input
-            type="text"
-            name="productName"
-            value={form.productName}
-            onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.productName ? "border-red-400" : "border-slate-300"
-            }`}
-            placeholder="e.g. Steel Coil, LED Light, Toy"
-          />
-          {errors.productName && (
-            <p className="text-red-500 text-xs mt-1">{errors.productName}</p>
-          )}
-        </div>
-
+        {/* Product Description */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            HS Code (Optional)
+            Product Description
           </label>
           <input
             type="text"
-            name="hsCode"
-            value={form.hsCode}
+            name="product"
+            value={form.product}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
-            placeholder="e.g. 7210"
+            className="w-full border border-slate-300 rounded px-3 py-2
+                       focus:outline-none focus:border-brand-500"
+            placeholder="e.g. Leather Shoes, Steel Pipes"
           />
         </div>
 
+        {/* HSN Code */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+          <label className="block text-sm font-semibold mb-1">
+            HSN Code (Optional)
+          </label>
+          <input
+            type="text"
+            name="hsnCode"
+            value={form.hsnCode}
+            onChange={handleChange}
+            className="w-full border border-slate-300 rounded px-3 py-2
+                       focus:outline-none focus:border-brand-500"
+            placeholder="e.g. 6403"
+          />
+        </div>
+
+        {/* Mobile Number */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number <span className="text-red-500"></span>
+          </label>
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.mobile ? "border-red-400" : "border-slate-300"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
-            placeholder="9876543210"
+            placeholder="e.g. 9876543210"
+            maxLength={10}
           />
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
           className={`w-full text-white font-bold py-3 rounded-lg transition ${
-            loading ? "bg-brand-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-700"
+            loading
+              ? "bg-brand-400 cursor-not-allowed"
+              : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : SUBMIT_TYPE}
+          {loading ? "Submitting..." : "Get Council Advice"}
         </button>
       </form>
     </div>
   );
 };
-
 export default QuickForm;

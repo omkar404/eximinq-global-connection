@@ -10,7 +10,7 @@ const serviceaeocertification = require("./routes/serviceaeocertification.routes
 const cooEnrollRoutes = require("./routes/cooEnroll.routes");
 const enrollRoutes = require("./routes/enroll.routes");
 const industriesWePowerRoutes = require("./routes/industriesWePower.routes");
-const mainenrollRoutes = require("./routes/mainenroll.routes");
+const bisRegistrationRoutes = require("./routes/bisRegistrationRoutes.routes");
 const mainCooRoutes = require("./routes/maincoo.routes");
 const importExportCodeRoutes = require("./routes/importExportCodeRoutes.routes");
 const icegateRoutes = require("./routes/icegateRegistrationRoutes.routes");
@@ -675,7 +675,7 @@ app.use("/api/aeo-certification", serviceaeocertification);
 app.use("/api/coo-enroll", cooEnrollRoutes);
 app.use("/api/home-enroll", enrollRoutes);
 app.use("/api/individual-enroll", industriesWePowerRoutes);
-app.use("/api/main-enroll", mainenrollRoutes);
+app.use("/api/bis-registration", bisRegistrationRoutes);
 app.use("/api/main-coo-enroll", mainCooRoutes);
 app.use("/api/import-export-code", importExportCodeRoutes);
 app.use("/api/icegate-registration", icegateRoutes);
