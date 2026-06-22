@@ -10,11 +10,11 @@ const Navbar = ({
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
                 <a href="#about" class="hover:text-brand-600 transition">Why ISO?</a>
                 <a href="#standards" class="hover:text-brand-600 transition">Standards</a>
                 <a href="#iaf" class="hover:text-brand-600 transition">IAF vs Non-IAF</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#fees" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
