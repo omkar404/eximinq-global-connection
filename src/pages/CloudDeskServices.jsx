@@ -725,7 +725,7 @@ const CloudDeskServices = () => {
         "LICENSES REGISTRATION AT CUSTOMS",
       icon: <FileText className="w-8 h-8 text-teal-600" />,
       popular: false,
-      link: "https://eximinq.in/services/epcg-scheme",
+      link: "https://eximinq.in/services/customs-license-registration",
     },
     {
       id: 707,
