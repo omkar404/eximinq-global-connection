@@ -17,18 +17,21 @@ const Hero = ({ setShowEnrollModal }) => {
                     Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
-                    <button
-                      onClick={() =>
-                        setShowEnrollModal({
-                          open: true,
-                          actionType: "Request Quote",
-                          source: "services/bis-registration",
-                        })
-                      }
-                      className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
-                    >
+                    {/* <a href="#home" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Request Quote
-                    </button>
+                    </a> */}
+
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Request_Quote",
+                  })
+                }
+                className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition"
+              >
+                Request Quote
+          </button>
                     <a href="#home" className="bg-white text-brand-900 hover:bg-slate-100 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Verify Your Product
                     </a>

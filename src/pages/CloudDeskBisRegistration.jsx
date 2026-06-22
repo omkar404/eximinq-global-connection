@@ -31,9 +31,17 @@ import { ModalEnroll } from "../components/CloudDeskBisRegistration/ModalEnroll"
 const CloudDeskBisRegistration = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    actionType: "",
-    source: "services/bis-registration",
+    type: "",
   });
+
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
+
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted - check console for data.");
+  };
   return (
 <>
 <Helmet>
@@ -173,18 +181,12 @@ const CloudDeskBisRegistration = () => {
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
+
       <ModalEnroll
         show={showEnrollModal.open}
-        type="bis_registration_enroll"
-        actionType={showEnrollModal.actionType}
-        source={showEnrollModal.source}
-        onClose={() =>
-          setShowEnrollModal({
-            open: false,
-            actionType: "",
-            source: "services/bis-registration",
-          })
-        }
+        type={showEnrollModal.type}
+        onClose={() => setShowEnrollModal({ open: false, type: "" })}
+        onSubmit={handleEnrollmentSubmit}
       />
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
@@ -364,7 +366,7 @@ const CloudDeskBisRegistration = () => {
               </ul>
 
               <div className="mt-6 text-center">
-                <button
+                {/* <button
                   onClick={() =>
                     setShowEnrollModal({
                       open: true,
@@ -375,7 +377,18 @@ const CloudDeskBisRegistration = () => {
                   className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
                 >
                   Appoint Indian Rep
-                </button>
+                </button> */}
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Foreign_Manufacturers_Certification_Scheme",
+                  })
+                }
+                className="inline-block bg-accent-500 text-brand-900 font-bold py-3 px-8 rounded-lg hover:bg-accent-600 transition"
+              >
+                Appoint Indian Rep
+          </button>
               </div>
             </div>
           </div>
