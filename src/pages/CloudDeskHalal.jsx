@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-// import TopBar from "../components/CloudDeskHalal/TopBar";
+import TopBar from "../components/CloudDeskHalal/TopBar";
 import Navbar from "../components/CloudDeskHalal/Navbar";
 import Hero from "../components/CloudDeskHalal/Hero";
 import Fees from "../components/CloudDeskHalal/Fees";
