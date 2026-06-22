@@ -417,12 +417,24 @@ const CloudDeskFertilizer = () => {
               <br />3. Efficacy Data from ICAR / State Agri Universities
             </p>
 
-            <a
+            {/* <a
               href="#contact"
               className="block text-center bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-600 transition"
             >
               Register Bio-stimulant
-            </a>
+            </a> */}
+
+            <button
+                onClick={() =>
+                  setShowEnrollModal({
+                    open: true,
+                    type: "Bio_stimulant_Focus",
+                  })
+                }
+                className="block text-center bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-600 transition"
+              >
+                Register Bio-stimulant
+          </button>
           </div>
 
         </div>

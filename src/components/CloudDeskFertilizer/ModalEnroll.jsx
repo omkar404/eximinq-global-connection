@@ -21,9 +21,9 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     Fertiliser_Import_License: {
       service: "Fertiliser Import License",
     },
-    // Central_Annual_Returns: {
-    //   service: "Central Annual Returns",
-    // },
+    Bio_stimulant_Focus: {
+      service: "Bio-stimulant Focus",
+    },
   };
 
   const serviceConfig = SERVICE_MAP[type];
