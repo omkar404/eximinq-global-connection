@@ -238,8 +238,8 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        // `${process.env.REACT_APP_API_URL}/api/halal-certification`,
-        "http://localhost:5000/api/halal-certification",
+        `${process.env.REACT_APP_API_URL}/api/halal-certification`,
+        // "http://localhost:5000/api/halal-certification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
