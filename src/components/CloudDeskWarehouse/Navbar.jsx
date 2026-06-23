@@ -11,17 +11,20 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#home" class="hover:text-brand-600 transition">
             Home
           </a>
-          <a href="#about" class="hover:text-brand-600 transition">
+          {/* <a href="#about" class="hover:text-brand-600 transition">
             Overview
-          </a>
+          </a> */}
           <a href="#types" class="hover:text-brand-600 transition">
             License Types
           </a>
           <a href="#bonded" class="hover:text-brand-600 transition">
             Bonded Benefits
           </a>
-          <a href="#contact" class="hover:text-brand-600 transition">
+          <a href="#process" class="hover:text-brand-600 transition">
             Process
+          </a>
+          <a href="#contact" class="hover:text-brand-600 transition">
+            Fees
           </a>
         </div>
 

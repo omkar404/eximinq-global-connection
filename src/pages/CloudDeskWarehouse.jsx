@@ -17,9 +17,9 @@ import {
   Phone,
   Mail,
   MapPin,
-Warehouse, 
-Lock, 
-Factory,
+  Warehouse, 
+  Lock, 
+  Factory,
   CalendarClock,
   Repeat,
   Tags,
@@ -322,7 +322,7 @@ const CloudDeskWarehouse = () => {
     </section>
 
 
-        <section id="process" className="py-20 bg-white">
+      <section id="process" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-16">
