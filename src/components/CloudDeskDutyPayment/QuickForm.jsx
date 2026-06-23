@@ -196,7 +196,7 @@ const QuickForm = () => {
               : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
-          {loading ? "Submitting..." : "Send Request"}
+          {loading ? "Submitting..." : "Calculate Now"}
         </button>
       </form>
     </div>
