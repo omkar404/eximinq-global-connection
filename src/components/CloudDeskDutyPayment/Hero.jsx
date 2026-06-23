@@ -20,7 +20,7 @@ const Hero = () => {
                     <a href="#pricing" class="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Generate Challan
                     </a>
-                    <a href="#services" class="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
+                    <a href="#home" class="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         Calculate Duty
                     </a>
                 </div>
