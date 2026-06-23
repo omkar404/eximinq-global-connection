@@ -134,14 +134,37 @@ function sortByLatestDate(items, fieldName) {
   });
 }
 
-function applyManualOverrides(parsedRows) {
-  const overriddenNotifications = new Set(
-    MANUAL_EXCHANGE_RATE_OVERRIDES.map((item) => item.notification)
+function getRowKey(item) {
+  return `${normalizeNotification(item.notification)}::${String(item.currency || "").trim().toUpperCase()}`;
+}
+
+function applyManualFallbacks(parsedRows) {
+  const existingKeys = new Set(parsedRows.map(getRowKey));
+  const missingManualRows = MANUAL_EXCHANGE_RATE_OVERRIDES.filter(
+    (item) => !existingKeys.has(getRowKey(item))
   );
 
-  return parsedRows
-    .filter((item) => !overriddenNotifications.has(item.notification))
-    .concat(MANUAL_EXCHANGE_RATE_OVERRIDES);
+  return parsedRows.concat(missingManualRows);
+}
+
+function findPrimaryExchangeRatesFile() {
+  if (fs.existsSync(EXCHANGE_RATES_FILE)) {
+    return EXCHANGE_RATES_FILE;
+  }
+
+  const xlsxFiles = fs
+    .readdirSync(EXCHANGE_RATES_FOLDER, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === ".xlsx")
+    .map((entry) => {
+      const fullPath = path.join(EXCHANGE_RATES_FOLDER, entry.name);
+      return {
+        fullPath,
+        mtimeMs: fs.statSync(fullPath).mtimeMs,
+      };
+    })
+    .sort((left, right) => right.mtimeMs - left.mtimeMs);
+
+  return xlsxFiles[0]?.fullPath || EXCHANGE_RATES_FILE;
 }
 
 function processExchangeRatesFile(filePath) {
@@ -258,7 +281,7 @@ function processExchangeRatesFile(filePath) {
     summaryMap.get(currentNotification).count += 1;
   }
 
-  const mergedRows = applyManualOverrides(parsedRows);
+  const mergedRows = applyManualFallbacks(parsedRows);
   const mergedSummaryMap = new Map();
 
   mergedRows.forEach((record) => {
@@ -284,7 +307,7 @@ function processExchangeRatesFile(filePath) {
 
 function loadExchangeRates() {
   ensureFolder();
-  processExchangeRatesFile(EXCHANGE_RATES_FILE);
+  processExchangeRatesFile(findPrimaryExchangeRatesFile());
 }
 
 function startWatcher() {

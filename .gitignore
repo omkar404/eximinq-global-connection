@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+backend/backend-deploy.tgz
+frontend-build.tgz
+backend/backend-deploy.tgz
+frontend-build.tgz

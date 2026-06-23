@@ -48,6 +48,43 @@ function formatDate(value) {
   return value;
 }
 
+function normalizeFinancialYear(value, fallbackDate = "") {
+  const text = String(value || "").trim();
+
+  if (/^\d{4}-\d{2}$/.test(text)) return text;
+  if (/^\d{4}-\d{4}$/.test(text)) {
+    const [start, end] = text.split("-");
+    return `${start}-${end.slice(-2)}`;
+  }
+  if (/^\d{4}$/.test(text)) {
+    const start = Number(text);
+    return `${start}-${String(start + 1).slice(-2)}`;
+  }
+
+  const normalizedDate = String(fallbackDate || "").trim();
+  const match = normalizedDate.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if (match) {
+    const [, day, month, year] = match;
+    const monthNumber = Number(month);
+    const startYear = monthNumber >= 4 ? Number(year) : Number(year) - 1;
+    return `${startYear}-${String(startYear + 1).slice(-2)}`;
+  }
+
+  return text;
+}
+
+function normalizeNoticeNumber(value, sheetName) {
+  const raw = String(value || "").trim().replace(/\s+/g, " ");
+
+  if (!raw) return raw;
+
+  if (sheetName.toLowerCase().includes("notification")) {
+    return raw.replace(/^NOTIFIACTION/i, "NOTIFICATION");
+  }
+
+  return raw;
+}
+
 function normalizeString(str) {
   if (!str) return "";
 
@@ -253,14 +290,19 @@ function processExcel(filePath) {
     rows.forEach((row) => {
       if (!row[1]) return;
 
+      const noticeNo = normalizeNoticeNumber(row[1], sheetName);
+      const formattedDate = formatDate(row[4]);
+      const financialYear = normalizeFinancialYear(row[2], formattedDate);
+
       excelData.push({
         id: excelData.length + 1,
         type,
         srNo: row[0],
-        noticeNo: row[1],
+        noticeNo,
         year: row[2],
+        financialYear,
         title: row[3],
-        date: formatDate(row[4]),
+        date: formattedDate,
         authority: "DGFT",
       });
     });

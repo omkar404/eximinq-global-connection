@@ -430,6 +430,15 @@ function FTPView({ loading, error, data, search, setSearch, activeLabel, activeF
 
   const columns = [
     {
+      key: "category",
+      label: "Type",
+      render: (row) => (
+        <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
+          {row.sectionKey === "appendices" ? "Appendix" : "ANF"}
+        </span>
+      ),
+    },
+    {
       key: "srNo",
       label: "Sr. No.",
       render: (row) => <span className="font-semibold text-slate-600">{row.srNo || "-"}</span>,
@@ -437,7 +446,23 @@ function FTPView({ loading, error, data, search, setSearch, activeLabel, activeF
     {
       key: "name",
       label: "Form / Name",
-      render: (row) => <span className="font-medium text-[#0d3b6e]">{row.name || "-"}</span>,
+      render: (row) =>
+        row.pdfAvailable && row.pdfFiles?.length ? (
+          <button
+            onClick={() =>
+              openExternal(
+                `${API_BASE}/api/ftp/pdf-download?category=${encodeURIComponent(
+                  row.pdfFiles[0].category
+                )}&file=${encodeURIComponent(row.pdfFiles[0].fileName)}`
+              )
+            }
+            className="font-medium text-[#0d3b6e] hover:text-blue-700 hover:underline text-left"
+          >
+            {row.name || "-"}
+          </button>
+        ) : (
+          <span className="font-medium text-[#0d3b6e]">{row.name || "-"}</span>
+        ),
     },
     {
       key: "description",
@@ -449,13 +474,28 @@ function FTPView({ loading, error, data, search, setSearch, activeLabel, activeF
       label: "Download",
       center: true,
       render: (row) => (
-        <button
-          onClick={() => openExternal(`${API_BASE}/api/ftp/pdf-download?srNo=${encodeURIComponent(row.srNo)}`)}
-          className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded"
-        >
-          <FileText size={11} />
-          PDF
-        </button>
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          {row.pdfFiles?.length ? (
+            row.pdfFiles.map((pdf) => (
+              <button
+                key={`${row.id}-${pdf.fileName}`}
+                onClick={() =>
+                  openExternal(
+                    `${API_BASE}/api/ftp/pdf-download?category=${encodeURIComponent(
+                      pdf.category
+                    )}&file=${encodeURIComponent(pdf.fileName)}`
+                  )
+                }
+                className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded"
+              >
+                <FileText size={11} />
+                {row.pdfFiles.length > 1 ? pdf.fileName.replace(/\.pdf$/i, "") : "PDF"}
+              </button>
+            ))
+          ) : (
+            <span className="text-xs text-slate-300">N/A</span>
+          )}
+        </div>
       ),
     },
   ];

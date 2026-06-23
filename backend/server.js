@@ -767,10 +767,19 @@ app.use("/api/epcg-scheme", epcgSchemeRoutes);
 /* ─────────────────────────────────────────────
    STATIC + CATCH-ALL
 ───────────────────────────────────────────── */
-app.use(express.static(path.join(__dirname, "build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+const frontendBuildDir = path.join(__dirname, "build");
+const frontendIndexFile = path.join(frontendBuildDir, "index.html");
+
+if (fs.existsSync(frontendIndexFile)) {
+  app.use(express.static(frontendBuildDir));
+  app.get("*", (req, res) => {
+    res.sendFile(frontendIndexFile);
+  });
+} else {
+  console.warn(
+    `Frontend build not found at ${frontendIndexFile}. Static fallback is disabled.`
+  );
+}
 
 /* ─────────────────────────────────────────────
    START SERVER

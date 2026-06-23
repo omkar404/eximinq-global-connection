@@ -9,16 +9,16 @@ const path = require("path");
 //  KEY MAP  — frontend tab key → service category key
 // ─────────────────────────────────────────────
 const TAB_TO_CATEGORY = {
-  "ftp-anf":           "anf",
+  "ftp-anf":           "anf_appendices",
   "ftp-policy":        "ftp",
   "ftp-statement":     "fts",
   "ftp-act":           "ftdr_act",
   "ftp-rules":         "ftdr_rules",
   "ftp-hop":           "hop",
   "ftp-rodtep-4r":     "rodtep",
-  "ftp-scomet-export": "anf",    // apna sahi category lagao
-  "ftp-scomet-import": "anf",    // apna sahi category lagao
-  "ftp-scomet-only":   "anf",    // apna sahi category lagao
+  "ftp-scomet-export": "scomet_export",
+  "ftp-scomet-import": "scomet_import",
+  "ftp-scomet-only":   "scomet_only",
 };
 
 // GET /api/ftp/data/:key
@@ -52,15 +52,18 @@ router.get("/data/:key", (req, res) => {
   });
 });
 
-// GET /api/ftp/pdf-download?srNo=...
+// GET /api/ftp/pdf-download?category=anf&file=ANF%201A.pdf
 router.get("/pdf-download", (req, res) => {
-  const { srNo } = req.query;
+  const { category, file } = req.query;
 
-  if (!srNo) {
-    return res.status(400).json({ success: false, message: "srNo is required" });
+  if (!category || !file) {
+    return res.status(400).json({
+      success: false,
+      message: "category and file are required",
+    });
   }
 
-  const pdfPath = ftpService.findPDFFile(srNo);
+  const pdfPath = ftpService.resolvePdfDownloadPath(category, file);
 
   if (!pdfPath) {
     return res.status(404).json({ success: false, message: "PDF not found" });
