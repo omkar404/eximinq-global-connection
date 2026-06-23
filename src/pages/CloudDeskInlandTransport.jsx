@@ -400,7 +400,7 @@ const CloudDeskInlandTransport = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section id="locations" className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-5xl text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-12">
             The EXIMINQ Advantage
