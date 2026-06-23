@@ -11,9 +11,9 @@ const Navbar = () => {
           <a href="#home" class="hover:text-brand-600 transition">
             Home
           </a>
-          <a href="#about" class="hover:text-brand-600 transition">
+          {/* <a href="#about" class="hover:text-brand-600 transition">
             What We Do
-          </a>
+          </a> */}
           <a href="#services" class="hover:text-brand-600 transition">
             Ground Services
           </a>
