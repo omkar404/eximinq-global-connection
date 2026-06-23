@@ -14,7 +14,7 @@ const Navbar = ({
                 <a href="#standards" class="hover:text-brand-600 transition">Standards</a>
                 <a href="#iaf" class="hover:text-brand-600 transition">IAF vs Non-IAF</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
-                <a href="#fees" class="hover:text-brand-600 transition">Fees</a>
+                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
