@@ -3,6 +3,7 @@ import { AlertTriangle, Phone } from "lucide-react";
 
 const UN_IIP_CATEGORIES = [
   {
+    shortLabel: "Drums (Code: 1)",
     label: "Drums (Code: 1) - Cylindrical packagings with flat or convex heads",
     options: [
       "1A1: Steel drum, non-removable head (tight head)",
@@ -18,6 +19,7 @@ const UN_IIP_CATEGORIES = [
     ],
   },
   {
+    shortLabel: "Wooden Barrels (Code: 2)",
     label: "Wooden Barrels (Code: 2) - Originally for wooden barrels (largely obsolete/reserved in modern usage)",
     options: [
       "2C1: Wooden barrel, bung type",
@@ -25,6 +27,7 @@ const UN_IIP_CATEGORIES = [
     ],
   },
   {
+    shortLabel: "Jerricans (Code: 3)",
     label: "Jerricans (Code: 3) - Rectangular or polygonal cross-section containers (often used for fuels/chemicals)",
     options: [
       "3A1: Steel jerrican, non-removable head",
@@ -36,6 +39,7 @@ const UN_IIP_CATEGORIES = [
     ],
   },
   {
+    shortLabel: "Boxes (Code: 4)",
     label: "Boxes (Code: 4) - Rectangular containers with solid sides",
     options: [
       "4A: Steel box",
@@ -51,6 +55,7 @@ const UN_IIP_CATEGORIES = [
     ],
   },
   {
+    shortLabel: "Bags (Code: 5)",
     label: "Bags (Code: 5) - Flexible packaging made of paper, plastic film, textiles, etc.",
     options: [
       "5H1: Woven plastic bag, unlined",
@@ -65,6 +70,7 @@ const UN_IIP_CATEGORIES = [
     ],
   },
   {
+    shortLabel: "Composite Packaging (Code: 6)",
     label: "Composite Packaging (Code: 6) - Consists of an inner receptacle and an outer packaging (single unit)",
     options: [
       "6HA1: Plastic inner receptacle with Steel outer drum",
@@ -238,7 +244,7 @@ const QuickForm = () => {
             <option value="">Select Category</option>
             {UN_IIP_CATEGORIES.map((cat) => (
               <option key={cat.label} value={cat.label}>
-                {cat.label}
+                {cat.shortLabel}
               </option>
             ))}
           </select>
@@ -248,10 +254,10 @@ const QuickForm = () => {
         </div>
 
         {/* SELECTED CATEGORY DISPLAY */}
-        {category && (
+        {category && selectedCategoryData && (
           <div className="mb-4 bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
             <p className="text-xs font-bold text-blue-700 uppercase mb-0.5">Selected Category</p>
-            <p className="text-sm text-blue-900 font-medium">{category}</p>
+            <p className="text-sm text-blue-900 font-medium">{selectedCategoryData.label}</p>
           </div>
         )}
 
