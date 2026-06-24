@@ -17,7 +17,7 @@ const Hero = () => {
                     Stop paying for physical Certificates of Origin (Form A). Get your <strong>REX Number</strong> and self-certify the origin of your goods for duty-free exports to the EU & UK.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#countries" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Apply REX Number
                     </a>
                     <a href="#about" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">

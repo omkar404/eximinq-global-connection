@@ -386,7 +386,7 @@ const CloudDeskREX = () => {
                 </span>
                 <a
                   href="#contact"
-                  className="text-brand-600 font-bold hover:underline"
+                  className="block w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition"
                 >
                   Get Registration
                 </a>
