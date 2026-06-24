@@ -13,6 +13,7 @@ const Navbar = ({setShowEnrollModal}) => {
                 <a href="#license" class="hover:text-brand-600 transition">Central License</a>
                 <a href="#process" class="hover:text-brand-600 transition">Clearance Process</a>
                 <a href="#labeling" class="hover:text-brand-600 transition">Labeling Norms</a>
+                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}

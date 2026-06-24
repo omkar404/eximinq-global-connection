@@ -5,7 +5,7 @@ const fssailicensingRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "fssailicensing Registration",
+      default: "fssai licensing Registration",
     },
     productType: {
       type: String,
