@@ -11,8 +11,8 @@ const Navbar = () => {
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
                 <a href="#about" class="hover:text-brand-600 transition">What is LMPC?</a>
                 <a href="#declarations" class="hover:text-brand-600 transition">Mandatory Labels</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
                 <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
+                <a href="#process" class="hover:text-brand-600 transition">Process</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
