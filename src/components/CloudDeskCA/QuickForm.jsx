@@ -1,7 +1,20 @@
-import { useState } from "react";
-import { FileCheck, Phone } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { FileCheck, Phone, ChevronDown } from "lucide-react";
 
-const Fees = () => {
+const CERTIFICATE_OPTIONS = [
+  "Select Certificate",
+  "Annual Export Turnover Certification",
+  "Export Obligation Discharge ( EODC ) Certification",
+  "Foreign Exchange Earning Certification",
+  "Status Holder Application ( 3 Years ) Certification",
+  "Average Export Performance Certification",
+  "RCMC Export Turnover Certification",
+  "Solvency Certificate Certification",
+  "EPCG Redemption Certification",
+  "AA Redemption Certification",
+];
+
+const QuickForm = () => {
   const [form, setForm] = useState({
     certificateType: "",
     financialYear: "",
@@ -10,6 +23,25 @@ const Fees = () => {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectCertificate = (value) => {
+    setForm((prev) => ({ ...prev, certificateType: value }));
+    setErrors((prev) => ({ ...prev, certificateType: "" }));
+    setIsDropdownOpen(false);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,8 +103,8 @@ const Fees = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/ca-certification-export-import`,
-    // "http://localhost:5000/api/ca-certification-export-import", // ✅ http:// is required   
+        // `${process.env.REACT_APP_API_URL}/api/ca-certification-export-import`,
+          // "http://localhost:5000/api/ca-certification-export-import", // ✅ http:// is required   
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -118,25 +150,58 @@ const Fees = () => {
 
       <form onSubmit={handleSubmit}>
         {/* Certificate Type */}
-        <div className="mb-4">
+        <div className="mb-4" ref={dropdownRef}>
           <label className="block text-sm font-semibold mb-1">
             Certificate Type
           </label>
-          <select
-            name="certificateType"
-            value={form.certificateType}
-            onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
-              errors.certificateType ? "border-red-500" : "border-slate-300"
-            }`}
-          >
-            <option value="">Select certificate</option>
-            <option>Annual Export Turnover</option>
-            <option>Export Obligation Discharge (EODC)</option>
-            <option>Foreign Exchange Earning</option>
-            <option>Status Holder Application (3 Years)</option>
-            <option>Average Export Performance</option>
-          </select>
+
+          <div className="relative">
+            {/* Trigger bar — normal input look, no color flip */}
+            <button
+              type="button"
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              className={`w-full flex items-center justify-between border rounded px-3 py-2 text-left bg-white focus:outline-none focus:border-brand-500 ${
+                errors.certificateType ? "border-red-500" : "border-slate-300"
+              }`}
+            >
+              <span className={form.certificateType ? "text-slate-800" : "text-slate-400"}>
+                {form.certificateType || "Select certificate"}
+              </span>
+              <ChevronDown
+                size={18}
+                className={`text-slate-400 transition-transform ${
+                  isDropdownOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {/* Dropdown list — absolutely positioned below the trigger.
+                This is anchored to the button itself (not the viewport),
+                so it always opens downward no matter the scroll position. */}
+            {isDropdownOpen && (
+              <ul
+                role="listbox"
+                className="absolute left-0 top-full mt-1 w-full max-h-72 overflow-y-auto bg-white border border-slate-300 rounded shadow-lg z-50"
+              >
+                {CERTIFICATE_OPTIONS.map((option) => (
+                  <li
+                    key={option}
+                    role="option"
+                    aria-selected={form.certificateType === option}
+                    onClick={() => selectCertificate(option)}
+                    className={`px-3 py-2 text-sm cursor-pointer hover:bg-slate-100 ${
+                      form.certificateType === option
+                        ? "bg-slate-100 font-semibold text-slate-900"
+                        : "text-slate-700"
+                    }`}
+                  >
+                    {option}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
           {errors.certificateType && (
             <p className="text-red-500 text-xs mt-1">{errors.certificateType}</p>
           )}
@@ -206,4 +271,4 @@ const Fees = () => {
   );
 };
 
-export default Fees;
+export default QuickForm;
