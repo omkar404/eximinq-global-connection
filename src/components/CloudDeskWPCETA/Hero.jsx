@@ -17,7 +17,7 @@ const Hero = () => {
                     Importing Bluetooth headphones, Smartwatches, or Wi-Fi Routers? You need an <strong>Equipment Type Approval (ETA)</strong> from the WPC Wing before customs clearance.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#documents" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Apply for SD-ETA
                     </a>
                     <a href="#products" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
