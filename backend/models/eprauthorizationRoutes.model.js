@@ -5,7 +5,7 @@ const eprauthorizationRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "Epr-authorization Registration",
+      default: "EPR Authorization Registration",
     },
     businessType: {
       type: String,

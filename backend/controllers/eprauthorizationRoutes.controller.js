@@ -30,15 +30,15 @@ async function sendEmail(record) {
     wasteCategory,
   } = record;
 
-  const serviceDisplay = service || "Epr-authorization Registration";
+  const serviceDisplay = service || "EPR Authorization Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com, sheshnathyadav1827499@gmail.com",
-    subject: `Epr-authorization Registration — ${serviceDisplay}`,
+    subject: `EPR Authorization Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>Epr-authorization Registration</h2>
+        <h2>EPR Authorization Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
@@ -91,7 +91,7 @@ exports.createeprauthorizationRoutes = async (req, res) => {
     }
 
     const recordData = {
-      service: service || "Epr-authorization Registration",
+      service: service || "EPR Authorization Registration",
       mobile: mobile.trim(),
       businessType: businessType ? businessType.trim() : null,   // ✅ use the correct variable
       wasteCategory: wasteCategory ? wasteCategory.trim() : null, // ✅ use correct variable
