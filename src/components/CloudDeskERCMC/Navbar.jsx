@@ -20,6 +20,9 @@ const Navbar = () => {
           <a href="#hsn-guide" class="hover:text-brand-600 transition">
             HSN Guide
           </a>
+          <a href="#document" class="hover:text-brand-600 transition">
+            Documents 
+          </a>
           <a href="#process" class="hover:text-brand-600 transition">
             Process
           </a>
@@ -27,7 +30,7 @@ const Navbar = () => {
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
         <a 
-          href="#home"
+          href="#process"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now

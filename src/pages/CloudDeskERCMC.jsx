@@ -827,7 +827,7 @@ const CloudDeskERCMC = () => {
           </div>
         </section>
 
-        <section className="py-20 bg-white">
+        <section id ="document"className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               {/* LEFT SIDE – DOCUMENT LIST */}
@@ -924,7 +924,7 @@ const CloudDeskERCMC = () => {
                   </p>
 
                   <a
-                    href="#contact"
+                    href="#process"
                     className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
                   >
                     Get Assistance
