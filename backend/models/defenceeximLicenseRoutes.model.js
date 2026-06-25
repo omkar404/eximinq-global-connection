@@ -5,7 +5,7 @@ const defenceeximLicenseRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "Defence Exim  Registration",
+      default: "Defence Exim License",
     },
     itemDescription: {
       type: String,
