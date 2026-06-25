@@ -23,6 +23,9 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#process" class="hover:text-brand-600 transition">
             Process
           </a>
+          <a href="#contact" class="hover:text-brand-600 transition">
+            Fees
+          </a>
         </div>
 
         {/* <button
