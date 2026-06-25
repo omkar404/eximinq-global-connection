@@ -20,7 +20,7 @@ const Hero = ({ setShowEnrollModal }) => {
                     <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-brand-900 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Start Application
                     </a>
-                    <a href="#authorities" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
+                    <a href="#sectors" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
                         View Restricted List
                     </a>
                 </div>
