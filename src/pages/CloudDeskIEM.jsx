@@ -386,12 +386,20 @@ const CloudDeskIEM = () => {
                   Hazardous Chemicals), you cannot file IEM. You must apply for
                   an <strong>Industrial License (IL)</strong> instead.
                 </p>
-                <a
+                {/* <a
                   href="#contact"
                   class="block text-center bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-industry-700 transition"
                 >
                   Check IL Applicability
-                </a>
+                </a> */}
+                <a
+                    href="/services/industrial-license"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-industry-700 transition"
+                >
+                    Check IL Applicability
+                </a>                
               </div>
             </div>
           </div>
