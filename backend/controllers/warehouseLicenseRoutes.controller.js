@@ -30,15 +30,15 @@ async function sendEmail(record) {
     location,
   } = record;
 
-  const serviceDisplay = service || "Warehouse Registration";
+  const serviceDisplay = service || "Warehouse License Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com, sheshnathyadav1827499@gmail.com",
-    subject: `Warehouse Registration — ${serviceDisplay}`,
+    subject: `Warehouse License Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>Warehouse Registration</h2>
+        <h2>Warehouse License Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
@@ -91,7 +91,7 @@ exports.createwarehouseLicenseRoutes = async (req, res) => {
     }
 
     const recordData = {
-      service: service || "Warehouse Registration",
+      service: service || "Warehouse License Registration",
       mobile: mobile.trim(),
       Type: Type ? Type.trim() : null, // ✅ use the correct variable
       location: location ? location.trim() : null, // ✅ use correct variable
