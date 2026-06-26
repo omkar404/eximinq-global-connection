@@ -9,6 +9,7 @@ const Navbar = () => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
+                <a href="#home" class="hover:text-brand-600 transition">Home</a>
                 <a href="#about" class="hover:text-brand-600 transition">Overview</a>
                 <a href="#brand-rate" class="hover:text-brand-600 transition">Brand Rate</a>
                 <a href="#section74" class="hover:text-brand-600 transition">Section 74 (Re-export)</a>
@@ -17,7 +18,7 @@ const Navbar = () => {
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
         <a 
-          href="#brand-rate"
+          href="#home"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
