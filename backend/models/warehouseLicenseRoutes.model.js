@@ -5,14 +5,14 @@ const warehouseLicenseRoutesSchema = new mongoose.Schema(
     service: {
       type: String,
       trim: true,
-      default: "Warehouse Registration",
+      default: "Warehouse License Registration",
     },
     Type: {
       type: String,
       trim: true,
       default: null,
     },
-    importValue: {
+    location: {
       type: String,
       trim: true,
       default: null,
