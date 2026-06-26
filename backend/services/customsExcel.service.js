@@ -2,10 +2,20 @@ const chokidar = require("chokidar");
 const XLSX = require("xlsx");
 const path = require("path");
 const fs = require("fs");
+const {
+  buildPdfDownloadUrl,
+  clearPdfCache,
+  findBestPdfMatch,
+  listPdfFilesRecursive,
+  normalizeText,
+  resolvePdfDownloadPath,
+} = require("../utils/regulatoryPdf");
 
 // Paths
-const CUSTOMS_BASE_FOLDER = path.join(__dirname, "../PDF_DOC/CUSTOMS_EXCEL");
-const PDF_FOLDER = path.join(__dirname, "../PDF_DOC/CUSTOMS_PDF");
+const CBIC_BASE_FOLDER = path.join(__dirname, "../PDF_DOC/CBIC");
+const CUSTOMS_BASE_FOLDER = CBIC_BASE_FOLDER;
+const PDF_FOLDER = CBIC_BASE_FOLDER;
+const CUSTOMS_DOWNLOAD_ROUTE = "/api/customs/pdf-download";
 
 // Data store
 let customsData = {
@@ -83,6 +93,140 @@ function formatDate(value) {
 function normalizeString(str) {
   if (!str) return "";
   return str.toString().toLowerCase().replace(/[\/\\\-\_\s]/g, "");
+}
+
+function getCbicFormCategoryLabel(sheetName) {
+  var categoryMap = {
+    "Bill of Entry": "Bill of Entry Forms"
+  };
+
+  return categoryMap[sheetName] || sheetName;
+}
+
+function getCustomsPdfMetadata(filePath) {
+  return {
+    pdfPath: filePath || null,
+    pdfUrl: filePath ? buildPdfDownloadUrl(CUSTOMS_DOWNLOAD_ROUTE, PDF_FOLDER, filePath) : null,
+    pdfFileName: filePath ? path.basename(filePath) : null,
+  };
+}
+
+function findCustomsRulePdf(ruleName) {
+  if (!ruleName) return null;
+
+  var rulesFolder = path.join(PDF_FOLDER, "Rules");
+  if (!fs.existsSync(rulesFolder)) return null;
+
+  var normalizedRuleName = normalizeText(ruleName);
+  var entries = fs.readdirSync(rulesFolder, { withFileTypes: true });
+  var matchingEntry = entries.find(function(entry) {
+    return entry.isDirectory() && normalizeText(entry.name) === normalizedRuleName;
+  });
+
+  if (!matchingEntry) return null;
+
+  var pdfFiles = listPdfFilesRecursive(path.join(rulesFolder, matchingEntry.name));
+  return pdfFiles.length > 0 ? pdfFiles[0] : null;
+}
+
+function getCustomsPdfForRow(item) {
+  if (!item) return getCustomsPdfMetadata(null);
+
+  if (item.type === "notifications") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.number], {
+        pathHints: ["Notifications", item.category, item.year],
+      })
+    );
+  }
+
+  if (item.type === "circulars") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.circularNo], {
+        pathHints: ["Circulars", item.year],
+      })
+    );
+  }
+
+  if (item.type === "instructions") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.number], {
+        pathHints: ["Instruction and Guidelines", item.year],
+      })
+    );
+  }
+
+  if (item.type === "orders") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.orderNumber], {
+        pathHints: ["Orders", "Non-Tariff", item.year],
+      })
+    );
+  }
+
+  if (item.type === "forms") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.formNumber, item.formName], {
+        pathHints: ["Forms", item.category],
+      })
+    );
+  }
+
+  if (item.type === "acts") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.act], {
+        pathHints: ["Acts"],
+      })
+    );
+  }
+
+  if (item.type === "rules") {
+    return getCustomsPdfMetadata(findCustomsRulePdf(item.ruleName || item.ruleSet));
+  }
+
+  if (item.type === "regulations") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.regulationNo, item.title], {
+        pathHints: ["Regulations"],
+      })
+    );
+  }
+
+  if (item.type === "alliedActs") {
+    return getCustomsPdfMetadata(
+      findBestPdfMatch(PDF_FOLDER, [item.actName, item.section, item.title], {
+        pathHints: ["Allied Acts"],
+      })
+    );
+  }
+
+  return getCustomsPdfMetadata(null);
+}
+
+function enrichCustomsRecord(item) {
+  return {
+    ...item,
+    ...getCustomsPdfForRow(item),
+  };
+}
+
+function resolveExistingSubfolder(basePath, candidates) {
+  if (!fs.existsSync(basePath)) return path.join(basePath, candidates[0]);
+
+  var entries = fs.readdirSync(basePath, { withFileTypes: true });
+  var normalizedCandidates = candidates.map(function(candidate) {
+    return normalizeString(candidate);
+  });
+
+  var matchedEntry = entries.find(function(entry) {
+    if (!entry.isDirectory()) return false;
+    var normalizedEntry = normalizeString(entry.name);
+    return normalizedCandidates.includes(normalizedEntry);
+  });
+
+  return matchedEntry
+    ? path.join(basePath, matchedEntry.name)
+    : path.join(basePath, candidates[0]);
 }
 
 // ==================== ACTS PROCESSING ====================
@@ -212,26 +356,39 @@ function processRulesFolder(folderPath) {
     var workbook = XLSX.readFile(rulesFilePath, { cellDates: true });
     
     workbook.SheetNames.forEach(function(sheetName) {
-      if (sheetName === "Rules") {
-        var worksheet = workbook.Sheets[sheetName];
-        var sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
+      var worksheet = workbook.Sheets[sheetName];
+      var sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
+      
+      if (sheetData.length < 2) return;
+      
+      var rows = sheetData.slice(1);
+      rows.forEach(function(row, index) {
+        var firstCell = row[0] ? row[0].toString().trim() : "";
+        var secondCell = row[1] ? row[1].toString().trim() : "";
+        if (!firstCell || !/^rule\b/i.test(firstCell)) return;
         
-        if (sheetData.length < 2) return;
+        var ruleNumber = firstCell;
+        var title = secondCell;
         
-        var rows = sheetData.slice(1);
-        rows.forEach(function(row, index) {
-          if (row[0] && row[0].toString().trim() !== "") {
-            rulesData.push({
-              id: "rules_" + index,
-              type: "rules",
-              ruleNumber: row[0] ? row[0].toString().trim() : "",
-              title: row[1] ? row[1].toString().trim() : "",
-              description: row[2] || "",
-              authority: "Customs"
-            });
-          }
+        if (firstCell.includes(":")) {
+          var parts = firstCell.split(":");
+          ruleNumber = parts.shift().trim();
+          title = parts.join(":").trim() || secondCell;
+        }
+
+        rulesData.push({
+          id: "rules_" + normalizeString(sheetName) + "_" + index,
+          type: "rules",
+          ruleName: sheetName,
+          ruleSet: sheetName,
+          chapter: sheetName,
+          ruleNumber: ruleNumber,
+          number: ruleNumber,
+          title: title,
+          description: [title, secondCell].filter(Boolean).join(" ").trim(),
+          authority: "Customs"
         });
-      }
+      });
     });
     console.log("  - Rules loaded: " + rulesData.length);
   }
@@ -319,16 +476,26 @@ function processFormsFolder(folderPath) {
         
         if (sheetData.length < 2) return;
         
-        var rows = sheetData.slice(1);
+        var headerRowIndex = 0;
+        for (var i = 0; i < Math.min(10, sheetData.length); i++) {
+          if (sheetData[i] && sheetData[i][0] === "Form Number") {
+            headerRowIndex = i;
+            break;
+          }
+        }
+
+        var rows = sheetData.slice(headerRowIndex + 1);
         var count = 0;
         rows.forEach(function(row, index) {
-          if (row[0] && row[0].toString().trim() !== "") {
+          var formNumber = row[0] ? row[0].toString().trim() : "";
+          var formName = row[1] ? row[1].toString().trim() : "";
+          if (formNumber && formNumber !== "Form Number" && formName && formName !== "Form Name") {
             formsData.push({
               id: "forms_" + sheetName + "_" + index,
               type: "forms",
-              category: sheetName,
-              formNumber: row[0] ? row[0].toString().trim() : "",
-              formName: row[1] ? row[1].toString().trim() : "",
+              category: getCbicFormCategoryLabel(sheetName),
+              formNumber: formNumber,
+              formName: formName,
               description: row[2] || "",
               authority: "Customs"
             });
@@ -603,6 +770,7 @@ function processOrdersFolder(folderPath) {
             ordersData.push({
               id: "order_" + sheetName + "_" + index,
               type: "orders",
+              category: "Non-Tariff",
               year: sheetName,
               orderNumber: row[0] ? row[0].toString().trim() : "",
               orderDate: formatDate(row[1]),
@@ -664,50 +832,20 @@ function processAlliedActsFolder(folderPath) {
 // ==================== PDF FINDER ====================
 function findPDFFile(noticeNo, category) {
   if (!noticeNo) return null;
-  
-  noticeNo = noticeNo.toString().trim();
-  
-  try {
-    if (!fs.existsSync(PDF_FOLDER)) {
-      return null;
-    }
-    
-    var files = fs.readdirSync(PDF_FOLDER);
-    var pdfFiles = files.filter(function(f) {
-      return path.extname(f).toLowerCase() === '.pdf';
-    });
-    
-    if (pdfFiles.length === 0) {
-      return null;
-    }
-    
-    var normalizedNotice = normalizeString(noticeNo);
-    
-    var pdfFile = pdfFiles.find(function(file) {
-      var fileNameWithoutExt = path.parse(file).name.trim();
-      var normalizedFileName = normalizeString(fileNameWithoutExt);
-      return normalizedFileName === normalizedNotice || 
-             normalizedFileName.includes(normalizedNotice);
-    });
-    
-    if (pdfFile) {
-      return path.join(PDF_FOLDER, pdfFile);
-    }
-    
-    return null;
-  } catch (error) {
-    console.error("❌ Error finding PDF:", error);
-    return null;
-  }
+
+  return findBestPdfMatch(PDF_FOLDER, [noticeNo], {
+    pathHints: category ? ["Notifications", category] : ["Notifications"],
+  });
 }
 
 // ==================== MAIN PROCESS FUNCTION ====================
 function processAllCustomsData() {
   console.log("\n🔄 ========== PROCESSING ALL CUSTOMS DATA ==========\n");
+  clearPdfCache(PDF_FOLDER);
   
   try {
     // Process Acts
-    var actsPath = path.join(CUSTOMS_BASE_FOLDER, "acts");
+    var actsPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Acts", "acts"]);
     if (fs.existsSync(actsPath)) {
       customsData.acts = processActsFolder(actsPath);
       console.log("✅ Acts loaded: " + customsData.acts.length + " records\n");
@@ -716,7 +854,7 @@ function processAllCustomsData() {
     }
     
     // Process Rules
-    var rulesPath = path.join(CUSTOMS_BASE_FOLDER, "rules");
+    var rulesPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Rules", "rules"]);
     if (fs.existsSync(rulesPath)) {
       customsData.rules = processRulesFolder(rulesPath);
       console.log("✅ Rules loaded: " + customsData.rules.length + " records\n");
@@ -725,7 +863,7 @@ function processAllCustomsData() {
     }
     
     // Process Regulations
-    var regulationsPath = path.join(CUSTOMS_BASE_FOLDER, "regulations");
+    var regulationsPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Regulations", "regulations"]);
     if (fs.existsSync(regulationsPath)) {
       customsData.regulations = processRegulationsFolder(regulationsPath);
       console.log("✅ Regulations loaded: " + customsData.regulations.length + " records\n");
@@ -734,7 +872,7 @@ function processAllCustomsData() {
     }
     
     // Process Forms
-    var formsPath = path.join(CUSTOMS_BASE_FOLDER, "forms");
+    var formsPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Forms", "forms"]);
     if (fs.existsSync(formsPath)) {
       customsData.forms = processFormsFolder(formsPath);
       console.log("✅ Forms loaded: " + customsData.forms.length + " records\n");
@@ -743,7 +881,7 @@ function processAllCustomsData() {
     }
     
     // Process Notifications
-    var notificationsPath = path.join(CUSTOMS_BASE_FOLDER, "notifications");
+    var notificationsPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Notifications", "notifications"]);
     if (fs.existsSync(notificationsPath)) {
       customsData.notifications = processNotificationsFolder(notificationsPath);
       console.log("✅ Notifications loaded\n");
@@ -752,7 +890,7 @@ function processAllCustomsData() {
     }
     
     // Process Circulars
-    var circularsPath = path.join(CUSTOMS_BASE_FOLDER, "circulars");
+    var circularsPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Circulars", "circulars"]);
     if (fs.existsSync(circularsPath)) {
       customsData.circulars = processCircularsFolder(circularsPath);
       console.log("✅ Circulars loaded: " + customsData.circulars.length + " records\n");
@@ -761,7 +899,7 @@ function processAllCustomsData() {
     }
     
     // Process Instructions/Guidelines - CORRECTED PATH
-    var instructionsPath = path.join(CUSTOMS_BASE_FOLDER, "Instruction and Guidelines");
+    var instructionsPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Instruction and Guidelines"]);
     if (fs.existsSync(instructionsPath)) {
       customsData.instructionsGuidelines = processInstructionsFolder(instructionsPath);
       console.log("✅ Instructions/Guidelines loaded: " + customsData.instructionsGuidelines.length + " records\n");
@@ -770,7 +908,7 @@ function processAllCustomsData() {
     }
     
     // Process Orders
-    var ordersPath = path.join(CUSTOMS_BASE_FOLDER, "orders");
+    var ordersPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Orders", "orders"]);
     if (fs.existsSync(ordersPath)) {
       customsData.orders = processOrdersFolder(ordersPath);
       console.log("✅ Orders loaded: " + customsData.orders.length + " records\n");
@@ -779,7 +917,7 @@ function processAllCustomsData() {
     }
     
     // Process Allied Acts
-    var alliedActsPath = path.join(CUSTOMS_BASE_FOLDER, "allied_acts");
+    var alliedActsPath = resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Allied Acts", "allied_acts"]);
     if (fs.existsSync(alliedActsPath)) {
       customsData.alliedActs = processAlliedActsFolder(alliedActsPath);
       console.log("✅ Allied Acts loaded: " + customsData.alliedActs.length + " records\n");
@@ -861,15 +999,15 @@ function getCustomsData() {
     success: true,
     lastUpdated: lastUpdated,
     data: {
-      acts: { title: "Acts", items: customsData.acts },
-      rules: { title: "Rules", items: customsData.rules },
-      regulations: { title: "Regulations", items: customsData.regulations },
-      forms: { title: "Forms", items: customsData.forms },
-      notifications: { title: "Notifications", items: allNotifications },
-      circulars: { title: "Circulars", items: customsData.circulars },
-      "instructions / guidelines": { title: "Instructions / Guidelines", items: customsData.instructionsGuidelines },
-      orders: { title: "Orders", items: customsData.orders },
-      "allied acts": { title: "Allied Acts", items: customsData.alliedActs }
+      acts: { title: "Acts", items: customsData.acts.map(enrichCustomsRecord) },
+      rules: { title: "Rules", items: customsData.rules.map(enrichCustomsRecord) },
+      regulations: { title: "Regulations", items: customsData.regulations.map(enrichCustomsRecord) },
+      forms: { title: "Forms", items: customsData.forms.map(enrichCustomsRecord) },
+      notifications: { title: "Notifications", items: allNotifications.map(enrichCustomsRecord) },
+      circulars: { title: "Circulars", items: customsData.circulars.map(enrichCustomsRecord) },
+      "instructions / guidelines": { title: "Instructions / Guidelines", items: customsData.instructionsGuidelines.map(enrichCustomsRecord) },
+      orders: { title: "Orders", items: customsData.orders.map(enrichCustomsRecord) },
+      "allied acts": { title: "Allied Acts", items: customsData.alliedActs.map(enrichCustomsRecord) }
     }
   };
 }
@@ -898,7 +1036,7 @@ function getCustomsDataByType(type) {
     .concat(customsData.notifications.safeguards)
     .concat(customsData.notifications.tariff);
   
-  return typeMap[type] || [];
+  return (typeMap[type] || []).map(enrichCustomsRecord);
 }
 
 function getNotificationsByCategory(category) {
@@ -909,7 +1047,7 @@ function getNotificationsByCategory(category) {
     safeguards: customsData.notifications.safeguards,
     tariff: customsData.notifications.tariff
   };
-  return categoryMap[category] || [];
+  return (categoryMap[category] || []).map(enrichCustomsRecord);
 }
 
 function getCustomsDiagnostics() {
@@ -918,15 +1056,15 @@ function getCustomsDiagnostics() {
   var folderMap = {
     base: CUSTOMS_BASE_FOLDER,
     pdf: PDF_FOLDER,
-    acts: path.join(CUSTOMS_BASE_FOLDER, "acts"),
-    rules: path.join(CUSTOMS_BASE_FOLDER, "rules"),
-    regulations: path.join(CUSTOMS_BASE_FOLDER, "regulations"),
-    forms: path.join(CUSTOMS_BASE_FOLDER, "forms"),
-    notifications: path.join(CUSTOMS_BASE_FOLDER, "notifications"),
-    circulars: path.join(CUSTOMS_BASE_FOLDER, "circulars"),
-    instructionsGuidelines: path.join(CUSTOMS_BASE_FOLDER, "Instruction and Guidelines"),
-    orders: path.join(CUSTOMS_BASE_FOLDER, "orders"),
-    alliedActs: path.join(CUSTOMS_BASE_FOLDER, "allied_acts")
+    acts: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Acts", "acts"]),
+    rules: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Rules", "rules"]),
+    regulations: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Regulations", "regulations"]),
+    forms: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Forms", "forms"]),
+    notifications: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Notifications", "notifications"]),
+    circulars: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Circulars", "circulars"]),
+    instructionsGuidelines: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Instruction and Guidelines"]),
+    orders: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Orders", "orders"]),
+    alliedActs: resolveExistingSubfolder(CUSTOMS_BASE_FOLDER, ["Allied Acts", "allied_acts"])
   };
 
   return {
@@ -964,6 +1102,10 @@ function getCustomsDiagnostics() {
   };
 }
 
+function resolveCustomsPdfDownloadPath(relativeFilePath) {
+  return resolvePdfDownloadPath(PDF_FOLDER, relativeFilePath);
+}
+
 // Export all functions
 module.exports = {
   startWatcher: startWatcher,
@@ -973,7 +1115,8 @@ module.exports = {
   getNotificationsByCategory: getNotificationsByCategory,
   getCustomsDiagnostics: getCustomsDiagnostics,
   findPDFFile: findPDFFile,
-  processAllCustomsData: processAllCustomsData
+  processAllCustomsData: processAllCustomsData,
+  resolveCustomsPdfDownloadPath: resolveCustomsPdfDownloadPath
 };
 
 

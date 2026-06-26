@@ -107,6 +107,10 @@ const gstRegulatoryRoutes = require("./routes/gstRegulatory.route");
 const ftpService = require("./services/foreigntradepolicy.service.js");
 const ftpRoutes  = require("./routes/ftp.route");
 
+const CBIC_DOCS_BASE = path.join(__dirname, "PDF_DOC", "CBIC");
+const CUSTOMS_EXCEL_PATH = CBIC_DOCS_BASE;
+const CUSTOMS_PDF_PATH = CBIC_DOCS_BASE;
+
 /* ─────────────────────────────────────────────
    IST DATE/TIME
 ───────────────────────────────────────────── */
@@ -552,7 +556,7 @@ app.get("/api/exchange-rates/download", (req, res) => {
 });
 
 /* ── Customs ── */
-app.use("/pdfs", express.static(path.join(__dirname, "PDF_DOC/CUSTOMS_PDF")));
+app.use("/pdfs", express.static(CUSTOMS_PDF_PATH));
 
 app.get("/api/customs/all", (req, res) => {
   try { res.json(customsService.getCustomsData()); }
@@ -628,6 +632,20 @@ app.get("/api/customs/pdf", (req, res) => {
     if (!pdfPath || !fs.existsSync(pdfPath)) return res.status(404).json({ success: false, message: "PDF not found" });
     res.sendFile(pdfPath);
   } catch (error) { res.status(500).json({ success: false, error: error.message }); }
+});
+
+app.get("/api/customs/pdf-download", (req, res) => {
+  try {
+    const { file } = req.query;
+    if (!file) return res.status(400).json({ success: false, message: "file is required" });
+
+    const pdfPath = customsService.resolveCustomsPdfDownloadPath(file);
+    if (!pdfPath) return res.status(404).json({ success: false, message: "PDF not found" });
+
+    return res.download(pdfPath, path.basename(pdfPath));
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
 });
 
 app.get("/api/customs/:type", (req, res) => {
@@ -786,6 +804,6 @@ if (fs.existsSync(frontendIndexFile)) {
 ───────────────────────────────────────────── */
 app.listen(5000, "0.0.0.0", () => {
   console.log("🚀 Backend running on 0.0.0.0:5000");
-  console.log(`📁 Excel folder: ${path.join(__dirname, "PDF_DOC/CUSTOMS_EXCEL")}`);
-  console.log(`📁 PDF folder:   ${path.join(__dirname, "PDF_DOC/CUSTOMS_PDF")}`);
+  console.log(`📁 Excel folder: ${CUSTOMS_EXCEL_PATH}`);
+  console.log(`📁 PDF folder:   ${CUSTOMS_PDF_PATH}`);
 });

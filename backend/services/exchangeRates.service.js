@@ -3,7 +3,8 @@ const XLSX = require("xlsx");
 const path = require("path");
 const fs = require("fs");
 
-const EXCHANGE_RATES_FOLDER = path.join(__dirname, "../PDF_DOC/EXCHANGE_RATES");
+const DGFT_BASE_FOLDER = path.join(__dirname, "../PDF_DOC/DGFT");
+const EXCHANGE_RATES_FOLDER = path.join(DGFT_BASE_FOLDER, "EXCHANGE_RATES");
 const EXCHANGE_RATES_FILE = path.join(EXCHANGE_RATES_FOLDER, "Exchange Rates.xlsx");
 
 let exchangeRatesData = [];

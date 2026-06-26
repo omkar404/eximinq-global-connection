@@ -1,9 +1,24 @@
 import { DGFT_FTP_TABS } from "../config/dgft";
-import { CBIC_NOTIFICATION_CATEGORY_MAP } from "../config/cbic";
-import { GST_NOTIFICATION_CATEGORY_MAP } from "../config/gst";
+import { CBIC_TAB_CONFIG } from "../config/cbic";
+import { GST_TAB_CONFIG } from "../config/gst";
 import { getRegulatoryApiBase } from "../utils/apiBase";
 
 export const SNAPSHOT_EVENT = "regulatory-updates:snapshot-ready";
+
+function getAuthorityTabConfig(authority, tabKey) {
+  if (authority === "gst") return GST_TAB_CONFIG[tabKey] || GST_TAB_CONFIG.acts;
+  if (authority === "customs") return CBIC_TAB_CONFIG[tabKey] || CBIC_TAB_CONFIG.acts;
+  return null;
+}
+
+function applyClientFilter(items, clientFilter) {
+  if (!clientFilter) return items;
+
+  const acceptedValues = new Set((clientFilter.values || []).map((value) => String(value).toLowerCase()));
+  return items.filter((item) =>
+    acceptedValues.has(String(item?.[clientFilter.field] || "").toLowerCase())
+  );
+}
 
 export function getRequestUrl(authority, tabKey) {
   const apiBase = getRegulatoryApiBase();
@@ -17,16 +32,16 @@ export function getRequestUrl(authority, tabKey) {
   }
 
   if (authority === "gst") {
-    const notificationCategory = GST_NOTIFICATION_CATEGORY_MAP[tabKey];
-    return notificationCategory
-      ? `${apiBase}/api/gst/notifications/category/${notificationCategory}`
-      : `${apiBase}/api/gst/${tabKey}`;
+    const tabConfig = getAuthorityTabConfig(authority, tabKey);
+    return tabConfig.notificationCategory
+      ? `${apiBase}/api/gst/notifications/category/${tabConfig.notificationCategory}`
+      : `${apiBase}/api/gst/${tabConfig.apiType}`;
   }
 
-  const notificationCategory = CBIC_NOTIFICATION_CATEGORY_MAP[tabKey];
-  return notificationCategory
-    ? `${apiBase}/api/customs/notifications/category/${notificationCategory}`
-    : `${apiBase}/api/customs/${tabKey}`;
+  const tabConfig = getAuthorityTabConfig(authority, tabKey);
+  return tabConfig.notificationCategory
+    ? `${apiBase}/api/customs/notifications/category/${tabConfig.notificationCategory}`
+    : `${apiBase}/api/customs/${tabConfig.apiType}`;
 }
 
 export async function fetchRegulatoryData(authority, tabKey) {
@@ -45,6 +60,7 @@ export async function fetchRegulatoryData(authority, tabKey) {
       : [];
   }
 
-  return Array.isArray(payload.data) ? payload.data : [];
+  const items = Array.isArray(payload.data) ? payload.data : [];
+  const tabConfig = getAuthorityTabConfig(authority, tabKey);
+  return applyClientFilter(items, tabConfig?.clientFilter);
 }
-

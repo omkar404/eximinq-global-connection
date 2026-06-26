@@ -17,13 +17,13 @@ export const DGFT_NAV = [
         label: "Import Export and SCOMET Policy",
         key: "ftp-scomet",
         children: [
-          { label: "Export Policy - ITC(HS) 2022", key: "ftp-scomet-export" },
-          { label: "Import Policy - ITC(HS) 2022", key: "ftp-scomet-import" },
+          { label: "Export Policy - ITC (HS) 2022", key: "ftp-scomet-export" },
+          { label: "Import Policy - ITC (HS) 2022", key: "ftp-scomet-import" },
           { label: "SCOMET", key: "ftp-scomet-only" },
         ],
       },
       {
-        label: "Rates under RoDTEP",
+        label: "Rates under RODTEP",
         key: "ftp-rodtep",
         children: [
           { label: "Rates under Appendix 4R-4RE", key: "ftp-rodtep-4r" },
@@ -47,4 +47,3 @@ export const DGFT_FTP_TABS = new Set([
   "ftp-scomet-import",
   "ftp-scomet-only",
 ]);
-

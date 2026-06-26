@@ -3,8 +3,9 @@ const XLSX = require("xlsx");
 const path = require("path");
 const fs = require("fs");
 
-const EXCEL_FOLDER = path.join(__dirname, "../PDF_DOC/ALL_PDF");
-const PDF_FOLDER = path.join(__dirname, "../PDF_DOC/PDF_FILES");
+const DGFT_BASE_FOLDER = path.join(__dirname, "../PDF_DOC/DGFT");
+const EXCEL_FOLDER = path.join(DGFT_BASE_FOLDER, "ALL_PDF");
+const PDF_FOLDER = path.join(DGFT_BASE_FOLDER, "PDF_FILES");
 
 
 let excelData = [];

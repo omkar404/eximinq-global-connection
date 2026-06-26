@@ -3,12 +3,84 @@ const XLSX = require("xlsx");
 const path = require("path");
 const fs = require("fs");
 
-const EXCEL_FOLDER = path.join(__dirname, "../PDF_DOC/Foreign_Trade_Policy");
-const PDF_ROOT_FOLDER = path.join(__dirname, "../PDF_DOC/Foreign_Trade_Policy_PDF");
-const PDF_CATEGORY_FOLDERS = {
-  anf: path.join(PDF_ROOT_FOLDER, "Aayat Niryat Form"),
-  appendices: path.join(PDF_ROOT_FOLDER, "Appendices"),
+const DGFT_BASE_FOLDER = path.join(__dirname, "../PDF_DOC/DGFT");
+const EXCEL_FOLDER = path.join(DGFT_BASE_FOLDER, "Foreign_Trade_Policy");
+const PDF_ROOT_FOLDER = path.join(DGFT_BASE_FOLDER, "Foreign_Trade_Policy_PDF");
+
+const CATEGORY_CONFIG = {
+  anf: {
+    sourceKey: "anf",
+    label: "Aayat Niryat Form",
+    folderAliases: ["aayatniryatformpdf", "aayatniryatform"],
+    matchType: "name",
+  },
+  appendices: {
+    sourceKey: "appendices",
+    label: "Appendices",
+    folderAliases: ["appendicespdf", "appendices"],
+    matchType: "name",
+  },
+  ftp: {
+    sourceKey: "ftp",
+    label: "Foreign Trade Policy",
+    folderAliases: ["foreigntradepolicypdf", "foreigntradepolicy"],
+    matchType: "chapter",
+  },
+  fts: {
+    sourceKey: "fts",
+    label: "Foreign Trade Statement",
+    folderAliases: ["foreigntradestatementpdf", "foreigntradestatement"],
+    matchType: "single",
+  },
+  hop: {
+    sourceKey: "hop",
+    label: "Handbook of Procedures",
+    folderAliases: ["handbookofprocedurespdf", "handbookofprocedures"],
+    matchType: "chapter",
+  },
+  ftdr_act: {
+    sourceKey: "ftdr_act",
+    label: "FT D&R Act",
+    folderAliases: ["ftdractpdf", "ftdract", "ftdandractpdf", "ftdandract"],
+    matchType: "number",
+    numberLabel: "actno",
+  },
+  ftdr_rules: {
+    sourceKey: "ftdr_rules",
+    label: "FT D&R Rules",
+    folderAliases: ["ftdrrulespdf", "ftdrrules", "ftdandrrulespdf", "ftdandrrules"],
+    matchType: "number",
+    numberLabel: "ruleno",
+  },
+  rodtep: {
+    sourceKey: "rodtep",
+    label: "RoDTEP Rates",
+    folderAliases: ["rodteppdf", "rodtep"],
+    matchType: "rodtep",
+  },
+  scomet_export: {
+    sourceKey: "scomet_export",
+    label: "Export Policy (SCOMET)",
+    folderAliases: ["exportpolicyitchs2022pdf", "exportpolicypdf", "exportpolicy"],
+    matchType: "chapter-number",
+  },
+  scomet_import: {
+    sourceKey: "scomet_import",
+    label: "Import Policy (SCOMET)",
+    folderAliases: ["importpolicyitchs2022pdf", "importpolicypdf", "importpolicy"],
+    matchType: "chapter-number",
+  },
+  scomet_only: {
+    sourceKey: "scomet_only",
+    label: "SCOMET",
+    folderAliases: ["scometpdf", "scomet"],
+    matchType: "list-number",
+  },
 };
+
+const categorySourceFile = Object.fromEntries(
+  Object.values(CATEGORY_CONFIG).map((config) => [config.sourceKey, ""])
+);
 
 let anfData = [];
 let appendicesData = [];
@@ -21,20 +93,6 @@ let rodtepData = [];
 let scometExportData = [];
 let scometImportData = [];
 let scometOnlyData = [];
-
-const categorySourceFile = {
-  anf: "",
-  appendices: "",
-  ftp: "",
-  fts: "",
-  hop: "",
-  ftdr_act: "",
-  ftdr_rules: "",
-  rodtep: "",
-  scomet_export: "",
-  scomet_import: "",
-  scomet_only: "",
-};
 
 if (!fs.existsSync(EXCEL_FOLDER)) {
   fs.mkdirSync(EXCEL_FOLDER, { recursive: true });
@@ -55,6 +113,14 @@ function normalizeString(value) {
     .replace(/[^a-z0-9]/g, "");
 }
 
+function isValidExcelFile(fileName) {
+  return (
+    fileName &&
+    fileName.toLowerCase().endsWith(".xlsx") &&
+    !path.basename(fileName).startsWith("~$")
+  );
+}
+
 function listPdfFiles(folderPath) {
   if (!folderPath || !fs.existsSync(folderPath)) return [];
 
@@ -66,15 +132,119 @@ function listPdfFiles(folderPath) {
 }
 
 function getPdfFolderForCategory(category) {
-  return PDF_CATEGORY_FOLDERS[category] || null;
+  const config = CATEGORY_CONFIG[category];
+  if (!config || !fs.existsSync(PDF_ROOT_FOLDER)) return null;
+
+  const allDirectories = fs
+    .readdirSync(PDF_ROOT_FOLDER, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory());
+
+  return (
+    allDirectories
+      .map((entry) => path.join(PDF_ROOT_FOLDER, entry.name))
+      .find((dirPath) => {
+        const normalizedDirName = normalizeString(path.basename(dirPath));
+        return config.folderAliases.some((alias) => {
+          const normalizedAlias = normalizeString(alias);
+          return (
+            normalizedDirName === normalizedAlias ||
+            normalizedDirName.includes(normalizedAlias) ||
+            normalizedAlias.includes(normalizedDirName)
+          );
+        });
+      }) || null
+  );
+}
+
+function extractLeadingNumber(value) {
+  const match = String(value || "").match(/^(\d+(?:-\d+)?)/);
+  return match ? match[1] : "";
+}
+
+function extractChapterNumber(value) {
+  const match = String(value || "").match(/chapter\s*0*(\d+)/i);
+  return match ? String(Number(match[1])) : "";
+}
+
+function extractChapterNumberFromFileName(value) {
+  const match = String(value || "").match(/chapterno0*(\d+)/i);
+  return match ? String(Number(match[1])) : "";
+}
+
+function extractListNumberFromFileName(value) {
+  const match = String(value || "").match(/listno0*(\d+)/i);
+  return match ? String(Number(match[1])) : "";
 }
 
 function getPdfMatchCandidates(category, row = {}) {
+  const config = CATEGORY_CONFIG[category];
   const folderPath = getPdfFolderForCategory(category);
-  if (!folderPath) return [];
+  if (!config || !folderPath) return [];
 
   const pdfFiles = listPdfFiles(folderPath);
   if (!pdfFiles.length) return [];
+
+  if (config.matchType === "single") {
+    return pdfFiles.length ? [pdfFiles[0]] : [];
+  }
+
+  if (config.matchType === "chapter") {
+    const chapterNumber = extractChapterNumber(row.description || row.name || row.title);
+    if (!chapterNumber) return [];
+
+    return pdfFiles.filter((filePath) => {
+      const normalizedName = normalizeString(path.parse(filePath).name);
+      return extractChapterNumberFromFileName(normalizedName) === chapterNumber;
+    });
+  }
+
+  if (config.matchType === "number") {
+    const recordNumber = normalizeString(extractLeadingNumber(row.srNo));
+    if (!recordNumber) return [];
+
+    return pdfFiles.filter((filePath) => {
+      const normalizedName = normalizeString(path.parse(filePath).name);
+      if (config.numberLabel && normalizedName.includes(config.numberLabel)) {
+        return normalizedName.endsWith(recordNumber) || normalizedName.includes(`${config.numberLabel}${recordNumber}`);
+      }
+
+      return (
+        normalizedName.endsWith(recordNumber) ||
+        normalizedName.includes(`no${recordNumber}`) ||
+        normalizedName.includes(recordNumber)
+      );
+    });
+  }
+
+  if (config.matchType === "rodtep") {
+    const recordNumber = normalizeString(extractLeadingNumber(row.srNo));
+    if (!recordNumber) return [];
+
+    return pdfFiles.filter((filePath) => {
+      const normalizedName = normalizeString(path.parse(filePath).name);
+      return normalizedName === recordNumber;
+    });
+  }
+
+  if (config.matchType === "list-number") {
+    const recordNumber = String(Number(extractLeadingNumber(row.srNo)));
+    if (!recordNumber || recordNumber === "NaN") return [];
+
+    return pdfFiles.filter((filePath) => {
+      const normalizedName = normalizeString(path.parse(filePath).name);
+      return extractListNumberFromFileName(normalizedName) === recordNumber;
+    });
+  }
+
+  if (config.matchType === "chapter-number") {
+    const recordNumber = String(Number(extractLeadingNumber(row.srNo)));
+    if (!recordNumber || recordNumber === "NaN") return [];
+
+    return pdfFiles.filter((filePath) => {
+      const normalizedName = normalizeString(path.parse(filePath).name);
+      return extractChapterNumberFromFileName(normalizedName) === recordNumber;
+    });
+  }
 
   const lookupKeys = [row.name, row.formName, row.appendix, row.title, row.srNo].filter(Boolean);
 
@@ -145,13 +315,15 @@ function processSheet(sheetData, targetArray, categoryName, sourceFile) {
   dataRows.forEach((row, index) => {
     if (!row[0] && !row[1] && !row[2]) return;
 
-    const has3Cols = row.length >= 3 && row[2] && row[2].toString().trim() !== "";
+    const hasThreeColumns =
+      row.length >= 3 && row[2] && row[2].toString().trim() !== "";
+
     targetArray.push({
       id: index + 1,
       category: categoryName,
       srNo: (row[0] || "").toString().trim(),
-      name: has3Cols ? (row[1] || "").toString().trim() : "",
-      description: has3Cols
+      name: hasThreeColumns ? (row[1] || "").toString().trim() : "",
+      description: hasThreeColumns
         ? (row[2] || "").toString().trim()
         : (row[1] || "").toString().trim(),
       authority: "DGFT",
@@ -169,27 +341,27 @@ function processAnfAndAppendices(filePath) {
     const data = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
 
     if (sheetName.toLowerCase() === "anf") {
-      processSheet(data, anfData, "Aayat Niryat Form", filePath);
+      processSheet(data, anfData, CATEGORY_CONFIG.anf.label, filePath);
       categorySourceFile.anf = fileName;
       return;
     }
 
     if (sheetName.toLowerCase() === "appendices") {
-      processSheet(data, appendicesData, "Appendices", filePath);
+      processSheet(data, appendicesData, CATEGORY_CONFIG.appendices.label, filePath);
       categorySourceFile.appendices = fileName;
     }
   });
 }
 
-function processSingleSheetFile(filePath, targetArray, categoryName, sourceKey, preferredSheetName) {
-  const fileName = path.basename(filePath);
+function processSingleSheetFile(filePath, targetArray, category, preferredSheetName) {
+  const config = CATEGORY_CONFIG[category];
   const workbook = XLSX.readFile(filePath, { cellDates: true });
   const worksheet =
     workbook.Sheets[preferredSheetName] || workbook.Sheets[workbook.SheetNames[0]];
   const data = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
 
-  processSheet(data, targetArray, categoryName, filePath);
-  categorySourceFile[sourceKey] = fileName;
+  processSheet(data, targetArray, config.label, filePath);
+  categorySourceFile[config.sourceKey] = path.basename(filePath);
 }
 
 function processActRules(filePath) {
@@ -202,10 +374,10 @@ function processActRules(filePath) {
     const normalizedSheetName = sheetName.toLowerCase();
 
     if (normalizedSheetName.includes("act")) {
-      processSheet(data, ftdrActData, "FT D&R Act", filePath);
+      processSheet(data, ftdrActData, CATEGORY_CONFIG.ftdr_act.label, filePath);
       categorySourceFile.ftdr_act = fileName;
     } else if (normalizedSheetName.includes("rules")) {
-      processSheet(data, ftdrRulesData, "FT D&R Rules", filePath);
+      processSheet(data, ftdrRulesData, CATEGORY_CONFIG.ftdr_rules.label, filePath);
       categorySourceFile.ftdr_rules = fileName;
     }
   });
@@ -215,34 +387,32 @@ function processExcel(filePath) {
   const fileName = path.basename(filePath);
   const lowerName = fileName.toLowerCase();
 
+  if (!isValidExcelFile(fileName)) return;
+
   if (lowerName.includes("aayat niryat form")) {
     processAnfAndAppendices(filePath);
   } else if (lowerName.includes("foreign trade policy")) {
-    processSingleSheetFile(filePath, ftpData, "Foreign Trade Policy", "ftp", "FTP");
+    processSingleSheetFile(filePath, ftpData, "ftp", "FTP");
   } else if (lowerName.includes("foreign trade statement")) {
-    processSingleSheetFile(filePath, ftsData, "Foreign Trade Statement", "fts", "FTS");
+    processSingleSheetFile(filePath, ftsData, "fts", "FTS");
   } else if (lowerName.includes("handbook of procedures")) {
-    processSingleSheetFile(filePath, hopData, "Handbook of Procedures", "hop", "HOP");
+    processSingleSheetFile(filePath, hopData, "hop", "HOP");
   } else if (lowerName.includes("ft d&r") && (lowerName.includes("act") || lowerName.includes("rules"))) {
     processActRules(filePath);
   } else if (lowerName.includes("rates under rodtep")) {
-    processSingleSheetFile(filePath, rodtepData, "RoDTEP Rates", "rodtep");
-  } else if (lowerName.includes("export policy") || (lowerName.includes("itc(hs)") && lowerName.includes("export"))) {
-    processSingleSheetFile(
-      filePath,
-      scometExportData,
-      "Export Policy (SCOMET)",
-      "scomet_export"
-    );
-  } else if (lowerName.includes("import policy") || (lowerName.includes("itc(hs)") && lowerName.includes("import"))) {
-    processSingleSheetFile(
-      filePath,
-      scometImportData,
-      "Import Policy (SCOMET)",
-      "scomet_import"
-    );
+    processSingleSheetFile(filePath, rodtepData, "rodtep");
+  } else if (
+    lowerName.includes("export policy") ||
+    (lowerName.includes("itc(hs)") && lowerName.includes("export"))
+  ) {
+    processSingleSheetFile(filePath, scometExportData, "scomet_export");
+  } else if (
+    lowerName.includes("import policy") ||
+    (lowerName.includes("itc(hs)") && lowerName.includes("import"))
+  ) {
+    processSingleSheetFile(filePath, scometImportData, "scomet_import");
   } else if (lowerName.includes("scomet") && !lowerName.includes("export") && !lowerName.includes("import")) {
-    processSingleSheetFile(filePath, scometOnlyData, "SCOMET", "scomet_only");
+    processSingleSheetFile(filePath, scometOnlyData, "scomet_only");
   } else {
     console.log(`Unknown or unsupported file: ${fileName}`);
   }
@@ -268,8 +438,9 @@ function resetAllStores() {
 
 function loadAllExcelFiles() {
   resetAllStores();
+
   fs.readdirSync(EXCEL_FOLDER).forEach((fileName) => {
-    if (path.extname(fileName).toLowerCase() === ".xlsx") {
+    if (isValidExcelFile(fileName)) {
       processExcel(path.join(EXCEL_FOLDER, fileName));
     }
   });
@@ -282,36 +453,32 @@ function startWatcher() {
   const watcher = chokidar.watch(EXCEL_FOLDER, { persistent: true });
   watcher.on("ready", () => console.log("FTP Watcher is ready"));
   watcher.on("add", (filePath) => {
-    if (path.extname(filePath).toLowerCase() === ".xlsx") {
-      loadAllExcelFiles();
-    }
+    if (isValidExcelFile(filePath)) loadAllExcelFiles();
   });
   watcher.on("change", (filePath) => {
-    if (path.extname(filePath).toLowerCase() === ".xlsx") {
-      loadAllExcelFiles();
-    }
+    if (isValidExcelFile(filePath)) loadAllExcelFiles();
   });
   watcher.on("unlink", (filePath) => {
-    if (path.extname(filePath).toLowerCase() === ".xlsx") {
-      loadAllExcelFiles();
-    }
+    if (isValidExcelFile(filePath)) loadAllExcelFiles();
   });
   watcher.on("error", (error) => console.error("FTP Watcher error:", error));
 }
 
-function getCategoryData(category) {
-  if (category === "anf_appendices") {
-    const data = [
-      ...anfData.map((row) => enrichRecordWithPdf(row, "anf")),
-      ...appendicesData.map((row) => enrichRecordWithPdf(row, "appendices")),
-    ];
-
-    return {
-      filename:
-        categorySourceFile.anf || categorySourceFile.appendices || "Aayat Niryat Form & Appendices.xlsx",
-      count: data.length,
-      data,
-    };
+function getEnrichedCategoryData(category) {
+  if (
+    !anfData.length &&
+    !appendicesData.length &&
+    !ftpData.length &&
+    !ftsData.length &&
+    !hopData.length &&
+    !ftdrActData.length &&
+    !ftdrRulesData.length &&
+    !rodtepData.length &&
+    !scometExportData.length &&
+    !scometImportData.length &&
+    !scometOnlyData.length
+  ) {
+    loadAllExcelFiles();
   }
 
   const categoryMap = {
@@ -331,15 +498,33 @@ function getCategoryData(category) {
   const data = categoryMap[category];
   if (!data) return null;
 
-  const enrichedData =
-    category === "anf" || category === "appendices"
-      ? data.map((row) => enrichRecordWithPdf(row, category))
-      : data;
+  return data.map((row) => enrichRecordWithPdf(row, category));
+}
+
+function getCategoryData(category) {
+  if (category === "anf_appendices") {
+    const data = [
+      ...getEnrichedCategoryData("anf"),
+      ...getEnrichedCategoryData("appendices"),
+    ];
+
+    return {
+      filename:
+        categorySourceFile.anf ||
+        categorySourceFile.appendices ||
+        "Aayat Niryat Form & Appendices.xlsx",
+      count: data.length,
+      data,
+    };
+  }
+
+  const data = getEnrichedCategoryData(category);
+  if (!data) return null;
 
   return {
     filename: categorySourceFile[category] || "Unknown.xlsx",
-    count: enrichedData.length,
-    data: enrichedData,
+    count: data.length,
+    data,
   };
 }
 

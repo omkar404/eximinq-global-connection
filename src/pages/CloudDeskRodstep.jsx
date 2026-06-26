@@ -12,6 +12,7 @@ import ContactCTA from "../components/CloudDeskRodstep/ContactCTA";
 import Footer from "../components/CloudDeskRodstep/Footer";
 
 import useLiveRates from "../components/CloudDeskRodstep/useLiveRates";
+import { SLABS } from "../components/CloudDeskRodstep/slabs";
 import {
   AlertTriangle,
   Building,
@@ -43,12 +44,7 @@ const CloudDeskRodstep = () => {
   const selectedAction = calcType === "buy" ? "Buying" : "Selling";
   const selectedScheme = calcScheme === "rodtep" ? "RODTEP" : "RoSCTL";
 
-  const rates = useMemo(() => {
-    return {
-      rodtep: { buy: 97.25, sell: 99.05 },
-      rosctl: { buy: 97.15, sell: 98.75 },
-    };
-  }, []);
+  const rates = useMemo(() => SLABS[0].rates, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);

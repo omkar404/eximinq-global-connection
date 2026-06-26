@@ -32,6 +32,7 @@ const CBIC_STYLE = {
 };
 
 const PAGE_SIZE_OPTIONS = ["10", "25", "50", "100"];
+const CBIC_YEAR_OPTIONS = ["2024", "2025", "2026"];
 
 function getInitialSnapshot() {
   if (typeof window === "undefined") return null;
@@ -75,24 +76,48 @@ function itemMatchesSearch(item, search) {
   if (!search) return true;
   const q = search.toLowerCase();
   return [
+    item.act,
     item.noticeNo,
     item.number,
+    item.circularNo,
+    item.orderNumber,
     item.title,
     item.subject,
     item.description,
     item.name,
     item.srNo,
+    item.category,
+    item.folderCategory,
     item.formName,
     item.formNumber,
     item.chapter,
     item.section,
     item.ruleNumber,
     item.ruleName,
+    item.ruleSet,
+    item.regulationNo,
     item.regulationNumber,
     item.regulationName,
   ]
     .filter(Boolean)
     .some((value) => String(value).toLowerCase().includes(q));
+}
+
+function getAvailableFinancialYears(items) {
+  const present = new Set(
+    items
+      .map((item) => getFinancialYearForItem(item))
+      .filter(Boolean)
+  );
+
+  return FINANCIAL_YEARS.filter((financialYear) => present.has(financialYear));
+}
+
+function normalizeLabel(value) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
 }
 
 function openExternal(url) {
@@ -362,13 +387,15 @@ function DGFTView({ loading, error, data, search, setSearch, activeLabel, active
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm mb-4 overflow-hidden">
         <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-100">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+              <Search size={18} strokeWidth={2.5} />
+            </div>
             <input
               type="text"
               placeholder="Search by notice number, title or subject..."
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-12 pr-4 py-3 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <select
@@ -414,91 +441,142 @@ function DGFTView({ loading, error, data, search, setSearch, activeLabel, active
   );
 }
 
-function FTPView({ loading, error, data, search, setSearch, activeLabel, activeFY }) {
+function FTPView({ loading, error, data, search, setSearch, activeLabel, activeFY, activeTab }) {
   const [pageSize, setPageSize] = useState("10");
   const [currentPage, setCurrentPage] = useState(1);
-  const { startIndex, endIndex, totalPages } = getPaginationMeta(data.length, currentPage, pageSize);
-  const paginatedData = data.slice(startIndex, endIndex);
+  const [anfSection, setAnfSection] = useState("anf");
 
   useEffect(() => {
     setCurrentPage(1);
   }, [search, activeLabel, activeFY]);
 
+  const isAnfTab = activeTab === "ftp-anf";
+  const filteredData = isAnfTab ? data.filter((row) => row.sectionKey === anfSection) : data;
+  const { startIndex, endIndex, totalPages } = getPaginationMeta(filteredData.length, currentPage, pageSize);
+  const paginatedData = filteredData.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    if (activeTab !== "ftp-anf") {
+      setAnfSection("anf");
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [anfSection]);
+
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
   }, [currentPage, totalPages]);
 
-  const columns = [
-    {
-      key: "category",
-      label: "Type",
-      render: (row) => (
-        <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
-          {row.sectionKey === "appendices" ? "Appendix" : "ANF"}
-        </span>
-      ),
-    },
-    {
-      key: "srNo",
-      label: "Sr. No.",
-      render: (row) => <span className="font-semibold text-slate-600">{row.srNo || "-"}</span>,
-    },
-    {
-      key: "name",
-      label: "Form / Name",
-      render: (row) =>
-        row.pdfAvailable && row.pdfFiles?.length ? (
+  const renderPdfButtons = (row) => (
+    <div className="flex flex-wrap items-center justify-center gap-2">
+      {row.pdfFiles?.length ? (
+        row.pdfFiles.map((pdf) => (
           <button
+            key={`${row.id}-${pdf.fileName}`}
             onClick={() =>
               openExternal(
                 `${API_BASE}/api/ftp/pdf-download?category=${encodeURIComponent(
-                  row.pdfFiles[0].category
-                )}&file=${encodeURIComponent(row.pdfFiles[0].fileName)}`
+                  pdf.category
+                )}&file=${encodeURIComponent(pdf.fileName)}`
               )
             }
-            className="font-medium text-[#0d3b6e] hover:text-blue-700 hover:underline text-left"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded"
           >
-            {row.name || "-"}
+            <FileText size={11} />
+            {row.pdfFiles.length > 1 ? pdf.fileName.replace(/\.pdf$/i, "") : "PDF"}
           </button>
-        ) : (
-          <span className="font-medium text-[#0d3b6e]">{row.name || "-"}</span>
-        ),
-    },
-    {
-      key: "description",
-      label: "Description",
-      render: (row) => row.description || row.title || "-",
-    },
-    {
-      key: "download",
-      label: "Download",
-      center: true,
-      render: (row) => (
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          {row.pdfFiles?.length ? (
-            row.pdfFiles.map((pdf) => (
+        ))
+      ) : (
+        <span className="text-xs text-slate-300">N/A</span>
+      )}
+    </div>
+  );
+
+  const columns = isAnfTab
+    ? [
+        {
+          key: "category",
+          label: "Type",
+          render: (row) => (
+            <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
+              {row.sectionKey === "appendices" ? "Appendix" : "ANF"}
+            </span>
+          ),
+        },
+        {
+          key: "srNo",
+          label: "Sr. No.",
+          render: (row) => <span className="font-semibold text-slate-600">{row.srNo || "-"}</span>,
+        },
+        {
+          key: "name",
+          label: "Form / Name",
+          render: (row) =>
+            row.pdfAvailable && row.pdfFiles?.length ? (
               <button
-                key={`${row.id}-${pdf.fileName}`}
                 onClick={() =>
                   openExternal(
                     `${API_BASE}/api/ftp/pdf-download?category=${encodeURIComponent(
-                      pdf.category
-                    )}&file=${encodeURIComponent(pdf.fileName)}`
+                      row.pdfFiles[0].category
+                    )}&file=${encodeURIComponent(row.pdfFiles[0].fileName)}`
                   )
                 }
-                className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded"
+                className="font-medium text-[#0d3b6e] hover:text-blue-700 hover:underline text-left"
               >
-                <FileText size={11} />
-                {row.pdfFiles.length > 1 ? pdf.fileName.replace(/\.pdf$/i, "") : "PDF"}
+                {row.name || "-"}
               </button>
-            ))
-          ) : (
-            <span className="text-xs text-slate-300">N/A</span>
-          )}
-        </div>
-      ),
-    },
-  ];
+            ) : (
+              <span className="font-medium text-[#0d3b6e]">{row.name || "-"}</span>
+            ),
+        },
+        {
+          key: "description",
+          label: "Description",
+          render: (row) => row.description || row.title || "-",
+        },
+        {
+          key: "download",
+          label: "Download",
+          center: true,
+          render: renderPdfButtons,
+        },
+      ]
+    : [
+        {
+          key: "srNo",
+          label: "Sr. No.",
+          render: (row) => <span className="font-semibold text-slate-600">{row.srNo || "-"}</span>,
+        },
+        {
+          key: "description",
+          label: "Description",
+          render: (row) =>
+            row.pdfAvailable && row.pdfFiles?.length ? (
+              <button
+                onClick={() =>
+                  openExternal(
+                    `${API_BASE}/api/ftp/pdf-download?category=${encodeURIComponent(
+                      row.pdfFiles[0].category
+                    )}&file=${encodeURIComponent(row.pdfFiles[0].fileName)}`
+                  )
+                }
+                className="font-medium text-[#0d3b6e] hover:text-blue-700 hover:underline text-left"
+              >
+                {row.description || row.title || "-"}
+              </button>
+            ) : (
+              row.description || row.title || "-"
+            ),
+        },
+        {
+          key: "download",
+          label: "Download",
+          center: true,
+          render: renderPdfButtons,
+        },
+      ];
 
   return (
     <div className="bg-white border-2 border-slate-200 rounded-2xl shadow-md overflow-hidden w-full">
@@ -508,6 +586,29 @@ function FTPView({ loading, error, data, search, setSearch, activeLabel, activeF
       </div>
 
       <div className="px-6 py-4 border-b border-slate-100">
+        {isAnfTab && (
+          <div className="mb-4 inline-flex rounded-xl border border-slate-200 bg-slate-50 p-1">
+            <button
+              onClick={() => setAnfSection("anf")}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
+                anfSection === "anf" ? "bg-blue-600 text-white shadow-sm" : "text-slate-600 hover:bg-white"
+              }`}
+            >
+              ANF Forms
+            </button>
+            <button
+              onClick={() => setAnfSection("appendices")}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
+                anfSection === "appendices"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-slate-600 hover:bg-white"
+              }`}
+            >
+              Appendices
+            </button>
+          </div>
+        )}
+
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-stretch max-w-md">
             <input
@@ -515,10 +616,10 @@ function FTPView({ loading, error, data, search, setSearch, activeLabel, activeF
               placeholder="Search by Sr. No., name or description..."
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              className="flex-1 border border-r-0 border-slate-300 rounded-l-md text-sm px-3 py-2 focus:outline-none"
+              className="flex-1 border border-r-0 border-slate-300 rounded-l-xl text-sm px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <span className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-r-md">
-              <Search size={15} />
+            <span className="flex items-center justify-center px-4 py-3 text-white bg-gradient-to-r from-teal-600 via-blue-600 to-indigo-700 rounded-r-xl shadow-sm">
+              <Search size={19} strokeWidth={2.5} />
             </span>
           </div>
 
@@ -535,19 +636,19 @@ function FTPView({ loading, error, data, search, setSearch, activeLabel, activeF
           </select>
         </div>
         <p className="text-xs text-slate-400 mt-2">
-          {loading ? "Loading..." : `${data.length} record${data.length !== 1 ? "s" : ""} found`}
+          {loading ? "Loading..." : `${filteredData.length} record${filteredData.length !== 1 ? "s" : ""} found`}
         </p>
       </div>
 
       <div className="p-6">
         {loading && <LoadingSkeleton />}
         {!loading && error && <ErrorState message={error} />}
-        {!loading && !error && data.length === 0 && <CBICEmptyState />}
-        {!loading && !error && data.length > 0 && (
+        {!loading && !error && filteredData.length === 0 && <CBICEmptyState />}
+        {!loading && !error && filteredData.length > 0 && (
           <>
             <TableView items={paginatedData} columns={columns} />
             <PaginationControls
-              totalItems={data.length}
+              totalItems={filteredData.length}
               currentPage={currentPage}
               pageSize={pageSize}
               onPageChange={setCurrentPage}
@@ -610,7 +711,14 @@ function CBICView({
 
   const uniqueActs = [...new Set(data.map((item) => item.act).filter(Boolean))];
   const uniqueChapters = [...new Set(data.map((item) => item.chapter).filter(Boolean))];
-  const uniqueRules = [...new Set(data.map((item) => item.ruleName || item.ruleSet).filter(Boolean))];
+  const uniqueRules = Array.from(
+    new Map(
+      data
+        .map((item) => item.ruleName || item.ruleSet)
+        .filter(Boolean)
+        .map((label) => [normalizeLabel(label), String(label).replace(/\s+/g, " ").trim()])
+    ).values()
+  );
   const availableYears = [...new Set(data.map((item) => item.year).filter(Boolean))];
 
   const filteredData = data.filter((item) => {
@@ -624,7 +732,13 @@ function CBICView({
     }
 
     if (activeTab === "rules") {
-      if (selectedRule && item.ruleName !== selectedRule && item.ruleSet !== selectedRule) return false;
+      if (
+        selectedRule &&
+        normalizeLabel(item.ruleName) !== normalizeLabel(selectedRule) &&
+        normalizeLabel(item.ruleSet) !== normalizeLabel(selectedRule)
+      ) {
+        return false;
+      }
       if (ruleNumber && !String(item.ruleNumber || item.number || "").toLowerCase().includes(ruleNumber.toLowerCase())) {
         return false;
       }
@@ -637,20 +751,43 @@ function CBICView({
   const displayedItems = filteredData.slice(startIndex, endIndex);
   const isActs = activeTab === "acts";
   const isRules = activeTab === "rules";
+  const isForms = activeTab === "forms" || activeTab.startsWith("forms-");
+  const isCirculars = activeTab === "circulars" || activeTab.startsWith("circulars-");
+  const isInstructions = activeTab === "instructions";
+  const isOrders = activeTab === "orders" || activeTab.startsWith("orders-");
+  const isRegulations = activeTab === "regulations";
   const isNotifications = activeTab.includes("notifications");
-  const isSearchOnlySection = ["forms", "circulars", "instructions", "orders", "alliedActs", "regulations"].includes(activeTab);
+  const isSearchOnlySection = isForms || isCirculars || isInstructions || isOrders || activeTab === "alliedActs" || isRegulations;
+  const showCbicYearDropdown =
+    authority === "customs" && (isNotifications || isCirculars || isForms || isInstructions || isOrders);
 
   let selectedDocument = "";
   if (isActs) selectedDocument = selectedAct || uniqueActs[0] || "";
   else if (isRules) selectedDocument = selectedRule || uniqueRules[0] || "";
 
   const selectedDocumentRecord = data.find((item) => {
+    if (isActs) return item.act === selectedDocument && item.pdfUrl;
+    if (isRules) {
+      return (
+        (normalizeLabel(item.ruleName) === normalizeLabel(selectedDocument) ||
+          normalizeLabel(item.ruleSet) === normalizeLabel(selectedDocument)) &&
+        item.pdfUrl
+      );
+    }
+    return false;
+  }) || data.find((item) => {
     if (isActs) return item.act === selectedDocument;
-    if (isRules) return (item.ruleName || item.ruleSet) === selectedDocument;
+    if (isRules) {
+      return (
+        normalizeLabel(item.ruleName) === normalizeLabel(selectedDocument) ||
+        normalizeLabel(item.ruleSet) === normalizeLabel(selectedDocument)
+      );
+    }
     return false;
   });
 
   const completePdfUrl = selectedDocumentRecord?.pdfUrl || null;
+  const completePdfLabel = selectedDocumentRecord?.pdfFileName || "PDF";
   const completeHtmlUrl = selectedDocumentRecord?.htmlUrl || null;
 
   const fetchAmendmentHistory = useCallback(async () => {
@@ -682,8 +819,17 @@ function CBICView({
   }, [currentPage, totalPages]);
 
   const columns = (() => {
-    if (activeTab === "forms") {
+    if (isForms) {
       return [
+        ...(activeTab === "forms"
+          ? [
+              {
+                key: "category",
+                label: "Category",
+                render: (row) => row.category || "-",
+              },
+            ]
+          : []),
         {
           key: "formNumber",
           label: "Form Number",
@@ -694,7 +840,7 @@ function CBICView({
           key: "download",
           label: "Download",
           center: true,
-          render: (row) => <LinkButton url={row.pdfUrl} label="PDF" />,
+          render: (row) => <LinkButton url={row.pdfUrl} label={row.pdfFileName || "PDF"} />,
         },
       ];
     }
@@ -712,8 +858,82 @@ function CBICView({
           key: "download",
           label: "Download",
           center: true,
-          render: (row) => <LinkButton url={row.pdfUrl} label="PDF" />,
+          render: (row) => <LinkButton url={row.pdfUrl} label={row.pdfFileName || "PDF"} />,
         },
+      ];
+    }
+
+    if (isCirculars) {
+      return [
+        {
+          key: "circularNo",
+          label: "Circular No.",
+          render: (row) => <span className="font-semibold text-[#0d3b6e]">{row.circularNo || row.number || "-"}</span>,
+        },
+        { key: "date", label: "Date", render: (row) => <span className="text-slate-500">{parseDisplayDate(row.date)}</span> },
+        { key: "subject", label: "Subject", render: (row) => row.subject || row.title || "-" },
+        {
+          key: "download",
+          label: "Download",
+          center: true,
+          render: (row) => <LinkButton url={row.pdfUrl} label={row.pdfFileName || "PDF"} />,
+        },
+      ];
+    }
+
+    if (isInstructions) {
+      return [
+        {
+          key: "number",
+          label: "Instruction No.",
+          render: (row) => <span className="font-semibold text-[#0d3b6e]">{row.number || "-"}</span>,
+        },
+        { key: "date", label: "Date", render: (row) => <span className="text-slate-500">{parseDisplayDate(row.date)}</span> },
+        { key: "subject", label: "Subject", render: (row) => row.subject || row.title || row.description || "-" },
+        {
+          key: "download",
+          label: "Download",
+          center: true,
+          render: (row) => <LinkButton url={row.pdfUrl} label={row.pdfFileName || "PDF"} />,
+        },
+      ];
+    }
+
+    if (isOrders) {
+      return [
+        ...(activeTab === "orders"
+          ? [
+              {
+                key: "category",
+                label: "Category",
+                render: (row) => row.category || "-",
+              },
+            ]
+          : []),
+        {
+          key: "orderNumber",
+          label: "Order No.",
+          render: (row) => <span className="font-semibold text-[#0d3b6e]">{row.orderNumber || row.number || "-"}</span>,
+        },
+        { key: "orderDate", label: "Date", render: (row) => <span className="text-slate-500">{parseDisplayDate(row.orderDate || row.date)}</span> },
+        { key: "subject", label: "Subject", render: (row) => row.subject || row.title || row.description || "-" },
+        {
+          key: "download",
+          label: "Download",
+          center: true,
+          render: (row) => <LinkButton url={row.pdfUrl} label={row.pdfFileName || "PDF"} />,
+        },
+      ];
+    }
+
+    if (isRegulations) {
+      return [
+        {
+          key: "regulationNo",
+          label: "Regulation",
+          render: (row) => <span className="font-semibold text-[#0d3b6e]">{row.regulationNo || row.number || "-"}</span>,
+        },
+        { key: "title", label: "Title / Description", render: (row) => row.title || row.description || "-" },
       ];
     }
 
@@ -761,7 +981,7 @@ function CBICView({
         key: "download",
         label: "Download",
         center: true,
-        render: (row) => <LinkButton url={row.pdfUrl} label="PDF" />,
+        render: (row) => <LinkButton url={row.pdfUrl} label={row.pdfFileName || "PDF"} />,
       },
     ];
   })();
@@ -777,7 +997,7 @@ function CBICView({
           {(isActs || isRules) && (
             <div className="flex items-center gap-2 text-sm text-slate-600 mb-4 flex-wrap">
               <span className="font-medium">View Complete {isActs ? "Act" : "Rule"}:</span>
-              <DocumentAction label="PDF" onClick={() => openExternal(completePdfUrl)} disabled={!completePdfUrl} />
+              <DocumentAction label={completePdfLabel} onClick={() => openExternal(completePdfUrl)} disabled={!completePdfUrl} />
               <span className="text-slate-300">|</span>
               <DocumentAction label="HTML" onClick={() => openExternal(completeHtmlUrl)} disabled={!completeHtmlUrl} />
               <span className="text-slate-300">|</span>
@@ -829,6 +1049,14 @@ function CBICView({
                     emptyLabel="All Rules"
                     minWidth="min-w-[230px]"
                   />
+                  <LabeledSelect
+                    label="Select Year"
+                    value={year}
+                    onChange={setYear}
+                    options={availableYears.length > 0 ? availableYears : CBIC_YEAR_OPTIONS}
+                    emptyLabel="All Years"
+                    minWidth="min-w-[150px]"
+                  />
                   <input
                     type="text"
                     placeholder="Enter Rule Number..."
@@ -851,8 +1079,8 @@ function CBICView({
                 label="Select Year"
                 value={year}
                 onChange={setYear}
-                options={availableYears}
-                emptyLabel="Select Year"
+                options={showCbicYearDropdown ? CBIC_YEAR_OPTIONS : availableYears}
+                emptyLabel={showCbicYearDropdown ? "All Years" : "Select Year"}
                 minWidth="min-w-[150px]"
               />
               <SearchInput search={search} setSearch={setSearch} />
@@ -862,12 +1090,24 @@ function CBICView({
 
         {isSearchOnlySection && (
           <div className="rounded-md p-4 mb-4 bg-white border border-slate-200 shadow-sm">
-            <SearchInput search={search} setSearch={setSearch} />
+            <div className="flex flex-wrap items-start gap-3">
+              {showCbicYearDropdown && !isNotifications && (
+                <LabeledSelect
+                  label="Select Year"
+                  value={year}
+                  onChange={setYear}
+                  options={CBIC_YEAR_OPTIONS}
+                  emptyLabel="All Years"
+                  minWidth="min-w-[150px]"
+                />
+              )}
+              <SearchInput search={search} setSearch={setSearch} />
+            </div>
           </div>
         )}
 
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-          {(activeTab === "regulations" || filteredData.length > 10) && (
+          {(isRegulations || filteredData.length > 10) && (
             <div className="flex items-center gap-2 text-sm text-slate-600">
               <span>show</span>
               <select value={entries} onChange={(event) => setEntries(event.target.value)} className="border border-slate-300 rounded px-2 py-1 text-sm focus:outline-none">
@@ -995,10 +1235,10 @@ function SearchInput({ search, setSearch }) {
         placeholder="Enter Keyword"
         value={search}
         onChange={(event) => setSearch(event.target.value)}
-        className="flex-1 border border-r-0 border-slate-300 rounded-l-md text-sm px-3 py-2 focus:outline-none"
+        className="flex-1 border border-r-0 border-slate-300 rounded-l-xl text-sm px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <button className="px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-r-md">
-        <Search size={15} />
+      <button className="flex items-center justify-center px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-teal-600 via-blue-600 to-indigo-700 rounded-r-xl shadow-sm">
+        <Search size={19} strokeWidth={2.5} />
       </button>
     </div>
   );
@@ -1021,10 +1261,11 @@ function LinkButton({ url, label }) {
   return (
     <button
       onClick={() => openExternal(url)}
-      className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 hover:bg-red-100 px-2 py-1 rounded"
+      title={label}
+      className="inline-flex max-w-[240px] items-center gap-1 rounded border border-red-200 bg-red-50 px-2 py-1 text-xs font-semibold text-red-700 hover:bg-red-100"
     >
-      <FileText size={11} />
-      {label}
+      <FileText size={11} className="shrink-0" />
+      <span className="truncate">{label}</span>
     </button>
   );
 }
@@ -1134,6 +1375,15 @@ export default function RegulatoryUpdates() {
   }, [activeTab, loadData]);
 
   useEffect(() => {
+    if (loading || error || notifications.length === 0) return;
+
+    const availableFinancialYears = getAvailableFinancialYears(notifications);
+    if (availableFinancialYears.length > 0 && !availableFinancialYears.includes(activeFY)) {
+      setActiveFY(availableFinancialYears[0]);
+    }
+  }, [activeFY, error, loading, notifications]);
+
+  useEffect(() => {
     if (typeof window === "undefined") return undefined;
 
     const snapshot = {
@@ -1169,7 +1419,10 @@ export default function RegulatoryUpdates() {
     };
   }, [activeAuthority, activeFY, activeLabel, activeTab, loading, notifications, search, selectedAct]);
 
-  const displayedData = notifications.filter((item) => itemMatchesSearch(item, search) && matchesFinancialYear(item, activeFY));
+  const displayedData =
+    activeAuthority === "dgft"
+      ? notifications.filter((item) => itemMatchesSearch(item, search) && matchesFinancialYear(item, activeFY))
+      : notifications;
 
   const switchAuthority = (authority) => {
     const defaultTab = getDefaultTab(authority);
@@ -1268,6 +1521,7 @@ export default function RegulatoryUpdates() {
                   setSearch={setSearch}
                   activeLabel={activeLabel}
                   activeFY={activeFY}
+                  activeTab={activeTab}
                 />
               ) : (
                 <DGFTView

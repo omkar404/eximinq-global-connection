@@ -1,0 +1,336 @@
+[dotenv@17.2.3] injecting env (6) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+✅ Excel folder exists: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\ALL_PDF
+✅ PDF folder exists: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\PDF_FILES
+📂 Watching Customs folder: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC
+
+🔄 ========== PROCESSING ALL CUSTOMS DATA ==========
+
+📖 Reading: Customs Act, 1962.xlsx
+  - Chapters found: 28
+📖 Reading: Customs Tariff Act, 1975.xlsx
+📖 Reading: Provisional Collection of Taxes Act, 1931.xlsx
+✅ Acts loaded: 272 records
+
+📖 Reading: CUSTOMS RULES.xlsx
+  - Rules loaded: 503
+✅ Rules loaded: 503 records
+
+📖 Reading: Regulations.xlsx
+  - Regulations loaded: 7
+✅ Regulations loaded: 7 records
+
+📖 Reading: Forms.xlsx
+  - Appeals: 8 forms
+  - Bonds: 3 forms
+  - Drawback: 13 forms
+  - Electronic Declaration: 23 forms
+  - Furnishing of Information: 1 forms
+  - Passenger or Baggage: 2 forms
+  - Refunds: 1 forms
+  - Settlement Commission: 2 forms
+  - Shipping Bill Forms: 10 forms
+  - Transhipment: 22 forms
+  - Warehousing: 5 forms
+  - Others: 17 forms
+✅ Forms loaded: 107 records
+
+📖 Processing: Anti-Dumping Duty
+  - Reading: Anti-Dumping Duty Notifications.xlsx
+    - 2026: 13 items
+    - 2025: 44 items
+    - 2024: 32 items
+    - Total Anti-Dumping Duty: 89 notifications
+📖 Processing: CVD
+  - Reading: CVD Notfications.xlsx
+    - 2026: 4 items
+    - 2025: 8 items
+    - 2024: 7 items
+    - Total CVD: 19 notifications
+📖 Processing: Non-Tariff
+  - Reading: Non-Tariff Notifications.xlsx
+    - 2026: 55 items
+    - 2025: 80 items
+    - 2024: 88 items
+    - Total Non-Tariff: 223 notifications
+📖 Processing: Safeguards
+  - Reading: Safeguards Notification.xlsx
+    - 2026: 1 items
+    - 2025: 3 items
+    - 2024: 1 items
+    - Total Safeguards: 5 notifications
+📖 Processing: Tariff
+  - Reading: Tariff Notifications.xlsx
+    - 2026: 22 items
+    - 2025: 60 items
+    - 2024: 50 items
+    - Total Tariff: 132 notifications
+✅ Notifications loaded
+
+📖 Reading: Circulars.xlsx
+  - 2026: 28 circulars
+  - 2025: 31 circulars
+  - 2024: 26 circulars
+✅ Circulars loaded: 85 records
+
+📖 Reading: Instructions and Guidelines.xlsx
+  - Sheets found: 2026, 2025, 2024
+  - Processing sheet: 2026
+    - 2026: 10 instructions loaded
+  - Processing sheet: 2025
+    - 2025: 34 instructions loaded
+  - Processing sheet: 2024
+    - 2024: 29 instructions loaded
+  - ✅ Total instructions loaded: 73
+✅ Instructions/Guidelines loaded: 73 records
+
+📖 Processing Orders from Non-Tariff folder
+  - Reading: Orders.xlsx
+    - 2026: 0 orders
+    - 2025: 2 orders
+    - 2024: 2 orders
+✅ Orders loaded: 4 records
+
+Allied Acts folder not found at: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC\Allied Acts
+
+📊 ========== FINAL SUMMARY SHESHNATH ==========
+  Acts: 272
+  Rules: 503
+  Regulations: 7
+  Forms: 107
+  Circulars: 85
+  Instructions: 73
+  Orders: 4
+  Allied Acts: 0
+  Notifications: 468
+  TOTAL RECORDS: 1519
+=====================================
+
+✅ Customs watcher started
+✅ Exchange rates watcher started
+Watching FTP folder: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\Foreign_Trade_Policy
+✅ FTP watcher started
+📂 Watching folder: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\ALL_PDF
+📥 Loading existing file: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\ALL_PDF\DGFT POLICY - Copy.xlsx
+📊 Processing: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\ALL_PDF\DGFT POLICY - Copy.xlsx
+✅ DGFT Excel Loaded: DGFT POLICY - Copy.xlsx
+📦 Total Records: 450
+🚀 Backend running on 0.0.0.0:5000
+📁 Excel folder: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC
+📁 PDF folder:   C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC
+FTP Watcher is ready
+📥 New file detected: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\ALL_PDF\DGFT POLICY - Copy.xlsx
+📊 Processing: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\DGFT\ALL_PDF\DGFT POLICY - Copy.xlsx
+✅ DGFT Excel Loaded: DGFT POLICY - Copy.xlsx
+📦 Total Records: 450
+✅ DGFT Watcher is ready...
+✅ Customs Watcher is ready...
+
+MongoDB Connected
+📥 New Excel file detected: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC\Rules\~$CUSTOMS RULES.xlsx
+
+🔄 ========== PROCESSING ALL CUSTOMS DATA ==========
+
+📖 Reading: Customs Act, 1962.xlsx
+  - Chapters found: 28
+📖 Reading: Customs Tariff Act, 1975.xlsx
+📖 Reading: Provisional Collection of Taxes Act, 1931.xlsx
+✅ Acts loaded: 272 records
+
+📖 Reading: CUSTOMS RULES.xlsx
+  - Rules loaded: 503
+✅ Rules loaded: 503 records
+
+📖 Reading: Regulations.xlsx
+  - Regulations loaded: 7
+✅ Regulations loaded: 7 records
+
+📖 Reading: Forms.xlsx
+  - Appeals: 8 forms
+  - Bonds: 3 forms
+  - Drawback: 13 forms
+  - Electronic Declaration: 23 forms
+  - Furnishing of Information: 1 forms
+  - Passenger or Baggage: 2 forms
+  - Refunds: 1 forms
+  - Settlement Commission: 2 forms
+  - Shipping Bill Forms: 10 forms
+  - Transhipment: 22 forms
+  - Warehousing: 5 forms
+  - Others: 17 forms
+✅ Forms loaded: 107 records
+
+📖 Processing: Anti-Dumping Duty
+  - Reading: Anti-Dumping Duty Notifications.xlsx
+    - 2026: 13 items
+    - 2025: 44 items
+    - 2024: 32 items
+    - Total Anti-Dumping Duty: 89 notifications
+📖 Processing: CVD
+  - Reading: CVD Notfications.xlsx
+    - 2026: 4 items
+    - 2025: 8 items
+    - 2024: 7 items
+    - Total CVD: 19 notifications
+📖 Processing: Non-Tariff
+  - Reading: Non-Tariff Notifications.xlsx
+    - 2026: 55 items
+    - 2025: 80 items
+    - 2024: 88 items
+    - Total Non-Tariff: 223 notifications
+📖 Processing: Safeguards
+  - Reading: Safeguards Notification.xlsx
+    - 2026: 1 items
+    - 2025: 3 items
+    - 2024: 1 items
+    - Total Safeguards: 5 notifications
+📖 Processing: Tariff
+  - Reading: Tariff Notifications.xlsx
+    - 2026: 22 items
+    - 2025: 60 items
+    - 2024: 50 items
+    - Total Tariff: 132 notifications
+✅ Notifications loaded
+
+📖 Reading: Circulars.xlsx
+  - 2026: 28 circulars
+  - 2025: 31 circulars
+  - 2024: 26 circulars
+✅ Circulars loaded: 85 records
+
+📖 Reading: Instructions and Guidelines.xlsx
+  - Sheets found: 2026, 2025, 2024
+  - Processing sheet: 2026
+    - 2026: 10 instructions loaded
+  - Processing sheet: 2025
+    - 2025: 34 instructions loaded
+  - Processing sheet: 2024
+    - 2024: 29 instructions loaded
+  - ✅ Total instructions loaded: 73
+✅ Instructions/Guidelines loaded: 73 records
+
+📖 Processing Orders from Non-Tariff folder
+  - Reading: Orders.xlsx
+    - 2026: 0 orders
+    - 2025: 2 orders
+    - 2024: 2 orders
+✅ Orders loaded: 4 records
+
+Allied Acts folder not found at: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC\Allied Acts
+
+📊 ========== FINAL SUMMARY SHESHNATH ==========
+  Acts: 272
+  Rules: 503
+  Regulations: 7
+  Forms: 107
+  Circulars: 85
+  Instructions: 73
+  Orders: 4
+  Allied Acts: 0
+  Notifications: 468
+  TOTAL RECORDS: 1519
+=====================================
+
+📥 New Excel file detected: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC\Notifications\Anti-Dumping Duty\~$Anti-Dumping Duty Notifications.xlsx
+
+🔄 ========== PROCESSING ALL CUSTOMS DATA ==========
+
+📖 Reading: Customs Act, 1962.xlsx
+  - Chapters found: 28
+📖 Reading: Customs Tariff Act, 1975.xlsx
+📖 Reading: Provisional Collection of Taxes Act, 1931.xlsx
+✅ Acts loaded: 272 records
+
+📖 Reading: CUSTOMS RULES.xlsx
+  - Rules loaded: 503
+✅ Rules loaded: 503 records
+
+📖 Reading: Regulations.xlsx
+  - Regulations loaded: 7
+✅ Regulations loaded: 7 records
+
+📖 Reading: Forms.xlsx
+  - Appeals: 8 forms
+  - Bonds: 3 forms
+  - Drawback: 13 forms
+  - Electronic Declaration: 23 forms
+  - Furnishing of Information: 1 forms
+  - Passenger or Baggage: 2 forms
+  - Refunds: 1 forms
+  - Settlement Commission: 2 forms
+  - Shipping Bill Forms: 10 forms
+  - Transhipment: 22 forms
+  - Warehousing: 5 forms
+  - Others: 17 forms
+✅ Forms loaded: 107 records
+
+📖 Processing: Anti-Dumping Duty
+  - Reading: Anti-Dumping Duty Notifications.xlsx
+    - 2026: 13 items
+    - 2025: 44 items
+    - 2024: 32 items
+    - Total Anti-Dumping Duty: 89 notifications
+📖 Processing: CVD
+  - Reading: CVD Notfications.xlsx
+    - 2026: 4 items
+    - 2025: 8 items
+    - 2024: 7 items
+    - Total CVD: 19 notifications
+📖 Processing: Non-Tariff
+  - Reading: Non-Tariff Notifications.xlsx
+    - 2026: 55 items
+    - 2025: 80 items
+    - 2024: 88 items
+    - Total Non-Tariff: 223 notifications
+📖 Processing: Safeguards
+  - Reading: Safeguards Notification.xlsx
+    - 2026: 1 items
+    - 2025: 3 items
+    - 2024: 1 items
+    - Total Safeguards: 5 notifications
+📖 Processing: Tariff
+  - Reading: Tariff Notifications.xlsx
+    - 2026: 22 items
+    - 2025: 60 items
+    - 2024: 50 items
+    - Total Tariff: 132 notifications
+✅ Notifications loaded
+
+📖 Reading: Circulars.xlsx
+  - 2026: 28 circulars
+  - 2025: 31 circulars
+  - 2024: 26 circulars
+✅ Circulars loaded: 85 records
+
+📖 Reading: Instructions and Guidelines.xlsx
+  - Sheets found: 2026, 2025, 2024
+  - Processing sheet: 2026
+    - 2026: 10 instructions loaded
+  - Processing sheet: 2025
+    - 2025: 34 instructions loaded
+  - Processing sheet: 2024
+    - 2024: 29 instructions loaded
+  - ✅ Total instructions loaded: 73
+✅ Instructions/Guidelines loaded: 73 records
+
+📖 Processing Orders from Non-Tariff folder
+  - Reading: Orders.xlsx
+    - 2026: 0 orders
+    - 2025: 2 orders
+    - 2024: 2 orders
+✅ Orders loaded: 4 records
+
+Allied Acts folder not found at: C:\Users\Admin\Desktop\Eximinq\eximinq-global-connection\backend\PDF_DOC\CBIC\Allied Acts
+
+📊 ========== FINAL SUMMARY SHESHNATH ==========
+  Acts: 272
+  Rules: 503
+  Regulations: 7
+  Forms: 107
+  Circulars: 85
+  Instructions: 73
+  Orders: 4
+  Allied Acts: 0
+  Notifications: 468
+  TOTAL RECORDS: 1519
+=====================================
+

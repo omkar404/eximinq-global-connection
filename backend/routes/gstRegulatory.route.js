@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const gstRegulatoryService = require("../services/gstRegulatory.service");
 
 const router = express.Router();
@@ -32,6 +33,25 @@ router.get("/notifications/category/:category", (req, res) => {
     });
   } catch (error) {
     return res.status(404).json({ success: false, message: error.message });
+  }
+});
+
+router.get("/pdf-download", (req, res) => {
+  try {
+    const { file } = req.query;
+
+    if (!file) {
+      return res.status(400).json({ success: false, message: "file is required" });
+    }
+
+    const pdfPath = gstRegulatoryService.resolveGstPdfDownloadPath(file);
+    if (!pdfPath) {
+      return res.status(404).json({ success: false, message: "PDF not found" });
+    }
+
+    return res.download(pdfPath, path.basename(pdfPath));
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
   }
 });
 
