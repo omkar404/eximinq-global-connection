@@ -20,7 +20,7 @@ const Hero = () => {
                     <a href="#home" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         New SCOMET License Request
                     </a>
-                    <a href="#contact" className="bg-white text-brand-900 hover:bg-slate-100 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                    <a href="#compliance" className="bg-white text-brand-900 hover:bg-slate-100 text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
                         Technical Classification
                     </a>
                     <a href="#categories" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
