@@ -12,6 +12,7 @@ const Navbar = () => {
                 <a href="#about" class="hover:text-brand-600 transition">What is RoDTEP?</a>
                 <a href="#rates" class="hover:text-brand-600 transition">Check Rates</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
                 <a href="#faq" class="hover:text-brand-600 transition">FAQs</a>
         </div>
 

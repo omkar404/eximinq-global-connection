@@ -461,7 +461,7 @@ const CloudDeskLegalMetrology = () => {
                   depending on the state authority.
                 </p>
                 <a
-                  href="#contact"
+                  href="#process"
                   className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
                 >
                   Apply Now

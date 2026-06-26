@@ -35,7 +35,7 @@ async function sendEmail(record) {
     hsnCode,   // ✅ ADDED
   } = record;
 
-  const serviceDisplay = service || "AD Code Registration";
+  const serviceDisplay = service || "E-RCMC Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,

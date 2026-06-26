@@ -13,6 +13,7 @@ const Navbar = () => {
                 <a href="#benefits" class="hover:text-brand-600 transition">Benefits</a>
                 <a href="#countries" class="hover:text-brand-600 transition">Countries</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}

@@ -30,9 +30,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   /* Show category dropdown for UN IIP Coordination */
   const showCategory = type === "UN_IIP_Coordination";
 
-  /* Two-level UN IIP OPTIONS — label is used as the key */
+  /* Two-level UN IIP OPTIONS — label is used as the key, shortLabel for dropdown display */
   const UN_IIP_CATEGORIES = [
     {
+      shortLabel: "Drums (Code: 1)",
       label: "Drums (Code: 1) - Cylindrical packagings with flat or convex heads",
       options: [
         "1A1: Steel drum, non-removable head (tight head)",
@@ -48,6 +49,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       ],
     },
     {
+      shortLabel: "Wooden Barrels (Code: 2)",
       label: "Wooden Barrels (Code: 2) - Originally for wooden barrels (largely obsolete/reserved in modern usage)",
       options: [
         "2C1: Wooden barrel, bung type",
@@ -55,6 +57,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       ],
     },
     {
+      shortLabel: "Jerricans (Code: 3)",
       label: "Jerricans (Code: 3) - Rectangular or polygonal cross-section containers (often used for fuels/chemicals)",
       options: [
         "3A1: Steel jerrican, non-removable head",
@@ -66,6 +69,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       ],
     },
     {
+      shortLabel: "Boxes (Code: 4)",
       label: "Boxes (Code: 4) - Rectangular containers with solid sides",
       options: [
         "4A: Steel box",
@@ -81,6 +85,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       ],
     },
     {
+      shortLabel: "Bags (Code: 5)",
       label: "Bags (Code: 5) - Flexible packaging made of paper, plastic film, textiles, etc.",
       options: [
         "5H1: Woven plastic bag, unlined",
@@ -95,6 +100,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       ],
     },
     {
+      shortLabel: "Composite Packaging (Code: 6)",
       label: "Composite Packaging (Code: 6) - Consists of an inner receptacle and an outer packaging (single unit)",
       options: [
         "6HA1: Plastic inner receptacle with Steel outer drum",
@@ -339,7 +345,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             )}
 
-            {/* STEP 1: PACKAGING CATEGORY — full label shown, full label stored as value */}
+            {/* STEP 1: PACKAGING CATEGORY — short label shown in dropdown, full label stored as value */}
             {showCategory && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
@@ -357,7 +363,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   <option value="">Select Category</option>
                   {UN_IIP_CATEGORIES.map((cat) => (
                     <option key={cat.label} value={cat.label}>
-                      {cat.label}
+                      {cat.shortLabel}
                     </option>
                   ))}
                 </select>
@@ -367,11 +373,11 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               </div>
             )}
 
-            {/* SELECTED CATEGORY DISPLAY BOX */}
-            {showCategory && category && (
+            {/* SELECTED CATEGORY DISPLAY BOX — full label shown here */}
+            {showCategory && category && selectedCategoryData && (
               <div className="bg-indigo-50 border border-indigo-200 rounded-lg px-4 py-2">
                 <p className="text-xs font-bold text-indigo-700 uppercase mb-0.5">Selected Category</p>
-                <p className="text-sm text-indigo-900 font-medium">{category}</p>
+                <p className="text-sm text-indigo-900 font-medium">{selectedCategoryData.label}</p>
               </div>
             )}
 

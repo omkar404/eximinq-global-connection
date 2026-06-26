@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
-    Category: "Electronics",
+    Category: "",
     company: "",
     mobile: "",
   });
@@ -81,7 +81,7 @@ const QuickForm = () => {
 
       // Reset form (keep default Category, clear company and mobile)
       setForm({
-        Category: "Electronics",
+        Category: "",
         company: "",
         mobile: "",
       });
@@ -114,6 +114,7 @@ const QuickForm = () => {
             onChange={handleChange}
             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
           >
+            <option>Select Product   </option>
             <option>Electronics</option>
             <option>Food Items</option>
             <option>Cosmetics</option>
