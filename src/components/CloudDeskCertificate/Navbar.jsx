@@ -6,35 +6,31 @@ const Navbar = () => {
   return (
     <header className="bg-white shadow-sm sticky top-24 z-30">
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
-        {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#about" class="hover:text-brand-600 transition">
+          <a href="#overview" className="hover:text-brand-600 transition">
             Overview
           </a>
-          <a href="#types" class="hover:text-brand-600 transition">
-            Types (FTA/PTA)
+          <a href="#types" className="hover:text-brand-600 transition">
+            COO Types
           </a>
-          <a href="#agreements" class="hover:text-brand-600 transition">
-            Agreements
+          <a href="#benefits" className="hover:text-brand-600 transition">
+            Benefits
           </a>
-          <a href="#process" class="hover:text-brand-600 transition">
+          <a href="#process" className="hover:text-brand-600 transition">
             Process
           </a>
-          <a href="#pricing" class="hover:text-brand-600 transition">
-            Fees
+          <a href="#faqs" className="hover:text-brand-600 transition">
+            FAQs
           </a>
         </div>
 
-        {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        <a 
-          // href="#process"
-          href="#pricing"
+        <a
+          href="#contact"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
-          Apply Now
+          Talk to Expert
         </a>
 
-        {/* MOBILE MENU BUTTON */}
         <button
           className="md:hidden text-brand-900 text-2xl absolute right-4"
           onClick={() => setOpen(!open)}
@@ -43,26 +39,28 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#about" class="block py-2 text-slate-600">
+          <a href="#overview" className="block py-2 text-slate-600">
             Overview
           </a>
-          <a href="#types" class="block py-2 text-slate-600">
-            Types
+          <a href="#types" className="block py-2 text-slate-600">
+            COO Types
           </a>
-          <a href="#agreements" class="block py-2 text-slate-600">
-            Agreements
+          <a href="#benefits" className="block py-2 text-slate-600">
+            Benefits
           </a>
-          <a href="#contact" class="block py-2 text-brand-600 font-bold">
-            Apply Online
+          <a href="#process" className="block py-2 text-slate-600">
+            Process
           </a>
-          <a 
-            href="#home"
+          <a href="#faqs" className="block py-2 text-slate-600">
+            FAQs
+          </a>
+          <a
+            href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
-            Apply Now
+            Start Request
           </a>
         </div>
       )}

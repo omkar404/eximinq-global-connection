@@ -31,163 +31,314 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskZeroDuty/MainNavbar";
 
+const EPCG_FAQS = [
+  {
+    question: "What is the EPCG scheme?",
+    answer:
+      "The Export Promotion Capital Goods scheme allows eligible exporters to import capital goods at concessional or zero customs duty against a future export obligation under the Foreign Trade Policy."
+  },
+  {
+    question: "Who is eligible to apply for an EPCG licence?",
+    answer:
+      "Manufacturer exporters, merchant exporters tied to supporting manufacturers, and service providers earning foreign exchange can generally apply, subject to product conditions, policy provisions, and DGFT compliance requirements."
+  },
+  {
+    question: "What can be imported under EPCG?",
+    answer:
+      "Capital goods for pre-production, production, and post-production can be covered, including machinery, spares, tools, jigs, fixtures, dies, moulds, and in some cases specialised software or technology linked to export activity."
+  },
+  {
+    question: "What is the export obligation under EPCG?",
+    answer:
+      "The specific export obligation is linked to the customs duty saved and must be fulfilled within the applicable obligation period. The exact computation depends on the authorisation terms, policy period, and any concession available to the exporter."
+  },
+  {
+    question: "What documents are required for EPCG application?",
+    answer:
+      "Typical documents include IEC, PAN, GST details, machine technical literature, proforma invoice, nexus justification, export profile, digital authorisations, and other declarations or certificates required by DGFT and customs."
+  },
+  {
+    question: "Why is the installation certificate important?",
+    answer:
+      "The installation certificate helps prove that imported capital goods were installed at the declared premises within the prescribed timeline, making it a critical compliance checkpoint before redemption and EODC closure."
+  },
+  {
+    question: "What happens if export obligation is not fulfilled?",
+    answer:
+      "Non-fulfilment can trigger demand for saved duty, applicable interest, customs complications, and difficulty in obtaining EODC closure. Early review, extension strategy, or corrective filings are important before defaults escalate."
+  },
+  {
+    question: "How does EXIMINQ help with EPCG redemption and EODC?",
+    answer:
+      "We support licence planning, customs registration, installation certificate coordination, shipping bill and e-BRC reconciliation, block-wise export obligation tracking, extension strategy, and final redemption documentation for EODC closure."
+  }
+];
+
+const EPCG_ELIGIBILITY = [
+  "Manufacturer exporters importing machinery for direct use in export production.",
+  "Merchant exporters backed by supporting manufacturers and documented production linkage.",
+  "Service providers earning foreign exchange, such as hospitality, healthcare, logistics, and eligible service sectors.",
+  "Exporters planning technology upgrades, plant expansion, or productivity improvements with identifiable export commitments."
+];
+
+const EPCG_BENEFITS = [
+  "Zero or concessional customs duty on eligible capital goods imports.",
+  "Improved manufacturing capacity, productivity, and technology modernisation.",
+  "Ability to preserve working capital otherwise blocked in import duty outflow.",
+  "Structured redemption path through export obligation planning and EODC closure."
+];
+
+const EPCG_DOCUMENTS = [
+  "IEC, PAN, GST, and entity constitution documents.",
+  "Product profile, export history, and projected export obligation plan.",
+  "Proforma invoice, technical literature, machinery catalogue, and specifications.",
+  "Nexus note connecting the capital goods to the export product or service.",
+  "Authorised signatory details, declarations, and digital filing support records.",
+  "Post-approval files such as customs registration papers, installation certificate, shipping bills, and e-BRC reconciliation."
+];
+
+const EPCG_TIMELINE = [
+  {
+    title: "Pre-application review",
+    detail:
+      "Validate eligibility, machine nexus, duty-saving estimate, export capacity, and the practical feasibility of meeting export obligation before filing."
+  },
+  {
+    title: "DGFT filing and approval",
+    detail:
+      "Prepare the EPCG application, draft the technical narrative, file through DGFT, and handle clarifications tied to machinery or export-product linkage."
+  },
+  {
+    title: "Customs registration and import",
+    detail:
+      "Register the authorisation with customs, complete bond or bank-guarantee steps where applicable, and clear the capital goods under the EPCG licence."
+  },
+  {
+    title: "Installation and export tracking",
+    detail:
+      "Obtain the installation certificate, map the machine to operations, and track shipping bills, e-BRCs, and block-wise obligation fulfilment."
+  },
+  {
+    title: "Redemption and EODC closure",
+    detail:
+      "Compile export proof, reconcile duty saved versus fulfilled obligation, file the closure set, and coordinate customs release after EODC issuance."
+  }
+];
+
+const EPCG_GOVERNMENT_REFERENCES = [
+  {
+    label: "DGFT EPCG scheme guidance",
+    href: "https://www.dgft.gov.in/CP/?opt=epcg"
+  },
+  {
+    label: "Foreign Trade Policy and Handbook of Procedures",
+    href: "https://www.dgft.gov.in/CP/?opt=handbook-procedures"
+  },
+  {
+    label: "DGFT regulatory updates and policy notices",
+    href: "/foreign-trade-policy/regulatory-updates"
+  }
+];
+
+const COVERAGE_CARDS = [
+  {
+    title: "Pre-Production",
+    icon: Factory,
+    border: "border-indigo-500",
+    text: "text-indigo-600",
+    description: "Goods required before actual manufacturing starts.",
+    items: ["Diesel Generator sets", "Transformers", "Effluent treatment plants", "Storage racks"]
+  },
+  {
+    title: "Production",
+    icon: Cog,
+    border: "border-accent-500",
+    text: "text-accent-600",
+    description: "Core machinery used for manufacturing export products.",
+    items: ["CNC machines and lathes", "Processing plants", "Textile looms", "Injection moulding machines"]
+  },
+  {
+    title: "Post-Production",
+    icon: PackageCheck,
+    border: "border-green-500",
+    text: "text-green-600",
+    description: "Equipment needed for finishing, packing, and testing.",
+    items: ["Packaging machinery", "Testing equipment and labs", "Quality control tools", "Barcode printers"]
+  }
+];
+
+const WHY_CLOUDDESK = [
+  {
+    title: "Capital-saved valuation audit",
+    text:
+      "The export obligation is directly linked to the duty saved. We model the practical obligation before filing so you can decide whether EPCG, MOOWR, or another structure is commercially smarter.",
+    icon: AlertTriangle,
+    tone: "bg-red-100 text-red-600"
+  },
+  {
+    title: "Nexus and technical certificate management",
+    text:
+      "To import a machine duty-free, you must prove nexus between the machine and the export output. We coordinate technical descriptions and certification support so the filing is defensible before DGFT and customs.",
+    icon: CheckCircle,
+    tone: "bg-blue-100 text-blue-600"
+  },
+  {
+    title: "Six-year export obligation radar",
+    text:
+      "EPCG rarely fails at application stage. It fails later through missed block-wise tracking, wrong shipping bill treatment, or delayed compliance. We help monitor the obligation before it becomes a customs and interest problem.",
+    icon: Building,
+    tone: "bg-green-100 text-green-600"
+  },
+  {
+    title: "Redemption and bank-guarantee release support",
+    text:
+      "The final outcome is clean EODC closure, customs bond cancellation, and collateral release. We reconcile shipping bills, e-BRCs, installation proof, and licence history so the redemption pack is closure-ready.",
+    icon: ShieldUser,
+    tone: "bg-purple-100 text-purple-600"
+  }
+];
+
+const CLOSURE_SUPPORT = [
+  {
+    title: "Customs registration and debit alignment",
+    text:
+      "If imports were handled at multiple ports, the customs licence cell entries, installation certificates, and debit records need to reconcile before closure. We handle that workflow under this core EPCG page."
+  },
+  {
+    title: "EOP extension and default management",
+    text:
+      "When the obligation window slips, the real work is EOP extension, shortfall computation, clubbing analysis, and evidence assembly before a demand hardens into duty plus interest."
+  },
+  {
+    title: "EODC retrieval and BG release",
+    text:
+      "The end-state is clean closure: EODC issuance, customs bond cancellation, and bank-guarantee release so fresh trade benefits are not blocked by an old EPCG licence."
+  }
+];
+
 const CloudDeskZeroDuty = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    type: "",
-    // source: "services/epcg-scheme",
+    type: ""
   });
 
   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
-
-    // TODO → send API call
-    // axios.post("/api/enroll", formData)
-
-    alert("Form submitted — check console for data.");
+    alert("Form submitted - check console for data.");
   };
+
   return (
     <>
       <Helmet>
         <title>
-          EPCG Scheme Registration India | DGFT CUSTOMS Services | EXIMINQ
+          EPCG Scheme Consultant India | DGFT EPCG License, Export Obligation
+          & EODC Support | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content="EPCG Scheme consultancy in India. Import capital goods at zero customs duty with export obligation planning, compliance tracking, customs cell coordination, and EODC redemption support."
+          content="EPCG scheme consultant in India for DGFT EPCG licence application, customs registration, installation certificate, export obligation tracking, EODC redemption, and closure support."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/epcg-scheme"
+        <meta
+          name="keywords"
+          content="EPCG scheme consultant, EPCG licence consultant India, DGFT EPCG licence, EPCG export obligation, EPCG EODC, EPCG redemption, installation certificate EPCG, customs registration EPCG"
         />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href="https://eximinq.in/services/epcg-scheme" />
 
         <meta
           property="og:title"
-          content="EPCG Scheme Consultancy in India"
+          content="EPCG Scheme Consultant India | DGFT EPCG License & EODC Support"
         />
         <meta
           property="og:description"
-          content="Apply for EPCG license under DGFT with export obligation tracking, customs cell coordination, and closure support."
+          content="Get end-to-end EPCG consulting for licence filing, customs registration, installation certificate, export obligation management, and EODC closure."
         />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/epcg-scheme"
-        />
+        <meta property="og:url" content="https://eximinq.in/services/epcg-scheme" />
         <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
 
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
               {
+                "@type": "WebPage",
+                "@id": "https://eximinq.in/services/epcg-scheme",
+                url: "https://eximinq.in/services/epcg-scheme",
+                name:
+                  "EPCG Scheme Consultant India | DGFT EPCG License, Export Obligation & EODC Support | EXIMINQ",
+                description:
+                  "EPCG scheme consultant in India for DGFT EPCG licence application, customs registration, installation certificate, export obligation tracking, EODC redemption, and closure support.",
+                isPartOf: {
+                  "@type": "WebSite",
+                  name: "EXIMINQ",
+                  url: "https://eximinq.in"
+                }
+              },
+              {
                 "@type": "BreadcrumbList",
-                "itemListElement": [
+                itemListElement: [
                   {
                     "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://eximinq.in"
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in"
                   },
                   {
                     "@type": "ListItem",
-                    "position": 2,
-                    "name": "Services",
-                    "item": "https://eximinq.in/services"
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services"
                   },
                   {
                     "@type": "ListItem",
-                    "position": 3,
-                    "name": "EPCG Scheme",
-                    "item": "https://eximinq.in/services/epcg-scheme"
+                    position: 3,
+                    name: "EPCG Scheme",
+                    item: "https://eximinq.in/services/epcg-scheme"
                   }
                 ]
               },
               {
                 "@type": "Service",
-                "name": "EPCG Scheme Consultancy",
-                "serviceType": "Export Promotion Capital Goods License",
-                "description":
-                  "Consultancy for EPCG registration, export obligation management, nexus certification and EODC redemption.",
-                "provider": {
+                "@id": "https://eximinq.in/services/epcg-scheme#service",
+                name: "EPCG Scheme Consultancy",
+                serviceType:
+                  "EPCG licence application, compliance, redemption and EODC support",
+                description:
+                  "Consultancy for DGFT EPCG application, export obligation planning, customs registration, installation certificate coordination, extension strategy, and EODC redemption.",
+                provider: {
                   "@type": "Organization",
-                  "name": "Eximinq Global Connections",
-                  "url": "https://eximinq.in"
+                  name: "Eximinq Global Connections",
+                  url: "https://eximinq.in"
                 },
-                "areaServed": {
+                areaServed: {
                   "@type": "Country",
-                  "name": "India"
+                  name: "India"
+                },
+                offers: {
+                  "@type": "Offer",
+                  availability: "https://schema.org/InStock",
+                  url: "https://eximinq.in/services/epcg-scheme"
                 }
               },
               {
                 "@type": "FAQPage",
-                "mainEntity": [
-                  {
-                    "@type": "Question",
-                    "name": "What can I import under the EPCG Scheme?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "The exporter must fulfill exports worth six times the duty saved within six years."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is the Export Obligation (EO)?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Manufacturer exporters, merchant exporters and service providers earning foreign exchange are eligible."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What happens if I can't meet the Export Obligation?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "The saved customs duty along with applicable interest must be paid if export obligation is not fulfilled."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Can I sell the machinery after importing it?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "No. The machinery is subject to \"Actual User Condition\" until the EODC is issued. You cannot shift, sell, or lease the machine without prior permission. CloudDesk helps with Installation Certificates to prove the machine is in your factory."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is the \"Average Export Level\"?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "This is the average of your exports in the 3 years preceding the license. You must maintain this average every year while the EPCG license is active. CloudDesk helps you track this \"Invisible Obligation\" so you don't default."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Is there any relief for \"Green Technology\" or \"North East\" units?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Yes. In 2026, units producing Green Energy equipment or units located in the North East/Hilly regions have a reduced Export Obligation (often 75% of the normal rate). CloudDesk checks your eligibility for these \"Bonus Benefits.\""
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is \"Post-Export EPCG\"?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "If you don't want to take the risk of future obligations, you pay the duty upfront, do the exports, and then claim the duty back as a \"Duty Credit Scrip.\" CloudDesk manages the scrip application to ensure you get your cash back."
-                    }
-                  },
-                ]
+                mainEntity: EPCG_FAQS.map((item) => ({
+                  "@type": "Question",
+                  name: item.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: item.answer
+                  }
+                }))
               }
             ]
           })}
         </script>
       </Helmet>
+
       <div className="bg-slate-50 text-slate-800">
-        {/* Dynamic Sections */}
-        {/* <TopBar /> */}
         <MainNavbar setShowEnrollModal={setShowEnrollModal} />
         <Navbar setShowEnrollModal={setShowEnrollModal} />
         <Hero setShowEnrollModal={setShowEnrollModal} />
@@ -195,38 +346,41 @@ const CloudDeskZeroDuty = () => {
         <ModalEnroll
           show={showEnrollModal.open}
           type={showEnrollModal.type}
-          // actionType={showEnrollModal.actionType}
-          // source={showEnrollModal.source}
           onSubmit={handleEnrollmentSubmit}
-          onClose={() =>
-            setShowEnrollModal({
-              open: false,
-              type: "",
-              // source: "services/epcg-scheme",
-            })
-          }
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
         />
-
-        {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
         <section id="about" className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-slate-900 mb-4">
-                What is EPCG Scheme?
+                What is the EPCG scheme?
               </h2>
-              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+              <div className="w-24 h-1 bg-accent-500 mx-auto rounded" />
             </div>
 
             <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
               <p className="mb-4">
-                The <strong>Export Promotion Capital Goods (EPCG) Scheme</strong>
-                facilitates the import of capital goods at{" "}
-                <strong>Zero Customs Duty</strong>.
+                The <strong>Export Promotion Capital Goods (EPCG) Scheme</strong>{" "}
+                is one of the most important DGFT schemes for manufacturers,
+                merchant exporters, and eligible service providers that want to
+                import capital goods with major customs-duty savings while
+                expanding export capacity.
               </p>
               <p className="mb-4">
-                Exporters must fulfill an <strong>Export Obligation (EO)</strong>{" "}
-                equal to 6× the duty saved within 6 years.
+                Searchers looking for an <strong>EPCG scheme consultant</strong>,{" "}
+                <strong>DGFT EPCG licence support</strong>, or{" "}
+                <strong>EPCG export obligation help</strong> usually need more
+                than a filing agent. They need planning for duty saved, machine
+                nexus, customs registration, installation certificate
+                timelines, export obligation tracking, and final{" "}
+                <strong>EODC redemption</strong>.
+              </p>
+              <p className="mb-4">
+                This page is therefore built as a complete EPCG resource for
+                applicants comparing eligibility, document requirements,
+                benefits, process steps, risk points, and closure support
+                before they apply under the Foreign Trade Policy.
               </p>
             </div>
 
@@ -235,15 +389,17 @@ const CloudDeskZeroDuty = () => {
                 <Factory className="text-brand-500 w-12 h-12 mx-auto mb-4" />
                 <h3 className="font-bold text-lg mb-2">Any Sector</h3>
                 <p className="text-sm text-slate-500">
-                  Manufacturer & Merchant Exporters both eligible.
+                  Manufacturer and merchant exporters can both qualify under the
+                  right structure.
                 </p>
               </div>
 
               <div className="p-6 bg-slate-50 rounded-lg border border-slate-100 hover:shadow-md transition">
                 <Cog className="text-brand-500 w-12 h-12 mx-auto mb-4" />
-                <h3 className="font-bold text-lg mb-2">All Machinery</h3>
+                <h3 className="font-bold text-lg mb-2">Capital Goods Focus</h3>
                 <p className="text-sm text-slate-500">
-                  Covers capital goods, spares, moulds, dies, fixtures & tools.
+                  Covers machinery, spares, moulds, dies, fixtures, tools, and
+                  related equipment.
                 </p>
               </div>
 
@@ -251,9 +407,88 @@ const CloudDeskZeroDuty = () => {
                 <HandCoins className="text-brand-500 w-12 h-12 mx-auto mb-4" />
                 <h3 className="font-bold text-lg mb-2">Service Providers</h3>
                 <p className="text-sm text-slate-500">
-                  Hotels, hospitals & logistics earning foreign exchange also
-                  eligible.
+                  Eligible service sectors earning foreign exchange may also use
+                  EPCG for technology upgrades.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="eligibility" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                  Eligibility and Benefits
+                </span>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-slate-900">
+                  Who should apply for an EPCG licence?
+                </h2>
+                <p className="mt-5 text-slate-600 leading-relaxed">
+                  If your business is planning a technology upgrade, new plant
+                  line, or high-value equipment import linked to future
+                  exports, the EPCG scheme can materially reduce landed cost.
+                  Businesses researching EPCG also want to know whether the
+                  later compliance burden is worth the duty saved. This section
+                  addresses that exact search intent.
+                </p>
+
+                <div className="mt-8 grid gap-4">
+                  {EPCG_ELIGIBILITY.map((item) => (
+                    <div
+                      key={item}
+                      className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                    >
+                      <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
+                      <p className="text-sm leading-relaxed text-slate-700">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-brand-100 bg-gradient-to-br from-brand-50 to-white p-8 shadow-sm">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Why exporters choose EPCG
+                </h3>
+                <p className="mt-3 text-slate-600">
+                  Businesses evaluating EPCG versus Advance Authorisation or
+                  MOOWR usually want to understand cash-flow relief, export
+                  planning flexibility, and long-term compliance effort.
+                </p>
+                <div className="mt-6 space-y-4">
+                  {EPCG_BENEFITS.map((item) => (
+                    <div key={item} className="flex gap-3">
+                      <BadgePercent className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
+                      <p className="text-sm text-slate-700">{item}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-8 rounded-2xl bg-white p-5 border border-slate-200">
+                  <p className="text-sm text-slate-600">
+                    Comparing schemes before you commit?
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
+                    <a
+                      href="/services/advance-authorisation/"
+                      className="text-brand-700 underline underline-offset-4"
+                    >
+                      Advance Authorisation support
+                    </a>
+                    <a
+                      href="/services/moowr-scheme/"
+                      className="text-brand-700 underline underline-offset-4"
+                    >
+                      MOOWR comparison
+                    </a>
+                    <a
+                      href="/services/eop-extension/"
+                      className="text-brand-700 underline underline-offset-4"
+                    >
+                      EOP extension help
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -261,92 +496,75 @@ const CloudDeskZeroDuty = () => {
 
         <section id="coverage" className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
-            {/* Heading */}
             <div className="text-center mb-16">
               <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
                 Scope
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-                What Can You Import?
+                What can you import under EPCG?
               </h2>
               <p className="text-slate-500 mt-2">
                 Comprehensive coverage across the production lifecycle.
               </p>
             </div>
 
-            {/* Grid */}
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Pre-Production */}
-              <div className="bg-white rounded-xl shadow-md p-8 border-t-4 border-indigo-500 hover:shadow-xl transition">
-                <Factory className="w-12 h-12 text-indigo-600 mb-4" />
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  Pre-Production
-                </h3>
-                <p className="text-sm text-slate-600 mb-4">
-                  Goods required before the actual manufacturing starts.
-                </p>
-                <ul className="text-sm text-slate-600 space-y-2">
-                  {[
-                    "Diesel Generator (DG) Sets",
-                    "Transformers",
-                    "Effluent Treatment Plants",
-                    "Storage Racks",
-                  ].map((item) => (
-                    <li key={item} className="flex items-center">
-                      <CheckCircle className="text-green-500 w-4 h-4 mr-2" />{" "}
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {COVERAGE_CARDS.map((card) => {
+                const Icon = card.icon;
+                return (
+                  <div
+                    key={card.title}
+                    className={`bg-white rounded-xl shadow-md p-8 border-t-4 ${card.border} hover:shadow-xl transition`}
+                  >
+                    <Icon className={`w-12 h-12 ${card.text} mb-4`} />
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 mb-4">{card.description}</p>
+                    <ul className="text-sm text-slate-600 space-y-2">
+                      {card.items.map((item) => (
+                        <li key={item} className="flex items-center">
+                          <CheckCircle className="text-green-500 w-4 h-4 mr-2" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
-              {/* Production */}
-              <div className="bg-white rounded-xl shadow-md p-8 border-t-4 border-accent-500 hover:shadow-xl transition">
-                <Cog className="w-12 h-12 text-accent-600 mb-4" />
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  Production
-                </h3>
-                <p className="text-sm text-slate-600 mb-4">
-                  Core machinery required for manufacturing the export product.
-                </p>
-                <ul className="text-sm text-slate-600 space-y-2">
-                  {[
-                    "CNC Machines / Lathes",
-                    "Processing Plants",
-                    "Textile Looms",
-                    "Injection Moulding Machines",
-                  ].map((item) => (
-                    <li key={item} className="flex items-center">
-                      <CheckCircle className="text-green-500 w-4 h-4 mr-2" />{" "}
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <section id="documents" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-14">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Documentation
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Documents required for EPCG application and closure
+              </h2>
+              <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+                Most EPCG applicants want a single page that covers both the
+                initial filing records and the later compliance evidence needed
+                for redemption. This section is designed for that exact search
+                intent.
+              </p>
+            </div>
 
-              {/* Post-Production */}
-              <div className="bg-white rounded-xl shadow-md p-8 border-t-4 border-green-500 hover:shadow-xl transition">
-                <PackageCheck className="w-12 h-12 text-green-600 mb-4" />
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  Post-Production
-                </h3>
-                <p className="text-sm text-slate-600 mb-4">
-                  Equipment required for finishing, packing, and testing.
-                </p>
-                <ul className="text-sm text-slate-600 space-y-2">
-                  {[
-                    "Packaging Machinery",
-                    "Testing Equipment / Labs",
-                    "Quality Control Tools",
-                    "Barcode Printers",
-                  ].map((item) => (
-                    <li key={item} className="flex items-center">
-                      <CheckCircle className="text-green-500 w-4 h-4 mr-2" />{" "}
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {EPCG_DOCUMENTS.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                >
+                  <div className="flex gap-3">
+                    <FileCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
+                    <p className="text-sm leading-relaxed text-slate-700">{item}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -354,85 +572,85 @@ const CloudDeskZeroDuty = () => {
         <section id="obligation" className="py-20 bg-brand-900 text-white">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-16 items-center">
-              {/* LEFT CONTENT */}
               <div>
                 <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
                   The Commitment
                 </span>
 
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Understanding Export Obligation
+                  Understanding export obligation in EPCG
                 </h2>
 
                 <p className="text-slate-300 mb-6 leading-relaxed">
-                  To enjoy Zero Duty benefits, you must fulfill an Export
-                  Obligation (EO). Failure to do so results in repayment of saved
-                  duty plus high interest.
+                  To enjoy the zero-duty or reduced-duty benefit, you must
+                  fulfil the prescribed export obligation. In real EPCG work,
+                  the challenge is not just the formula. It is the long tail of
+                  customs execution, installation proof, shipping-bill tagging,
+                  and block-wise follow-through.
                 </p>
 
-                {/* Total Obligation Box */}
                 <div className="bg-brand-800 p-6 rounded-lg border border-brand-700 mb-4">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-slate-300 flex items-center gap-2">
                       <BadgePercent className="w-4 h-4 text-accent-400" />
-                      Total Obligation
+                      Obligation concept
                     </span>
 
                     <span className="text-xl font-bold text-white flex items-center gap-2">
-                      <TrendingUp className="w-5 h-5 text-accent-400" />6 × Duty
-                      Saved
+                      <TrendingUp className="w-5 h-5 text-accent-400" />
+                      Duty-saved linked
                     </span>
                   </div>
 
                   <div className="w-full bg-brand-900 rounded-full h-2 mb-4">
-                    <div
-                      className="bg-accent-500 h-2 rounded-full"
-                      style={{ width: "100%" }}
-                    />
+                    <div className="bg-accent-500 h-2 rounded-full" style={{ width: "100%" }} />
                   </div>
 
                   <p className="text-xs text-slate-400">
-                    Must be fulfilled in Foreign Currency (Free Foreign Exchange).
+                    The exact obligation should always be read from the
+                    authorisation terms, policy conditions, and product context.
                   </p>
                 </div>
 
-                {/* Time Period Box */}
                 <div className="bg-brand-800 p-6 rounded-lg border border-brand-700">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-slate-300 flex items-center gap-2">
                       <Clock className="w-4 h-4 text-accent-400" />
-                      Time Period
+                      Compliance reality
                     </span>
 
-                    <span className="text-xl font-bold text-white">6 Years</span>
+                    <span className="text-xl font-bold text-white">
+                      Multi-year tracking
+                    </span>
                   </div>
 
                   <ul className="text-xs text-slate-400 space-y-1 mt-2">
-                    <li>• Block 1 (1st – 4th Year): Minimum 50% EO</li>
-                    <li>• Block 2 (5th – 6th Year): Remaining Balance</li>
+                    <li>Track imports, installation, and exports as one chain.</li>
+                    <li>Review block-wise progress before shortfall hardens.</li>
+                    <li>Prepare extension or redemption evidence early.</li>
                   </ul>
                 </div>
               </div>
 
-              {/* RIGHT CARD */}
               <div className="relative">
                 <div className="bg-white text-slate-800 rounded-xl p-8 shadow-2xl relative">
                   <h3 className="text-xl font-bold mb-4 text-brand-900 border-b pb-4">
-                    Domestic Sourcing Benefit
+                    Domestic sourcing angle
                   </h3>
 
                   <p className="text-sm text-slate-600 mb-4">
-                    If you procure capital goods from domestic manufacturers
-                    instead of importing, the EO reduces by 25%.
+                    Businesses often compare imported capital goods versus
+                    domestic procurement because the decision affects both duty
+                    planning and the long-term export-obligation burden.
                   </p>
 
                   <div className="flex items-center justify-between bg-green-50 p-4 rounded-lg border border-green-100">
                     <div>
                       <span className="block text-xs font-bold text-green-800">
-                        Reduced EO
+                        Strategic planning matters
                       </span>
                       <span className="text-lg font-bold text-green-600">
-                        4.5 × Duty Saved
+                        Scheme selection before filing
                       </span>
                     </div>
 
@@ -440,7 +658,8 @@ const CloudDeskZeroDuty = () => {
                   </div>
 
                   <p className="text-xs text-slate-500 mt-4">
-                    *Supports the “Make in India” initiative.
+                    The best outcome often comes from scheme comparison before
+                    the licence is filed, not after default begins.
                   </p>
                 </div>
               </div>
@@ -448,91 +667,194 @@ const CloudDeskZeroDuty = () => {
           </div>
         </section>
 
+        <section id="timelines" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-14">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Timeline and Process
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                EPCG process flow from application to EODC closure
+              </h2>
+              <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+                This section is designed to satisfy both informational and
+                commercial search intent: users researching the EPCG process
+                can understand the workflow and then move directly into enquiry
+                or document preparation.
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-5">
+              {EPCG_TIMELINE.map((item, index) => (
+                <div
+                  key={item.title}
+                  className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm"
+                >
+                  <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                    {index + 1}
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                    {item.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="process" className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            {/* HEADER */}
             <div className="text-center mb-16">
               <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
                 Lifecycle
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-                License Lifecycle
+                License lifecycle overview
               </h2>
             </div>
 
-            {/* STEPS */}
             <div className="relative grid md:grid-cols-5 gap-8 step-connector">
-              {/* Step 1 */}
               <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 
-                            border-4 border-brand-200 shadow-sm"
-                >
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-brand-200 shadow-sm">
                   <FileCheck className="w-7 h-7 text-brand-900" />
                 </div>
                 <h3 className="text-lg font-bold mb-2">Apply</h3>
                 <p className="text-sm text-slate-500">
-                  File ANF 5A on DGFT portal. Submit Nexus Certificate if
-                  required.
+                  File the EPCG application on the DGFT portal with the right
+                  technical and nexus narrative.
                 </p>
               </div>
 
-              {/* Step 2 */}
               <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 
-                            border-4 border-brand-200 shadow-sm"
-                >
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-brand-200 shadow-sm">
                   <Stamp className="w-7 h-7 text-brand-900" />
                 </div>
                 <h3 className="text-lg font-bold mb-2">Register</h3>
                 <p className="text-sm text-slate-500">
-                  Register license at Customs Port. Execute Bond/BG.
+                  Register the licence with customs and complete the bond or
+                  bank-guarantee steps where applicable.
                 </p>
               </div>
 
-              {/* Step 3 */}
               <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 
-                            border-4 border-brand-200 shadow-sm"
-                >
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-brand-200 shadow-sm">
                   <PackageCheck className="w-7 h-7 text-brand-900" />
                 </div>
                 <h3 className="text-lg font-bold mb-2">Import</h3>
                 <p className="text-sm text-slate-500">
-                  Clear goods at 0% Duty. Install machinery at factory within 6
-                  months.
+                  Clear the capital goods, install them, and preserve the
+                  compliance trail from day one.
                 </p>
               </div>
 
-              {/* Step 4 */}
               <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 
-                            border-4 border-brand-200 shadow-sm"
-                >
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-brand-200 shadow-sm">
                   <PlaneTakeoff className="w-7 h-7 text-brand-900" />
                 </div>
                 <h3 className="text-lg font-bold mb-2">Export</h3>
                 <p className="text-sm text-slate-500">
-                  Start production and export goods. Mention EPCG License on
-                  Shipping Bills.
+                  Track shipping bills, e-BRCs, and block-wise fulfilment so
+                  the obligation remains closure-ready.
                 </p>
               </div>
 
-              {/* Step 5 - Final */}
               <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 
-                            border-4 border-white shadow-sm"
-                >
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white shadow-sm">
                   <CheckCheck className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-lg font-bold mb-2">Redemption</h3>
+                <h3 className="text-lg font-bold mb-2">Redeem</h3>
                 <p className="text-sm text-slate-500">
-                  Submit Installation Certificate and Export Proofs to get EODC.
+                  Submit the redemption pack with installation and export proof
+                  to obtain EODC closure.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="references" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
+              <div>
+                <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                  Government References
+                </span>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-slate-900">
+                  Policy references, risk points, and related EPCG support
+                </h2>
+                <p className="mt-5 text-slate-600 leading-relaxed">
+                  Google rewards pages that demonstrate expertise and connect
+                  users to trustworthy sources. We therefore surface the
+                  official policy context, common compliance pain points, and
+                  related service pages that users usually need next.
+                </p>
+                <div className="mt-8 space-y-4">
+                  {EPCG_GOVERNMENT_REFERENCES.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                      className="block rounded-2xl border border-slate-200 bg-white p-5 text-brand-700 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+                    >
+                      <span className="font-semibold">{item.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Common EPCG issues we solve
+                </h3>
+                <div className="mt-6 space-y-5 text-sm text-slate-700">
+                  <p>
+                    <strong>Weak nexus documentation:</strong> when the machine
+                    description, export product mapping, or technical logic is
+                    too thin to withstand scrutiny.
+                  </p>
+                  <p>
+                    <strong>Installation certificate delays:</strong> when the
+                    post-import compliance window is missed or the certificate
+                    trail is incomplete.
+                  </p>
+                  <p>
+                    <strong>Shipping bill and e-BRC mismatch:</strong> when
+                    redemption stalls because exports were not properly tagged or
+                    reconciled against the licence.
+                  </p>
+                  <p>
+                    <strong>Export shortfall:</strong> when block-wise or final
+                    obligation appears likely to slip and an EOP extension or
+                    corrective strategy is needed.
+                  </p>
+                </div>
+                <div className="mt-8 border-t border-slate-200 pt-6">
+                  <p className="text-sm text-slate-600">
+                    Related services for stronger topical authority:
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
+                    <a
+                      href="/services/customs-adjudication"
+                      className="text-brand-700 underline underline-offset-4"
+                    >
+                      Customs adjudication support
+                    </a>
+                    <a
+                      href="/advance-authorization-redemption"
+                      className="text-brand-700 underline underline-offset-4"
+                    >
+                      Advance Authorisation redemption
+                    </a>
+                    <a
+                      href="/epcg-redemption"
+                      className="text-brand-700 underline underline-offset-4"
+                    >
+                      EPCG closure and EODC audit
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -540,203 +862,67 @@ const CloudDeskZeroDuty = () => {
 
         <Fees setShowEnrollModal={setShowEnrollModal} />
 
-        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Epcg-Scheme?</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Why CloudDesk for EPCG scheme support?
+              </h2>
               <p className="text-slate-500">
-                An EPCG license is a 6-year marriage with the DGFT. CloudDesk ensures you don't end up in a messy divorce.
+                EPCG is rarely lost at the application stage. It is usually
+                lost in duty calculations, customs execution, export tagging, or
+                closure documentation.
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Feature 1 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
-                  <AlertTriangle size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">1. "Capital-Saved" Valuation Audit</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    The export obligation is directly proportional to the duty you save.<strong> CloudDesk </strong>performs a <strong>Pre-Import Duty Mapping </strong>to calculate exactly how much export growth you need.
-                    If the obligation is too high for your business plan, we advise on alternative schemes like<strong> MOOWR </strong>to save you from future legal traps.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 2 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
-                  <CheckCircle size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">2. Nexus & Technical Certificate Management</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    To import a machine duty-free, you must prove a<strong> "Nexus"</strong>—that the machine actually helps produce the goods you export.
-                    We handle the<strong> Chartered Engineer (CE)</strong> <strong>Certification, ensuring </strong>the technical description of your machinery is bulletproof for DGFT and Customs.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 3 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
-                  <Building size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">3. The 6-Year "Obligation" Radar</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    You have 6 years to complete your<strong> Export Obligation (EO).</strong><strong> CloudDesk’s EO-Dashboard</strong> tracks your progress year-by-year.
-                    We ensure you meet the<strong> "Block-wise" </strong>requirements <strong>(50% in the first 4 years, 50% in the next 2),</strong> so you don't lose your license halfway through.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 4 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
-                  <ShieldUser size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">4. Redemption & BG Release</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    The final hurdle is the<strong> Export Obligation Discharge Certificate (EODC).</strong> We manage the reconciliation of Shipping<strong> Bills and Bank Realization Certificates (e-BRC).</strong>
-                    Once the<strong> EODC </strong>is issued, we coordinate with Customs to release your<strong> Bank Guarantee (BG),</strong> putting your collateral back into your bank account.
-                  </p>
-                </div>
-              </div>
+              {WHY_CLOUDDESK.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100"
+                  >
+                    <div className={`${item.tone} p-3 rounded-lg h-fit`}>
+                      <Icon size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-3xl">
-            {/* Heading */}
             <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-              Frequently Asked Questions
+              EPCG Scheme FAQs
             </h2>
 
-            {/* FAQ Items */}
             <div className="space-y-4">
-              {/* Question 1 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What can I import under the EPCG Scheme?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
+              {EPCG_FAQS.map((item) => (
+                <details
+                  key={item.question}
+                  className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group"
+                >
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    {item.question}
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
 
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Capital goods required for pre-production, production, and post-production. This includes machinery, spare parts, tools, jigs, and even specialized software (for service exporters). It also covers "Second-hand" machinery, though with stricter conditions.
-                </p>
-              </details>
-
-              {/* Question 2 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Who is eligible for EPCG?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Manufacturer exporters (with or without supporting manufacturers), merchant exporters tied to a manufacturer, and Service Providers (like Hotels, Hospitals, or IT firms) who earn foreign exchange.
-                </p>
-              </details>
-
-              {/* Question 3 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What is the Export Obligation (EO)?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  You must export goods/services worth 6 times the duty saved within 6 years. This is in addition to your "Average Export Level"—meaning you must maintain your past performance and add the new obligation on top.
-                </p>
-              </details>
-
-              {/* Question 4 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What happens if I can't meet the Export Obligation?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  You must pay the saved duty plus 15% annual interest. CloudDesk’s primary value is identifying "Shortfalls" early and applying for EO Extensions or "Clubbing of Licenses" to avoid these penalties.
-                </p>
-              </details>
-
-              {/* Question 5 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Can I sell the machinery after importing it?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  No. The machinery is subject to "Actual User Condition" until the EODC is issued. You cannot shift, sell, or lease the machine without prior permission. CloudDesk helps with Installation Certificates to prove the machine is in your factory.
-                </p>
-              </details>
-
-              {/* Question 6 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What is the "Average Export Level"?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  This is the average of your exports in the 3 years preceding the license. You must maintain this average every year while the EPCG license is active. CloudDesk helps you track this "Invisible Obligation" so you don't default.
-                </p>
-              </details>
-
-              {/* Question 7 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Is there any relief for "Green Technology" or "North East" units?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Yes. In 2026, units producing Green Energy equipment or units located in the North East/Hilly regions have a reduced Export Obligation (often 75% of the normal rate). CloudDesk checks your eligibility for these "Bonus Benefits."
-                </p>
-              </details>
-
-              {/* Question 8 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What is "Post-Export EPCG"?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  If you don't want to take the risk of future obligations, you pay the duty upfront, do the exports, and then claim the duty back as a "Duty Credit Scrip." CloudDesk manages the scrip application to ensure you get your cash back.
-                </p>
-              </details>
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    {item.answer}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         </section>
@@ -748,67 +934,39 @@ const CloudDeskZeroDuty = () => {
                 Consolidated Support
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-                EPCG License Closure, Customs Cell Work, and EODC Recovery
+                EPCG licence closure, customs cell work, and EODC recovery
               </h2>
               <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
-                We merged the weaker EPCG support URLs into this page so the
-                main EPCG guide now covers both the front-end application and
-                the painful back-end closure work that usually traps bank
-                guarantees and blocks fresh trade benefits.
+                We consolidated related EPCG support intent into this page so
+                Google and users find one authoritative guide for application,
+                compliance, and closure work instead of fragmented weak URLs.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-6">
-              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  Customs registration and debit alignment
-                </h3>
-                <p className="text-slate-600">
-                  If your EPCG imports were handled at multiple ports, the
-                  customs license cell entries, installation certificates, and
-                  debit records need to reconcile before closure. We now handle
-                  that workflow under this master page instead of splitting it
-                  into a separate weak URL.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  EOP extension and default management
-                </h3>
-                <p className="text-slate-600">
-                  When the obligation window slips, the real work is not the
-                  original application but the salvage plan: EOP extension,
-                  shortfall computation, clubbing, and evidence assembly before
-                  a demand hardens into duty plus interest.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  EODC retrieval and BG release
-                </h3>
-                <p className="text-slate-600">
-                  The end-state is clean closure: EODC issuance, customs bond
-                  cancellation, and bank guarantee release. That closure intent
-                  used to live on its own page; it now strengthens this core
-                  EPCG URL instead.
-                </p>
-              </div>
+              {CLOSURE_SUPPORT.map((item) => (
+                <div
+                  key={item.title}
+                  className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm"
+                >
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600">{item.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-            {/* BRAND */}
             <div>
               <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
               <p className="text-sm mb-6">
-                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
-                Logistics compliance.
+                EXIMINQ Contact: Your trusted partner for DGFT, customs, and
+                trade-compliance execution.
               </p>
 
               <div className="flex gap-4">
@@ -824,61 +982,67 @@ const CloudDeskZeroDuty = () => {
               </div>
             </div>
 
-            {/* QUICK LINKS */}
             <div>
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/epcg-scheme" className="hover:text-white transition">
                     EPCG Scheme
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a
+                    href="/services/advance-authorisation/"
+                    className="hover:text-white transition"
+                  >
                     Advance Authorisation
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    RoDTEP Scrips
+                  <a href="/services/rodtep-scheme" className="hover:text-white transition">
+                    RoDTEP Scheme
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/star-export-house" className="hover:text-white transition">
                     Status Holder Certificate
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* OTHER SERVICES */}
             <div>
               <h4 className="text-white font-bold mb-6">Other Services</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    Chartered Engineer List
+                  <a
+                    href="/services/customs-adjudication"
+                    className="hover:text-white transition"
+                  >
+                    Customs and technical support
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a
+                    href="/foreign-trade-policy/regulatory-updates"
+                    className="hover:text-white transition"
+                  >
                     DGFT Public Notices
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    Average Export Performance
+                  <a href="/services/eop-extension/" className="hover:text-white transition">
+                    EOP Extension
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/foreign-trade-policy" className="hover:text-white transition">
                     FTP 2023 Guidelines
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* CONTACT */}
             <div>
               <h4 className="text-white font-bold mb-6">Contact Us</h4>
               <ul className="space-y-4 text-sm">
@@ -900,9 +1064,8 @@ const CloudDeskZeroDuty = () => {
             </div>
           </div>
 
-          {/* COPYRIGHT */}
           <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            © 2026 EXIMINQ CloudDesk. All rights reserved. Not affiliated with
             DGFT.
           </div>
         </footer>

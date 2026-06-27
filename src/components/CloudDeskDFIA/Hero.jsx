@@ -10,17 +10,17 @@ const Hero = ({ setShowEnrollModal }) => {
                     TRANSFERABLE LICENSE
                 </span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">DFIA License</span> for Post-Export Benefits
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">DFIA Licence</span> for Transferable Post-Export Benefits
                 </h1>
                 <p className="text-lg text-slate-200 mb-8 leading-relaxed">
-                    Convert your exports into a tradeable asset. Duty Free Import Authorisation allows you to import raw materials without BCD or sell the license in the open market.
+                    Work with a DFIA licence consultant to evaluate SION fit, value-addition logic, and transferability potential so your exports convert into a usable or monetisable DGFT trade benefit.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="#contact" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
-                        Apply for DFIA
+                    <a href="#eligibility" className="bg-accent-500 hover:bg-accent-600 text-white text-center font-bold py-3 px-8 rounded-lg shadow-lg transition">
+                        Check DFIA Fit
                     </a>
-                    <a href="#about" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
-                        DFIA vs AA
+                    <a href="#contact" className="bg-transparent border border-white hover:bg-white hover:text-brand-900 text-center font-semibold py-3 px-8 rounded-lg transition">
+                        Start DFIA Enquiry
                     </a>
                 </div>
             </div>

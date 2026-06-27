@@ -17,6 +17,9 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#home" className="transition hover:text-brand-600">
             Home
           </a>
+          <a href="#eligibility" className="transition hover:text-brand-600">
+            Eligibility
+          </a>
           <a href="#about" className="transition hover:text-brand-600">
             What is EPCG?
           </a>
@@ -25,6 +28,9 @@ const Navbar = ({ setShowEnrollModal }) => {
           </a>
           <a href="#obligation" className="transition hover:text-brand-600">
             Export Obligation
+          </a>
+          <a href="#documents" className="transition hover:text-brand-600">
+            Documents
           </a>
           <a href="#fees" className="transition hover:text-brand-600">
             Service Charges
@@ -58,11 +64,17 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#about" className="block py-2 text-slate-600">
             What is EPCG?
           </a>
+          <a href="#eligibility" className="block py-2 text-slate-600">
+            Eligibility
+          </a>
           <a href="#coverage" className="block py-2 text-slate-600">
             Coverage
           </a>
           <a href="#obligation" className="block py-2 text-slate-600">
             Export Obligation
+          </a>
+          <a href="#documents" className="block py-2 text-slate-600">
+            Documents
           </a>
           <a href="#fees" className="block py-2 text-slate-600">
             Service Charges

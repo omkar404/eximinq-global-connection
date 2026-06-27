@@ -633,7 +633,6 @@ app.get("/api/customs/pdf", (req, res) => {
     res.sendFile(pdfPath);
   } catch (error) { res.status(500).json({ success: false, error: error.message }); }
 });
-
 app.get("/api/customs/pdf-download", (req, res) => {
   try {
     const { file } = req.query;
@@ -785,25 +784,49 @@ app.use("/api/epcg-scheme", epcgSchemeRoutes);
 /* ─────────────────────────────────────────────
    STATIC + CATCH-ALL
 ───────────────────────────────────────────── */
-const frontendBuildDir = path.join(__dirname, "build");
-const frontendIndexFile = path.join(frontendBuildDir, "index.html");
+const frontendBuildCandidates = [
+  path.join(__dirname, "build"),
+  path.join(__dirname, "..", "build"),
+];
 
-if (fs.existsSync(frontendIndexFile)) {
+const frontendBuildDir = frontendBuildCandidates.find((candidate) =>
+  fs.existsSync(path.join(candidate, "index.html"))
+);
+
+if (frontendBuildDir) {
+  const frontendIndexFile = path.join(frontendBuildDir, "index.html");
+
   app.use(express.static(frontendBuildDir));
   app.get("*", (req, res) => {
     res.sendFile(frontendIndexFile);
   });
+
+  console.log(`Frontend static fallback enabled from ${frontendBuildDir}`);
 } else {
   console.warn(
-    `Frontend build not found at ${frontendIndexFile}. Static fallback is disabled.`
+    `Frontend build not found in any expected location: ${frontendBuildCandidates.join(", ")}. Static fallback is disabled.`
   );
 }
 
 /* ─────────────────────────────────────────────
    START SERVER
 ───────────────────────────────────────────── */
-app.listen(5000, "0.0.0.0", () => {
-  console.log("🚀 Backend running on 0.0.0.0:5000");
-  console.log(`📁 Excel folder: ${CUSTOMS_EXCEL_PATH}`);
-  console.log(`📁 PDF folder:   ${CUSTOMS_PDF_PATH}`);
+const PORT = Number(process.env.PORT) || 5000;
+const HOST = process.env.HOST || "0.0.0.0";
+
+const server = app.listen(PORT, HOST, () => {
+  console.log(`Backend running on ${HOST}:${PORT}`);
+  console.log(`Excel folder: ${CUSTOMS_EXCEL_PATH}`);
+  console.log(`PDF folder:   ${CUSTOMS_PDF_PATH}`);
+});
+
+server.on("error", (error) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(
+      `Port ${PORT} is already in use. Stop the existing process or start this server with a different PORT.`
+    );
+    process.exit(1);
+  }
+
+  throw error;
 });

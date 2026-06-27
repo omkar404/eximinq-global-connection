@@ -13,27 +13,29 @@ const Hero = () => {
           </span>
 
           <h1 className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-            Zero Duty Import of{" "}
-            <span className="text-[#ffb11b]">Capital Goods</span>
+            DGFT EPCG Scheme for{" "}
+            <span className="text-[#ffb11b]">Zero Duty Capital Goods Import</span>
           </h1>
 
           <p className="mb-8 max-w-xl text-lg leading-relaxed text-slate-200">
-            Modernize your factory. Import machinery, spares, moulds, and dies
-            without paying Customs Duty. Fulfill obligation over 6 years.
+            Work with an EPCG scheme consultant to import machinery, spares,
+            moulds, and dies with major customs-duty savings while planning
+            export obligation, installation certificate compliance, and EODC
+            closure from day one.
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row">
             <a
-              href="#process"
+              href="#eligibility"
               className="rounded-lg bg-[#f6a313] px-8 py-3 text-center font-bold text-white shadow-lg transition hover:bg-[#df930f]"
             >
               Check Eligibility
             </a>
             <a
-              href="#home"
+              href="#fees"
               className="rounded-lg border border-white/80 px-8 py-3 text-center font-semibold text-white transition hover:bg-white hover:text-brand-900"
             >
-              Calculate EO
+              Start EPCG Enquiry
             </a>
           </div>
         </div>

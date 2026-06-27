@@ -1,826 +1,858 @@
-import TopBar from "../components/CloudDeskEDPMS/TopBar";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
-import Navbar from "../components/CloudDeskEDPMS/Navbar";
-import Hero from "../components/CloudDeskEDPMS/Hero";
-import Fees from "../components/CloudDeskEDPMS/Fees";
+import { Link } from "react-router-dom";
 import {
-  ChevronDown,
-  Linkedin,
-  Twitter,
-  Facebook,
-  AlertTriangle,
-  Building,
-  ShieldUser, 
-  CheckCircle,   
-  Phone,
+  ArrowRight,
+  BadgeCheck,
+  BookOpenCheck,
+  Building2,
+  CalendarClock,
+  CheckCircle2,
+  ClipboardCheck,
+  FileCheck2,
+  FileSearch,
+  Landmark,
   Mail,
   MapPin,
-  Check,
-  Headphones,
-  Wifi,
-  Watch,
-  Contact2,
-  Drone,
-  Smartphone,
-  FileCheck,
-  IdCard,
-  FileText,
-  Settings,
-  XCircle,
-  Banl,
-  Link2,
-  Award,
-  Eraser,
-  Ban,
+  Phone,
+  ReceiptText,
+  ShieldCheck,
+  Sparkles,
+  Target
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskEDPMS/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskEDPMS/ModalEnroll";
+import QuickForm from "../components/CloudDeskEDPMS/QuickForm";
+
+const HIGHLIGHTS = [
+  "EDPMS consultant India",
+  "eBRC generation, IRM mapping, and shipping bill reconciliation support",
+  "AD bank follow-up for open export entries, write-off, extension, and closure",
+  "RBI, DGFT, and export proceeds compliance support for goods exporters"
+];
+
+const BENEFITS = [
+  "Helps exporters identify why export proceeds are still open in EDPMS even after inward remittance is received, partially adjusted, or reconciled operationally.",
+  "Supports cleaner coordination between exporter records, shipping bills, IRMs, AD bank updates, and DGFT-facing eBRC expectations so benefits and compliance are not lost together.",
+  "Reduces caution-list and unresolved-export risk by reviewing unrealised export proceeds, delayed closure, short realisation, extension, write-off, and mapping errors before they become a larger banking problem.",
+  "Creates a practical closure path for exporters who need both regulatory clarity and transaction-level follow-up instead of only a surface status check."
+];
+
+const USE_CASES = [
+  {
+    title: "Open shipping bills in EDPMS",
+    description:
+      "Useful where export proceeds are received but the shipping bill still appears open, unrealised, or unmatched because the IRM was not mapped properly or the AD bank has not updated the case correctly."
+  },
+  {
+    title: "eBRC generation and DGFT linkage confusion",
+    description:
+      "Relevant where exporters need to understand the difference between EDPMS closure and eBRC generation, or where eBRC expectations are blocked by incomplete bank-side transaction mapping."
+  },
+  {
+    title: "Short realisation, deduction, write-off, or extension",
+    description:
+      "Applies where export proceeds were received with deductions, only partly received, delayed, written off, or need extension support with the AD bank and documentary reasoning."
+  },
+  {
+    title: "Caution-list and compliance-risk prevention",
+    description:
+      "Important where exporters want to prevent repeat non-realisation flags, banking restrictions, and unresolved FEMA-facing transaction exposure from building up across multiple shipments."
+  }
+];
+
+const ELIGIBILITY_POINTS = [
+  "Goods exporters with open EDPMS entries, unmatched IRMs, delayed closure, or export proceeds that do not reflect correctly against shipping bills.",
+  "Businesses that need support for eBRC-related transaction readiness, especially where DGFT benefit claims or export incentives depend on correct realisation evidence.",
+  "Exporters dealing with short realisation, bank charges, third-party remittance structure, extension requests, partial remittance, or write-off treatment.",
+  "Companies facing banking follow-up, caution-list concern, or repeated transaction-level reconciliation problems across multiple export shipments."
+];
+
+const DOCUMENTS_REQUIRED = [
+  "IEC details, shipping bill copies, export invoice set, port details, shipment dates, and the underlying export transaction trail.",
+  "FIRC or equivalent inward remittance records, IRM references, bank advice, remittance breakup, deduction details, and realised amount evidence.",
+  "Outstanding export bill list, AD bank correspondence, EDPMS screenshots, unrealised bill records, and any caution-list related communication.",
+  "DGFT-side eBRC reference points, export incentive dependency details, extension or write-off papers, and any prior explanatory submissions."
+];
+
+const PROCESS_STEPS = [
+  {
+    title: "Transaction diagnosis",
+    detail:
+      "We begin by identifying whether the case is a straight IRM-mapping issue, a partial-remittance issue, a short-realisation problem, a delayed closure case, or a wider export-compliance risk."
+  },
+  {
+    title: "Shipping bill and remittance reconciliation",
+    detail:
+      "The shipping bill, inward remittance, invoice values, deductions, and bank-side records are reviewed together so the true mismatch is understood before any follow-up begins."
+  },
+  {
+    title: "AD bank action path",
+    detail:
+      "We define whether the matter requires bank-side mapping, object-code correction, short-realisation reasoning, extension request, write-off support, or updated transaction closure handling."
+  },
+  {
+    title: "eBRC and downstream export-benefit readiness",
+    detail:
+      "Where relevant, we review how the transaction closure status affects eBRC availability and broader export incentive workflows tied to DGFT-facing proof of realisation."
+  },
+  {
+    title: "Future transaction tightening",
+    detail:
+      "The goal is not only closing today’s open entries but improving document flow, bank coordination, and shipment-level discipline for future exports."
+  }
+];
+
+const TIMELINE_POINTS = [
+  "Initial EDPMS issue review usually begins within 1 to 3 working days once shipping bill and remittance records are available.",
+  "Simple mapping or record-clarity matters often move faster than extension, write-off, or repeated short-realisation cases.",
+  "Bank-side closure timing depends on the quality of exporter records, branch responsiveness, and whether the issue involves correction, explanation, or approval.",
+  "Older unresolved export bills and multi-shipment reconciliation cases usually require a longer cleanup cycle than a single current shipment."
+];
+
+const COMMON_ISSUES = [
+  {
+    title: "Payment received but shipping bill still open",
+    detail:
+      "This often points to missing IRM mapping, incorrect linkage, or incomplete bank-side closure rather than absence of payment itself."
+  },
+  {
+    title: "eBRC expected but records are not transaction-ready",
+    detail:
+      "Exporters sometimes treat eBRC and EDPMS as the same step, but the underlying bank and shipping-bill alignment still has to be correct."
+  },
+  {
+    title: "Short realisation or deduction is not documented properly",
+    detail:
+      "Bank charges, partial remittance, exchange variation, or commercial deduction may be commercially understood but not properly reflected in closure records."
+  },
+  {
+    title: "Too many old open entries have accumulated",
+    detail:
+      "Once unresolved bills pile up, the exporter is no longer solving a single exception and instead needs structured reconciliation and banking follow-up."
+  }
+];
+
+const FAQS = [
+  {
+    question: "What is EDPMS in exports?",
+    answer:
+      "EDPMS is the banking and export-monitoring framework used to track whether export proceeds are realised against shipping bills within the permitted timeline and whether those transactions are closed correctly."
+  },
+  {
+    question: "What is the difference between EDPMS and eBRC?",
+    answer:
+      "EDPMS is the monitoring and closure framework around export realisation, while eBRC is the DGFT-facing proof or digital evidence of export proceeds realisation used in broader export-benefit contexts."
+  },
+  {
+    question: "Why is my shipping bill still open after payment was received?",
+    answer:
+      "The most common reasons are IRM mapping gaps, bank-side non-updation, deduction handling issues, short-realisation mismatch, or incomplete transaction-level closure."
+  },
+  {
+    question: "Can EDPMS issues affect export incentives?",
+    answer:
+      "Yes. If export proceeds are not reflected properly, it can affect eBRC-dependent workflows, broader compliance comfort, and the exporter’s ability to demonstrate clean realisation records."
+  },
+  {
+    question: "Can partial payment or deduction still be closed?",
+    answer:
+      "Often yes, but the case usually needs correct reasoning, supporting records, and AD bank-side treatment for short realisation, bank charges, or approved adjustment logic."
+  },
+  {
+    question: "When is extension or write-off relevant?",
+    answer:
+      "Extension is relevant where proceeds are delayed but still expected, while write-off becomes relevant where part or all of the export receivable will not be realised and needs compliant banking treatment."
+  }
+];
+
+const GOVERNMENT_REFERENCES = [
+  {
+    label: "Reserve Bank of India",
+    href: "https://www.rbi.org.in/"
+  },
+  {
+    label: "DGFT Portal",
+    href: "https://www.dgft.gov.in/CP/"
+  },
+  {
+    label: "ICEGATE Portal",
+    href: "https://www.icegate.gov.in/"
+  },
+  {
+    label: "CBIC Customs Portal",
+    href: "https://www.cbic.gov.in/"
+  }
+];
+
+const RELATED_LINKS = [
+  {
+    href: "/services/igst-refund",
+    title: "IGST Refund Support",
+    description:
+      "Useful where export proceeds and banking records sit alongside GST refund dependency, shipping bill accuracy, and broader export-document reconciliation."
+  },
+  {
+    href: "/services/rodtep-scheme",
+    title: "RoDTEP Support",
+    description:
+      "Relevant where exporters need incentive-side guidance together with clean export transaction records and reliable downstream proof of realisation."
+  },
+  {
+    href: "/services/gst-lut-filing",
+    title: "GST LUT Filing Support",
+    description:
+      "Helpful where exporters want cleaner zero-rated export compliance, LUT discipline, and transaction readiness aligned with banking and customs records."
+  },
+  {
+    href: "/services/import-export-code/",
+    title: "IEC and DGFT Profile Support",
+    description:
+      "Important where exporter profile maintenance, DGFT access, and transaction record quality all affect the speed of export-document resolution."
+  }
+];
+
+const SECTION_LINKS = [
+  { href: "#overview", label: "Overview" },
+  { href: "#eligibility", label: "Eligibility" },
+  { href: "#documents", label: "Documents" },
+  { href: "#process", label: "Process" },
+  { href: "#faqs", label: "FAQs" }
+];
+
 const CloudDeskEDPMS = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
     type: ""
   });
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
+  };
 
-    // TODO → send API call
-    // axios.post("/api/enroll", formData)
-
-    alert("Form submitted - check console for data.")
-  }
   return (
-
-<>
-
-<Helmet>
+    <>
+      <Helmet>
         <title>
-          Close Open Entries in EDPMS & Get e-BRC | EDPMS BRC Registration India | DGFT CUSTOMS Services | EXIMINQ
+          EDPMS and eBRC Consultant India | Export Proceeds Reconciliation, IRM
+          Mapping and AD Bank Closure Support | EXIMINQ
         </title>
-
         <meta
           name="description"
-          content="Un-reconciled export payments can land you on the <strong>RBI Caution List</strong>, stopping all your future shipments. We map IRMs to Shipping Bills and regularize your account."
+          content="EDPMS and eBRC consultant in India for export proceeds reconciliation, IRM mapping, open shipping bill closure, short realisation, extension, write-off, AD bank follow-up, and DGFT-linked export compliance support."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/edpms-ebrc"
+        <meta
+          name="keywords"
+          content="EDPMS consultant India, eBRC consultant India, export proceeds reconciliation, IRM mapping, shipping bill closure, AD bank export compliance, short realisation, EDPMS closure support, eBRC generation support"
         />
-
-        {/* Open Graph */}
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href="https://eximinq.in/services/edpms-ebrc" />
         <meta
           property="og:title"
-          content="Close Open Entries in EDPMS & Get e-BRC in India | Eximinq"
+          content="EDPMS and eBRC Consultant India | Export Proceeds Reconciliation Support"
         />
         <meta
           property="og:description"
-          content="Un-reconciled export payments can land you on the <strong>RBI Caution List</strong>, stopping all your future shipments. We map IRMs to Shipping Bills and regularize your account."
+          content="Get support for EDPMS closure, eBRC readiness, IRM mapping, short realisation, AD bank follow-up, and export proceeds reconciliation."
         />
         <meta
           property="og:url"
           content="https://eximinq.in/services/edpms-ebrc"
         />
-        <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Close Open Entries in EDPMS & Get e-BRC",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Un-reconciled export payments can land you on the RBI Caution List, stopping all your future shipments. We map IRMs to Shipping Bills and regularize your account."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
+            "@graph": [
               {
-                "@type": "Question",
-                "name": "Does the new e-BRC system require bank intervention?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Under the new DGFT system (2023), the process is self-certified. The bank issues the IRM, and the exporter can self-generate the e-BRC on the DGFT portal by linking the IRM to the Shipping Bill. However, closing the entry in EDPMS still requires bank action."
-                }
+                "@type": "WebPage",
+                "@id": "https://eximinq.in/services/edpms-ebrc#webpage",
+                url: "https://eximinq.in/services/edpms-ebrc",
+                name: "EDPMS and eBRC Consultant India | EXIMINQ",
+                description:
+                  "Support for EDPMS closure, IRM mapping, eBRC readiness, open shipping bill reconciliation, and export proceeds compliance.",
+                inLanguage: "en-IN"
               },
               {
-                "@type": "Question",
-                "name": "What if my payment came with a deduction (Bank Charges)?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Small deductions ("Bank Charges") are allowed. You must instruct the bank to close the Shipping Bill fully by accounting for the "Bank Charges" component separately in the EDPMS system.`
-                }
+                "@type": "BreadcrumbList",
+                "@id": "https://eximinq.in/services/edpms-ebrc#breadcrumb",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "EDPMS and eBRC",
+                    item: "https://eximinq.in/services/edpms-ebrc"
+                  }
+                ]
               },
               {
-                "@type": "Question",
-                "name": "Can I get removed from the Caution List instantly?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It is not instant. Once the AD Bank marks the bills as "Realized" or "Extension Granted" in the EDPMS, the system updates the status overnight or within a few days, removing the caution flag.`
-                }
+                "@type": "Service",
+                "@id": "https://eximinq.in/services/edpms-ebrc#service",
+                name: "EDPMS and eBRC Support",
+                serviceType: "EDPMS consultant",
+                provider: {
+                  "@type": "Organization",
+                  name: "EXIMINQ",
+                  url: "https://eximinq.in/"
+                },
+                areaServed: {
+                  "@type": "Country",
+                  name: "India"
+                },
+                description:
+                  "Support for export proceeds reconciliation, IRM mapping, open shipping bill closure, AD bank follow-up, extension, write-off, and eBRC-linked export compliance workflows."
               },
               {
-                "@type": "Question",
-                "name": "What is the difference between EDPMS and e-BRC?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `• EDPMS An RBI system where the Shipping Bill (money expected) and IRM (money received) are matched.
-                     • e-BRC A DGFT certificate that proves the money was received, used to claim government incentives.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the time limit to realize export proceeds in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `The standard window is 15 months from the date of export. For "Status Holders" and specific "INR-Invoiced" exports, this can be extended up to 18 months with prior bank approval.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Why is my Shipping Bill still "Open" despite receiving payment?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `The bank likely hasn't updated the "Object Code" or the "SB Mapping" in the EDPMS server. This is a common manual error by bank staff. CloudDesk provides the Reconciliation Report you need to send to your bank manager to fix this.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if I receive payment in a different currency?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `EDPMS can handle currency fluctuations within a 5% tolerance. If the difference is higher (due to bank charges or FX moves), you must provide a "Reason for Short-Realization" to the bank.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Can I get an e-BRC for a "Third-Party" payment?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes, but it's complex. You must mention the third-party details in the Shipping Bill and have a "Tripartite Agreement." Without this, the bank will refuse to issue the e-BRC and you'll lose your incentives.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What are the penalties for not closing EDPMS entries?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Under FEMA 1999/2026, non-realization is a serious offense. Penalties can be up to 3x the amount not realized. More practically, your bank will stop issuing "Forward Contracts" and "PCFC" (Pre-shipment Credit) for your future orders.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How does the new e-BRC system affect GST refunds?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `In 2026, the GST portal is directly linked to the DGFT's e-BRC server. If your e-BRC isn't generated within the time limit, the GST department can issue a "Demand" to recover the IGST refund they previously paid you.`
-                }
-              },
+                "@type": "FAQPage",
+                "@id": "https://eximinq.in/services/edpms-ebrc#faq",
+                mainEntity: FAQS.map((faq) => ({
+                  "@type": "Question",
+                  name: faq.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: faq.answer
+                  }
+                }))
+              }
             ]
           })}
         </script>
       </Helmet>
-    <div className="bg-slate-50 text-slate-800">
-      {/* Dynamic Sections */}
-      {/* <TopBar /> */}
-      <MainNavbar setShowEnrollModal={setShowEnrollModal}/>
-      <Navbar setShowEnrollModal={setShowEnrollModal}/>
-      <Hero setShowEnrollModal={setShowEnrollModal}/>
 
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: "" })}
-        onSubmit={handleEnrollmentSubmit}
-      />
-      {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
+      <div className="min-h-screen bg-slate-50 text-slate-900">
+        <MainNavbar
+          scrolled={scrolled}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+          setShowEnrollModal={setShowEnrollModal}
+        />
 
-      <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              What is EDPMS?
-            </h2>
-            <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
-          </div>
-          <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
-            <p className="mb-4">
-              The{" "}
-              <strong>
-                Export Data Processing and Monitoring System (EDPMS)
-              </strong>{" "}
-              is an IT platform launched by the Reserve Bank of India (RBI) to
-              monitor export transactions. It links Customs, SEZs, STPIs, and
-              Authorized Dealer (AD) Banks to track whether export proceeds are
-              realized within the stipulated time (usually 9 months).
-            </p>
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
+        />
 
-            <p className="mb-4">
-              When you export, Customs sends the Shipping Bill data to EDPMS.
-              When you receive payment, the Bank issues an{" "}
-              <strong>Inward Remittance Message (IRM)</strong>. "Closing an
-              entry" involves mapping this IRM to the Shipping Bill in the
-              system. If this link is missing, the entry remains
-              "Open/Outstanding," leading to non-compliance.
-            </p>
-          </div>
-        </div>
-      </section>
+        <main className="overflow-hidden">
+          <section className="bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.18),_transparent_38%),linear-gradient(135deg,#eff6ff_0%,#ffffff_45%,#ecfeff_100%)] pt-28 pb-16 md:pt-32 md:pb-20">
+            <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-[1.2fr_0.8fr] md:px-8">
+              <div>
+                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/80 px-4 py-2 text-sm font-semibold text-sky-700 shadow-sm">
+                  <Sparkles className="h-4 w-4" />
+                  EDPMS, eBRC, IRM Mapping, AD Bank Closure
+                </div>
 
-      <section id="caution" className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* LEFT SIDE */}
-            <div>
-              <span className="text-red-600 font-bold uppercase tracking-wider text-sm">
-                Major Risk
-              </span>
+                <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-slate-950 md:text-6xl">
+                  EDPMS and eBRC Consultant India for Export Proceeds
+                  Reconciliation and Shipping Bill Closure
+                </h1>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-6">
-                The RBI Caution List
-              </h2>
+                <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
+                  Resolve open export entries, unmatched IRMs, delayed closure,
+                  short realisation, extension, write-off, and eBRC-related
+                  export compliance issues with a transaction-first support
+                  workflow built for Indian exporters.
+                </p>
 
-              <p className="text-slate-600 mb-6">
-                If export proceeds are not realized and documents are not closed
-                in EDPMS within 2 years (automatic caution listing), the RBI
-                flags the IEC.
-              </p>
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {HIGHLIGHTS.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white/90 px-4 py-4 shadow-sm"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-600" />
+                      <p className="text-sm font-medium leading-6 text-slate-700">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500 mb-4">
-                <h4 className="font-bold text-red-900 mb-2">Consequences:</h4>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <a
+                    href="#quick-check"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-4 text-base font-semibold text-white transition hover:bg-slate-800"
+                  >
+                    Check My EDPMS Status
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <Link
+                    to="/contact-us"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-6 py-4 text-base font-semibold text-slate-700 transition hover:border-sky-300 hover:text-sky-700"
+                  >
+                    Speak With an Export Compliance Expert
+                  </Link>
+                </div>
 
-                <ul className="text-sm text-slate-600 space-y-2">
-                  <li className="flex items-start">
-                    <XCircle className="text-red-500 mr-2" size={18} />
-                    Shipping Bills cannot be generated.
-                  </li>
-
-                  <li className="flex items-start">
-                    <XCircle className="text-red-500 mr-2" size={18} />
-                    Banks refuse to handle export documents.
-                  </li>
-
-                  <li className="flex items-start">
-                    <XCircle className="text-red-500 mr-2" size={18} />
-                    Denial of export incentives (RoDTEP/Drawback).
-                  </li>
-
-                  <li className="flex items-start">
-                    <XCircle className="text-red-500 mr-2" size={18} />
-                    Negative impact on credit rating.
-                  </li>
-                </ul>
+                <div className="mt-10 grid gap-4 text-sm text-slate-600 sm:grid-cols-3">
+                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
+                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
+                      <Phone className="h-4 w-4 text-sky-600" />
+                      Call Us
+                    </div>
+                    <a href="tel:+917400096950" className="hover:text-sky-700">
+                      +91 74000 96950
+                    </a>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
+                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
+                      <Mail className="h-4 w-4 text-sky-600" />
+                      Email
+                    </div>
+                    <a
+                      href="mailto:clouddesk@eximinq.in"
+                      className="hover:text-sky-700"
+                    >
+                      clouddesk@eximinq.in
+                    </a>
+                  </div>
+                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
+                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
+                      <MapPin className="h-4 w-4 text-sky-600" />
+                      Coverage
+                    </div>
+                    <p>India-wide exporter support for DGFT, banking, and customs-linked reconciliation matters.</p>
+                  </div>
+                </div>
               </div>
 
-              <a
-                href="#contact"
-                className="inline-block bg-brand-600 text-white font-bold py-3 px-8 
-                rounded hover:bg-brand-700 transition"
-              >
-                Get De-listed Now
-              </a>
-            </div>
-
-            {/* RIGHT SIDE */}
-            <div className="bg-white rounded-xl shadow-xl p-8 border border-slate-200 text-center">
-              <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Ban className="text-4xl text-red-600" size={40} />
-              </div>
-
-              <h3 className="text-xl font-bold text-slate-800 mb-2">
-                Are you at risk?
-              </h3>
-
-              <p className="text-slate-500 text-sm mb-6">
-                Even if you have received payment, if the bank hasn't mapped it
-                in EDPMS, you are technically non-compliant.
-              </p>
-
-              <div className="bg-slate-50 p-4 rounded text-xs text-left">
-                <strong>Common Reasons:</strong>
-
-                <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>Bank charges deducted (Short Payment)</li>
-                  <li>Payment received from third party</li>
-                  <li>Goods re-imported or rejected</li>
-                  <li>Sample shipments not declared properly</li>
-                </ul>
+              <div id="quick-check" className="self-start">
+                <div className="rounded-[28px] border border-slate-200 bg-white/95 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.10)]">
+                  <QuickForm />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section id="services" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-              Banking Solutions
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-              How We Help
-            </h2>
-            <p className="text-slate-500 mt-2">
-              Bridging the gap between your Bank and DGFT.
-            </p>
-          </div>
-
-          {/* Services Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Service 1 */}
-            <div className="bg-white rounded-xl shadow-md p-8 border-t-4 border-brand-600 hover:shadow-xl transition">
-              <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center text-brand-600 text-2xl mb-4">
-                <Link2 size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                IRM Mapping
-              </h3>
-              <p className="text-sm text-slate-600">
-                We coordinate with your AD Bank to map the Inward Remittance
-                Message (IRM) with the specific Shipping Bill number to close
-                the entry (Knock-off).
-              </p>
+          <section className="sticky top-[76px] z-20 border-y border-slate-200 bg-white/95 backdrop-blur">
+            <div className="mx-auto flex max-w-7xl gap-3 overflow-x-auto px-4 py-4 md:px-8">
+              {SECTION_LINKS.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
+          </section>
 
-            {/* Service 2 */}
-            <div className="bg-white rounded-xl shadow-md p-8 border-t-4 border-green-500 hover:shadow-xl transition">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-2xl mb-4">
-                <Award size={28} />
+          <section id="overview" className="mx-auto max-w-7xl px-4 py-16 md:px-8">
+            <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-600">
+                  <Target className="h-4 w-4" />
+                  Service Overview
+                </div>
+                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
+                  Why exporters search for EDPMS closure and eBRC support
+                </h2>
+                <div className="mt-6 space-y-5 text-base leading-8 text-slate-600">
+                  <p>
+                    Exporters usually discover EDPMS problems only after a
+                    shipment is commercially complete but the banking trail is
+                    still unresolved. Payment may have arrived, but the shipping
+                    bill remains open, the inward remittance is not mapped
+                    correctly, the deduction logic is unclear, or the exporter
+                    realises that eBRC expectations depend on cleaner
+                    transaction-level reconciliation than operations assumed.
+                  </p>
+                  <p>
+                    This page is built to rank for high-intent searches around{" "}
+                    <strong>EDPMS consultant India</strong>,{" "}
+                    <strong>eBRC support</strong>,{" "}
+                    <strong>shipping bill closure</strong>,{" "}
+                    <strong>IRM mapping</strong>,{" "}
+                    <strong>short realisation</strong>, and{" "}
+                    <strong>AD bank export compliance</strong> because those are
+                    the real business situations exporters face.
+                  </p>
+                  <p>
+                    It also serves commercial and compliance intent at the same
+                    time. Users searching for EDPMS are not always looking for a
+                    definition. They are often looking for a resolution path
+                    that covers bank follow-up, documentary logic, export
+                    proceeds closure, extension, write-off, and DGFT-facing
+                    readiness.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                e-BRC Generation
-              </h3>
-              <p className="text-sm text-slate-600">
-                Assistance with the new DGFT Self-Certification e-BRC process.
-                We help you utilize the IRM data to generate valid certificates
-                for claiming incentives.
-              </p>
-            </div>
 
-            {/* Service 3 */}
-            <div className="bg-white rounded-xl shadow-md p-8 border-t-4 border-accent-500 hover:shadow-xl transition">
-              <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center text-accent-600 text-2xl mb-4">
-                <Eraser size={28} />
+              <div className="grid gap-5">
+                <div className="rounded-[28px] border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
+                  <div className="mb-3 flex items-center gap-3 text-emerald-700">
+                    <ShieldCheck className="h-5 w-5" />
+                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
+                      Outcome Focus
+                    </span>
+                  </div>
+                  <p className="text-sm leading-7 text-emerald-900">
+                    Clear closure logic for open entries, cleaner bank
+                    coordination, lower caution-list risk, and stronger export
+                    proceeds documentation for future shipments.
+                  </p>
+                </div>
+                <div className="rounded-[28px] border border-sky-200 bg-sky-50 p-6 shadow-sm">
+                  <div className="mb-3 flex items-center gap-3 text-sky-700">
+                    <Landmark className="h-5 w-5" />
+                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
+                      Search Intent Covered
+                    </span>
+                  </div>
+                  <p className="text-sm leading-7 text-sky-900">
+                    EDPMS closure, eBRC generation support, IRM mapping, export
+                    proceeds reconciliation, extension, write-off, unrealised
+                    bills, and AD bank follow-up.
+                  </p>
+                </div>
+                <div className="rounded-[28px] border border-violet-200 bg-violet-50 p-6 shadow-sm">
+                  <div className="mb-3 flex items-center gap-3 text-violet-700">
+                    <BookOpenCheck className="h-5 w-5" />
+                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
+                      E-E-A-T Angle
+                    </span>
+                  </div>
+                  <p className="text-sm leading-7 text-violet-900">
+                    The page uses practical exporter problems, transaction-level
+                    workflow explanations, official references, and related
+                    service links to improve expertise and trust signals.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                Write-off / Extension
-              </h3>
-              <p className="text-sm text-slate-600">
-                If the foreign buyer has defaulted, we help file for "Write-off"
-                or "Extension of Time" with the AD Bank as per RBI Master
-                Directions.
-              </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section id="process" className="py-20 bg-brand-900 text-white">
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
-              Workflow
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2">
-              Closure Process
-            </h2>
-          </div>
-
-          {/* Steps */}
-          <div className="relative grid md:grid-cols-4 gap-8 step-connector">
-            {/* Step 1 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-                            text-2xl font-bold text-brand-900 mx-auto mb-4 
-                            border-4 border-brand-200 shadow-sm"
-              >
-                1
+          <section className="bg-white py-16">
+            <div className="mx-auto max-w-7xl px-4 md:px-8">
+              <div className="mb-10 max-w-3xl">
+                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
+                  What this page helps exporters solve
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-600">
+                  These use cases expand the page beyond a thin service pitch and
+                  align it to the different ways exporters actually search for
+                  EDPMS and eBRC help.
+                </p>
               </div>
-              <h3 className="text-lg font-bold mb-2">Audit</h3>
-              <p className="text-sm text-slate-300">
-                Download "Outstanding List" from EDPMS and reconcile with your
-                bank statements.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-                            text-2xl font-bold text-brand-900 mx-auto mb-4 
-                            border-4 border-brand-200 shadow-sm"
-              >
-                2
+              <div className="grid gap-6 md:grid-cols-2">
+                {USE_CASES.map((item) => (
+                  <article
+                    key={item.title}
+                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 shadow-sm"
+                  >
+                    <div className="mb-4 inline-flex rounded-full bg-white px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
+                      Use Case
+                    </div>
+                    <h3 className="text-xl font-black text-slate-950">
+                      {item.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-slate-600">
+                      {item.description}
+                    </p>
+                  </article>
+                ))}
               </div>
-              <h3 className="text-lg font-bold mb-2">Submission</h3>
-              <p className="text-sm text-slate-300">
-                Submit Disposal Instructions (DI) or request letter to the Bank
-                with SB/IRM details.
-              </p>
             </div>
+          </section>
 
-            {/* Step 3 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-                            text-2xl font-bold text-brand-900 mx-auto mb-4 
-                            border-4 border-brand-200 shadow-sm"
-              >
-                3
+          <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-700">
+                  <BadgeCheck className="h-4 w-4" />
+                  Key Benefits
+                </div>
+                <div className="space-y-4">
+                  {BENEFITS.map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <CheckCircle2 className="mt-1 h-5 w-5 flex-none text-emerald-600" />
+                      <p className="text-sm leading-7 text-slate-600">{item}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3 className="text-lg font-bold mb-2">Processing</h3>
-              <p className="text-sm text-slate-300">
-                Bank uploads closure data to RBI server. e-BRC data flows to
-                DGFT.
-              </p>
-            </div>
-
-            {/* Step 4 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center 
-                            text-2xl font-bold text-white mx-auto mb-4 
-                            border-4 border-white shadow-sm"
-              >
-                <Check size={28} />
+              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-rose-700">
+                  <FileSearch className="h-4 w-4" />
+                  Common Problems
+                </div>
+                <div className="space-y-5">
+                  {COMMON_ISSUES.map((item) => (
+                    <div
+                      key={item.title}
+                      className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                    >
+                      <h3 className="text-lg font-bold text-slate-900">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-7 text-slate-600">
+                        {item.detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3 className="text-lg font-bold mb-2">Removal</h3>
-              <p className="text-sm text-slate-300">
-                Caution list flag is removed automatically or upon specific
-                request by AD Bank.
-              </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <Fees setShowEnrollModal={setShowEnrollModal}/>
+          <section id="eligibility" className="bg-slate-950 py-16 text-white">
+            <div className="mx-auto max-w-7xl px-4 md:px-8">
+              <div className="mb-10 max-w-3xl">
+                <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+                  Eligibility and ideal fit
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-300">
+                  This section is written to capture both search relevance and
+                  decision-stage clarity for exporters comparing whether this
+                  support is actually for their case.
+                </p>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                {ELIGIBILITY_POINTS.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-[24px] border border-white/10 bg-white/5 p-6"
+                  >
+                    <div className="flex items-start gap-3">
+                      <Building2 className="mt-1 h-5 w-5 flex-none text-cyan-300" />
+                      <p className="text-sm leading-7 text-slate-200">{item}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
-{/* --- WHY CLOUDDESK SECTION (EDPMS / e-BRC) --- */}
-<section className="py-20 bg-white">
-  <div className="container mx-auto px-4 max-w-5xl">
-    <div className="text-center mb-12">
-      <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for EDPMS & e-BRC?</h2>
-      <p className="text-slate-500">
-        Banks are notorious for 'forgetting' to map your inward remittance to your shipping bills. CloudDesk ensures your ledger is always zeroed out.
-      </p>
-    </div>
-    <div className="grid md:grid-cols-2 gap-8">
-      {/* Feature 1 */}
-      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-        <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
-          <AlertTriangle size={24} />
-        </div>
-        <div>
-          <h4 className="font-bold text-slate-900 mb-2">1. IRM-to-Shipping Bill Mapping</h4>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            When you receive foreign exchange, the bank creates an <strong>IRM (Inward Remittance Message)</strong> in EDPMS. If this isn't mapped to your Shipping Bill (SB), the bill stays <strong>"Open."</strong> CloudDesk performs a <strong>Weekly EDPMS Audit</strong>, identifying unmapped bills and forcing your AD Bank to close them before the <strong>15-month deadline</strong>.
-          </p>
-        </div>
+          <section id="documents" className="bg-white py-16">
+            <div className="mx-auto max-w-7xl px-4 md:px-8">
+              <div className="mb-10 max-w-3xl">
+                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
+                  Documents and records typically required
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-600">
+                  Stronger documentation depth improves user usefulness and also
+                  makes the page more complete for Google’s indexing systems.
+                </p>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                {DOCUMENTS_REQUIRED.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-[24px] border border-slate-200 bg-slate-50 p-6"
+                  >
+                    <div className="flex items-start gap-3">
+                      <FileCheck2 className="mt-1 h-5 w-5 flex-none text-sky-600" />
+                      <p className="text-sm leading-7 text-slate-600">{item}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="process" className="bg-slate-50 py-16">
+            <div className="mx-auto max-w-7xl px-4 md:px-8">
+              <div className="mb-10 max-w-3xl">
+                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
+                  Process flow for EDPMS closure and eBRC support
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-600">
+                  A defined process section helps both users and search engines
+                  understand the workflow depth behind the service.
+                </p>
+              </div>
+              <div className="grid gap-6 lg:grid-cols-5">
+                {PROCESS_STEPS.map((step, index) => (
+                  <article
+                    key={step.title}
+                    className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm"
+                  >
+                    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-white">
+                      {index + 1}
+                    </div>
+                    <h3 className="text-lg font-black text-slate-950">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">
+                      {step.detail}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-white py-16">
+            <div className="mx-auto max-w-7xl px-4 md:px-8">
+              <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+                <div className="rounded-[28px] border border-slate-200 bg-slate-950 p-8 text-white shadow-sm">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
+                    <CalendarClock className="h-4 w-4" />
+                    Expected Timelines
+                  </div>
+                  <div className="space-y-4">
+                    {TIMELINE_POINTS.map((item) => (
+                      <div key={item} className="flex items-start gap-3">
+                        <ReceiptText className="mt-1 h-5 w-5 flex-none text-cyan-300" />
+                        <p className="text-sm leading-7 text-slate-200">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-8 shadow-sm">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
+                    <ClipboardCheck className="h-4 w-4" />
+                    Government and ecosystem references
+                  </div>
+                  <p className="mb-5 text-sm leading-7 text-slate-600">
+                    Official reference links strengthen trust and help position
+                    the page inside the correct export, banking, DGFT, and
+                    customs context.
+                  </p>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {GOVERNMENT_REFERENCES.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-2xl border border-slate-200 bg-white p-5 text-sm font-semibold text-slate-700 transition hover:border-sky-300 hover:text-sky-700"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-slate-50 py-16">
+            <div className="mx-auto max-w-7xl px-4 md:px-8">
+              <div className="mb-10 max-w-3xl">
+                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
+                  Related services that strengthen this page’s internal SEO cluster
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-600">
+                  Internal links help Google understand that this page belongs to
+                  a broader export compliance and incentive ecosystem, not an
+                  isolated thin page.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                {RELATED_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className="group rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-sky-300 hover:shadow-lg"
+                  >
+                    <div className="mb-4 inline-flex rounded-full bg-sky-50 p-3 text-sky-700">
+                      <ArrowRight className="h-5 w-5" />
+                    </div>
+                    <h3 className="text-lg font-black text-slate-950 group-hover:text-sky-700">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">
+                      {item.description}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="faqs" className="bg-white py-16">
+            <div className="mx-auto max-w-5xl px-4 md:px-8">
+              <div className="mb-10 text-center">
+                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
+                  Frequently asked questions on EDPMS and eBRC
+                </h2>
+                <p className="mt-4 text-base leading-8 text-slate-600">
+                  FAQ depth improves long-tail coverage and supports potential
+                  rich-result interpretation when Google decides to use it.
+                </p>
+              </div>
+              <div className="space-y-5">
+                {FAQS.map((faq) => (
+                  <article
+                    key={faq.question}
+                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 shadow-sm"
+                  >
+                    <h3 className="text-lg font-black text-slate-950">
+                      {faq.question}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">
+                      {faq.answer}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-[linear-gradient(135deg,#0f172a_0%,#1e3a8a_55%,#0f766e_100%)] py-16 text-white">
+            <div className="mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-[1fr_auto] md:items-center md:px-8">
+              <div>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
+                  <Sparkles className="h-4 w-4" />
+                  Ready to reconcile open export entries?
+                </div>
+                <h2 className="max-w-3xl text-3xl font-black tracking-tight md:text-4xl">
+                  Get structured support for EDPMS closure, eBRC readiness,
+                  shipping bill reconciliation, and AD bank follow-up.
+                </h2>
+                <p className="mt-4 max-w-2xl text-base leading-8 text-slate-200">
+                  If you are dealing with unrealised export bills, open entries,
+                  remittance mapping issues, short realisation, or pending
+                  banking closure, we can help you build a cleaner path forward.
+                </p>
+              </div>
+              <div className="flex flex-col gap-4 sm:flex-row md:flex-col">
+                <a
+                  href="tel:+917400096950"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-slate-100"
+                >
+                  <Phone className="h-4 w-4" />
+                  Call +91 74000 96950
+                </a>
+                <Link
+                  to="/contact-us"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-base font-semibold text-white transition hover:bg-white/15"
+                >
+                  Book an EDPMS Review
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        </main>
       </div>
-
-      {/* Feature 2 */}
-      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-        <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
-          <CheckCircle size={24} />
-        </div>
-        <div>
-          <h4 className="font-bold text-slate-900 mb-2">2. The New "Self-Certification" e-BRC</h4>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            In late 2025/2026, the DGFT shifted from Bank-issued e-BRCs to <strong>Exporter Self-Certification</strong>. CloudDesk manages this digital filing on the DGFT portal, using your bank's transaction data to "Self-Certify" realization, which instantly unlocks your <strong>RoDTEP, Drawback, and AA/EPCG redemption</strong>.
-          </p>
-        </div>
-      </div>
-
-      {/* Feature 3 */}
-      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-        <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
-          <Building size={24} />
-        </div>
-        <div>
-          <h4 className="font-bold text-slate-900 mb-2">3. Caution List Rescue</h4>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            If you have "Open" bills older than 15 months, the RBI's automated system places your IEC on the <strong>Caution List</strong> — meaning you cannot ship without 100% advance payment or a Bank Guarantee. CloudDesk manages the <strong>Extension of Time (EOT)</strong> applications and coordinates with the <strong>RBI's Regional Office</strong> to delist your firm.
-          </p>
-        </div>
-      </div>
-
-      {/* Feature 4 */}
-      <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-        <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
-          <ShieldUser size={24} />
-        </div>
-        <div>
-          <h4 className="font-bold text-slate-900 mb-2">4. Write-off & Extension Management</h4>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            Sometimes buyers don't pay. In 2026, you can self-write off up to <strong>10% of your total annual realization</strong>. CloudDesk calculates your <strong>"Write-off Eligibility"</strong> and files the necessary <strong>"V-Form"</strong> with the bank to ensure your EDPMS reflects a <strong>"Closed" status</strong> even for bad debts.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* --- FAQ SECTION (EDPMS / e-BRC) --- */}
-<section className="py-20 bg-white">
-  <div className="container mx-auto px-4 max-w-3xl">
-    <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-      Frequently Asked Questions
-    </h2>
-
-    <div className="space-y-4">
-      {/* FAQ 1 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          Does the new e-BRC system require bank intervention?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          Under the new DGFT system (2023), the process is self-certified. The bank issues the IRM, and the exporter can <strong>self-generate the e-BRC</strong> on the DGFT portal by linking the IRM to the Shipping Bill. However, closing the entry in <strong>EDPMS still requires bank action</strong>.
-        </p>
-      </details>
-
-      {/* FAQ 2 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          What if my payment came with a deduction (Bank Charges)?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          Small deductions ("Bank Charges") are allowed. You must instruct the bank to close the Shipping Bill fully by accounting for the <strong>"Bank Charges" component separately</strong> in the EDPMS system.
-        </p>
-      </details>
-
-      {/* FAQ 3 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          Can I get removed from the Caution List instantly?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          It is not instant. Once the AD Bank marks the bills as <strong>"Realized" or "Extension Granted"</strong> in the EDPMS, the system updates the status <strong>overnight or within a few days</strong>, removing the caution flag.
-        </p>
-      </details>
-
-      {/* FAQ 4 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          What is the difference between EDPMS and e-BRC?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          • <strong>EDPMS:</strong> An RBI system where the Shipping Bill (money expected) and IRM (money received) are matched.<br />
-          • <strong>e-BRC:</strong> A DGFT certificate that proves the money was received, used to claim government incentives.
-        </p>
-      </details>
-
-      {/* FAQ 5 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          What is the time limit to realize export proceeds in 2026?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          The standard window is <strong>15 months from the date of export</strong>. For "Status Holders" and specific "INR-Invoiced" exports, this can be extended up to <strong>18 months</strong> with prior bank approval.
-        </p>
-      </details>
-
-      {/* FAQ 6 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          Does EDPMS apply to Service Exports?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          Yes. Service exports are monitored via the <strong>Unified EDF (Export Declaration Form)</strong>. In 2026, your <strong>FIRC (Foreign Inward Remittance Certificate)</strong> must be mapped to the EDF in the bank's portal to avoid a FEMA violation.
-        </p>
-      </details>
-
-      {/* FAQ 7 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          Why is my Shipping Bill still "Open" despite receiving payment?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          The bank likely hasn't updated the <strong>"Object Code"</strong> or the <strong>"SB Mapping"</strong> in the EDPMS server. This is a common manual error by bank staff. CloudDesk provides the <strong>Reconciliation Report</strong> you need to send to your bank manager to fix this.
-        </p>
-      </details>
-
-      {/* FAQ 8 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          What happens if I receive payment in a different currency?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          EDPMS can handle currency fluctuations within a <strong>5% tolerance</strong>. If the difference is higher (due to bank charges or FX moves), you must provide a <strong>"Reason for Short-Realization"</strong> to the bank.
-        </p>
-      </details>
-
-      {/* FAQ 9 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          Can I get an e-BRC for a "Third-Party" payment?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          Yes, but it's complex. You must mention the third-party details in the Shipping Bill and have a <strong>"Tripartite Agreement."</strong> Without this, the bank will refuse to issue the e-BRC and you'll <strong>lose your incentives</strong>.
-        </p>
-      </details>
-
-      {/* FAQ 10 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          What are the penalties for not closing EDPMS entries?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          Under <strong>FEMA 1999/2026</strong>, non-realization is a serious offense. Penalties can be up to <strong>3x the amount not realized</strong>. More practically, your bank will stop issuing <strong>"Forward Contracts"</strong> and <strong>"PCFC" (Pre-shipment Credit)</strong> for your future orders.
-        </p>
-      </details>
-
-      {/* FAQ 11 */}
-      <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-        <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-          How does the new e-BRC system affect GST refunds?
-          <ChevronDown
-            className="text-brand-500 transition-transform group-open:rotate-180"
-            size={20}
-          />
-        </summary>
-        <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-          In 2026, the GST portal is <strong>directly linked to the DGFT's e-BRC server</strong>. If your e-BRC isn't generated within the time limit, the GST department can issue a <strong>"Demand"</strong> to recover the IGST refund they previously paid you.
-        </p>
-      </details>
-    </div>
-  </div>
-</section>
-
-      {/* Footer */}
-      <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-          {/* BRAND */}
-          <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
-
-            <p className="text-sm mb-6">
-              EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
-              Logistics compliance.
-            </p>
-
-            <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Linkedin size={18} />
-              </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Twitter size={18} />
-              </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Facebook size={18} />
-              </a>
-            </div>
-          </div>
-
-          {/* QUICK LINKS */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  e-BRC Generation
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  EDPMS Closure
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  RoDTEP Scrips
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  Duty Drawback
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* OTHER SERVICES */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  RBI Master Circular
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  DGFT e-BRC Help
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  Write-off Guidelines
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  FEMA Regulations
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Contact Us</h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex gap-3 items-center">
-                <Phone size={18} className="text-brand-500" />
-                +917400096950
-              </li>
-
-              <li className="flex gap-3 items-center">
-                <Mail size={18} className="text-brand-500" />
-                clouddesk@eximinq.in
-              </li>
-
-              <li className="flex gap-3 items-center">
-                <MapPin size={18} className="text-brand-500" />
-                Mumbai, India
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* COPYRIGHT */}
-        <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-          © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
-          DGFT.
-        </div>
-      </footer>
-    </div>
-</>
+    </>
   );
 };
 

@@ -1,931 +1,768 @@
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import React, { useState } from "react";
-import TopBar from "../components/ADCode/TopBar";
-import Navbar from "../components/ADCode/Navbar";
-import Hero from "../components/ADCode/Hero";
-import Fees from "../components/ADCode/Fees";
+import { Link } from "react-router-dom";
 import {
-  ChevronDown,
-  Linkedin,
-  Twitter,
-  Facebook,
-  AlertTriangle,
-  Building,
-  ShieldUser,
-  Phone,
+  ArrowRight,
+  BadgeCheck,
+  BookOpenCheck,
+  Building2,
+  CalendarClock,
+  CheckCircle2,
+  ClipboardCheck,
+  FileCheck2,
+  FileSearch,
+  Landmark,
   Mail,
   MapPin,
-  Check,
-  FileOutput,
-  HandCoins,
-  RefreshCcw,
-  CheckCircle,
-  ChevronRight,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  WalletCards
 } from "lucide-react";
 import { MainNavbar } from "../components/ADCode/MainNavbar";
-import { ModalEnroll } from "../components/ADCode/ModalEnroll";
-const ADCode = () => {
-  const [showEnrollModal, setShowEnrollModal] = useState({
-    open: false,
-    type: "",
-  });
+import QuickForm from "../components/ADCode/QuickForm";
 
-   const handleEnrollmentSubmit = (formData) => {
-    console.log("Enrollment Submitted:", formData);
+const HIGHLIGHTS = [
+  "AD Code registration consultant India",
+  "ICEGATE bank account mapping and customs port registration support",
+  "e-Sanchit document review, bank-letter validation, and multi-port setup",
+  "AD Code not found, mismatch, rejection, and modification issue support"
+];
 
-    // TODO → send API call
-    // axios.post("/api/enroll", formData)
+const BENEFITS = [
+  "Helps exporters register the correct bank AD Code against the correct customs location so shipping-bill and export-realisation workflows do not get blocked later.",
+  "Reduces rejection risk caused by weak bank letters, incomplete authorisation records, wrong port mapping, or inconsistent exporter details across ICEGATE and customs submissions.",
+  "Supports first-time port registration, port addition, modification, and recovery of transactions where the AD Code status is unclear or already failing operationally.",
+  "Improves shipment readiness by aligning bank account details, exporter credentials, port code selection, document uploads, and customs-facing workflow before cargo movement."
+];
 
-    alert("Form submitted — check console for data.");
-  };
+const USE_CASES = [
+  {
+    title: "First-time AD Code registration",
+    description:
+      "For exporters who already have IEC and bank account readiness but need the AD Code to be registered correctly with customs or ICEGATE before export documentation can move smoothly."
+  },
+  {
+    title: "Port-wise AD Code addition",
+    description:
+      "Useful where the exporter is expanding to a new seaport, airport, ICD, or CFS and needs the same authorised dealer bank account mapped again for that new location."
+  },
+  {
+    title: "AD Code correction or modification",
+    description:
+      "Relevant when the bank account changes, the AD Code details are mismatched, or the exporter has to correct earlier records to avoid operational stoppages."
+  },
+  {
+    title: "AD Code not found or rejected cases",
+    description:
+      "For cases where documents were submitted but customs systems, ICEGATE users, or CHA teams still cannot use the AD Code at the intended export port."
+  }
+];
+
+const ELIGIBILITY_POINTS = [
+  "Exporters with a valid IEC who need to map an authorised dealer bank account to a specific customs port for export transactions.",
+  "Businesses adding one or more ports beyond their existing registration, including seaports, airports, ICDs, CFS locations, and other customs formations supported operationally.",
+  "Companies changing their export bank account, modifying an existing AD Code mapping, or regularising mismatched bank details before further shipping-bill activity.",
+  "Exporters whose CHA, freight team, or internal trade desk is facing an AD Code not found, inactive mapping, or rejection issue that is delaying customs processing."
+];
+
+const DOCUMENTS_REQUIRED = [
+  "IEC details, GST or entity details where relevant operationally, authorised signatory credentials, and exporter master information used in customs-facing filings.",
+  "Bank-issued AD Code letter in the required format, account details, IFSC information, branch confirmation, and supporting bank authorisation trail.",
+  "Port selection details, customs location codes, exporter address records, authorisation documents, and any supporting undertaking or request letter needed for the target workflow.",
+  "Previous rejection screenshots, deficient submissions, ICEGATE status proof, e-Sanchit IRN records, or customs communication if the case is a correction or revival matter."
+];
+
+const PROCESS_STEPS = [
+  {
+    title: "Document and port-readiness review",
+    detail:
+      "We first confirm exporter identity, bank documentation quality, target port selection, and whether the case is a new registration, a port addition, or a correction workflow."
+  },
+  {
+    title: "Bank-letter and account validation",
+    detail:
+      "The AD Code letter, account details, authorised signatory support, and branch-level references are reviewed so the submission is commercially and procedurally usable."
+  },
+  {
+    title: "Customs or ICEGATE submission support",
+    detail:
+      "Depending on the actual workflow, we help structure the registration path, e-Sanchit document set, and port-specific filing sequence for the target customs location."
+  },
+  {
+    title: "Query handling and status follow-up",
+    detail:
+      "If the submission is held up, rejected, or showing inconsistent status, we help identify whether the gap is documentary, bank-side, port-side, or user-flow related."
+  },
+  {
+    title: "Future-ready exporter setup",
+    detail:
+      "Where helpful, the case is aligned with ICEGATE registration, shipping-bill readiness, and export compliance support so future port additions become easier to manage."
+  }
+];
+
+const TIMELINE_POINTS = [
+  "Initial document and port-readiness review is usually possible within 1 to 2 working days once the exporter and bank record set is available.",
+  "Straightforward AD Code registration or port-addition cases often move faster when the bank letter format and supporting details are already correct.",
+  "Correction, rejection, or inactive-mapping cases can take longer because the root cause may sit with bank formatting, customs history, port-specific process expectations, or prior filing defects.",
+  "Actual activation time depends on customs workload, port practice, document quality, and whether the case is new, modified, or being revived after rejection."
+];
+
+const COMMON_ISSUES = [
+  {
+    title: "AD Code not found at the export port",
+    detail:
+      "The exporter may have a bank account and an AD Code, but it is either not registered at the required port or not active in the way the shipment workflow expects."
+  },
+  {
+    title: "Weak or inconsistent bank letter",
+    detail:
+      "A poorly formatted AD Code letter, missing branch details, or mismatch between exporter information and bank records can cause avoidable delay or rejection."
+  },
+  {
+    title: "Port expansion was not planned properly",
+    detail:
+      "Many exporters assume one successful AD Code registration automatically covers every customs location, which creates friction when operations expand to new ports."
+  },
+  {
+    title: "Status is unclear even after submission",
+    detail:
+      "The issue may be with e-Sanchit linkage, customs acceptance, user-side mapping visibility, or incomplete supporting records rather than the concept of AD Code itself."
+  }
+];
+
+const FAQS = [
+  {
+    question: "What is AD Code registration in exports?",
+    answer:
+      "AD Code registration is the process of mapping the exporter’s authorised dealer bank account with the relevant customs port so export transactions and related banking workflows can move correctly."
+  },
+  {
+    question: "Is AD Code registration port specific?",
+    answer:
+      "Yes. In practice, exporters often need the AD Code to be registered or mapped for each relevant customs location where export activity is planned."
+  },
+  {
+    question: "Why does AD Code show as not found?",
+    answer:
+      "Common reasons include no port-wise mapping, document quality problems, bank-letter mismatch, inactive or incomplete submission history, or incorrect workflow assumptions."
+  },
+  {
+    question: "Can the same exporter use AD Code at multiple ports?",
+    answer:
+      "Yes, but the required mapping and acceptance must usually be handled location-wise. Port expansion often needs separate operational follow-through."
+  },
+  {
+    question: "What documents are usually needed for AD Code registration?",
+    answer:
+      "Typical requirements include IEC details, bank-issued AD Code letter, account and branch details, authorised signatory proof, port selection details, and any supporting request documentation used in the filing flow."
+  },
+  {
+    question: "How does this page improve ranking potential for AD Code keywords?",
+    answer:
+      "Because it covers real exporter intent around AD Code registration: bank account mapping, port-wise setup, rejection causes, document requirements, official references, timelines, and related customs workflow support."
+  }
+];
+
+const GOVERNMENT_REFERENCES = [
+  {
+    label: "ICEGATE Portal",
+    href: "https://www.icegate.gov.in/"
+  },
+  {
+    label: "ICEGATE Guidelines and Advisories",
+    href: "https://www.icegate.gov.in/guidelines"
+  },
+  {
+    label: "ICEGATE e-Sanchit Help and User Resources",
+    href: "https://www.icegate.gov.in/e-sanchit"
+  },
+  {
+    label: "CBIC Customs Portal",
+    href: "https://www.cbic.gov.in/"
+  }
+];
+
+const RELATED_LINKS = [
+  {
+    href: "/services/import-export-code/",
+    title: "IEC Registration and DGFT Profile Support",
+    description:
+      "Useful where the exporter first needs IEC readiness or DGFT profile cleanup before customs-facing registration workflows are stabilised."
+  },
+  {
+    href: "/services/icegate-registration/",
+    title: "ICEGATE Registration Support",
+    description:
+      "Important where user access, customs login readiness, and document workflow setup need to be aligned with AD Code registration."
+  },
+  {
+    href: "/services/e-sanchit-filing",
+    title: "e-Sanchit Filing Support",
+    description:
+      "Relevant where the AD Code process depends on correctly structured digital document uploads and supporting IRN-ready records."
+  },
+  {
+    href: "/services/shipping-bill-filing",
+    title: "Shipping Bill Filing Support",
+    description:
+      "Helps exporters connect AD Code readiness with actual export filing execution, declaration quality, and port-level customs processing."
+  }
+];
+
+const SECTION_LINKS = [
+  { href: "#overview", label: "Overview" },
+  { href: "#eligibility", label: "Eligibility" },
+  { href: "#documents", label: "Documents" },
+  { href: "#process", label: "Process" },
+  { href: "#faqs", label: "FAQs" }
+];
+
+const CloudDeskADCode = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <Helmet>
         <title>
-          AD Code Registration Online in India | DGFT CUSTOMS Services | EXIMINQ
+          AD Code Registration Consultant India | ICEGATE Bank Account Mapping,
+          Customs Port Registration and e-Sanchit Support | EXIMINQ
         </title>
-
         <meta
           name="description"
-          content="AD Code registration for exporters and importers in India. Customs port mapping, ICEGATE submission, e-Sanchit upload and multi-port AD Code setup support."
+          content="AD Code registration consultant in India for ICEGATE bank account mapping, customs port registration, e-Sanchit document support, multi-port setup, AD Code modification, and AD Code not found issue resolution."
         />
-
+        <meta
+          name="keywords"
+          content="AD Code registration consultant India, AD Code registration, ICEGATE AD Code registration, customs port AD Code registration, bank AD Code mapping, AD Code not found, e-Sanchit AD Code support, port wise AD Code registration"
+        />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
           href="https://eximinq.in/services/ad-code-registration/"
         />
-
-        {/* Open Graph */}
         <meta
           property="og:title"
-          content="AD Code Registration & Port Mapping | Eximinq"
+          content="AD Code Registration Consultant India | ICEGATE, Customs Port and e-Sanchit Support"
         />
         <meta
           property="og:description"
-          content="Complete AD Code registration with Customs EDI mapping and ICEGATE filing support."
+          content="Get expert support for AD Code registration, ICEGATE bank mapping, customs port registration, multi-port additions, and AD Code rejection resolution."
         />
         <meta
           property="og:url"
           content="https://eximinq.in/services/ad-code-registration/"
         />
-        <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "AD Code Registration Service",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Authorized Dealer (AD) Code registration and Customs port mapping services including ICEGATE filing and e-Sanchit documentation."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
+            "@graph": [
               {
-                "@type": "Question",
-                "name": "Is physical submission of documents required?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Generally, no. The process is now 100% online via ICEGATE. However, in rare cases or specific ports, the Customs Officer may request physical verification of the original Bank Letter."
+                "@type": "WebPage",
+                "@id": "https://eximinq.in/services/ad-code-registration/#webpage",
+                url: "https://eximinq.in/services/ad-code-registration/",
+                name: "AD Code Registration Consultant India | EXIMINQ",
+                description:
+                  "AD Code registration consultant in India for ICEGATE bank account mapping, customs port registration, e-Sanchit document support, multi-port setup, modification support, and rejection handling.",
+                inLanguage: "en-IN"
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": "https://eximinq.in/services/ad-code-registration/#breadcrumb",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "AD Code Registration",
+                    item: "https://eximinq.in/services/ad-code-registration/"
+                  }
+                ]
+              },
+              {
+                "@type": "Service",
+                "@id": "https://eximinq.in/services/ad-code-registration/#service",
+                name: "AD Code Registration Support",
+                serviceType: "AD Code registration consultant",
+                provider: {
+                  "@type": "Organization",
+                  name: "EXIMINQ",
+                  url: "https://eximinq.in/"
+                },
+                areaServed: {
+                  "@type": "Country",
+                  name: "India"
+                },
+                description:
+                  "Support for AD Code registration, ICEGATE bank account mapping, customs port registration, e-Sanchit document readiness, port-wise additions, and AD Code correction workflows.",
+                offers: {
+                  "@type": "Offer",
+                  availability: "https://schema.org/InStock",
+                  priceCurrency: "INR"
                 }
               },
               {
-                "@type": "Question",
-                "name": "Can I change my registered bank account?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, you can modify your AD Code. You will need to obtain a new letter from the new bank and follow the same modification process on ICEGATE online."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does approval take?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Once the application is submitted successfully online, it usually takes 3–5 working days for Customs to approve, provided there are no queries or document discrepancies."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is an AD Code, and why is it 14 digits?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "An Authorized Dealer (AD) Code is a unique 14-digit identifier assigned by the RBI to bank branches authorized to deal in foreign exchange. It links your bank account to your Import-Export Code (IEC) in the Customs database."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is AD Code registration mandatory for exporters?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. While it is most critical for Exporters (for Shipping Bill generation), Importers need it to ensure that their foreign remittances (Bill of Entry payments) are tracked correctly under FEMA guidelines."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is there a government fee for AD Code registration?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "ICEGATE does not charge a fee for AD Code registration. However, some banks may charge a nominal \"Processing Fee\" (ranging from ₹500 to ₹2,000) for issuing the AD Code letter on their letterhead."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "If I register my AD Code at Nhava Sheva (JNPT), can I export from Mundra??",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. As of 2026, you still need to map your bank account to the specific \"Port Location Code\" (e.g., INNSA1 for Nhava Sheva, INMUN1 for Mundra) on the ICEGATE portal. You don't need a new code, but you do need a new registration for that location."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if I change my bank account?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "You must obtain a new AD Code letter from your new bank and perform a \"Modify Bank Account\" request on ICEGATE. Note: Your existing shipping bills will still be tied to the old account until the new one is approved."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Why was my AD Code rejected with the error \"Invalid IRN\"?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "This happens when the documents uploaded on e-Sanchit are not digitally signed or the IRN (Image Reference Number) was incorrectly entered in the form. CloudDesk’s automation ensures the IRN is \"Live\" before we hit submit."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "The Customs officer is asking for a \"Physical Set\" of documents after I filed online. Is this normal?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Occasionally, certain ports (like smaller ICDs) require a physical copy of the bank letter and self-attested documents for \"one-time verification.\" CloudDesk’s local agents can assist in these physical submissions to avoid travel for the exporter."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can one IEC have multiple AD Codes?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. If you use one bank for exports and another for imports, or different banks for different product lines, you can register multiple AD Codes under the same IEC."
-                }
+                "@type": "FAQPage",
+                "@id": "https://eximinq.in/services/ad-code-registration/#faq",
+                mainEntity: FAQS.map((item) => ({
+                  "@type": "Question",
+                  name: item.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: item.answer
+                  }
+                }))
               }
             ]
           })}
         </script>
       </Helmet>
-      <div className="bg-slate-50 text-slate-800">
-        {/* Dynamic Sections */}
-        {/* <TopBar /> */}
-        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-        <Navbar setShowEnrollModal={setShowEnrollModal} />
-        <Hero setShowEnrollModal={setShowEnrollModal} />
 
-        <ModalEnroll
-          show={showEnrollModal.open}
-          type={showEnrollModal.type}
-          onClose={() => setShowEnrollModal({ open: false, type: "" })}
-          onSubmit={handleEnrollmentSubmit}
+      <div className="min-h-screen bg-slate-50 text-slate-900">
+        <MainNavbar
+          scrolled={scrolled}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
         />
 
-        {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#0f1d4b] via-[#1e3a8a] to-[#0f766e] text-white">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.16),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(255,255,255,0.12),_transparent_28%)]" />
+          <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-28 md:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-100">
+                <Sparkles className="h-4 w-4" />
+                Port-wise AD Code registration and correction support
+              </div>
+              <h1 className="mt-6 max-w-4xl text-4xl font-extrabold leading-tight md:text-5xl">
+                AD Code Registration Consultant in India for ICEGATE, Customs
+                Port Mapping, and e-Sanchit Readiness
+              </h1>
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-100/90">
+                Register your bank AD Code correctly at the right customs port,
+                fix AD Code not found issues, and prepare your exporter account
+                for smoother shipping-bill, documentation, and export-banking
+                workflows.
+              </p>
 
-        <section id="about" className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-5xl">
-            {/* Heading */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">
-                What is an AD Code?
-              </h2>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {HIGHLIGHTS.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-4 backdrop-blur"
+                  >
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-200" />
+                    <p className="text-sm leading-6 text-slate-100">{item}</p>
+                  </div>
+                ))}
+              </div>
 
-              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href="#quick-form"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-cyan-50"
+                >
+                  Start AD Code Review
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="#faqs"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  Read FAQs
+                </a>
+              </div>
             </div>
 
-            {/* Content */}
-            <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
-              <p className="mb-4">
-                An <strong>Authorized Dealer (AD) Code</strong> is a 14-digit
-                numerical code issued by the bank where you maintain your business
-                current account. It acts as a bridge between the Customs
-                Department and your bank.
-              </p>
-
-              <p className="mb-4">
-                To export goods from India, you must register this code at every
-                port (Air, Sea, or ICD) where you intend to file your shipping
-                documents. Without this registration, the{" "}
-                <strong>Electronic Data Interchange (EDI)</strong> system will not
-                allow the generation of the Shipping Bill.
-              </p>
-
-              {/* Info Box */}
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mt-8 rounded-r-lg">
-                <h3 className="font-bold text-blue-900 text-lg mb-2">
-                  Did You Know?
-                </h3>
-                <p className="text-sm">
-                  AD Code registration is <strong>port-specific</strong>. If you
-                  register at Mumbai Port, it does <em>not</em> automatically
-                  register you at Delhi Airport — you must file a separate online
-                  application for each port.
-                </p>
-              </div>
+            <div
+              id="quick-form"
+              className="rounded-[32px] border border-white/15 bg-white/95 p-4 shadow-2xl shadow-slate-950/20 backdrop-blur"
+            >
+              <QuickForm />
             </div>
           </div>
         </section>
 
-        <section id="benefits" className="py-20 bg-slate-50">
-          <div className="container mx-auto px-4">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-                Importance
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-                Why is Registration Mandatory?
-              </h2>
-            </div>
-
-            {/* Grid */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Benefit 1 */}
-              <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-lg transition">
-                <div className="w-12 h-12 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-2xl mb-4">
-                  <FileOutput size={26} />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  Shipping Bill Generation
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  The Shipping Bill number is the primary document for exports.
-                  Customs EDI system blocks generation if the AD Code is not
-                  mapped to your IEC.
-                </p>
-              </div>
-
-              {/* Benefit 2 */}
-              <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-lg transition">
-                <div className="w-12 h-12 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-2xl mb-4">
-                  <HandCoins size={26} />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  Government Incentives
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  Benefits like <strong>Duty Drawback (DBK)</strong> and{" "}
-                  <strong>RoDTEP</strong> are credited directly to your bank
-                  through PFMS, which relies on AD Code validation.
-                </p>
-              </div>
-
-              {/* Benefit 3 */}
-              <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-lg transition">
-                <div className="w-12 h-12 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-2xl mb-4">
-                  <RefreshCcw size={26} />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  IGST Refund
-                </h3>
-                <p className="text-slate-600 text-sm">
-                  If IGST is paid on exports, refund processing happens only when
-                  the AD Code and Bank Account are correctly registered and
-                  validated in the Customs system.
-                </p>
-              </div>
-            </div>
+        <section className="sticky top-[84px] z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
+          <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-4 py-4 md:px-6 lg:px-8">
+            {SECTION_LINKS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-500 hover:text-blue-700"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </section>
 
-        <section id="documents" className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* LEFT CONTENT */}
-              <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">
-                  Documents for AD Code
-                </h2>
-
-                <p className="text-slate-600 mb-8">
-                  The most critical document is the{" "}
-                  <strong>Bank Authorization Letter</strong>. It must be in the
-                  exact format prescribed by the Customs Public Notice.
+        <main className="mx-auto max-w-7xl px-4 py-14 md:px-6 lg:px-8">
+          <section
+            id="overview"
+            className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]"
+          >
+            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+                <Target className="h-4 w-4" />
+                Service Overview
+              </div>
+              <h2 className="mt-4 text-3xl font-bold text-slate-900">
+                Why AD Code registration matters for exporters
+              </h2>
+              <div className="mt-5 space-y-4 text-base leading-8 text-slate-600">
+                <p>
+                  AD Code registration is not just a banking formality. It is a
+                  customs-facing exporter readiness step that connects the
+                  authorised dealer bank account with the specific port where the
+                  export transaction is being handled.
                 </p>
+                <p>
+                  If the mapping is missing, weak, incomplete, or not active at
+                  the required location, exporters often face confusion around
+                  shipping-bill execution, customs document movement, or
+                  bank-linked export process continuity. That is why search
+                  intent around AD Code registration is usually high intent and
+                  operationally urgent.
+                </p>
+                <p>
+                  This page is built for exporters who need reliable support for
+                  first-time AD Code registration, port additions, corrections,
+                  and rejected or unclear cases where the workflow has already
+                  started to fail.
+                </p>
+              </div>
+            </div>
 
-                <ul className="space-y-4">
-                  {/* Item 1 */}
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <div>
-                      <strong className="block text-slate-800">
-                        AD Code Letter from Bank
-                      </strong>
-                      <span className="text-sm text-slate-500">
-                        Original letter on Bank letterhead, signed by Branch
-                        Manager, mentioning the 14-digit AD code and Port Name.
-                      </span>
-                    </div>
-                  </li>
-
-                  {/* Item 2 */}
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <div>
-                      <strong className="block text-slate-800">
-                        Cancelled Cheque
-                      </strong>
-                      <span className="text-sm text-slate-500">
-                        Must show Account Name, Number & IFSC.
-                      </span>
-                    </div>
-                  </li>
-
-                  {/* Item 3 */}
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <div>
-                      <strong className="block text-slate-800">
-                        IEC & PAN Copy
-                      </strong>
-                      <span className="text-sm text-slate-500">
-                        Self-attested copies of Import Export Code and Company
-                        PAN.
-                      </span>
-                    </div>
-                  </li>
-
-                  {/* Item 4 */}
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <div>
-                      <strong className="block text-slate-800">
-                        GST Registration
-                      </strong>
-                      <span className="text-sm text-slate-500">
-                        Copy of GST Certificate.
-                      </span>
-                    </div>
-                  </li>
-
-                  {/* Item 5 */}
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="text-green-500 mt-1" size={18} />
-                    <div>
-                      <strong className="block text-slate-800">
-                        Class 3 DSC
-                      </strong>
-                      <span className="text-sm text-slate-500">
-                        Digital Signature required for uploading documents on
-                        e-Sanchit.
-                      </span>
-                    </div>
-                  </li>
+            <div className="grid gap-6">
+              <div className="rounded-[28px] bg-gradient-to-br from-emerald-50 to-cyan-50 p-7 shadow-sm ring-1 ring-emerald-100">
+                <div className="flex items-center gap-3 text-emerald-700">
+                  <BadgeCheck className="h-5 w-5" />
+                  <span className="text-sm font-semibold uppercase tracking-[0.22em]">
+                    Key Benefits
+                  </span>
+                </div>
+                <ul className="mt-5 space-y-4">
+                  {BENEFITS.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-7 text-slate-700">
+                      <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-emerald-600" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              {/* RIGHT CARD */}
-              <div className="bg-slate-100 rounded-2xl p-8 border border-slate-200">
-                <div className="bg-white p-6 shadow-md rounded">
-                  <h4 className="font-bold text-brand-900 border-b pb-2 mb-4">
-                    Bank Letter Format Checklist
-                  </h4>
+              <div className="rounded-[28px] bg-slate-900 p-7 text-white shadow-sm">
+                <div className="flex items-center gap-3 text-cyan-200">
+                  <WalletCards className="h-5 w-5" />
+                  <span className="text-sm font-semibold uppercase tracking-[0.22em]">
+                    Related Customs Workflows
+                  </span>
+                </div>
+                <p className="mt-4 text-sm leading-7 text-slate-200">
+                  AD Code readiness often works best when aligned with IEC,
+                  ICEGATE, e-Sanchit, and shipping-bill execution instead of
+                  being treated as an isolated formality.
+                </p>
+              </div>
+            </div>
+          </section>
 
-                  <ul className="text-xs text-slate-600 space-y-2">
-                    <li className="flex items-center gap-2">
-                      <ChevronRight className="text-brand-500" size={14} />
-                      Is it on Bank Letterhead?
-                    </li>
+          <section className="mt-14">
+            <div className="mb-6 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+              <Building2 className="h-4 w-4" />
+              Use Cases
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {USE_CASES.map((item) => (
+                <article
+                  key={item.title}
+                  className="rounded-[26px] bg-white p-6 shadow-sm ring-1 ring-slate-200"
+                >
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">
+                    {item.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
 
-                    <li className="flex items-center gap-2">
-                      <ChevronRight className="text-brand-500" size={14} />
-                      Is the 14-digit AD Code mentioned?
-                    </li>
-
-                    <li className="flex items-center gap-2">
-                      <ChevronRight className="text-brand-500" size={14} />
-                      Is the IFSC Code correct?
-                    </li>
-
-                    <li className="flex items-center gap-2">
-                      <ChevronRight className="text-brand-500" size={14} />
-                      Is the Port Name (e.g., Nhava Sheva) mentioned?
-                    </li>
-
-                    <li className="flex items-center gap-2">
-                      <ChevronRight className="text-brand-500" size={14} />
-                      Is the applicant’s photo attested by the Bank?
-                    </li>
-
-                    <li className="flex items-center gap-2">
-                      <ChevronRight className="text-brand-500" size={14} />
-                      Is the Branch Manager's stamp & signature present?
-                    </li>
-                  </ul>
-
-                  {/* Footer CTA */}
-                  <div className="mt-4 pt-4 border-t text-center">
-                    <p className="text-xs text-red-500 font-bold mb-2">
-                      Incorrect format leads to REJECTION.
+          <section className="mt-14 grid gap-8 lg:grid-cols-2">
+            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+                <ShieldCheck className="h-4 w-4" />
+                Common Issues
+              </div>
+              <div className="mt-6 space-y-5">
+                {COMMON_ISSUES.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl border border-rose-100 bg-rose-50/70 p-5"
+                  >
+                    <h3 className="text-lg font-semibold text-slate-900">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-7 text-slate-600">
+                      {item.detail}
                     </p>
-
-                    <button className="bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold py-2 px-4 rounded transition">
-                      Download Correct Format
-                    </button>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Process Steps */}
-        <section id="process" className="py-20 bg-brand-900 text-white">
-          <div className="container mx-auto px-4">
-            {/* Header */}
-            <div className="text-center mb-16">
-              <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
-                Step-by-Step
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2">
-                Registration Workflow
+            <div
+              id="eligibility"
+              className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
+            >
+              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+                <ClipboardCheck className="h-4 w-4" />
+                Eligibility
+              </div>
+              <h2 className="mt-4 text-3xl font-bold text-slate-900">
+                Who usually needs AD Code registration support
               </h2>
+              <ul className="mt-6 space-y-4">
+                {ELIGIBILITY_POINTS.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-7 text-slate-600">
+                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-blue-600" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </section>
 
-            {/* Steps Grid */}
-            <div className="relative grid md:grid-cols-5 gap-12 step-connector">
-              {/* STEP 1 */}
-              <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-                text-2xl font-bold text-brand-900 mx-auto mb-4 
-                border-4 border-accent-500"
-                >
-                  1
-                </div>
-                <h3 className="text-lg font-bold mb-2">Bank Letter</h3>
-                <p className="text-sm text-slate-300">
-                  Obtain the letter from your bank in the prescribed format.
-                </p>
-              </div>
-
-              {/* STEP 2 */}
-              <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-                text-2xl font-bold text-brand-900 mx-auto mb-4 
-                border-4 border-accent-500"
-                >
-                  2
-                </div>
-                <h3 className="text-lg font-bold mb-2">ICEGATE</h3>
-                <p className="text-sm text-slate-300">
-                  Login to ICEGATE portal. If not registered, create ID first.
-                </p>
-              </div>
-
-              {/* STEP 3 */}
-              <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-                text-2xl font-bold text-brand-900 mx-auto mb-4 
-                border-4 border-accent-500"
-                >
-                  3
-                </div>
-                <h3 className="text-lg font-bold mb-2">e-Sanchit</h3>
-                <p className="text-sm text-slate-300">
-                  Upload digitally signed documents to generate IRN / DRN.
-                </p>
-              </div>
-
-              {/* STEP 4 */}
-              <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-                text-2xl font-bold text-brand-900 mx-auto mb-4 
-                border-4 border-accent-500"
-                >
-                  4
-                </div>
-                <h3 className="text-lg font-bold mb-2">Submission</h3>
-                <p className="text-sm text-slate-300">
-                  Submit the AD Code request to the specific Custom Port online.
-                </p>
-              </div>
-
-              {/* STEP 5 */}
-              <div className="text-center relative z-10">
-                <div
-                  className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center 
-                text-2xl font-bold text-white mx-auto mb-4 
-                border-4 border-white"
-                >
-                  <Check size={28} />
-                </div>
-                <h3 className="text-lg font-bold mb-2">Approval</h3>
-                <p className="text-sm text-slate-300">
-                  Customs officer verifies and approves via system (2–4 days).
-                </p>
-              </div>
+          <section
+            id="documents"
+            className="mt-14 rounded-[30px] bg-gradient-to-br from-slate-950 to-slate-800 p-8 text-white shadow-sm"
+          >
+            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-200">
+              <FileCheck2 className="h-4 w-4" />
+              Required Documents
             </div>
-          </div>
-        </section>
-
-        {/* Dynamic Fees Section */}
-        <Fees setShowEnrollModal={setShowEnrollModal} />
-
-        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Ad-Code-Registration?</h2>
-              <p className="text-slate-500">Getting the 14-digit code from your bank is only 20% of the job. The remaining 80% is mapping it correctly to the Customs EDI system.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Feature 1 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
-                  <AlertTriangle size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">1. Multi-Port Mapping Engine</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    Exporters often believe they only need to register at one port. In reality, you need registration at every port you ship from<strong> (Nhava Sheva, Mundra, Sahar Air Cargo, etc.). </strong>
-                    <strong>CloudDesk’s</strong> One-Click Port Expansion feature allows you to push your bank's AD Code to multiple ports simultaneously, saving weeks of manual filing.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 2 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
-                  <CheckCircle size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">2. IFSC-Drawback Synchronization</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    The AD Code is for shipping, but the <strong>IFSC registration </strong>is for money. If your IFSC is not mapped correctly, your Duty Drawback and <strong>RoDTEP refunds</strong> will be rejected by the system.
-                    <strong>CloudDesk</strong> performs a <strong>"Financial Handshake" </strong>test to ensure your bank's IFSC is active in the Customs "Drawback Ledger."
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 3 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
-                  <Building size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">3. Bank Letter Format Validator</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    Customs is notoriously strict about the Bank’s AD Code Letter format <strong>(Annexure-A).</strong>
-                    If a single sentence is missing or the bank official's signature isn't stamped properly, the EDI officer will reject it.
-                    <strong>CloudDesk </strong> provides a Pre-Filled Template for you to give your bank manager, ensuring a 100% acceptance rate on the first upload.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 4 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
-                  <ShieldUser size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">4. Real-Time Approval Tracking</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    Once submitted, AD Code approval can take 24 hours or 10 days depending on the port.
-                    <strong>CloudDesk’s </strong>Status Pulse monitors the <strong>ICEGATE </strong>"Bank Management" dashboard and alerts you the second your status moves from "Pending" to "Customs Approved."
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-3xl">
-            {/* Heading */}
-            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-              Frequently Asked Questions
+            <h2 className="mt-4 text-3xl font-bold">
+              Documents typically checked before filing
             </h2>
-
-            {/* FAQ Items */}
-            <div className="space-y-4">
-              {/* Question 1 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Is physical submission of documents required?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Generally, no. The process is now 100% online via ICEGATE.
-                  However, in rare cases or specific ports, the Customs Officer
-                  may request physical verification of the original Bank Letter.
-                </p>
-              </details>
-
-              {/* Question 2 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Can I change my registered bank account?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Yes, you can modify your AD Code. You will need to obtain a new
-                  letter from the new bank and follow the same modification
-                  process on ICEGATE online.
-                </p>
-              </details>
-
-              {/* Question 3 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  How long does approval take?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Once the application is submitted successfully online, it
-                  usually takes 3–5 working days for Customs to approve, provided
-                  there are no queries or document discrepancies.
-                </p>
-              </details>
-
-              {/* Question 4 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What is an AD Code, and why is it 14 digits?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  An Authorized Dealer (AD) Code is a unique 14-digit identifier assigned by the RBI to bank branches authorized to deal in foreign exchange.
-                  It links your bank account to your Import-Export Code (IEC) in the Customs database.
-                </p>
-              </details>
-
-              {/* Question 5 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Is AD Code registration required for Importers?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Yes. While it is most critical for Exporters (for Shipping Bill generation),
-                  Importers need it to ensure that their foreign remittances (Bill of Entry payments) are tracked correctly under FEMA guidelines.
-                </p>
-              </details>
-
-              {/* Question 6 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Is there a government fee for AD Code registration?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  ICEGATE does not charge a fee for AD Code registration. However, some banks may charge a nominal "Processing Fee" (ranging from ₹500 to ₹2,000) for issuing the AD Code letter on their letterhead.
-                </p>
-              </details>
-
-              {/* Question 7 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  If I register my AD Code at Nhava Sheva (JNPT), can I export from Mundra?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  No. As of 2026, you still need to map your bank account to the specific "Port Location Code" (e.g., INNSA1 for Nhava Sheva, INMUN1 for Mundra) on the ICEGATE portal.
-                  You don't need a new code, but you do need a new registration for that location.
-                </p>
-              </details>
-
-              {/* Question 8 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What happens if I change my bank account?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  You must obtain a new AD Code letter from your new bank and perform a "Modify Bank Account" request on ICEGATE.
-                  Note: Your existing shipping bills will still be tied to the old account until the new one is approved.
-                </p>
-              </details>
-
-              {/* Question 9 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Why was my AD Code rejected with the error "Invalid IRN"?
-
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  This happens when the documents uploaded on e-Sanchit are not digitally signed or the IRN (Image Reference Number) was incorrectly entered in the form.
-                  CloudDesk’s automation ensures the IRN is "Live" before we hit submit.
-                </p>
-              </details>
-
-              {/* Question 10 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  The Customs officer is asking for a "Physical Set" of documents after I filed online. Is this normal?
-
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Occasionally, certain ports (like smaller ICDs) require a physical copy of the bank letter and self-attested documents for "one-time verification."
-                  CloudDesk’s local agents can assist in these physical submissions to avoid travel for the exporter.
-                </p>
-              </details>
-
-              {/* Question 11 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Can one IEC have multiple AD Codes?
-
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Yes. If you use one bank for exports and another for imports, or different banks for different product lines, you can register multiple AD Codes under the same IEC.
-                </p>
-              </details>
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              {DOCUMENTS_REQUIRED.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                >
+                  <p className="text-sm leading-7 text-slate-100/90">{item}</p>
+                </div>
+              ))}
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Footer */}
-        <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
-          <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-            {/* BRAND */}
-            <div>
-              <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+          <section
+            id="process"
+            className="mt-14 rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
+          >
+            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+              <BookOpenCheck className="h-4 w-4" />
+              Step-by-Step Process
+            </div>
+            <h2 className="mt-4 text-3xl font-bold text-slate-900">
+              Practical AD Code registration workflow
+            </h2>
+            <div className="mt-8 grid gap-6 lg:grid-cols-5">
+              {PROCESS_STEPS.map((item, index) => (
+                <article
+                  key={item.title}
+                  className="rounded-[24px] border border-slate-200 bg-slate-50 p-5"
+                >
+                  <div className="text-sm font-bold text-blue-700">
+                    Step {index + 1}
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold text-slate-900">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {item.detail}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
 
-              <p className="text-sm mb-6">
-                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
-                Logistics compliance.
+          <section className="mt-14 grid gap-8 lg:grid-cols-2">
+            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+                <CalendarClock className="h-4 w-4" />
+                Timelines
+              </div>
+              <ul className="mt-6 space-y-4">
+                {TIMELINE_POINTS.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-7 text-slate-600">
+                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-emerald-600" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+                <Landmark className="h-4 w-4" />
+                Official References
+              </div>
+              <p className="mt-4 text-sm leading-7 text-slate-600">
+                The page is strengthened with references to the primary customs
+                and ICEGATE ecosystem so users and search engines can connect
+                the service to authoritative workflow sources.
               </p>
-
-              <div className="flex gap-4">
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                  <Linkedin size={18} />
-                </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                  <Twitter size={18} />
-                </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                  <Facebook size={18} />
-                </a>
+              <div className="mt-6 space-y-4">
+                {GOVERNMENT_REFERENCES.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between rounded-2xl border border-slate-200 px-5 py-4 text-sm font-medium text-slate-700 transition hover:border-blue-500 hover:text-blue-700"
+                  >
+                    <span>{item.label}</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                ))}
               </div>
             </div>
+          </section>
 
-            {/* QUICK LINKS */}
-            <div>
-              <h4 className="text-white font-bold mb-6">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    AD Code Registration
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    ICEGATE ID Creation
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    IFSC Update
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    IGST Refund Help
-                  </a>
-                </li>
-              </ul>
+          <section className="mt-14 rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+              <FileSearch className="h-4 w-4" />
+              Related Services
             </div>
-
-            {/* OTHER SERVICES */}
-            <div>
-              <h4 className="text-white font-bold mb-6">Other Services</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Nhava Sheva (JNPT)
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Mundra Port
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Chennai Sea/Air
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Delhi Air Cargo
-                  </a>
-                </li>
-              </ul>
+            <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {RELATED_LINKS.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className="group rounded-[24px] border border-slate-200 bg-slate-50 p-5 transition hover:border-blue-500 hover:bg-blue-50"
+                >
+                  <h3 className="text-lg font-semibold text-slate-900 group-hover:text-blue-700">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {item.description}
+                  </p>
+                </Link>
+              ))}
             </div>
+          </section>
 
-            {/* CONTACT */}
-            <div>
-              <h4 className="text-white font-bold mb-6">Contact Us</h4>
-              <ul className="space-y-4 text-sm">
-                <li className="flex gap-3 items-center">
-                  <Phone size={18} className="text-brand-500" />
-                  +917400096950
-                </li>
-
-                <li className="flex gap-3 items-center">
-                  <Mail size={18} className="text-brand-500" />
-                  clouddesk@eximinq.in
-                </li>
-
-                <li className="flex gap-3 items-center">
-                  <MapPin size={18} className="text-brand-500" />
-                  Mumbai, India
-                </li>
-              </ul>
+          <section
+            id="faqs"
+            className="mt-14 rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
+          >
+            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
+              <BadgeCheck className="h-4 w-4" />
+              FAQs
             </div>
-          </div>
+            <h2 className="mt-4 text-3xl font-bold text-slate-900">
+              Common questions about AD Code registration
+            </h2>
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              {FAQS.map((item) => (
+                <article
+                  key={item.question}
+                  className="rounded-[24px] border border-slate-200 bg-slate-50 p-6"
+                >
+                  <h3 className="text-lg font-semibold text-slate-900">
+                    {item.question}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {item.answer}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
 
-          {/* COPYRIGHT */}
-          <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
-            DGFT.
-          </div>
-        </footer>
+          <section className="mt-14 rounded-[32px] bg-gradient-to-r from-blue-700 via-cyan-700 to-emerald-600 p-8 text-white shadow-xl">
+            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <div className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-100">
+                  Conversion CTA
+                </div>
+                <h2 className="mt-4 text-3xl font-bold">
+                  Need help with AD Code registration, port addition, or a
+                  customs-side rejection?
+                </h2>
+                <p className="mt-4 max-w-3xl text-base leading-8 text-cyan-50">
+                  We review the exporter profile, bank-letter quality, target
+                  port workflow, and document readiness so the AD Code process
+                  is handled with better commercial clarity and fewer avoidable
+                  delays.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-4 text-sm font-medium text-white">
+                  <a
+                    href="tel:+917400096950"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 hover:bg-white/20"
+                  >
+                    <Phone className="h-4 w-4" />
+                    +91 74000 96950
+                  </a>
+                  <a
+                    href="mailto:clouddesk@eximinq.in"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 hover:bg-white/20"
+                  >
+                    <Mail className="h-4 w-4" />
+                    clouddesk@eximinq.in
+                  </a>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3">
+                    <MapPin className="h-4 w-4" />
+                    Mumbai, India
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <a
+                  href="#quick-form"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-cyan-50"
+                >
+                  Start With Quick Form
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link
+                  to="/contact-us"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  Speak With Our Team
+                </Link>
+              </div>
+            </div>
+          </section>
+        </main>
       </div>
     </>
   );
 };
 
-export default ADCode;
+export default CloudDeskADCode;

@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskEOP/TopBar";
 import Navbar from "../components/CloudDeskEOP/Navbar";
 import Hero from "../components/CloudDeskEOP/Hero";
 import Fees from "../components/CloudDeskEOP/Fees";
@@ -19,171 +18,269 @@ import {
   AlertTriangle,
   Coins,
   Calculator,
+  FileCheck,
+  Clock3,
+  ShieldCheck
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskEOP/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskEOP/ModalEnroll";
 
+const EOP_FAQS = [
+  {
+    question: "What is Export Obligation Period (EOP) extension?",
+    answer:
+      "EOP extension is the DGFT process used to extend the time available for fulfilling export obligation under schemes such as Advance Authorisation and EPCG, subject to policy conditions, composition fee, and documentary compliance."
+  },
+  {
+    question: "Who needs an EOP extension?",
+    answer:
+      "Exporters who have not completed the prescribed export obligation within the original validity window of their Advance Authorisation or EPCG authorisation usually need to review EOP extension immediately before the default turns into duty and interest exposure."
+  },
+  {
+    question: "Can EOP extension be requested after expiry?",
+    answer:
+      "Yes, late or post-expiry cases may still be reviewable depending on the scheme, timing, and policy conditions, but they can attract additional fee, scrutiny, or a more difficult regularisation path."
+  },
+  {
+    question: "What is the composition fee in EOP extension?",
+    answer:
+      "Composition fee is the policy-prescribed charge payable for extending the export obligation period. The actual amount depends on the scheme, delay stage, and the current DGFT framework applicable to the authorisation."
+  },
+  {
+    question: "Is EOP extension available for both Advance Authorisation and EPCG?",
+    answer:
+      "Yes, EOP extension is relevant to both Advance Authorisation and EPCG, but the extension structure, timelines, supporting conditions, and fee logic differ across the two schemes."
+  },
+  {
+    question: "What documents are usually required for EOP extension?",
+    answer:
+      "Typical records include the authorisation copy, export-performance details, shipping-bill and e-BRC data, a shortfall summary, justification note, and proof of the applicable fee or supporting compliance documents required by DGFT."
+  },
+  {
+    question: "Why is EOP extension better than waiting for default?",
+    answer:
+      "Because a valid extension pathway can be significantly cheaper and safer than allowing the authorisation to slip into full duty, interest, customs action, or delayed closure complications."
+  },
+  {
+    question: "How does EXIMINQ help with EOP extension?",
+    answer:
+      "We support shortfall review, scheme-specific extension strategy, composition-fee planning, document preparation, DGFT filing, and alignment with the downstream redemption or closure workflow."
+  }
+];
+
+const EOP_ELIGIBILITY = [
+  "Advance Authorisation holders nearing or crossing the original 18-month export-obligation window.",
+  "EPCG authorisation holders facing block-wise or overall export-obligation delay.",
+  "Exporters with shipment delay, market disruption, project deferment, or compliance slippage that affects obligation fulfilment.",
+  "Businesses needing a structured regularisation plan before customs duty and interest exposure escalates."
+];
+
+const EOP_DOCUMENTS = [
+  "Authorisation copy and scheme details for Advance Authorisation or EPCG.",
+  "Shipping-bill and export-performance summary showing fulfilled and pending obligation.",
+  "e-BRC or realisation support records where required for the scheme review.",
+  "Shortfall note, factual explanation, and timeline of delay or hardship.",
+  "Composition-fee planning and supporting payment records where applicable.",
+  "Related compliance records such as installation certificate, amendments, prior extension history, or customs alignment documents depending on the authorisation."
+];
+
+const EOP_TIMELINE = [
+  {
+    title: "Shortfall review",
+    detail:
+      "Measure the actual pending obligation, identify whether the case is still within the regular extension window, and decide whether a standard or escalation path is needed."
+  },
+  {
+    title: "Scheme-specific strategy",
+    detail:
+      "Separate the case correctly as Advance Authorisation or EPCG because the timing, fee logic, and extension rules differ materially."
+  },
+  {
+    title: "Document preparation",
+    detail:
+      "Compile the authorisation record, export evidence, shortfall note, and supporting explanation for the delay or regularisation requirement."
+  },
+  {
+    title: "DGFT filing and fee handling",
+    detail:
+      "Submit the extension request with the correct composition-fee treatment and supporting records through the applicable DGFT service flow."
+  },
+  {
+    title: "Follow-through to closure",
+    detail:
+      "After extension, continue export tracking and prepare for redemption or EODC closure instead of treating the extension as the end of the compliance process."
+  }
+];
+
+const EOP_REFERENCES = [
+  {
+    label: "DGFT EPCG service portal with EO / block extension",
+    href: "https://www.dgft.gov.in/CP/?opt=epcg"
+  },
+  {
+    label: "DGFT Advance Authorisation portal with EO extension service",
+    href: "https://www.dgft.gov.in/CP/?opt=adnavce-authorisation"
+  },
+  {
+    label: "DGFT Handbook of Procedures 2023 reference",
+    href: "https://content.dgft.gov.in/Website/dgftprod/e1cb52ea-0c3a-4c2a-8cd7-dd992e9bdc98/HBP_2023.pdf"
+  }
+];
+
+const WHY_CLOUDDESK = [
+  {
+    title: "Shortfall-first diagnosis",
+    text:
+      "Many exporters ask for an EOP extension before measuring the real shortfall. We review the obligation gap first so the strategy is based on numbers, not assumption.",
+    icon: AlertTriangle,
+    tone: "bg-red-100 text-red-600"
+  },
+  {
+    title: "Advance Authorisation and EPCG separation",
+    text:
+      "EOP logic is not identical across schemes. We separate the case correctly at the start because composition fee, timing, and compliance consequences differ between Advance Authorisation and EPCG.",
+    icon: ShieldCheck,
+    tone: "bg-blue-100 text-blue-600"
+  },
+  {
+    title: "Composition fee planning",
+    text:
+      "Extension is often far cheaper than default, but only if the filing path is chosen correctly and in time. We help structure the fee and timing around the policy framework in force for the authorisation.",
+    icon: Coins,
+    tone: "bg-green-100 text-green-600"
+  },
+  {
+    title: "Extension-to-closure continuity",
+    text:
+      "An extension is not the finish line. We align the request with the later redemption or EODC workflow so the file moves toward closure instead of repeating the same risk later.",
+    icon: ShieldUser,
+    tone: "bg-purple-100 text-purple-600"
+  }
+];
+
 const CloudDeskEOP = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    type: null,
+    type: null
   });
 
   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
-
-    // TODO → send API call
-    // axios.post("/api/enroll", formData)
-
-    alert("Form submitted — check console for data.");
+    alert("Form submitted - check console for data.");
   };
-  ;
+
   return (
     <>
       <Helmet>
         <title>
-          Export Obligation Period (EOP) Extension India | DGFT CUSTOMS Services | EXIMINQ
+          EOP Extension Consultant India | Export Obligation Period Extension
+          for Advance Authorisation and EPCG | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content="Apply for Export Obligation Period (EOP) extension under Advance Authorisation and EPCG. Composition fee calculation, PRC representation and DGFT filing support."
+          content="EOP extension consultant in India for Advance Authorisation and EPCG. Get help with export obligation period extension, composition fee planning, DGFT filing, and default-risk regularisation."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/eop-extension/"
+        <meta
+          name="keywords"
+          content="EOP extension consultant, export obligation period extension, advance authorisation EOP extension, EPCG EOP extension, DGFT EO extension, composition fee DGFT, export obligation extension India"
         />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href="https://eximinq.in/services/eop-extension/" />
 
-        <meta property="og:title" content="EOP Extension Consultancy in India" />
+        <meta
+          property="og:title"
+          content="EOP Extension Consultant India | Export Obligation Extension for Advance Authorisation and EPCG"
+        />
         <meta
           property="og:description"
-          content="Professional support for DGFT Export Obligation Period extension, composition fee calculation and PRC representation."
+          content="Get end-to-end EOP extension support for Advance Authorisation and EPCG, including composition-fee planning, DGFT filing, and shortfall regularisation."
         />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/eop-extension/"
-        />
+        <meta property="og:url" content="https://eximinq.in/services/eop-extension/" />
         <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
 
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
               {
+                "@type": "WebPage",
+                "@id": "https://eximinq.in/services/eop-extension/",
+                url: "https://eximinq.in/services/eop-extension/",
+                name:
+                  "EOP Extension Consultant India | Export Obligation Period Extension for Advance Authorisation and EPCG | EXIMINQ",
+                description:
+                  "EOP extension consultant in India for Advance Authorisation and EPCG. Get help with export obligation period extension, composition fee planning, DGFT filing, and default-risk regularisation.",
+                isPartOf: {
+                  "@type": "WebSite",
+                  name: "EXIMINQ",
+                  url: "https://eximinq.in"
+                }
+              },
+              {
                 "@type": "BreadcrumbList",
-                "itemListElement": [
+                itemListElement: [
                   {
                     "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://eximinq.in"
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in"
                   },
                   {
                     "@type": "ListItem",
-                    "position": 2,
-                    "name": "Services",
-                    "item": "https://eximinq.in/services"
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services"
                   },
                   {
                     "@type": "ListItem",
-                    "position": 3,
-                    "name": "EOP Extension",
-                    "item": "https://eximinq.in/services/eop-extension/"
+                    position: 3,
+                    name: "EOP Extension",
+                    item: "https://eximinq.in/services/eop-extension/"
                   }
                 ]
               },
               {
                 "@type": "Service",
-                "name": "Export Obligation Period Extension",
-                "serviceType": "DGFT License Amendment",
-                "description":
-                  "Consultancy for Export Obligation Period (EOP) extension under Advance Authorisation and EPCG, including composition fee calculation and PRC representation.",
-                "provider": {
+                "@id": "https://eximinq.in/services/eop-extension/#service",
+                name: "Export Obligation Period Extension Consultancy",
+                serviceType:
+                  "Advance Authorisation and EPCG EOP extension, composition fee planning, and DGFT filing support",
+                description:
+                  "Consultancy for export obligation period extension under Advance Authorisation and EPCG, including shortfall review, composition fee planning, and DGFT filing support.",
+                provider: {
                   "@type": "Organization",
-                  "name": "Eximinq Global Connections",
-                  "url": "https://eximinq.in"
+                  name: "Eximinq Global Connections",
+                  url: "https://eximinq.in"
                 },
-                "areaServed": {
+                areaServed: {
                   "@type": "Country",
-                  "name": "India"
+                  name: "India"
+                },
+                offers: {
+                  "@type": "Offer",
+                  availability: "https://schema.org/InStock",
+                  url: "https://eximinq.in/services/eop-extension/"
                 }
               },
               {
                 "@type": "FAQPage",
-                "mainEntity": [
-                  {
-                    "@type": "Question",
-                    "name": "What is the standard Export Obligation Period (EOP)?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Export Obligation Period is the time allowed to complete export commitments under schemes like Advance Authorisation and EPCG."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Can I get an extension if my EOP has already expired?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Yes, but ex-post-facto extension involves higher composition fees and possible scrutiny from DGFT."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How many extensions can I get?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "It is calculated as a percentage of unfulfilled export obligation or proportionate duty saved amount."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How is the \"Composition Fee\" calculated?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "It is calculated as a percentage of unfulfilled export obligation or proportionate duty saved amount."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Is interest also charged for the extension period?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "No. If you get a valid EOP extension, you do not pay interest for that period. This is why getting an extension is always better than defaulting."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What documents are required for an EOP extension?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "(1) A formal application via the DGFT portal, (2) A self-declaration of exports made so far, (3) Evidence of \"Genuine Hardship\" (like a fire report, strike notice, or bank letter), and (4) Proof of payment of the Composition Fee."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What happens to my Bank Guarantee (BG) during the extension?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "You must extend the validity of your Bank Guarantee at Customs to match the new EOP. CloudDesk coordinates with your bank and the Customs department to ensure the BG remains active, preventing a \"BG Forfeiture\" action."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Can I get an extension for \"Deemed Exports\"?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Yes. If you are supplying to SEZs or EOU units in India (Deemed Exports), the same EOP rules and extension procedures apply as they do for physical exports."
-                    },
+                mainEntity: EOP_FAQS.map((item) => ({
+                  "@type": "Question",
+                  name: item.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: item.answer
                   }
-                ]
+                }))
               }
             ]
           })}
         </script>
       </Helmet>
+
       <div className="bg-slate-50 text-slate-800">
-        {/* Dynamic Sections */}
         <MainNavbar setShowEnrollModal={setShowEnrollModal} />
         <Navbar setShowEnrollModal={setShowEnrollModal} />
         <Hero setShowEnrollModal={setShowEnrollModal} />
@@ -195,479 +292,411 @@ const CloudDeskEOP = () => {
           onSubmit={handleEnrollmentSubmit}
         />
 
-        {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
-
         <section id="about" className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-slate-900 mb-4">
-                Why Extend EOP?
+                What is Export Obligation Period extension?
               </h2>
-              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+              <div className="w-24 h-1 bg-accent-500 mx-auto rounded" />
             </div>
             <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
               <p className="mb-4">
-                Every export license comes with a fixed{" "}
+                Every export-linked authorisation comes with a defined{" "}
                 <strong>Export Obligation Period (EOP)</strong>. For Advance
-                Authorisation, it is typically 18 months. For EPCG, it is 6 years.
+                Authorisation, the export obligation period is commonly tied to
+                an 18-month framework, while EPCG runs on a different
+                multi-year structure with its own extension rules, timing, and
+                compliance implications.
               </p>
-              [Image of EOP Timeline Diagram]
               <p className="mb-4">
-                If you fail to complete the export obligation within this time,
-                you are liable to pay Customs Duty + Interest (15%). However, the
-                Foreign Trade Policy allows for an{" "}
-                <strong>Extension of EOP</strong> upon payment of a Composition
-                Fee. This is far cheaper than paying the duty with interest.
+                Searchers looking for an <strong>EOP extension consultant</strong>,{" "}
+                <strong>Advance Authorisation EOP extension</strong>, or{" "}
+                <strong>EPCG export obligation extension</strong> usually have
+                a practical problem already: delay, shortfall, missed block
+                performance, or growing fear of customs duty and interest.
               </p>
+              <p className="mb-4">
+                This page is therefore built as a complete EOP resource that
+                explains extension eligibility, composition-fee logic,
+                documents, process flow, official references, and the difference
+                between extending a file and allowing it to default.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="eligibility" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                  Eligibility and Fit
+                </span>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-slate-900">
+                  Who should review EOP extension immediately?
+                </h2>
+                <p className="mt-5 text-slate-600 leading-relaxed">
+                  EOP extension becomes relevant the moment export performance
+                  begins to slip against licence timelines. The strongest SEO
+                  opportunity on this page is to meet that urgent intent with
+                  practical answers before the file moves from delay into
+                  default.
+                </p>
+
+                <div className="mt-8 grid gap-4">
+                  {EOP_ELIGIBILITY.map((item) => (
+                    <div
+                      key={item}
+                      className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                    >
+                      <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
+                      <p className="text-sm leading-relaxed text-slate-700">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-brand-100 bg-gradient-to-br from-brand-50 to-white p-8 shadow-sm">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Why exporters act before default
+                </h3>
+                <p className="mt-3 text-slate-600">
+                  The commercial purpose of EOP extension is simple: protect the
+                  licence from becoming a far more expensive customs and
+                  interest problem.
+                </p>
+                <div className="mt-6 space-y-4">
+                  {[
+                    "Lower cost than duty-plus-interest regularisation in many cases.",
+                    "Keeps the authorisation on a manageable compliance path.",
+                    "Buys time to complete exports or structure the next filing step.",
+                    "Supports eventual redemption or EODC closure instead of collapse into default."
+                  ].map((item) => (
+                    <div key={item} className="flex gap-3">
+                      <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
+                      <p className="text-sm text-slate-700">{item}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-8 rounded-2xl bg-white p-5 border border-slate-200">
+                  <p className="text-sm text-slate-600">
+                    Related scheme pages for users comparing next steps:
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
+                    <a href="/services/advance-authorisation/" className="text-brand-700 underline underline-offset-4">
+                      Advance Authorisation
+                    </a>
+                    <a href="/services/epcg-scheme" className="text-brand-700 underline underline-offset-4">
+                      EPCG Scheme
+                    </a>
+                    <a href="/advance-authorization-redemption" className="text-brand-700 underline underline-offset-4">
+                      AA redemption
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         <section id="types" className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
-            {/* Header */}
             <div className="text-center mb-16">
               <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
                 Scheme Rules
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-                Extension Criteria
+                Advance Authorisation vs EPCG extension logic
               </h2>
             </div>
 
-            {/* Cards */}
             <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-              {/* Advance Authorisation */}
               <div className="bg-white rounded-xl shadow-lg border-t-8 border-brand-600 overflow-hidden">
                 <div className="p-8">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">
                     Advance Authorisation
                   </h3>
                   <p className="text-sm font-semibold text-slate-500 mb-6">
-                    Original EOP: 18 Months
+                    EOP review is commonly time-sensitive and document-heavy.
                   </p>
 
                   <ul className="space-y-4 text-sm text-slate-600">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="text-green-500 mt-1" size={18} />
                       <span>
-                        <strong>1st Extension (6 Months):</strong> Allowed by
-                        paying Composition Fee of 0.5% of unfulfilled EO value.
+                        Extension planning depends on the applicable DGFT
+                        framework, authorisation status, and whether the case is
+                        still within the regular extension window.
                       </span>
                     </li>
-
                     <li className="flex items-start gap-3">
                       <CheckCircle className="text-green-500 mt-1" size={18} />
                       <span>
-                        <strong>2nd Extension (6 Months):</strong> Allowed by
-                        paying Composition Fee of 0.5% (Total 12 months extension
-                        possible).
+                        Composition fee and late-handling logic should be
+                        assessed before the request is filed.
                       </span>
                     </li>
-
                     <li className="flex items-start gap-3">
-                      <AlertTriangle className="text-red-500 mt-1" size={18} />
+                      <CheckCircle className="text-green-500 mt-1" size={18} />
                       <span>
-                        Further extension requires approaching the{" "}
-                        <strong>Policy Relaxation Committee (PRC)</strong>.
+                        Strong export evidence and shortfall explanation matter
+                        more when the file is close to or past expiry.
                       </span>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              {/* EPCG Scheme */}
               <div className="bg-white rounded-xl shadow-lg border-t-8 border-accent-500 overflow-hidden">
                 <div className="p-8">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                    EPCG Scheme
-                  </h3>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">EPCG</h3>
                   <p className="text-sm font-semibold text-slate-500 mb-6">
-                    Original EOP: 6 Years
+                    Overall EO and block-wise issues must be treated carefully.
                   </p>
 
                   <ul className="space-y-4 text-sm text-slate-600">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="text-green-500 mt-1" size={18} />
                       <span>
-                        <strong>Block-wise Extension:</strong> If Block 1 target
-                        (4 years) is missed, it can be regularized by paying a 2%
-                        fee.
+                        EPCG extension strategy often needs separate attention to
+                        block-wise and overall obligation timing.
                       </span>
                     </li>
-
                     <li className="flex items-start gap-3">
                       <CheckCircle className="text-green-500 mt-1" size={18} />
                       <span>
-                        <strong>Overall Extension:</strong> One extension of up to
-                        2 years may be granted.
+                        Installation certificate status, prior amendments, and
+                        customs alignment can affect downstream closure.
                       </span>
                     </li>
-
                     <li className="flex items-start gap-3">
-                      <Coins className="text-accent-500 mt-1" size={18} />
+                      <CheckCircle className="text-green-500 mt-1" size={18} />
                       <span>
-                        <strong>Fee:</strong> 2% of proportionate duty saved
-                        amount on unfulfilled EO.
+                        Extension should be planned as part of the later EODC
+                        closure path, not as a standalone fix.
                       </span>
                     </li>
                   </ul>
-
-                  {/* CTA */}
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="fees" className="py-20 bg-brand-900 text-white">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              {/* LEFT CONTENT */}
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Composition Fee Structure
-                </h2>
-
-                <p className="text-slate-300 mb-8 leading-relaxed">
-                  The cost of extension is calculated based on the unfulfilled
-                  export value. It is critical to calculate this accurately to
-                  avoid rejection by the Regional Authority (RA).
-                </p>
-
-                <div className="space-y-4">
-                  <div className="bg-white/10 p-4 rounded-lg border border-white/20">
-                    <h4 className="font-bold text-accent-400">Advance License</h4>
-                    <p className="text-sm">
-                      0.5% of the shortfall in FOB value of Export Obligation.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/10 p-4 rounded-lg border border-white/20">
-                    <h4 className="font-bold text-accent-400">EPCG License</h4>
-                    <p className="text-sm">
-                      2% of the proportionate duty saved amount corresponding to
-                      unfulfilled EO.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* RIGHT CARD */}
-              <div className="bg-white text-slate-800 rounded-xl p-8 shadow-2xl text-center">
-                <Calculator className="mx-auto text-brand-600 mb-6" size={56} />
-
-                <h3 className="text-xl font-bold mb-2">Example Calculation</h3>
-
-                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
-                  <strong>Advance Auth Shortfall:</strong> ₹ 1 Crore
-                  <br />
-                  <strong>Extension Fee (0.5%):</strong> ₹ 50,000
-                  <br />
-                  <span className="text-xs text-red-500">
-                    (vs Duty + Interest which could be ₹ 30 Lakhs+)
-                  </span>
-                </p>
-
-                {/* CTA */}
-                <a
-                  href="#contact"
-                  class="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-700 transition"
-                >
-                  Get Precise Calculation
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="process" className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-
-            {/* Header */}
-            <div className="text-center mb-16">
+        <section id="documents" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-14">
               <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-                Filing Steps
+                Documentation
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-                DGFT Workflow
+                Documents required for EOP extension
               </h2>
+              <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+                Strong rankings come from content that answers the next user
+                question completely. Most exporters searching for EOP extension
+                want the filing path and required records on one page.
+              </p>
             </div>
 
-            {/* Steps */}
-            <div className="relative grid md:grid-cols-4 gap-8 step-connector">
-
-              {/* Step 1 */}
-              <div className="text-center relative z-10">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
-                            text-2xl font-bold text-brand-900 mx-auto mb-4
-                            border-4 border-brand-200 shadow-sm">
-                  1
+            <div className="grid gap-6 md:grid-cols-2">
+              {EOP_DOCUMENTS.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm"
+                >
+                  <div className="flex gap-3">
+                    <FileCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
+                    <p className="text-sm leading-relaxed text-slate-700">{item}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold mb-2">Audit</h3>
-                <p className="text-sm text-slate-500">
-                  Determine total exports completed versus obligation pending.
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="process" className="py-20 bg-brand-900 text-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
+                Lifecycle
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2">
+                EOP extension process flow
+              </h2>
+              <p className="text-slate-300 mt-2">
+                Step-by-step route from shortfall review to extension filing and
+                closure planning.
+              </p>
+            </div>
+
+            <div className="relative grid md:grid-cols-5 gap-8 step-connector">
+              {EOP_TIMELINE.map((item, index) => (
+                <div key={item.title} className="text-center relative z-10">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-brand-200 shadow-sm">
+                    {index + 1}
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm text-slate-300">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="references" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
+              <div>
+                <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                  Government References
+                </span>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-slate-900">
+                  Policy references and extension risk points
+                </h2>
+                <p className="mt-5 text-slate-600 leading-relaxed">
+                  Google rewards pages that demonstrate expertise and connect
+                  users to trustworthy sources. We therefore surface the
+                  official DGFT service routes and policy reference documents
+                  relevant to EOP extension.
                 </p>
+                <div className="mt-8 space-y-4">
+                  {EOP_REFERENCES.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="block rounded-2xl border border-slate-200 bg-white p-5 text-brand-700 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+                    >
+                      <span className="font-semibold">{item.label}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
 
-              {/* Step 2 */}
-              <div className="text-center relative z-10">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
-                            text-2xl font-bold text-brand-900 mx-auto mb-4
-                            border-4 border-brand-200 shadow-sm">
-                  2
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Common EOP problems we solve
+                </h3>
+                <div className="mt-6 space-y-5 text-sm text-slate-700">
+                  <p>
+                    <strong>Late shortfall detection:</strong> when the exporter
+                    realises the obligation gap too close to expiry.
+                  </p>
+                  <p>
+                    <strong>Wrong scheme assumptions:</strong> when Advance
+                    Authorisation and EPCG extension rules are treated as if
+                    they are identical.
+                  </p>
+                  <p>
+                    <strong>Weak documentary support:</strong> when exports,
+                    shortfall logic, or supporting compliance records are not
+                    organised well enough for the filing.
+                  </p>
+                  <p>
+                    <strong>No closure plan after extension:</strong> when the
+                    extension request is filed without thinking about the later
+                    redemption or EODC stage.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold mb-2">Fee Payment</h3>
-                <p className="text-sm text-slate-500">
-                  Calculate and pay the composition fee on the DGFT portal.
-                </p>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center relative z-10">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center
-                            text-2xl font-bold text-brand-900 mx-auto mb-4
-                            border-4 border-brand-200 shadow-sm">
-                  3
+                <div className="mt-8 border-t border-slate-200 pt-6">
+                  <p className="text-sm text-slate-600">
+                    Related pages that strengthen this topic cluster:
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
+                    <a href="/services/advance-authorisation/" className="text-brand-700 underline underline-offset-4">
+                      Advance Authorisation
+                    </a>
+                    <a href="/services/epcg-scheme" className="text-brand-700 underline underline-offset-4">
+                      EPCG Scheme
+                    </a>
+                    <a href="/epcg-redemption" className="text-brand-700 underline underline-offset-4">
+                      EPCG redemption
+                    </a>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold mb-2">Application</h3>
-                <p className="text-sm text-slate-500">
-                  File the amendment request online for EOP extension.
-                </p>
               </div>
-
-              {/* Step 4 */}
-              <div className="text-center relative z-10">
-                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center
-                            mx-auto mb-4 border-4 border-white shadow-sm">
-                  <Check className="text-white" size={28} />
-                </div>
-                <h3 className="text-lg font-bold mb-2">Approval</h3>
-                <p className="text-sm text-slate-500">
-                  Regional Authority approves and updates license validity in DGFT.
-                </p>
-              </div>
-
             </div>
           </div>
         </section>
 
         <Fees setShowEnrollModal={setShowEnrollModal} />
 
-
-        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Eop-Extension?</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Why CloudDesk for EOP extension support?
+              </h2>
               <p className="text-slate-500">
-                Missing a deadline by one day can cost you years of profit. CloudDesk manages the 'Clock' so you don't have to.
+                Export obligation extension is not just a formality. It is a
+                timing, numbers, and compliance problem that needs the right
+                structure before default hardens.
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Feature 1 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
-                  <AlertTriangle size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">1. Strategic "Reason-for-Delay" Drafting</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    The <strong>DGFT </strong>doesn't grant extensions just because you asked. You need a Compelling Legal Justification<strong> (e.g., force majeure, policy changes, or genuine hardship).</strong>
-                    <strong>CloudDesk’s </strong>legal team drafts the representation to the<strong> Regional Authority (RA) or the Policy Relaxation Committee (PRC)</strong> to ensure your case is viewed favorably.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 2 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
-                  <CheckCircle size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">2. Composition Fee Optimization</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    Extensions aren't free; they come with a Composition Fee (usually a % of the duty saved).<strong> CloudDesk </strong>performs a Cost-Benefit Analysis.
-                    We calculate if it’s cheaper to pay the fee for an extension or to<strong> "Regularize"(pay duty + interest) </strong>based on your current order book.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 3 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
-                  <Building size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">3. PRC (Policy Relaxation Committee) Representation</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    When your extension request falls outside the standard rules of the<strong> Hand Book of Procedures (HBP),</strong> it goes to the<strong> PRC at DGFT Headquarters, New Delhi.</strong>
-                    <strong>CloudDesk </strong>manages the high-level representation, providing the necessary data and<strong> "Public Interest" </strong>arguments to secure an out-of-turn extension.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 4 */}
-              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
-                  <ShieldUser size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-2">4. Automatic "Deadline Sentinel"</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    Exporters often realize their<strong> EOP </strong>has expired after it’s too late.<strong> CloudDesk’s </strong>Compliance Clock starts a countdown<strong> 6 months before your EOP expires.</strong>
-                    If your <strong>exports are below 70% </strong>of the target, we automatically initiate the extension process to avoid<strong> "Ex-post-facto" penalties.</strong>
-                  </p>
-                </div>
-              </div>
+              {WHY_CLOUDDESK.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100"
+                  >
+                    <div className={`${item.tone} p-3 rounded-lg h-fit`}>
+                      <Icon size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-3xl">
-            {/* Heading */}
             <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-              Frequently Asked Questions
+              EOP Extension FAQs
             </h2>
 
-            {/* FAQ Items */}
             <div className="space-y-4">
-              {/* Question 1 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What is the standard Export Obligation Period (EOP)?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
+              {EOP_FAQS.map((item) => (
+                <details
+                  key={item.question}
+                  className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group"
+                >
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    {item.question}
+                    <ChevronDown
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                      size={20}
+                    />
+                  </summary>
 
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  "• Advance Authorisation: Generally 18 months from the date of license issue.
-                  • EPCG: Generally 6 years from the date of license issue."
-
-                </p>
-              </details>
-
-              {/* Question 2 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Can I get an extension if my EOP has already expired?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Yes, but it's expensive. This is called "Ex-post-facto" extension. You will have to pay a much higher composition fee and may face a "Show Cause Notice" from the DGFT. CloudDesk specializes in resolving these "Expired License" crises.
-                </p>
-              </details>
-
-              {/* Question 3 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  How many extensions can I get?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Under the 2023-2026 Policy, you can typically get two extensions of 6 months each for Advance Authorisation, and two extensions of 1 year each for EPCG, subject to payment of composition fees. Anything beyond this requires PRC approval.
-                </p>
-              </details>
-
-              {/* Question 4 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  How is the "Composition Fee" calculated?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  In 2026, the fee is usually a tiered percentage of the Duty Saved (e.g., 0.5% for the first extension, 1% for the second). CloudDesk ensures you are charged correctly—DGFT officers often over-calculate these fees manually.
-                </p>
-              </details>
-
-              {/* Question 5 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Is interest also charged for the extension period?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  No. If you get a valid EOP extension, you do not pay interest for that period. This is why getting an extension is always better than defaulting.
-                </p>
-              </details>
-
-              {/* Question 6 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What documents are required for an EOP extension?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  (1) A formal application via the DGFT portal, (2) A self-declaration of exports made so far, (3) Evidence of "Genuine Hardship" (like a fire report, strike notice, or bank letter), and (4) Proof of payment of the Composition Fee.
-                </p>
-              </details>
-
-              {/* Question 7 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  What happens to my Bank Guarantee (BG) during the extension?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  You must extend the validity of your Bank Guarantee at Customs to match the new EOP. CloudDesk coordinates with your bank and the Customs department to ensure the BG remains active, preventing a "BG Forfeiture" action.
-                </p>
-              </details>
-
-              {/* Question 8 */}
-              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                  Can I get an extension for "Deemed Exports"?
-                  <ChevronDown
-                    size={20}
-                    className="text-brand-500 transition-transform group-open:rotate-180"
-                  />
-                </summary>
-
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                  Yes. If you are supplying to SEZs or EOU units in India (Deemed Exports), the same EOP rules and extension procedures apply as they do for physical exports.
-                </p>
-              </details>
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    {item.answer}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-            {/* BRAND */}
             <div>
               <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
               <p className="text-sm mb-6">
-                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
-                Logistics compliance.
+                EXIMINQ Contact: Your trusted partner for DGFT, customs, and
+                trade-compliance execution.
               </p>
 
               <div className="flex gap-4">
@@ -683,29 +712,58 @@ const CloudDeskEOP = () => {
               </div>
             </div>
 
-            {/* QUICK LINKS */}
             <div>
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" class="hover:text-white transition">Advance Authorisation</a></li>
-                <li><a href="#" class="hover:text-white transition">EPCG Scheme</a></li>
-                <li><a href="#" class="hover:text-white transition">EODC Redemption</a></li>
-                <li><a href="#" class="hover:text-white transition">Clubbing of Licenses</a></li>
+                <li>
+                  <a href="/services/advance-authorisation/" className="hover:text-white transition">
+                    Advance Authorisation
+                  </a>
+                </li>
+                <li>
+                  <a href="/services/epcg-scheme" className="hover:text-white transition">
+                    EPCG Scheme
+                  </a>
+                </li>
+                <li>
+                  <a href="/services/eop-extension/" className="hover:text-white transition">
+                    EOP Extension
+                  </a>
+                </li>
+                <li>
+                  <a href="/advance-authorization-redemption" className="hover:text-white transition">
+                    AA Redemption
+                  </a>
+                </li>
               </ul>
             </div>
 
-            {/* OTHER SERVICES */}
             <div>
               <h4 className="text-white font-bold mb-6">Other Services</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" class="hover:text-white transition">Fee Calculator</a></li>
-                <li><a href="#" class="hover:text-white transition">Public Notices</a></li>
-                <li><a href="#" class="hover:text-white transition">Policy Circulars</a></li>
-                <li><a href="#" class="hover:text-white transition">Amnesty Scheme</a></li>
+                <li>
+                  <a href="/epcg-redemption" className="hover:text-white transition">
+                    EPCG redemption
+                  </a>
+                </li>
+                <li>
+                  <a href="/foreign-trade-policy/regulatory-updates" className="hover:text-white transition">
+                    DGFT updates
+                  </a>
+                </li>
+                <li>
+                  <a href="/services/customs-adjudication" className="hover:text-white transition">
+                    Customs support
+                  </a>
+                </li>
+                <li>
+                  <a href="/foreign-trade-policy" className="hover:text-white transition">
+                    FTP guidelines
+                  </a>
+                </li>
               </ul>
             </div>
 
-            {/* CONTACT */}
             <div>
               <h4 className="text-white font-bold mb-6">Contact Us</h4>
               <ul className="space-y-4 text-sm">
@@ -727,9 +785,8 @@ const CloudDeskEOP = () => {
             </div>
           </div>
 
-          {/* COPYRIGHT */}
           <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            © 2026 EXIMINQ CloudDesk. All rights reserved. Not affiliated with
             DGFT.
           </div>
         </footer>

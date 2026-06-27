@@ -1,797 +1,881 @@
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
-import TopBar from "../components/CloudDeskMoowr/TopBar";
-import Navbar from "../components/CloudDeskMoowr/Navbar";
-import Hero from "../components/CloudDeskMoowr/Hero";
-import Fees from "../components/CloudDeskMoowr/Fees";
+import { Link } from "react-router-dom";
 import {
+  ArrowRight,
+  BadgeCheck,
+  BookOpenCheck,
+  Box,
+  Building2,
+  CheckCircle2,
   ChevronDown,
+  CircleDollarSign,
+  ClipboardCheck,
+  Factory,
+  FileCheck2,
+  FileSearch,
+  Landmark,
   Linkedin,
-  Twitter,
-  Facebook,
-  AlertTriangle,
-  Building,
-  ShieldUser,
-  CheckCircle, 
-  Phone,
   Mail,
   MapPin,
-  Percent,
-  FileText,
-  Wallet,
-  FileCheck,
-  Scale,
-  Banknote,
-  BadgeCheck,
-  PackageOpen,
-  ArrowDownUp,
+  PackageCheck,
+  Phone,
   ShieldCheck,
-  FileBadge,
-  Factory,
-  PackageIcon,
+  TimerReset,
+  Twitter,
+  Facebook,
+  Warehouse
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskMoowr/MainNavbar";
-import { ModalEnroll } from "../components/CloudDeskMoowr/ModalEnroll";
+import { MainNavbar } from "../components/CloudDeskDigitalSignatures/MainNavbar";
+import QuickForm from "../components/CloudDeskMoowr/QuickForm";
+
+const MOOWR_CORE_AREAS = [
+  {
+    title: "Bonded warehouse licensing under Section 58",
+    description:
+      "MOOWR begins with private bonded warehouse approval under the customs warehousing framework, including premises readiness, process design, and record discipline."
+  },
+  {
+    title: "Manufacturing permission under Section 65",
+    description:
+      "The operational value of MOOWR comes from permission to manufacture or carry out other permitted operations in the bonded warehouse while keeping duty deferment benefits intact."
+  },
+  {
+    title: "Duty deferment for raw materials and capital goods",
+    description:
+      "The scheme is commercially valuable because customs duty can be deferred until domestic clearance, while export-facing models can materially improve cash-flow efficiency."
+  },
+  {
+    title: "Ongoing warehouse compliance and returns",
+    description:
+      "MOOWR is not only a registration step. The long-term advantage depends on inventory controls, customs process discipline, warehousing records, and return filing readiness."
+  }
+];
+
+const BENEFITS = [
+  "Improves working-capital efficiency by deferring customs duty instead of paying it upfront at import stage for qualifying warehousing and manufacturing operations.",
+  "Supports domestic manufacturing, assembly, processing, and value-addition models without forcing a traditional export-obligation structure like some alternative schemes.",
+  "Can work well for import-heavy manufacturers that need long-horizon duty deferment, flexible storage duration, and a warehouse-led production workflow.",
+  "Creates strategic optionality for businesses comparing MOOWR against EPCG, Advance Authorisation, or a standard warehousing model."
+];
+
+const ELIGIBILITY_POINTS = [
+  "Manufacturers, processors, assemblers, or businesses planning operations that can be run from a controlled private bonded warehouse environment.",
+  "Businesses importing raw materials, components, or capital goods that want duty deferment integrated into their production and inventory model.",
+  "Companies with identifiable premises, compliance controls, and operational readiness for customs-supervised warehousing and record maintenance.",
+  "Importers and manufacturers that want a long-term customs strategy rather than a one-time licence filing approach."
+];
+
+const DOCUMENTS_REQUIRED = [
+  "Entity documents, IEC, GST, PAN, authorised signatory records, and business profile details tied to the warehousing applicant.",
+  "Premises address proof, ownership or lease records, layout plan, storage maps, process-flow note, and security-control details for the warehouse.",
+  "Import and manufacturing profile, product list, capital-goods plan, bill-of-materials context, and proposed operational narrative for the bonded unit.",
+  "Warehouse record-keeping controls, inventory discipline model, customs coordination documents, and any existing warehouse or compliance correspondence."
+];
+
+const PROCESS_STEPS = [
+  {
+    title: "Commercial feasibility and scheme comparison",
+    detail:
+      "We first check whether MOOWR is commercially stronger than EPCG, Advance Authorisation, or a non-bonded import structure based on imports, sales pattern, and manufacturing flow."
+  },
+  {
+    title: "Premises and warehousing-readiness review",
+    detail:
+      "The warehouse or factory setup is checked for customs-facing practicality, including storage logic, process controls, and physical readiness."
+  },
+  {
+    title: "Section 58 and Section 65 application support",
+    detail:
+      "The bonded warehouse licence and manufacturing permission workflow are organised into a structured filing set with practical compliance notes."
+  },
+  {
+    title: "Implementation and customs process alignment",
+    detail:
+      "Post-approval support focuses on import flow, inventory discipline, ex-bond clearance logic, operational controls, and customs-facing execution."
+  },
+  {
+    title: "Monthly returns, audit trail, and continuity",
+    detail:
+      "The real long-term value of MOOWR comes from clean warehouse accounting, return discipline, and documentation that can withstand future customs review."
+  }
+];
+
+const FAQS = [
+  {
+    question: "What is the MOOWR scheme?",
+    answer:
+      "MOOWR refers to the Manufacture and Other Operations in Warehouse Regulations framework, which allows manufacturing or permitted operations in a bonded warehouse with customs duty deferment benefits."
+  },
+  {
+    question: "Is MOOWR only for exporters?",
+    answer:
+      "No. MOOWR is often attractive because it does not depend on a classic export-obligation model. It can also be relevant where domestic clearance forms part of the commercial plan."
+  },
+  {
+    question: "What approvals are generally involved in a MOOWR setup?",
+    answer:
+      "A practical MOOWR implementation usually involves bonded warehouse licensing under Section 58 and permission for manufacturing or other operations under Section 65, supported by operational and compliance readiness."
+  },
+  {
+    question: "How is MOOWR different from Advance Authorisation or EPCG?",
+    answer:
+      "Advance Authorisation and EPCG are licence-driven schemes tied to different commercial and compliance structures, while MOOWR is warehouse-led and is often chosen for long-term duty deferment and manufacturing flexibility."
+  },
+  {
+    question: "Is there a time limit for storing goods in a MOOWR unit?",
+    answer:
+      "One reason businesses evaluate MOOWR seriously is its warehousing flexibility compared with many other import-benefit structures, but implementation should still be designed around the current customs process and compliance requirements."
+  },
+  {
+    question: "Why can this page rank for MOOWR keywords?",
+    answer:
+      "Because it is built to answer real user intent around bonded warehouse setup, Section 58 and 65 approvals, duty deferment, monthly returns, and scheme comparison instead of using a shallow promotional page."
+  }
+];
+
+const GOVERNMENT_REFERENCES = [
+  {
+    label: "ICEGATE Warehouse Licensing Manual",
+    href: "https://www.icegate.gov.in/sites/default/files/2024-11/User%20Manual-Warehouse%20Licensing_v.1.07.pdf"
+  },
+  {
+    label: "ICEGATE Warehouse Monthly Returns",
+    href: "https://www.icegate.gov.in/guidelines/warehouse-related-modules/warehouse-monthly-returns"
+  },
+  {
+    label: "ICEGATE Warehouse Module FAQ",
+    href: "https://www.icegate.gov.in/guidelines/frequently-asked-questions-warehouse-module-april-4-2025"
+  }
+];
+
+const RELATED_LINKS = [
+  {
+    href: "/services/epcg-scheme",
+    title: "EPCG Scheme Support",
+    description:
+      "Useful when the business is comparing capital-goods import strategy, export obligation impact, and long-term customs cost structure."
+  },
+  {
+    href: "/services/advance-authorisation/",
+    title: "Advance Authorisation Support",
+    description:
+      "Relevant for businesses deciding between licence-led duty exemption and warehouse-led duty deferment."
+  },
+  {
+    href: "/services/warehouse-license",
+    title: "Warehouse Licence Support",
+    description:
+      "Important where the warehousing foundation itself needs structured support before a larger MOOWR implementation can work properly."
+  },
+  {
+    href: "/services/compliance-audit",
+    title: "Import Export Compliance Audit",
+    description:
+      "Helpful where MOOWR planning needs to be linked to customs controls, inventory records, and broader trade-compliance governance."
+  }
+];
+
+const HIGHLIGHTS = [
+  "MOOWR consultant India",
+  "Section 58 bonded warehouse and Section 65 manufacturing support",
+  "Duty deferment strategy for import-heavy manufacturing",
+  "Warehouse returns, controls, and customs process alignment"
+];
 
 const CloudDeskMoowr = () => {
-    const [showEnrollModal, setShowEnrollModal] = useState({
-      open: false,
-      type: "",
-    });
-  
-    const handleEnrollmentSubmit = (formData) => {
-      console.log("Enrollment Submitted:", formData);
-  
-      // TODO → send API call
-      // axios.post("/api/enroll", formData)
-  
-      alert("Form submitted — check console for data.");
-    };
-    
+  const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
-    <Helmet>
-  <title>
-    MOOWR Scheme Registration in India | DGFT CUSTOMS Services | EXIMINQ
-  </title>
-
-  <meta
-    name="description"
-    content="MOOWR Scheme consultancy in India. Set up a bonded warehouse under Section 65 and defer customs duty on imports with compliance support."
-  />
-
-  <link
-    rel="canonical"
-    href="https://eximinq.in/services/moowr-scheme/"
-  />
-
-  <meta
-    property="og:title"
-    content="MOOWR Scheme Registration in India"
-  />
-  <meta
-    property="og:description"
-    content="Manufacturing and Other Operations in Warehouse Regulations (MOOWR) setup and bonded warehouse licensing support."
-  />
-  <meta
-    property="og:url"
-    content="https://eximinq.in/services/moowr-scheme/"
-  />
-  <meta property="og:type" content="article" />
-
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://eximinq.in"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Services",
-              "item": "https://eximinq.in/services"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "MOOWR Scheme",
-              "item": "https://eximinq.in/services/moowr-scheme/"
-            }
-          ]
-        },
-        {
-          "@type": "Service",
-          "name": "MOOWR Scheme Consultancy",
-          "serviceType": "Bonded Warehouse Setup under Section 65",
-          "description":
-            "Consultancy for MOOWR registration, bonded warehouse licensing, compliance setup and customs duty deferment implementation.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Eximinq Global Connections",
-            "url": "https://eximinq.in"
-          },
-          "areaServed": {
-            "@type": "Country",
-            "name": "India"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What exactly is the MOOWR Scheme?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "MOOWR allows manufacturers to import goods into a bonded warehouse without upfront customs duty and pay duty only when goods are cleared for domestic consumption."
+      <Helmet>
+        <title>
+          MOOWR Scheme Consultant India | Bonded Warehouse, Section 58 and
+          Section 65 Manufacturing Support | EXIMINQ
+        </title>
+        <meta
+          name="description"
+          content="MOOWR scheme consultant in India for bonded warehouse licensing, Section 58 and Section 65 approvals, duty deferment strategy, warehouse compliance, monthly returns, and customs implementation support."
+        />
+        <meta
+          name="keywords"
+          content="MOOWR consultant India, MOOWR scheme consultant, bonded warehouse consultant, section 58 warehouse licence, section 65 manufacturing permission, MOOWR registration, duty deferment scheme India, customs bonded manufacturing"
+        />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link
+          rel="canonical"
+          href="https://eximinq.in/services/moowr-scheme/"
+        />
+        <meta
+          property="og:title"
+          content="MOOWR Scheme Consultant India | Bonded Warehouse and Section 65 Manufacturing Support"
+        />
+        <meta
+          property="og:description"
+          content="Get expert support for MOOWR setup, Section 58 bonded warehouse licensing, Section 65 manufacturing permission, duty deferment planning, and warehouse compliance."
+        />
+        <meta
+          property="og:url"
+          content="https://eximinq.in/services/moowr-scheme/"
+        />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "@id": "https://eximinq.in/services/moowr-scheme/",
+                url: "https://eximinq.in/services/moowr-scheme/",
+                name: "MOOWR Scheme Consultant India | Bonded Warehouse, Section 58 and Section 65 Manufacturing Support | EXIMINQ",
+                description:
+                  "MOOWR scheme consultant in India for bonded warehouse licensing, Section 58 and Section 65 approvals, duty deferment strategy, warehouse compliance, monthly returns, and customs implementation support.",
+                isPartOf: {
+                  "@type": "WebSite",
+                  name: "EXIMINQ",
+                  url: "https://eximinq.in/"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "MOOWR Scheme",
+                    item: "https://eximinq.in/services/moowr-scheme/"
+                  }
+                ]
+              },
+              {
+                "@type": "Service",
+                name: "MOOWR Scheme Consultant India",
+                provider: {
+                  "@type": "Organization",
+                  name: "EXIMINQ",
+                  url: "https://eximinq.in/"
+                },
+                areaServed: {
+                  "@type": "Country",
+                  name: "India"
+                },
+                serviceType:
+                  "Bonded warehouse licensing, Section 58 and Section 65 approvals, duty deferment planning, and MOOWR implementation support",
+                description:
+                  "Professional support for MOOWR setup, customs bonded warehouse implementation, manufacturing permission, warehouse compliance, and long-term duty deferment planning."
+              },
+              {
+                "@type": "FAQPage",
+                mainEntity: FAQS.map((faq) => ({
+                  "@type": "Question",
+                  name: faq.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: faq.answer
+                  }
+                }))
               }
-            },
-            {
-              "@type": "Question",
-              "name": "How is MOOWR better than an EOU (Export Oriented Unit) or SEZ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "There is no fixed time limit for storing goods in a bonded warehouse under MOOWR until they are cleared for domestic consumption."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is there a time limit for keeping goods in the MOOWR warehouse?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. There is no export obligation under the MOOWR scheme."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Who can apply for a MOOWR license?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Inter-unit transfers are permitted without payment of duty, subject to customs procedures."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What are the \"Security\" requirements for a MOOWR factory?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Your premises must be secure. Requirements include: (1) Strong physical boundaries, (2) 24/7 CCTV surveillance with a 30-day backup, and (3) Digital record-keeping of all entry and exit. CloudDesk provides a Security Checklist to ensure you meet these before the inspector arrives."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do I need a separate IEC for MOOWR?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. You use your existing IEC. However, your ICEGATE ID must be mapped to the specific Bonded Warehouse Code generated after your license is approved."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What happens when I sell my product in India (DTA)?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "You must file an Ex-Bond Bill of Entry and pay the deferred BCD and IGST on the raw materials used in that product. There is no interest charged on the deferred duty if paid at the time of clearance."
-              }
-            },
-                        {
-              "@type": "Question",
-              "name": "Can I transfer goods from one MOOWR unit to another?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Inter-unit transfers are permitted without payment of duty, making it an excellent scheme for companies with multiple manufacturing stages across different locations."
-              }
-            },
-          ]
-        }
-      ]
-    })}
-  </script>
-</Helmet>
-    <div className="bg-slate-50 text-slate-800">
-      {/* Dynamic Sections */}
-      <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      <Navbar setShowEnrollModal={setShowEnrollModal} />
-      <Hero setShowEnrollModal={setShowEnrollModal} />
+            ]
+          })}
+        </script>
+      </Helmet>
 
-      <ModalEnroll
-        show={showEnrollModal.open}
-        type={showEnrollModal.type}
-        onClose={() => setShowEnrollModal({ open: false, type: "" })}
-        onSubmit={handleEnrollmentSubmit}
-      />
+      <div className="min-h-screen bg-slate-50 text-slate-900">
+        <MainNavbar />
 
-      {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
-
-      <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              What is the MOOWR Scheme?
-            </h2>
-            <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
-          </div>
-          <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
-            <p className="mb-4">
-              <strong>
-                MOOWR (Manufacturing and Other Operations in Warehouse
-                Regulations)
-              </strong>{" "}
-              is a flagship scheme by the Government of India under Section 65
-              of the Customs Act, 1962. It aims to boost the "Make in India"
-              initiative by allowing importers to set up a{" "}
-              <strong>Private Bonded Warehouse</strong> within their factory
-              premises.
-            </p>
-            <p className="mb-4">
-              Under this scheme, manufacturers can import raw materials and
-              capital goods (machinery){" "}
-              <strong>without paying Customs Duty</strong> at the time of
-              import. The duty is deferred until the finished goods are cleared
-              for the domestic market. If the finished goods are exported, the
-              deferred duty on inputs is <strong>fully remitted</strong>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="benefits" className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4">
-          {/* HEADER */}
-          <div className="text-center mb-16">
-            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
-              Advantage India
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
-              Why Choose MOOWR?
-            </h2>
-          </div>
-
-          {/* BENEFIT CARDS */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Benefit 1 */}
-            <div className="bg-white p-8 rounded-xl shadow-md border-t-4 border-brand-600 hover:shadow-xl transition">
-              <Wallet className="text-brand-600 mb-4" size={40} />
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                Duty Deferment
-              </h3>
-              <p className="text-slate-600 text-sm">
-                No duty payment on import of Capital Goods and Raw Materials.
-                Duty is payable only when finished goods are sold in India.
+        <header className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-900 text-white">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.22),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(16,185,129,0.18),transparent_32%)]" />
+          <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-28 lg:grid-cols-[1.15fr_0.85fr] lg:px-10">
+            <div className="max-w-3xl">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-blue-100 backdrop-blur">
+                <Warehouse className="h-4 w-4" />
+                Bonded warehouse manufacturing and duty deferment strategy
+              </div>
+              <h1 className="max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">
+                MOOWR Scheme Consultant in India for Bonded Warehouse Setup,
+                Section 58 Licensing, and Section 65 Manufacturing Support
+              </h1>
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">
+                EXIMINQ helps importers and manufacturers evaluate, structure,
+                and implement MOOWR so bonded warehousing, customs duty
+                deferment, manufacturing permission, warehouse returns, and
+                ongoing compliance work as one commercially usable system.
               </p>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {HIGHLIGHTS.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-sm text-slate-100"
+                  >
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-300" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href="#feasibility-check"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+                >
+                  Check MOOWR Feasibility
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="#process"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  View Process Flow
+                  <ChevronDown className="h-4 w-4" />
+                </a>
+              </div>
             </div>
 
-            {/* Benefit 2 */}
-            <div className="bg-white p-8 rounded-xl shadow-md border-t-4 border-green-500 hover:shadow-xl transition">
-              <Percent className="text-green-500 mb-4" size={40} />
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                No Interest Liability
-              </h3>
-              <p className="text-slate-600 text-sm">
-                No interest is charged on deferred duty, even for years,
-                provided the materials are used for manufacturing.
-              </p>
+            <div id="feasibility-check" className="lg:pt-4">
+              <QuickForm />
+            </div>
+          </div>
+        </header>
+
+        <div
+          className={`sticky top-[72px] z-30 border-b transition ${
+            scrolled
+              ? "border-slate-200 bg-white/95 shadow-sm backdrop-blur"
+              : "border-slate-100 bg-white"
+          }`}
+        >
+          <div className="mx-auto max-w-7xl px-4 py-3 lg:px-10">
+            <div className="hidden flex-wrap items-center gap-3 md:flex">
+              {[
+                ["overview", "Overview"],
+                ["benefits", "Benefits"],
+                ["eligibility", "Eligibility"],
+                ["documents", "Documents"],
+                ["process", "Process"],
+                ["references", "References"],
+                ["faqs", "FAQs"]
+              ].map(([href, label]) => (
+                <a
+                  key={href}
+                  href={`#${href}`}
+                  className="rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
+                >
+                  {label}
+                </a>
+              ))}
             </div>
 
-            {/* Benefit 3 */}
-            <div className="bg-white p-8 rounded-xl shadow-md border-t-4 border-accent-500 hover:shadow-xl transition">
-              <FileCheck className="text-accent-500 mb-4" size={40} />
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                No Export Obligation
-              </h3>
-              <p className="text-slate-600 text-sm">
-                Unlike EPCG/Advance Authorization, MOOWR has no export targets.
-                You can sell 100% domestically without restrictions.
-              </p>
+            <div className="md:hidden">
+              <button
+                type="button"
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+                className="flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-semibold text-slate-900"
+              >
+                Jump to section
+                <ChevronDown
+                  className={`h-4 w-4 transition ${isMenuOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              {isMenuOpen && (
+                <div className="mt-2 space-y-1 rounded-2xl border border-slate-200 bg-white p-2 shadow-lg">
+                  {[
+                    ["overview", "Overview"],
+                    ["benefits", "Benefits"],
+                    ["eligibility", "Eligibility"],
+                    ["documents", "Documents"],
+                    ["process", "Process"],
+                    ["references", "References"],
+                    ["faqs", "FAQs"]
+                  ].map(([href, label]) => (
+                    <a
+                      key={href}
+                      href={`#${href}`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                    >
+                      {label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="comparison" className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          {/* HEADER */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900">
-              MOOWR vs Traditional Schemes
-            </h2>
-            <p className="text-slate-500 mt-2">
-              Why MOOWR is superior for modern manufacturing.
-            </p>
-          </div>
-
-          {/* TABLE */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left text-slate-600 border border-slate-200">
-              <thead className="text-xs text-slate-700 uppercase bg-slate-100">
-                <tr>
-                  <th className="px-6 py-4 border-r">Feature</th>
-                  <th className="px-6 py-4 border-r text-brand-700 font-bold">
-                    MOOWR Scheme
-                  </th>
-                  <th className="px-6 py-4 border-r">EPCG Scheme</th>
-                  <th className="px-6 py-4">Advance Authorization</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {/* ROW 1 */}
-                <tr className="border-b hover:bg-slate-50">
-                  <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
-                    <Banknote size={16} className="text-brand-600" />
-                    Import Duty
-                  </td>
-                  <td className="px-6 py-4 border-r text-green-600 font-bold">
-                    Deferred (Zero Upfront)
-                  </td>
-                  <td className="px-6 py-4 border-r">Zero (Conditional)</td>
-                  <td className="px-6 py-4">Zero (Inputs only)</td>
-                </tr>
-
-                {/* ROW 2 */}
-                <tr className="border-b hover:bg-slate-50">
-                  <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
-                    <BadgeCheck size={16} className="text-brand-600" />
-                    Export Obligation
-                  </td>
-                  <td className="px-6 py-4 border-r text-green-600 font-bold">
-                    NONE
-                  </td>
-                  <td className="px-6 py-4 border-r">6 Times Duty Saved</td>
-                  <td className="px-6 py-4">Value Addition Required</td>
-                </tr>
-
-                {/* ROW 3 */}
-                <tr className="border-b hover:bg-slate-50">
-                  <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
-                    <PackageOpen size={16} className="text-brand-600" />
-                    Capital Goods
-                  </td>
-                  <td className="px-6 py-4 border-r">Allowed</td>
-                  <td className="px-6 py-4 border-r">Allowed</td>
-                  <td className="px-6 py-4">Not Allowed</td>
-                </tr>
-
-                {/* ROW 4 */}
-                <tr className="border-b hover:bg-slate-50">
-                  <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
-                    <Scale size={16} className="text-brand-600" />
-                    IGST Payment
-                  </td>
-                  <td className="px-6 py-4 border-r text-green-600 font-bold">
-                    Deferred
-                  </td>
-                  <td className="px-6 py-4 border-r">Exempted (Pre-Import)</td>
-                  <td className="px-6 py-4">Exempted</td>
-                </tr>
-
-                {/* ROW 5 */}
-                <tr className="hover:bg-slate-50">
-                  <td className="px-6 py-4 font-bold border-r flex items-center gap-2">
-                    <ArrowDownUp size={16} className="text-brand-600" />
-                    Depreciation
-                  </td>
-                  <td className="px-6 py-4 border-r">
-                    Allowed on Capital Goods
-                  </td>
-                  <td className="px-6 py-4 border-r">Not Applicable</td>
-                  <td className="px-6 py-4">Not Applicable</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section id="process" className="py-20 bg-slate-900 text-white">
-        <div className="container mx-auto px-4">
-          {/* Heading */}
-          <div className="text-center mb-16">
-            <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
-              Implementation
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2">
-              Steps to Establish Bonded Warehouse
-            </h2>
-          </div>
-
-          {/* Steps Grid */}
-          <div className="relative grid md:grid-cols-5 gap-8 step-connector">
-            {/* STEP 1 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-              mx-auto mb-4 border-4 border-accent-500"
-              >
-                <FileText className="text-brand-900" size={32} />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Application</h3>
-              <p className="text-sm text-slate-300">
-                File common application online via ICEGATE (Annexure A).
+        <main className="mx-auto max-w-7xl space-y-20 px-6 py-16 lg:px-10">
+          <section
+            id="overview"
+            className="grid gap-8 rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200 lg:grid-cols-[1.05fr_0.95fr]"
+          >
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+                MOOWR Overview
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950">
+                Why MOOWR ranks well when the page answers both customs and
+                commercial intent
+              </h2>
+              <p className="mt-5 text-base leading-8 text-slate-600">
+                Searchers looking for <strong>MOOWR consultant India</strong>,
+                <strong> bonded warehouse setup</strong>, or{" "}
+                <strong>Section 65 manufacturing permission</strong> are not
+                looking for generic scheme definitions alone. They want to know
+                whether MOOWR is better than EPCG or Advance Authorisation,
+                whether it fits their import model, what approvals are involved,
+                how duty deferment works, and what ongoing warehouse compliance
+                will look like in practice.
+              </p>
+              <p className="mt-4 text-base leading-8 text-slate-600">
+                That is why this page is built around real commercial decision
+                points: bonded warehouse licensing, manufacturing permission,
+                customs process discipline, monthly returns, inventory controls,
+                and long-term operating viability.
               </p>
             </div>
 
-            {/* STEP 2 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-              mx-auto mb-4 border-4 border-accent-500"
-              >
-                <ShieldCheck className="text-brand-900" size={32} />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Permission</h3>
-              <p className="text-sm text-slate-300">
-                Principal Commissioner grants permission under Section 65.
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                {
+                  icon: CircleDollarSign,
+                  title: "Duty deferment logic",
+                  text: "Strong relevance for businesses that want working-capital relief and customs-cost efficiency at scale."
+                },
+                {
+                  icon: Factory,
+                  title: "Manufacturing flexibility",
+                  text: "Useful for import-led assembly, production, and value-addition models that need a warehouse-based customs structure."
+                },
+                {
+                  icon: Box,
+                  title: "Inventory discipline",
+                  text: "MOOWR success depends on controls, records, and warehouse accounting that remain customs-ready over time."
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Long-term compliance",
+                  text: "The real SEO and conversion strength comes from explaining implementation, not just registration."
+                }
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200"
+                >
+                  <item.icon className="h-8 w-8 text-blue-700" />
+                  <h3 className="mt-4 text-lg font-semibold text-slate-950">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="space-y-8">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+                Core MOOWR Areas
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950">
+                The four areas that define a successful MOOWR implementation
+              </h2>
+              <p className="mt-4 text-base leading-8 text-slate-600">
+                A page can only rank sustainably for MOOWR keywords if it
+                explains not just the scheme benefit, but the actual operating
+                pillars behind it.
               </p>
             </div>
 
-            {/* STEP 3 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-              mx-auto mb-4 border-4 border-accent-500"
-              >
-                <FileBadge className="text-brand-900" size={32} />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Bonding</h3>
-              <p className="text-sm text-slate-300">
-                Execute a Triple Duty Bond with Customs covering liability.
-              </p>
+            <div className="grid gap-6 lg:grid-cols-2">
+              {MOOWR_CORE_AREAS.map((area, index) => (
+                <article
+                  key={area.title}
+                  className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
+                >
+                  <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-800">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-700 text-white">
+                      {index + 1}
+                    </span>
+                    Core area
+                  </div>
+                  <h3 className="mt-5 text-2xl font-bold text-slate-950">
+                    {area.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-8 text-slate-600">
+                    {area.description}
+                  </p>
+                </article>
+              ))}
             </div>
+          </section>
 
-            {/* STEP 4 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-white rounded-full flex items-center justify-center 
-              mx-auto mb-4 border-4 border-accent-500"
-              >
-                <PackageIcon className="text-brand-900" size={32} />
+          <section
+            id="benefits"
+            className="rounded-[32px] bg-gradient-to-r from-slate-950 via-blue-950 to-indigo-900 p-8 text-white shadow-xl lg:p-10"
+          >
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">
+                  Benefits
+                </p>
+                <h2 className="mt-3 text-3xl font-bold">
+                  Why manufacturers compare MOOWR seriously against other schemes
+                </h2>
+                <p className="mt-5 text-base leading-8 text-slate-200">
+                  The strongest search-intent angle for MOOWR is commercial
+                  decision-making. Users want to know whether the scheme creates
+                  real cash-flow, warehousing, and manufacturing advantages for
+                  their operating model.
+                </p>
               </div>
-              <h3 className="text-lg font-bold mb-2">Import</h3>
-              <p className="text-sm text-slate-300">
-                Start importing goods duty-free into the warehouse.
-              </p>
-            </div>
 
-            {/* STEP 5 */}
-            <div className="text-center relative z-10">
-              <div
-                className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center 
-              mx-auto mb-4 border-4 border-white"
-              >
-                <Factory className="text-white" size={32} />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Manufacture</h3>
-              <p className="text-sm text-slate-300">
-                Carry out operations. Clear final goods as per demand.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Dynamic Fees Section */}
-      <Fees  setShowEnrollModal={setShowEnrollModal}/>
-
-
-        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
-              <section className="py-20 bg-white">
-                <div className="container mx-auto px-4 max-w-5xl">
-                  <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Why CloudDesk for Moowr-Scheme?</h2>
-                    <p className="text-slate-500">
-                      MOOWR turns your factory into a 'Legal Customs Vault.' CloudDesk ensures the keys always turn smoothly.
+              <div className="grid gap-4 sm:grid-cols-2">
+                {BENEFITS.map((benefit) => (
+                  <div
+                    key={benefit}
+                    className="rounded-3xl border border-white/10 bg-white/8 p-5 backdrop-blur"
+                  >
+                    <BadgeCheck className="h-6 w-6 text-emerald-300" />
+                    <p className="mt-4 text-sm leading-7 text-slate-100">
+                      {benefit}
                     </p>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    {/* Feature 1 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
-                        <AlertTriangle size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">1. "Infinite" Duty Deferral Setup</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          Unlike Advance Authorisation, <strong>MOOWR </strong>has no fixed export obligation and no time limit for duty deferral. 
-                          <strong>CloudDesk</strong> architects your licensing so that you only pay duty if and when you sell to the <strong>domestic market (DTA).</strong> If you export, the duty is waived forever.
-                        </p>
-                      </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="eligibility"
+            className="grid gap-8 lg:grid-cols-[1fr_1fr]"
+          >
+            <article className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div className="flex items-center gap-3">
+                <Building2 className="h-7 w-7 text-blue-700" />
+                <h2 className="text-2xl font-bold text-slate-950">
+                  Eligibility indicators
+                </h2>
+              </div>
+              <div className="mt-6 space-y-4">
+                {ELIGIBILITY_POINTS.map((item) => (
+                  <div key={item} className="flex gap-3">
+                    <CheckCircle2 className="mt-1 h-5 w-5 flex-none text-emerald-500" />
+                    <p className="text-sm leading-7 text-slate-600">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article
+              id="documents"
+              className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
+            >
+              <div className="flex items-center gap-3">
+                <FileCheck2 className="h-7 w-7 text-blue-700" />
+                <h2 className="text-2xl font-bold text-slate-950">
+                  Documents typically required
+                </h2>
+              </div>
+              <div className="mt-6 space-y-4">
+                {DOCUMENTS_REQUIRED.map((item) => (
+                  <div key={item} className="flex gap-3">
+                    <ClipboardCheck className="mt-1 h-5 w-5 flex-none text-blue-700" />
+                    <p className="text-sm leading-7 text-slate-600">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </section>
+
+          <section
+            id="process"
+            className="rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
+          >
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+                Process Flow
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950">
+                A step-by-step path from MOOWR evaluation to live warehouse
+                operation
+              </h2>
+              <p className="mt-4 text-base leading-8 text-slate-600">
+                This section is designed to satisfy the exact questions Google
+                users ask when they move from browsing the scheme to planning an
+                actual implementation.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-5">
+              {PROCESS_STEPS.map((step, index) => (
+                <div
+                  key={step.title}
+                  className="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-lg font-bold text-white">
+                    {index + 1}
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold text-slate-950">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {step.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section
+            id="references"
+            className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]"
+          >
+            <article className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div className="flex items-center gap-3">
+                <BookOpenCheck className="h-7 w-7 text-blue-700" />
+                <h2 className="text-2xl font-bold text-slate-950">
+                  Government and system references
+                </h2>
+              </div>
+              <p className="mt-4 text-base leading-8 text-slate-600">
+                MOOWR pages are stronger when they connect users to actual
+                warehouse-system documentation and current customs workflow
+                references.
+              </p>
+
+              <div className="mt-6 space-y-3">
+                {GOVERNMENT_REFERENCES.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-4 text-sm font-semibold text-slate-900 transition hover:border-blue-300 hover:bg-blue-50"
+                  >
+                    <span className="flex items-center gap-3">
+                      <Landmark className="h-5 w-5 text-blue-700" />
+                      {item.label}
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-slate-500" />
+                  </a>
+                ))}
+              </div>
+            </article>
+
+            <article className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
+              <div className="flex items-center gap-3">
+                <PackageCheck className="h-7 w-7 text-blue-700" />
+                <h2 className="text-2xl font-bold text-slate-950">
+                  Related scheme and compliance services
+                </h2>
+              </div>
+              <p className="mt-4 text-base leading-8 text-slate-600">
+                Internal linking helps Google understand this page as part of a
+                wider customs, warehousing, and duty-optimization cluster.
+              </p>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                {RELATED_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md"
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <h3 className="text-lg font-semibold text-slate-950">
+                        {item.title}
+                      </h3>
+                      <ArrowRight className="h-5 w-5 text-blue-700" />
                     </div>
-        
-                    {/* Feature 2 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
-                        <CheckCircle size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">2. The Single-Point Approval Engine</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          Getting a <strong>MOOWR license </strong>involves both a Bonded <strong>Warehouse License </strong>(Sec 58) and Permission for Manufacturing (Sec 65). <strong>CloudDesk</strong> handles the dual-application process, ensuring your factory layout, security protocols, and bond execution are approved by the Commissioner in one go.
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 3 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
-                        <Building size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">3. Digital Inventory-Bond Sync</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          The biggest compliance hurdle is the <strong>Triple-Column Ledger (Input, Process, Output).</strong>
-                          <strong>CloudDesk’s </strong>Bonded-Inventory Module automates this ledger, ensuring your raw material consumption matches your <strong>export/domestic sales perfectly,</strong> making your monthly returns "Audit-Proof."
-                        </p>
-                      </div>
-                    </div>
-        
-                    {/* Feature 4 */}
-                    <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
-                        <ShieldUser size={24} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 mb-2">4. GST-Customs Financial Mapping</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          While Customs duty is deferred, <strong>IGST rules are complex under MOOWR.</strong>
-                         <strong>CloudDesk </strong>performs a Tax-Optimization Audit to ensure you aren't accidentally blocking your GST credits while trying to save on Customs duty.
-                        </p>
-                      </div>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">
+                      {item.description}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </article>
+          </section>
+
+          <section
+            id="faqs"
+            className="rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
+          >
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+                Frequently Asked Questions
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950">
+                Common MOOWR questions importers and manufacturers ask
+              </h2>
+            </div>
+
+            <div className="mt-10 grid gap-4">
+              {FAQS.map((faq) => (
+                <article
+                  key={faq.question}
+                  className="rounded-3xl bg-slate-50 p-6 ring-1 ring-slate-200"
+                >
+                  <div className="flex items-start gap-4">
+                    <FileSearch className="mt-1 h-5 w-5 flex-none text-blue-700" />
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-950">
+                        {faq.question}
+                      </h3>
+                      <p className="mt-3 text-sm leading-7 text-slate-600">
+                        {faq.answer}
+                      </p>
                     </div>
                   </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-[32px] bg-gradient-to-r from-blue-700 to-indigo-700 p-8 text-white shadow-xl lg:p-10">
+            <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div className="max-w-3xl">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-100">
+                  Conversion-Focused CTA
+                </p>
+                <h2 className="mt-3 text-3xl font-bold">
+                  Need a commercially workable MOOWR roadmap for your imports?
+                </h2>
+                <p className="mt-4 text-base leading-8 text-blue-50">
+                  If your team wants to compare MOOWR with other customs-benefit
+                  structures, build a bonded manufacturing workflow, or align
+                  warehouse compliance for a live implementation, we can help
+                  you structure it properly from the start.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                <a
+                  href="#feasibility-check"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+                >
+                  Start Feasibility Check
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="tel:+917400096950"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  Speak to a MOOWR Expert
+                  <Phone className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer className="border-t border-slate-200 bg-slate-950 text-slate-200">
+          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1.1fr_0.7fr_0.8fr] lg:px-10">
+            <div>
+              <h2 className="text-2xl font-bold text-white">EXIMINQ</h2>
+              <p className="mt-4 max-w-xl text-sm leading-7 text-slate-400">
+                MOOWR consultant for manufacturers and importers that need a
+                bonded warehouse structure, duty deferment strategy, customs
+                process control, and long-term warehouse compliance support.
+              </p>
+              <div className="mt-6 flex items-center gap-4 text-slate-400">
+                <a
+                  href="https://www.linkedin.com/company/eximinq/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-slate-800 p-3 transition hover:border-slate-600 hover:text-white"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://x.com/eximinq"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-slate-800 p-3 transition hover:border-slate-600 hover:text-white"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://www.facebook.com/eximinq"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-slate-800 p-3 transition hover:border-slate-600 hover:text-white"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Related Services
+              </h3>
+              <div className="mt-5 space-y-3">
+                {RELATED_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className="block text-sm text-slate-300 transition hover:text-white"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Contact
+              </h3>
+              <div className="mt-5 space-y-4 text-sm text-slate-300">
+                <div className="flex items-start gap-3">
+                  <Phone className="mt-1 h-4 w-4 text-blue-300" />
+                  <a href="tel:+917400096950" className="hover:text-white">
+                    +91 74000 96950
+                  </a>
                 </div>
-              </section>
-
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          {/* Heading */}
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
-          </h2>
-
-          {/* FAQ Items */}
-          <div className="space-y-4">
-            {/* Question 1 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What exactly is the MOOWR Scheme?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                It allows you to import capital goods and raw materials into a bonded warehouse (your factory) without paying BCD (Basic Customs Duty) or IGST. You only pay these taxes when you clear the finished goods into the Indian domestic market. If you export the finished goods, you pay zero duty.
-              </p>
-            </details>
-
-            {/* Question 2 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                How is MOOWR better than an EOU (Export Oriented Unit) or SEZ?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                "• No Export Obligation: Unlike EOUs, there is no ""Net Foreign Exchange"" (NFE) requirement.
-                 • No Location Restriction: Unlike SEZs, you can set up a MOOWR unit anywhere in India.
-                 • Ease of Exit: Exiting MOOWR is significantly simpler than exiting an SEZ or EOU."
-
-              </p>
-            </details>
-
-            {/* Question 3 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Is there a time limit for keeping goods in the MOOWR warehouse?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                No. You can keep raw materials or capital goods in the bonded premises indefinitely without paying duty until they are "cleared" for domestic consumption.
-              </p>
-            </details>
-
-            {/* Question 4 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Who can apply for a MOOWR license?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               Any person (Proprietorship, Partnership, or Company) who has been granted a license under Section 58 of the Customs Act for a bonded warehouse and intends to carry out manufacturing or other operations under Section 65.
-              </p>
-            </details>
-
-            {/* Question 5 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                What are the "Security" requirements for a MOOWR factory?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               Your premises must be secure. Requirements include: (1) Strong physical boundaries, (2) 24/7 CCTV surveillance with a 30-day backup, and (3) Digital record-keeping of all entry and exit. CloudDesk provides a Security Checklist to ensure you meet these before the inspector arrives.
-              </p>
-            </details>
-
-            {/* Question 6 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-                Do I need a separate IEC for MOOWR? 
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               No. You use your existing IEC. However, your ICEGATE ID must be mapped to the specific Bonded Warehouse Code generated after your license is approved.
-              </p>
-            </details>
-
-            {/* Question 7 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-               What happens when I sell my product in India (DTA)?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               You must file an Ex-Bond Bill of Entry and pay the deferred BCD and IGST on the raw materials used in that product. There is no interest charged on the deferred duty if paid at the time of clearance.
-              </p>
-            </details>
-
-            {/* Question 8 */}
-            <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
-              <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
-              Can I transfer goods from one MOOWR unit to another?
-                <ChevronDown
-                  size={20}
-                  className="text-brand-500 transition-transform group-open:rotate-180"
-                />
-              </summary>
-
-              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-               Yes. Inter-unit transfers are permitted without payment of duty, making it an excellent scheme for companies with multiple manufacturing stages across different locations.
-              </p>
-            </details>
-          </div>
-        </div>
-      </section>      
-
-      {/* Footer */}
-      <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
-          {/* BRAND */}
-          <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
-
-            <p className="text-sm mb-6">
-              EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
-              Logistics compliance.
-            </p>
-
-            <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Linkedin size={18} />
-              </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Twitter size={18} />
-              </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
-                <Facebook size={18} />
-              </a>
+                <div className="flex items-start gap-3">
+                  <Mail className="mt-1 h-4 w-4 text-blue-300" />
+                  <a
+                    href="mailto:clouddesk@eximinq.in"
+                    className="hover:text-white"
+                  >
+                    clouddesk@eximinq.in
+                  </a>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-1 h-4 w-4 text-blue-300" />
+                  <span>Mumbai, Maharashtra, India</span>
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* QUICK LINKS */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  MOOWR Consultancy
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  AEO Certification
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  EPCG Scheme
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  Advance Authorization
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* OTHER SERVICES */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  Section 65 Guidelines
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  Bond Format
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  Monthly Return Format
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  FAQ on MOOWR
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div>
-            <h4 className="text-white font-bold mb-6">Contact Us</h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex gap-3 items-center">
-                <Phone size={18} className="text-brand-500" />
-                +917400096950
-              </li>
-
-              <li className="flex gap-3 items-center">
-                <Mail size={18} className="text-brand-500" />
-                clouddesk@eximinq.in
-              </li>
-
-              <li className="flex gap-3 items-center">
-                <MapPin size={18} className="text-brand-500" />
-                Mumbai, India
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* COPYRIGHT */}
-        <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-          © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
-          DGFT.
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
     </>
   );
 };

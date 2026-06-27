@@ -6,46 +6,63 @@ const Navbar = () => {
   return (
     <header className="bg-white shadow-sm sticky top-24 z-30">
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
-
-        {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#about" class="hover:text-brand-600 transition">Why DSC?</a>
-                <a href="#dgft" class="hover:text-brand-600 transition">DGFT DSC</a>
-                <a href="#icegate" class="hover:text-brand-600 transition">ICEGATE DSC</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
+          <a href="#overview" className="hover:text-brand-600 transition">
+            Overview
+          </a>
+          <a href="#use-cases" className="hover:text-brand-600 transition">
+            Use Cases
+          </a>
+          <a href="#benefits" className="hover:text-brand-600 transition">
+            Benefits
+          </a>
+          <a href="#process" className="hover:text-brand-600 transition">
+            Process
+          </a>
+          <a href="#faqs" className="hover:text-brand-600 transition">
+            FAQs
+          </a>
         </div>
 
-        {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
-        <a 
-          href="#process"
+        <a
+          href="#contact"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Apply Now
         </a>
 
-        {/* MOBILE MENU BUTTON */}
         <button
-          className="md:hidden text-brand-900 text-2xl absolute right-4"
+          className="md:hidden text-brand-900 text-base font-bold absolute right-4"
           onClick={() => setOpen(!open)}
+          aria-label="Toggle navigation"
         >
-          ☰
+          Menu
         </button>
-
       </nav>
 
-      {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">Why DSC?</a>
-            <a href="#dgft" class="block py-2 text-slate-600">DGFT DSC</a>
-            <a href="#icegate" class="block py-2 text-slate-600">ICEGATE DSC</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Buy Token</a>
-          {/* <a 
+          <a href="#overview" className="block py-2 text-slate-600">
+            Overview
+          </a>
+          <a href="#use-cases" className="block py-2 text-slate-600">
+            Use Cases
+          </a>
+          <a href="#benefits" className="block py-2 text-slate-600">
+            Benefits
+          </a>
+          <a href="#process" className="block py-2 text-slate-600">
+            Process
+          </a>
+          <a href="#faqs" className="block py-2 text-slate-600">
+            FAQs
+          </a>
+          <a
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now
-          </a> */}
+          </a>
         </div>
       )}
     </header>

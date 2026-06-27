@@ -12,7 +12,9 @@ const Navbar = ({
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
                 <a href="#home" class="hover:text-brand-600 transition">Home</a>
                 <a href="#about" class="hover:text-brand-600 transition">What is EOP?</a>
+                <a href="#eligibility" class="hover:text-brand-600 transition">Eligibility</a>
                 <a href="#types" class="hover:text-brand-600 transition">Advance vs EPCG</a>
+                <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
                 <a href="#fees" class="hover:text-brand-600 transition">Composition Fee</a>
         </div>
@@ -48,7 +50,9 @@ const Navbar = ({
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
           <a href="#home" class="hover:text-brand-600 transition">Home</a>
             <a href="#about" class="block py-2 text-slate-600">What is EOP?</a>
+            <a href="#eligibility" class="block py-2 text-slate-600">Eligibility</a>
             <a href="#types" class="block py-2 text-slate-600">Advance vs EPCG</a>
+            <a href="#documents" class="block py-2 text-slate-600">Documents</a>
             <a href="#process" class="block py-2 text-slate-600">Process</a>
             <a href="#contact" class="block py-2 text-brand-600 font-bold">Extend License</a>
 

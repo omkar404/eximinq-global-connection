@@ -59,53 +59,61 @@ export const seoRoutes = {
   },
 
   // --- DGFT SERVICES ---
-    "/services/import-export-code/": {
-    title: "IEC Profile Deactivation & KYC Update | DGFT Helpdesk Mumbai",
-    description: "Fix IEC Profile Deactivation, Duplicate IEC issues, and IEC Surrender Process. Expert help for IEC KYC Update and Merger and Acquisition IEC transfer."
+  "/services/import-export-code/": {
+    title: "IEC Registration Consultant India | Import Export Code Application, Annual Update and DGFT Profile Support | EXIMINQ",
+    description: "IEC registration consultant in India for Import Export Code application, annual update, DGFT profile correction, deactivation recovery, signatory changes, document review, and portal filing support."
   },
   "/services/advance-authorisation/": {
-    title: "Advance Authorisation Consultant Mumbai | EXIMINQ",
-    description: "Zero Duty Import of raw materials. Handle SION Norms, License issuance, and Redemption (EODC) to close files without penalties."
+    title: "Advance Authorisation Consultant India | DGFT License, SION & EODC Support | EXIMINQ",
+    description: "Advance Authorisation consultant for DGFT licence application, SION fixation, annual requirement, export obligation tracking, redemption and EODC closure support across India."
   },
   "/services/epcg-scheme": {
-    title: "EPCG License Consultant Mumbai - 0% Duty Import | EXIMINQ",
-    description: "Import Capital Goods at Zero Duty. Services include Application filing, Installation Certificate generation, and Export Obligation (EO) Discharge."
+    title: "EPCG Scheme Consultant India | DGFT EPCG License, Export Obligation & EODC Support | EXIMINQ",
+    description: "EPCG scheme consultant in India for DGFT EPCG licence application, customs registration, installation certificate, export obligation tracking, EODC redemption, and closure support."
   },
   "/services/iec-code-management": {
     title: "IEC Code Registration & Annual Update Mumbai | EXIMINQ",
     description: "Apply for new IEC or file the mandatory annual update. Prevent IEC deactivation by DGFT. Expert Import Export Code modification in Mumbai."
   },
   "/services/rcmc-registration": {
-    title: "E-RCMC Registration Consultant Mumbai - FIEO & EPCs | EXIMINQ",
-    description: "Apply for mandatory E-RCMC from FIEO, CHEMEXCIL, EEPC, or APEDA. Handle DGFT portal registration and renewal for export incentives."
+    title: "e-RCMC Consultant India | DGFT Registration, EPC Mapping and Export Promotion Council Support | EXIMINQ",
+    description: "e-RCMC consultant in India for DGFT registration, EPC mapping, FIEO and sectoral council selection, renewal, validity, annual subscription, multi-product exporter support, and export benefit readiness."
+  },
+  "/services/e-rcmc-registration": {
+    title: "e-RCMC Consultant India | DGFT Registration, EPC Mapping and Export Promotion Council Support | EXIMINQ",
+    description: "e-RCMC consultant in India for DGFT registration, EPC mapping, FIEO and sectoral council selection, renewal, validity, annual subscription, multi-product exporter support, and export benefit readiness."
   },
   "/services/star-export-house": {
-    title: "Star Export House Consultant Mumbai - BG Exemption | EXIMINQ",
-    description: "Get 1-Star to 5-Star Export House Status. Claim Double Weightage for MSMEs/ISO to fast-track status. Enjoy 100% Bank Guarantee waiver at Customs."
+    title: "Star Export House Consultant India | DGFT Status Holder Certificate, Thresholds & Application Support | EXIMINQ",
+    description: "Star Export House consultant in India for DGFT Status Holder Certificate filing, threshold validation, export-performance review, One Star to Five Star strategy, and deficiency-response support."
   },
   "/services/rodtep-rosctl-trading": {
     title: "Sell RoDTEP & RoSCTL Scrips - Best Rates | EXIMINQ",
     description: "Sell RoDTEP & RoSCTL scrips at 98.50%. Instant cash settlement for exporters in Mumbai. Check today's live buying rates here."
+  },
+  "/services/rodtep-scheme": {
+    title: "RoDTEP Consultant India | Claim Strategy, Rate Verification, ICEGATE Ledger and Recovery Support | EXIMINQ",
+    description: "RoDTEP consultant in India for shipping-bill declaration review, rate and cap verification, ICEGATE ledger support, missed-credit diagnosis, RoDTEP recovery, and export incentive strategy."
   },
   "/services/rodtep-scheme-application": {
     title: "RoDTEP Scheme Application & Scroll Generation | EXIMINQ",
     description: "Scrip not generated? Fix Class Mapping errors, Invoice mismatches, and Scroll Generation issues on ICEGATE to credit RoDTEP to the ledger."
   },
   "/services/duty-drawback/": {
-    title: "Duty Drawback Consultant Mumbai - AIR & Brand Rate | EXIMINQ",
-    description: "Claim unclaimed Duty Drawback on exports. Handle All Industry Rate (AIR) claims and Brand Rate Fixation with Ministry of Finance for Mumbai exporters."
+    title: "Duty Drawback Consultant India | AIR Claims, Brand Rate Fixation and Section 74 Re-export Support | EXIMINQ",
+    description: "Duty drawback consultant in India for AIR claims, brand rate fixation, Section 74 re-export drawback support, drawback status review, shipping-bill declaration checks, customs documentation, and export incentive recovery."
   },
   "/services/scomet-licensing": {
-    title: "SCOMET License Consultant India - Dual Use Items | EXIMINQ",
-    description: "Exporting dual-use technology? Secure SCOMET Authorization from DGFT/MEA for chemicals, aerospace, and electronics to prevent customs hold."
+    title: "SCOMET Licence Consultant India | DGFT Export Authorisation for Dual-Use Goods, Software and Technology | EXIMINQ",
+    description: "SCOMET licence consultant in India for DGFT export authorisation, SCOMET classification, EUC review, EMS filing, dual-use goods compliance, software and technology transfer review, and strategic trade control support."
   },
   "/services/defence-export-license": {
     title: "Defence Exim License & SCOMET Consultant India | EXIMINQ",
     description: "Exporting military items? Handle End User Certificates (EUC) and DGFT/MOD licensing for defence exports."
   },
   "/services/dfia-license": {
-    title: "DFIA License Consultant - Transferable Duty Credit | EXIMINQ",
-    description: "Get Duty Free Import Authorization (DFIA). Handle SION norms, Transferability Endorsement, and license sale for post-export duty benefits."
+    title: "DFIA Licence Consultant India | Duty Free Import Authorisation, Transferability & SION Support | EXIMINQ",
+    description: "DFIA licence consultant in India for Duty Free Import Authorisation, SION mapping, transferable DFIA filing, value-addition review, and post-export trade benefit strategy."
   },
   "/services/restricted-import-license": {
     title: "Restricted Import License Agent (DGFT & Customs) | EXIMINQ",
@@ -120,12 +128,16 @@ export const seoRoutes = {
     description: "Rejected by DGFT? Get representation at the Policy Relaxation Committee (PRC) in New Delhi to condone delays and fix genuine procedural errors."
   },
   "/services/eop-extension/": {
-    title: "Export Obligation (EOP) Extension Consultant | EXIMINQ",
-    description: "Missed export deadline? File EOP Extension for Advance & EPCG licenses at DGFT to save on heavy Customs Duty & Interest penalties."
+    title: "EOP Extension Consultant India | Export Obligation Period Extension for Advance Authorisation and EPCG | EXIMINQ",
+    description: "EOP extension consultant in India for Advance Authorisation and EPCG. Get help with export obligation period extension, composition fee planning, DGFT filing, and default-risk regularisation."
   },
   "/services/interest-equalisation": {
-    title: "Interest Equalisation Scheme (IES) Consultant | EXIMINQ",
-    description: "Claim 2% or 3% Interest Subvention. Generate the Unique IES UIN from DGFT and link it with the bank to reduce pre-shipment loan interest."
+    title: "Interest Equalisation Scheme Consultant India | Export Credit Interest Subvention Support, DGFT and Bank Coordination | EXIMINQ",
+    description: "Interest Equalisation Scheme consultant in India for export credit interest subvention support, DGFT workflow, bank coordination, MSME eligibility review, packing credit, post-shipment credit, and current EPM-linked guidance."
+  },
+  "/services/interest-equalisation-scheme": {
+    title: "Interest Equalisation Scheme Consultant India | Export Credit Interest Subvention Support, DGFT and Bank Coordination | EXIMINQ",
+    description: "Interest Equalisation Scheme consultant in India for export credit interest subvention support, DGFT workflow, bank coordination, MSME eligibility review, packing credit, post-shipment credit, and current EPM-linked guidance."
   },
 
   // --- CUSTOMS SERVICES ---
@@ -134,24 +146,28 @@ export const seoRoutes = {
     description: "Learn how to complete ICEGATE registration online. Get the step-by-step portal process, exact document checklist, and professional fees for fast customs clearance."
   },
   "/services/ad-code-registration/": {
-    title: "AD Code Registration at Customs & ICEGATE Mumbai | EXIMINQ",
-    description: "Mandatory AD Code Registration for Exporters. Register Bank AD Code at Nhava Sheva, Mundra, & Air Cargo. Fix 'AD Code Not Found' errors instantly."
+    title: "AD Code Registration Consultant India | ICEGATE Bank Account Mapping, Customs Port Registration and e-Sanchit Support | EXIMINQ",
+    description: "AD Code registration consultant in India for ICEGATE bank account mapping, customs port registration, e-Sanchit document support, multi-port setup, AD Code modification, and AD Code not found issue resolution."
   },
-  "/import-management-registration":{
-    title: "Import Management Registration Consultant Mumbai | EXIMINQ",
-    description: "Stuck with Import Management Registration? Handle Simplified Registration, DSC Mapping, and AD Code Registration for Mumbai exporters. Fix Java errors instantly."
+  "/services/import-management-registration/": {
+    title: "Import Management Registration Consultant India | SIMS, PIMS, NFMIMS & DGFT Import Monitoring | EXIMINQ",
+    description: "Import management registration consultant in India for SIMS, PIMS, NFMIMS, CIMS, CHIMS, ITC(HS) mapping, shipment timing, and DGFT import monitoring compliance."
   },
   "/services/aeo-certification": {
     title: "AEO T1, T2, T3 Certification Consultant Mumbai | EXIMINQ",
     description: "Get AEO Status for faster Customs clearance. Handle AEO T1, T2 & LO Application, Annexure filling, and Physical Verification support."
   },
   "/services/moowr-scheme/": {
-    title: "MOOWR Scheme Consultant Mumbai - Bonded Warehouse | EXIMINQ",
-    description: "Defer Customs Duty on raw materials with MOOWR Scheme. Expert consultancy for Section 65 Bonded Warehouse manufacturing in Mumbai."
+    title: "MOOWR Scheme Consultant India | Bonded Warehouse, Section 58 and Section 65 Manufacturing Support | EXIMINQ",
+    description: "MOOWR scheme consultant in India for bonded warehouse licensing, Section 58 and Section 65 approvals, duty deferment strategy, warehouse compliance, monthly returns, and customs implementation support."
   },
   "/services/svb-valuation": {
     title: "SVB Consultant Mumbai - Related Party Import Valuation | EXIMINQ",
     description: "Got an SVB Notice? Expert Special Valuation Branch consultancy for Related Party Imports. Handle Questionnaire reply, EDD refund, and Final Order."
+  },
+  "/services/svb-registration": {
+    title: "SVB Consultant India | Special Valuation Branch, Related Party Import Valuation & Questionnaire Support | EXIMINQ",
+    description: "SVB consultant in India for Special Valuation Branch cases, related party import valuation, questionnaire replies, provisional assessment strategy, and customs valuation support."
   },
   "/services/rmcc-alert-removal": {
     title: "RMCC Alert & Customs Hold Removal Consultant | EXIMINQ",
@@ -166,8 +182,8 @@ export const seoRoutes = {
     description: "Save CFS costs with Direct Port Delivery (DPD). Register importers at JNPT for DPD status to get container delivery in < 48 hours."
   },
   "/services/factory-stuffing": {
-    title: "Factory Stuffing Permission & Self Sealing | EXIMINQ",
-    description: "Stuff containers at factory premises. Handle Factory Stuffing permission, RFID E-Seal registration, and Officer deputation (MoT) for exporters."
+    title: "Factory Stuffing Consultant India | Self Sealing Permission, RFID E-Seal & Customs Export Stuffing Support | EXIMINQ",
+    description: "Factory stuffing consultant in India for self sealing permission, RFID e-seal setup, customs export stuffing workflow, factory or warehouse approval, and officer-supervised container sealing support."
   },
   "/services/bill-of-entry-import": {
     title: "Bill of Entry (BE) Filing Agent Mumbai - Import | EXIMINQ",
@@ -186,8 +202,8 @@ export const seoRoutes = {
     description: "Stuck with ICEGATE payments? Manage the Electronic Cash Ledger (ECL). Generate Challans, top-up wallets, and pay Customs Duty without failures."
   },
   "/services/igst-refund": {
-    title: "IGST Refund Consultant - Export with Payment of Duty | EXIMINQ",
-    description: "IGST Refund stuck? Resolve 'Invoice Mismatch', EGM errors, and Scroll Status (SB005) to get tax refunds credited to the bank."
+    title: "IGST Refund Consultant India | Export Refund Recovery, Shipping Bill and GST Mismatch Resolution | EXIMINQ",
+    description: "IGST refund consultant in India for export refund recovery, shipping bill and GST mismatch resolution, SB005, SB006, PFMS, EGM issues, refund scroll delays, ICEGATE coordination, and stuck IGST refund support."
   },
   "/services/bond-cancellation": {
     title: "Bond Cancellation & No Due Certificate (NDC) | EXIMINQ",
@@ -238,8 +254,8 @@ export const seoRoutes = {
     description: "Exporting fruits or vegetables? Handle APEDA Registration, Phytosanitary Certificates (Phyto), and Plant Quarantine (PQ) clearance at Mumbai Air Cargo."
   },
   "/services/free-sale-certificate": {
-    title: "Free Sale Certificate Consultant (DGFT & Health) | EXIMINQ",
-    description: "Exporting Medical Devices or Food? Procure Free Sale Certificates from DGFT, CDSCO, or State Licensing Authorities for global market access."
+    title: "Free Sale Certificate Consultant India | FSC for Export, CDSCO & DGFT Support | EXIMINQ",
+    description: "Free Sale Certificate consultant in India for FSC issuance, authority routing, domestic licence review, apostille, and export product registration support."
   },
   "/services/bis-registration": {
     title: "BIS Registration (ISI Mark) Consultant for Import | EXIMINQ",
@@ -262,8 +278,8 @@ export const seoRoutes = {
     description: "Importing pre-packaged goods? Mandatory LMPC Registration is required before shipment. Ensure MRP stickers comply with Indian packaging laws."
   },
   "/services/edpms-ebrc": {
-    title: "EDPMS & e-BRC Reconciliation Consultant | EXIMINQ",
-    description: "Removed from RBI Caution List. Reconcile pending Shipping Bills in EDPMS, generate e-BRCs, and close open export entries with the bank."
+    title: "EDPMS and eBRC Consultant India | Export Proceeds Reconciliation, IRM Mapping and AD Bank Closure Support | EXIMINQ",
+    description: "EDPMS and eBRC consultant in India for export proceeds reconciliation, IRM mapping, open shipping bill closure, short realisation, extension, write-off, AD bank follow-up, and DGFT-linked export compliance support."
   },
   "/services/aqcs-pqms": {
     title: "AQCS & PQMS Clearance Agent (Animal & Plant) | EXIMINQ",
@@ -274,8 +290,8 @@ export const seoRoutes = {
     description: "Importing Cosmetics, Drugs, or Medical Devices? Handle CDSCO Port Registration, ADC NOC, and Test License (Form 11) for fast clearance."
   },
   "/services/certificate-of-origin/": {
-    title: "Certificate of Origin (CoO) - Preferential & Non-Pref | EXIMINQ",
-    description: "Get CoO from Chamber of Commerce or Export Council. Handle GSP, SAPTA, APTA, and Generic CoO issuance for reduced import duty abroad."
+    title: "Certificate of Origin Consultant India | Preferential & Non-Preferential COO | EXIMINQ",
+    description: "Certificate of Origin consultant in India for preferential and non-preferential COO, Rules of Origin checks, FTA eligibility review, and DGFT filing support."
   },
   "/services/gst-lut-filing": {
     title: "GST LUT Filing for Exporters (Letter of Undertaking) | EXIMINQ",
@@ -286,8 +302,8 @@ export const seoRoutes = {
     description: "Exporting to Europe? Get Registered Exporter (REX) number for self-certification. Mandatory for claiming GSP duty benefits in EU/UK markets."
   },
   "/services/dsc-services": {
-    title: "Class 3 Digital Signature (DSC) for DGFT & ICEGATE | EXIMINQ",
-    description: "Buy Class 3 Combo DSC (Sign + Encrypt). Handle DSC mapping errors on DGFT, ICEGATE, and GST portals. Same-day token delivery in Mumbai."
+    title: "Class 3 DSC Consultant India | Digital Signature for DGFT, ICEGATE, GST & MCA | EXIMINQ",
+    description: "Class 3 DSC consultant in India for DGFT, ICEGATE, GST, MCA, token support, issuance, renewal, and portal-ready digital signature workflows."
   },
   "/services/igcr-returns": {
     title: "IGCR Rules 2022 Compliance & Monthly Returns | EXIMINQ",
@@ -314,8 +330,8 @@ export const seoRoutes = {
     description: "Get Consent to Establish (CTE) & Operate (CTO) from MPCB. Handle Pollution Control compliance for Red, Orange & Green category industries."
   },
   "/services/warehouse-license": {
-    title: "Public & Private Bonded Warehouse License (Sec 57/58) | EXIMINQ",
-    description: "Set up a Customs Bonded Warehouse. Secure Section 57 (Public) and Section 58 (Private) Licenses from Customs for duty-free storage."
+    title: "Warehouse Licence Consultant India | Public and Private Bonded Warehouse Registration, Section 57 and Section 58 Support | EXIMINQ",
+    description: "Warehouse licence consultant in India for public and private bonded warehouse registration, Section 57 and Section 58 support, customs duty deferment, warehouse compliance, controls, records, and implementation guidance."
   },
   "/services/un-iip-certification": {
     title: "UN IIP Certification Consultant - Dangerous Goods | EXIMINQ",
@@ -326,8 +342,8 @@ export const seoRoutes = {
     description: "Instant CA Certificates for Export. Issue Net Worth Certificates, turnover certificates for Star Status, and Utilization Certificates for EPCG/Advance."
   },
   "/services/compliance-audit": {
-    title: "Export-Import Transactional Audit & Health Check | EXIMINQ",
-    description: "Risk of Customs Notice? Conduct deep Transactional Audit of past 5 years' imports/exports to find duty shortfalls before DRI does."
+    title: "Import Export Compliance Audit Consultant India | EPCG, Advance Authorisation, IGST & Duty Drawback Risk Review | EXIMINQ",
+    description: "Import export compliance audit consultant in India for EPCG, Advance Authorisation, IGST refunds, duty drawback, DGFT records, customs exposure, and transactional health-check support."
   },
   "/services/customs-adjudication": {
     title: "Customs Adjudication & Appeal Consultant Mumbai | EXIMINQ",
