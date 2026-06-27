@@ -11,9 +11,9 @@ const Navbar = () => {
           <a href="#ims" class="hover:text-brand-600 transition">
             Import Monitoring
           </a>
-          <a href="#process" class="hover:text-brand-600 transition">
+          {/* <a href="#process" class="hover:text-brand-600 transition">
             How it Works
-          </a>
+          </a> */}
           <a href="#contact" class="hover:text-brand-600 transition">
             Introducing
           </a>
