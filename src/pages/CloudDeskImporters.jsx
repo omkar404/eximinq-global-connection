@@ -234,12 +234,6 @@ const CloudDeskImporters = () => {
                   Mandatory advance registration for all iron & steel imports (HS
                   72, 73, 86). Fee based on value.
                 </p>
-                {/* <a
-                  href="#contact"
-                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
-                >
-                  Get SIMS No <ArrowRight size={12} className="ml-1" />
-                </a> */}
                 <button
                  onClick={() => setShowEnrollModal({ open: true, type: "Steel_Import_NOC_SIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
@@ -260,12 +254,6 @@ const CloudDeskImporters = () => {
                   For Copper items under <strong>HS Chapter 74</strong>{" "}
                   (7401-7419). Registration required to track volume.
                 </p>
-                {/* <a
-                  href="#contact"
-                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
-                >
-                  Register Copper <ArrowRight size={12} className="ml-1" />
-                </a> */}
                 <button
                  onClick={() => setShowEnrollModal({ open: true, type: "Copper_NFMIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
@@ -286,12 +274,6 @@ const CloudDeskImporters = () => {
                   For Aluminium items under <strong>HS Chapter 76</strong>{" "}
                   (7601-7616). Mandatory registration policy.
                 </p>
-                {/* <a
-                  href="#contact"
-                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
-                >
-                  Register Aluminium <ArrowRight size={12} className="ml-1" />
-                </a> */}
                 <button
                  onClick={() => setShowEnrollModal({ open: true, type: "Aluminium_NFMIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
@@ -312,12 +294,6 @@ const CloudDeskImporters = () => {
                   Coal Import Monitoring System. Covers Anthracite, Bituminous,
                   Coking Coal (<strong>HS 2701 to 2704</strong>).
                 </p>
-                {/* <a
-                  href="#contact"
-                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
-                >
-                  Get CIMS No <ArrowRight size={12} className="ml-1" />
-                </a> */}
                 <button
                  onClick={() => setShowEnrollModal({ open: true, type: "Coal_CIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
@@ -338,12 +314,6 @@ const CloudDeskImporters = () => {
                   Registration for import of paper products (Newsprint, Handmade,
                   Tissue, etc.) under <strong>HS Chapter 48</strong>.
                 </p>
-                {/* <a
-                  href="#contact"
-                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
-                >
-                  Get PIMS No <ArrowRight size={12} className="ml-1" />
-                </a> */}
                 <button
                  onClick={() => setShowEnrollModal({ open: true, type: "Paper_PIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
@@ -365,12 +335,6 @@ const CloudDeskImporters = () => {
                   under
                   <strong> HS Code 8542</strong>.
                 </p>
-                {/* <a
-                  href="#contact"
-                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
-                >
-                  Register Chips <ArrowRight size={12} className="ml-1" />
-                </a> */}
                 <button
                  onClick={() => setShowEnrollModal({ open: true, type: "Chip_CHIMS" })}
                  className="text-xs font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wide flex items-center"
@@ -386,23 +350,17 @@ const CloudDeskImporters = () => {
                 <p className="text-xs text-slate-300 mb-4">
                   Not sure which IMS applies to your HS Code?
                 </p>
-                {/* <a
-                  href="#contact"
+                <button
+                  onClick={() =>
+                    setShowEnrollModal({
+                      open: true,
+                      type: "NEED_HELP",
+                    })
+                  }
                   className="bg-white text-brand-900 px-4 py-2 rounded-lg font-bold text-xs hover:bg-accent-400 transition"
                 >
                   Contact Expert
-                </a> */}
-            <button
-                onClick={() =>
-                  setShowEnrollModal({
-                    open: true,
-                    type: "NEED_HELP",
-                  })
-                }
-                className="bg-white text-brand-900 px-4 py-2 rounded-lg font-bold text-xs hover:bg-accent-400 transition"
-              >
-                Contact Expert
-          </button>                
+                </button>
               </div>
             </div>
           </div>
@@ -633,13 +591,13 @@ const CloudDeskImporters = () => {
               </p>
 
               <div className="flex gap-4">
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a href="#" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                   <Linkedin size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a href="#" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                   <Twitter size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a href="#" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                   <Facebook size={18} />
                 </a>
               </div>
@@ -649,33 +607,28 @@ const CloudDeskImporters = () => {
             <div>
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-2 text-sm">
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <a href="#" className="hover:text-white transition">
-                      SIMS Registration
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-white transition">
-                      NFMIMS Registration
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-white transition">
-                      CIMS Registration
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-white transition">
-                      PIMS Registration
-                    </a>
-                  </li>
-                </ul>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    SIMS Registration
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    NFMIMS Registration
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    CIMS Registration
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    PIMS Registration
+                  </a>
+                </li>
               </ul>
             </div>
-
-
-
 
             {/* OTHER SERVICES */}
             <div>
@@ -728,7 +681,7 @@ const CloudDeskImporters = () => {
 
           {/* COPYRIGHT */}
           <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
-            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            © 2026 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
             DGFT.
           </div>
         </footer>
