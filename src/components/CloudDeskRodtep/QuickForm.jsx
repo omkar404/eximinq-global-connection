@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Calculator } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 const QuickForm = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const QuickForm = () => {
       };
 
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/rodtep-scheme`,
+      getApiUrl("/api/rodtep-scheme"),
       // "http://localhost:5000/api/rodtep-scheme", 
       {
       method: "POST",

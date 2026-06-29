@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Warehouse, Phone } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 const Fees = () => {
   const [form, setForm] = useState({
@@ -69,7 +70,7 @@ const Fees = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/warehouse-license`,
+        getApiUrl("/api/warehouse-license"),
         // "http://localhost:5000/api/warehouse-license",
         {
           method: "POST",
@@ -142,7 +143,7 @@ const Fees = () => {
             Location
           </label>
           <input
-            Type="text"
+            type="text"
             name="location"
             value={form.location}
             onChange={handleChange}
@@ -167,7 +168,7 @@ const Fees = () => {
               className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
             />
             <input
-              Type="tel"
+              type="tel"
               name="mobile"
               value={form.mobile}
               onChange={handleChange}
@@ -185,7 +186,7 @@ const Fees = () => {
 
         {/* Submit Button */}
         <button
-          Type="submit"
+          type="submit"
           disabled={loading}
           className={`w-full text-white font-bold py-3 rounded-lg transition ${
             loading

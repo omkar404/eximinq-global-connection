@@ -1,12 +1,12 @@
-// 
+//
 
 // components/ModalEnroll.jsx
 
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
-
   /* ─────────────────────────────────────────
      STATE — all hooks before early return
   ───────────────────────────────────────── */
@@ -20,17 +20,18 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   });
 
   const [category, setCategory] = useState("");
-  const [issue, setIssue]       = useState("");
-  const [errors, setErrors]     = useState({});
-  const [loading, setLoading]   = useState(false); // FIX 4: was missing entirely
+  const [issue, setIssue] = useState("");
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // FIX 4: was missing entirely
 
   /* ─────────────────────────────────────────
      FORM TYPE FLAGS
   ───────────────────────────────────────── */
-  const isEnroll        = type === "Enroll";
-  const isApplyBrand    = type === "Apply_for_Brand_Rate";
+  const isEnroll = type === "Enroll";
+  const isApplyBrand = type === "Apply_for_Brand_Rate";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
-  const isRegistration  = type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
+  const isRegistration =
+    type === "IEC_REGISTRATION" || type === "IEC_ANNUAL_UPDATE";
 
   /* ─────────────────────────────────────────
      OPTIONS
@@ -59,10 +60,17 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
      messages don't appear on reopen.
   ───────────────────────────────────────── */
   const resetForm = () => {
-    setForm({ name: "", mobile: "", entity: "", email: "", role: "", partner: false });
+    setForm({
+      name: "",
+      mobile: "",
+      entity: "",
+      email: "",
+      role: "",
+      partner: false,
+    });
     setCategory("");
     setIssue("");
-    setErrors({});   // ← FIX 3: was missing
+    setErrors({}); // ← FIX 3: was missing
     setLoading(false);
   };
 
@@ -94,10 +102,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   ───────────────────────────────────────── */
   const validate = () => {
     const newErrors = {};
-    if (!form.name.trim())   newErrors.name   = "Name is required.";
+    if (!form.name.trim()) newErrors.name = "Name is required.";
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
-    if (!form.email.trim())  newErrors.email  = "Email is required.";
-    if (!form.role)          newErrors.role   = "Please select your role.";
+    if (!form.email.trim()) newErrors.email = "Email is required.";
+    if (!form.role) newErrors.role = "Please select your role.";
     return newErrors;
   };
 
@@ -106,7 +114,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
      FIX 1: handleSubmit was not async but used
      await — SyntaxError, form never submitted.
   ───────────────────────────────────────── */
-  const handleSubmit = async (e) => {  // ← FIX 1: added async
+  const handleSubmit = async (e) => {
+    // ← FIX 1: added async
     e.preventDefault();
 
     const v = validate();
@@ -118,8 +127,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     const payload = {
       ...form,
       type,
-      category: isEnroll       ? category : null,
-      issue:    isProfileUpdate ? issue    : null,
+      category: isEnroll ? category : null,
+      issue: isProfileUpdate ? issue : null,
     };
 
     console.log("Final payload:", payload);
@@ -128,14 +137,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       setLoading(true);
 
       const res = await fetch(
-         `${process.env.REACT_APP_API_URL}/api/duty-drawback`,
-        // "http://localhost:5000/api/duty-drawback", 
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }
-    );
+        getApiUrl("/api/duty-drawback"),
+        // "http://localhost:5000/api/duty-drawback",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
 
       const data = await res.json();
 
@@ -149,7 +158,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       alert("Registration submitted successfully");
       resetForm();
       onClose();
-
     } catch (err) {
       console.error("Enroll error:", err.name, err.message);
       alert("Submission failed. Please try again.");
@@ -164,7 +172,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-
         {/* ── Header ── */}
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
           <div>
@@ -187,7 +194,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         {/* ── Body ── */}
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
           <form className="space-y-5" onSubmit={handleSubmit}>
-
             {/* Name + Mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -239,7 +245,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 Entity Name
               </label>
               <div className="relative">
-                <Building className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Building
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="text"
                   name="entity"
@@ -257,7 +266,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 Email ID
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Mail
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="email"
                   name="email"
@@ -287,9 +299,13 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   onChange={(e) => setIssue(e.target.value)}
                   className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 outline-none text-sm"
                 >
-                  <option value="" disabled>Select Update Type</option>
+                  <option value="" disabled>
+                    Select Update Type
+                  </option>
                   {PROFILE_UPDATE_OPTIONS.map((option) => (
-                    <option key={option} value={option}>{option}</option>
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -321,7 +337,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                   Category
                 </label>
                 <div className="relative">
-                  <FileSignature className="absolute left-3 top-3 text-gray-400" size={16} />
+                  <FileSignature
+                    className="absolute left-3 top-3 text-gray-400"
+                    size={16}
+                  />
                   <input
                     type="text"
                     name="service"
@@ -339,31 +358,33 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 I am a:
               </label>
               <div className="grid grid-cols-2 gap-3">
-                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map((role) => {
-                  const selected = form.role === role;
-                  return (
-                    <label
-                      key={role}
-                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition ${
-                        selected
-                          ? "border-teal-500 bg-teal-50"
-                          : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="role"
-                        value={role}
-                        checked={form.role === role}
-                        onChange={handleChange}
-                        className="w-4 h-4 text-teal-600 focus:ring-teal-500"
-                      />
-                      <span className="ml-2 text-sm font-medium text-gray-700">
-                        {role}
-                      </span>
-                    </label>
-                  );
-                })}
+                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
+                  (role) => {
+                    const selected = form.role === role;
+                    return (
+                      <label
+                        key={role}
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer transition ${
+                          selected
+                            ? "border-teal-500 bg-teal-50"
+                            : "border-gray-200 hover:bg-indigo-50 hover:border-indigo-200"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="role"
+                          value={role}
+                          checked={form.role === role}
+                          onChange={handleChange}
+                          className="w-4 h-4 text-teal-600 focus:ring-teal-500"
+                        />
+                        <span className="ml-2 text-sm font-medium text-gray-700">
+                          {role}
+                        </span>
+                      </label>
+                    );
+                  },
+                )}
               </div>
               {errors.role && (
                 <p className="text-xs text-red-500 mt-2">{errors.role}</p>
@@ -397,9 +418,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
               className={`w-full py-4 bg-gradient-to-r from-teal-600 to-indigo-700
                 text-white font-bold rounded-xl shadow-lg hover:shadow-xl
                 transition flex items-center justify-center text-lg
-                ${loading
-                  ? "opacity-60 cursor-not-allowed"
-                  : "transform hover:-translate-y-0.5"
+                ${
+                  loading
+                    ? "opacity-60 cursor-not-allowed"
+                    : "transform hover:-translate-y-0.5"
                 }`}
             >
               {loading ? (
@@ -410,11 +432,16 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                     fill="none"
                   >
                     <circle
-                      className="opacity-25" cx="12" cy="12" r="10"
-                      stroke="currentColor" strokeWidth="4"
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
                     />
                     <path
-                      className="opacity-75" fill="currentColor"
+                      className="opacity-75"
+                      fill="currentColor"
                       d="M4 12a8 8 0 018-8v8z"
                     />
                   </svg>
@@ -424,7 +451,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 "Submit Enrollment"
               )}
             </button>
-
           </form>
         </div>
       </div>

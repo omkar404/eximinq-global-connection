@@ -1,3 +1,4 @@
+import { getApiUrl } from "../../utils/apiBaseUrl";
 // import { useState } from "react";
 // import { ShieldAlert, Phone } from "lucide-react";
 
@@ -188,7 +189,7 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/svb-registration`,
+        getApiUrl("/api/svb-registration"),
         // "http://localhost:5000/api/svb-registration", // fallback for local dev
         {
           method: "POST",

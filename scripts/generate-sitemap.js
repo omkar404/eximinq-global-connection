@@ -7,9 +7,7 @@ const PACKAGE_FILE = path.join(ROOT_DIR, "package.json");
 const SITEMAP_FILE = path.join(ROOT_DIR, "public", "sitemap.xml");
 
 const SITE_URL = "https://eximinq.in";
-const REACT_SNAP_EXCLUDED_ROUTES = new Set([
-  "/services/ad-code-registration/",
-]);
+const REACT_SNAP_EXCLUDED_ROUTES = new Set();
 const REACT_SNAP_PRIORITY_ROUTES = [
   "/advance-authorization-redemption",
   "/services/advance-authorisation/",

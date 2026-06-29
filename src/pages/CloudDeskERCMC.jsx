@@ -1,244 +1,77 @@
-import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import TopBar from "../components/CloudDeskERCMC/TopBar";
+import Navbar from "../components/CloudDeskERCMC/Navbar";
+import Hero from "../components/CloudDeskERCMC/Hero";
+import Fees from "../components/CloudDeskERCMC/Fees";
 import {
-  ArrowRight,
-  BadgeCheck,
-  BookOpenCheck,
-  Building2,
-  CalendarClock,
-  CheckCircle2,
-  ClipboardCheck,
-  FileCheck2,
-  FileSearch,
-  Landmark,
+  ChevronDown,
+  Linkedin,
+  Twitter,
+  Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  Phone,
   Mail,
   MapPin,
-  Phone,
-  ReceiptText,
-  ShieldCheck,
-  Sparkles,
-  Target
+  Check,
+  FileOutput,
+  HandCoins,
+  RefreshCcw,
+  CheckCircle,
+  ChevronRight,
+  Laptop,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskERCMC/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskERCMC/ModalEnroll";
-import QuickForm from "../components/CloudDeskERCMC/QuickForm";
-
-const HIGHLIGHTS = [
-  "e-RCMC consultant India",
-  "DGFT e-RCMC filing, EPC mapping, and council-membership support",
-  "FIEO, APEDA, EEPC, CHEMEXCIL, SEPC, and product-to-council guidance",
-  "RCMC validity, renewal, subscription, and export-benefit readiness support"
-];
-
-const BENEFITS = [
-  "Helps exporters identify the correct Export Promotion Council or Commodity Board instead of filing with the wrong body and losing time in application correction cycles.",
-  "Supports DGFT portal filing, council-side documentation, membership logic, and product-to-council mapping so the e-RCMC is not treated like a basic one-click formality.",
-  "Improves readiness for export benefits, status planning, and downstream DGFT workflows where a valid RCMC is often expected before real commercial usage begins.",
-  "Reduces confusion around multi-product exports, FIEO versus sector-specific councils, renewal timelines, subscription continuity, and invalid-profile rejection risk."
-];
-
-const USE_CASES = [
-  {
-    title: "New exporter applying for first e-RCMC",
-    description:
-      "Useful for first-time exporters who already have an IEC and now need the correct council membership path, digital filing support, and a clear understanding of which product category drives the application."
-  },
-  {
-    title: "Wrong EPC or product-council mismatch",
-    description:
-      "Relevant where the exporter is unsure whether APEDA, FIEO, EEPC, CHEMEXCIL, SEPC, Spices Board, or another council is the right fit based on actual export products and business model."
-  },
-  {
-    title: "Multi-product or trader-exporter structure",
-    description:
-      "Important where one business handles more than one product category and needs advice on whether to hold multiple sectoral RCMCs or use a broader multi-product membership route."
-  },
-  {
-    title: "Renewal, validity, or benefit-readiness concerns",
-    description:
-      "Useful where the issue is not first registration but renewal, annual subscription continuity, or ensuring a valid RCMC remains aligned with export incentive and DGFT usage requirements."
-  }
-];
-
-const ELIGIBILITY_POINTS = [
-  "Businesses with an active IEC that need e-RCMC registration through the correct Export Promotion Council or Commodity Board.",
-  "Manufacturers, merchant exporters, and trader exporters who want to align product categories with the correct council before filing digitally on the DGFT system.",
-  "Exporters preparing for DGFT benefit-linked workflows where a valid RCMC supports credibility, compliance, and operational continuity.",
-  "Companies with multi-product export exposure, renewal needs, council-switch questions, or unclear membership structure across product lines."
-];
-
-const DOCUMENTS_REQUIRED = [
-  "Active IEC details, entity information, product profile, GST registration details where applicable, and exporter identity records used in DGFT profile validation.",
-  "Product description, HSN-based product positioning, export category details, and any supporting information needed to determine the correct EPC or board.",
-  "Digital Signature or portal access readiness where required, turnover evidence if council fee structure or slab planning depends on business size, and prior membership history if renewal is involved.",
-  "Any council communication, previous RCMC copy, rejection or deficiency messages, and subscription-related records for amendment, renewal, or correction cases."
-];
-
-const PROCESS_STEPS = [
-  {
-    title: "Council and product mapping review",
-    detail:
-      "We begin by reviewing the exporter’s product mix, export model, and DGFT profile so the correct Export Promotion Council or board path is identified before filing."
-  },
-  {
-    title: "IEC and profile readiness check",
-    detail:
-      "The exporter’s base profile is checked to confirm whether the IEC and related details are in a condition that supports clean e-RCMC application movement."
-  },
-  {
-    title: "Application and membership filing support",
-    detail:
-      "We support the DGFT-facing filing logic together with the council-membership side so the application is not approached as a disconnected portal exercise."
-  },
-  {
-    title: "Deficiency response or correction",
-    detail:
-      "If the case involves product mismatch, missing information, renewal friction, or approval-side issues, the focus shifts to clarification and correction support."
-  },
-  {
-    title: "Post-approval readiness",
-    detail:
-      "After approval, the objective is to ensure the exporter understands validity, annual membership expectations, and where the RCMC matters in related DGFT benefit workflows."
-  }
-];
-
-const TIMELINE_POINTS = [
-  "Initial council-identification and document review usually begins within 1 to 3 working days once the exporter’s product and profile records are shared.",
-  "Straightforward first-time filings typically move faster than multi-product, mismatch, or correction-led matters.",
-  "Approval timing depends on the relevant council, record quality, product clarity, and whether any council-side clarification is triggered.",
-  "Renewal or amendment matters may be faster than new registrations unless there are unresolved subscription, profile, or mapping issues."
-];
-
-const COMMON_ISSUES = [
-  {
-    title: "Exporter is unsure which council applies",
-    detail:
-      "This is one of the biggest real-world search intents behind e-RCMC queries because the filing path depends on actual product and business structure, not just on the exporter’s broad industry label."
-  },
-  {
-    title: "IEC exists, but profile readiness is weak",
-    detail:
-      "An IEC alone is not enough if the profile details, product positioning, or supporting records are not in a condition that supports clean filing."
-  },
-  {
-    title: "Multi-product exports create council ambiguity",
-    detail:
-      "The exporter may need to decide between FIEO and sector-specific councils, or between a single route and multiple memberships, depending on commercial reality."
-  },
-  {
-    title: "RCMC is treated only as a certificate, not a workflow asset",
-    detail:
-      "Businesses often underestimate how RCMC validity, membership continuity, and council selection affect later benefit use and export operations."
-  }
-];
-
 const FAQS = [
   {
     question: "What is e-RCMC?",
     answer:
-      "e-RCMC is the digital Registration Cum Membership Certificate workflow through which an exporter obtains membership with the relevant Export Promotion Council or Commodity Board under the DGFT framework."
+      "e-RCMC is the digital Registration Cum Membership Certificate workflow through which an exporter obtains membership with the relevant Export Promotion Council or Commodity Board under the DGFT framework.",
   },
   {
     question: "Is RCMC mandatory for every exporter?",
     answer:
-      "Not every export shipment stops without it, but a valid RCMC is often important where exporters want to align themselves properly with DGFT benefit-linked and council-linked workflows."
+      "Not every export shipment stops without it, but a valid RCMC is often important where exporters want to align themselves properly with DGFT benefit-linked and council-linked workflows.",
   },
   {
     question: "Can I apply for e-RCMC without an IEC?",
     answer:
-      "No. A valid and active IEC is the base requirement because the e-RCMC process depends on exporter profile identity already existing within the DGFT ecosystem."
+      "No. A valid and active IEC is the base requirement because the e-RCMC process depends on exporter profile identity already existing within the DGFT ecosystem.",
   },
   {
     question: "How do I know which EPC or board is correct?",
     answer:
-      "The right council depends on your actual product category, export model, and whether you are better served by a sector-specific body or a broader multi-product route such as FIEO."
+      "The right council depends on your actual product category, export model, and whether you are better served by a sector-specific body or a broader multi-product route such as FIEO.",
   },
   {
     question: "How long is an e-RCMC valid?",
     answer:
-      "Validity generally follows the policy and council framework in force, but exporters should separately pay attention to annual membership and subscription continuity so the certificate remains operationally useful."
+      "Validity generally follows the policy and council framework in force, but exporters should separately pay attention to annual membership and subscription continuity so the certificate remains operationally useful.",
   },
   {
     question: "Can one exporter need more than one RCMC?",
     answer:
-      "Yes, depending on the product mix, council-specific positioning, and whether the exporter uses multiple sectoral categories that make separate membership commercially or procedurally sensible."
-  }
-];
-
-const GOVERNMENT_REFERENCES = [
-  {
-    label: "DGFT Portal",
-    href: "https://www.dgft.gov.in/CP/"
+      "Yes, depending on the product mix, council-specific positioning, and whether the exporter uses multiple sectoral categories that make separate membership commercially or procedurally sensible.",
   },
-  {
-    label: "DGFT e-RCMC Resources",
-    href: "https://www.dgft.gov.in/CP/?opt=e-rcmc"
-  },
-  {
-    label: "Ministry of Commerce and Industry",
-    href: "https://www.commerce.gov.in/"
-  },
-  {
-    label: "FIEO",
-    href: "https://www.fieo.org/"
-  }
-];
-
-const RELATED_LINKS = [
-  {
-    href: "/services/import-export-code/",
-    title: "IEC Registration Support",
-    description:
-      "Useful because IEC readiness is the foundation for e-RCMC filing and exporter identity on the DGFT side."
-  },
-  {
-    href: "/services/advance-authorisation/",
-    title: "Advance Authorisation Support",
-    description:
-      "Relevant where exporters want RCMC readiness aligned with broader DGFT benefit usage and scheme planning."
-  },
-  {
-    href: "/services/rodtep-scheme",
-    title: "RoDTEP Support",
-    description:
-      "Helpful where exporters are preparing for incentive-linked workflows and want the right compliance groundwork around council registration."
-  },
-  {
-    href: "/services/star-export-house",
-    title: "Star Export House Support",
-    description:
-      "Important for exporters planning long-term DGFT positioning, recognition, and structured export-growth support."
-  }
-];
-
-const SECTION_LINKS = [
-  { href: "#overview", label: "Overview" },
-  { href: "#eligibility", label: "Eligibility" },
-  { href: "#documents", label: "Documents" },
-  { href: "#process", label: "Process" },
-  { href: "#faqs", label: "FAQs" }
 ];
 
 const CloudDeskERCMC = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
-    type: ""
+    type: "",
   });
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
-  };
 
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <>
       <Helmet>
@@ -285,7 +118,7 @@ const CloudDeskERCMC = () => {
                 name: "e-RCMC Consultant India | EXIMINQ",
                 description:
                   "Support for DGFT e-RCMC registration, EPC mapping, council selection, renewal, and export benefit readiness.",
-                inLanguage: "en-IN"
+                inLanguage: "en-IN",
               },
               {
                 "@type": "BreadcrumbList",
@@ -296,21 +129,21 @@ const CloudDeskERCMC = () => {
                     "@type": "ListItem",
                     position: 1,
                     name: "Home",
-                    item: "https://eximinq.in/"
+                    item: "https://eximinq.in/",
                   },
                   {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "e-RCMC Registration",
-                    item: "https://eximinq.in/services/e-rcmc-registration"
-                  }
-                ]
+                    item: "https://eximinq.in/services/e-rcmc-registration",
+                  },
+                ],
               },
               {
                 "@type": "Service",
@@ -321,40 +154,36 @@ const CloudDeskERCMC = () => {
                 provider: {
                   "@type": "Organization",
                   name: "EXIMINQ",
-                  url: "https://eximinq.in/"
+                  url: "https://eximinq.in/",
                 },
                 areaServed: {
                   "@type": "Country",
-                  name: "India"
+                  name: "India",
                 },
                 description:
-                  "Support for DGFT e-RCMC registration, Export Promotion Council mapping, product-to-council identification, renewal, subscription continuity, and export benefit readiness."
+                  "Support for DGFT e-RCMC registration, Export Promotion Council mapping, product-to-council identification, renewal, subscription continuity, and export benefit readiness.",
               },
               {
                 "@type": "FAQPage",
-                "@id":
-                  "https://eximinq.in/services/e-rcmc-registration#faq",
+                "@id": "https://eximinq.in/services/e-rcmc-registration#faq",
                 mainEntity: FAQS.map((faq) => ({
                   "@type": "Question",
                   name: faq.question,
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: faq.answer
-                  }
-                }))
-              }
-            ]
+                    text: faq.answer,
+                  },
+                })),
+              },
+            ],
           })}
         </script>
       </Helmet>
-
-      <div className="min-h-screen bg-slate-50 text-slate-900">
-        <MainNavbar
-          scrolled={scrolled}
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-          setShowEnrollModal={setShowEnrollModal}
-        />
+      <div className="bg-slate-50 text-slate-800">
+        {/* Dynamic Sections */}
+        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
 
         <ModalEnroll
           show={showEnrollModal.open}
@@ -362,494 +191,1093 @@ const CloudDeskERCMC = () => {
           onClose={() => setShowEnrollModal({ open: false, type: "" })}
           onSubmit={handleEnrollmentSubmit}
         />
+        {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
+        <section id="about" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                What is E-RCMC?
+              </h2>
+              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+            </div>
+            <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
+              <p className="mb-4">
+                The{" "}
+                <strong>Registration Cum Membership Certificate (RCMC)</strong>{" "}
+                is a membership certificate issued by Export Promotion Councils
+                (EPCs) or Commodity Boards. As per the Foreign Trade Policy, an
+                exporter must obtain an RCMC to avail of benefits under schemes
+                like{" "}
+                <strong>RoDTEP, RoSCTL, Advance Authorization, or EPCG</strong>.
+              </p>
+              <p className="mb-4">
+                Recently, DGFT introduced the{" "}
+                <strong>
+                  Common Digital Platform for Issuance of RCMC (E-RCMC)
+                </strong>
+                . Now, exporters do not need to file physical applications. The
+                entire process, from application to renewal, is handled online
+                through the DGFT portal.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section id="panels" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                All Councils & Boards
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Comprehensive Panel Guide
+              </h2>
+              <p className="text-slate-500 mt-2">
+                Categorized list of all 30+ Export Promotion Councils and
+                Commodity Boards in India.
+              </p>
+            </div>
 
-        <main className="overflow-hidden">
-          <section className="bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.18),_transparent_38%),linear-gradient(135deg,#f0fdf4_0%,#ffffff_45%,#eff6ff_100%)] pt-28 pb-16 md:pt-32 md:pb-20">
-            <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-[1.2fr_0.8fr] md:px-8">
-              <div>
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm">
-                  <Sparkles className="h-4 w-4" />
-                  DGFT e-RCMC, EPC Mapping, FIEO and Sectoral Council Support
+            {/* PANEL CARDS */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {/* GENERAL & SERVICES */}
+              <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border border-slate-100">
+                <div className="bg-slate-800 p-4 text-white flex justify-between items-center">
+                  <h3 className="font-bold">General & Services</h3>
+                  <i className="fas fa-briefcase opacity-50"></i>
                 </div>
+                <div className="p-6">
+                  <ul className="space-y-3 text-sm text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
+                      <strong>FIEO</strong> (Multi-Product/Trader)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
+                      <strong>SEPC</strong> (Services EPC)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
+                      <strong>PEPC</strong> (Project Exports)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
+                      <strong>EIC</strong> (Export Inspection Council)
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-                <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-slate-950 md:text-6xl">
-                  e-RCMC Consultant India for DGFT Registration and Export
-                  Promotion Council Mapping
-                </h1>
+              {/* ENGINEERING */}
+              <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border border-slate-100">
+                <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
+                  <h3 className="font-bold">Engineering & Tech</h3>
+                  <i className="fas fa-cogs opacity-50"></i>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3 text-sm text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <strong>EEPC India</strong> (Engineering)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <strong>ESC</strong> (Electronics & Software)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <strong>TEPC</strong> (Telecom Equipment)
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-                <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
-                  Get structured support for e-RCMC registration, correct EPC
-                  selection, DGFT filing, renewal, subscription continuity, and
-                  export-benefit readiness across India.
+              {/* AGRICULTURE */}
+              <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border border-slate-100">
+                <div className="bg-green-600 p-4 text-white flex justify-between items-center">
+                  <h3 className="font-bold">Agriculture & Food</h3>
+                  <i className="fas fa-leaf opacity-50"></i>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3 text-sm text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <strong>APEDA</strong>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      Spices Board
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      Tea Board
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      Coffee Board
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      Rubber Board
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      Tobacco Board
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      Coconut Board
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* TEXTILES */}
+              <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border border-slate-100">
+                <div className="bg-pink-600 p-4 text-white flex justify-between items-center">
+                  <h3 className="font-bold">Textiles & Apparel</h3>
+                  <i className="fas fa-tshirt opacity-50"></i>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3 text-sm text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      <strong>AEPC</strong> (Garments)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      <strong>TEXPROCIL</strong> (Cotton)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      <strong>MATEXIL</strong>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      <strong>HEPC</strong>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      <strong>CEPC</strong>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      <strong>WWEPC</strong>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      <strong>ISEPC</strong>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
+                      Jute Board
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* CHEMICALS */}
+              <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border border-slate-100">
+                <div className="bg-yellow-600 p-4 text-white flex justify-between items-center">
+                  <h3 className="font-bold">Chem, Pharma & Plastics</h3>
+                  <i className="fas fa-flask opacity-50"></i>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3 text-sm text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      CHEMEXCIL
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      PHARMEXCIL
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      PLEXCONCIL
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      CAPEXIL
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      SHEFEXIL
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* LIFESTYLE */}
+              <div className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden border border-slate-100">
+                <div className="bg-purple-600 p-4 text-white flex justify-between items-center">
+                  <h3 className="font-bold">Lifestyle & Specialized</h3>
+                  <i className="fas fa-gem opacity-50"></i>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3 text-sm text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      GJEPC
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      CLE
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      EPCH
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      SGEPC
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      MPEDA
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      CEPC
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      IOPEPC
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* HSN TO COUNCIL TABLE */}
+            <div
+              id="hsn-guide"
+              className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
+            >
+              <div className="bg-brand-900 text-white p-4">
+                <h3 className="font-bold text-lg">
+                  Master HSN to Council Mapping (Comprehensive List)
+                </h3>
+              </div>
+
+              <div className="overflow-x-auto max-h-[600px]">
+                <table className="w-full text-sm text-left text-slate-600">
+                  <thead className="text-xs text-slate-700 uppercase bg-slate-100 sticky top-0 z-10 shadow-sm">
+                    <tr>
+                      <th className="px-6 py-3">Industry / Sector</th>
+                      <th className="px-6 py-3">Product Category & HSN Code</th>
+                      <th className="px-6 py-3">
+                        Relevant Council (EPC) / Board
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody className="divide-y divide-slate-100">
+                    {/* <!-- Agri & Food --> */}
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Agriculture & Food
+                      </td>
+                      <td className="px-6 py-4">
+                        Fruits, Veg, Rice, Wheat, Meat, Dairy, Pickles,
+                        Beverages (Ch 02, 04, 07, 08, 10-12, 16-23)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">APEDA</span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Marine Products
+                      </td>
+                      <td className="px-6 py-4">
+                        Fish, Crustaceans, Molluscs (Ch 03, 16)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">MPEDA</span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Spices
+                      </td>
+                      <td className="px-6 py-4">
+                        Spices, Curry Powders, Spice Oils (Ch 09)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          Spices Board
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Tea / Coffee
+                      </td>
+                      <td className="px-6 py-4">
+                        Tea (Ch 0902) / Coffee (Ch 0901)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          Tea Board / Coffee Board
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Specialty Agri
+                      </td>
+                      <td className="px-6 py-4">
+                        Rubber (Ch 40), Tobacco (Ch 24), Cashew (Ch 0801),
+                        Oilseeds (Ch 12)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          Rubber Board / Tobacco Board / CEPC (Cashew) / IOPEPC
+                        </span>
+                      </td>
+                    </tr>
+
+                    {/* <!-- Chemicals & Pharma --> */}
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Chemicals
+                      </td>
+                      <td className="px-6 py-4">
+                        Dyes, Organic/Inorganic Chemicals, Soaps, Agro Chemicals
+                        (Ch 28, 29, 32, 34, 38)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          CHEMEXCIL
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Pharmaceuticals
+                      </td>
+                      <td className="px-6 py-4">
+                        Drugs, APIs, Vaccines, Herbals, Surgical Dressings (Ch
+                        30)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          PHARMEXCIL
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Plastics
+                      </td>
+                      <td className="px-6 py-4">
+                        Polymers, Plastic Goods, Packaging (Ch 39)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          PLEXCONCIL
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Allied Products
+                      </td>
+                      <td className="px-6 py-4">
+                        Books, Paper, Glass, Ceramics, Refractories, Tyres (Ch
+                        48, 49, 69, 70)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          CAPEXIL
+                        </span>
+                      </td>
+                    </tr>
+
+                    {/* <!-- Engineering & Electronics --> */}
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Engineering
+                      </td>
+                      <td className="px-6 py-4">
+                        Steel, Machinery, Auto Parts, Tools, Med Devices (Ch
+                        72-84, 90)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          EEPC India
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Electronics & Telecom
+                      </td>
+                      <td className="px-6 py-4">
+                        Computers, Software, Telecom Equipment (Ch 85)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          ESC / TEPC
+                        </span>
+                      </td>
+                    </tr>
+
+                    {/* <!-- Textiles --> */}
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Apparel / Garments
+                      </td>
+                      <td className="px-6 py-4">
+                        Readymade Garments (Knitted or Woven) (Ch 61, 62)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          AEPC (Apparel EPC)
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Cotton Textiles
+                      </td>
+                      <td className="px-6 py-4">
+                        Cotton Yarn, Fabrics, Made-ups (Ch 52)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          TEXPROCIL
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Synthetic / Rayon
+                      </td>
+                      <td className="px-6 py-4">
+                        Man-made Fibres, Polyester, Viscose (Ch 54, 55)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          MATEXIL (Formerly SRTEPC)
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Handloom
+                      </td>
+                      <td className="px-6 py-4">
+                        Handloom Fabrics and Products
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">HEPC</span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Wool / Silk / Jute
+                      </td>
+                      <td className="px-6 py-4">
+                        Wool (Ch 51), Silk (Ch 50), Jute (Ch 53)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          WWEPC / ISEPC / Jute Board
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Carpets
+                      </td>
+                      <td className="px-6 py-4">
+                        Handmade/Machine-made Carpets, Rugs (Ch 57)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          CEPC (Carpet EPC)
+                        </span>
+                      </td>
+                    </tr>
+
+                    {/* <!-- Lifestyle & Others --> */}
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Leather
+                      </td>
+                      <td className="px-6 py-4">
+                        Leather Footwear, Bags, Garments, Saddlery (Ch 41, 42,
+                        64)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          CLE (Council for Leather Exports)
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Gems & Jewellery
+                      </td>
+                      <td className="px-6 py-4">
+                        Diamonds, Gold, Silver, Imitation Jewellery (Ch 71)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">GJEPC</span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Handicrafts
+                      </td>
+                      <td className="px-6 py-4">
+                        Artware, Woodware, Decor, Shawls (Ch 44, 46, 96)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">EPCH</span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Sports Goods
+                      </td>
+                      <td className="px-6 py-4">
+                        Sports Equipment, Toys (Ch 95)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">SGEPC</span>
+                      </td>
+                    </tr>
+                    <tr className="bg-white hover:bg-slate-50">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Forest / Shellac
+                      </td>
+                      <td className="px-6 py-4">
+                        Lac, Shellac, Vegetable Saps, Guar Gum (Ch 13, 14)
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          SHEFEXIL
+                        </span>
+                      </td>
+                    </tr>
+
+                    {/* <!-- Services & General --> */}
+                    <tr className="bg-slate-50 hover:bg-slate-100 border-t-2 border-slate-200">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Services Sector
+                      </td>
+                      <td className="px-6 py-4">
+                        Consultancy, Healthcare, Education, Hotel, Logistics, IT
+                        Services
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">
+                          SEPC (Services EPC)
+                        </span>
+                      </td>
+                    </tr>
+                    <tr className="bg-slate-50 hover:bg-slate-100">
+                      <td className="px-6 py-4 font-bold text-slate-800">
+                        Multi-Product / General
+                      </td>
+                      <td className="px-6 py-4">
+                        Merchants exporting multiple categories or products not
+                        covered above
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-brand-700 font-bold">FIEO</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="document" className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* LEFT SIDE – DOCUMENT LIST */}
+              <div>
+                <h2 className="text-3xl font-bold text-slate-900 mb-6">
+                  Documents for E-RCMC
+                </h2>
+
+                <p className="text-slate-600 mb-8">
+                  The documentation varies slightly by council, but the core
+                  requirements on the DGFT portal remain consistent.
                 </p>
 
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                  {HIGHLIGHTS.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white/90 px-4 py-4 shadow-sm"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-600" />
-                      <p className="text-sm font-medium leading-6 text-slate-700">
-                        {item}
-                      </p>
+                <ul className="space-y-4">
+                  {/* IEC & PAN */}
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="text-green-500 mt-1" size={22} />
+                    <div>
+                      <strong className="block text-slate-800">
+                        IEC & PAN
+                      </strong>
+                      <span className="text-sm text-slate-500">
+                        Updated Import Export Code and Business PAN.
+                      </span>
                     </div>
-                  ))}
-                </div>
+                  </li>
 
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  {/* GST Certificate */}
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="text-green-500 mt-1" size={22} />
+                    <div>
+                      <strong className="block text-slate-800">
+                        GST Certificate
+                      </strong>
+                      <span className="text-sm text-slate-500">
+                        GST Registration certificate.
+                      </span>
+                    </div>
+                  </li>
+
+                  {/* MSME */}
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="text-green-500 mt-1" size={22} />
+                    <div>
+                      <strong className="block text-slate-800">
+                        MSME / Udyam (Optional)
+                      </strong>
+                      <span className="text-sm text-slate-500">
+                        Helpful for getting concessional membership fees in some
+                        councils.
+                      </span>
+                    </div>
+                  </li>
+
+                  {/* Financial Data */}
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="text-green-500 mt-1" size={22} />
+                    <div>
+                      <strong className="block text-slate-800">
+                        Financial Data
+                      </strong>
+                      <span className="text-sm text-slate-500">
+                        Export turnover of the preceding financial year (CA
+                        Certificate may be required).
+                      </span>
+                    </div>
+                  </li>
+
+                  {/* Product List */}
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="text-green-500 mt-1" size={22} />
+                    <div>
+                      <strong className="block text-slate-800">
+                        Product List
+                      </strong>
+                      <span className="text-sm text-slate-500">
+                        List of major HS Codes you intend to export.
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              {/* RIGHT SIDE – ONLINE PROCESS BOX */}
+              <div className="bg-brand-50 rounded-2xl p-8 border border-brand-100 flex items-center justify-center text-center">
+                <div>
+                  <Laptop className="text-brand-300 mx-auto mb-4" size={60} />
+
+                  <h3 className="text-xl font-bold text-brand-900 mb-2">
+                    100% Online Process
+                  </h3>
+
+                  <p className="text-slate-600 mb-6">
+                    No physical file submission. Use your DGFT Digital Signature
+                    to sign and submit the application.
+                  </p>
+
                   <a
-                    href="#quick-check"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-4 text-base font-semibold text-white transition hover:bg-slate-800"
+                    href="#process"
+                    className="inline-block bg-brand-600 text-white font-bold py-2 px-6 rounded hover:bg-brand-700 transition"
                   >
-                    Find the Right Council
-                    <ArrowRight className="h-4 w-4" />
+                    Get Assistance
                   </a>
-                  <Link
-                    to="/contact-us"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-6 py-4 text-base font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700"
-                  >
-                    Speak With an e-RCMC Expert
-                  </Link>
-                </div>
-
-                <div className="mt-10 grid gap-4 text-sm text-slate-600 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
-                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
-                      <Phone className="h-4 w-4 text-emerald-600" />
-                      Call Us
-                    </div>
-                    <a href="tel:+917400096950" className="hover:text-emerald-700">
-                      +91 74000 96950
-                    </a>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
-                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
-                      <Mail className="h-4 w-4 text-emerald-600" />
-                      Email
-                    </div>
-                    <a
-                      href="mailto:clouddesk@eximinq.in"
-                      className="hover:text-emerald-700"
-                    >
-                      clouddesk@eximinq.in
-                    </a>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
-                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
-                      <MapPin className="h-4 w-4 text-emerald-600" />
-                      Coverage
-                    </div>
-                    <p>India-wide support for DGFT e-RCMC, EPC selection, and renewal workflows.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div id="quick-check" className="self-start">
-                <div className="rounded-[28px] border border-slate-200 bg-white/95 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.10)]">
-                  <QuickForm />
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="sticky top-[76px] z-20 border-y border-slate-200 bg-white/95 backdrop-blur">
-            <div className="mx-auto flex max-w-7xl gap-3 overflow-x-auto px-4 py-4 md:px-8">
-              {SECTION_LINKS.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700"
-                >
-                  {item.label}
+        {/* Dynamic Fees Section */}
+        <Fees setShowEnrollModal={setShowEnrollModal} />
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Why CloudDesk for E-RCMC Registration?
+              </h2>
+              <p className="text-slate-500">
+                Most exporters pick the wrong council or fail the technical
+                DGFT-EPC sync. CloudDesk ensures you are mapped to the council
+                that gives you the most benefits
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Feature 1 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                  <AlertTriangle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    1. Strategic EPC Mapping
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    There are over{" "}
+                    <strong>35 Export Promotion Councils (EPCs)</strong> and
+                    Commodity Boards. Picking the wrong one (e.g., registering
+                    with FIEO when you should be with APEDA) can disqualify you
+                    from product-specific subsidies.
+                    <strong>CloudDesk’s</strong> "Council-Match" Algorithm
+                    analyzes your HSN codes and recommends the specific EPC that
+                    maximizes your ROI.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                  <CheckCircle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    2. The "Unified Profile" Sync
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    The <strong>e-RCMC </strong>is filed on the DGFT portal but
+                    approved by the individual EPC. This "cross-talk" often
+                    fails due to digital signature mismatches.
+                    <strong>CloudDesk</strong> acts as the Technical Liaison,
+                    ensuring your DGFT profile data perfectly aligns with the
+                    EPC’s internal membership requirements before you pay the
+                    fee.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                  <Building size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    3. Automatic Benefit Trigger
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Obtaining the RCMC is just Step 1.{" "}
+                    <strong>CloudDesk’s </strong> dashboard automatically alerts
+                    you to the Incentive Schemes (like RoDTEP, Advance
+                    Authorisation, or MAI) that your specific RCMC now unlocks.
+                    We don't just give you the certificate; we show you how to
+                    use it.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                  <ShieldUser size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    4. Membership Ledger Management
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    EPC fees vary based on your export turnover. Many exporters
+                    overpay. <strong>CloudDesk’s </strong>Fee Auditor calculates
+                    your exact subscription slab based on your past year’s
+                    shipping bills, ensuring you pay the minimum required
+                    membership fee.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-3xl">
+            {/* Heading */}
+            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+              Frequently Asked Questions
+            </h2>
+
+            {/* FAQ Items */}
+            <div className="space-y-4">
+              {/* Question 1 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Is RCMC mandatory for every exporter?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Technically, you can export without an RCMC. However, it is
+                  mandatory if you want to claim any benefit under the Foreign
+                  Trade Policy (FTP), such as duty remissions (RoDTEP),
+                  duty-free imports (Advance Auth), or even just to participate
+                  in an international trade fair at a subsidized rate.
+                </p>
+              </details>
+
+              {/* Question 2 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  I export both Spices and Engineering goods. Do I need two
+                  RCMCs?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  You have two options: (1) Obtain separate RCMCs from the
+                  Spices Board and EEPC, or (2) Obtain a single "Multi-Product"
+                  RCMC from FIEO (Federation of Indian Export Organisations).
+                  CloudDesk evaluates your volume in each category to advise
+                  which path is more cost-effective.
+                </p>
+              </details>
+
+              {/* Question 3 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is the validity of an e-RCMC?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  An RCMC is typically valid for 5 financial years. It begins on
+                  April 1st of the year it was issued and ends on March 31st of
+                  the fifth year. Note: You must still pay the "Annual
+                  Membership Subscription" to the council to keep it active.
+                </p>
+              </details>
+
+              {/* Question 4 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I apply for RCMC without an IEC?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. An active and updated IEC (Import-Export Code) is the
+                  absolute prerequisite. The e-RCMC application pulls all your
+                  company data directly from your IEC profile.
+                </p>
+              </details>
+
+              {/* Question 5 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is the "ANF 2C" form?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  ANF 2C is the specific application form for RCMC. Under the
+                  new "e-RCMC" system, this form is completely digital on the
+                  DGFT portal. You no longer need to send physical papers to the
+                  council offices.
+                </p>
+              </details>
+
+              {/* Question 6 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What documents are required for e-RCMC in 2026?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  (1) Digital Signature (Class 3), (2) Updated IEC Profile, (3)
+                  GST Registration, (4) CA Certificate certifying your export
+                  turnover for the previous year (if you are an existing
+                  exporter).
+                </p>
+              </details>
+
+              {/* Question 7 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  How much does it cost?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  The fee consists of two parts: a one-time Admission Fee
+                  (usually ₹2,000 - ₹5,000) and an Annual Subscription based on
+                  your turnover (ranging from ₹6,000 to ₹75,000+). CloudDesk
+                  provides a fee-calculator based on your last year's FOB value.
+                </p>
+              </details>
+
+              {/* Question 8 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What happens if my RCMC expires while my cargo is at sea?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  You can still clear the goods, but you will not be able to
+                  claim the incentives (like RoDTEP) for that specific Shipping
+                  Bill. The system checks for a "Valid RCMC" at the time the
+                  Shipping Bill is generated. CloudDesk’s Expiry Shield prevents
+                  this by alerting you 60 days before the 5-year term ends.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
+          <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+            {/* BRAND */}
+            <div>
+              <a className="text-2xl font-bold text-white mb-4 block">
+                EXIMINQ
+              </a>
+
+              <p className="text-sm mb-6">
+                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
+                Logistics compliance.
+              </p>
+
+              <div className="flex gap-4">
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Linkedin size={18} />
                 </a>
-              ))}
-            </div>
-          </section>
-
-          <section id="overview" className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-            <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-600">
-                  <Target className="h-4 w-4" />
-                  Service Overview
-                </div>
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Why exporters search for e-RCMC registration support
-                </h2>
-                <div className="mt-6 space-y-5 text-base leading-8 text-slate-600">
-                  <p>
-                    Exporters usually reach this page when they already know that
-                    an IEC alone is not enough for their next stage of trade
-                    growth. They need the right council relationship, the right
-                    product mapping, and a valid DGFT-facing e-RCMC path that
-                    supports export benefits, policy workflows, and long-term
-                    exporter positioning.
-                  </p>
-                  <p>
-                    This page is built to rank for high-intent searches around{" "}
-                    <strong>e-RCMC consultant India</strong>,{" "}
-                    <strong>RCMC registration</strong>,{" "}
-                    <strong>DGFT e-RCMC</strong>,{" "}
-                    <strong>EPC mapping</strong>,{" "}
-                    <strong>FIEO RCMC</strong>, and{" "}
-                    <strong>APEDA or EEPC council selection</strong> because
-                    those are the real exporter decisions behind the query.
-                  </p>
-                  <p>
-                    It also addresses the deeper commercial question: not just
-                    how to obtain the certificate, but how to choose the correct
-                    council structure so the business does not lose time, pay the
-                    wrong membership, or weaken its benefit readiness later.
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid gap-5">
-                <div className="rounded-[28px] border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
-                  <div className="mb-3 flex items-center gap-3 text-emerald-700">
-                    <ShieldCheck className="h-5 w-5" />
-                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
-                      Outcome Focus
-                    </span>
-                  </div>
-                  <p className="text-sm leading-7 text-emerald-900">
-                    Correct council identification, cleaner DGFT filing, lower
-                    rejection risk, and better alignment with downstream export
-                    benefit and compliance workflows.
-                  </p>
-                </div>
-                <div className="rounded-[28px] border border-sky-200 bg-sky-50 p-6 shadow-sm">
-                  <div className="mb-3 flex items-center gap-3 text-sky-700">
-                    <Landmark className="h-5 w-5" />
-                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
-                      Search Intent Covered
-                    </span>
-                  </div>
-                  <p className="text-sm leading-7 text-sky-900">
-                    e-RCMC registration, RCMC renewal, council selection, FIEO
-                    versus sectoral EPC, product mapping, subscription continuity,
-                    and exporter benefit readiness.
-                  </p>
-                </div>
-                <div className="rounded-[28px] border border-violet-200 bg-violet-50 p-6 shadow-sm">
-                  <div className="mb-3 flex items-center gap-3 text-violet-700">
-                    <BookOpenCheck className="h-5 w-5" />
-                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
-                      E-E-A-T Angle
-                    </span>
-                  </div>
-                  <p className="text-sm leading-7 text-violet-900">
-                    The page uses practical exporter decision points, official
-                    references, and related DGFT service links to improve
-                    expertise and trust signals.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  What this page helps exporters solve
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  These use cases make the page more complete for both real users
-                  and Google’s indexing systems.
-                </p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                {USE_CASES.map((item) => (
-                  <article
-                    key={item.title}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 shadow-sm"
-                  >
-                    <div className="mb-4 inline-flex rounded-full bg-white px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-                      Use Case
-                    </div>
-                    <h3 className="text-xl font-black text-slate-950">
-                      {item.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-7 text-slate-600">
-                      {item.description}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-            <div className="grid gap-6 lg:grid-cols-2">
-              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-700">
-                  <BadgeCheck className="h-4 w-4" />
-                  Key Benefits
-                </div>
-                <div className="space-y-4">
-                  {BENEFITS.map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-1 h-5 w-5 flex-none text-emerald-600" />
-                      <p className="text-sm leading-7 text-slate-600">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-rose-700">
-                  <FileSearch className="h-4 w-4" />
-                  Common Problems
-                </div>
-                <div className="space-y-5">
-                  {COMMON_ISSUES.map((item) => (
-                    <div
-                      key={item.title}
-                      className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
-                    >
-                      <h3 className="text-lg font-bold text-slate-900">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-7 text-slate-600">
-                        {item.detail}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="eligibility" className="bg-slate-950 py-16 text-white">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                  Eligibility and ideal fit
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-300">
-                  This section captures decision-stage user intent and strengthens
-                  the page’s topical completeness.
-                </p>
-              </div>
-              <div className="grid gap-5 md:grid-cols-2">
-                {ELIGIBILITY_POINTS.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-[24px] border border-white/10 bg-white/5 p-6"
-                  >
-                    <div className="flex items-start gap-3">
-                      <Building2 className="mt-1 h-5 w-5 flex-none text-cyan-300" />
-                      <p className="text-sm leading-7 text-slate-200">{item}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section id="documents" className="bg-white py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Documents and records typically required
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  Deeper document coverage improves usefulness and makes the page
-                  more complete for indexation.
-                </p>
-              </div>
-              <div className="grid gap-5 md:grid-cols-2">
-                {DOCUMENTS_REQUIRED.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-[24px] border border-slate-200 bg-slate-50 p-6"
-                  >
-                    <div className="flex items-start gap-3">
-                      <FileCheck2 className="mt-1 h-5 w-5 flex-none text-emerald-600" />
-                      <p className="text-sm leading-7 text-slate-600">{item}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section id="process" className="bg-slate-50 py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Process flow for e-RCMC registration and council mapping
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  A clear process section helps users and search engines
-                  understand the actual service workflow.
-                </p>
-              </div>
-              <div className="grid gap-6 lg:grid-cols-5">
-                {PROCESS_STEPS.map((step, index) => (
-                  <article
-                    key={step.title}
-                    className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm"
-                  >
-                    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-white">
-                      {index + 1}
-                    </div>
-                    <h3 className="text-lg font-black text-slate-950">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      {step.detail}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-                <div className="rounded-[28px] border border-slate-200 bg-slate-950 p-8 text-white shadow-sm">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
-                    <CalendarClock className="h-4 w-4" />
-                    Expected Timelines
-                  </div>
-                  <div className="space-y-4">
-                    {TIMELINE_POINTS.map((item) => (
-                      <div key={item} className="flex items-start gap-3">
-                        <ReceiptText className="mt-1 h-5 w-5 flex-none text-cyan-300" />
-                        <p className="text-sm leading-7 text-slate-200">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-8 shadow-sm">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-                    <ClipboardCheck className="h-4 w-4" />
-                    Government and ecosystem references
-                  </div>
-                  <p className="mb-5 text-sm leading-7 text-slate-600">
-                    Official reference links strengthen trust and help position
-                    the page inside the correct DGFT and export ecosystem.
-                  </p>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {GOVERNMENT_REFERENCES.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-2xl border border-slate-200 bg-white p-5 text-sm font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-slate-50 py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Related services that strengthen this page’s internal SEO cluster
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  Internal linking helps Google understand that this page belongs
-                  to a wider DGFT and exporter-readiness service cluster.
-                </p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                {RELATED_LINKS.map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className="group rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-emerald-300 hover:shadow-lg"
-                  >
-                    <div className="mb-4 inline-flex rounded-full bg-emerald-50 p-3 text-emerald-700">
-                      <ArrowRight className="h-5 w-5" />
-                    </div>
-                    <h3 className="text-lg font-black text-slate-950 group-hover:text-emerald-700">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      {item.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section id="faqs" className="bg-white py-16">
-            <div className="mx-auto max-w-5xl px-4 md:px-8">
-              <div className="mb-10 text-center">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Frequently asked questions on e-RCMC registration
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  FAQ depth improves long-tail coverage and supports stronger
-                  semantic understanding.
-                </p>
-              </div>
-              <div className="space-y-5">
-                {FAQS.map((faq) => (
-                  <article
-                    key={faq.question}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 shadow-sm"
-                  >
-                    <h3 className="text-lg font-black text-slate-950">
-                      {faq.question}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      {faq.answer}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-[linear-gradient(135deg,#022c22_0%,#065f46_55%,#1d4ed8_100%)] py-16 text-white">
-            <div className="mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-[1fr_auto] md:items-center md:px-8">
-              <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
-                  <Sparkles className="h-4 w-4" />
-                  Ready to identify the correct council?
-                </div>
-                <h2 className="max-w-3xl text-3xl font-black tracking-tight md:text-4xl">
-                  Get structured support for e-RCMC registration, council
-                  selection, renewal, and export benefit readiness.
-                </h2>
-                <p className="mt-4 max-w-2xl text-base leading-8 text-slate-200">
-                  If you are unsure which EPC applies, need a clean DGFT filing
-                  path, or want to keep your RCMC aligned with your export plans,
-                  we can help you move faster with fewer corrections.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 sm:flex-row md:flex-col">
-                <a
-                  href="tel:+917400096950"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-slate-100"
-                >
-                  <Phone className="h-4 w-4" />
-                  Call +91 74000 96950
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Twitter size={18} />
                 </a>
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-base font-semibold text-white transition hover:bg-white/15"
-                >
-                  Book an e-RCMC Review
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Facebook size={18} />
+                </a>
               </div>
             </div>
-          </section>
-        </main>
+
+            {/* QUICK LINKS */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    FIEO Registration
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    APEDA Registration
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    EEPC India
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    CHEMEXCIL
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* OTHER SERVICES */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Other Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    HSN Code Finder
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    RoDTEP Rates
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Duty Drawback
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    DGFT Public Notices
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* CONTACT */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Contact Us</h4>
+              <ul className="space-y-4 text-sm">
+                <li className="flex gap-3 items-center">
+                  <Phone size={18} className="text-brand-500" />
+                  +917400096950
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <Mail size={18} className="text-brand-500" />
+                  clouddesk@eximinq.in
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <MapPin size={18} className="text-brand-500" />
+                  Mumbai, India
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* COPYRIGHT */}
+          <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
+            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            DGFT.
+          </div>
+        </footer>
       </div>
     </>
   );

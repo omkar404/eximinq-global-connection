@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -34,7 +35,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
-
 
   const isEnroll = type === "Enroll";
   /* --------------------------------
@@ -116,7 +116,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required.";
     if (!form.email.trim()) newErrors.email = "Email is required.";
     if (!form.role) newErrors.role = "Please select your role.";
-    if (isEnroll) ;
+    if (isEnroll);
     if (isIECService && !category) {
       newErrors.category = "Please select category.";
     }
@@ -127,149 +127,147 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   /* --------------------------------
      SUBMIT FORM
   -------------------------------- */
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   const v = validate();
-//   setErrors(v);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const v = validate();
+  //   setErrors(v);
 
-//   if (Object.keys(v).length > 0) return;
-//   // setLoading(true);
+  //   if (Object.keys(v).length > 0) return;
+  //   // setLoading(true);
 
-//   // send data out if callback provided
-//   if (typeof onSubmit === "function") {
-//     onSubmit({
-//     ...form,
-//     type,
-//     category: isEnroll,
-//     issue,
-//     });
-//   }
+  //   // send data out if callback provided
+  //   if (typeof onSubmit === "function") {
+  //     onSubmit({
+  //     ...form,
+  //     type,
+  //     category: isEnroll,
+  //     issue,
+  //     });
+  //   }
 
-//   // const payload = {
-//   //   ...form,
-//   //   type,
-//   //   category,
-//   //   issue,
-//   // };
+  //   // const payload = {
+  //   //   ...form,
+  //   //   type,
+  //   //   category,
+  //   //   issue,
+  //   // };
 
-//   try {
-//     const finalType = type || "ENROLL_NOW";
+  //   try {
+  //     const finalType = type || "ENROLL_NOW";
 
-//     const payload = {
-//         ...form,
-//         type: finalType,
-//         category: isEnroll ? category : undefined,
-//         issue: isProfileUpdate ? issue : undefined,
-//       };
+  //     const payload = {
+  //         ...form,
+  //         type: finalType,
+  //         category: isEnroll ? category : undefined,
+  //         issue: isProfileUpdate ? issue : undefined,
+  //       };
 
-//       if (category) {
-//         payload.category = category;
-//       }
+  //       if (category) {
+  //         payload.category = category;
+  //       }
 
-//       if (issue) {
-//         payload.issue = issue;
-//       }    
-//       console.log("Final Payload:", payload);
+  //       if (issue) {
+  //         payload.issue = issue;
+  //       }
+  //       console.log("Final Payload:", payload);
 
- 
-//     const res = await fetch(
-//      `${process.env.REACT_APP_API_URL}/api/ad-code-registration`, 
-//       // "http://localhost:5000/api/ad-code-registration",
-//       {
-//       method: "POST",
-//       headers: {"Content-Type": "application/json",},
-//       body: JSON.stringify(payload),
-//     }
-//   );
+  //     const res = await fetch(
+  //      `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
+  //       // "http://localhost:5000/api/ad-code-registration",
+  //       {
+  //       method: "POST",
+  //       headers: {"Content-Type": "application/json",},
+  //       body: JSON.stringify(payload),
+  //     }
+  //   );
 
-//     const data = await res.json();
+  //     const data = await res.json();
 
-//     console.log("API Response:", data);
+  //     console.log("API Response:", data);
 
-//     if (res.ok) {
-//       alert("Registration submitted successfully");
-//       setForm({
-//         name: "",
-//         mobile: "",
-//         email: "",
-//         entity: "",
-//         role: "",
-//         partner: false,
-//       });
-//     } else {
-//       alert(data.message || "Submission failed");
-//     }
-//   } catch (error) {
-//     console.error("Submission error:", error);
-//     alert("Submission failed. Please try again.");
-//   } finally {
-//   setLoading(false);
-//   }
-// };
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  //     if (res.ok) {
+  //       alert("Registration submitted successfully");
+  //       setForm({
+  //         name: "",
+  //         mobile: "",
+  //         email: "",
+  //         entity: "",
+  //         role: "",
+  //         partner: false,
+  //       });
+  //     } else {
+  //       alert(data.message || "Submission failed");
+  //     }
+  //   } catch (error) {
+  //     console.error("Submission error:", error);
+  //     alert("Submission failed. Please try again.");
+  //   } finally {
+  //   setLoading(false);
+  //   }
+  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const v = validate();
-  setErrors(v);
-  if (Object.keys(v).length > 0) return;
+    const v = validate();
+    setErrors(v);
+    if (Object.keys(v).length > 0) return;
 
-  setLoading(true); // ✅ uncommented
+    setLoading(true); // ✅ uncommented
 
-  try {
-    const finalType = type || "Enroll";
+    try {
+      const finalType = type || "Enroll";
 
-    // ✅ Clean payload — all fields correctly sent
-    const payload = {
-      name:     form.name,
-      mobile:   form.mobile,
-      email:    form.email,
-      entity:   form.entity,      // ✅ Entity Name
-      role:     form.role,        // ✅ Importer/CHA/Logistics/Forwarder
-      partner:  form.partner,     // ✅ true / false
-      type:     finalType,
-      category: category || "",   // ✅ was wrongly "isEnroll" (boolean)
-      issue:    issue    || "",
-      service:  predefinedService || finalType, // ✅ service name
-    };
+      // ✅ Clean payload — all fields correctly sent
+      const payload = {
+        name: form.name,
+        mobile: form.mobile,
+        email: form.email,
+        entity: form.entity, // ✅ Entity Name
+        role: form.role, // ✅ Importer/CHA/Logistics/Forwarder
+        partner: form.partner, // ✅ true / false
+        type: finalType,
+        category: category || "", // ✅ was wrongly "isEnroll" (boolean)
+        issue: issue || "",
+        service: predefinedService || finalType, // ✅ service name
+      };
 
-    console.log("Final Payload:", payload);
+      console.log("Final Payload:", payload);
 
-    // ✅ Send to parent callback if provided
-    if (typeof onSubmit === "function") {
-      onSubmit(payload);
-    }
-
-    const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
-      //  "http://localhost:5000/api/ad-code-registration",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+      // ✅ Send to parent callback if provided
+      if (typeof onSubmit === "function") {
+        onSubmit(payload);
       }
-    );
 
-    const data = await res.json();
-    console.log("API Response:", data);
+      const res = await fetch(
+        getApiUrl("/api/ad-code-registration"),
+        //  "http://localhost:5000/api/ad-code-registration",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
 
-    if (res.ok) {
-      alert("Registration submitted successfully!");
-      resetForm();  // ✅ resets all fields
-      onClose();    // ✅ closes modal
-    } else {
-      alert(data.message || "Submission failed");
+      const data = await res.json();
+      console.log("API Response:", data);
+
+      if (res.ok) {
+        alert("Registration submitted successfully!");
+        resetForm(); // ✅ resets all fields
+        onClose(); // ✅ closes modal
+      } else {
+        alert(data.message || "Submission failed");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("Submission error:", error);
-    alert("Submission failed. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative overflow-hidden">
-        
         {/* HEADER */}
 
         <div className="bg-indigo-900 p-6 text-white flex justify-between items-start">
@@ -295,13 +293,10 @@ const handleSubmit = async (e) => {
         {/* BODY */}
 
         <div className="p-6 md:p-8 overflow-y-auto max-h-[80vh]">
-
           <form className="space-y-5" onSubmit={handleSubmit}>
-
             {/* NAME + MOBILE */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Name
@@ -349,7 +344,6 @@ const handleSubmit = async (e) => {
                   <p className="text-xs text-red-500 mt-1">{errors.mobile}</p>
                 )}
               </div>
-
             </div>
 
             {/* ENTITY NAME */}
@@ -359,8 +353,9 @@ const handleSubmit = async (e) => {
                 Entity Name
               </label>
               <div className="relative">
-                <Building className="absolute left-3 top-3 text-gray-400" 
-                size={16} 
+                <Building
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
                 />
                 <input
                   type="text"
@@ -380,8 +375,9 @@ const handleSubmit = async (e) => {
                 Email ID
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-gray-400" 
-                size={16} 
+                <Mail
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
                 />
                 <input
                   type="email"
@@ -443,7 +439,7 @@ const handleSubmit = async (e) => {
                   </select> */}
                 </div>
               </>
-            )}            
+            )}
 
             {/* IEC CATEGORY */}
 
@@ -466,9 +462,7 @@ const handleSubmit = async (e) => {
                 </select>
 
                 {errors.category && (
-                  <p className="text-xs text-red-500 mt-1">
-                    {errors.category}
-                  </p>
+                  <p className="text-xs text-red-500 mt-1">{errors.category}</p>
                 )}
               </div>
             )}
@@ -508,7 +502,7 @@ const handleSubmit = async (e) => {
                         </span>
                       </label>
                     );
-                  }
+                  },
                 )}
               </div>
 
@@ -521,7 +515,6 @@ const handleSubmit = async (e) => {
 
             <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
               <label className="flex items-start cursor-pointer">
-
                 <input
                   type="checkbox"
                   name="partner"
@@ -533,10 +526,10 @@ const handleSubmit = async (e) => {
                 <span className="ml-3 text-sm text-gray-800">
                   I am interested in being a
                   <span className="font-bold text-teal-700">
-                    {" "}Partner with EXIMINQ CLOUDDESK
+                    {" "}
+                    Partner with EXIMINQ CLOUDDESK
                   </span>
                 </span>
-
               </label>
             </div>
 
@@ -549,7 +542,6 @@ const handleSubmit = async (e) => {
             >
               {loading ? "Submitting..." : "Submit Enrollment"}
             </button>
-
           </form>
         </div>
       </div>

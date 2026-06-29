@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RefreshCw } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 const QuickForm = () => {
   const [activeTab, setActiveTab] = useState("SB"); // "SB" or "IGST"
@@ -86,7 +87,7 @@ const QuickForm = () => {
       }
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/igst-refund`,
+        getApiUrl("/api/igst-refund"),
         // "http://localhost:5000/api/igst-refund",
         {
           method: "POST",

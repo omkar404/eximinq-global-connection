@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
@@ -71,7 +72,7 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/factory-stuffing`,
+        getApiUrl("/api/factory-stuffing"),
         // "http://localhost:5000/api/factory-stuffing", // ✅ http:// is required
         {
           method: "POST",

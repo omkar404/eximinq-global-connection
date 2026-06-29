@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -97,7 +98,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         role: form.role,
         partner: form.partner,
         type: finalType,
-        category: category || "",   // will be empty for fee services
+        category: category || "", // will be empty for fee services
         issue: issue || "",
         service: predefinedService || finalType,
       };
@@ -109,13 +110,13 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/interest-equalisation-scheme`,
+        getApiUrl("/api/interest-equalisation-scheme"),
         // "http://localhost:5000/api/interest-equalisation-scheme",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       const data = await res.json();
@@ -211,7 +212,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 Entity Name
               </label>
               <div className="relative">
-                <Building className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Building
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="text"
                   name="entity"
@@ -229,7 +233,10 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 Email ID
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
+                <Mail
+                  className="absolute left-3 top-3 text-gray-400"
+                  size={16}
+                />
                 <input
                   type="email"
                   name="email"
@@ -291,31 +298,33 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 I am a:
               </label>
               <div className="grid grid-cols-2 gap-3">
-                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map((role) => {
-                  const selected = form.role === role;
-                  return (
-                    <label
-                      key={role}
-                      className={`flex items-center p-3 border rounded-lg cursor-pointer ${
-                        selected
-                          ? "border-teal-500 bg-teal-50"
-                          : "border-gray-200 hover:bg-indigo-50"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="role"
-                        value={role}
-                        checked={form.role === role}
-                        onChange={handleChange}
-                        className="w-4 h-4 text-teal-600"
-                      />
-                      <span className="ml-2 text-sm font-medium text-gray-700">
-                        {role}
-                      </span>
-                    </label>
-                  );
-                })}
+                {["Importer / Exporter", "CHA", "Logistics", "Forwarder"].map(
+                  (role) => {
+                    const selected = form.role === role;
+                    return (
+                      <label
+                        key={role}
+                        className={`flex items-center p-3 border rounded-lg cursor-pointer ${
+                          selected
+                            ? "border-teal-500 bg-teal-50"
+                            : "border-gray-200 hover:bg-indigo-50"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="role"
+                          value={role}
+                          checked={form.role === role}
+                          onChange={handleChange}
+                          className="w-4 h-4 text-teal-600"
+                        />
+                        <span className="ml-2 text-sm font-medium text-gray-700">
+                          {role}
+                        </span>
+                      </label>
+                    );
+                  },
+                )}
               </div>
               {errors.role && (
                 <p className="text-xs text-red-500 mt-2">{errors.role}</p>
@@ -335,7 +344,8 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
                 <span className="ml-3 text-sm text-gray-800">
                   I am interested in being a
                   <span className="font-bold text-teal-700">
-                    {" "}Partner with EXIMINQ CLOUDDESK
+                    {" "}
+                    Partner with EXIMINQ CLOUDDESK
                   </span>
                 </span>
               </label>

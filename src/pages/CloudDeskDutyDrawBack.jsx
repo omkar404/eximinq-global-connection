@@ -1,227 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import Navbar from "../components/CloudDeskDutyDrawBack/Navbar";
+import Hero from "../components/CloudDeskDutyDrawBack/Hero";
+// import Fees from "../components/CloudDeskDutyDrawBack/Fees";
+import { ModalEnroll } from "../components/CloudDeskDutyDrawBack/ModalEnroll";
 import {
-  ArrowRight,
-  BadgeCheck,
-  BookOpenCheck,
-  Building2,
-  CalendarClock,
-  CheckCircle2,
   ChevronDown,
-  ClipboardCheck,
-  FileCheck2,
-  FileSearch,
-  Landmark,
   Linkedin,
-  Mail,
+  Twitter,
+  Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  FileSearch,
+  CheckCircle,
+  FileSpreadsheet,
+  Receipt,
+  FileOutput,
+  PackageOpen,
+  Wrench,
+  Coins,
   MapPin,
   Phone,
-  ReceiptText,
-  Scale,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  Twitter,
-  Facebook
+  Mail,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskDutyDrawBack/MainNavbar";
-import QuickForm from "../components/CloudDeskDutyDrawBack/QuickForm";
-
-const HIGHLIGHTS = [
-  "Duty drawback consultant India",
-  "AIR claims, brand rate fixation, and Section 74 re-export drawback support",
-  "Shipping-bill, drawback scroll, and customs documentation review",
-  "Export incentive recovery, claim strategy, and dispute-risk reduction"
-];
-
-const BENEFITS = [
-  "Helps exporters recover eligible customs-duty incidence through the right drawback route instead of relying on incomplete claim logic or shipping-bill assumptions.",
-  "Supports both routine All Industry Rate claims and more technical brand-rate or Section 74 re-export situations where documentary precision matters.",
-  "Reduces risk of under-claim, rejection, delay, and post-clearance questioning by aligning product facts, export records, duty incidence, and drawback route selection.",
-  "Improves working-capital recovery for exporters whose drawback is stuck, short-paid, or never claimed because the transaction was not structured correctly."
-];
-
-const CLAIM_TRACKS = [
-  {
-    title: "All Industry Rate (AIR) drawback",
-    description:
-      "Used where notified drawback rates already exist for the export product and the claim can be made under the standard schedule-linked route."
-  },
-  {
-    title: "Brand Rate fixation",
-    description:
-      "Used where the notified AIR is not available or does not sufficiently cover actual duty incidence, making a product-specific drawback computation more relevant."
-  },
-  {
-    title: "Section 74 re-export drawback",
-    description:
-      "Relevant where imported goods are re-exported and the drawback claim depends on proof of identity, time limits, and the re-export condition framework."
-  }
-];
-
-const ELIGIBILITY_POINTS = [
-  "Exporters claiming standard drawback under notified AIR schedules for eligible products and properly declared export transactions.",
-  "Businesses whose actual duty incidence appears materially different from standard rates and need brand-rate feasibility review before or after export.",
-  "Importers or traders re-exporting imported goods and assessing whether Section 74 drawback can be claimed with the required identity trail.",
-  "Exporters whose drawback is delayed, short credited, unclaimed, questioned, or commercially significant enough to justify transaction-level review."
-];
-
-const DOCUMENTS_REQUIRED = [
-  "Shipping bill details, invoice set, export product description, drawback declaration trail, port code, and exporter transaction summary.",
-  "Bill of Entry, duty-payment trail, input records, costing basis, consumption linkage, and product-specific documentation where brand-rate review is required.",
-  "Re-export evidence, import-to-export identity trail, serial or batch references, packing details, and timeline records where Section 74 drawback is being explored.",
-  "ICEGATE status screenshots, drawback scroll status, customs correspondence, query notices, deficiency communications, and any previous drawback submissions."
-];
-
-const PROCESS_STEPS = [
-  {
-    title: "Drawback-route diagnosis",
-    detail:
-      "We first determine whether the transaction should be handled as a standard AIR claim, a brand-rate review, or a Section 74 re-export drawback case."
-  },
-  {
-    title: "Duty-incidence and record review",
-    detail:
-      "The export records, product facts, customs duty trail, shipping-bill declarations, and available cost support are checked together before claim strategy is defined."
-  },
-  {
-    title: "Claim structuring or deficiency correction",
-    detail:
-      "Where required, we help structure the drawback position, correct transaction-level gaps, and prepare the records needed for filing, follow-up, or representation."
-  },
-  {
-    title: "Customs interaction and tracking",
-    detail:
-      "The objective is not just submission. It is also to ensure drawback status, query handling, and scroll-level follow-through are managed with commercial clarity."
-  },
-  {
-    title: "Future drawback-readiness improvement",
-    detail:
-      "We help businesses avoid repeated loss by tightening shipping-bill discipline, product mapping, records, and drawback-route selection for future exports."
-  }
-];
-
-const TIMELINE_POINTS = [
-  "Initial drawback review and route assessment: typically 1 to 3 working days once the transaction set is available.",
-  "AIR-claim issue diagnosis or stuck-claim review: usually 2 to 5 working days depending on the record trail and customs status available.",
-  "Brand-rate or Section 74 matters can take longer because eligibility, duty incidence, identity trail, and supporting evidence usually need deeper review.",
-  "Actual customs disposal time varies by claim type, product complexity, transaction age, and whether the matter is a new filing, follow-up, or rectification case."
-];
-
-const COMMON_ISSUES = [
-  {
-    title: "Wrong drawback route selected",
-    detail:
-      "Exporters sometimes proceed under AIR when the transaction economics require brand-rate evaluation, or assume Section 74 without a sufficient identity trail."
-  },
-  {
-    title: "Shipping-bill declaration mismatch",
-    detail:
-      "Errors in drawback declaration, product description, supporting classification, or transactional records can reduce or block the claim entirely."
-  },
-  {
-    title: "Brand-rate support is commercially weak",
-    detail:
-      "Even where the AIR looks inadequate, many businesses do not maintain the input-duty, cost, and consumption records required to support a stronger claim."
-  },
-  {
-    title: "Stuck or unclear drawback status",
-    detail:
-      "The exporter may know that drawback was expected, but not whether the issue sits at declaration stage, deficiency stage, customs processing stage, or scroll stage."
-  }
-];
 
 const FAQS = [
   {
     question: "What is duty drawback in exports?",
     answer:
-      "Duty drawback is an export incentive framework through which eligible customs-duty incidence can be remitted or refunded when goods are exported, subject to the applicable drawback rules, product position, and claim route."
+      "Duty drawback is an export incentive framework through which eligible customs-duty incidence can be remitted or refunded when goods are exported, subject to the applicable drawback rules, product position, and claim route.",
   },
   {
     question: "What is the difference between AIR and brand-rate drawback?",
     answer:
-      "AIR drawback follows notified standard rates, while brand-rate cases are considered where product-specific duty incidence needs a more tailored computation than the standard notified rate."
+      "AIR drawback follows notified standard rates, while brand-rate cases are considered where product-specific duty incidence needs a more tailored computation than the standard notified rate.",
   },
   {
     question: "When is Section 74 drawback relevant?",
     answer:
-      "Section 74 is generally relevant where imported goods are re-exported and the claim depends on proving identity, timing, and compliance with the re-export drawback conditions."
+      "Section 74 is generally relevant where imported goods are re-exported and the claim depends on proving identity, timing, and compliance with the re-export drawback conditions.",
   },
   {
     question: "Why does a duty drawback claim get delayed or missed?",
     answer:
-      "Common reasons include wrong drawback route selection, weak declarations, shipping-bill issues, incomplete supporting records, poor identity linkage, deficient follow-up, or misunderstanding of the commercial and procedural route."
+      "Common reasons include wrong drawback route selection, weak declarations, shipping-bill issues, incomplete supporting records, poor identity linkage, deficient follow-up, or misunderstanding of the commercial and procedural route.",
   },
   {
-    question: "Can duty drawback and other export incentives be reviewed together?",
+    question:
+      "Can duty drawback and other export incentives be reviewed together?",
     answer:
-      "Yes. Exporters often need drawback to be reviewed together with shipping-bill filing, RoDTEP, IGST refund, or broader compliance controls so the transaction is structured correctly from the start."
+      "Yes. Exporters often need drawback to be reviewed together with shipping-bill filing, RoDTEP, IGST refund, or broader compliance controls so the transaction is structured correctly from the start.",
   },
   {
     question: "Why can this page rank for duty drawback keywords?",
     answer:
-      "Because it covers the real search intent behind drawback queries: AIR vs brand-rate logic, Section 74 re-export situations, documentation, timelines, official references, risk points, and practical claim strategy."
-  }
-];
-
-const GOVERNMENT_REFERENCES = [
-  {
-    label: "CBIC Drawback Division",
-    href: "https://www.cbic.gov.in/entities/cbic-content-mst/MTQ5MzE="
+      "Because it covers the real search intent behind drawback queries: AIR vs brand-rate logic, Section 74 re-export situations, documentation, timelines, official references, risk points, and practical claim strategy.",
   },
-  {
-    label: "ICEGATE Drawback Manual and FAQs",
-    href: "https://www.icegate.gov.in/guidelines/frequently-asked-questions-faq-drawback-manual"
-  },
-  {
-    label: "ICEGATE Drawback Enquiry User Manual",
-    href: "https://www.icegate.gov.in/sites/default/files/2024-08/Drawback_Enquiry.pdf"
-  },
-  {
-    label: "CBIC Instruction on Pending Drawback and IGST Refund Claims",
-    href: "https://taxinformation.cbic.gov.in/content/html/tax_repository/ftp/cx/instr/2020-cx/instruction03-2020.pdf"
-  }
-];
-
-const RELATED_LINKS = [
-  {
-    href: "/services/rodtep-scheme",
-    title: "RoDTEP Scheme Support",
-    description:
-      "Useful for exporters who need to compare drawback positioning with RoDTEP strategy and avoid overlapping or poorly structured benefit claims."
-  },
-  {
-    href: "/services/igst-refund",
-    title: "IGST Refund Support",
-    description:
-      "Relevant where shipping-bill design, customs filing quality, and export incentive recovery must be reviewed together."
-  },
-  {
-    href: "/services/shipping-bill-filing",
-    title: "Shipping Bill Filing Support",
-    description:
-      "Important where drawback success depends on declaration quality, product description, scheme selection, and transaction-ready customs filing."
-  },
-  {
-    href: "/services/compliance-audit",
-    title: "Import Export Compliance Audit",
-    description:
-      "Helpful where drawback exposure should be examined alongside DGFT, customs, refund, and shipment-level process weaknesses."
-  }
 ];
 
 const CloudDeskDutyDrawBack = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
 
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <>
       <Helmet>
@@ -270,8 +122,8 @@ const CloudDeskDutyDrawBack = () => {
                 isPartOf: {
                   "@type": "WebSite",
                   name: "EXIMINQ",
-                  url: "https://eximinq.in/"
-                }
+                  url: "https://eximinq.in/",
+                },
               },
               {
                 "@type": "BreadcrumbList",
@@ -280,21 +132,21 @@ const CloudDeskDutyDrawBack = () => {
                     "@type": "ListItem",
                     position: 1,
                     name: "Home",
-                    item: "https://eximinq.in/"
+                    item: "https://eximinq.in/",
                   },
                   {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "Duty Drawback",
-                    item: "https://eximinq.in/services/duty-drawback/"
-                  }
-                ]
+                    item: "https://eximinq.in/services/duty-drawback/",
+                  },
+                ],
               },
               {
                 "@type": "Service",
@@ -304,15 +156,15 @@ const CloudDeskDutyDrawBack = () => {
                 provider: {
                   "@type": "Organization",
                   name: "EXIMINQ",
-                  url: "https://eximinq.in/"
+                  url: "https://eximinq.in/",
                 },
                 areaServed: {
                   "@type": "Country",
-                  name: "India"
+                  name: "India",
                 },
                 url: "https://eximinq.in/services/duty-drawback/",
                 description:
-                  "Duty drawback consultant in India for AIR claims, brand rate fixation, Section 74 re-export drawback support, drawback review, and export incentive recovery."
+                  "Duty drawback consultant in India for AIR claims, brand rate fixation, Section 74 re-export drawback support, drawback review, and export incentive recovery.",
               },
               {
                 "@type": "FAQPage",
@@ -321,567 +173,712 @@ const CloudDeskDutyDrawBack = () => {
                   name: faq.question,
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: faq.answer
-                  }
-                }))
-              }
-            ]
+                    text: faq.answer,
+                  },
+                })),
+              },
+            ],
           })}
         </script>
       </Helmet>
-
       <div className="bg-slate-50 text-slate-800">
-        <MainNavbar
-          scrolled={scrolled}
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-          setShowEnrollModal={() => {}}
+        {/* Dynamic Sections */}
+        {/* <TopBar /> */}
+        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
+
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: "" })}
+          onSubmit={handleEnrollmentSubmit}
         />
+        {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
-        <section className="relative overflow-hidden bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_55%,#38bdf8_100%)] pt-32 text-white">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.12),transparent_30%)]" />
-          <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-16 md:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <div>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold backdrop-blur">
-                <Sparkles className="h-4 w-4" />
-                Duty drawback, brand rate, and Section 74 advisory
+        <section id="about" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            {/* Heading */}
+            <div className="text-center mb-12">
+              <div className="flex justify-center mb-4">
+                <FileSearch className="w-10 h-10 text-accent-500" />
               </div>
-              <h1 className="max-w-4xl text-4xl font-bold leading-tight md:text-5xl">
-                Duty Drawback Consultant India for AIR Claims, Brand Rate
-                Fixation, and Section 74 Re-export Support
-              </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-blue-50">
-                Recover export incentive value with a clearer drawback strategy.
-                We help exporters review All Industry Rate claims, brand-rate
-                feasibility, Section 74 re-export drawback, shipping-bill
-                declaration quality, and stuck-claim follow-up.
-              </p>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {HIGHLIGHTS.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-start gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-4 backdrop-blur"
-                  >
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-200" />
-                    <span className="text-sm leading-6 text-blue-50">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="#quick-form"
-                  className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-slate-900 transition hover:bg-slate-100"
-                >
-                  Check Drawback Position
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#references"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-                >
-                  View Official References
-                  <BookOpenCheck className="h-4 w-4" />
-                </a>
-              </div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                What is Duty Drawback?
+              </h2>
+              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
             </div>
 
-            <div id="quick-form" className="lg:justify-self-end">
-              <QuickForm />
+            {/* Content */}
+            <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
+              <p className="mb-4">
+                <strong>Duty Drawback (DBK)</strong> is a refund of Customs Duty
+                and Central Excise Duty paid on raw materials, components, and
+                packaging materials used in the manufacture of export goods. It
+                ensures that Indian exports remain competitive by nullifying the
+                cascading effect of taxes.
+              </p>
+
+              <p className="mb-4">
+                There are two main types for exporters:
+                <br />
+                1. <strong>All Industry Rate (AIR):</strong> A standard fixed
+                percentage notified by the government for common products.
+                <br />
+                2. <strong>Brand Rate:</strong> A special rate fixed for a
+                specific exporter when the AIR is low (less than 80% of actual
+                duty paid) or does not exist for the product.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="sticky top-[76px] z-30 border-y border-slate-200 bg-white/95 backdrop-blur">
-          <div className="mx-auto flex max-w-7xl gap-6 overflow-x-auto px-4 py-4 text-sm font-semibold text-slate-600 md:px-8">
-            <a href="#overview" className="whitespace-nowrap hover:text-blue-700">
-              Overview
-            </a>
-            <a href="#claim-tracks" className="whitespace-nowrap hover:text-blue-700">
-              Claim Tracks
-            </a>
-            <a href="#benefits" className="whitespace-nowrap hover:text-blue-700">
-              Benefits
-            </a>
-            <a href="#eligibility" className="whitespace-nowrap hover:text-blue-700">
-              Eligibility
-            </a>
-            <a href="#documents" className="whitespace-nowrap hover:text-blue-700">
-              Documents
-            </a>
-            <a href="#process" className="whitespace-nowrap hover:text-blue-700">
-              Process
-            </a>
-            <a href="#references" className="whitespace-nowrap hover:text-blue-700">
-              Official References
-            </a>
-            <a href="#faq" className="whitespace-nowrap hover:text-blue-700">
-              FAQs
-            </a>
-          </div>
-        </section>
+        <section id="brand-rate" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* LEFT SIDE */}
+              <div>
+                <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                  Rule 6 & 7
+                </span>
 
-        <main className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-          <section id="overview" className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
-                <Target className="h-4 w-4" />
-                Search-intent-focused overview
-              </div>
-              <h2 className="text-3xl font-bold text-slate-900">
-                Duty drawback support built around real exporter search intent
-              </h2>
-              <p className="mt-5 text-base leading-8 text-slate-600">
-                This page is designed for exporters looking for practical help
-                with <strong>duty drawback claims</strong>, not generic export
-                incentive copy. Businesses usually search because they want to
-                know whether a shipment should move under{" "}
-                <strong>All Industry Rate drawback</strong>, whether{" "}
-                <strong>brand rate fixation</strong> is commercially viable, or
-                whether a <strong>Section 74 re-export drawback</strong> case is
-                still recoverable.
-              </p>
-              <p className="mt-5 text-base leading-8 text-slate-600">
-                The page therefore covers drawback-route selection, supporting
-                records, common causes of under-claim or delay, official
-                customs-facing references, and the broader export workflow links
-                that affect drawback outcomes. That deeper semantic coverage
-                gives the route a stronger chance of ranking for both service
-                queries and problem-resolution queries.
-              </p>
-            </div>
-
-            <div className="rounded-[32px] bg-slate-900 p-8 text-white shadow-sm">
-              <h3 className="text-2xl font-bold">
-                What Google should understand from this page
-              </h3>
-              <div className="mt-6 space-y-4">
-                <div className="flex gap-3">
-                  <BadgeCheck className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
-                  <p className="text-sm leading-7 text-slate-200">
-                    The page serves exporters seeking drawback consulting,
-                    drawback claim recovery, AIR review, brand-rate support, and
-                    Section 74 re-export guidance.
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
-                  <p className="text-sm leading-7 text-slate-200">
-                    The content is built around customs process accuracy, not
-                    just lead generation, which strengthens E-E-A-T for a
-                    compliance-sensitive page.
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  <Landmark className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
-                  <p className="text-sm leading-7 text-slate-200">
-                    Official CBIC and ICEGATE references are included to improve
-                    trust, crawl context, and topical authority.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="claim-tracks" className="mt-16">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold text-slate-900">
-                Core duty drawback claim tracks covered on this page
-              </h2>
-              <p className="mt-4 text-base leading-8 text-slate-600">
-                Users searching for duty drawback support do not all need the
-                same thing. This page intentionally covers the three claim
-                tracks most likely to drive ranking opportunity and qualified
-                enquiries.
-              </p>
-            </div>
-            <div className="mt-8 grid gap-6 lg:grid-cols-3">
-              {CLAIM_TRACKS.map((track) => (
-                <article
-                  key={track.title}
-                  className="rounded-[28px] bg-white p-7 shadow-sm ring-1 ring-slate-200"
-                >
-                  <div className="mb-4 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
-                    Duty drawback route
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900">
-                    {track.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">
-                    {track.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section id="benefits" className="mt-16 rounded-[32px] bg-gradient-to-r from-blue-50 via-white to-cyan-50 p-8 ring-1 ring-slate-200">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold text-slate-900">
-                Why exporters seek duty drawback consulting support
-              </h2>
-              <p className="mt-4 text-base leading-8 text-slate-600">
-                The commercial value of drawback is often lost not because the
-                scheme is unavailable, but because the claim route, declaration
-                logic, or support trail is weak. The page now addresses those
-                exact concerns.
-              </p>
-            </div>
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              {BENEFITS.map((benefit) => (
-                <div
-                  key={benefit}
-                  className="flex gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200"
-                >
-                  <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-emerald-600" />
-                  <p className="text-sm leading-7 text-slate-600">{benefit}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-16 grid gap-8 lg:grid-cols-2">
-            <div className="rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700">
-                <FileSearch className="h-4 w-4" />
-                Frequent drawback problem patterns
-              </div>
-              <h2 className="text-3xl font-bold text-slate-900">
-                Common issues that stop or weaken drawback recovery
-              </h2>
-              <div className="mt-8 space-y-5">
-                {COMMON_ISSUES.map((issue) => (
-                  <div
-                    key={issue.title}
-                    className="rounded-2xl border border-slate-200 p-5"
-                  >
-                    <h3 className="text-lg font-bold text-slate-900">
-                      {issue.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">
-                      {issue.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[32px] bg-slate-900 p-8 text-white shadow-sm">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-200">
-                <CalendarClock className="h-4 w-4" />
-                Practical timeline expectations
-              </div>
-              <h2 className="text-3xl font-bold">
-                Timelines depend heavily on route complexity and record quality
-              </h2>
-              <div className="mt-8 space-y-4">
-                {TIMELINE_POINTS.map((item) => (
-                  <div key={item} className="flex gap-3">
-                    <ChevronDown className="mt-1 h-5 w-5 shrink-0 rotate-[-90deg] text-cyan-300" />
-                    <p className="text-sm leading-7 text-slate-200">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section id="eligibility" className="mt-16 grid gap-8 lg:grid-cols-2">
-            <div className="rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
-                <Scale className="h-4 w-4" />
-                Eligibility and fit
-              </div>
-              <h2 className="text-3xl font-bold text-slate-900">
-                Who should review a duty drawback claim with a specialist
-              </h2>
-              <div className="mt-7 space-y-4">
-                {ELIGIBILITY_POINTS.map((item) => (
-                  <div key={item} className="flex gap-3">
-                    <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-emerald-600" />
-                    <p className="text-sm leading-7 text-slate-600">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div
-              id="documents"
-              className="rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
-            >
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700">
-                <FileCheck2 className="h-4 w-4" />
-                Required documents
-              </div>
-              <h2 className="text-3xl font-bold text-slate-900">
-                Records that usually matter in drawback review
-              </h2>
-              <div className="mt-7 space-y-4">
-                {DOCUMENTS_REQUIRED.map((item) => (
-                  <div key={item} className="flex gap-3">
-                    <ReceiptText className="mt-1 h-5 w-5 shrink-0 text-violet-600" />
-                    <p className="text-sm leading-7 text-slate-600">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section
-            id="process"
-            className="mt-16 rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
-          >
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold text-slate-900">
-                Step-by-step duty drawback review and claim support process
-              </h2>
-              <p className="mt-4 text-base leading-8 text-slate-600">
-                Searchers with strong purchase intent want to understand what
-                actually happens after they enquire. This section is intentionally
-                built to improve that conversion and ranking signal.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-6 lg:grid-cols-5">
-              {PROCESS_STEPS.map((step, index) => (
-                <article
-                  key={step.title}
-                  className="rounded-[28px] bg-slate-50 p-6 ring-1 ring-slate-200"
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-lg font-bold text-white">
-                    {index + 1}
-                  </div>
-                  <h3 className="mt-5 text-lg font-bold text-slate-900">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {step.detail}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section
-            id="references"
-            className="mt-16 rounded-[32px] bg-slate-900 p-8 text-white shadow-sm"
-          >
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold">
-                Official government and system references
-              </h2>
-              <p className="mt-4 text-base leading-8 text-slate-200">
-                Official references help users verify drawback context and help
-                reinforce E-E-A-T for a customs-heavy page. These sources also
-                strengthen semantic relevance around CBIC and ICEGATE entities.
-              </p>
-            </div>
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              {GOVERNMENT_REFERENCES.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-[24px] border border-white/10 bg-white/5 p-5 transition hover:bg-white/10"
-                >
-                  <div className="flex items-start gap-3">
-                    <Landmark className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
-                    <div>
-                      <h3 className="text-lg font-bold text-white">
-                        {item.label}
-                      </h3>
-                      <p className="mt-2 text-sm leading-7 text-slate-300">
-                        Open the official source
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-16 rounded-[32px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold text-slate-900">
-                Internal links that strengthen topical authority
-              </h2>
-              <p className="mt-4 text-base leading-8 text-slate-600">
-                Duty drawback rarely operates in isolation. Strong internal
-                linking to adjacent customs and export incentive workflows helps
-                Google understand the broader service cluster and helps users
-                navigate toward connected issues.
-              </p>
-            </div>
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {RELATED_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="group rounded-[28px] bg-slate-50 p-6 ring-1 ring-slate-200 transition hover:-translate-y-1 hover:bg-white"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-slate-900">
-                        {link.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {link.description}
-                      </p>
-                    </div>
-                    <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-slate-400 transition group-hover:text-blue-700" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section id="faq" className="mt-16">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold text-slate-900">
-                Duty drawback FAQs for exporters and trade teams
-              </h2>
-              <p className="mt-4 text-base leading-8 text-slate-600">
-                FAQ depth improves search coverage, helps featured-snippet
-                eligibility, and addresses decision-stage questions users ask
-                before submitting an enquiry.
-              </p>
-            </div>
-            <div className="mt-8 space-y-5">
-              {FAQS.map((faq) => (
-                <article
-                  key={faq.question}
-                  className="rounded-[28px] bg-white p-7 shadow-sm ring-1 ring-slate-200"
-                >
-                  <h3 className="text-xl font-bold text-slate-900">
-                    {faq.question}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {faq.answer}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-16 overflow-hidden rounded-[36px] bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_100%)]">
-            <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="p-8 text-white md:p-10">
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
-                  <ClipboardCheck className="h-7 w-7" />
-                </div>
-                <h2 className="text-4xl font-bold leading-tight">
-                  Ready to review a drawback claim before value is lost?
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-6">
+                  Brand Rate Fixation
                 </h2>
-                <p className="mt-5 max-w-xl text-base leading-8 text-blue-100">
-                  Use the quick form to start with the right drawback route,
-                  product context, and export record review. The goal is not
-                  just filing. It is better drawback recovery and lower repeat
-                  risk.
+
+                <p className="text-slate-600 mb-6">
+                  Is your actual duty incidence higher than the standard All
+                  Industry Rate? Don't settle for less. We help you apply for a{" "}
+                  <em>Brand Rate</em> to recover the actual duty paid on your
+                  inputs.
                 </p>
-                <div className="mt-8 space-y-4 text-sm text-blue-100">
-                  <div className="flex items-start gap-3">
-                    <Building2 className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
-                    <span>AIR, brand-rate, and Section 74 claim support</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <ReceiptText className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
-                    <span>Shipping-bill and customs documentation review</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <BookOpenCheck className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
-                    <span>Export incentive recovery with stronger compliance context</span>
-                  </div>
+
+                {/* WHEN TO APPLY BOX */}
+                <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-brand-500 mb-4">
+                  <h4 className="font-bold text-brand-900 mb-2">
+                    When to Apply?
+                  </h4>
+
+                  <ul className="text-sm text-slate-600 space-y-2">
+                    <li className="flex items-start">
+                      <CheckCircle className="text-green-500 w-4 h-4 mr-2 mt-1" />
+                      When AIR is "Nil" for your product.
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="text-green-500 w-4 h-4 mr-2 mt-1" />
+                      When AIR covers less than 80% of duties paid.
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="text-green-500 w-4 h-4 mr-2 mt-1" />
+                      For highly specialized, non-standard goods.
+                    </li>
+                  </ul>
                 </div>
+
+                {/* <a
+                  href="#home"
+                  className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
+                >
+                  Apply for Brand Rate
+                </a> */}
+                <button
+                  onClick={() =>
+                    setShowEnrollModal({
+                      open: true,
+                      type: "Apply_for_Brand_Rate",
+                    })
+                  }
+                  className="inline-block bg-brand-600 text-white font-bold py-3 px-8 rounded hover:bg-brand-700 transition"
+                >
+                  Apply for Brand Rate
+                </button>
               </div>
 
-              <div className="bg-white p-8 md:p-10">
-                <h3 className="text-3xl font-bold text-slate-900">
-                  Speak with EXIMINQ
+              {/* RIGHT SIDE */}
+              <div className="bg-white rounded-xl shadow-xl p-8 border border-slate-200">
+                <h3 className="text-xl font-bold text-slate-800 mb-4">
+                  Documents for Brand Rate
                 </h3>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  Whether the issue is a fresh drawback claim, a stuck refund,
-                  a brand-rate decision, or a Section 74 re-export case, we can
-                  help you review the transaction path and next action.
-                </p>
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  <a
-                    href="tel:+917400096950"
-                    className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 transition hover:bg-white"
-                  >
-                    <Phone className="h-5 w-5 text-blue-700" />
-                    <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-slate-500">
-                      Call us
-                    </p>
-                    <p className="mt-1 text-lg font-bold text-slate-900">
-                      +91 74000 96950
-                    </p>
-                  </a>
-                  <a
-                    href="mailto:clouddesk@eximinq.in"
-                    className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 transition hover:bg-white"
-                  >
-                    <Mail className="h-5 w-5 text-blue-700" />
-                    <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-slate-500">
-                      Email us
-                    </p>
-                    <p className="mt-1 text-lg font-bold text-slate-900">
-                      clouddesk@eximinq.in
-                    </p>
-                  </a>
-                  <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 sm:col-span-2">
-                    <MapPin className="h-5 w-5 text-blue-700" />
-                    <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-slate-500">
-                      Office
-                    </p>
-                    <p className="mt-1 text-lg font-bold text-slate-900">
-                      Mumbai, India
-                    </p>
-                  </div>
-                </div>
+
+                <ul className="space-y-4 text-sm text-slate-600">
+                  {/* Item 1 */}
+                  <li className="flex gap-3">
+                    <FileSpreadsheet className="text-brand-500 w-5 h-5 mt-1" />
+                    <div>
+                      <strong className="block text-slate-800">
+                        Data Sheet (DBK-I / II / III)
+                      </strong>
+                      <span>
+                        Detailed consumption & wastage data certified by
+                        Chartered Engineer.
+                      </span>
+                    </div>
+                  </li>
+
+                  {/* Item 2 */}
+                  <li className="flex gap-3">
+                    <Receipt className="text-brand-500 w-5 h-5 mt-1" />
+                    <div>
+                      <strong className="block text-slate-800">
+                        Original Import Bills
+                      </strong>
+                      <span>
+                        Bills of Entry showing duty payment for raw materials.
+                      </span>
+                    </div>
+                  </li>
+
+                  {/* Item 3 */}
+                  <li className="flex gap-3">
+                    <FileOutput className="text-brand-500 w-5 h-5 mt-1" />
+                    <div>
+                      <strong className="block text-slate-800">
+                        Export Proofs
+                      </strong>
+                      <span>
+                        Shipping Bills (EP Copy) and Bank Realization
+                        Certificates (e-BRC).
+                      </span>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
+        <section id="section74" className="py-20 bg-brand-900 text-white">
+          <div className="container mx-auto px-4">
+            {/* HEADER */}
+            <div className="text-center mb-16">
+              <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
+                Re-Export Refund
+              </span>
 
-        <footer className="border-t border-slate-200 bg-white">
-          <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 md:flex-row md:items-center md:justify-between md:px-8">
-            <div>
-              <p className="text-lg font-bold text-slate-900">EXIMINQ</p>
-              <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-600">
-                Duty drawback consulting support for AIR claims, brand-rate
-                fixation, Section 74 re-export review, customs documentation,
-                and export incentive recovery workflows.
+              <h2 className="text-3xl md:text-4xl font-bold mt-2">
+                Section 74 Drawback
+              </h2>
+
+              <p className="text-slate-300 mt-2">
+                Refund of duty paid on imported goods which are re-exported "as
+                such".
               </p>
             </div>
-            <div className="flex items-center gap-4 text-slate-500">
-              <a
-                href="https://www.linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="rounded-full border border-slate-200 p-3 transition hover:border-blue-700 hover:text-blue-700"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a
-                href="https://x.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="rounded-full border border-slate-200 p-3 transition hover:border-blue-700 hover:text-blue-700"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="rounded-full border border-slate-200 p-3 transition hover:border-blue-700 hover:text-blue-700"
-              >
-                <Facebook className="h-4 w-4" />
-              </a>
+
+            {/* TWO CARDS */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* CASE 1 */}
+              <div className="bg-brand-800 rounded-xl p-8 border border-brand-700 hover:border-accent-500 transition">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-2xl font-bold text-white">98% Refund</h3>
+                  <PackageOpen className="text-accent-400 w-10 h-10" />
+                </div>
+
+                <p className="text-slate-300 text-sm mb-6">
+                  Applicable when goods are re-exported without being used.
+                  E.g., Wrong shipment received, or quality rejection before
+                  use.
+                </p>
+
+                <ul className="text-xs text-slate-400 space-y-2">
+                  <li className="flex items-start">
+                    <CheckCircle className="text-green-400 w-4 h-4 mr-2 mt-0.5" />
+                    Goods identified easily by serial no.
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="text-green-400 w-4 h-4 mr-2 mt-0.5" />
+                    Re-export within 2 years of import payment.
+                  </li>
+                </ul>
+              </div>
+
+              {/* CASE 2 */}
+              <div className="bg-brand-800 rounded-xl p-8 border border-brand-700 hover:border-accent-500 transition">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-2xl font-bold text-white">
+                    Reduced Refund
+                  </h3>
+                  <Wrench className="text-accent-400 w-10 h-10" />
+                </div>
+
+                <p className="text-slate-300 text-sm mb-6">
+                  Applicable when goods have been used after import before
+                  re-export. The refund percentage drops based on the duration
+                  of use.
+                </p>
+
+                <div className="bg-brand-900 p-3 rounded text-xs">
+                  <div className="flex justify-between mb-1">
+                    <span>0–3 Months Use:</span>
+                    <span>95% Refund</span>
+                  </div>
+
+                  <div className="flex justify-between mb-1">
+                    <span>3–6 Months Use:</span>
+                    <span>85% Refund</span>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span>6–12 Months Use:</span>
+                    <span>70% Refund</span>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
+
+        <section id="process" className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            {/* HEADER */}
+            <div className="text-center mb-16">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Execution
+              </span>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Claim Process
+              </h2>
+            </div>
+
+            {/* 4 STEPS */}
+            <div className="relative grid md:grid-cols-4 gap-8 step-connector">
+              {/* Step 1 */}
+              <div className="text-center relative z-10">
+                <div
+                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center
+                            text-2xl font-bold text-brand-900 mx-auto mb-4
+                            border-4 border-brand-200 shadow-sm"
+                >
+                  1
+                </div>
+                <h3 className="text-lg font-bold mb-2">Application</h3>
+                <p className="text-sm text-slate-500">
+                  File application with Principal Commissioner of Customs
+                  (Drawback Cell) within 3 months of export.
+                </p>
+              </div>
+
+              {/* Step 2 */}
+              <div className="text-center relative z-10">
+                <div
+                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center
+                            text-2xl font-bold text-brand-900 mx-auto mb-4
+                            border-4 border-brand-200 shadow-sm"
+                >
+                  2
+                </div>
+                <h3 className="text-lg font-bold mb-2">Verification</h3>
+                <p className="text-sm text-slate-500">
+                  Customs verifies input consumption, wastage norms, and
+                  original duty payment proofs.
+                </p>
+              </div>
+
+              {/* Step 3 */}
+              <div className="text-center relative z-10">
+                <div
+                  className="w-16 h-16 bg-white rounded-full flex items-center justify-center
+                            text-2xl font-bold text-brand-900 mx-auto mb-4
+                            border-4 border-brand-200 shadow-sm"
+                >
+                  3
+                </div>
+                <h3 className="text-lg font-bold mb-2">Letter</h3>
+                <p className="text-sm text-slate-500">
+                  Issuance of Brand Rate Letter specifying the eligible drawback
+                  amount per unit.
+                </p>
+              </div>
+
+              {/* Step 4 */}
+              <div className="text-center relative z-10">
+                <div
+                  className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center
+                            text-2xl font-bold text-white mx-auto mb-4
+                            border-4 border-white shadow-sm"
+                >
+                  <Coins className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Disbursal</h3>
+                <p className="text-sm text-slate-500">
+                  Amount credited directly to the exporter's bank account linked
+                  with ICEGATE.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* <Fees setShowEnrollModal={setShowEnrollModal} /> */}
+
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Why CloudDesk for Duty-Drawback?
+              </h2>
+              <p className="text-slate-500">
+                Standard drawbacks are easy. Specialized drawbacks are a battle.
+                CloudDesk is your 'Special Ops' for stuck funds.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Feature 1 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                  <AlertTriangle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    1. Section 74: The 98% Refund Strategy
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    If you imported<strong> goods, paid duty, </strong>and are
+                    now re-exporting them
+                    <strong>
+                      {" "}
+                      (because they were defective or the order was
+                      cancelled),{" "}
+                    </strong>
+                    you are entitled to a 98% refund of the original duty under
+                    Section 74.
+                    <strong>CloudDesk </strong>manages the
+                    <strong> "Identity Correlation"—proving </strong>to Customs
+                    that the goods going out are the exact same ones that came
+                    in.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                  <CheckCircle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    2. Brand Rate Fixation (Section 75)
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    If the<strong> "All Industry Rate" (AIR) </strong>for your
+                    product is 1%, but your actual{" "}
+                    <strong>duty paid on raw materials is 5%,</strong> you are
+                    losing money. <strong>CloudDesk </strong>handles Brand Rate
+                    Fixation. We file the{" "}
+                    <strong>application within 90 days </strong>of export,
+                    providing the<strong> cost-data </strong>and consumption
+                    sheets to secure a customized,
+                    <strong> higher drawback rate </strong>for your specific
+                    brand.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                  <Building size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    3. The "Stuck Drawback" Rescue
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    "Is your drawback showing as
+                    <strong>""Pending at EGM"" or ""Query Raised""?</strong>
+                    <strong> CloudDesk’s Drawback </strong>Recovery Unit
+                    performs a <strong>""Status Audit."" </strong>We find the
+                    specific officer holding the file and resolve queries like:
+                    o Non-receipt of <strong>BRC/e-BRC.</strong>o Weight/Value
+                    Mismatch. o <strong>EGM (Export General Manifest) </strong>
+                    errors."
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                  <ShieldUser size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    4. Identity Verification for Re-exports
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    The #1 reason Section<strong> 74 claims </strong>fail is
+                    <strong> "Lack of Identification." </strong>
+                    <strong>CloudDesk </strong>ensures that at the time of
+                    import, the goods are
+                    <strong> "examined for re-export," </strong>and we manage
+                    the Customs Supervision during the re-export stuffing to
+                    ensure your 98% refund is undisputed.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-3xl">
+            {/* Heading */}
+            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+              Frequently Asked Questions
+            </h2>
+
+            {/* FAQ Items */}
+            <div className="space-y-4">
+              {/* Question 1 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is Section 74 Duty Drawback?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  It is a refund of 98% of the import duty paid if the goods are
+                  re-exported. The goods must be identifiable and exported
+                  within 2 years of payment of duty (extensions are possible but
+                  difficult).
+                </p>
+              </details>
+
+              {/* Question 2 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I get a refund if I used the goods in India?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes, but the rate drops. If the goods were "used" before being
+                  re-exported, the 98% refund is reduced based on a sliding
+                  scale (e.g., if used for 3–6 months, you might only get 75%
+                  back).
+                </p>
+              </details>
+
+              {/* Question 3 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What if I re-export only a part of the shipment?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  You can claim a "Pro-rata" drawback. CloudDesk helps you map
+                  the specific serial numbers or batch numbers from the original
+                  Bill of Entry to the new Shipping Bill.
+                </p>
+              </details>
+
+              {/* Question 4 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  When should I apply for a Brand Rate?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Apply if the All Industry Rate (AIR) is less than 80% of the
+                  actual duty you paid on inputs. It's essentially a request for
+                  a "Fair Refund" based on your actual costs.
+                </p>
+              </details>
+
+              {/* Question 5 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  How long does it take to fix a Brand Rate?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  It usually takes 3 to 6 months as it involves verification by
+                  the Central Excise/Customs Commissioner. However, you can
+                  claim the "Provisional Drawback" in the meantime.
+                </p>
+              </details>
+
+              {/* Question 6 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Why is my drawback stuck at "Scroll Generation"?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  This usually means the system is waiting for the Bank Account
+                  Validation or the EGM to be filed by the shipping line.
+                  CloudDesk triggers a "Scroll Push" request once the technical
+                  errors are fixed.
+                </p>
+              </details>
+
+              {/* Question 7 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is a "Drawback Query"?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  An officer can flag your shipment if they suspect the "Export
+                  Value" is artificially inflated to get more drawback. We
+                  provide the Market Value Justification to close these queries.
+                </p>
+              </details>
+
+              {/* Question 8 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I claim drawback if I am an EOU or SEZ unit?
+                  <ChevronDown
+                    size={20}
+                    className="text-brand-500 transition-transform group-open:rotate-180"
+                  />
+                </summary>
+
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. Since these units don't pay duty on inputs, they aren't
+                  entitled to a "drawback" of duty. They must rely on other
+                  schemes like RoDTEP.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
+          <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+            {/* BRAND */}
+            <div>
+              <a className="text-2xl font-bold text-white mb-4 block">
+                EXIMINQ
+              </a>
+
+              <p className="text-sm mb-6">
+                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
+                Logistics compliance.
+              </p>
+
+              <div className="flex gap-4">
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Linkedin size={18} />
+                </a>
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Twitter size={18} />
+                </a>
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Facebook size={18} />
+                </a>
+              </div>
+            </div>
+
+            {/* QUICK LINKS */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Duty Drawback
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    RoDTEP Scheme
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    IGST Refund
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    MOOWR Scheme
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* OTHER SERVICES */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Other Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Drawback Schedule
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Rule 6 Guidelines
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Section 74 Rules
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Depreciation Chart
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* CONTACT */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Contact Us</h4>
+              <ul className="space-y-4 text-sm">
+                <li className="flex gap-3 items-center">
+                  <Phone size={18} className="text-brand-500" />
+                  +917400096950
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <Mail size={18} className="text-brand-500" />
+                  clouddesk@eximinq.in
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <MapPin size={18} className="text-brand-500" />
+                  Mumbai, India
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* COPYRIGHT */}
+          <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
+            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            DGFT.
           </div>
         </footer>
       </div>

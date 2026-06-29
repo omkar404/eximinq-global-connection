@@ -1,3 +1,4 @@
+import { getApiUrl } from "../../utils/apiBaseUrl";
 // import { useState } from "react";
 
 // const QuickForm = () => {
@@ -203,7 +204,7 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/import-export-code`,
+        getApiUrl("/api/import-export-code"),
         // "http://localhost:5000/api/import-export-code",
         {
           method: "POST",

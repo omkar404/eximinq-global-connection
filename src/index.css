@@ -65,3 +65,119 @@
 .blink {
   animation: blink 1s step-start infinite;
 }
+
+/* Shared visual contract for consultancy service pages.
+   Mirrors the Advance Authorisation page without changing page content or APIs. */
+.advance-service-page {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.advance-service-page .advance-service-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 10rem !important;
+  padding-bottom: 6rem !important;
+  color: #fff !important;
+  background-color: #123f72 !important;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(135deg, #123b67 0%, #164e96 100%) !important;
+  background-size: 30px 30px, auto !important;
+}
+
+.advance-service-page .advance-service-hero h1 {
+  max-width: 48rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #fff !important;
+  font-family: inherit !important;
+  font-size: clamp(2.25rem, 5vw, 3.75rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.025em;
+}
+
+.advance-service-page .advance-service-hero h1 span {
+  color: #f59e0b;
+}
+
+.advance-service-page .advance-service-hero h1 + p {
+  color: #e2e8f0 !important;
+}
+
+.advance-service-page .advance-service-hero > div:not(.absolute) {
+  width: 100%;
+  max-width: 72rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.advance-service-page section[class*="sticky"] {
+  top: 6rem !important;
+  border-color: #e2e8f0 !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.advance-service-page h2 {
+  color: #0f172a;
+  font-family: inherit !important;
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.advance-service-page h3,
+.advance-service-page h4 {
+  font-family: inherit !important;
+  font-weight: 700;
+}
+
+.advance-service-page section[class*="py-16"],
+.advance-service-page main > section[class*="py-16"] {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.advance-service-page [class*="rounded-[2rem]"],
+.advance-service-page [class*="rounded-[28px]"],
+.advance-service-page [class*="rounded-[32px]"],
+.advance-service-page [class*="rounded-[36px]"] {
+  border-radius: 1rem !important;
+}
+
+.advance-service-page details {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem !important;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.advance-service-page footer {
+  border-color: #1e4f7a !important;
+  background: #103b65 !important;
+  color: #cbd5e1 !important;
+}
+
+.advance-service-page footer h2,
+.advance-service-page footer h3,
+.advance-service-page footer h4,
+.advance-service-page footer strong {
+  color: #fff !important;
+}
+
+@media (max-width: 767px) {
+  .advance-service-page .advance-service-hero {
+    padding-top: 8rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .advance-service-page .advance-service-hero h1 {
+    font-size: 2.35rem !important;
+  }
+
+  .advance-service-page section[class*="sticky"] {
+    display: none;
+  }
+}

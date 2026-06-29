@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -33,8 +34,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setCategory("");
     setIssue("");
   };
-
-
 
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
@@ -77,81 +76,80 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     return newErrors;
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  const validationErrors = validate();
-  setErrors(validationErrors);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (Object.keys(validationErrors).length > 0) return;
+    const validationErrors = validate();
+    setErrors(validationErrors);
 
-  setLoading(true);
+    if (Object.keys(validationErrors).length > 0) return;
 
-  try {
-    // Send data out if callback provided
-    if (typeof onSubmit === "function") {
-      onSubmit({
-        ...form,
-        type,
-        category: isEnroll ? category : null,
-        issue: isProfileUpdate ? issue : null,
-      });
-    }
-    
-    const finalType = type || "ENROLL_NOW";
+    setLoading(true);
 
-    const payload = {
-      ...form,
-      type: finalType,
-      category: isEnroll ? category : undefined,
-      issue: isProfileUpdate ? issue : undefined,
-    };
-
-    if (category) {
-      payload.category = category;
-    }
-
-    if (issue) {
-      payload.issue = issue;
-    }
-    
-    console.log("final payload", payload);
-
-    const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/scomet-licensing`,
-      // `http://localhost:5000/api/scomet-licensing`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+    try {
+      // Send data out if callback provided
+      if (typeof onSubmit === "function") {
+        onSubmit({
+          ...form,
+          type,
+          category: isEnroll ? category : null,
+          issue: isProfileUpdate ? issue : null,
+        });
       }
-    );
 
-    const data = await res.json();
+      const finalType = type || "ENROLL_NOW";
 
-    console.log("API Response:", data);
+      const payload = {
+        ...form,
+        type: finalType,
+        category: isEnroll ? category : undefined,
+        issue: isProfileUpdate ? issue : undefined,
+      };
 
-    if (!res.ok || !data.success) {
-      throw new Error(data.error || "API failed");
+      if (category) {
+        payload.category = category;
+      }
+
+      if (issue) {
+        payload.issue = issue;
+      }
+
+      console.log("final payload", payload);
+
+      const res = await fetch(
+        getApiUrl("/api/scomet-licensing"),
+        // `http://localhost:5000/api/scomet-licensing`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const data = await res.json();
+
+      console.log("API Response:", data);
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "API failed");
+      }
+
+      alert("Request submitted successfully");
+
+      // Reset form
+      resetForm();
+
+      // Close modal/drawer if onClose is provided
+      if (typeof onClose === "function") {
+        onClose();
+      }
+    } catch (err) {
+      console.error("Enroll error:", err);
+      alert(err.message || "Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    alert("Request submitted successfully");
-    
-    // Reset form
-    resetForm();
-    
-    // Close modal/drawer if onClose is provided
-    if (typeof onClose === "function") {
-      onClose();
-    }
-    
-  } catch (err) {
-    console.error("Enroll error:", err);
-    alert(err.message || "Submission failed. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">

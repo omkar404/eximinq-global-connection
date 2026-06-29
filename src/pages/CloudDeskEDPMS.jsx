@@ -20,7 +20,7 @@ import {
   Sparkles,
   Target
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskEDPMS/MainNavbar";
+import { MainNavbar } from "../components/CloudDeskAdvanceAuthority/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskEDPMS/ModalEnroll";
 import QuickForm from "../components/CloudDeskEDPMS/QuickForm";
 
@@ -341,7 +341,7 @@ const CloudDeskEDPMS = () => {
         </script>
       </Helmet>
 
-      <div className="min-h-screen bg-slate-50 text-slate-900">
+      <div className="advance-service-page min-h-screen bg-slate-50 text-slate-900">
         <MainNavbar
           scrolled={scrolled}
           isMenuOpen={isMenuOpen}
@@ -357,7 +357,7 @@ const CloudDeskEDPMS = () => {
         />
 
         <main className="overflow-hidden">
-          <section className="bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.18),_transparent_38%),linear-gradient(135deg,#eff6ff_0%,#ffffff_45%,#ecfeff_100%)] pt-28 pb-16 md:pt-32 md:pb-20">
+          <section className="advance-service-hero bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.18),_transparent_38%),linear-gradient(135deg,#eff6ff_0%,#ffffff_45%,#ecfeff_100%)] pt-28 pb-16 md:pt-32 md:pb-20">
             <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-[1.2fr_0.8fr] md:px-8">
               <div>
                 <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/80 px-4 py-2 text-sm font-semibold text-sky-700 shadow-sm">

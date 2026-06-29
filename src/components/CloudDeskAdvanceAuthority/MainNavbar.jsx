@@ -135,7 +135,17 @@ export const MainNavbar = ({
           </div>
 
           <button
-            onClick={() => setShowEnrollModal({ open:true , type:"Enroll" })}
+            onClick={() => {
+              if (setShowEnrollModal) {
+                setShowEnrollModal({ open: true, type: "Enroll" });
+                return;
+              }
+
+              document.querySelector("form")?.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+            }}
             className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 rounded-lg shadow-lg hover:shadow-xl"
           >
             Enroll Now

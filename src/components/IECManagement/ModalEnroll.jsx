@@ -1,3 +1,4 @@
+import { getApiUrl } from "../../utils/apiBaseUrl";
 // import React, { useState, useEffect } from "react";
 // import { X, Handshake, Building, Mail } from "lucide-react";
 
@@ -598,7 +599,7 @@ export const ModalEnroll = ({ show, onClose, type, onSubmit }) => {
       console.log("📤 Final payload:", payload);
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/import-export-code`,
+        getApiUrl("/api/import-export-code"),
         // "http://localhost:5000/api/import-export-code",
         {
           method: "POST",

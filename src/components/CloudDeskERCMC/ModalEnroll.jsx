@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   // ─────────────────────────────────────────────────────────────────
@@ -213,7 +214,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       console.log("FINAL PAYLOAD:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/e-rcmc-registration`,
+        getApiUrl("/api/e-rcmc-registration"),
         // "http://localhost:5000/api/e-rcmc-registration",
         {
           method: "POST",

@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 // ─────────────────────────────────────────────────────────────────────────
 //  COMPLETE PORT DATA (Sea, Air, ICD, CFS, LCS)
@@ -319,7 +320,10 @@ export default function QuickForm() {
   const wrapperRef = useRef(null);
 
   // Get the list of codes for the selected category
-  const currentCodes = portCategory ? (portData[portCategory] || []).map(p => p.code) : [];
+  const currentCodes = useMemo(
+    () => (portCategory ? (portData[portCategory] || []).map((port) => port.code) : []),
+    [portCategory]
+  );
 
   // Filter codes based on input
   useEffect(() => {
@@ -414,7 +418,7 @@ export default function QuickForm() {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
+        getApiUrl("/api/ad-code-registration"),
         // "http://localhost:5000/api/ad-code-registration", // ✅ http:// is required        
         {
           method: "POST",

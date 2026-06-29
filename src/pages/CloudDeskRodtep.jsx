@@ -1,235 +1,85 @@
-import React, { useEffect, useState } from "react";
+import TopBar from "../components/CloudDeskRodtep/TopBar";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import Navbar from "../components/CloudDeskRodtep/Navbar";
+import Hero from "../components/CloudDeskRodtep/Hero";
+import Fees from "../components/CloudDeskRodtep/Fees";
+import { ModalEnroll } from "../components/CloudDeskRodtep/ModalEnroll";
 import {
-  ArrowRight,
-  BadgeCheck,
-  BookOpenCheck,
-  Building2,
-  CalendarClock,
-  CheckCircle2,
-  ClipboardCheck,
+  ChevronDown,
+  Linkedin,
+  Twitter,
+  Facebook,
+  AlertTriangle,
+  Building,
+  ShieldUser,
+  CheckCircle,
+  FileSignature,
+  FileText,
+  Handshake,
+  Globe2,
+  Shirt,
+  Sprout,
+  Fish,
+  Cog,
+  FlaskConical,
+  Workflow,
+  ScrollText,
+  BookUser,
   Coins,
-  FileCheck2,
-  FileSearch,
-  Landmark,
-  Mail,
   MapPin,
   Phone,
-  ShieldCheck,
-  Sparkles,
-  Target
+  Mail,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskRodtep/MainNavbar";
-import QuickForm from "../components/CloudDeskRodtep/QuickForm";
-
-const HIGHLIGHTS = [
-  "RoDTEP consultant India",
-  "Shipping-bill declaration, rate verification, and ICEGATE ledger support",
-  "RoDTEP recovery, missed-scroll diagnosis, and scrip monetisation guidance",
-  "AA, EPCG, EOU, drawback, and RoSCTL interaction review"
-];
-
-const BENEFITS = [
-  "Helps exporters structure RoDTEP correctly at the shipping-bill stage so the benefit is not lost because of declaration, product-mapping, or workflow mistakes.",
-  "Supports rate and cap validation before export so businesses do not rely on broad assumptions where product-specific remission logic materially affects margins.",
-  "Reduces risk around missed credits, invalid expectations, and post-export confusion by aligning RoDTEP with ICEGATE ledger readiness, EGM completion, and incentive strategy.",
-  "Improves commercial outcomes by reviewing whether the exporter should focus on RoDTEP alone, compare it with drawback or RoSCTL, or plan around AA, EPCG, or EOU conditions."
-];
-
-const USE_CASES = [
-  {
-    title: "RoDTEP claim planning before export",
-    description:
-      "For exporters who want to validate whether the product is appropriately positioned for RoDTEP, what rate and cap logic may apply, and what declaration discipline is required before shipping-bill filing."
-  },
-  {
-    title: "Missed or delayed RoDTEP credits",
-    description:
-      "Useful where the shipment has moved but the exporter cannot see expected credit, the ledger is unclear, or the scroll and credit-generation process seems stuck."
-  },
-  {
-    title: "RoDTEP and related-scheme comparison",
-    description:
-      "Relevant where the exporter is also dealing with Duty Drawback, RoSCTL, Advance Authorisation, EPCG, EOU, or other conditions that change the real commercial value of the RoDTEP path."
-  },
-  {
-    title: "Scrip utilisation or monetisation strategy",
-    description:
-      "For exporters who have generated or expect to generate RoDTEP scrip value and need help using it properly, transferring it, or connecting it to wider customs-duty planning."
-  }
-];
-
-const ELIGIBILITY_POINTS = [
-  "Exporters shipping eligible products and evaluating whether embedded taxes not otherwise refunded can be remitted through the RoDTEP framework.",
-  "Businesses that need transaction-level support for shipping-bill intent declaration, rate review, EGM completion dependency, and ICEGATE ledger readiness.",
-  "Exporters comparing RoDTEP with related incentive routes such as drawback or RoSCTL, or assessing the practical effect of AA, EPCG, EOU, or other operating models.",
-  "Businesses facing missed credits, rate confusion, ledger uncertainty, scrip questions, or recovery situations where the claim flow did not work the way operations expected."
-];
-
-const DOCUMENTS_REQUIRED = [
-  "Shipping-bill details, invoice set, FOB value, product description, HSN position, port details, and the export transaction trail relevant to the RoDTEP claim flow.",
-  "ICEGATE user and ledger status proof, EGM-linked records, available credit or scroll references, and any screenshots showing missed-credit, mismatch, or non-generation issues.",
-  "Supporting export-commercial records used to review rate or cap expectations, including product-level facts, sector context, and scheme-choice assumptions where relevant.",
-  "Any customs or operational correspondence, CHA working sheets, query records, or related scheme records if the matter overlaps with drawback, RoSCTL, AA, EPCG, or compliance review."
-];
-
-const PROCESS_STEPS = [
-  {
-    title: "Shipment and incentive diagnosis",
-    detail:
-      "We first review whether the case is about pre-export claim planning, a missed or delayed credit, a rate or cap misunderstanding, or a broader incentive-structure problem."
-  },
-  {
-    title: "Declaration and data review",
-    detail:
-      "The shipping-bill position, product classification assumptions, transaction facts, and scheme-declaration discipline are checked together instead of in isolation."
-  },
-  {
-    title: "Rate, cap, and eligibility interpretation",
-    detail:
-      "Where required, the exporter’s expected RoDTEP value is reviewed against the practical notified logic, product facts, and any surrounding scheme interaction."
-  },
-  {
-    title: "ICEGATE and credit workflow support",
-    detail:
-      "We assess the downstream flow involving EGM completion, scroll progression, ledger visibility, and whether the benefit is commercially usable or requires recovery follow-through."
-  },
-  {
-    title: "Recovery or future-transaction tightening",
-    detail:
-      "The objective is either to recover value where possible or to make the exporter’s next shipment set more accurate, bankable, and less vulnerable to incentive leakage."
-  }
-];
-
-const TIMELINE_POINTS = [
-  "Initial RoDTEP transaction review and issue diagnosis can usually begin within 1 to 3 working days once the export record set is available.",
-  "Pre-export declaration and scheme-planning reviews are often faster than recovery or missed-credit matters because they do not depend on already-fractured transaction history.",
-  "Recovery or delayed-credit situations may take longer because the issue can sit at classification, declaration, EGM, scroll, ledger, or inter-scheme decision level.",
-  "Actual customs and system-side progression depends on export status, data quality, and whether the matter is preventive planning, post-export review, or a commercial recovery case."
-];
-
-const COMMON_ISSUES = [
-  {
-    title: "RoDTEP intent was not structured properly",
-    detail:
-      "Many exporters only discover the importance of transaction-level declaration discipline after export, when the benefit does not flow the way they expected."
-  },
-  {
-    title: "Rate and cap assumptions were too broad",
-    detail:
-      "A headline rate is not enough. Product facts, notified logic, and cap realities can materially change the real value expected from the shipment."
-  },
-  {
-    title: "ICEGATE or ledger visibility is unclear",
-    detail:
-      "The issue may not be the concept of eligibility at all. It may sit in downstream movement such as EGM completion, scroll processing, ledger readiness, or operational interpretation."
-  },
-  {
-    title: "RoDTEP was evaluated without scheme interaction",
-    detail:
-      "The exporter may need RoDTEP to be reviewed together with drawback, RoSCTL, AA, EPCG, or EOU conditions to understand the best real commercial route."
-  }
-];
 
 const FAQS = [
   {
     question: "What is the RoDTEP scheme?",
     answer:
-      "RoDTEP is a remission framework intended to refund certain embedded duties and taxes on exported products that are not otherwise rebated through other mechanisms, subject to notified product logic and export compliance conditions."
+      "RoDTEP is a remission framework intended to refund certain embedded duties and taxes on exported products that are not otherwise rebated through other mechanisms, subject to notified product logic and export compliance conditions.",
   },
   {
     question: "How is RoDTEP claimed?",
     answer:
-      "In practice, RoDTEP depends on correct shipping-bill declaration and downstream export-processing flow. The benefit is tied to transaction accuracy rather than a casual post-export assumption."
+      "In practice, RoDTEP depends on correct shipping-bill declaration and downstream export-processing flow. The benefit is tied to transaction accuracy rather than a casual post-export assumption.",
   },
   {
     question: "Is RoDTEP the same as Duty Drawback?",
     answer:
-      "No. RoDTEP and Duty Drawback are different incentive frameworks with different logic, and many exporters need a transaction-level review before assuming which route gives the better or valid result."
+      "No. RoDTEP and Duty Drawback are different incentive frameworks with different logic, and many exporters need a transaction-level review before assuming which route gives the better or valid result.",
   },
   {
     question: "Can RoDTEP be relevant along with AA, EPCG, or EOU operations?",
     answer:
-      "Yes, but the practical commercial value and applicable route can change when other export-promotion conditions are involved, so the interaction should be reviewed carefully."
+      "Yes, but the practical commercial value and applicable route can change when other export-promotion conditions are involved, so the interaction should be reviewed carefully.",
   },
   {
     question: "Why is my RoDTEP credit not visible?",
     answer:
-      "The reason may sit at declaration, data quality, EGM completion, scroll movement, ledger visibility, or scheme-positioning level rather than in a single obvious error."
+      "The reason may sit at declaration, data quality, EGM completion, scroll movement, ledger visibility, or scheme-positioning level rather than in a single obvious error.",
   },
   {
     question: "Can this page rank for RoDTEP keywords strongly?",
     answer:
-      "Yes, because it targets actual exporter search intent around RoDTEP eligibility, rates, declaration workflow, ledger issues, scheme comparison, recovery problems, and transaction-level claim support."
-  }
-];
-
-const GOVERNMENT_REFERENCES = [
-  {
-    label: "DGFT Portal",
-    href: "https://www.dgft.gov.in/CP/"
+      "Yes, because it targets actual exporter search intent around RoDTEP eligibility, rates, declaration workflow, ledger issues, scheme comparison, recovery problems, and transaction-level claim support.",
   },
-  {
-    label: "ICEGATE Portal",
-    href: "https://www.icegate.gov.in/"
-  },
-  {
-    label: "CBIC Customs Portal",
-    href: "https://www.cbic.gov.in/"
-  },
-  {
-    label: "ICEGATE Guidelines and Help Resources",
-    href: "https://www.icegate.gov.in/guidelines"
-  }
-];
-
-const RELATED_LINKS = [
-  {
-    href: "/services/duty-drawback/",
-    title: "Duty Drawback Support",
-    description:
-      "Useful where RoDTEP has to be compared with drawback strategy, route selection, and transaction structuring before or after export."
-  },
-  {
-    href: "/services/shipping-bill-filing",
-    title: "Shipping Bill Filing Support",
-    description:
-      "Relevant where RoDTEP success depends on declaration quality, scheme coding, shipment data discipline, and export-filing accuracy."
-  },
-  {
-    href: "/services/igst-refund",
-    title: "IGST Refund Support",
-    description:
-      "Helpful where the exporter needs broader export-incentive review across RoDTEP, GST-linked refund exposure, and customs-filing quality."
-  },
-  {
-    href: "/services/advance-authorisation/",
-    title: "Advance Authorisation Support",
-    description:
-      "Important where exporters need RoDTEP to be evaluated alongside AA-based duty-saving strategy and export obligation planning."
-  }
-];
-
-const SECTION_LINKS = [
-  { href: "#overview", label: "Overview" },
-  { href: "#eligibility", label: "Eligibility" },
-  { href: "#documents", label: "Documents" },
-  { href: "#process", label: "Process" },
-  { href: "#faqs", label: "FAQs" }
 ];
 
 const CloudDeskRodtep = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showEnrollModal, setShowEnrollModal] = useState({
+    open: false,
+    type: "",
+  });
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const handleEnrollmentSubmit = (formData) => {
+    console.log("Enrollment Submitted:", formData);
 
+    // TODO → send API call
+    // axios.post("/api/enroll", formData)
+
+    alert("Form submitted — check console for data.");
+  };
   return (
     <>
       <Helmet>
@@ -275,7 +125,7 @@ const CloudDeskRodtep = () => {
                 name: "RoDTEP Consultant India | EXIMINQ",
                 description:
                   "RoDTEP consultant in India for claim strategy, declaration review, rate verification, ICEGATE ledger support, and RoDTEP recovery matters.",
-                inLanguage: "en-IN"
+                inLanguage: "en-IN",
               },
               {
                 "@type": "BreadcrumbList",
@@ -285,21 +135,21 @@ const CloudDeskRodtep = () => {
                     "@type": "ListItem",
                     position: 1,
                     name: "Home",
-                    item: "https://eximinq.in/"
+                    item: "https://eximinq.in/",
                   },
                   {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "RoDTEP Scheme",
-                    item: "https://eximinq.in/services/rodtep-scheme"
-                  }
-                ]
+                    item: "https://eximinq.in/services/rodtep-scheme",
+                  },
+                ],
               },
               {
                 "@type": "Service",
@@ -309,19 +159,19 @@ const CloudDeskRodtep = () => {
                 provider: {
                   "@type": "Organization",
                   name: "EXIMINQ",
-                  url: "https://eximinq.in/"
+                  url: "https://eximinq.in/",
                 },
                 areaServed: {
                   "@type": "Country",
-                  name: "India"
+                  name: "India",
                 },
                 description:
                   "Support for RoDTEP declaration planning, rate verification, ICEGATE ledger review, missed-credit diagnosis, and related export incentive strategy.",
                 offers: {
                   "@type": "Offer",
                   availability: "https://schema.org/InStock",
-                  priceCurrency: "INR"
-                }
+                  priceCurrency: "INR",
+                },
               },
               {
                 "@type": "FAQPage",
@@ -331,432 +181,676 @@ const CloudDeskRodtep = () => {
                   name: item.question,
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: item.answer
-                  }
-                }))
-              }
-            ]
+                    text: item.answer,
+                  },
+                })),
+              },
+            ],
           })}
         </script>
       </Helmet>
-
-      <div className="min-h-screen bg-slate-50 text-slate-900">
-        <MainNavbar
-          scrolled={scrolled}
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
+      <div className="bg-slate-50 text-slate-800">
+        {/* Dynamic Sections */}
+        {/* <TopBar /> */}
+        <MainNavbar setShowEnrollModal={setShowEnrollModal} />
+        <Navbar setShowEnrollModal={setShowEnrollModal} />
+        <Hero setShowEnrollModal={setShowEnrollModal} />
+        <ModalEnroll
+          show={showEnrollModal.open}
+          type={showEnrollModal.type}
+          onClose={() => setShowEnrollModal({ open: false, type: null })}
+          onSubmit={handleEnrollmentSubmit}
         />
+        {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
+        <section id="about" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            {/* Heading */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                What is the RoDTEP Scheme?
+              </h2>
+              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+            </div>
 
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#0f1d4b] via-[#1d4ed8] to-[#0f766e] text-white">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.16),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(255,255,255,0.12),_transparent_28%)]" />
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-28 md:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8">
+            {/* Description */}
+            <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
+              <p className="mb-4">
+                The{" "}
+                <strong>
+                  RoDTEP (Remission of Duties and Taxes on Exported Products)
+                </strong>{" "}
+                scheme was introduced to replace the MEIS scheme. Its primary
+                objective is to refund the embedded central, state, and local
+                duties or taxes that were not being refunded under any other
+                mechanism (like GST refund or Duty Drawback).
+              </p>
+              <p className="mb-4">
+                These include taxes like VAT on fuel used in transportation,
+                Mandi tax, and Electricity duty used during manufacturing. The
+                rebate is issued in the form of a transferable electronic scrip
+                (e-Scrip) which sits in an electronic ledger on the ICEGATE
+                portal.
+              </p>
+
+              {/* Placeholder Image */}
+              <div className="w-full text-center text-slate-400 italic mt-6">
+                [Image of Tax Refund Flow Diagram]
+              </div>
+            </div>
+
+            {/* Feature Cards */}
+            <div className="grid md:grid-cols-3 gap-6 mt-12 text-center">
+              {/* Card 1 */}
+              <div className="p-6 bg-slate-50 rounded-lg border border-slate-100 hover:shadow-md transition">
+                <FileText className="text-brand-500 w-12 h-12 mx-auto mb-4" />
+                <h3 className="font-bold text-lg mb-2">Electronic Scrip</h3>
+                <p className="text-sm text-slate-500">
+                  No physical paper. Credits are maintained in a digital ledger
+                  on ICEGATE.
+                </p>
+              </div>
+
+              {/* Card 2 */}
+              <div className="p-6 bg-slate-50 rounded-lg border border-slate-100 hover:shadow-md transition">
+                <Handshake className="text-brand-500 w-12 h-12 mx-auto mb-4" />
+                <h3 className="font-bold text-lg mb-2">Transferable</h3>
+                <p className="text-sm text-slate-500">
+                  Scrips can be easily transferred to other IEC holders who need
+                  to pay Basic Customs Duty.
+                </p>
+              </div>
+
+              {/* Card 3 */}
+              <div className="p-6 bg-slate-50 rounded-lg border border-slate-100 hover:shadow-md transition">
+                <Globe2 className="text-brand-500 w-12 h-12 mx-auto mb-4" />
+                <h3 className="font-bold text-lg mb-2">All Sectors</h3>
+                <p className="text-sm text-slate-500">
+                  Covers 8500+ tariff lines including Textiles, Agriculture,
+                  Marine, Leather, and Engineering.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        (
+        <section id="rates" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            {/* Heading */}
+            <div className="text-center mb-16">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Incentive Structure
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                RoDTEP Rates & Caps
+              </h2>
+              <p className="text-slate-500 mt-2">
+                Rates vary by product (0.5% to 4.3%) and often have a value cap.
+              </p>
+            </div>
+
+            {/* Table */}
+            <div className="overflow-x-auto bg-white rounded-xl shadow-lg border border-slate-200 max-w-4xl mx-auto">
+              <table className="w-full text-sm text-left text-slate-600">
+                <thead className="text-xs text-slate-700 uppercase bg-slate-100">
+                  <tr>
+                    <th className="px-6 py-4 border-b">Sector / Product</th>
+                    <th className="px-6 py-4 border-b">Approx Rate (%)</th>
+                    <th className="px-6 py-4 border-b">Cap (₹ per Unit)</th>
+                  </tr>
+                </thead>
+
+                <tbody className="divide-y divide-slate-100">
+                  {/* Textiles */}
+                  <tr className="hover:bg-slate-50">
+                    <td className="px-6 py-4 font-bold text-slate-800 flex items-center gap-2">
+                      <Shirt className="w-5 h-5 text-brand-600" />
+                      Textiles (Apparel)
+                    </td>
+                    <td className="px-6 py-4">~ 2.5% - 4.3%</td>
+                    <td className="px-6 py-4">Yes (varies)</td>
+                  </tr>
+
+                  {/* Agriculture */}
+                  <tr className="hover:bg-slate-50">
+                    <td className="px-6 py-4 font-bold text-slate-800 flex items-center gap-2">
+                      <Sprout className="w-5 h-5 text-green-600" />
+                      Agriculture
+                    </td>
+                    <td className="px-6 py-4">~ 1.4% - 2.0%</td>
+                    <td className="px-6 py-4">None</td>
+                  </tr>
+
+                  {/* Marine */}
+                  <tr className="hover:bg-slate-50">
+                    <td className="px-6 py-4 font-bold text-slate-800 flex items-center gap-2">
+                      <Fish className="w-5 h-5 text-blue-600" />
+                      Marine Products
+                    </td>
+                    <td className="px-6 py-4">~ 2.5%</td>
+                    <td className="px-6 py-4">₹ 16/kg (example)</td>
+                  </tr>
+
+                  {/* Engineering */}
+                  <tr className="hover:bg-slate-50">
+                    <td className="px-6 py-4 font-bold text-slate-800 flex items-center gap-2">
+                      <Cog className="w-5 h-5 text-brand-600" />
+                      Engineering Goods
+                    </td>
+                    <td className="px-6 py-4">~ 0.5% - 1.0%</td>
+                    <td className="px-6 py-4">None</td>
+                  </tr>
+
+                  {/* Chemicals */}
+                  <tr className="hover:bg-slate-50">
+                    <td className="px-6 py-4 font-bold text-slate-800 flex items-center gap-2">
+                      <FlaskConical className="w-5 h-5 text-purple-600" />
+                      Chemicals / Plastics
+                    </td>
+                    <td className="px-6 py-4">~ 0.8% - 1.5%</td>
+                    <td className="px-6 py-4">None</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div className="p-4 bg-brand-50 text-center text-xs text-brand-800">
+                *Rates are subject to change by DGFT notifications. Contact us
+                for the specific rate for your HS Code.
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="process" className="py-20 bg-brand-900 text-white">
+          <div className="container mx-auto px-4">
+            {/* Heading */}
+            <div className="text-center mb-16">
+              <span className="text-accent-400 font-bold uppercase tracking-wider text-sm">
+                Workflow
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2">
+                How to Claim RoDTEP
+              </h2>
+            </div>
+
+            {/* Steps */}
+            <div className="relative grid md:grid-cols-5 gap-8 step-connector">
+              {/* STEP 1 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-brand-900 mx-auto mb-4 border-4 border-accent-500">
+                  <FileSignature className="w-7 h-7 text-brand-900" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Declaration</h3>
+                <p className="text-sm text-slate-300">
+                  Mandatory declaration "RODTEPY" in the Shipping Bill.
+                </p>
+              </div>
+
+              {/* STEP 2 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-brand-900 mx-auto mb-4 border-4 border-accent-500">
+                  <Workflow className="w-7 h-7 text-brand-900" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Processing</h3>
+                <p className="text-sm text-slate-300">
+                  After EGM filing, RMS processes the Shipping Bill.
+                </p>
+              </div>
+
+              {/* STEP 3 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-brand-900 mx-auto mb-4 border-4 border-accent-500">
+                  <ScrollText className="w-7 h-7 text-brand-900" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Scroll</h3>
+                <p className="text-sm text-slate-300">
+                  Customs issues a RoDTEP Scroll with eligible bills.
+                </p>
+              </div>
+
+              {/* STEP 4 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-brand-900 mx-auto mb-4 border-4 border-accent-500">
+                  <BookUser className="w-7 h-7 text-brand-900" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Ledger</h3>
+                <p className="text-sm text-slate-300">
+                  Create RoDTEP Ledger on ICEGATE to receive credits.
+                </p>
+              </div>
+
+              {/* STEP 5 */}
+              <div className="text-center relative z-10">
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white mx-auto mb-4 border-4 border-white shadow-sm">
+                  <Coins className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">Scrip</h3>
+                <p className="text-sm text-slate-300">
+                  Generate e-Scrip. Use it or transfer to another importer.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Dynamic Fees Section */}
+        <Fees setShowEnrollModal={setShowEnrollModal} />
+        {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Why CloudDesk for Rodtep-Scheme?
+              </h2>
+              <p className="text-slate-500">
+                Most exporters lose 1-2% of their turnover because they don't
+                know how to claim their scrips. CloudDesk ensures no rupee is
+                left behind.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Feature 1 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                  <AlertTriangle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    1. The "Shipping Bill Declaration" Guard
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    You must claim<strong> RoDTEP </strong>at the time of filing
+                    the Shipping Bill. If you miss the
+                    <strong> "Intent" </strong>declaration on
+                    <strong> ICEGATE,</strong> the benefit is gone forever.
+                    <strong>CloudDesk’s</strong> Audit Engine scans every
+                    Shipping Bill before submission to ensure the correct
+                    <strong> "Scheme Code" </strong>is selected for your HSN.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                  <CheckCircle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    2. Digital Scrip Ledger Management
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Unlike old physical papers, these benefits are issued as
+                    Electronic Duty Credit Scrips in your ICEGATE ledger.
+                    <strong>CloudDesk</strong> monitors your
+                    <strong> "Scrip Management Module,"</strong> tracks the
+                    generation of credits, and ensures they are
+                    <strong> "notarized" </strong>in the system so they don't
+                    expire.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                  <Building size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    3. Monetization & Transfer (Cash Conversion)
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    If you don't have an <strong>import duty liability,</strong>{" "}
+                    these scrips are<strong> "Dead Capital."</strong>
+                    <strong>CloudDesk </strong>acts as your Scrip Broker. We
+                    help you transfer these scrips to other{" "}
+                    <strong>importers at a market premium, </strong>converting
+                    your tax credits into immediate cash flow.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="flex gap-4 p-6 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                  <ShieldUser size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">
+                    4. RoSCTL Specialization for Apparel
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    For the textile and garment<strong> sector, RoSCTL </strong>
+                    offers much higher rates than<strong> RoDTEP.</strong>
+                    We manage the specialized<strong> RoSCTL Ledger, </strong>
+                    ensuring that your garment exports are mapped to the correct
+                    <strong> "Apparel Category" </strong>for maximum rebate.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="faq" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-4">
+              {/* FAQ 1 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Is RoDTEP applicable for Advance Authorisation / EOU?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Initially, it was excluded. However, the government has
+                  extended RoDTEP benefits to AA, EOU, and SEZ units for
+                  specific periods. Please check the latest notification or
+                  contact us for eligibility.
+                </p>
+              </details>
+
+              {/* FAQ 2 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Does the RoDTEP scrip expire?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes, the validity period of the scrip is generally{" "}
+                  <strong>one year</strong> from the date of its generation. It
+                  must be utilized for duty payment or transferred within this
+                  period.
+                </p>
+              </details>
+
+              {/* FAQ 3 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What duties can be paid using RoDTEP scrips?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  RoDTEP scrips can be used to pay{" "}
+                  <strong>Basic Customs Duty (BCD)</strong> only. They cannot be
+                  used to pay IGST, Compensation Cess, or other surcharges.
+                </p>
+              </details>
+
+              {/* FAQ 4 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is the main difference between RoDTEP and RoSCTL?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  RoDTEP: Covers almost all sectors (Engineering, Chemicals,
+                  Agriculture, etc.). RoSCTL: Specifically for Apparel,
+                  Garments, and Made-ups (Chapters 61, 62, and 63). It provides
+                  a higher rebate because the textile sector has more embedded
+                  taxes.
+                </p>
+              </details>
+
+              {/* FAQ 5 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is a "Duty Credit Scrip"?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  It is a digital currency issued by Customs. You can use it to
+                  pay Basic Customs Duty (BCD) on your future imports, or you
+                  can sell it to someone else who needs to pay duty.
+                </p>
+              </details>
+
+              {/* FAQ 6 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I claim RoDTEP if I am also using Advance Authorisation?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes, but at a lower rate. In 2026, the government has enabled
+                  RoDTEP for AA/EPCG/EOU units, but the "RoDTEP for AA" rates
+                  are typically lower than the "Normal RoDTEP" rates. CloudDesk
+                  calculates which combination gives you the highest net saving.
+                </p>
+              </details>
+
+              {/* FAQ 7 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  How do I claim the benefit?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  There is no separate application. You must declare your intent
+                  in the Shipping Bill (using specific codes for RoDTEP or
+                  RoSCTL). Once the EGM (Export General Manifest) is filed, the
+                  credit is automatically processed into your ICEGATE Ledger.
+                </p>
+              </details>
+
+              {/* FAQ 8 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  What is the validity of the Scrip?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Typically, the scrips are valid for 1 or 2 years from the date
+                  of generation. If you don't use or sell them within this
+                  window, the value becomes zero. CloudDesk’s Expiry Alert
+                  ensures you never lose a scrip.
+                </p>
+              </details>
+
+              {/* FAQ 9 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Can I use RoDTEP to pay IGST?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  No. RoDTEP and RoSCTL scrips can only be used to pay Basic
+                  Customs Duty (BCD). They cannot be used for IGST, Compensation
+                  Cess, or Antidumping Duty.
+                </p>
+              </details>
+
+              {/* FAQ 10 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  Is it legal to sell RoDTEP scrips?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Yes. These scrips are "Freely Transferable." You can transfer
+                  them to any other IEC holder via the ICEGATE portal.
+                </p>
+              </details>
+
+              {/* FAQ 11 */}
+              <details className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group">
+                <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                  How much "Cash" will I get if I sell my scrip?
+                  <ChevronDown className="text-brand-500 h-5 w-5 transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                  Scrips usually sell at a discount. For example, a ₹100 scrip
+                  might sell for ₹97 or ₹98 in the market. CloudDesk finds the
+                  buyer with the lowest discount (highest premium) for you.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+        <section id="rodtep-recovery" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Consolidated Recovery
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                RoDTEP Recovery Audits, Scroll Reversal, and Scrip Monetization
+              </h2>
+              <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+                We folded the weaker refund-recovery URL into this main RoDTEP
+                page so the ranking URL covers the full lifecycle: claim,
+                credit, reconciliation, recovery, and sale.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-6">
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  Missed or expired scroll recovery
+                </h3>
+                <p className="text-slate-600">
+                  If your shipping bills carried intent but the scroll expired,
+                  landed in the wrong ledger, or stalled behind EGM mismatch,
+                  the recovery job belongs inside the RoDTEP master service, not
+                  on a separate orphan URL.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  Benefit reversal and ledger cleanup
+                </h3>
+                <p className="text-slate-600">
+                  Re-imports, audit objections, and duplicated incentives often
+                  require partial reversal before the exporter can move forward.
+                  We treat those reversals as part of the same operational
+                  RoDTEP workflow.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  Scrip sale and cash realization
+                </h3>
+                <p className="text-slate-600">
+                  Once credits are valid, the next question is utilization or
+                  sale. This consolidated page now captures the high-intent
+                  “sell my RoDTEP scrip” journey alongside the claim strategy
+                  itself.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Footer */}
+        <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
+          <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+            {/* BRAND */}
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-100">
-                <Sparkles className="h-4 w-4" />
-                Export incentive planning, claim support, and recovery review
-              </div>
-              <h1 className="mt-6 max-w-4xl text-4xl font-extrabold leading-tight md:text-5xl">
-                RoDTEP Consultant in India for Claim Strategy, Rate
-                Verification, ICEGATE Ledger Support, and Recovery Cases
-              </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-100/90">
-                Strengthen your RoDTEP claim flow before export, review missed
-                credits after export, and align RoDTEP with drawback, RoSCTL,
-                AA, EPCG, and broader incentive strategy.
-              </p>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {HIGHLIGHTS.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-start gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-4 backdrop-blur"
-                  >
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-200" />
-                    <p className="text-sm leading-6 text-slate-100">{item}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="#quick-form"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-cyan-50"
-                >
-                  Start RoDTEP Review
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#faqs"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-                >
-                  Read FAQs
-                </a>
-              </div>
-            </div>
-
-            <div
-              id="quick-form"
-              className="rounded-[32px] border border-white/15 bg-white/95 p-4 shadow-2xl shadow-slate-950/20 backdrop-blur"
-            >
-              <QuickForm />
-            </div>
-          </div>
-        </section>
-
-        <section className="sticky top-[84px] z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
-          <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-4 py-4 md:px-6 lg:px-8">
-            {SECTION_LINKS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-500 hover:text-blue-700"
-              >
-                {item.label}
+              <a className="text-2xl font-bold text-white mb-4 block">
+                EXIMINQ
               </a>
-            ))}
-          </div>
-        </section>
 
-        <main className="mx-auto max-w-7xl px-4 py-14 md:px-6 lg:px-8">
-          <section
-            id="overview"
-            className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]"
-          >
-            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-                <Target className="h-4 w-4" />
-                Service Overview
-              </div>
-              <h2 className="mt-4 text-3xl font-bold text-slate-900">
-                Why RoDTEP needs transaction-level strategy, not guesswork
-              </h2>
-              <div className="mt-5 space-y-4 text-base leading-8 text-slate-600">
-                <p>
-                  RoDTEP is not just a general exporter benefit label. In
-                  practical operations, it depends on product position,
-                  declaration discipline, shipment facts, and the downstream
-                  credit flow that exporters and customs-facing teams actually
-                  need to manage correctly.
-                </p>
-                <p>
-                  Many businesses lose value not because RoDTEP is unavailable,
-                  but because it was evaluated too casually, declared poorly, or
-                  not reviewed alongside related schemes such as drawback,
-                  RoSCTL, Advance Authorisation, EPCG, or EOU conditions.
-                </p>
-                <p>
-                  This page is built as a stronger master RoDTEP service page
-                  for exporters who need claim planning, recovery review, ledger
-                  visibility support, and a clearer commercial strategy around
-                  export incentives.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid gap-6">
-              <div className="rounded-[28px] bg-gradient-to-br from-emerald-50 to-cyan-50 p-7 shadow-sm ring-1 ring-emerald-100">
-                <div className="flex items-center gap-3 text-emerald-700">
-                  <BadgeCheck className="h-5 w-5" />
-                  <span className="text-sm font-semibold uppercase tracking-[0.22em]">
-                    Key Benefits
-                  </span>
-                </div>
-                <ul className="mt-5 space-y-4">
-                  {BENEFITS.map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-7 text-slate-700">
-                      <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-emerald-600" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="rounded-[28px] bg-slate-900 p-7 text-white shadow-sm">
-                <div className="flex items-center gap-3 text-cyan-200">
-                  <Coins className="h-5 w-5" />
-                  <span className="text-sm font-semibold uppercase tracking-[0.22em]">
-                    Incentive Context
-                  </span>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-slate-200">
-                  RoDTEP works best when viewed as part of an export incentive
-                  system, not as a standalone label disconnected from filing
-                  quality, customs workflow, or product-level economics.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="mt-14">
-            <div className="mb-6 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-              <Building2 className="h-4 w-4" />
-              Use Cases
-            </div>
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {USE_CASES.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-[26px] bg-white p-6 shadow-sm ring-1 ring-slate-200"
-                >
-                  <h3 className="text-xl font-semibold text-slate-900">
-                    {item.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">
-                    {item.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-14 grid gap-8 lg:grid-cols-2">
-            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-                <ShieldCheck className="h-4 w-4" />
-                Common Issues
-              </div>
-              <div className="mt-6 space-y-5">
-                {COMMON_ISSUES.map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-2xl border border-rose-100 bg-rose-50/70 p-5"
-                  >
-                    <h3 className="text-lg font-semibold text-slate-900">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div
-              id="eligibility"
-              className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
-            >
-              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-                <ClipboardCheck className="h-4 w-4" />
-                Eligibility
-              </div>
-              <h2 className="mt-4 text-3xl font-bold text-slate-900">
-                Who usually needs RoDTEP support
-              </h2>
-              <ul className="mt-6 space-y-4">
-                {ELIGIBILITY_POINTS.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm leading-7 text-slate-600">
-                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-blue-600" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          <section
-            id="documents"
-            className="mt-14 rounded-[30px] bg-gradient-to-br from-slate-950 to-slate-800 p-8 text-white shadow-sm"
-          >
-            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-200">
-              <FileCheck2 className="h-4 w-4" />
-              Required Documents
-            </div>
-            <h2 className="mt-4 text-3xl font-bold">
-              Records typically reviewed for RoDTEP support
-            </h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              {DOCUMENTS_REQUIRED.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-5"
-                >
-                  <p className="text-sm leading-7 text-slate-100/90">{item}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section
-            id="process"
-            className="mt-14 rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
-          >
-            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-              <BookOpenCheck className="h-4 w-4" />
-              Step-by-Step Process
-            </div>
-            <h2 className="mt-4 text-3xl font-bold text-slate-900">
-              Practical RoDTEP review and support workflow
-            </h2>
-            <div className="mt-8 grid gap-6 lg:grid-cols-5">
-              {PROCESS_STEPS.map((item, index) => (
-                <article
-                  key={item.title}
-                  className="rounded-[24px] border border-slate-200 bg-slate-50 p-5"
-                >
-                  <div className="text-sm font-bold text-blue-700">
-                    Step {index + 1}
-                  </div>
-                  <h3 className="mt-3 text-lg font-semibold text-slate-900">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {item.detail}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-14 grid gap-8 lg:grid-cols-2">
-            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-                <CalendarClock className="h-4 w-4" />
-                Timelines
-              </div>
-              <ul className="mt-6 space-y-4">
-                {TIMELINE_POINTS.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm leading-7 text-slate-600">
-                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-emerald-600" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-                <Landmark className="h-4 w-4" />
-                Official References
-              </div>
-              <p className="mt-4 text-sm leading-7 text-slate-600">
-                The page is strengthened with primary ecosystem references so
-                users and search engines can connect RoDTEP support with the
-                actual DGFT, customs, and ICEGATE environment.
+              <p className="text-sm mb-6">
+                EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
+                Logistics compliance.
               </p>
-              <div className="mt-6 space-y-4">
-                {GOVERNMENT_REFERENCES.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-between rounded-2xl border border-slate-200 px-5 py-4 text-sm font-medium text-slate-700 transition hover:border-blue-500 hover:text-blue-700"
-                  >
-                    <span>{item.label}</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </section>
 
-          <section className="mt-14 rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-              <FileSearch className="h-4 w-4" />
-              Related Services
-            </div>
-            <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {RELATED_LINKS.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className="group rounded-[24px] border border-slate-200 bg-slate-50 p-5 transition hover:border-blue-500 hover:bg-blue-50"
-                >
-                  <h3 className="text-lg font-semibold text-slate-900 group-hover:text-blue-700">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {item.description}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section
-            id="faqs"
-            className="mt-14 rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-slate-200"
-          >
-            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">
-              <BadgeCheck className="h-4 w-4" />
-              FAQs
-            </div>
-            <h2 className="mt-4 text-3xl font-bold text-slate-900">
-              Common questions about RoDTEP
-            </h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              {FAQS.map((item) => (
-                <article
-                  key={item.question}
-                  className="rounded-[24px] border border-slate-200 bg-slate-50 p-6"
-                >
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    {item.question}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {item.answer}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-14 rounded-[32px] bg-gradient-to-r from-blue-700 via-cyan-700 to-emerald-600 p-8 text-white shadow-xl">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div>
-                <div className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-100">
-                  Conversion CTA
-                </div>
-                <h2 className="mt-4 text-3xl font-bold">
-                  Need RoDTEP claim planning, missed-credit diagnosis, or
-                  incentive strategy support?
-                </h2>
-                <p className="mt-4 max-w-3xl text-base leading-8 text-cyan-50">
-                  We review the shipment, declaration, rate assumptions, ledger
-                  status, and related-scheme interaction so your RoDTEP
-                  decisions are commercially stronger and technically cleaner.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-4 text-sm font-medium text-white">
-                  <a
-                    href="tel:+917400096950"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 hover:bg-white/20"
-                  >
-                    <Phone className="h-4 w-4" />
-                    +91 74000 96950
-                  </a>
-                  <a
-                    href="mailto:clouddesk@eximinq.in"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 hover:bg-white/20"
-                  >
-                    <Mail className="h-4 w-4" />
-                    clouddesk@eximinq.in
-                  </a>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3">
-                    <MapPin className="h-4 w-4" />
-                    Mumbai, India
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-4">
-                <a
-                  href="#quick-form"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-cyan-50"
-                >
-                  Start With Quick Form
-                  <ArrowRight className="h-4 w-4" />
+              <div className="flex gap-4">
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Linkedin size={18} />
                 </a>
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-                >
-                  Speak With Our Team
-                </Link>
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Twitter size={18} />
+                </a>
+                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                  <Facebook size={18} />
+                </a>
               </div>
             </div>
-          </section>
-        </main>
+
+            {/* QUICK LINKS */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Quick Links</h4>
+              <ul class="space-y-2 text-sm">
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    SCOMET License
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    Advance Authorisation
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    EPCG Scheme
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    Restricted Export License
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* OTHER SERVICES */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Other Services</h4>
+              <ul class="space-y-2 text-sm">
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    Appendix 3 (SCOMET)
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    EUC Format (Appx 2S)
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    DGFT FAQs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">
+                    Wassenaar List
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* CONTACT */}
+            <div>
+              <h4 className="text-white font-bold mb-6">Contact Us</h4>
+              <ul className="space-y-4 text-sm">
+                <li className="flex gap-3 items-center">
+                  <Phone size={18} className="text-brand-500" />
+                  +917400096950
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <Mail size={18} className="text-brand-500" />
+                  clouddesk@eximinq.in
+                </li>
+
+                <li className="flex gap-3 items-center">
+                  <MapPin size={18} className="text-brand-500" />
+                  Mumbai, India
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* COPYRIGHT */}
+          <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
+            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            DGFT.
+          </div>
+        </footer>
       </div>
     </>
   );

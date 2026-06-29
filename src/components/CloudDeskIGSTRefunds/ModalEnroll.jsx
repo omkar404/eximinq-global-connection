@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { X, Handshake, Building, Mail ,FileSignature} from "lucide-react";
+import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
+import { getApiUrl } from "../../utils/apiBaseUrl";
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -15,7 +16,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [issue, setIssue] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState("");
-  
+
   const isEnroll = type === "Enroll";
   const Applyapplication = type === "Start_Recovery";
   const isProfileUpdate = type === "IEC_PROFILE_UPDATE";
@@ -35,7 +36,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     setIssue("");
   };
 
-
   const IEC_OPTIONS = [
     "NEW IEC REGISTRATION",
     "IEC PROFILE UPDATATION",
@@ -43,15 +43,14 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
     "IEC SUSPENSION",
   ];
 
-const PROFILE_UPDATE_OPTIONS = [
-  "Steel Import NOC (SIMS)",
-  "Copper (NFMIMS)",
-  "Aluminium (NFMIMS)",
-  "Coal (CIMS)",
-  "Paper (PIMS)",
-  "Chip (CHIMS)",
-];
-
+  const PROFILE_UPDATE_OPTIONS = [
+    "Steel Import NOC (SIMS)",
+    "Copper (NFMIMS)",
+    "Aluminium (NFMIMS)",
+    "Coal (CIMS)",
+    "Paper (PIMS)",
+    "Chip (CHIMS)",
+  ];
 
   const handleClose = () => {
     resetForm();
@@ -116,7 +115,7 @@ const PROFILE_UPDATE_OPTIONS = [
       console.log("final payload", payload);
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/igst-refund`,
+        getApiUrl("/api/igst-refund"),
         // "http://localhost:5000/api/igst-refund",
         {
           method: "POST",
@@ -143,7 +142,6 @@ const PROFILE_UPDATE_OPTIONS = [
       setLoading(false);
     }
   };
-
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-sm">
@@ -282,11 +280,11 @@ const PROFILE_UPDATE_OPTIONS = [
                   <option value="" disabled>
                     Select Update Type
                   </option>
-                    {PROFILE_UPDATE_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
+                  {PROFILE_UPDATE_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
                 </select>
               </div>
             )}
@@ -316,26 +314,26 @@ const PROFILE_UPDATE_OPTIONS = [
               </>
             )}
 
-  {Applyapplication && (
-  <div>
-    <label className="block text-xs font-bold text-gray-700 mb-1">
-      CATEGORY
-    </label>
-    <div className="relative">
-      <FileSignature
-        className="absolute left-3 top-3 text-gray-400"
-        size={16}
-      />
-      <input
-        type="text"
-        name="service"
-        value="IGST Refund"
-        readOnly
-        className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
-      />
-    </div>
-  </div>
-)}
+            {Applyapplication && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  CATEGORY
+                </label>
+                <div className="relative">
+                  <FileSignature
+                    className="absolute left-3 top-3 text-gray-400"
+                    size={16}
+                  />
+                  <input
+                    type="text"
+                    name="service"
+                    value="IGST Refund"
+                    readOnly
+                    className="w-full pl-10 p-3 rounded-lg border border-gray-300 bg-gray-100 text-sm"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Role Selection */}
             <div>
@@ -370,7 +368,7 @@ const PROFILE_UPDATE_OPTIONS = [
                         </span>
                       </label>
                     );
-                  }
+                  },
                 )}
               </div>
               {errors.role && (
