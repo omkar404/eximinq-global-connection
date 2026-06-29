@@ -11,6 +11,12 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
+
+const notificationRecipients = [
+  "crm@eximinq.com",
+  "omkarmhetar100@gmail.com",
+  "sheshnathyadav1827499@gmail.com",
+];
     
 /* EMAIL HELPER */
 async function sendEmail(record) {
@@ -32,9 +38,9 @@ async function sendEmail(record) {
 
   const serviceDisplay = service || "Advance Authorisation Registration";
 
-  await transporter.sendMail({
+  const info = await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
-    to: "crm@eximinq.com, omkarmhetar100@gmail.com, sheshnathyadav1827499@gmail.com",
+    to: notificationRecipients,
     subject: `Advance Authorisation Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
@@ -58,7 +64,28 @@ async function sendEmail(record) {
     `,
   });
 
-  console.log("✅ Email sent:", _id);
+  const accepted = info.accepted || [];
+  const rejected = info.rejected || [];
+
+  if (accepted.length !== notificationRecipients.length || rejected.length) {
+    const deliveryError = new Error(
+      "SMTP did not accept every notification recipient",
+    );
+    deliveryError.code = "EMAIL_NOT_FULLY_ACCEPTED";
+    deliveryError.accepted = accepted;
+    deliveryError.rejected = rejected;
+    throw deliveryError;
+  }
+
+  console.log("✅ Email accepted by SMTP:", {
+    recordId: _id,
+    messageId: info.messageId,
+    acceptedCount: accepted.length,
+    rejectedCount: rejected.length,
+    response: info.response,
+  });
+
+  return info;
 }
 
 /* CREATE API */
@@ -110,13 +137,39 @@ exports.createadvanceAuthorisationRoutes = async (req, res) => {
     const record = await advanceAuthorisationRoutes.create(recordData);
     console.log("✅ Saved:", record._id);
 
-    sendEmail(record).catch((err) =>
-      console.error("❌ Email Error:", err.message),
-    );
+    let emailInfo;
+    try {
+      emailInfo = await sendEmail(record);
+    } catch (emailError) {
+      console.error("❌ Advance Authorisation email delivery failed:", {
+        recordId: record._id,
+        code: emailError.code,
+        command: emailError.command,
+        response: emailError.response,
+        accepted: emailError.accepted,
+        rejected: emailError.rejected,
+        message: emailError.message,
+      });
+
+      return res.status(502).json({
+        success: false,
+        saved: true,
+        emailSent: false,
+        id: record._id,
+        message:
+          "Form saved, but the email notification could not be delivered. Please contact support.",
+      });
+    }
 
     return res.status(201).json({
       success: true,
       message: "Submitted successfully",
+      emailSent: true,
+      email: {
+        messageId: emailInfo.messageId,
+        acceptedCount: emailInfo.accepted.length,
+        rejectedCount: emailInfo.rejected.length,
+      },
       data: record,
     });
   } catch (error) {
