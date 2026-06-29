@@ -57,7 +57,7 @@ const CloudDeskCertifiedGovernment = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/gem-registration"
+          href="https://eximinq.in/services/gem-registration/"
         />
 
         {/* Open Graph */}
@@ -71,7 +71,7 @@ const CloudDeskCertifiedGovernment = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/gem-registration"
+          content="https://eximinq.in/services/gem-registration/"
         />
         <meta property="og:type" content="website" />
 

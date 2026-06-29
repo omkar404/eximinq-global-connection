@@ -199,7 +199,7 @@ const RELATED_LINKS = [
       "Relevant where exporters need incentive-side guidance together with clean export transaction records and reliable downstream proof of realisation."
   },
   {
-    href: "/services/gst-lut-filing",
+    href: "/services/gst-lut-filing/",
     title: "GST LUT Filing Support",
     description:
       "Helpful where exporters want cleaner zero-rated export compliance, LUT discipline, and transaction readiness aligned with banking and customs records."
@@ -255,7 +255,7 @@ const CloudDeskEDPMS = () => {
           content="EDPMS consultant India, eBRC consultant India, export proceeds reconciliation, IRM mapping, shipping bill closure, AD bank export compliance, short realisation, EDPMS closure support, eBRC generation support"
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://eximinq.in/services/edpms-ebrc" />
+        <link rel="canonical" href="https://eximinq.in/services/edpms-ebrc/" />
         <meta
           property="og:title"
           content="EDPMS and eBRC Consultant India | Export Proceeds Reconciliation Support"
@@ -266,7 +266,7 @@ const CloudDeskEDPMS = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/edpms-ebrc"
+          content="https://eximinq.in/services/edpms-ebrc/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -277,7 +277,7 @@ const CloudDeskEDPMS = () => {
               {
                 "@type": "WebPage",
                 "@id": "https://eximinq.in/services/edpms-ebrc#webpage",
-                url: "https://eximinq.in/services/edpms-ebrc",
+                url: "https://eximinq.in/services/edpms-ebrc/",
                 name: "EDPMS and eBRC Consultant India | EXIMINQ",
                 description:
                   "Support for EDPMS closure, IRM mapping, eBRC readiness, open shipping bill reconciliation, and export proceeds compliance.",
@@ -297,13 +297,13 @@ const CloudDeskEDPMS = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services/"
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "EDPMS and eBRC",
-                    item: "https://eximinq.in/services/edpms-ebrc"
+                    item: "https://eximinq.in/services/edpms-ebrc/"
                   }
                 ]
               },

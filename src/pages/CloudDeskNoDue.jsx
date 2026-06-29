@@ -55,7 +55,7 @@ const CloudDeskNoDue = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/no-due-certificate"
+          href="https://eximinq.in/services/no-due-certificate/"
         />
 
         {/* Open Graph */}
@@ -69,7 +69,7 @@ const CloudDeskNoDue = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/no-due-certificate"
+          content="https://eximinq.in/services/no-due-certificate/"
         />
         <meta property="og:type" content="website" />
 

@@ -54,7 +54,7 @@ const CloudDeskEPCG = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/customs-license-registration"
+          href="https://eximinq.in/services/customs-license-registration/"
         />
 
         {/* Open Graph */}
@@ -68,7 +68,7 @@ const CloudDeskEPCG = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/customs-license-registration"
+          content="https://eximinq.in/services/customs-license-registration/"
         />
         <meta property="og:type" content="website" />
 

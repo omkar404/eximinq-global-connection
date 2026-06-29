@@ -15,7 +15,7 @@ const IndustriesSection = () => {
   const industries = [
     {
       title: "Pharmaceuticals",
-      url: "https://eximinq.in/pharmaceuticals-industry-import-export",
+      url: "https://eximinq.in/pharmaceuticals-industry-import-export/",
       icon: <Activity className="w-6 h-6 text-white" />,
       desc: "Critical cold-chain clearance & regulatory approvals.",
       tags: ["ADC NOC", "Advance License", "Cold Chain"],
@@ -24,7 +24,7 @@ const IndustriesSection = () => {
     },
     {
       title: "Engineering & Auto",
-      url: "https://eximinq.in/engineering-industry-import-export",
+      url: "https://eximinq.in/engineering-industry-import-export/",
       icon: <Settings className="w-6 h-6 text-white" />,
       desc: "Capital goods import at 0% duty under EPCG.",
       tags: ["EPCG Scheme", "SION Fixation", "Project Imports"],
@@ -33,7 +33,7 @@ const IndustriesSection = () => {
     },
     {
       title: "Electronics & IT",
-      url: "https://eximinq.in/electronics-it-industry-import-export",
+      url: "https://eximinq.in/electronics-it-industry-import-export/",
       icon: <Cpu className="w-6 h-6 text-white" />,
       desc: "Mandatory registration for wireless & digital goods.",
       tags: ["BIS (CRS)", "WPC (ETA)", "E-Waste (EPR)"],
@@ -42,7 +42,7 @@ const IndustriesSection = () => {
     },
     {
       title: "Chemicals",
-      url: "https://eximinq.in/chemicals-industry-import-export",
+      url: "https://eximinq.in/chemicals-industry-import-export/",
       icon: <FlaskConical className="w-6 h-6 text-white" />,
       desc: "Handling hazardous cargo & dual-use licensing.",
       tags: ["SCOMET", "Haz-Waste", "Anti-Dumping"],
@@ -51,7 +51,7 @@ const IndustriesSection = () => {
     },
     {
       title: "Textiles",
-      url: "https://eximinq.in/textiles-apparels-industry-import-export",
+      url: "https://eximinq.in/textiles-apparels-industry-import-export/",
       icon: <Layers className="w-6 h-6 text-white" />,
       desc: "Maximizing rebates on export of garments.",
       tags: ["RoSCTL", "Duty Drawback", "Fabric Sourcing"],
@@ -60,7 +60,7 @@ const IndustriesSection = () => {
     },
     {
       title: "Food & Agro",
-      url: "https://eximinq.in/food-agro-industry-import-export",
+      url: "https://eximinq.in/food-agro-industry-import-export/",
       icon: <Leaf className="w-6 h-6 text-white" />,
       desc: "Perishable cargo clearance with FSSAI compliance.",
       tags: ["FSSAI", "Phytosanitary", "Quota Mgmt"],
@@ -69,7 +69,7 @@ const IndustriesSection = () => {
     },
     {
       title: "Solar & Renewables",
-      url: "https://eximinq.in/solar-and-renewables-industry-import-export",
+      url: "https://eximinq.in/solar-and-renewables-industry-import-export/",
       icon: <Zap className="w-6 h-6 text-white" />,
       desc: "Project imports for power plants & ALMM compliance.",
       tags: ["Project Import", "ALMM", "Bose Exemptions"],
@@ -78,7 +78,7 @@ const IndustriesSection = () => {
     },
     {
       title: "Defense & Aerospace",
-      url: "https://eximinq.in/defense-aerospace-industry-import-export",
+      url: "https://eximinq.in/defense-aerospace-industry-import-export/",
       icon: <Plane className="w-6 h-6 text-white" />,
       desc: "Handling SCOMET licensing for dual-use technology.",
       tags: ["SCOMET", "End User Cert", "Restricted Items"],
@@ -87,7 +87,7 @@ const IndustriesSection = () => {
     },
     {
       title: "E-Commerce",
-      url: "https://eximinq.in/ecommerce-industry-import-export",
+      url: "https://eximinq.in/ecommerce-industry-import-export/",
       icon: <ShoppingCart className="w-6 h-6 text-white" />,
       desc: "Simplified clearance for courier & postal exports.",
       tags: ["CSB-V Filing", "PEMS", "Return Mgmt"],

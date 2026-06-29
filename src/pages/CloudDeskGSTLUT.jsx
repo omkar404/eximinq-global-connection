@@ -49,12 +49,12 @@ const CloudDeskGSTLUT = () => {
 
         <meta
           name="description"
-          content="Save your working capital. File <strong>Letter of Undertaking (LUT)</strong> under GST for the current Financial Year and export goods/services without upfront tax payment."
+          content="Save working capital by filing a Letter of Undertaking (LUT) under GST for the current financial year and exporting goods or services without upfront IGST payment."
         />
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/gst-lut-filing"
+          href="https://eximinq.in/services/gst-lut-filing/"
         />
 
         {/* Open Graph */}
@@ -64,11 +64,11 @@ const CloudDeskGSTLUT = () => {
         />
         <meta
           property="og:description"
-          content="Save your working capital. File <strong>Letter of Undertaking (LUT)</strong> under GST for the current Financial Year and export goods/services without upfront tax payment."
+          content="Save working capital by filing a Letter of Undertaking (LUT) under GST for the current financial year and exporting goods or services without upfront IGST payment."
         />
         <meta
           property="og:url"
-          content=""
+          content="https://eximinq.in/services/gst-lut-filing/"
         />
         <meta property="og:type" content="website" />
 
@@ -85,7 +85,8 @@ const CloudDeskGSTLUT = () => {
             },
             "areaServed": "India",
             "description":
-              "Save your working capital. File <strong>Letter of Undertaking (LUT)</strong> under GST for the current Financial Year and export goods/services without upfront tax payment."
+              "Save working capital by filing a Letter of Undertaking (LUT) under GST for the current financial year and exporting goods or services without upfront IGST payment.",
+            "url": "https://eximinq.in/services/gst-lut-filing/"
           })}
         </script>
 

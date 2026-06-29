@@ -41,7 +41,7 @@ const HeroCompliance = ({ setShowModal, upcomingDeadlines = [] }) => {
 
               <button className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-lg transition border border-white/20 backdrop-blur-sm">
                 <a
-                href="https://eximinq.in/trade-compliance-calendar"
+                href="https://eximinq.in/trade-compliance-calendar/"
                 target="_blank"
                 rel="noopener noreferrer"
                 >

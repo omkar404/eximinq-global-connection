@@ -28,13 +28,13 @@ export default function CloudDeskAdvanceLanding() {
         content="Advance Authorisation redemption, EODC filing, ANF 4F documentation, export obligation closure, customs bond cancellation, and bank guarantee release support in India."
       />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://eximinq.in/advance-authorization-redemption" />
+      <link rel="canonical" href="https://eximinq.in/advance-authorization-redemption/" />
       <meta property="og:title" content="Advance Authorisation Redemption & EODC Closure | EXIMINQ" />
       <meta
         property="og:description"
         content="Close pending Advance Authorisation licenses with EODC filing, DGFT documentation, value addition checks, and customs bond cancellation support."
       />
-      <meta property="og:url" content="https://eximinq.in/advance-authorization-redemption" />
+      <meta property="og:url" content="https://eximinq.in/advance-authorization-redemption/" />
       <meta property="og:type" content="website" />
       <script type="application/ld+json">
         {JSON.stringify({
@@ -53,13 +53,13 @@ export default function CloudDeskAdvanceLanding() {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Services",
-                  "item": "https://eximinq.in/services"
+                  "item": "https://eximinq.in/services/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Advance Authorisation Redemption",
-                  "item": "https://eximinq.in/advance-authorization-redemption"
+                  "item": "https://eximinq.in/advance-authorization-redemption/"
                 }
               ]
             },
@@ -77,7 +77,7 @@ export default function CloudDeskAdvanceLanding() {
                 "@type": "Country",
                 "name": "India"
               },
-              "url": "https://eximinq.in/advance-authorization-redemption"
+              "url": "https://eximinq.in/advance-authorization-redemption/"
             },
             {
               "@type": "FAQPage",

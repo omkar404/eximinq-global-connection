@@ -40,7 +40,7 @@ const CloudDeskCompliance = () => {
     {
       id: "i1",
       title: "BIS Registration (CRS/ISI)",
-      link: "https://eximinq.in/services/bis-registration",
+      link: "https://eximinq.in/services/bis-registration/",
       desc: "Mandatory BIS certification for Electronics, Steel, Chemicals, and Toys. We handle testing coordination and grant of license.",
       icon: <Zap className="w-6 h-6 text-blue-600" />,
       risk: "High: Goods Confiscation",
@@ -49,7 +49,7 @@ const CloudDeskCompliance = () => {
     {
       id: "i2",
       title: "EPR Authorization",
-      link: "https://eximinq.in/services/epr-authorization",
+      link: "https://eximinq.in/services/epr-authorization/",
       desc: "Extended Producer Responsibility registration for E-waste, Plastic Packaging, Battery, and Tyre waste management.",
       icon: <Leaf className="w-6 h-6 text-green-600" />,
       risk: "Medium: Heavy Penalties",
@@ -58,7 +58,7 @@ const CloudDeskCompliance = () => {
     {
       id: "i3",
       title: "WPC (ETA) License",
-      link: "https://eximinq.in/services/wpc-license",
+      link: "https://eximinq.in/services/wpc-license/",
       desc: "Equipment Type Approval (ETA) from WPC Wing for importing wireless products (Bluetooth/Wi-Fi devices).",
       icon: <Radio className="w-6 h-6 text-blue-600" />,
       risk: "High: Import Ban",
@@ -67,7 +67,7 @@ const CloudDeskCompliance = () => {
     {
       id: "i4",
       title: "Legal Metrology (LMPC)",
-      link: "https://eximinq.in/services/lmpc-registration",
+      link: "https://eximinq.in/services/lmpc-registration/",
       desc: "Registration for Pre-packaged commodities. Ensuring MRP labeling compliance on imported retail packages.",
       icon: <Scale className="w-6 h-6 text-blue-600" />,
       risk: "Medium: Seizure at Port",
@@ -88,7 +88,7 @@ const CloudDeskCompliance = () => {
     {
       id: "e1",
       title: "Banking (EDPMS / e-BRC)",
-      link: "https://eximinq.in/services/edpms-ebrc",
+      link: "https://eximinq.in/services/edpms-ebrc/",
       desc: "Closing export payments & avoiding RBI caution listing.",
       icon: "Landmark",
       risk: "Critical: IEC Suspension",
@@ -97,7 +97,7 @@ const CloudDeskCompliance = () => {
     {
       id: "e2",
       title: "REX Registration",
-      link: "https://eximinq.in/services/rex-registration",
+      link: "https://eximinq.in/services/rex-registration/",
       desc: "Self-certification for EU exports under GSP.",
       icon: "Globe",
       risk: "Medium: Duty Benefit Loss",
@@ -109,7 +109,7 @@ const CloudDeskCompliance = () => {
     {
       id: "a1",
       title: "FSSAI License",
-      link: "https://eximinq.in/services/fssai-licensing",
+      link: "https://eximinq.in/services/fssai-licensing/",
       desc: "FICS clearance + central licensing for food imports.",
       icon: "Utensils",
       risk: "Critical: Health Hazard",
@@ -118,7 +118,7 @@ const CloudDeskCompliance = () => {
     {
       id: "a2",
       title: "AQCS & PQMS",
-      link:"https://eximinq.in/services/aqcs-pqms",
+      link:"https://eximinq.in/services/aqcs-pqms/",
       desc: "Animal & Plant quarantine certifications.",
       icon: "Leaf",
       risk: "High: Bio-security Risk",

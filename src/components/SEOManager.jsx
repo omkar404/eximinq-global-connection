@@ -21,6 +21,13 @@ const sanitizePathname = (pathname) => {
   return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
 };
 
+const toCanonicalPath = (pathname) => {
+  const sanitizedPath = sanitizePathname(pathname);
+  return sanitizedPath === "/" || sanitizedPath.endsWith("/")
+    ? sanitizedPath
+    : `${sanitizedPath}/`;
+};
+
 const getRouteMeta = (pathname) => {
   const candidates = pathname === "/"
     ? ["/"]
@@ -79,7 +86,7 @@ const SEOManager = () => {
   const { pathname } = useLocation();
   const normalizedPath = sanitizePathname(pathname.toLowerCase());
   const meta = getRouteMeta(normalizedPath) || buildFallbackMeta(normalizedPath);
-  const canonicalUrl = `${CANONICAL_ORIGIN}${normalizedPath}`;
+  const canonicalUrl = `${CANONICAL_ORIGIN}${toCanonicalPath(normalizedPath)}`;
 
   return (
     <Helmet>

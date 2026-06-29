@@ -60,7 +60,7 @@ const CloudDeskHorticulture = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/horticulture"
+          href="https://eximinq.in/services/horticulture/"
         />
 
         {/* Open Graph */}
@@ -74,7 +74,7 @@ const CloudDeskHorticulture = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/horticulture"
+          content="https://eximinq.in/services/horticulture/"
         />
         <meta property="og:type" content="website" />
 

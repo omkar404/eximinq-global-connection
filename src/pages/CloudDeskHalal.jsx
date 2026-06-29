@@ -55,7 +55,7 @@ const CloudDeskHalal = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/halal-certification"
+          href="https://eximinq.in/services/halal-certification/"
         />
 
         {/* Open Graph */}
@@ -69,7 +69,7 @@ const CloudDeskHalal = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/halal-certification"
+          content="https://eximinq.in/services/halal-certification/"
         />
         <meta property="og:type" content="website" />
 

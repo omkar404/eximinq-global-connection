@@ -60,7 +60,7 @@ const CloudDeskESANCHIT = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/e-sanchit-filing"
+          href="https://eximinq.in/services/e-sanchit-filing/"
         />
 
         {/* Open Graph */}
@@ -76,7 +76,7 @@ const CloudDeskESANCHIT = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/e-sanchit-filing"
+          content="https://eximinq.in/services/e-sanchit-filing/"
         />
         <meta property="og:type" content="website" />
 

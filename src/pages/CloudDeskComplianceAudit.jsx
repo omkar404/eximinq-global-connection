@@ -157,13 +157,13 @@ const CloudDeskComplianceAudit = () => {
           content="Import export compliance audit consultant for EPCG, Advance Authorisation, IGST refunds, duty drawback, DGFT records, and Customs exposure."
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://eximinq.in/services/compliance-audit" />
+        <link rel="canonical" href="https://eximinq.in/services/compliance-audit/" />
         <meta property="og:title" content="Import Export Compliance Audit Consultant India" />
         <meta
           property="og:description"
           content="Identify DGFT, Customs, licence, refund, and documentation risks before they become notices or recovery demands."
         />
-        <meta property="og:url" content="https://eximinq.in/services/compliance-audit" />
+        <meta property="og:url" content="https://eximinq.in/services/compliance-audit/" />
         <meta property="og:type" content="article" />
         <script type="application/ld+json">
           {JSON.stringify({
@@ -179,7 +179,7 @@ const CloudDeskComplianceAudit = () => {
                   url: "https://eximinq.in",
                 },
                 areaServed: { "@type": "Country", name: "India" },
-                url: "https://eximinq.in/services/compliance-audit",
+                url: "https://eximinq.in/services/compliance-audit/",
               },
               {
                 "@type": "FAQPage",

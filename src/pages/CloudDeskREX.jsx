@@ -63,7 +63,7 @@ const CloudDeskREX = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/rex-registration"
+          href="https://eximinq.in/services/rex-registration/"
         />
 
         {/* Open Graph */}
@@ -77,7 +77,7 @@ const CloudDeskREX = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/rex-registration"
+          content="https://eximinq.in/services/rex-registration/"
         />
         <meta property="og:type" content="website" />
 

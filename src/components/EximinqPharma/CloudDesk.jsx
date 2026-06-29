@@ -61,7 +61,7 @@ const CloudDesk = () => {
 
             {/* CTA */}
             <a 
-              href="https://eximinq.in/clouddesk-saas"
+              href="https://eximinq.in/clouddesk-saas/"
               target="_blank"
               rel="noopener noreferrer" 
               className="inline-block mt-10 bg-teal-600 hover:bg-teal-500 text-white px-8 py-3 rounded-lg font-bold transition-all"

@@ -229,7 +229,7 @@ const CloudDeskFreeSale = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/free-sale-certificate"
+          href="https://eximinq.in/services/free-sale-certificate/"
         />
 
         <meta
@@ -242,7 +242,7 @@ const CloudDeskFreeSale = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/free-sale-certificate"
+          content="https://eximinq.in/services/free-sale-certificate/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -253,8 +253,8 @@ const CloudDeskFreeSale = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/free-sale-certificate",
-                url: "https://eximinq.in/services/free-sale-certificate",
+                "@id": "https://eximinq.in/services/free-sale-certificate/",
+                url: "https://eximinq.in/services/free-sale-certificate/",
                 name:
                   "Free Sale Certificate Consultant India | FSC for Export, CDSCO, DGFT & State Authority Support | EXIMINQ",
                 description:
@@ -278,13 +278,13 @@ const CloudDeskFreeSale = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services/"
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "Free Sale Certificate",
-                    item: "https://eximinq.in/services/free-sale-certificate"
+                    item: "https://eximinq.in/services/free-sale-certificate/"
                   }
                 ]
               },

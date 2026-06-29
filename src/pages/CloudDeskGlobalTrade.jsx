@@ -71,7 +71,7 @@ const CloudDeskGlobalTrade = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/freight-forwarding"
+          href="https://eximinq.in/services/freight-forwarding/"
         />
 
         {/* Open Graph */}
@@ -86,7 +86,7 @@ const CloudDeskGlobalTrade = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/freight-forwarding"
+          content="https://eximinq.in/services/freight-forwarding/"
         />
         <meta property="og:type" content="website" />
 

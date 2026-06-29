@@ -57,7 +57,7 @@ const [showEnrollModal, setShowEnrollModal] = useState({
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/cdsco-compliance"
+          href="https://eximinq.in/services/cdsco-compliance/"
         />
 
         {/* Open Graph */}
@@ -71,7 +71,7 @@ const [showEnrollModal, setShowEnrollModal] = useState({
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/cdsco-compliance"
+          content="https://eximinq.in/services/cdsco-compliance/"
         />
         <meta property="og:type" content="website" />
 

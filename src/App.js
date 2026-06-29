@@ -55,7 +55,6 @@ import CloudDeskPolicyRelaxation from "./pages/CloudDeskPolicyRelaxation"
 import CloudDeskDigitalSignatures from "./pages/CloudDeskDigitalSignatures"
 import CloudDeskImporters from "./pages/CloudDeskImporters"
 import CloudDeskNoDue from "./pages/CloudDeskNoDue"
-import CloudDeskNoINC from "./pages/CloudDeskNoINC";
 import CloudDeskDisclaimer from "./pages/CloudDeskDisclaimer"
 import CloudDeskPrivacy from "./pages/CloudDeskPrivacy"
 import CloudDeskIES from "./pages/CloudDeskIES"
@@ -84,8 +83,6 @@ import CloudDeskHorticulture from "./pages/CloudDeskHorticulture"
 import CloudDeskPollution from "./pages/CloudDeskPollution"
 import CloudDeskBrand from "./pages/CloudDeskBrand";
 import CloudDeskCopyright from "./pages/CloudDeskCopyright";
-import CloudDeskBrandCopyright from "./pages/CloudDeskBrandCopyright";
-import CloudDeskLogoCopyright from "./pages/CloudDeskLogoCopyright";
 import CloudDeskBarcode from "./pages/CloudDeskBarcode"
 import CloudDeskDesign from "./pages/CloudDeskDesign";
 import CloudDeskRMCC from "./pages/CloudDeskRMCC";
@@ -93,7 +90,6 @@ import CloudDeskSVB from "./pages/CloudDeskSVB"
 import CloudDeskWarehouse from "./pages/CloudDeskWarehouse"
 import CloudDeskUN from "./pages/CloudDeskUN";
 import CloudDeskCA from "./pages/CloudDeskCA";
-import CloudDeskCustoms from "./pages/CloudDeskCustoms";
 import CloudDeskRodstep from "./pages/CloudDeskRodstep";
 import EximinqPharma from "./pages/EximinqPharma";
 import EximinqEngineering from "./pages/EximinqEngineering";
@@ -243,7 +239,7 @@ function App() {
         <Route path="/services/certificate-of-origin/" element={<CloudDeskCertificate />} />
 
         {/* GST LUT Filing */}
-        <Route path="/services/gst-lut-filing" element={<CloudDeskGSTLUT />} />
+        <Route path="/services/gst-lut-filing/" element={<CloudDeskGSTLUT />} />
 
         {/* REX Registration */}
         <Route path="/services/rex-registration" element={<CloudDeskREX />} />
@@ -271,14 +267,11 @@ function App() {
         {/* No Due Certificate */}
         <Route path="/services/no-due-certificate" element={<CloudDeskNoDue />} />
 
-        {/* No Incentive Certificate */}
-        <Route path="/services/no-incentive-certificate" element={<CloudDeskNoINC />} />
-
-        {/* Consolidated URL redirects */}
-        {/* <Route
+        {/* Consolidated URL redirect */}
+        <Route
           path="/services/no-incentive-certificate"
-          element={<Navigate to="/services/no-due-certificate" replace />}
-        /> */}
+          element={<Navigate to="/services/no-due-certificate/" replace />}
+        />
 
         {/* Interest Equalisation  */}
         <Route path="/services/interest-equalisation-scheme" element={<CloudDeskIES />} />
@@ -343,19 +336,17 @@ function App() {
         {/* Copyright Registration */}
         <Route path="/services/copyright-registration" element={<CloudDeskCopyright />} />
 
-        {/* Brand-Copyright Registration */}
-        <Route path="/services/brand-copyright" element={<CloudDeskBrandCopyright />} />
-        {/* <Route
+        {/* Consolidated URL redirect */}
+        <Route
           path="/services/brand-copyright"
-          element={<Navigate to="/services/copyright-registration" replace />}
-        /> */}
+          element={<Navigate to="/services/copyright-registration/" replace />}
+        />
 
-        {/* Logo-Copyright Registration */}
-        <Route path="/services/logo-copyright" element={<CloudDeskLogoCopyright />} />
-        {/* <Route
+        {/* Consolidated URL redirect */}
+        <Route
           path="/services/logo-copyright"
-          element={<Navigate to="/services/copyright-registration" replace />}
-        /> */}
+          element={<Navigate to="/services/copyright-registration/" replace />}
+        />
 
         {/* Official Barcode Registration */}
         <Route path="/services/barcode-registration" element={<CloudDeskBarcode />} />
@@ -378,13 +369,10 @@ function App() {
         {/* ca-certification-export-import */}
         <Route path="/services/ca-certification-export-import" element={<CloudDeskCA />} />
 
-        {/* <Route
+        <Route
           path="/services/customs-license-registration"
-          element={<Navigate to="/services/epcg-scheme" replace />}
-        /> */}
-
-        {/* customs-license-registration  */}
-        <Route path="/services/customs-license-registration" element={<CloudDeskCustoms />} />
+          element={<Navigate to="/services/epcg-scheme/" replace />}
+        />
 
         {/* rodtep-rosctl-trading */}
         <Route path="/services/rodtep-rosctl-trading" element={<CloudDeskRodstep />} />

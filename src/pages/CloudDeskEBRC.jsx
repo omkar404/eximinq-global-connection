@@ -58,7 +58,7 @@ const CloudDeskEBRC = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/aqcs-pqms"
+          href="https://eximinq.in/services/aqcs-pqms/"
         />
 
         {/* Open Graph */}
@@ -72,7 +72,7 @@ const CloudDeskEBRC = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/aqcs-pqms"
+          content="https://eximinq.in/services/aqcs-pqms/"
         />
         <meta property="og:type" content="website" />
 

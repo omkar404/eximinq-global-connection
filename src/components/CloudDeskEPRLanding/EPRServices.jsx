@@ -103,7 +103,7 @@ export default function EPRServices() {
         </div>
         <div className="text-center mt-12">
           <a
-            href="https://eximinq.in/strategic-solutions"
+            href="https://eximinq.in/strategic-solutions/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sky-600 text-lg font-bold hover:text-sky-700 transition-colors inline-flex items-center"

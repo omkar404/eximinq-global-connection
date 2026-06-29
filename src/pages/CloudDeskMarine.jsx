@@ -54,7 +54,7 @@ const CloudDeskMarine = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/marine-insurance"
+          href="https://eximinq.in/services/marine-insurance/"
         />
 
         {/* Open Graph */}
@@ -68,7 +68,7 @@ const CloudDeskMarine = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/marine-insurance"
+          content="https://eximinq.in/services/marine-insurance/"
         />
         <meta property="og:type" content="website" />
 

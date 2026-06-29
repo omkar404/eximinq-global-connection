@@ -9,11 +9,17 @@ const SITEMAP_FILE = path.join(ROOT_DIR, "public", "sitemap.xml");
 const SITE_URL = "https://eximinq.in";
 const REACT_SNAP_EXCLUDED_ROUTES = new Set();
 const REACT_SNAP_PRIORITY_ROUTES = [
-  "/advance-authorization-redemption",
+  "/advance-authorization-redemption/",
   "/services/advance-authorisation/",
-  "/services",
+  "/services/",
   "/",
 ];
+
+function toCanonicalRoutePath(routePath) {
+  return routePath === "/" || routePath.endsWith("/")
+    ? routePath
+    : `${routePath}/`;
+}
 
 function toPosixPath(filePath) {
   return filePath.replace(/\\/g, "/");
@@ -53,8 +59,8 @@ function getRouteMetadata(routePath) {
 
   if (
     routePath === "/foreign-trade-policy" ||
-    routePath === "/dgft-customs-consultancy/" ||
-    routePath === "/certificate-of-origin/" ||
+    routePath === "/dgft-customs-consultancy" ||
+    routePath === "/certificate-of-origin" ||
     routePath === "/compliance-trade-india" ||
     routePath === "/clouddesk-saas" ||
     routePath === "/advance-authorization-redemption"
@@ -167,7 +173,8 @@ function buildSitemapXml(routes) {
   ];
 
   routes.forEach((route) => {
-    const { changefreq, priority } = getRouteMetadata(route.path);
+    const metadataPath = route.path === "/" ? "/" : route.path.replace(/\/$/, "");
+    const { changefreq, priority } = getRouteMetadata(metadataPath);
     lines.push("  <url>");
     lines.push(`    <loc>${escapeXml(`${SITE_URL}${route.path}`)}</loc>`);
     lines.push(`    <lastmod>${route.lastmod}</lastmod>`);
@@ -200,6 +207,7 @@ function main() {
   const importMap = getImportMap(appSource);
   const routes = getRoutes(appSource, importMap).map((route) => ({
     ...route,
+    path: toCanonicalRoutePath(route.path),
     lastmod: getLastModified(route),
   }));
 

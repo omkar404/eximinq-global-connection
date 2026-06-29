@@ -75,7 +75,7 @@ const AEOServices = () => {
 
       <div className="text-center mt-12">
         <a
-          href="https://eximinq.in/services"
+          href="https://eximinq.in/services/"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center text-blue-600 font-semibold hover:underline"

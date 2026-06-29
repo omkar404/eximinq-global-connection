@@ -51,12 +51,12 @@ const Footer = () => {
           links={[
             {
               label: "HSN Code Search",
-              href: "https://eximinq.in/tools/hs-code-finder",
+              href: "https://eximinq.in/tools/hs-code-finder/",
               external: true,
             },
             {
               label: "Duty Calculator",
-              href: "https://eximinq.in/tools/duty-calculator-finder",
+              href: "https://eximinq.in/tools/duty-calculator-finder/",
               external: true,
             },
             { label: "Export Incentives" },

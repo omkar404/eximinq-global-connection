@@ -51,7 +51,7 @@ const CloudDeskIGCR = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/igcr-returns"
+          href="https://eximinq.in/services/igcr-returns/"
         />
 
         {/* Open Graph */}
@@ -65,7 +65,7 @@ const CloudDeskIGCR = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/igcr-returns"
+          content="https://eximinq.in/services/igcr-returns/"
         />
         <meta property="og:type" content="website" />
 

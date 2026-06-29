@@ -222,7 +222,7 @@ const CloudDeskDigitalSignatures = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/dsc-services"
+          href="https://eximinq.in/services/dsc-services/"
         />
 
         <meta
@@ -235,7 +235,7 @@ const CloudDeskDigitalSignatures = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/dsc-services"
+          content="https://eximinq.in/services/dsc-services/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -246,8 +246,8 @@ const CloudDeskDigitalSignatures = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/dsc-services",
-                url: "https://eximinq.in/services/dsc-services",
+                "@id": "https://eximinq.in/services/dsc-services/",
+                url: "https://eximinq.in/services/dsc-services/",
                 name:
                   "Class 3 DSC Consultant India | Digital Signature for DGFT, ICEGATE, GST & MCA | EXIMINQ",
                 description:
@@ -271,13 +271,13 @@ const CloudDeskDigitalSignatures = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services/"
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "DSC Services",
-                    item: "https://eximinq.in/services/dsc-services"
+                    item: "https://eximinq.in/services/dsc-services/"
                   }
                 ]
               },

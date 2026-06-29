@@ -56,7 +56,7 @@ const CloudDeskBisRegistration = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/bis-registration"
+          href="https://eximinq.in/services/bis-registration/"
         />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ const CloudDeskBisRegistration = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/bis-registration"
+          content="https://eximinq.in/services/bis-registration/"
         />
         <meta property="og:type" content="website" />
 

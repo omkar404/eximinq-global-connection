@@ -96,7 +96,7 @@ const CloudDeskWarehouse = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/warehouse-license"
+          href="https://eximinq.in/services/warehouse-license/"
         />
         <meta
           property="og:title"
@@ -108,7 +108,7 @@ const CloudDeskWarehouse = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/warehouse-license"
+          content="https://eximinq.in/services/warehouse-license/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -118,8 +118,8 @@ const CloudDeskWarehouse = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/warehouse-license",
-                url: "https://eximinq.in/services/warehouse-license",
+                "@id": "https://eximinq.in/services/warehouse-license/",
+                url: "https://eximinq.in/services/warehouse-license/",
                 name: "Warehouse Licence Consultant India | Public and Private Bonded Warehouse Registration, Section 57 and Section 58 Support | EXIMINQ",
                 description:
                   "Warehouse licence consultant in India for public and private bonded warehouse registration, Section 57 and Section 58 support, customs duty deferment, warehouse compliance, controls, records, and implementation guidance.",
@@ -142,13 +142,13 @@ const CloudDeskWarehouse = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "Warehouse Licence",
-                    item: "https://eximinq.in/services/warehouse-license",
+                    item: "https://eximinq.in/services/warehouse-license/",
                   },
                 ],
               },

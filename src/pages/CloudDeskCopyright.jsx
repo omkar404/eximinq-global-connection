@@ -56,7 +56,7 @@ const CloudDeskCopyright = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/copyright-registration"
+          href="https://eximinq.in/services/copyright-registration/"
         />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ const CloudDeskCopyright = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/copyright-registration"
+          content="https://eximinq.in/services/copyright-registration/"
         />
         <meta property="og:type" content="website" />
 

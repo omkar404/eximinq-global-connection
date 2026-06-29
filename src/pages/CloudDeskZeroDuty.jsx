@@ -244,7 +244,7 @@ const CloudDeskZeroDuty = () => {
           content="EPCG scheme consultant, EPCG licence consultant India, DGFT EPCG licence, EPCG export obligation, EPCG EODC, EPCG redemption, installation certificate EPCG, customs registration EPCG"
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://eximinq.in/services/epcg-scheme" />
+        <link rel="canonical" href="https://eximinq.in/services/epcg-scheme/" />
 
         <meta
           property="og:title"
@@ -254,7 +254,7 @@ const CloudDeskZeroDuty = () => {
           property="og:description"
           content="Get end-to-end EPCG consulting for licence filing, customs registration, installation certificate, export obligation management, and EODC closure."
         />
-        <meta property="og:url" content="https://eximinq.in/services/epcg-scheme" />
+        <meta property="og:url" content="https://eximinq.in/services/epcg-scheme/" />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
 
@@ -264,8 +264,8 @@ const CloudDeskZeroDuty = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/epcg-scheme",
-                url: "https://eximinq.in/services/epcg-scheme",
+                "@id": "https://eximinq.in/services/epcg-scheme/",
+                url: "https://eximinq.in/services/epcg-scheme/",
                 name:
                   "EPCG Scheme Consultant India | DGFT EPCG License, Export Obligation & EODC Support | EXIMINQ",
                 description:
@@ -289,13 +289,13 @@ const CloudDeskZeroDuty = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services/"
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "EPCG Scheme",
-                    item: "https://eximinq.in/services/epcg-scheme"
+                    item: "https://eximinq.in/services/epcg-scheme/"
                   }
                 ]
               },
@@ -319,7 +319,7 @@ const CloudDeskZeroDuty = () => {
                 offers: {
                   "@type": "Offer",
                   availability: "https://schema.org/InStock",
-                  url: "https://eximinq.in/services/epcg-scheme"
+                  url: "https://eximinq.in/services/epcg-scheme/"
                 }
               },
               {

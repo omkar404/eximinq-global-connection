@@ -56,7 +56,7 @@ const CloudDeskLegalMetrology = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/lmpc-registration"
+          href="https://eximinq.in/services/lmpc-registration/"
         />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ const CloudDeskLegalMetrology = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/lmpc-registration"
+          content="https://eximinq.in/services/lmpc-registration/"
         />
         <meta property="og:type" content="website" />
 

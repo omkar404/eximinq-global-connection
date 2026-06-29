@@ -98,7 +98,7 @@ const CloudDeskRodtep = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/rodtep-scheme"
+          href="https://eximinq.in/services/rodtep-scheme/"
         />
         <meta
           property="og:title"
@@ -110,7 +110,7 @@ const CloudDeskRodtep = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/rodtep-scheme"
+          content="https://eximinq.in/services/rodtep-scheme/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -121,7 +121,7 @@ const CloudDeskRodtep = () => {
               {
                 "@type": "WebPage",
                 "@id": "https://eximinq.in/services/rodtep-scheme#webpage",
-                url: "https://eximinq.in/services/rodtep-scheme",
+                url: "https://eximinq.in/services/rodtep-scheme/",
                 name: "RoDTEP Consultant India | EXIMINQ",
                 description:
                   "RoDTEP consultant in India for claim strategy, declaration review, rate verification, ICEGATE ledger support, and RoDTEP recovery matters.",
@@ -141,13 +141,13 @@ const CloudDeskRodtep = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "RoDTEP Scheme",
-                    item: "https://eximinq.in/services/rodtep-scheme",
+                    item: "https://eximinq.in/services/rodtep-scheme/",
                   },
                 ],
               },

@@ -90,7 +90,7 @@ const CloudDeskIGSTRefunds = () => {
           content="igst refund consultant India, igst refund export, shipping bill mismatch refund, SB005 error solution, SB006 refund issue, PFMS refund rejection, stuck igst refund, icegate igst refund support"
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://eximinq.in/services/igst-refund" />
+        <link rel="canonical" href="https://eximinq.in/services/igst-refund/" />
         <meta
           property="og:title"
           content="IGST Refund Consultant India | Export Refund Recovery and Mismatch Resolution"
@@ -101,7 +101,7 @@ const CloudDeskIGSTRefunds = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/igst-refund"
+          content="https://eximinq.in/services/igst-refund/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -111,8 +111,8 @@ const CloudDeskIGSTRefunds = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/igst-refund",
-                url: "https://eximinq.in/services/igst-refund",
+                "@id": "https://eximinq.in/services/igst-refund/",
+                url: "https://eximinq.in/services/igst-refund/",
                 name: "IGST Refund Consultant India | Export Refund Recovery, Shipping Bill and GST Mismatch Resolution | EXIMINQ",
                 description:
                   "IGST refund consultant in India for export refund recovery, shipping bill and GST mismatch resolution, SB005, SB006, PFMS, EGM issues, refund scroll delays, ICEGATE coordination, and stuck IGST refund support.",
@@ -135,13 +135,13 @@ const CloudDeskIGSTRefunds = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "IGST Refund",
-                    item: "https://eximinq.in/services/igst-refund",
+                    item: "https://eximinq.in/services/igst-refund/",
                   },
                 ],
               },
@@ -156,7 +156,7 @@ const CloudDeskIGSTRefunds = () => {
                   url: "https://eximinq.in/",
                 },
                 areaServed: "India",
-                url: "https://eximinq.in/services/igst-refund",
+                url: "https://eximinq.in/services/igst-refund/",
                 description:
                   "Consulting support for IGST export refund recovery, shipping bill and GST mismatch correction, PFMS issues, EGM issues, refund status analysis, and ICEGATE-linked refund support.",
               },

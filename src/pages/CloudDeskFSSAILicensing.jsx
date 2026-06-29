@@ -56,7 +56,7 @@ const CloudDeskFSSAILicensing = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/fssai-licensing"
+          href="https://eximinq.in/services/fssai-licensing/"
         />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ const CloudDeskFSSAILicensing = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/fssai-licensing"
+          content="https://eximinq.in/services/fssai-licensing/"
         />
         <meta property="og:type" content="website" />
 

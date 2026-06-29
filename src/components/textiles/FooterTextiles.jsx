@@ -68,7 +68,7 @@ export const FooterTextiles = ({ onEnrollClick }) => {
           <ul className="space-y-2 text-sm">
             <li>
               <a
-                href="https://eximinq.in/tools/hs-code-finder"
+                href="https://eximinq.in/tools/hs-code-finder/"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-teal-400"
@@ -78,7 +78,7 @@ export const FooterTextiles = ({ onEnrollClick }) => {
             </li>
             <li>
               <a
-                href="https://eximinq.in/tools/duty-calculator-finder"
+                href="https://eximinq.in/tools/duty-calculator-finder/"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-teal-400"

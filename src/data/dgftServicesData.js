@@ -21,7 +21,7 @@ import {
       id: 'd2',
       category: 'Issuance',
       title: 'EPCG Scheme',
-      link: "https://eximinq.in/services/epcg-scheme",
+      link: "https://eximinq.in/services/epcg-scheme/",
       desc: 'Import capital goods at 0% duty for pre/post-production. Analysis of export obligation based on duty saved.',
       icon: <Award className="w-6 h-6 text-teal-600" />,
       steps: ['Capital Goods List Approval', 'Chartered Engineer Cert', 'License Issuance', 'Installation Cert']
@@ -30,7 +30,7 @@ import {
       id: 'd3',
       category: 'Incentives',
       title: 'RoDTEP Scrips',
-      link: "https://eximinq.in/services/rodtep-scheme",
+      link: "https://eximinq.in/services/rodtep-scheme/",
       desc: 'Claiming rebate on embedded taxes. Checking shipping bills for correct scheme codes and generating e-scrips.',
       icon: <DollarSign className="w-6 h-6 text-green-600" />,
       steps: ['Shipping Bill Verification', 'e-Scrip Generation', 'Ledger Transfer / Sale']
@@ -39,7 +39,7 @@ import {
       id: 'd4',
       category: 'Regulatory',
       title: 'SCOMET Licensing',
-      link : "https://eximinq.in/services/scomet-licensing",
+      link : "https://eximinq.in/services/scomet-licensing/",
       desc: 'End-to-end filing for dual-use items (Special Chemicals, Organisms, Materials, Equipment).',
       icon: <ShieldCheck className="w-6 h-6 text-red-600" />,
       steps: ['Product Classification', 'End User Certificate', 'IMWG Approval', 'License Grant']
@@ -48,7 +48,7 @@ import {
       id: 'd5',
       category: 'Closure',
       title: 'License Redemption (EODC)',
-      link: "https://eximinq.in/services/epcg-scheme",
+      link: "https://eximinq.in/services/epcg-scheme/",
       desc: 'Closure of Advance Auth & EPCG licenses after fulfilling export obligation. Release of Bond/BG from Customs.',
       icon: <CheckCircle className="w-6 h-6 text-teal-600" />,
       steps: ['Export Doc Compilation', 'ANF 4F/5B Filing', 'Deficiency Correction', 'EODC Issuance']

@@ -62,7 +62,7 @@ const CloudDeskDutyPayment = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/duty-payment-ecl"
+          href="https://eximinq.in/services/duty-payment-ecl/"
         />
 
         {/* Open Graph */}
@@ -76,7 +76,7 @@ const CloudDeskDutyPayment = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/duty-payment-ecl"
+          content="https://eximinq.in/services/duty-payment-ecl/"
         />
         <meta property="og:type" content="website" />
 

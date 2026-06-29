@@ -92,7 +92,7 @@ const CloudDeskSVB = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/svb-registration"
+          href="https://eximinq.in/services/svb-registration/"
         />
         <meta
           property="og:title"
@@ -104,7 +104,7 @@ const CloudDeskSVB = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/svb-registration"
+          content="https://eximinq.in/services/svb-registration/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -114,8 +114,8 @@ const CloudDeskSVB = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/svb-registration",
-                url: "https://eximinq.in/services/svb-registration",
+                "@id": "https://eximinq.in/services/svb-registration/",
+                url: "https://eximinq.in/services/svb-registration/",
                 name: "SVB Consultant India | Special Valuation Branch, Related Party Import Valuation & Questionnaire Support | EXIMINQ",
                 description:
                   "SVB consultant in India for Special Valuation Branch cases, related party import valuation, questionnaire replies, provisional assessment strategy, and customs valuation support.",
@@ -138,13 +138,13 @@ const CloudDeskSVB = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "SVB Registration",
-                    item: "https://eximinq.in/services/svb-registration",
+                    item: "https://eximinq.in/services/svb-registration/",
                   },
                 ],
               },

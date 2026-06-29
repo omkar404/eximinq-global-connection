@@ -91,7 +91,7 @@ const CloudDeskFactoryStuffing = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/factory-stuffing"
+          href="https://eximinq.in/services/factory-stuffing/"
         />
         <meta
           property="og:title"
@@ -103,7 +103,7 @@ const CloudDeskFactoryStuffing = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/factory-stuffing"
+          content="https://eximinq.in/services/factory-stuffing/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -113,8 +113,8 @@ const CloudDeskFactoryStuffing = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/factory-stuffing",
-                url: "https://eximinq.in/services/factory-stuffing",
+                "@id": "https://eximinq.in/services/factory-stuffing/",
+                url: "https://eximinq.in/services/factory-stuffing/",
                 name: "Factory Stuffing Consultant India | Self Sealing Permission, RFID E-Seal & Customs Export Stuffing Support | EXIMINQ",
                 description:
                   "Factory stuffing consultant in India for self sealing permission, RFID e-seal setup, customs export stuffing workflow, factory or warehouse approval, and officer-supervised container sealing support.",
@@ -137,13 +137,13 @@ const CloudDeskFactoryStuffing = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "Factory Stuffing",
-                    item: "https://eximinq.in/services/factory-stuffing",
+                    item: "https://eximinq.in/services/factory-stuffing/",
                   },
                 ],
               },

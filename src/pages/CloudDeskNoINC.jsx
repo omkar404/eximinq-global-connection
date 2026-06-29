@@ -65,7 +65,7 @@ const CloudDeskNoINC = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/no-incentive-certificate"
+          href="https://eximinq.in/services/no-incentive-certificate/"
         />
 
         {/* Open Graph */}
@@ -79,7 +79,7 @@ const CloudDeskNoINC = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/no-incentive-certificate"
+          content="https://eximinq.in/services/no-incentive-certificate/"
         />
         <meta property="og:type" content="website" />
 

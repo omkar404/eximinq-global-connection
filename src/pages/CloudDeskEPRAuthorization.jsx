@@ -63,7 +63,7 @@ const CloudDeskEPRAuthorization = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/epr-authorization"
+          href="https://eximinq.in/services/epr-authorization/"
         />
 
         {/* Open Graph */}
@@ -77,7 +77,7 @@ const CloudDeskEPRAuthorization = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/epr-authorization"
+          content="https://eximinq.in/services/epr-authorization/"
         />
         <meta property="og:type" content="website" />
 

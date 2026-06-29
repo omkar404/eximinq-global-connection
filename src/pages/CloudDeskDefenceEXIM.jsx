@@ -58,7 +58,7 @@ const CloudDeskDefenceEXIM = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/defence-exim-license"
+          href="https://eximinq.in/services/defence-exim-license/"
         />
 
         {/* Open Graph */}
@@ -72,7 +72,7 @@ const CloudDeskDefenceEXIM = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/defence-exim-license"
+          content="https://eximinq.in/services/defence-exim-license/"
         />
         <meta property="og:type" content="website" />
 

@@ -56,7 +56,7 @@ const CloudDeskShippingBills = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/shipping-bill-filing"
+          href="https://eximinq.in/services/shipping-bill-filing/"
         />
 
         <meta
@@ -69,7 +69,7 @@ const CloudDeskShippingBills = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/shipping-bill-filing"
+          content="https://eximinq.in/services/shipping-bill-filing/"
         />
         <meta property="og:type" content="article" />
 
@@ -90,13 +90,13 @@ const CloudDeskShippingBills = () => {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Services",
-                    "item": "https://eximinq.in/services"
+                    "item": "https://eximinq.in/services/"
                   },
                   {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "Shipping Bill Filing",
-                    "item": "https://eximinq.in/services/shipping-bill-filing"
+                    "item": "https://eximinq.in/services/shipping-bill-filing/"
                   }
                 ]
               },

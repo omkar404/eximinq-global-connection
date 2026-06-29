@@ -60,7 +60,7 @@ const CloudDeskFertilizer = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/fertiliser-import-license"
+          href="https://eximinq.in/services/fertiliser-import-license/"
         />
 
         {/* Open Graph */}
@@ -74,7 +74,7 @@ const CloudDeskFertilizer = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/fertiliser-import-license"
+          content="https://eximinq.in/services/fertiliser-import-license/"
         />
         <meta property="og:type" content="website" />
 

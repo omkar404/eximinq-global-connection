@@ -56,7 +56,7 @@ const CloudDeskUN = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/un-iip-certification"
+          href="https://eximinq.in/services/un-iip-certification/"
         />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ const CloudDeskUN = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/un-iip-certification"
+          content="https://eximinq.in/services/un-iip-certification/"
         />
         <meta property="og:type" content="website" />
 

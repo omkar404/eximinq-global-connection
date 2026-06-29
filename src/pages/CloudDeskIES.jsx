@@ -91,7 +91,7 @@ const CloudDeskIES = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/interest-equalisation-scheme"
+          href="https://eximinq.in/services/interest-equalisation-scheme/"
         />
         <meta
           property="og:title"
@@ -103,7 +103,7 @@ const CloudDeskIES = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/interest-equalisation-scheme"
+          content="https://eximinq.in/services/interest-equalisation-scheme/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -114,8 +114,8 @@ const CloudDeskIES = () => {
               {
                 "@type": "WebPage",
                 "@id":
-                  "https://eximinq.in/services/interest-equalisation-scheme",
-                url: "https://eximinq.in/services/interest-equalisation-scheme",
+                  "https://eximinq.in/services/interest-equalisation-scheme/",
+                url: "https://eximinq.in/services/interest-equalisation-scheme/",
                 name: "Interest Equalisation Scheme Consultant India | Export Credit Interest Subvention Support, DGFT and Bank Coordination | EXIMINQ",
                 description:
                   "Interest Equalisation Scheme consultant in India for export credit interest subvention support, DGFT workflow, bank coordination, MSME eligibility review, packing credit, post-shipment credit, and current EPM-linked guidance.",
@@ -138,13 +138,13 @@ const CloudDeskIES = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "Interest Equalisation Scheme",
-                    item: "https://eximinq.in/services/interest-equalisation-scheme",
+                    item: "https://eximinq.in/services/interest-equalisation-scheme/",
                   },
                 ],
               },
@@ -159,7 +159,7 @@ const CloudDeskIES = () => {
                   url: "https://eximinq.in/",
                 },
                 areaServed: "India",
-                url: "https://eximinq.in/services/interest-equalisation-scheme",
+                url: "https://eximinq.in/services/interest-equalisation-scheme/",
                 description:
                   "Consulting support for Interest Equalisation Scheme and current export credit interest subvention workflows, including eligibility review, DGFT filing support, bank coordination, and exporter documentation.",
               },

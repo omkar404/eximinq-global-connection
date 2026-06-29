@@ -61,7 +61,7 @@ const CloudDeskAeoCertification = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/aeo-certification"
+          href="https://eximinq.in/services/aeo-certification/"
         />
 
         <meta
@@ -74,7 +74,7 @@ const CloudDeskAeoCertification = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/aeo-certification"
+          content="https://eximinq.in/services/aeo-certification/"
         />
         <meta property="og:type" content="article" />
 
@@ -95,13 +95,13 @@ const CloudDeskAeoCertification = () => {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Services",
-                    "item": "https://eximinq.in/services"
+                    "item": "https://eximinq.in/services/"
                   },
                   {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "AEO Certification",
-                    "item": "https://eximinq.in/services/aeo-certification"
+                    "item": "https://eximinq.in/services/aeo-certification/"
                   }
                 ]
               },

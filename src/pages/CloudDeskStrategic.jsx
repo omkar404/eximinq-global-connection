@@ -1144,7 +1144,7 @@ export default function StrategicSolutions() {
                 {/* <li>• GST LUT Filing</li> */}
                 <li>
                   <a
-                    href="/services/gst-lut-filing"
+                    href="/services/gst-lut-filing/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-blue-600 transition"

@@ -55,7 +55,7 @@ const CloudDeskPollution = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/pollution-control"
+          href="https://eximinq.in/services/pollution-control/"
         />
 
         {/* Open Graph */}
@@ -69,7 +69,7 @@ const CloudDeskPollution = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/pollution-control"
+          content="https://eximinq.in/services/pollution-control/"
         />
         <meta property="og:type" content="website" />
 

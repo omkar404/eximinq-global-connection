@@ -60,7 +60,7 @@ const CloudDeskCustomsAdjudication = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/customs-adjudication"
+          href="https://eximinq.in/services/customs-adjudication/"
         />
 
         {/* Open Graph */}
@@ -76,7 +76,7 @@ const CloudDeskCustomsAdjudication = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/customs-adjudication"
+          content="https://eximinq.in/services/customs-adjudication/"
         />
         <meta property="og:type" content="website" />
 

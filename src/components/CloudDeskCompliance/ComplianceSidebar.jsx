@@ -1,7 +1,7 @@
 import React from "react";
 import { FileWarning, BookOpen, ChevronRight } from "lucide-react";
 
-const REGULATION_URL = "https://eximinq.in/bis-epr-wpc-lmpc";
+const REGULATION_URL = "https://eximinq.in/bis-epr-wpc-lmpc/";
 
 const ComplianceSidebar = ({ setShowModal }) => {
   return (

@@ -56,7 +56,7 @@ const CloudDeskIEM = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/iem-registration"
+          href="https://eximinq.in/services/iem-registration/"
         />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ const CloudDeskIEM = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/iem-registration"
+          content="https://eximinq.in/services/iem-registration/"
         />
         <meta property="og:type" content="website" />
 

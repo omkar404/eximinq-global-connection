@@ -54,7 +54,7 @@ const CloudDeskGSTFiling = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/gst-returns"
+          href="https://eximinq.in/services/gst-returns/"
         />
 
         {/* Open Graph */}
@@ -68,7 +68,7 @@ const CloudDeskGSTFiling = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/gst-returns"
+          content="https://eximinq.in/services/gst-returns/"
         />
         <meta property="og:type" content="website" />
 

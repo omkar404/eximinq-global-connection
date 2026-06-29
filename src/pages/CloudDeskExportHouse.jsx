@@ -101,7 +101,7 @@ const CloudDeskExportHouse = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/star-export-house"
+          href="https://eximinq.in/services/star-export-house/"
         />
         <meta
           property="og:title"
@@ -113,7 +113,7 @@ const CloudDeskExportHouse = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/star-export-house"
+          content="https://eximinq.in/services/star-export-house/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -123,8 +123,8 @@ const CloudDeskExportHouse = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/star-export-house",
-                url: "https://eximinq.in/services/star-export-house",
+                "@id": "https://eximinq.in/services/star-export-house/",
+                url: "https://eximinq.in/services/star-export-house/",
                 name: "Star Export House Consultant India | DGFT Status Holder Certificate, Thresholds & Application Support | EXIMINQ",
                 description:
                   "Star Export House consultant in India for DGFT Status Holder Certificate filing, threshold validation, export-performance review, One Star to Five Star strategy, and deficiency-response support.",
@@ -147,13 +147,13 @@ const CloudDeskExportHouse = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "Star Export House",
-                    item: "https://eximinq.in/services/star-export-house",
+                    item: "https://eximinq.in/services/star-export-house/",
                   },
                 ],
               },

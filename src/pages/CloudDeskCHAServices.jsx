@@ -58,7 +58,7 @@ const CloudDeskCHAServices = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/cha-services"
+          href="https://eximinq.in/services/cha-services/"
         />
 
         {/* Open Graph */}
@@ -74,7 +74,7 @@ const CloudDeskCHAServices = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/cha-services"
+          content="https://eximinq.in/services/cha-services/"
         />
         <meta property="og:type" content="website" />
 

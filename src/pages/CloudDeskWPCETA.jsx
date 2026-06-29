@@ -59,7 +59,7 @@ const CloudDeskWPCETA = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/wpc-license"
+          href="https://eximinq.in/services/wpc-license/"
         />
 
         {/* Open Graph */}
@@ -73,7 +73,7 @@ const CloudDeskWPCETA = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/wpc-license"
+          content="https://eximinq.in/services/wpc-license/"
         />
         <meta property="og:type" content="website" />
 

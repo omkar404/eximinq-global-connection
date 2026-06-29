@@ -64,7 +64,7 @@ const CloudDeskWarehousing = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/warehousing-solutions"
+          href="https://eximinq.in/services/warehousing-solutions/"
         />
 
         {/* Open Graph */}
@@ -80,7 +80,7 @@ const CloudDeskWarehousing = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/warehousing-solutions"
+          content="https://eximinq.in/services/warehousing-solutions/"
         />
         <meta property="og:type" content="website" />
 

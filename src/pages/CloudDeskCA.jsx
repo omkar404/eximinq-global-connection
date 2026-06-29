@@ -58,7 +58,7 @@ const CloudDeskCA = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/ca-certification-export-import"
+          href="https://eximinq.in/services/ca-certification-export-import/"
         />
 
         {/* Open Graph */}
@@ -72,7 +72,7 @@ const CloudDeskCA = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/ca-certification-export-import"
+          content="https://eximinq.in/services/ca-certification-export-import/"
         />
         <meta property="og:type" content="website" />
 

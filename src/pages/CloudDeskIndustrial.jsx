@@ -61,7 +61,7 @@ const CloudDeskIndustrial = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/industrial-license"
+          href="https://eximinq.in/services/industrial-license/"
         />
 
         {/* Open Graph */}
@@ -75,7 +75,7 @@ const CloudDeskIndustrial = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/industrial-license"
+          content="https://eximinq.in/services/industrial-license/"
         />
         <meta property="og:type" content="website" />
 

@@ -60,7 +60,7 @@ const CloudDeskInlandTransport = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/inland-transportation"
+          href="https://eximinq.in/services/inland-transportation/"
         />
 
         {/* Open Graph */}
@@ -74,7 +74,7 @@ const CloudDeskInlandTransport = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/inland-transportation"
+          content="https://eximinq.in/services/inland-transportation/"
         />
         <meta property="og:type" content="website" />
 

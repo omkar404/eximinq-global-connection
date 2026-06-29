@@ -64,7 +64,7 @@ const CloudDeskISO = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/iso-certification"
+          href="https://eximinq.in/services/iso-certification/"
         />
 
         {/* Open Graph */}
@@ -78,7 +78,7 @@ const CloudDeskISO = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/iso-certification"
+          content="https://eximinq.in/services/iso-certification/"
         />
         <meta property="og:type" content="website" />
 

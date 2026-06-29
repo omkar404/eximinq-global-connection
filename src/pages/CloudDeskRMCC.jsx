@@ -56,7 +56,7 @@ const CloudDeskRMCC = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/rmcc-alert-removal"
+          href="https://eximinq.in/services/rmcc-alert-removal/"
         />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ const CloudDeskRMCC = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/rmcc-alert-removal"
+          content="https://eximinq.in/services/rmcc-alert-removal/"
         />
         <meta property="og:type" content="website" />
 

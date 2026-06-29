@@ -51,7 +51,7 @@ const CloudDeskPolicyRelaxation = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/prc-relaxation"
+          href="https://eximinq.in/services/prc-relaxation/"
         />
 
         {/* Open Graph */}
@@ -67,7 +67,7 @@ const CloudDeskPolicyRelaxation = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/prc-relaxation"
+          content="https://eximinq.in/services/prc-relaxation/"
         />
         <meta property="og:type" content="website" />
 

@@ -93,7 +93,7 @@ const CloudDeskSCOMET = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/scomet-licensing"
+          href="https://eximinq.in/services/scomet-licensing/"
         />
         <meta
           property="og:title"
@@ -105,7 +105,7 @@ const CloudDeskSCOMET = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/scomet-licensing"
+          content="https://eximinq.in/services/scomet-licensing/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -115,8 +115,8 @@ const CloudDeskSCOMET = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/scomet-licensing",
-                url: "https://eximinq.in/services/scomet-licensing",
+                "@id": "https://eximinq.in/services/scomet-licensing/",
+                url: "https://eximinq.in/services/scomet-licensing/",
                 name: "SCOMET Licence Consultant India | DGFT Export Authorisation for Dual-Use Goods, Software and Technology | EXIMINQ",
                 description:
                   "SCOMET licence consultant in India for DGFT export authorisation, SCOMET classification, EUC review, EMS filing, dual-use goods compliance, software and technology transfer review, and strategic trade control support.",
@@ -139,13 +139,13 @@ const CloudDeskSCOMET = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "SCOMET Licensing",
-                    item: "https://eximinq.in/services/scomet-licensing",
+                    item: "https://eximinq.in/services/scomet-licensing/",
                   },
                 ],
               },
@@ -160,7 +160,7 @@ const CloudDeskSCOMET = () => {
                   url: "https://eximinq.in/",
                 },
                 areaServed: "India",
-                url: "https://eximinq.in/services/scomet-licensing",
+                url: "https://eximinq.in/services/scomet-licensing/",
                 description:
                   "Consulting support for SCOMET classification, DGFT export authorisation, EUC review, EMS filing, dual-use item compliance, and strategic trade control documentation.",
               },

@@ -54,7 +54,7 @@ const CloudDeskBankEntry = () => {
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/bill-of-entry-filing"
+          href="https://eximinq.in/services/bill-of-entry-filing/"
         />
 
         {/* Open Graph */}
@@ -68,7 +68,7 @@ const CloudDeskBankEntry = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/bill-of-entry-filing"
+          content="https://eximinq.in/services/bill-of-entry-filing/"
         />
         <meta property="og:type" content="article" />
 
@@ -90,13 +90,13 @@ const CloudDeskBankEntry = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "Bill of Entry Filing",
-                    item: "https://eximinq.in/services/bill-of-entry-filing",
+                    item: "https://eximinq.in/services/bill-of-entry-filing/",
                   },
                 ],
               },

@@ -17,15 +17,15 @@ const services = [
   },
   {
     name: "Advance Authorisation Redemption",
-    url: "https://eximinq.in/advance-authorization-redemption",
+    url: "https://eximinq.in/advance-authorization-redemption/",
   },
   {
     name: "EPCG Scheme",
-    url: "https://eximinq.in/services/epcg-scheme",
+    url: "https://eximinq.in/services/epcg-scheme/",
   },
   {
     name: "RoDTEP Scrips",
-    url: "https://eximinq.in/services/rodtep-rosctl-trading",
+    url: "https://eximinq.in/services/rodtep-rosctl-trading/",
   },
   {
     name: "Import Monitoring (SIMS)",
@@ -164,7 +164,7 @@ const BentoGrid = () => {
               <div className="mt-4 pt-4 border-t border-slate-800">
                 <div className="flex items-center justify-between text-slate-300 text-sm group-hover:text-emerald-400 transition-colors cursor-pointer">
                   <a
-                    href="https://eximinq.in/tools/duty-calculator-finder"
+                    href="https://eximinq.in/tools/duty-calculator-finder/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -193,7 +193,7 @@ const BentoGrid = () => {
                   {/* <span>Start Audit</span>
                   <ArrowRight className="w-4 h-4" /> */}
                   <a
-                    href="https://eximinq.in/services/compliance-audit"
+                    href="https://eximinq.in/services/compliance-audit/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

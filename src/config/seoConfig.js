@@ -293,7 +293,7 @@ export const seoRoutes = {
     title: "Certificate of Origin Consultant India | Preferential & Non-Preferential COO | EXIMINQ",
     description: "Certificate of Origin consultant in India for preferential and non-preferential COO, Rules of Origin checks, FTA eligibility review, and DGFT filing support."
   },
-  "/services/gst-lut-filing": {
+  "/services/gst-lut-filing/": {
     title: "GST LUT Filing for Exporters (Letter of Undertaking) | EXIMINQ",
     description: "Export without paying IGST. File annual GST LUT (Form RFD-11) instantly. Mandatory for all Zero-Rated Supply exports."
   },

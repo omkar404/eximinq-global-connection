@@ -202,7 +202,7 @@ const CloudDeskDFIA = () => {
           content="DFIA licence consultant, Duty Free Import Authorisation consultant, transferable DFIA, DGFT DFIA, DFIA SION, DFIA value addition, DFIA licence India, DFIA transferability endorsement"
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://eximinq.in/services/dfia-license" />
+        <link rel="canonical" href="https://eximinq.in/services/dfia-license/" />
 
         <meta
           property="og:title"
@@ -212,7 +212,7 @@ const CloudDeskDFIA = () => {
           property="og:description"
           content="Get end-to-end DFIA consulting for SION validation, post-export filing, value-addition review, and transferability strategy under the DGFT framework."
         />
-        <meta property="og:url" content="https://eximinq.in/services/dfia-license" />
+        <meta property="og:url" content="https://eximinq.in/services/dfia-license/" />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
 
@@ -222,8 +222,8 @@ const CloudDeskDFIA = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/dfia-license",
-                url: "https://eximinq.in/services/dfia-license",
+                "@id": "https://eximinq.in/services/dfia-license/",
+                url: "https://eximinq.in/services/dfia-license/",
                 name:
                   "DFIA Licence Consultant India | Duty Free Import Authorisation, Transferability & SION Support | EXIMINQ",
                 description:
@@ -247,13 +247,13 @@ const CloudDeskDFIA = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services"
+                    item: "https://eximinq.in/services/"
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "DFIA License",
-                    item: "https://eximinq.in/services/dfia-license"
+                    item: "https://eximinq.in/services/dfia-license/"
                   }
                 ]
               },
@@ -277,7 +277,7 @@ const CloudDeskDFIA = () => {
                 offers: {
                   "@type": "Offer",
                   availability: "https://schema.org/InStock",
-                  url: "https://eximinq.in/services/dfia-license"
+                  url: "https://eximinq.in/services/dfia-license/"
                 }
               },
               {

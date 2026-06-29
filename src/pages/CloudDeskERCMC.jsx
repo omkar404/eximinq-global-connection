@@ -90,7 +90,7 @@ const CloudDeskERCMC = () => {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link
           rel="canonical"
-          href="https://eximinq.in/services/e-rcmc-registration"
+          href="https://eximinq.in/services/e-rcmc-registration/"
         />
         <meta
           property="og:title"
@@ -102,7 +102,7 @@ const CloudDeskERCMC = () => {
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/e-rcmc-registration"
+          content="https://eximinq.in/services/e-rcmc-registration/"
         />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -114,7 +114,7 @@ const CloudDeskERCMC = () => {
                 "@type": "WebPage",
                 "@id":
                   "https://eximinq.in/services/e-rcmc-registration#webpage",
-                url: "https://eximinq.in/services/e-rcmc-registration",
+                url: "https://eximinq.in/services/e-rcmc-registration/",
                 name: "e-RCMC Consultant India | EXIMINQ",
                 description:
                   "Support for DGFT e-RCMC registration, EPC mapping, council selection, renewal, and export benefit readiness.",
@@ -135,13 +135,13 @@ const CloudDeskERCMC = () => {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: "https://eximinq.in/services",
+                    item: "https://eximinq.in/services/",
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: "e-RCMC Registration",
-                    item: "https://eximinq.in/services/e-rcmc-registration",
+                    item: "https://eximinq.in/services/e-rcmc-registration/",
                   },
                 ],
               },

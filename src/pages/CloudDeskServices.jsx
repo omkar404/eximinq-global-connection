@@ -125,7 +125,7 @@ const CloudDeskServices = () => {
         "Zero duty import of capital goods for pre-production, production, and post-production.",
       icon: <Award className="w-8 h-8 text-teal-600" />,
       popular: true,
-      link: "https://eximinq.in/services/epcg-scheme",
+      link: "https://eximinq.in/services/epcg-scheme/",
     },
     {
       id: 306,
@@ -135,7 +135,7 @@ const CloudDeskServices = () => {
         "Duty Free Import Authorisation. Transferable license issued post-export.",
       icon: <File className="w-8 h-8 text-teal-600" />,
       popular: false,
-      link: "https://eximinq.in/services/dfia-license",
+      link: "https://eximinq.in/services/dfia-license/",
     },
     {
       id: 304,
@@ -175,7 +175,7 @@ const CloudDeskServices = () => {
         "States goods are freely sold in India, for medical/food product exports.",
       icon: <Globe className="w-8 h-8 text-green-600" />,
       popular: false,
-      link: "https://eximinq.in/services/free-sale-certificate",
+      link: "https://eximinq.in/services/free-sale-certificate/",
     },
     {
       id: 812,
@@ -185,7 +185,7 @@ const CloudDeskServices = () => {
         "Digital Signature Certificate. Essential for filing online documents with DGFT, Customs, and GST.",
       icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/dsc-services",
+      link: "https://eximinq.in/services/dsc-services/",
     },
     {
       id: 408,
@@ -195,7 +195,7 @@ const CloudDeskServices = () => {
         "Buying & Selling options for Scripts at Best Market Competitive rates",
       icon: <Recycle className="w-8 h-8 text-green-600" />,
       popular: false,
-      link: "https://eximinq.in/services/rodtep-rosctl-trading",
+      link: "https://eximinq.in/services/rodtep-rosctl-trading/",
     },
     {
       id: 823,
@@ -205,7 +205,7 @@ const CloudDeskServices = () => {
         "Compliance Audit to ensure compliance with regulatory requirements.",
       icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/compliance-audit",
+      link: "https://eximinq.in/services/compliance-audit/",
     },
     {
       id: 107,
@@ -215,7 +215,7 @@ const CloudDeskServices = () => {
         "DGFT status certificate based on performance, granting privileges like fast-track.",
       icon: <StarIcon className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/star-export-house",
+      link: "https://eximinq.in/services/star-export-house/",
     },
     {
       id: 208,
@@ -225,7 +225,7 @@ const CloudDeskServices = () => {
         'Mandatory for importers related to foreign suppliers to validate pricing.',
       icon: <FileText className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/svb-registration",
+      link: "https://eximinq.in/services/svb-registration/",
     },
     {
       id: 708,
@@ -235,7 +235,7 @@ const CloudDeskServices = () => {
         "Permission to pack export containers inside factory under Customs supervision.",
       icon: <BookCopy className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/factory-stuffing",
+      link: "https://eximinq.in/services/factory-stuffing/",
     },
     {
       id: 206,
@@ -255,7 +255,7 @@ const CloudDeskServices = () => {
         "License for bonded warehouses (MOOWR) to store goods without immediate duty.",
       icon: <Warehouse className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/warehouse-license",
+      link: "https://eximinq.in/services/warehouse-license/",
     },
     {
       id: 406,
@@ -265,7 +265,7 @@ const CloudDeskServices = () => {
         "Scheme reducing the interest rate on pre/post-shipment export credit.",
       icon: <TrendingUp className="w-8 h-8 text-green-600" />,
       popular: false,
-      link: "https://eximinq.in/services/interest-equalisation-scheme",
+      link: "https://eximinq.in/services/interest-equalisation-scheme/",
     },
     {
       id: 303,
@@ -275,7 +275,7 @@ const CloudDeskServices = () => {
         "Specialized filing for Dual-Use items (Special Chemicals, Organisms, Materials, Equipment).",
       icon: <ShieldCheck className="w-8 h-8 text-teal-600" />,
       popular: false,
-      link: "https://eximinq.in/services/scomet-licensing",
+      link: "https://eximinq.in/services/scomet-licensing/",
     },
     {
       id: 402,
@@ -285,7 +285,7 @@ const CloudDeskServices = () => {
         "Resolution of IGST refund scrolls stuck due to PFMS mismatch, EGM errors, or non-transmission.",
       icon: <CreditCard className="w-8 h-8 text-green-600" />,
       popular: true,
-      link: "https://eximinq.in/services/igst-refund",
+      link: "https://eximinq.in/services/igst-refund/",
     },
     {
       id: 403,
@@ -335,7 +335,7 @@ const CloudDeskServices = () => {
         "Remission of Duties and Taxes on Exported Products. Scrip generation and ledger transfer.",
       icon: <TrendingUp className="w-8 h-8 text-green-600" />,
       popular: true,
-      link: "https://eximinq.in/services/rodtep-scheme",
+      link: "https://eximinq.in/services/rodtep-scheme/",
     },
     {
       id: 806,
@@ -345,7 +345,7 @@ const CloudDeskServices = () => {
         "Export Data Processing and Monitoring System closure and e-BRC realization to avoid RBI caution listing.",
       icon: <Landmark className="w-8 h-8 text-indigo-700" />,
       popular: true,
-      link: "https://eximinq.in/services/edpms-ebrc",
+      link: "https://eximinq.in/services/edpms-ebrc/",
     },
     {
       id: 104,
@@ -355,7 +355,7 @@ const CloudDeskServices = () => {
         "Obtain and manage your Electronic Registration-Cum-Membership Certificate (RCMC) from Export Promotion Councils.",
       icon: <FileBadge className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/e-rcmc-registration",
+      link: "https://eximinq.in/services/e-rcmc-registration/",
     },
     {
       id: 205,
@@ -365,7 +365,7 @@ const CloudDeskServices = () => {
         "Consultancy for Authorized Economic Operator (T1/T2/T3) status for deferred duty and direct port delivery.",
       icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
       popular: true,
-      link: "https://eximinq.in/services/aeo-certification",
+      link: "https://eximinq.in/services/aeo-certification/",
     },
     {
       id: 817,
@@ -385,7 +385,7 @@ const CloudDeskServices = () => {
         "Mandatory license for industries involved in hazardous chemicals or defense sectors.",
       icon: <Shield className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/industrial-license",
+      link: "https://eximinq.in/services/industrial-license/",
     },
     {
       id: 814,
@@ -395,7 +395,7 @@ const CloudDeskServices = () => {
         "Industrial Entrepreneur Memorandum for undertakings exempted from licensing.",
       icon: <Building className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/iem-registration",
+      link: "https://eximinq.in/services/iem-registration/",
     },
     {
       id: 108,
@@ -405,7 +405,7 @@ const CloudDeskServices = () => {
         "Registration for exporting/importing SCOMET list or defense-related equipment.",
       icon: <Shield className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/defence-exim-license",
+      link: "https://eximinq.in/services/defence-exim-license/",
     },
     {
       id: 601,
@@ -415,7 +415,7 @@ const CloudDeskServices = () => {
         "Reply to Show Cause Notices (SCN) and representation in personal hearings.",
       icon: <Gavel className="w-8 h-8 text-red-600" />,
       popular: false,
-      link: "https://eximinq.in/services/customs-adjudication",
+      link: "https://eximinq.in/services/customs-adjudication/",
     },
     {
       id: 802,
@@ -425,7 +425,7 @@ const CloudDeskServices = () => {
         "Extended Producer Responsibility compliance for E-waste, Plastic, Battery, and Waste Tyre management.",
       icon: <Leaf className="w-8 h-8 text-green-700" />,
       popular: true,
-      link: "https://eximinq.in/services/epr-authorization",
+      link: "https://eximinq.in/services/epr-authorization/",
     },
     {
       id: 803,
@@ -435,7 +435,7 @@ const CloudDeskServices = () => {
         "Food Import Clearance System (FICS) and Central Licensing for food importers ( FSSAI ).",
       icon: <Utensils className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/fssai-licensing",
+      link: "https://eximinq.in/services/fssai-licensing/",
     },
     {
       id: 805,
@@ -445,7 +445,7 @@ const CloudDeskServices = () => {
         "Registration for pre-packaged commodities to ensure MRP labeling compliance.",
       icon: <Scale className="w-8 h-8 text-blue-700" />,
       popular: false,
-      link: "https://eximinq.in/services/lmpc-registration",
+      link: "https://eximinq.in/services/lmpc-registration/",
     },
     {
       id: 821,
@@ -455,7 +455,7 @@ const CloudDeskServices = () => {
         "Certification for packages used to transport dangerous goods internationally.",
       icon: <Cuboid className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/un-iip-certification",
+      link: "https://eximinq.in/services/un-iip-certification/",
     },
     {
       id: 811,
@@ -465,7 +465,7 @@ const CloudDeskServices = () => {
         "Registered Exporter System registration for self-certification of origin under GSP.",
       icon: <Globe className="w-8 h-8 text-indigo-700" />,
       popular: false,
-      link: "https://eximinq.in/services/rex-registration",
+      link: "https://eximinq.in/services/rex-registration/",
     },
     {
       id: 804,
@@ -475,7 +475,7 @@ const CloudDeskServices = () => {
         "Equipment Type Approval (ETA) for wireless products (Bluetooth/Wi-Fi) from WPC Wing.",
       icon: <Radio className="w-8 h-8 text-blue-700" />,
       popular: false,
-      link: "https://eximinq.in/services/wpc-license",
+      link: "https://eximinq.in/services/wpc-license/",
     },
     {
       id: 602,
@@ -485,7 +485,7 @@ const CloudDeskServices = () => {
         "Representing cases before the Policy Relaxation Committee for procedural lapses.",
       icon: <AlertTriangle className="w-8 h-8 text-red-600" />,
       popular: false,
-      link: "https://eximinq.in/services/prc-relaxation",
+      link: "https://eximinq.in/services/prc-relaxation/",
     },
     {
       id: 706,
@@ -505,7 +505,7 @@ const CloudDeskServices = () => {
         "Chartered Accountant certificates to verify financial data or consumption norms.",
       icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/ca-certification-export-import",
+      link: "https://eximinq.in/services/ca-certification-export-import/",
     },
     {
       id: 404,
@@ -515,7 +515,7 @@ const CloudDeskServices = () => {
         "Proof of no outstanding dues to government bodies to claim rebates.",
       icon: <Check className="w-8 h-8 text-green-600" />,
       popular: false,
-      link: "https://eximinq.in/services/no-due-certificate",
+      link: "https://eximinq.in/services/no-due-certificate/",
     },
     {
       id: 405,
@@ -525,7 +525,7 @@ const CloudDeskServices = () => {
         "Verifies no other incentives were claimed to avoid double-dipping.",
       icon: <AlertTriangle className="w-8 h-8 text-green-600" />,
       popular: false,
-      link: "https://eximinq.in/services/no-incentive-certificate",
+      link: "https://eximinq.in/services/no-incentive-certificate/",
     },
     {
       id: 819,
@@ -535,7 +535,7 @@ const CloudDeskServices = () => {
         "Consent to Establish/Operate (CTE/CTO) from the Pollution Control Board.",
       icon: <GlobeIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/pollution-control",
+      link: "https://eximinq.in/services/pollution-control/",
     },
     {
       id: 201,
@@ -545,7 +545,7 @@ const CloudDeskServices = () => {
         "Filing of Bill of Entry (Home Consumption/Warehouse) with HSN classification and duty assessment.",
       icon: <FileText className="w-8 h-8 text-blue-600" />,
       popular: true,
-      link: "https://eximinq.in/services/bill-of-entry-filing",
+      link: "https://eximinq.in/services/bill-of-entry-filing/",
     },
     {
       id: 202,
@@ -555,7 +555,7 @@ const CloudDeskServices = () => {
         "Generation of Shipping Bills for export clearance, ensuring correct scheme codes (RoDTEP/Drawback).",
       icon: <Ship className="w-8 h-8 text-blue-600" />,
       popular: true,
-      link: "https://eximinq.in/services/shipping-bill-filing",
+      link: "https://eximinq.in/services/shipping-bill-filing/",
     },
     {
       id: 203,
@@ -565,7 +565,7 @@ const CloudDeskServices = () => {
         "Digital uploading of supporting documents (Invoice, Packing List, CoO) via e-Sanchit for paperless clearance.",
       icon: <UploadCloud className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/e-sanchit-filing",
+      link: "https://eximinq.in/services/e-sanchit-filing/",
     },
     {
       id: 204,
@@ -575,7 +575,7 @@ const CloudDeskServices = () => {
         "Management of Electronic Cash Ledger (ECL) for seamless payment of Basic Customs Duty and IGST.",
       icon: <DollarSign className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/duty-payment-ecl",
+      link: "https://eximinq.in/services/duty-payment-ecl/",
     },
     // {
     //   id: 702,
@@ -585,7 +585,7 @@ const CloudDeskServices = () => {
     //     "Dedicated Customs House Agent support for physical examination, sealing, and clearance at ports.",
     //   icon: <Anchor className="w-8 h-8 text-orange-600" />,
     //   popular: true,
-    //   link: "https://eximinq.in/services/cha-services",
+    //   link: "https://eximinq.in/services/cha-services/",
     // },
     // {
     //   id: "logistics-701",
@@ -595,7 +595,7 @@ const CloudDeskServices = () => {
     //     "End-to-end cargo booking for Sea (FCL/LCL) and Air shipments with competitive rate negotiation.",
     //   icon: <Plane className="w-8 h-8 text-orange-600" />,
     //   popular: true,
-    //   link: "https://eximinq.in/services/freight-forwarding",
+    //   link: "https://eximinq.in/services/freight-forwarding/",
     // },
     {
       id: 703,
@@ -605,7 +605,7 @@ const CloudDeskServices = () => {
         "Access to Bonded and General warehouses near major ports for storage, labeling, and inventory management.",
       icon: <Warehouse className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/warehousing-solutions",
+      link: "https://eximinq.in/services/warehousing-solutions/",
     },
     {
       id: 704,
@@ -615,7 +615,7 @@ const CloudDeskServices = () => {
         "First and last-mile connectivity via road/rail trailers for factory stuffing and port delivery.",
       icon: <Truck className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/inland-transportation",
+      link: "https://eximinq.in/services/inland-transportation/",
     },
     {
       id: 705,
@@ -625,7 +625,7 @@ const CloudDeskServices = () => {
         "Comprehensive transit risk coverage against damage, theft, or loss during international shipping.",
       icon: <Shield className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/marine-insurance",
+      link: "https://eximinq.in/services/marine-insurance/",
     },
     {
       id: 818,
@@ -635,7 +635,7 @@ const CloudDeskServices = () => {
         "Filing returns for claiming Input Tax Credit (ITC) and refunds for exporters.",
       icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/gst-returns",
+      link: "https://eximinq.in/services/gst-returns/",
     },
     {
       id: 810,
@@ -645,7 +645,7 @@ const CloudDeskServices = () => {
         "Letter of Undertaking filing for exports without payment of IGST.",
       icon: <FileCheck className="w-8 h-8 text-indigo-700" />,
       popular: false,
-      link: "https://eximinq.in/services/gst-lut-filing",
+      link: "https://eximinq.in/services/gst-lut-filing/",
     },
     {
       id: 207,
@@ -655,7 +655,7 @@ const CloudDeskServices = () => {
         'Removing "risky exporter" alerts that block IGST refunds and cause delays.',
       icon: <AlertTriangle className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/rmcc-alert-removal",
+      link: "https://eximinq.in/services/rmcc-alert-removal/",
     },
     {
       id: 813,
@@ -665,7 +665,7 @@ const CloudDeskServices = () => {
         "Import of Goods at Concessional Rate. Filing monthly returns for goods imported at lower duty.",
       icon: <ServerIcon className="w-8 h-8 text-orange-600" />,
       popular: false,
-      link: "https://eximinq.in/services/igcr-returns",
+      link: "https://eximinq.in/services/igcr-returns/",
     },
     {
       id: 807,
@@ -675,7 +675,7 @@ const CloudDeskServices = () => {
         "Animal & Plant Quarantine clearances for livestock and agricultural imports/exports.",
       icon: <Leaf className="w-8 h-8 text-green-700" />,
       popular: false,
-      link: "https://eximinq.in/services/aqcs-pqms",
+      link: "https://eximinq.in/services/aqcs-pqms/",
     },
     {
       id: 706,
@@ -685,7 +685,7 @@ const CloudDeskServices = () => {
         "Specific legal protection for visual logos and graphic symbols.",
       icon: <Barcode className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/barcode-registration",
+      link: "https://eximinq.in/services/barcode-registration/",
     },
     {
       id: 801,
@@ -695,7 +695,7 @@ const CloudDeskServices = () => {
         "Mandatory BIS (ISI/CRS) certification for Steel, Electronics, Chemicals, and Toys imports.",
       icon: <Zap className="w-8 h-8 text-blue-700" />,
       popular: true,
-      link: "https://eximinq.in/services/bis-registration",
+      link: "https://eximinq.in/services/bis-registration/",
     },
     {
       id: 704,
@@ -705,7 +705,7 @@ const CloudDeskServices = () => {
         "Specific legal protection for unique brand identity elements.",
       icon: <Lightbulb className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/brand-copyright",
+      link: "https://eximinq.in/services/brand-copyright/",
     },
     {
       id: 703,
@@ -715,7 +715,7 @@ const CloudDeskServices = () => {
         "Protection for original literary, artistic, or creative works.",
       icon: <Timer className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/copyright-registration",
+      link: "https://eximinq.in/services/copyright-registration/",
     },
     {
       id: 307,
@@ -725,7 +725,7 @@ const CloudDeskServices = () => {
         "LICENSES REGISTRATION AT CUSTOMS",
       icon: <FileText className="w-8 h-8 text-teal-600" />,
       popular: false,
-      link: "https://eximinq.in/services/customs-license-registration",
+      link: "https://eximinq.in/services/customs-license-registration/",
     },
     {
       id: 707,
@@ -735,7 +735,7 @@ const CloudDeskServices = () => {
         "Protection of the aesthetic shape, pattern, or configuration of a product.",
       icon: <IdCard className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/design-registration",
+      link: "https://eximinq.in/services/design-registration/",
     },
     {
       id: 707,
@@ -755,7 +755,7 @@ const CloudDeskServices = () => {
         "Import registration and licensing for drugs, medical devices, and cosmetics.",
       icon: <ShieldCheck className="w-8 h-8 text-red-700" />,
       popular: false,
-      link: "https://eximinq.in/services/cdsco-compliance",
+      link: "https://eximinq.in/services/cdsco-compliance/",
     },
     {
       id: 106,
@@ -765,7 +765,7 @@ const CloudDeskServices = () => {
         "Essential for export to Middle Eastern/Islamic countries.",
       icon: <Check className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/halal-certification",
+      link: "https://eximinq.in/services/halal-certification/",
     },
     {
       id: "iso-701",
@@ -775,7 +775,7 @@ const CloudDeskServices = () => {
         "International standard certification ensuring quality management and compliance.",
       icon: <Check className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/iso-certification",
+      link: "https://eximinq.in/services/iso-certification/",
     },
     {
       id: 705,
@@ -785,7 +785,7 @@ const CloudDeskServices = () => {
         "Specific legal protection for visual logos and graphic symbols.",
       icon: <Image className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/logo-copyright",
+      link: "https://eximinq.in/services/logo-copyright/",
     },
     {
       id: 702,
@@ -795,7 +795,7 @@ const CloudDeskServices = () => {
         "Intellectual Property protection for brand names and symbols.",
       icon: <Hash className="w-8 h-8 text-pink-600" />,
       popular: false,
-      link: "https://eximinq.in/services/trademark-registration",
+      link: "https://eximinq.in/services/trademark-registration/",
     },
     {
       id: 305,
@@ -805,7 +805,7 @@ const CloudDeskServices = () => {
         "ExSpecific license required to import fertilizers, regulated by Dept of Fertilizers.",
       icon: <ImportIcon className="w-8 h-8 text-teal-600" />,
       popular: false,
-      link: "https://eximinq.in/services/fertiliser-import-license",
+      link: "https://eximinq.in/services/fertiliser-import-license/",
     },
     {
       id: 109,
@@ -815,7 +815,7 @@ const CloudDeskServices = () => {
         "Government e-Marketplace registration to sell directly to Indian government depts.",
       icon: <Briefcase className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/gem-registration",
+      link: "https://eximinq.in/services/gem-registration/",
     },
     {
       id: 110,
@@ -825,7 +825,7 @@ const CloudDeskServices = () => {
         "Registration with National Horticulture Board for exporting agricultural produce.",
       icon: <Globe className="w-8 h-8 text-blue-600" />,
       popular: false,
-      link: "https://eximinq.in/services/horticulture",
+      link: "https://eximinq.in/services/horticulture/",
     },
 
 

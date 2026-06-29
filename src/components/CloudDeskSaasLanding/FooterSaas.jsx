@@ -44,12 +44,12 @@ const FooterSaas = ({ setShowModal }) => {
           <h5 className="text-white font-bold mb-4">Resources</h5>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="https://eximinq.in/tools/hs-code-finder" className="hover:text-teal-400">
+              <a href="https://eximinq.in/tools/hs-code-finder/" className="hover:text-teal-400">
                 HSN Code Search
               </a>
             </li>
             <li>
-              <a href="https://eximinq.in/tools/duty-calculator-finder" className="hover:text-teal-400">
+              <a href="https://eximinq.in/tools/duty-calculator-finder/" className="hover:text-teal-400">
                 Duty Calculator
               </a>
             </li>
