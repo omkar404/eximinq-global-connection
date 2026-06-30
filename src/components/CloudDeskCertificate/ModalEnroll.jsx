@@ -9,6 +9,7 @@ export const ModalEnroll = ({ show, onClose, type }) => {
     email: "",
     role: "",
     partner: false,
+    ftaagreement: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -20,6 +21,28 @@ export const ModalEnroll = ({ show, onClose, type }) => {
   const isPreferentialCOO = type === "PREFERENTIAL_COO";
   const isNonPreferentialCOO = type === "NON_PREFERENTIAL_COO";
 
+  const PREFERENTIAL_AGREEMENT_OPTIONS = [
+    "India-Japan Comprehensive Economic Partnership Agreement (IJCEPA)",
+    "India-Korea Comprehensive Economic Partnership Agreement (IKCEPA)",
+    "South Asian Free Trade Area (SAFTA)",
+    "Global System of Trade Preferences (GSTP)",
+    "India Sri Lanka Free Trade Agreement (ISFTA)",
+    "Generalized System of Preferences (GSP) Scheme",
+    "India-Chile Preferential Trade Agreement (India-Chile PTA)",
+    "SAARC Preferential Trading Arrangement (SAPTA)",
+    "India-Thailand Early Harvest Scheme",
+    "India-Singapore Comprehensive Economic Cooperation Agreement (CECA)",
+    "India-Mercosur Preferential Trade Agreement (India-Mercosur PTA)",
+    "ASEAN-India Free Trade Agreement (ASEAN-India FTA)",
+    "India-Malaysia Comprehensive Economic Cooperation Agreement (IMCECA)",
+    "Asia-Pacific Trade Agreement (APTA)",
+    "India-Mauritius Comprehensive Economic Cooperation and Partnership Agreement",
+    "India-UAE Comprehensive Economic Partnership Agreement (IUCEPA)",
+    "India-Australia Economic Cooperation and Trade Agreement (Ind-Aus ECTA)",
+    "India EFTA TEPA (Self-Declaration)",
+    "India EFTA TEPA (Agency Issued)",
+  ];
+
   const resetForm = () => {
     setForm({
       name: "",
@@ -28,6 +51,7 @@ export const ModalEnroll = ({ show, onClose, type }) => {
       email: "",
       role: "",
       partner: false,
+      ftaagreement: "",
     });
     setErrors({});
   };
@@ -53,6 +77,8 @@ export const ModalEnroll = ({ show, onClose, type }) => {
     if (!form.mobile.trim()) e.mobile = "Mobile is required.";
     if (!form.email.trim()) e.email = "Email is required.";
     if (!form.role) e.role = "Role is required.";
+    if (isPreferentialCOO && !form.ftaagreement)
+      e.ftaagreement = "Please select an agreement.";
     return e;
   };
 
@@ -70,7 +96,7 @@ export const ModalEnroll = ({ show, onClose, type }) => {
         ...form,
         type,
         certificateType:
-          type === "PREFERENTIAL_COO" || type === "NON_PREFERENTIAL_COO"||
+          type === "PREFERENTIAL_COO" || type === "NON_PREFERENTIAL_COO" ||
           type === "Startup_Small_Plan" ||
           type === "MID_SIZE_EXPORTER_PLAN" ||
           type === "LARGE_EXPORTER_PLAN"
@@ -80,7 +106,7 @@ export const ModalEnroll = ({ show, onClose, type }) => {
 
       const res = await fetch(
         `${process.env.REACT_APP_API_URL}/api/coo-enroll`,
-        // 'http://localhost:5000/api/coo-enroll',
+        // "http://localhost:5000/api/coo-enroll",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -231,6 +257,31 @@ export const ModalEnroll = ({ show, onClose, type }) => {
                   disabled
                   className="w-full p-3 rounded-lg border bg-gray-100"
                 />
+              </div>
+            )}
+
+            {/* Preferential Agreement Dropdown */}
+            {isPreferentialCOO && (
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
+                  Applicable Agreement / Scheme
+                </label>
+                <select
+                  name="ftaagreement"
+                  value={form.ftaagreement}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-lg border border-gray-300 bg-white"
+                >
+                  <option value="">-- Select Agreement --</option>
+                  {PREFERENTIAL_AGREEMENT_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+                {errors.ftaagreement && (
+                  <p className="text-xs text-red-500 mt-1">{errors.ftaagreement}</p>
+                )}
               </div>
             )}
 

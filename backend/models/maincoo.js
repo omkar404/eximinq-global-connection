@@ -2,29 +2,10 @@ const mongoose = require("mongoose");
 
 const MainCooSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
-    mobile: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
-    email: {
-      type: String,
-      required: true,
-      lowercase: true,
-      trim: true,
-    },
-
-    entity: {
-      type: String,
-      trim: true,
-    },
+    name: { type: String, required: true, trim: true },
+    mobile: { type: String, required: true, trim: true },
+    email: { type: String, required: true, lowercase: true, trim: true },
+    entity: { type: String, trim: true },
 
     role: {
       type: String,
@@ -32,12 +13,8 @@ const MainCooSchema = new mongoose.Schema(
       required: true,
     },
 
-    partner: {
-      type: Boolean,
-      default: false,
-    },
+    partner: { type: Boolean, default: false },
 
-    /* 🔑 SOURCE / TYPE */
     type: {
       type: String,
       required: true,
@@ -48,7 +25,6 @@ const MainCooSchema = new mongoose.Schema(
         "CTA",
         "PREFERENTIAL_COO",
         "NON_PREFERENTIAL_COO",
-        "CTA",
         "FooterCTA",
         "Startup_Small_Plan",
         "MID_SIZE_EXPORTER_PLAN",
@@ -56,16 +32,15 @@ const MainCooSchema = new mongoose.Schema(
       ],
     },
 
-    /* HERO only */
     flow: {
       type: String,
       enum: ["PREFERENTIAL_COO", "NON_PREFERENTIAL_COO"],
     },
 
-    /* Preferential / Non-Preferential only */
-    cooType: {
-      type: String,
-    },
+    cooType: { type: String },
+
+    /* 🔑 NEW: FTA Agreement selected (Preferential CoO only) */
+    ftaagreement: { type: String, trim: true },
   },
   { timestamps: true }
 );
