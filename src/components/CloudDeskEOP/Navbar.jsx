@@ -16,6 +16,7 @@ const Navbar = ({
                 <a href="#types" class="hover:text-brand-600 transition">Advance vs EPCG</a>
                 <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#references" class="hover:text-brand-600 transition">References</a>
                 <a href="#fees" class="hover:text-brand-600 transition">Composition Fee</a>
         </div>
 
