@@ -17,20 +17,23 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#home" className="transition hover:text-brand-600">
             Home
           </a>
-          <a href="#eligibility" className="transition hover:text-brand-600">
-            Eligibility
-          </a>
           <a href="#about" className="transition hover:text-brand-600">
             What is EPCG?
+          </a>
+          <a href="#eligibility" className="transition hover:text-brand-600">
+            Eligibility
           </a>
           <a href="#coverage" className="transition hover:text-brand-600">
             Coverage
           </a>
+          <a href="#documents" className="transition hover:text-brand-600">
+            Documents
+          </a>
           <a href="#obligation" className="transition hover:text-brand-600">
             Export Obligation
           </a>
-          <a href="#documents" className="transition hover:text-brand-600">
-            Documents
+          <a href="#timelines" className="transition hover:text-brand-600">
+            Timelines
           </a>
           <a href="#fees" className="transition hover:text-brand-600">
             Service Charges
