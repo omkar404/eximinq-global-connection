@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -110,7 +110,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        getApiUrl("/api/svb-registration"),
+        `${process.env.REACT_APP_API_URL}/api/svb-registration`,
         // "http://localhost:5000/api/svb-registration",
         {
           method: "POST",
