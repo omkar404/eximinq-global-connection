@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   /* ─────────────────────────────────────────
@@ -144,7 +144,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
         onSubmit(payload);
       }
       const res = await fetch(
-        getApiUrl("/api/star-export-house"),
+        `${process.env.REACT_APP_API_URL}/api/star-export-house`,
         // "http://localhost:5000/api/star-export-house",
         {
           method: "POST",

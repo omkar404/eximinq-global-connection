@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 const QuickForm = () => {
   const [form, setForm] = useState({
@@ -71,7 +71,7 @@ const QuickForm = () => {
       console.log("Sending data:", payload);
 
       const response = await fetch(
-        getApiUrl("/api/star-export-house"),
+      `${process.env.REACT_APP_API_URL}/api/star-export-house`,
         // "http://localhost:5000/api/star-export-house",
         {
           method: "POST",
