@@ -19,6 +19,9 @@ const Navbar = () => {
           <a href="#process" className="hover:text-brand-600 transition">
             Process
           </a>
+          <a href="#contact" className="hover:text-brand-600 transition">
+            Fees
+          </a>
           <a href="#faqs" className="hover:text-brand-600 transition">
             FAQs
           </a>
