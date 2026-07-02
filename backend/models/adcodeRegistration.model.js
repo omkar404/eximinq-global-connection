@@ -4,29 +4,33 @@ const AdcodeRegistrationSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: false,   // ✅ change to false (or remove required)
+      required: false,
       trim: true,
       default: null,
     },
     portCategory: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
+      default: null,
     },
     portCode: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
+      default: null,
     },
     portLocation: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
+      default: null,
     },
     bank: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
+      default: null,
     },
     mobile: {
       type: String,
@@ -35,16 +39,39 @@ const AdcodeRegistrationSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: false,   // ✅ change to false (or remove required)
+      required: false,
       trim: true,
       default: null,
     },
-    entity: { type: String, trim: true, default: "" },
-    role: { type: String, trim: true, default: "" },
-    partner: { type: Boolean, default: false },
-    type: { type: String, required: true, trim: true },
-    category: { type: String, trim: true, default: "" },
-    issue: { type: String, trim: true, default: "" },
+    entity: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    role: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    partner: {
+      type: Boolean,
+      default: false,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    issue: {
+      type: String,
+      trim: true,
+      default: "",
+    },
   },
   { timestamps: true }
 );
