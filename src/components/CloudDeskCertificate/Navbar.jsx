@@ -16,8 +16,20 @@ const Navbar = () => {
           <a href="#benefits" className="hover:text-brand-600 transition">
             Benefits
           </a>
+          <a href="#eligibility" className="hover:text-brand-600 transition">
+            Eligibility
+          </a>
+          <a href="#documents" className="hover:text-brand-600 transition">
+            Documents
+          </a>
+          <a href="#agreements" className="hover:text-brand-600 transition">
+            Agreements
+          </a>
           <a href="#process" className="hover:text-brand-600 transition">
             Process
+          </a>
+          <a href="#pricing" className="hover:text-brand-600 transition">
+            Fees
           </a>
           <a href="#faqs" className="hover:text-brand-600 transition">
             FAQs
@@ -25,7 +37,7 @@ const Navbar = () => {
         </div>
 
         <a
-          href="#contact"
+          href="#pricing"
           className="hidden md:inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-2 px-6 rounded-md shadow-md absolute right-4"
         >
           Talk to Expert

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -115,7 +115,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       console.log("final payload", payload);
 
       const res = await fetch(
-        getApiUrl("/api/igst-refund"),
+        `${process.env.REACT_APP_API_URL}/api/igst-refund`,
         // "http://localhost:5000/api/igst-refund",
         {
           method: "POST",

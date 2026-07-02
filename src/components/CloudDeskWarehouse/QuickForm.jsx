@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Warehouse, Phone } from "lucide-react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 const Fees = () => {
   const [form, setForm] = useState({
@@ -70,7 +70,7 @@ const Fees = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        getApiUrl("/api/warehouse-license"),
+        `${process.env.REACT_APP_API_URL}/api/warehouse-license`,
         // "http://localhost:5000/api/warehouse-license",
         {
           method: "POST",

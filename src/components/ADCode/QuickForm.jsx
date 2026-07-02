@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 // ─────────────────────────────────────────────────────────────────────────
 //  COMPLETE PORT DATA (Sea, Air, ICD, CFS, LCS)
@@ -418,7 +418,7 @@ export default function QuickForm() {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        getApiUrl("/api/ad-code-registration"),
+        `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
         // "http://localhost:5000/api/ad-code-registration", // ✅ http:// is required        
         {
           method: "POST",

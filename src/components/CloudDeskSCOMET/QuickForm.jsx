@@ -1,4 +1,4 @@
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 // import { SearchCheck } from "lucide-react";
 
 // const QuickForm = () => {
@@ -159,7 +159,7 @@ const handleSubmit = async (e) => {
     console.log("Sending payload:", payload);
 
     const response = await fetch(
-      getApiUrl("/api/scomet-licensing"),
+      `${process.env.REACT_APP_API_URL}/api/scomet-licensing`,
       // "http://localhost:5000/api/scomet-licensing",
       {
         method: "POST",

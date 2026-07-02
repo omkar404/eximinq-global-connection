@@ -10,8 +10,10 @@ const Navbar = () => {
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
                 <a href="#about" class="hover:text-brand-600 transition">About Scheme</a>
+                <a href="#eligibility" class="hover:text-brand-600 transition">Eligibility</a>
                 <a href="#norms" class="hover:text-brand-600 transition">Norm Fixation</a>
                 <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#timelines" class="hover:text-brand-600 transition">Timelines</a>
                 <a href="#redemption" class="hover:text-brand-600 transition">Redemption (EODC)</a>
         </div>
 

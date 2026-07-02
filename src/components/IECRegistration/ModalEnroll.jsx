@@ -502,18 +502,18 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   };
 
   const PROFILE_UPDATE_OPTIONS = [
-    "Change in Address",
-    "Change in Directors / Partners",
-    "Addition / Deletion of Branch Address",
-    "Change in Bank Account",
-    "Change in Preferred Sectors",
+    "NEW ICEGATE REGISTRATION",
+    "Deletion of Icegate Registration",
+    "Change in Icegate Profile",
+    "Insertion / Deletion of Child User",
   ];
 
   const serviceConfig     = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
   const isEnroll          = !!predefinedService;
-  const isProfileUpdate   = type === "IEC_PROFILE_UPDATE";
+  const isProfileUpdate   = type === "Apply_Now"|| type === "ICEGATE_REGISTRATION";
   const issueLabel        = ISSUE_LABEL_MAP[type]; // ✅ Single lookup replaces 4 booleans
+  
 
   useEffect(() => {
     if (predefinedService) {

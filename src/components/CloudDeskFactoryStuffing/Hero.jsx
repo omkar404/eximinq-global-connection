@@ -13,7 +13,7 @@ const Hero = ({ setShowEnrollModal }) => {
             SECURE LOGISTICS
           </span>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-200">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">
               Factory Stuffing
             </span>{" "}
             Permission
