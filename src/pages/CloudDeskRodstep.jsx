@@ -23,6 +23,7 @@ import {
 const CloudDeskRodstep = () => {
   const [scrolled, setScrolled] = useState(false);
   const [quoteDetails, setQuoteDetails] = useState(null);
+  const [showImportantUpdate, setShowImportantUpdate] = useState(false);
 
   const {
     calcAmount,
@@ -51,6 +52,37 @@ const CloudDeskRodstep = () => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!window.sessionStorage.getItem("rodtep-important-update-dismissed")) {
+      setShowImportantUpdate(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showImportantUpdate) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        window.sessionStorage.setItem(
+          "rodtep-important-update-dismissed",
+          "true"
+        );
+        setShowImportantUpdate(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [showImportantUpdate]);
+
+  const closeImportantUpdate = () => {
+    window.sessionStorage.setItem(
+      "rodtep-important-update-dismissed",
+      "true"
+    );
+    setShowImportantUpdate(false);
+  };
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -90,6 +122,63 @@ const CloudDeskRodstep = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      {showImportantUpdate && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="important-update-title"
+          aria-describedby="important-update-description"
+        >
+          <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-2xl">
+            <div className="flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-4 pr-14 text-white sm:px-7">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
+                <AlertTriangle size={22} aria-hidden="true" />
+              </span>
+              <h2
+                id="important-update-title"
+                className="text-xl font-bold sm:text-2xl"
+              >
+                Important Update
+              </h2>
+            </div>
+
+            <button
+              type="button"
+              onClick={closeImportantUpdate}
+              className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-2xl leading-none text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white"
+              aria-label="Close important update"
+            >
+              &times;
+            </button>
+
+            <div className="px-5 py-6 sm:px-7 sm:py-7">
+              <p
+                id="important-update-description"
+                className="text-base leading-7 text-slate-700 sm:text-lg sm:leading-8"
+              >
+                Due to systemic issues with Customs EDI synchronization
+                following <strong>Notification 15/2026-27</strong>, we are
+                pausing all <strong>RoDTEP/RoSCTL scrip acquisitions</strong>.
+                We advise partners to retain scrips in source accounts to
+                prevent further technical complications. We remain committed
+                to resuming transactions as soon as stable filing is restored.
+              </p>
+
+              <div className="mt-6 flex justify-end">
+                <button
+                  type="button"
+                  onClick={closeImportantUpdate}
+                  className="rounded-lg bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+                >
+                  Close Notice
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Navbar scrolled={scrolled} />
       <SecondaryNavbar scrollToSection={scrollToSection} />
       <Hero onViewRates={() => scrollToSection("rates")} />
