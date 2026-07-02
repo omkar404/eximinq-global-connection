@@ -20,6 +20,10 @@ import {
   CheckCircle,
   ChevronDown,
 } from "lucide-react";
+
+const IMPORTANT_UPDATE_SESSION_KEY =
+  "rodtep-technical-advisory-2026-07-02-dismissed";
+
 const CloudDeskRodstep = () => {
   const [scrolled, setScrolled] = useState(false);
   const [quoteDetails, setQuoteDetails] = useState(null);
@@ -54,7 +58,7 @@ const CloudDeskRodstep = () => {
   }, []);
 
   useEffect(() => {
-    if (!window.sessionStorage.getItem("rodtep-important-update-dismissed")) {
+    if (!window.sessionStorage.getItem(IMPORTANT_UPDATE_SESSION_KEY)) {
       setShowImportantUpdate(true);
     }
   }, []);
@@ -64,10 +68,7 @@ const CloudDeskRodstep = () => {
 
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
-        window.sessionStorage.setItem(
-          "rodtep-important-update-dismissed",
-          "true"
-        );
+        window.sessionStorage.setItem(IMPORTANT_UPDATE_SESSION_KEY, "true");
         setShowImportantUpdate(false);
       }
     };
@@ -77,10 +78,7 @@ const CloudDeskRodstep = () => {
   }, [showImportantUpdate]);
 
   const closeImportantUpdate = () => {
-    window.sessionStorage.setItem(
-      "rodtep-important-update-dismissed",
-      "true"
-    );
+    window.sessionStorage.setItem(IMPORTANT_UPDATE_SESSION_KEY, "true");
     setShowImportantUpdate(false);
   };
 
@@ -124,52 +122,136 @@ const CloudDeskRodstep = () => {
     <div className="min-h-screen bg-slate-50">
       {showImportantUpdate && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/75 p-3 backdrop-blur-sm sm:p-5"
           role="dialog"
           aria-modal="true"
           aria-labelledby="important-update-title"
           aria-describedby="important-update-description"
         >
-          <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-2xl">
-            <div className="flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-4 pr-14 text-white sm:px-7">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
-                <AlertTriangle size={22} aria-hidden="true" />
+          <div className="relative flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-2xl">
+            <div className="flex shrink-0 items-center gap-3 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 px-4 py-3.5 pr-14 text-white sm:px-7 sm:py-4">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 sm:h-11 sm:w-11">
+                <AlertTriangle size={24} aria-hidden="true" />
               </span>
-              <h2
-                id="important-update-title"
-                className="text-xl font-bold sm:text-2xl"
-              >
-                Important Update
-              </h2>
+              <div>
+                <h2
+                  id="important-update-title"
+                  className="text-xl font-bold leading-tight sm:text-2xl"
+                >
+                  Important Update
+                </h2>
+                <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-amber-50 sm:text-sm">
+                  Technical Advisory: Systemic Issues with RoDTEP/RoSCTL Debits
+                </p>
+              </div>
             </div>
 
             <button
               type="button"
               onClick={closeImportantUpdate}
-              className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-2xl leading-none text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white"
+              className="absolute right-2.5 top-2.5 flex h-10 w-10 items-center justify-center rounded-full text-3xl leading-none text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white sm:right-4 sm:top-3.5"
               aria-label="Close important update"
             >
               &times;
             </button>
 
-            <div className="px-5 py-6 sm:px-7 sm:py-7">
+            <div className="overscroll-contain overflow-y-auto px-4 py-4 sm:px-7 sm:py-5">
+              <div className="mb-4 grid gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm sm:grid-cols-[150px_1fr] sm:gap-x-6">
+                <p>
+                  <strong className="text-slate-900">Date:</strong>{" "}
+                  <span className="text-slate-600">July 2, 2026</span>
+                </p>
+                <p>
+                  <strong className="text-slate-900">Subject:</strong>{" "}
+                  <span className="text-slate-600">
+                    Industry-wide Technical Disruption – RoDTEP/RoSCTL Scrip
+                    Utilization
+                  </span>
+                </p>
+              </div>
+
               <p
                 id="important-update-description"
-                className="text-base leading-7 text-slate-700 sm:text-lg sm:leading-8"
+                className="text-sm leading-6 text-slate-700 sm:text-base"
               >
-                Due to systemic issues with Customs EDI synchronization
-                following <strong>Notification 15/2026-27</strong>, we are
-                pausing all <strong>RoDTEP/RoSCTL scrip acquisitions</strong>.
-                We advise partners to retain scrips in source accounts to
-                prevent further technical complications. We remain committed
-                to resuming transactions as soon as stable filing is restored.
+                We are writing to address the ongoing technical failures
+                currently affecting RoDTEP and RoSCTL scrip utilization
+                nationwide.
               </p>
 
-              <div className="mt-6 flex justify-end">
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                <section className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
+                  <h3 className="mb-2 font-bold text-slate-900">Root Cause</h3>
+                  <p className="text-sm leading-6 text-slate-700">
+                    Following the government’s notification No. 15/2026-27
+                    (effective May 1, 2026), a mandatory technical alignment of
+                    RoDTEP schedules with the revised Customs Tariff Act was
+                    implemented. This process involved the addition of 142 new
+                    tariff lines and the deletion of 50 existing tariff lines.
+                  </p>
+                </section>
+
+                <section className="rounded-xl border border-red-200 bg-red-50/70 p-4">
+                  <h3 className="mb-2 font-bold text-slate-900">Current Impact</h3>
+                  <p className="text-sm leading-6 text-slate-700">
+                    The ICEGATE Customs Automated System is currently
+                    experiencing synchronization failures, leading to widespread
+                    validation errors (including codes 415, 407, 408, and 427).
+                    Because of these systemic discrepancies, many scrips have
+                    become temporarily unusable, and significant numbers of
+                    these assets are being returned by importers to sellers as
+                    they cannot be debited against Bills of Entry.
+                  </p>
+                </section>
+              </div>
+
+              <section className="mt-3 rounded-xl border border-blue-200 bg-blue-50/60 p-4">
+                <h3 className="mb-3 font-bold text-slate-900">
+                  Operational Notice to Partners
+                </h3>
+                <ul className="space-y-2 text-sm leading-6 text-slate-700">
+                  <li className="flex gap-2.5">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-orange-500" />
+                    <span>
+                      <strong>Standby Status:</strong> EXIMINQ has placed all
+                      pending RoDTEP purchase transactions on standby until the
+                      Customs EDI infrastructure achieves full stability.
+                    </span>
+                  </li>
+                  <li className="flex gap-2.5">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-orange-500" />
+                    <span>
+                      <strong>Suspension of Purchases:</strong> We are currently
+                      unable to complete any further RoDTEP purchase
+                      transactions.
+                    </span>
+                  </li>
+                  <li className="flex gap-2.5">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-orange-500" />
+                    <span>
+                      <strong>Asset Security:</strong> We strongly advise all
+                      partners to retain scrip assets within their original
+                      source accounts to avoid the administrative and legal
+                      complications of returning scrips already transferred into
+                      a new system.
+                    </span>
+                  </li>
+                </ul>
+              </section>
+
+              <p className="mt-4 text-sm leading-6 text-slate-700">
+                We are monitoring the stability of the ICEGATE infrastructure
+                daily and will notify all partners once the technical
+                environment permits the resumption of transactions. We
+                appreciate your patience as the authorities work through these
+                mandatory system-level updates.
+              </p>
+
+              <div className="mt-4 flex justify-end border-t border-slate-200 pt-4">
                 <button
                   type="button"
                   onClick={closeImportantUpdate}
-                  className="rounded-lg bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+                  className="w-full rounded-lg bg-slate-900 px-6 py-2.5 font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 sm:w-auto"
                 >
                   Close Notice
                 </button>
