@@ -4,7 +4,7 @@
 
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail, FileSignature } from "lucide-react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   /* ─────────────────────────────────────────
@@ -137,7 +137,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       setLoading(true);
 
       const res = await fetch(
-        getApiUrl("/api/duty-drawback"),
+        `${process.env.REACT_APP_API_URL}/api/duty-drawback`,
         // "http://localhost:5000/api/duty-drawback",
         {
           method: "POST",

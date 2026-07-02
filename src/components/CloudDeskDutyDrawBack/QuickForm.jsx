@@ -68,7 +68,7 @@ const QuickForm = () => {
       };
 
       const response = await fetch(
-        getApiUrl("/api/duty-drawback"),
+       `${process.env.REACT_APP_API_URL}/api/duty-drawback`,
         // "http://localhost:5000/api/duty-drawback",
         {
           method: "POST",
