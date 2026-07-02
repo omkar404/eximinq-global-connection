@@ -84,7 +84,7 @@ const ComplianceWidgetEcommerce = ({ setShowEnrollModal }) => {
       // Fallback navigation based on type
       const routes = {
         gifts: "/services/no-due-certificate",
-        commercial: "/services/edpms-ebrc",
+        commercial: "/services/edpms-ebrc/",
         returns: "/services/igcr-returns",
       };
       window.location.href = routes[type] || "/contact";
@@ -103,7 +103,7 @@ const ComplianceWidgetEcommerce = ({ setShowEnrollModal }) => {
       id: "commercial",
       title: "Commercial Export (CSB-V)",
       desc: "Understand GST refunds, incentives, and documentation rules.",
-      href: "/services/edpms-ebrc",
+      href: "/services/edpms-ebrc/",
       tags: ["GST Refunds", "RoDTEP", "Documentation"],
     },
     {

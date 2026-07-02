@@ -44,7 +44,7 @@ const tradeSolutions = {
     title: "Export Solutions",
     items: [
       {
-        href: "/services/edpms-ebrc", // 🔗 Link to EDPMS & e-BRC
+        href: "/services/edpms-ebrc/", // 🔗 Link to EDPMS & e-BRC
         target: "_blank",
         rel: "noopener noreferrer",
         head: "CSB-V Commercial Export",

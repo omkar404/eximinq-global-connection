@@ -277,7 +277,7 @@ export const seoRoutes = {
     title: "LMPC Certificate Consultant - Legal Metrology | EXIMINQ",
     description: "Importing pre-packaged goods? Mandatory LMPC Registration is required before shipment. Ensure MRP stickers comply with Indian packaging laws."
   },
-  "/services/edpms-ebrc": {
+  "/services/edpms-ebrc/": {
     title: "EDPMS and eBRC Consultant India | Export Proceeds Reconciliation, IRM Mapping and AD Bank Closure Support | EXIMINQ",
     description: "EDPMS and eBRC consultant in India for export proceeds reconciliation, IRM mapping, open shipping bill closure, short realisation, extension, write-off, AD bank follow-up, and DGFT-linked export compliance support."
   },

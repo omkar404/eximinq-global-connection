@@ -99,13 +99,13 @@ const services = [
     features: [
       {
         name: "Gateway Recon",
-        href: "/services/edpms-ebrc",
+        href: "/services/edpms-ebrc/",
         target: "_blank",
         rel: "noopener noreferrer",
       },
       {
         name: "EDPMS Closure",
-        href: "/services/edpms-ebrc",
+        href: "/services/edpms-ebrc/",
         target: "_blank",
         rel: "noopener noreferrer",
       },

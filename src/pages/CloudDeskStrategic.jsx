@@ -1164,7 +1164,7 @@ export default function StrategicSolutions() {
                 {/* <li>• e-BRC & EDPMS Closure</li> */}
                 <li>
                   <a
-                    href="/services/edpms-ebrc"
+                    href="/services/edpms-ebrc/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-blue-600 transition"

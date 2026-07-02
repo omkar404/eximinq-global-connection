@@ -227,7 +227,7 @@ function App() {
         <Route path="/services/lmpc-registration" element={<CloudDeskLegalMetrology />} />
 
         {/* EDPMS  */}
-        <Route path="/services/edpms-ebrc" element={<CloudDeskEDPMS />} />
+        <Route path="/services/edpms-ebrc/" element={<CloudDeskEDPMS />} />
 
         {/* EDPMS & e-BRC */}
         <Route path="/services/aqcs-pqms" element={<CloudDeskEBRC />} />

@@ -618,7 +618,10 @@ const IECManagement = () => {
               Commodity Boards.
             </p>
             <div class="grid md:grid-cols-2 gap-4 mt-6">
-              <div class="bg-slate-50 p-4 rounded border border-slate-200">
+              <a
+                href="/services/e-rcmc-registration/"
+                class="block bg-slate-50 p-4 rounded border border-slate-200 transition hover:border-brand-400 hover:bg-white hover:shadow-sm"
+              >
                 <strong class="block text-brand-900 mb-1">
                   RCMC Registration
                 </strong>
@@ -626,8 +629,11 @@ const IECManagement = () => {
                   Required for APEDA, Spices Board, Coffee Board, Tea Board,
                   etc. to claim incentives.
                 </p>
-              </div>
-              <div class="bg-slate-50 p-4 rounded border border-slate-200">
+              </a>
+              <a
+                href="/services/ad-code-registration/"
+                class="block bg-slate-50 p-4 rounded border border-slate-200 transition hover:border-brand-400 hover:bg-white hover:shadow-sm"
+              >
                 <strong class="block text-brand-900 mb-1">
                   AD Code Registration
                 </strong>
@@ -635,7 +641,7 @@ const IECManagement = () => {
                   Essential for custom port approval and foreign transactions at
                   the bank level.
                 </p>
-              </div>
+              </a>
             </div>
           </div>
         </section>

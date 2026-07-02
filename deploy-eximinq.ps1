@@ -81,6 +81,11 @@ $backendItems = @(
 
 if ($IncludePdfDoc) {
     $backendItems += "PDF_DOC"
+} else {
+    # The DGFT notices API loads its index from this small workbook directory.
+    # Keep it in every backend deploy; the optional flag is only needed for the
+    # much larger PDF document archive.
+    $backendItems += "PDF_DOC/DGFT/ALL_PDF"
 }
 
 $existingBackendItems = @()

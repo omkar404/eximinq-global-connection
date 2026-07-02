@@ -1,158 +1,122 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 import {
-  ArrowRight,
-  BadgeCheck,
-  BookOpenCheck,
-  Building2,
-  CalendarClock,
-  CheckCircle2,
-  ClipboardCheck,
+  AlertTriangle,
+  Building,
+  CheckCircle,
+  ChevronDown,
+  Clock,
+  Facebook,
   FileCheck2,
   FileSearch,
   Landmark,
+  Linkedin,
   Mail,
   MapPin,
   Phone,
   ReceiptText,
   ShieldCheck,
-  Sparkles,
-  Target
+  Twitter
 } from "lucide-react";
-import { MainNavbar } from "../components/CloudDeskAdvanceAuthority/MainNavbar";
+import { MainNavbar } from "../components/CloudDeskEDPMS/MainNavbar";
+import Navbar from "../components/CloudDeskEDPMS/Navbar";
+import Hero from "../components/CloudDeskEDPMS/Hero";
+import Fees from "../components/CloudDeskEDPMS/Fees";
 import { ModalEnroll } from "../components/CloudDeskEDPMS/ModalEnroll";
-import QuickForm from "../components/CloudDeskEDPMS/QuickForm";
-
-const HIGHLIGHTS = [
-  "EDPMS consultant India",
-  "eBRC generation, IRM mapping, and shipping bill reconciliation support",
-  "AD bank follow-up for open export entries, write-off, extension, and closure",
-  "RBI, DGFT, and export proceeds compliance support for goods exporters"
-];
 
 const BENEFITS = [
-  "Helps exporters identify why export proceeds are still open in EDPMS even after inward remittance is received, partially adjusted, or reconciled operationally.",
-  "Supports cleaner coordination between exporter records, shipping bills, IRMs, AD bank updates, and DGFT-facing eBRC expectations so benefits and compliance are not lost together.",
-  "Reduces caution-list and unresolved-export risk by reviewing unrealised export proceeds, delayed closure, short realisation, extension, write-off, and mapping errors before they become a larger banking problem.",
-  "Creates a practical closure path for exporters who need both regulatory clarity and transaction-level follow-up instead of only a surface status check."
+  "Identify why export proceeds are still open in EDPMS even after inward remittance has been received.",
+  "Coordinate exporter records, shipping bills, IRMs, AD bank updates, and DGFT-facing eBRC requirements.",
+  "Reduce caution-list and unresolved-export risk by reviewing delayed closure, short realisation, extension, and write-off cases.",
+  "Create a practical closure path with transaction-level follow-up instead of only a surface status check."
 ];
 
 const USE_CASES = [
   {
     title: "Open shipping bills in EDPMS",
     description:
-      "Useful where export proceeds are received but the shipping bill still appears open, unrealised, or unmatched because the IRM was not mapped properly or the AD bank has not updated the case correctly."
+      "Useful where payment is received but the shipping bill still appears open, unrealised, or unmatched because the IRM was not mapped correctly."
   },
   {
-    title: "eBRC generation and DGFT linkage confusion",
+    title: "eBRC generation and DGFT linkage",
     description:
-      "Relevant where exporters need to understand the difference between EDPMS closure and eBRC generation, or where eBRC expectations are blocked by incomplete bank-side transaction mapping."
+      "Relevant where eBRC generation is blocked because the underlying bank-side transaction mapping is incomplete."
   },
   {
-    title: "Short realisation, deduction, write-off, or extension",
+    title: "Short realisation or deduction",
     description:
-      "Applies where export proceeds were received with deductions, only partly received, delayed, written off, or need extension support with the AD bank and documentary reasoning."
+      "Applies where export proceeds were received with deductions, partial payment, bank charges, or write-off requirements."
   },
   {
-    title: "Caution-list and compliance-risk prevention",
+    title: "Caution-list risk prevention",
     description:
-      "Important where exporters want to prevent repeat non-realisation flags, banking restrictions, and unresolved FEMA-facing transaction exposure from building up across multiple shipments."
+      "Important for exporters who want to prevent repeat non-realisation flags and banking restrictions across multiple shipments."
   }
 ];
 
-const ELIGIBILITY_POINTS = [
-  "Goods exporters with open EDPMS entries, unmatched IRMs, delayed closure, or export proceeds that do not reflect correctly against shipping bills.",
-  "Businesses that need support for eBRC-related transaction readiness, especially where DGFT benefit claims or export incentives depend on correct realisation evidence.",
-  "Exporters dealing with short realisation, bank charges, third-party remittance structure, extension requests, partial remittance, or write-off treatment.",
-  "Companies facing banking follow-up, caution-list concern, or repeated transaction-level reconciliation problems across multiple export shipments."
-];
-
 const DOCUMENTS_REQUIRED = [
-  "IEC details, shipping bill copies, export invoice set, port details, shipment dates, and the underlying export transaction trail.",
-  "FIRC or equivalent inward remittance records, IRM references, bank advice, remittance breakup, deduction details, and realised amount evidence.",
-  "Outstanding export bill list, AD bank correspondence, EDPMS screenshots, unrealised bill records, and any caution-list related communication.",
-  "DGFT-side eBRC reference points, export incentive dependency details, extension or write-off papers, and any prior explanatory submissions."
+  "IEC details, shipping bill copies, export invoice set, port details, shipment dates, and export transaction trail.",
+  "FIRC or equivalent inward remittance records, IRM references, bank advice, remittance breakup, and realised amount evidence.",
+  "Outstanding export bill list, AD bank correspondence, EDPMS screenshots, unrealised bill records, and caution-list communication.",
+  "DGFT-side eBRC reference points, export incentive dependency details, extension or write-off papers, and prior submissions."
 ];
 
 const PROCESS_STEPS = [
   {
     title: "Transaction diagnosis",
     detail:
-      "We begin by identifying whether the case is a straight IRM-mapping issue, a partial-remittance issue, a short-realisation problem, a delayed closure case, or a wider export-compliance risk."
+      "We identify whether the case is an IRM-mapping issue, partial-remittance issue, short-realisation problem, delayed closure case, or wider export-compliance risk."
   },
   {
     title: "Shipping bill and remittance reconciliation",
     detail:
-      "The shipping bill, inward remittance, invoice values, deductions, and bank-side records are reviewed together so the true mismatch is understood before any follow-up begins."
+      "Shipping bill, inward remittance, invoice value, deductions, and bank-side records are reviewed together before follow-up starts."
   },
   {
     title: "AD bank action path",
     detail:
-      "We define whether the matter requires bank-side mapping, object-code correction, short-realisation reasoning, extension request, write-off support, or updated transaction closure handling."
+      "We define whether the matter needs bank-side mapping, object-code correction, short-realisation reasoning, extension, write-off, or updated closure handling."
   },
   {
-    title: "eBRC and downstream export-benefit readiness",
+    title: "eBRC readiness",
     detail:
-      "Where relevant, we review how the transaction closure status affects eBRC availability and broader export incentive workflows tied to DGFT-facing proof of realisation."
+      "Where relevant, we review how EDPMS closure affects eBRC availability and export incentive workflows tied to proof of realisation."
   },
   {
     title: "Future transaction tightening",
     detail:
-      "The goal is not only closing today’s open entries but improving document flow, bank coordination, and shipment-level discipline for future exports."
+      "The aim is not only to close current open entries but also to improve document flow and bank coordination for future exports."
   }
-];
-
-const TIMELINE_POINTS = [
-  "Initial EDPMS issue review usually begins within 1 to 3 working days once shipping bill and remittance records are available.",
-  "Simple mapping or record-clarity matters often move faster than extension, write-off, or repeated short-realisation cases.",
-  "Bank-side closure timing depends on the quality of exporter records, branch responsiveness, and whether the issue involves correction, explanation, or approval.",
-  "Older unresolved export bills and multi-shipment reconciliation cases usually require a longer cleanup cycle than a single current shipment."
 ];
 
 const COMMON_ISSUES = [
-  {
-    title: "Payment received but shipping bill still open",
-    detail:
-      "This often points to missing IRM mapping, incorrect linkage, or incomplete bank-side closure rather than absence of payment itself."
-  },
-  {
-    title: "eBRC expected but records are not transaction-ready",
-    detail:
-      "Exporters sometimes treat eBRC and EDPMS as the same step, but the underlying bank and shipping-bill alignment still has to be correct."
-  },
-  {
-    title: "Short realisation or deduction is not documented properly",
-    detail:
-      "Bank charges, partial remittance, exchange variation, or commercial deduction may be commercially understood but not properly reflected in closure records."
-  },
-  {
-    title: "Too many old open entries have accumulated",
-    detail:
-      "Once unresolved bills pile up, the exporter is no longer solving a single exception and instead needs structured reconciliation and banking follow-up."
-  }
+  "Payment received but shipping bill still shows open.",
+  "IRM exists but is not mapped with the correct shipping bill.",
+  "eBRC is expected but bank records are not transaction-ready.",
+  "Short realisation, bank charges, or deductions are not documented properly.",
+  "Old open export bills have accumulated across many shipments."
 ];
 
 const FAQS = [
   {
     question: "What is EDPMS in exports?",
     answer:
-      "EDPMS is the banking and export-monitoring framework used to track whether export proceeds are realised against shipping bills within the permitted timeline and whether those transactions are closed correctly."
+      "EDPMS is the export monitoring framework used to track whether export proceeds are realised against shipping bills within the permitted timeline and closed correctly."
   },
   {
     question: "What is the difference between EDPMS and eBRC?",
     answer:
-      "EDPMS is the monitoring and closure framework around export realisation, while eBRC is the DGFT-facing proof or digital evidence of export proceeds realisation used in broader export-benefit contexts."
+      "EDPMS is the monitoring and closure framework for export realisation. eBRC is the DGFT-facing proof of export proceeds realisation."
   },
   {
     question: "Why is my shipping bill still open after payment was received?",
     answer:
-      "The most common reasons are IRM mapping gaps, bank-side non-updation, deduction handling issues, short-realisation mismatch, or incomplete transaction-level closure."
+      "Common reasons include missing IRM mapping, bank-side non-updation, deduction handling issues, short-realisation mismatch, or incomplete transaction closure."
   },
   {
     question: "Can EDPMS issues affect export incentives?",
     answer:
-      "Yes. If export proceeds are not reflected properly, it can affect eBRC-dependent workflows, broader compliance comfort, and the exporter’s ability to demonstrate clean realisation records."
+      "Yes. If export proceeds are not reflected properly, eBRC-dependent workflows and export benefit documentation can be affected."
   },
   {
     question: "Can partial payment or deduction still be closed?",
@@ -162,62 +126,26 @@ const FAQS = [
   {
     question: "When is extension or write-off relevant?",
     answer:
-      "Extension is relevant where proceeds are delayed but still expected, while write-off becomes relevant where part or all of the export receivable will not be realised and needs compliant banking treatment."
+      "Extension is relevant when proceeds are delayed but expected. Write-off is relevant when part or all of the export receivable will not be realised and needs compliant banking treatment."
   }
 ];
 
 const GOVERNMENT_REFERENCES = [
   {
-    label: "Reserve Bank of India",
-    href: "https://www.rbi.org.in/"
+    title: "Reserve Bank of India",
+    url: "https://www.rbi.org.in/",
+    detail: "Primary ecosystem reference for banking and export proceeds monitoring."
   },
   {
-    label: "DGFT Portal",
-    href: "https://www.dgft.gov.in/CP/"
+    title: "DGFT Portal",
+    url: "https://www.dgft.gov.in/CP/",
+    detail: "Useful for DGFT-linked eBRC and export benefit workflows."
   },
   {
-    label: "ICEGATE Portal",
-    href: "https://www.icegate.gov.in/"
-  },
-  {
-    label: "CBIC Customs Portal",
-    href: "https://www.cbic.gov.in/"
+    title: "ICEGATE Portal",
+    url: "https://www.icegate.gov.in/",
+    detail: "Relevant for shipping bill and customs-side export record references."
   }
-];
-
-const RELATED_LINKS = [
-  {
-    href: "/services/igst-refund",
-    title: "IGST Refund Support",
-    description:
-      "Useful where export proceeds and banking records sit alongside GST refund dependency, shipping bill accuracy, and broader export-document reconciliation."
-  },
-  {
-    href: "/services/rodtep-scheme",
-    title: "RoDTEP Support",
-    description:
-      "Relevant where exporters need incentive-side guidance together with clean export transaction records and reliable downstream proof of realisation."
-  },
-  {
-    href: "/services/gst-lut-filing/",
-    title: "GST LUT Filing Support",
-    description:
-      "Helpful where exporters want cleaner zero-rated export compliance, LUT discipline, and transaction readiness aligned with banking and customs records."
-  },
-  {
-    href: "/services/import-export-code/",
-    title: "IEC and DGFT Profile Support",
-    description:
-      "Important where exporter profile maintenance, DGFT access, and transaction record quality all affect the speed of export-document resolution."
-  }
-];
-
-const SECTION_LINKS = [
-  { href: "#overview", label: "Overview" },
-  { href: "#eligibility", label: "Eligibility" },
-  { href: "#documents", label: "Documents" },
-  { href: "#process", label: "Process" },
-  { href: "#faqs", label: "FAQs" }
 ];
 
 const CloudDeskEDPMS = () => {
@@ -276,16 +204,21 @@ const CloudDeskEDPMS = () => {
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://eximinq.in/services/edpms-ebrc#webpage",
+                "@id": "https://eximinq.in/services/edpms-ebrc/#webpage",
                 url: "https://eximinq.in/services/edpms-ebrc/",
                 name: "EDPMS and eBRC Consultant India | EXIMINQ",
                 description:
                   "Support for EDPMS closure, IRM mapping, eBRC readiness, open shipping bill reconciliation, and export proceeds compliance.",
-                inLanguage: "en-IN"
+                inLanguage: "en-IN",
+                isPartOf: {
+                  "@type": "WebSite",
+                  name: "EXIMINQ",
+                  url: "https://eximinq.in"
+                }
               },
               {
                 "@type": "BreadcrumbList",
-                "@id": "https://eximinq.in/services/edpms-ebrc#breadcrumb",
+                "@id": "https://eximinq.in/services/edpms-ebrc/#breadcrumb",
                 itemListElement: [
                   {
                     "@type": "ListItem",
@@ -309,7 +242,7 @@ const CloudDeskEDPMS = () => {
               },
               {
                 "@type": "Service",
-                "@id": "https://eximinq.in/services/edpms-ebrc#service",
+                "@id": "https://eximinq.in/services/edpms-ebrc/#service",
                 name: "EDPMS and eBRC Support",
                 serviceType: "EDPMS consultant",
                 provider: {
@@ -321,12 +254,13 @@ const CloudDeskEDPMS = () => {
                   "@type": "Country",
                   name: "India"
                 },
+                url: "https://eximinq.in/services/edpms-ebrc/",
                 description:
                   "Support for export proceeds reconciliation, IRM mapping, open shipping bill closure, AD bank follow-up, extension, write-off, and eBRC-linked export compliance workflows."
               },
               {
                 "@type": "FAQPage",
-                "@id": "https://eximinq.in/services/edpms-ebrc#faq",
+                "@id": "https://eximinq.in/services/edpms-ebrc/#faq",
                 mainEntity: FAQS.map((faq) => ({
                   "@type": "Question",
                   name: faq.question,
@@ -341,13 +275,15 @@ const CloudDeskEDPMS = () => {
         </script>
       </Helmet>
 
-      <div className="advance-service-page min-h-screen bg-slate-50 text-slate-900">
+      <div className="bg-slate-50 text-slate-800">
         <MainNavbar
           scrolled={scrolled}
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}
           setShowEnrollModal={setShowEnrollModal}
         />
+        <Navbar />
+        <Hero />
 
         <ModalEnroll
           show={showEnrollModal.open}
@@ -356,501 +292,418 @@ const CloudDeskEDPMS = () => {
           onSubmit={handleEnrollmentSubmit}
         />
 
-        <main className="overflow-hidden">
-          <section className="advance-service-hero bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.18),_transparent_38%),linear-gradient(135deg,#eff6ff_0%,#ffffff_45%,#ecfeff_100%)] pt-28 pb-16 md:pt-32 md:pb-20">
-            <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-[1.2fr_0.8fr] md:px-8">
+        <section id="about" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                What is EDPMS and eBRC?
+              </h2>
+              <div className="w-24 h-1 bg-accent-500 mx-auto rounded"></div>
+            </div>
+
+            <div className="prose lg:prose-lg mx-auto text-slate-600 text-justify">
+              <p className="mb-4">
+                <strong>EDPMS</strong> is the export proceeds monitoring
+                framework used to track whether export payments are realised
+                against shipping bills and closed correctly through the
+                authorised dealer bank.
+              </p>
+              <p className="mb-4">
+                <strong>eBRC</strong> is the DGFT-facing proof of export
+                realisation. If IRM mapping, shipping bill reconciliation, short
+                realisation, or bank-side closure is incomplete, exporters can
+                face open entries, incentive delays, and caution-list risk.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mt-12 text-center">
+              <div className="p-6 bg-slate-50 rounded-lg border border-slate-100">
+                <Landmark className="w-12 h-12 text-brand-500 mx-auto mb-4" />
+                <h3 className="font-bold text-lg mb-2">Bank Coordination</h3>
+                <p className="text-sm text-slate-500">
+                  Follow-up with AD bank records, IRM mapping, and closure
+                  requirements.
+                </p>
+              </div>
+              <div className="p-6 bg-slate-50 rounded-lg border border-slate-100">
+                <ReceiptText className="w-12 h-12 text-brand-500 mx-auto mb-4" />
+                <h3 className="font-bold text-lg mb-2">Shipping Bill Closure</h3>
+                <p className="text-sm text-slate-500">
+                  Match export invoices, realisation evidence, deductions, and
+                  shipping bill data.
+                </p>
+              </div>
+              <div className="p-6 bg-slate-50 rounded-lg border border-slate-100">
+                <ShieldCheck className="w-12 h-12 text-brand-500 mx-auto mb-4" />
+                <h3 className="font-bold text-lg mb-2">Compliance Shield</h3>
+                <p className="text-sm text-slate-500">
+                  Reduce unresolved export bill exposure and future caution-list
+                  risk.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="caution" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-14">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Export Proceeds Compliance
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Common EDPMS Problems We Help Resolve
+              </h2>
+              <p className="text-slate-500 mt-3 max-w-3xl mx-auto">
+                This page is built for exporters facing open shipping bills,
+                pending eBRC generation, IRM mismatch, short realisation, and
+                bank-side export closure issues.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-5">
+                  Key benefits
+                </h3>
+                <ul className="space-y-4 text-slate-600">
+                  {BENEFITS.map((point) => (
+                    <li key={point} className="flex gap-3">
+                      <CheckCircle className="text-green-500 mt-1 shrink-0" size={18} />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-brand-900 rounded-2xl text-white p-8 shadow-sm">
+                <h3 className="text-2xl font-bold mb-5">
+                  Why this matters for exporters
+                </h3>
+                <div className="space-y-4 text-slate-100">
+                  <p>
+                    EDPMS issues are rarely just a portal problem. They usually
+                    involve a mismatch between commercial records, shipping
+                    bills, bank remittance data, and DGFT expectations.
+                  </p>
+                  <p>
+                    A clean closure path protects future shipments, supports
+                    eBRC readiness, and gives management a clear view of which
+                    export proceeds are still unresolved.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               <div>
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/80 px-4 py-2 text-sm font-semibold text-sky-700 shadow-sm">
-                  <Sparkles className="h-4 w-4" />
-                  EDPMS, eBRC, IRM Mapping, AD Bank Closure
-                </div>
-
-                <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-slate-950 md:text-6xl">
-                  EDPMS and eBRC Consultant India for Export Proceeds
-                  Reconciliation and Shipping Bill Closure
-                </h1>
-
-                <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
-                  Resolve open export entries, unmatched IRMs, delayed closure,
-                  short realisation, extension, write-off, and eBRC-related
-                  export compliance issues with a transaction-first support
-                  workflow built for Indian exporters.
-                </p>
-
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                  {HIGHLIGHTS.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white/90 px-4 py-4 shadow-sm"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-600" />
-                      <p className="text-sm font-medium leading-6 text-slate-700">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                  <a
-                    href="#quick-check"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-4 text-base font-semibold text-white transition hover:bg-slate-800"
-                  >
-                    Check My EDPMS Status
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                  <Link
-                    to="/contact-us"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-6 py-4 text-base font-semibold text-slate-700 transition hover:border-sky-300 hover:text-sky-700"
-                  >
-                    Speak With an Export Compliance Expert
-                  </Link>
-                </div>
-
-                <div className="mt-10 grid gap-4 text-sm text-slate-600 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
-                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
-                      <Phone className="h-4 w-4 text-sky-600" />
-                      Call Us
-                    </div>
-                    <a href="tel:+917400096950" className="hover:text-sky-700">
-                      +91 74000 96950
-                    </a>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
-                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
-                      <Mail className="h-4 w-4 text-sky-600" />
-                      Email
-                    </div>
-                    <a
-                      href="mailto:clouddesk@eximinq.in"
-                      className="hover:text-sky-700"
-                    >
-                      clouddesk@eximinq.in
-                    </a>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white/85 p-4 shadow-sm">
-                    <div className="mb-2 flex items-center gap-2 font-semibold text-slate-900">
-                      <MapPin className="h-4 w-4 text-sky-600" />
-                      Coverage
-                    </div>
-                    <p>India-wide exporter support for DGFT, banking, and customs-linked reconciliation matters.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div id="quick-check" className="self-start">
-                <div className="rounded-[28px] border border-slate-200 bg-white/95 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.10)]">
-                  <QuickForm />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="sticky top-[76px] z-20 border-y border-slate-200 bg-white/95 backdrop-blur">
-            <div className="mx-auto flex max-w-7xl gap-3 overflow-x-auto px-4 py-4 md:px-8">
-              {SECTION_LINKS.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </section>
-
-          <section id="overview" className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-            <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-600">
-                  <Target className="h-4 w-4" />
-                  Service Overview
-                </div>
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Why exporters search for EDPMS closure and eBRC support
+                <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                  Use Cases
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-5">
+                  Where EDPMS and eBRC Support Is Needed
                 </h2>
-                <div className="mt-6 space-y-5 text-base leading-8 text-slate-600">
-                  <p>
-                    Exporters usually discover EDPMS problems only after a
-                    shipment is commercially complete but the banking trail is
-                    still unresolved. Payment may have arrived, but the shipping
-                    bill remains open, the inward remittance is not mapped
-                    correctly, the deduction logic is unclear, or the exporter
-                    realises that eBRC expectations depend on cleaner
-                    transaction-level reconciliation than operations assumed.
-                  </p>
-                  <p>
-                    This page is built to rank for high-intent searches around{" "}
-                    <strong>EDPMS consultant India</strong>,{" "}
-                    <strong>eBRC support</strong>,{" "}
-                    <strong>shipping bill closure</strong>,{" "}
-                    <strong>IRM mapping</strong>,{" "}
-                    <strong>short realisation</strong>, and{" "}
-                    <strong>AD bank export compliance</strong> because those are
-                    the real business situations exporters face.
-                  </p>
-                  <p>
-                    It also serves commercial and compliance intent at the same
-                    time. Users searching for EDPMS are not always looking for a
-                    definition. They are often looking for a resolution path
-                    that covers bank follow-up, documentary logic, export
-                    proceeds closure, extension, write-off, and DGFT-facing
-                    readiness.
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid gap-5">
-                <div className="rounded-[28px] border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
-                  <div className="mb-3 flex items-center gap-3 text-emerald-700">
-                    <ShieldCheck className="h-5 w-5" />
-                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
-                      Outcome Focus
-                    </span>
-                  </div>
-                  <p className="text-sm leading-7 text-emerald-900">
-                    Clear closure logic for open entries, cleaner bank
-                    coordination, lower caution-list risk, and stronger export
-                    proceeds documentation for future shipments.
-                  </p>
-                </div>
-                <div className="rounded-[28px] border border-sky-200 bg-sky-50 p-6 shadow-sm">
-                  <div className="mb-3 flex items-center gap-3 text-sky-700">
-                    <Landmark className="h-5 w-5" />
-                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
-                      Search Intent Covered
-                    </span>
-                  </div>
-                  <p className="text-sm leading-7 text-sky-900">
-                    EDPMS closure, eBRC generation support, IRM mapping, export
-                    proceeds reconciliation, extension, write-off, unrealised
-                    bills, and AD bank follow-up.
-                  </p>
-                </div>
-                <div className="rounded-[28px] border border-violet-200 bg-violet-50 p-6 shadow-sm">
-                  <div className="mb-3 flex items-center gap-3 text-violet-700">
-                    <BookOpenCheck className="h-5 w-5" />
-                    <span className="text-sm font-bold uppercase tracking-[0.18em]">
-                      E-E-A-T Angle
-                    </span>
-                  </div>
-                  <p className="text-sm leading-7 text-violet-900">
-                    The page uses practical exporter problems, transaction-level
-                    workflow explanations, official references, and related
-                    service links to improve expertise and trust signals.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  What this page helps exporters solve
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  These use cases expand the page beyond a thin service pitch and
-                  align it to the different ways exporters actually search for
-                  EDPMS and eBRC help.
-                </p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                {USE_CASES.map((item) => (
-                  <article
-                    key={item.title}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 shadow-sm"
-                  >
-                    <div className="mb-4 inline-flex rounded-full bg-white px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-                      Use Case
-                    </div>
-                    <h3 className="text-xl font-black text-slate-950">
-                      {item.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-7 text-slate-600">
-                      {item.description}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-            <div className="grid gap-6 lg:grid-cols-2">
-              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-700">
-                  <BadgeCheck className="h-4 w-4" />
-                  Key Benefits
-                </div>
-                <div className="space-y-4">
-                  {BENEFITS.map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-1 h-5 w-5 flex-none text-emerald-600" />
-                      <p className="text-sm leading-7 text-slate-600">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-rose-700">
-                  <FileSearch className="h-4 w-4" />
-                  Common Problems
-                </div>
-                <div className="space-y-5">
-                  {COMMON_ISSUES.map((item) => (
+                <div className="grid gap-5">
+                  {USE_CASES.map((item) => (
                     <div
                       key={item.title}
-                      className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                      className="bg-slate-50 rounded-2xl border border-slate-200 p-6"
                     >
-                      <h3 className="text-lg font-bold text-slate-900">
+                      <h3 className="font-bold text-lg text-slate-900 mb-2">
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-7 text-slate-600">
-                        {item.detail}
+                      <p className="text-sm leading-7 text-slate-600">
+                        {item.description}
                       </p>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-          </section>
 
-          <section id="eligibility" className="bg-slate-950 py-16 text-white">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                  Eligibility and ideal fit
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-300">
-                  This section is written to capture both search relevance and
-                  decision-stage clarity for exporters comparing whether this
-                  support is actually for their case.
-                </p>
-              </div>
-              <div className="grid gap-5 md:grid-cols-2">
-                {ELIGIBILITY_POINTS.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-[24px] border border-white/10 bg-white/5 p-6"
-                  >
-                    <div className="flex items-start gap-3">
-                      <Building2 className="mt-1 h-5 w-5 flex-none text-cyan-300" />
-                      <p className="text-sm leading-7 text-slate-200">{item}</p>
-                    </div>
-                  </div>
-                ))}
+              <div>
+                <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                  Documents Required
+                </span>
+                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-5">
+                  Records We Usually Review
+                </h3>
+                <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                  <ul className="space-y-4 text-slate-600">
+                    {DOCUMENTS_REQUIRED.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <FileCheck2 className="text-brand-600 mt-1 shrink-0" size={18} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section id="documents" className="bg-white py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Documents and records typically required
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  Stronger documentation depth improves user usefulness and also
-                  makes the page more complete for Google’s indexing systems.
-                </p>
-              </div>
-              <div className="grid gap-5 md:grid-cols-2">
-                {DOCUMENTS_REQUIRED.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-[24px] border border-slate-200 bg-slate-50 p-6"
-                  >
-                    <div className="flex items-start gap-3">
-                      <FileCheck2 className="mt-1 h-5 w-5 flex-none text-sky-600" />
-                      <p className="text-sm leading-7 text-slate-600">{item}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+        <section id="process" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Process
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                EDPMS Closure and eBRC Readiness Flow
+              </h2>
+              <p className="text-slate-500 mt-2">
+                A practical workflow for identifying the issue and moving it
+                toward closure.
+              </p>
             </div>
-          </section>
 
-          <section id="process" className="bg-slate-50 py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Process flow for EDPMS closure and eBRC support
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  A defined process section helps both users and search engines
-                  understand the workflow depth behind the service.
-                </p>
-              </div>
-              <div className="grid gap-6 lg:grid-cols-5">
+            <div className="relative">
+              <div className="hidden md:block absolute top-8 left-0 w-full h-1 bg-slate-200 -z-0"></div>
+              <div className="grid md:grid-cols-5 gap-8 relative z-10">
                 {PROCESS_STEPS.map((step, index) => (
-                  <article
-                    key={step.title}
-                    className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm"
-                  >
-                    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-white">
+                  <div key={step.title} className="text-center relative z-10">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl font-bold text-brand-900 mx-auto mb-4 border-4 border-brand-200 shadow-sm">
                       {index + 1}
                     </div>
-                    <h3 className="text-lg font-black text-slate-950">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      {step.detail}
-                    </p>
-                  </article>
+                    <h3 className="text-lg font-bold mb-2">{step.title}</h3>
+                    <p className="text-sm text-slate-500">{step.detail}</p>
+                  </div>
                 ))}
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="bg-white py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-                <div className="rounded-[28px] border border-slate-200 bg-slate-950 p-8 text-white shadow-sm">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
-                    <CalendarClock className="h-4 w-4" />
-                    Expected Timelines
-                  </div>
-                  <div className="space-y-4">
-                    {TIMELINE_POINTS.map((item) => (
-                      <div key={item} className="flex items-start gap-3">
-                        <ReceiptText className="mt-1 h-5 w-5 flex-none text-cyan-300" />
-                        <p className="text-sm leading-7 text-slate-200">{item}</p>
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-10">
+              <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+                <h3 className="text-2xl font-bold text-slate-900 mb-5">
+                  Common issues that trigger delays
+                </h3>
+                <div className="space-y-4">
+                  {COMMON_ISSUES.map((issue) => (
+                    <div
+                      key={issue}
+                      className="bg-red-50 border border-red-100 rounded-2xl p-5 text-slate-700"
+                    >
+                      <div className="flex gap-3">
+                        <AlertTriangle className="text-red-600 mt-1 shrink-0" size={18} />
+                        <p>{issue}</p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-8 shadow-sm">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-                    <ClipboardCheck className="h-4 w-4" />
-                    Government and ecosystem references
-                  </div>
-                  <p className="mb-5 text-sm leading-7 text-slate-600">
-                    Official reference links strengthen trust and help position
-                    the page inside the correct export, banking, DGFT, and
-                    customs context.
-                  </p>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {GOVERNMENT_REFERENCES.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-2xl border border-slate-200 bg-white p-5 text-sm font-semibold text-slate-700 transition hover:border-sky-300 hover:text-sky-700"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-slate-50 py-16">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
-              <div className="mb-10 max-w-3xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Related services that strengthen this page’s internal SEO cluster
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  Internal links help Google understand that this page belongs to
-                  a broader export compliance and incentive ecosystem, not an
-                  isolated thin page.
-                </p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                {RELATED_LINKS.map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className="group rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-sky-300 hover:shadow-lg"
-                  >
-                    <div className="mb-4 inline-flex rounded-full bg-sky-50 p-3 text-sky-700">
-                      <ArrowRight className="h-5 w-5" />
                     </div>
-                    <h3 className="text-lg font-black text-slate-950 group-hover:text-sky-700">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      {item.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section id="faqs" className="bg-white py-16">
-            <div className="mx-auto max-w-5xl px-4 md:px-8">
-              <div className="mb-10 text-center">
-                <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
-                  Frequently asked questions on EDPMS and eBRC
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
-                  FAQ depth improves long-tail coverage and supports potential
-                  rich-result interpretation when Google decides to use it.
-                </p>
-              </div>
-              <div className="space-y-5">
-                {FAQS.map((faq) => (
-                  <article
-                    key={faq.question}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 shadow-sm"
-                  >
-                    <h3 className="text-lg font-black text-slate-950">
-                      {faq.question}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      {faq.answer}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-[linear-gradient(135deg,#0f172a_0%,#1e3a8a_55%,#0f766e_100%)] py-16 text-white">
-            <div className="mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-[1fr_auto] md:items-center md:px-8">
-              <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
-                  <Sparkles className="h-4 w-4" />
-                  Ready to reconcile open export entries?
+                  ))}
                 </div>
-                <h2 className="max-w-3xl text-3xl font-black tracking-tight md:text-4xl">
-                  Get structured support for EDPMS closure, eBRC readiness,
-                  shipping bill reconciliation, and AD bank follow-up.
-                </h2>
-                <p className="mt-4 max-w-2xl text-base leading-8 text-slate-200">
-                  If you are dealing with unrealised export bills, open entries,
-                  remittance mapping issues, short realisation, or pending
-                  banking closure, we can help you build a cleaner path forward.
-                </p>
               </div>
-              <div className="flex flex-col gap-4 sm:flex-row md:flex-col">
-                <a
-                  href="tel:+917400096950"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-slate-100"
-                >
-                  <Phone className="h-4 w-4" />
-                  Call +91 74000 96950
-                </a>
-                <Link
-                  to="/contact-us"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-base font-semibold text-white transition hover:bg-white/15"
-                >
-                  Book an EDPMS Review
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+                <h3 className="text-2xl font-bold text-slate-900 mb-5">
+                  Official sources and useful next pages
+                </h3>
+                <div className="space-y-5">
+                  {GOVERNMENT_REFERENCES.map((reference) => (
+                    <a
+                      key={reference.url}
+                      href={reference.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-xl border border-slate-200 p-5 hover:border-brand-300 hover:bg-slate-50 transition"
+                    >
+                      <h4 className="font-bold text-slate-900 mb-1">{reference.title}</h4>
+                      <p className="text-sm text-slate-600">{reference.detail}</p>
+                    </a>
+                  ))}
+
+                  <div className="rounded-xl bg-brand-900 text-white p-5">
+                    <p className="text-sm text-slate-100 leading-relaxed">
+                      Related internal resources: review{" "}
+                      <a href="/services/igst-refund" className="font-semibold underline underline-offset-4">
+                        IGST refund support
+                      </a>
+                      ,{" "}
+                      <a href="/services/rodtep-scheme" className="font-semibold underline underline-offset-4">
+                        RoDTEP scheme support
+                      </a>
+                      , and{" "}
+                      <a href="/services/gst-lut-filing/" className="font-semibold underline underline-offset-4">
+                        GST LUT filing
+                      </a>{" "}
+                      for stronger export compliance continuity.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
+
+        <section className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Why CloudDesk for EDPMS and eBRC?
+              </h2>
+              <p className="text-slate-500">
+                EDPMS closure is a banking, export-document, and compliance
+                exercise. CloudDesk helps structure the file before follow-up.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="flex gap-4 p-6 bg-white rounded-xl border border-slate-100">
+                <div className="bg-red-100 p-3 rounded-lg text-red-600 h-fit">
+                  <AlertTriangle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">1. Open Entry Diagnosis</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    We identify the exact reason an export entry is unresolved,
+                    instead of treating every case as the same bank follow-up.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 p-6 bg-white rounded-xl border border-slate-100">
+                <div className="bg-blue-100 p-3 rounded-lg text-blue-600 h-fit">
+                  <FileSearch size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">2. IRM and Shipping Bill Mapping</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    We review the transaction trail so realisation evidence can
+                    be matched with the correct export records.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 p-6 bg-white rounded-xl border border-slate-100">
+                <div className="bg-green-100 p-3 rounded-lg text-green-600 h-fit">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">3. Extension and Write-Off Guidance</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Delayed or partly realised proceeds need correct reasoning,
+                    documentation, and bank-side treatment.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 p-6 bg-white rounded-xl border border-slate-100">
+                <div className="bg-purple-100 p-3 rounded-lg text-purple-600 h-fit">
+                  <Building size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-2">4. AD Bank Follow-Up Pack</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    We help prepare a cleaner follow-up path so the bank has the
+                    right information to act on the case.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Fees setShowEnrollModal={setShowEnrollModal} />
+
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+              EDPMS and eBRC FAQs
+            </h2>
+
+            <div className="space-y-4">
+              {FAQS.map((faq) => (
+                <details
+                  key={faq.question}
+                  className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 group"
+                >
+                  <summary className="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+                    {faq.question}
+                    <ChevronDown
+                      size={20}
+                      className="text-brand-500 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+
+                  <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
+          <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+            <div>
+              <a href="/" className="text-2xl font-bold text-white mb-4 block">
+                EXIMINQ
+              </a>
+              <p className="text-sm mb-6">
+                EXIMINQ Contact: Your trusted partner for DGFT, Customs, banking,
+                and logistics compliance.
+              </p>
+              <div className="flex gap-4">
+                <a href="https://www.linkedin.com/company/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition" aria-label="LinkedIn">
+                  <Linkedin size={18} />
+                </a>
+                <a href="https://twitter.com/" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition" aria-label="Twitter">
+                  <Twitter size={18} />
+                </a>
+                <a href="https://www.facebook.com/" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition" aria-label="Facebook">
+                  <Facebook size={18} />
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-6">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="/services/edpms-ebrc/" className="hover:text-white transition">EDPMS and eBRC</a></li>
+                <li><a href="/services/igst-refund" className="hover:text-white transition">IGST Refund</a></li>
+                <li><a href="/services/rodtep-scheme" className="hover:text-white transition">RoDTEP Scheme</a></li>
+                <li><a href="/services/advance-authorisation/" className="hover:text-white transition">Advance Authorisation</a></li>
+                <li><a href="/services/epcg-scheme" className="hover:text-white transition">EPCG Scheme</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-6">Other Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="/services/gst-lut-filing/" className="hover:text-white transition">GST LUT Filing</a></li>
+                <li><a href="/services/duty-drawback" className="hover:text-white transition">Duty Drawback</a></li>
+                <li><a href="/services/import-export-code/" className="hover:text-white transition">IEC Management</a></li>
+                <li><a href="/services/ad-code-registration/" className="hover:text-white transition">AD Code Registration</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-6">Contact Us</h4>
+              <ul className="space-y-4 text-sm">
+                <li className="flex gap-3 items-center">
+                  <Phone size={18} className="text-brand-500" />
+                  +917400096950
+                </li>
+                <li className="flex gap-3 items-center">
+                  <Mail size={18} className="text-brand-500" />
+                  clouddesk@eximinq.in
+                </li>
+                <li className="flex gap-3 items-center">
+                  <MapPin size={18} className="text-brand-500" />
+                  Mumbai, India
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="container mx-auto px-4 mt-12 pt-8 border-t border-brand-800 text-center text-xs text-slate-500">
+            © 2025 EXIMINQ CloudDesk. All Rights Reserved. Not affiliated with
+            DGFT, RBI, ICEGATE, or any government authority.
+          </div>
+        </footer>
       </div>
     </>
   );
