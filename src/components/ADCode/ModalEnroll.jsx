@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 
 export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
   const [form, setForm] = useState({
@@ -239,7 +239,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        getApiUrl("/api/ad-code-registration"),
+        `${process.env.REACT_APP_API_URL}/api/ad-code-registration`,
         //  "http://localhost:5000/api/ad-code-registration",
         {
           method: "POST",
