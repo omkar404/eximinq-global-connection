@@ -1,4 +1,4 @@
-import { getApiUrl } from "../../utils/apiBaseUrl";
+
 // import { useState } from "react";
 
 // const QuickForm = () => {
@@ -265,7 +265,7 @@ const QuickForm = () => {
       console.log("📤 Sending data:", payload);
 
       const response = await fetch(
-        getApiUrl("/api/e-rcmc-registration"),
+        `${process.env.REACT_APP_API_URL}/api/e-rcmc-registration`,
         // "http://localhost:5000/api/e-rcmc-registration", // ✅ http:// is required
         {
           method: "POST",
