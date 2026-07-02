@@ -14,11 +14,11 @@ const Navbar = ({ setShowEnrollModal }) => {
           <a href="#about" className="hover:text-brand-600 transition">
             About IEC
           </a>
-          <a href="#benefits" className="hover:text-brand-600 transition">
-            Benefits
-          </a>
           <a href="#documents" className="hover:text-brand-600 transition">
             Documents
+          </a>
+          <a href="#benefits" className="hover:text-brand-600 transition">
+            Benefits
           </a>
           <a href="#process" className="hover:text-brand-600 transition">
             Process
