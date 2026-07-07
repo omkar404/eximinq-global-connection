@@ -31,8 +31,8 @@ const Navbar = () => {
           <a href="#pricing" className="hover:text-brand-600 transition">
             Fees
           </a>
-          <a href="#faqs" className="hover:text-brand-600 transition">
-            FAQs
+          <a href="#exporter-packages" className="hover:text-brand-600 transition">
+            Exporter-packages
           </a>
         </div>
 

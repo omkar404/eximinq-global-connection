@@ -28,6 +28,7 @@ async function sendEmail(record) {
     issue,
     destinationCountry,
     hsCode,
+    ftaagreement,
   } = record;
 
   const serviceDisplay = service || "Certificate of Origin Registration";
@@ -44,6 +45,7 @@ async function sendEmail(record) {
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${destinationCountry ? `<tr><td><b>Destination Country</b></td><td>${destinationCountry}</td></tr>` : ""}
           ${hsCode ? `<tr><td><b>HS Code (First 6 digits)</b></td><td>${hsCode}</td></tr>` : ""}
+          ${ftaagreement ? `<tr><td><b>FTA Agreement</b></td><td>${ftaagreement}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -79,6 +81,7 @@ exports.createservicecertificateoforigin = async (req, res) => {
       issue,
       destinationCountry, // ✅ camelCase
       hsCode, // ✅ camelCase
+      ftaagreement,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -95,6 +98,7 @@ exports.createservicecertificateoforigin = async (req, res) => {
       mobile: mobile.trim(),
       destinationCountry: destinationCountry ? destinationCountry.trim() : null, // ✅ use the correct variable
       hsCode: hsCode ? hsCode.trim() : null, // ✅ use correct variable
+      ftaagreement: ftaagreement ? ftaagreement.trim() : null, // ✅ was missing — now saved
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,

@@ -17,6 +17,11 @@ const servicecertificateoforiginSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    ftaagreement: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
       trim: true,

@@ -192,6 +192,82 @@ const WHY_CLOUDDESK = [
   }
 ];
 
+const COO_FEES = [
+  {
+    plan: "Preferential CoO",
+    tag: "FTA / PTA / CEPA",
+    price: "₹ 1,500",
+    unit: "+ GST (Per Certificate)",
+    features: [
+      "Duty Benefit Analysis",
+      "Rules of Origin Check",
+      "DGFT Digital Filing",
+      "Expert Consultation"
+    ],
+    cta: "Apply Preferential",
+    featured: true
+  },
+  {
+    plan: "Non-Preferential CoO",
+    tag: "General Exports",
+    price: "₹ 500",
+    unit: "+ GST (Per Certificate)",
+    features: [
+      "Standard Origin Proof",
+      "Chamber/Agency Liaison",
+      "Fast Track Issuance",
+      "Basic Documentation"
+    ],
+    cta: "Apply Non-Preferential",
+    featured: false
+  }
+];
+
+const EXPORTER_PACKAGES = [
+  {
+    name: "Startup / Small Plan",
+    price: "₹25,000",
+    unit: "/ mo",
+    limit: "Up to 30 Pref. COOs.",
+    extra: "Additional COOs billed extra",
+    features: [
+      "Monthly compliance review",
+      "Data reconciliation",
+      "Audit support"
+    ],
+    featured: false
+  },
+  {
+    name: "Mid-Size Exporter Plan",
+    price: "₹50,000",
+    unit: "/ mo",
+    limit: "Up to 75 Pref. COOs.",
+    extra: "Additional COOs billed extra",
+    features: [
+      "Monthly compliance review",
+      "Data reconciliation",
+      "Audit support",
+      "Priority query resolution"
+    ],
+    featured: true,
+    badge: "Best Value"
+  },
+  {
+    name: "Large-Size Exporter Plan",
+    price: "₹75,000",
+    unit: "/ mo",
+    limit: "Up to 75 Pref. COOs.",
+    extra: "Additional COOs billed extra",
+    features: [
+      "Monthly compliance review",
+      "Data reconciliation",
+      "Audit support",
+      "Dedicated account manager"
+    ],
+    featured: false
+  }
+];
+
 const CloudDeskCertificate = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -557,7 +633,10 @@ const CloudDeskCertificate = () => {
           </div>
         </section>
 
-        <section id="agreements" className="py-20 bg-white">
+
+
+
+        <section id="agreements" className="py-20 bg-slate-50">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center mb-14">
               <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
@@ -653,6 +732,110 @@ const CloudDeskCertificate = () => {
         </section>
 
         <Fees setShowEnrollModal={setShowEnrollModal} />
+
+        <section id="exporter-packages" className="py-20 bg-slate-900 text-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-14">
+              <span className="text-brand-400 font-bold uppercase tracking-wider text-sm">
+                Monthly Retainer Plans
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2">
+                Exporter Monthly Packages
+              </h2>
+              <p className="text-slate-300 mt-4 max-w-2xl mx-auto">
+                For exporters filing Certificates of Origin regularly, a
+                monthly plan covers ongoing compliance review, reconciliation,
+                and audit support at a fixed cost.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {EXPORTER_PACKAGES.map((plan) => (
+                <article
+                  key={plan.name}
+                  className={`relative rounded-2xl p-8 flex flex-col shadow-sm ${
+                    plan.featured
+                      ? "bg-brand-600 text-white scale-105 shadow-xl"
+                      : "bg-white text-slate-800"
+                  }`}
+                >
+                  {plan.badge && (
+                    <span className="absolute top-4 right-4 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      {plan.badge}
+                    </span>
+                  )}
+
+                  <h3
+                    className={`text-lg font-bold mb-2 ${
+                      plan.featured ? "text-white" : "text-slate-900"
+                    }`}
+                  >
+                    {plan.name}
+                  </h3>
+
+                  <div className="flex items-baseline gap-1 mb-1">
+                    <span className="text-3xl font-extrabold">
+                      {plan.price}
+                    </span>
+                    <span
+                      className={`text-sm ${
+                        plan.featured ? "text-white/80" : "text-slate-500"
+                      }`}
+                    >
+                      {plan.unit}
+                    </span>
+                  </div>
+
+                  <p
+                    className={`text-sm mb-1 ${
+                      plan.featured ? "text-white/90" : "text-slate-600"
+                    }`}
+                  >
+                    {plan.limit}
+                  </p>
+                  <p
+                    className={`text-xs mb-6 ${
+                      plan.featured ? "text-white/70" : "text-slate-400"
+                    }`}
+                  >
+                    {plan.extra}
+                  </p>
+
+                  <ul className="space-y-3 mb-8 flex-grow">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-3 text-sm">
+                        <CheckCircle
+                          className={`w-4 h-4 shrink-0 ${
+                            plan.featured ? "text-white" : "text-green-500"
+                          }`}
+                        />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    onClick={() =>
+                      setShowEnrollModal({ open: true, type: plan.name })
+                    }
+                    className="block w-full bg-slate-600 text-white font-bold py-3 rounded-lg hover:bg-slate-700 transition"
+                  >
+                    Choose Plan
+                  </button>
+                </article>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-4 justify-center mt-10">
+              <span className="bg-green-600 text-white font-semibold text-sm px-6 py-3 rounded-lg">
+                Exclusive Bonus: Non-Preferential COO at ₹250
+              </span>
+              <span className="bg-slate-800 text-slate-300 font-medium text-sm px-6 py-3 rounded-lg">
+                No Advance Payment Required · Monthly Billing Cycle
+              </span>
+            </div>
+          </div>
+        </section>
 
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-6xl">
