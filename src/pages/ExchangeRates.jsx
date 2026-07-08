@@ -603,8 +603,8 @@
 
 
 /*----------------------------*/
-
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
 import Marquee from "react-fast-marquee";
 import {
@@ -629,21 +629,21 @@ const fallbackExchangeRates = exchangeRates.filter(
 // Get year from date string (handles DD-MM-YYYY format)
 const getYear = (dateStr) => {
   if (!dateStr) return null;
-  
+
   // Handle DD-MM-YYYY format
   if (dateStr.includes('-')) {
     const parts = dateStr.split("-");
     if (parts.length !== 3) return null;
     return parts[2];
   }
-  
+
   // Handle DD/MM/YYYY format
   if (dateStr.includes('/')) {
     const parts = dateStr.split("/");
     if (parts.length !== 3) return null;
     return parts[2];
   }
-  
+
   return null;
 };
 
@@ -659,7 +659,7 @@ const parseDMY = (dmy) => {
     // Use UTC to avoid timezone issues
     return new Date(Date.UTC(y, m - 1, d));
   }
-  
+
   // Handle DD/MM/YYYY format
   if (dmy.includes('/')) {
     const parts = dmy.split("/");
@@ -667,17 +667,17 @@ const parseDMY = (dmy) => {
     const [d, m, y] = parts.map(Number);
     return new Date(Date.UTC(y, m - 1, d));
   }
-  
+
   return null;
 };
 
 // Check if a date is within the validity period
 const isRateValidForDate = (rate, targetDate) => {
   if (!rate.effectiveDate) return false;
-  
+
   const effectiveDate = parseDMY(rate.effectiveDate);
   if (!effectiveDate) return false;
-  
+
   // Parse target date (stored in DD-MM-YYYY format)
   let targetDateObj;
   if (typeof targetDate === 'string') {
@@ -693,10 +693,10 @@ const isRateValidForDate = (rate, targetDate) => {
   } else {
     targetDateObj = new Date(targetDate);
   }
-  
+
   targetDateObj.setUTCHours(0, 0, 0, 0);
   effectiveDate.setUTCHours(0, 0, 0, 0);
-  
+
   // If there's a tillDate, check if target date is within range
   if (rate.tillDate && rate.tillDate !== "") {
     const tillDate = parseDMY(rate.tillDate);
@@ -705,7 +705,7 @@ const isRateValidForDate = (rate, targetDate) => {
       return targetDateObj >= effectiveDate && targetDateObj <= tillDate;
     }
   }
-  
+
   // If no tillDate, the latest rate stays valid from WEF onward.
   return targetDateObj >= effectiveDate;
 };
@@ -732,45 +732,46 @@ const getTrend = (current, previous) => {
 
 /* ---------------- DATE FORMATTING UTILITIES ---------------- */
 
-// Format to DD/MM/YYYY for display
+// Format any supported input to DD-MM-YYYY for display
 const formatToDDMMYYYY = (input) => {
   if (!input) return '';
-  
+
   try {
     if (input instanceof Date) {
       const day = String(input.getDate()).padStart(2, '0');
       const month = String(input.getMonth() + 1).padStart(2, '0');
       const year = input.getFullYear();
-      return `${day}/${month}/${year}`;
+      return `${day}-${month}-${year}`;
     }
-    
+
     if (typeof input === 'string') {
-      // Handle YYYY-MM-DD format
+      // Handle YYYY-MM-DD format (e.g. from <input type="date">)
       if (input.match(/^\d{4}-\d{2}-\d{2}$/)) {
         const [year, month, day] = input.split('-');
-        return `${day}/${month}/${year}`;
+        return `${day}-${month}-${year}`;
       }
-      
-      // Handle DD-MM-YYYY format
+
+      // Handle DD-MM-YYYY format (already correct)
       if (input.match(/^\d{2}-\d{2}-\d{4}$/)) {
-        const [day, month, year] = input.split('-');
-        return `${day}/${month}/${year}`;
-      }
-      
-      // Handle DD/MM/YYYY format
-      if (input.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
         return input;
       }
-      
-      // Handle D/M/YYYY format
-      if (input.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
+
+      // Handle DD/MM/YYYY format
+      if (input.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
         const [day, month, year] = input.split('/');
+        return `${day}-${month}-${year}`;
+      }
+
+      // Handle D/M/YYYY or D-M-YYYY (single-digit day/month) format
+      if (input.match(/^\d{1,2}[/-]\d{1,2}[/-]\d{4}$/)) {
+        const separator = input.includes('/') ? '/' : '-';
+        const [day, month, year] = input.split(separator);
         const paddedDay = day.padStart(2, '0');
         const paddedMonth = month.padStart(2, '0');
-        return `${paddedDay}/${paddedMonth}/${year}`;
+        return `${paddedDay}-${paddedMonth}-${year}`;
       }
     }
-    
+
     return input;
   } catch (error) {
     console.error('Date formatting error:', error);
@@ -824,50 +825,35 @@ const isoToDmy = (isoDate) => {
   return `${day}-${month}-${year}`;
 };
 
-const getDefaultSearchDate = (rates) => {
-  if (!rates.length) return "";
-
+// The native <input type="date"> element always requires YYYY-MM-DD
+// internally, regardless of what format we display to the user.
+const getTodayIso = () => {
   const today = new Date();
-  today.setHours(23, 59, 59, 999);
-  const currentMonth = today.getMonth();
-  const currentYear = today.getFullYear();
-
-  const effectiveRatesUpToToday = rates.filter((rate) => {
-    const effectiveDate = parseDMY(rate.effectiveDate);
-    return effectiveDate && effectiveDate <= today;
-  });
-
-  const currentMonthRates = effectiveRatesUpToToday.filter((rate) => {
-    const effectiveDate = parseDMY(rate.effectiveDate);
-    return (
-      effectiveDate &&
-      effectiveDate.getUTCMonth() === currentMonth &&
-      effectiveDate.getUTCFullYear() === currentYear
-    );
-  });
-
-  const candidateRates = currentMonthRates.length
-    ? currentMonthRates
-    : effectiveRatesUpToToday.length
-      ? effectiveRatesUpToToday
-      : rates;
-  const latestRate = [...candidateRates].sort((a, b) => {
-    const dateA = parseDMY(a.effectiveDate);
-    const dateB = parseDMY(b.effectiveDate);
-    if (!dateA || !dateB) return 0;
-    return dateB - dateA;
-  })[0];
-
-  return latestRate ? dmyToIso(latestRate.effectiveDate) : "";
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
 /* ---------------- COMPONENT ---------------- */
 
 export default function ExchangeRates() {
   const [ratesData, setRatesData] = useState(fallbackExchangeRates);
+  // Default currency filter is "All" (empty) so the Archive table shows
+  // every currency out of the box, same as the original behavior.
+  // The Snapshot card still defaults to USD (see `latest` below) even
+  // when no currency is explicitly selected.
   const [currency, setCurrency] = useState("");
   const [year, setYear] = useState("");
-  const [date, setDate] = useState("");
+  // Default Search Date is always today's actual date
+  const [date, setDate] = useState(getTodayIso());
+  // Which chart bar is currently hovered/tapped (index + its bounding
+  // rect), used to position a page-level tooltip via a portal so it's
+  // never clipped by the chart's scroll container and needs no
+  // reserved empty space.
+  const [activeBar, setActiveBar] = useState(null);
+
+  const archiveRef = useRef(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -903,17 +889,18 @@ export default function ExchangeRates() {
   // Get available years from data
   const availableYears = useMemo(() => getAllYears(safeExchangeRates), [safeExchangeRates]);
 
-  useEffect(() => {
-    if (!date && safeExchangeRates.length) {
-      setDate(getDefaultSearchDate(safeExchangeRates));
-    }
-  }, [date, safeExchangeRates]);
-
-  // Reset date
+  // Reset filters back to defaults: All currencies, no year filter, today's date
   const resetDate = () => {
     setCurrency("");
     setYear("");
-    setDate(getDefaultSearchDate(safeExchangeRates));
+    setDate(getTodayIso());
+  };
+
+  // Scroll the Exchange Rate Archive into view, keeping whatever
+  // Search Date and Currency the user has already picked (does NOT
+  // reset the date to today).
+  const goToToday = () => {
+    archiveRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   /* ---- GET RATES VALID ON SELECTED DATE ---- */
@@ -923,29 +910,33 @@ export default function ExchangeRates() {
       return [];
     }
 
-    let validRates = currency
-      ? (() => {
-          const currencyRates = safeExchangeRates.filter((r) => r.currency === currency);
-          const validRate = getRateValidForDate(currencyRates, dmyDate);
-          return validRate ? [validRate] : [];
-        })()
-      : Array.from(
-          safeExchangeRates.reduce((ratesByCurrency, rate) => {
-            const currencyCode = String(rate.currency || "").trim();
-            if (!currencyCode) {
-              return ratesByCurrency;
-            }
+    // Group by currency, then pick the rate valid on the selected date
+    // for each currency.
+    let validRates = Array.from(
+      safeExchangeRates.reduce((ratesByCurrency, rate) => {
+        const currencyCode = String(rate.currency || "").trim();
+        if (!currencyCode) {
+          return ratesByCurrency;
+        }
 
-            if (!ratesByCurrency.has(currencyCode)) {
-              ratesByCurrency.set(currencyCode, []);
-            }
+        if (!ratesByCurrency.has(currencyCode)) {
+          ratesByCurrency.set(currencyCode, []);
+        }
 
-            ratesByCurrency.get(currencyCode).push(rate);
-            return ratesByCurrency;
-          }, new Map()).values()
-        )
-          .map((currencyRates) => getRateValidForDate(currencyRates, dmyDate))
-          .filter(Boolean);
+        ratesByCurrency.get(currencyCode).push(rate);
+        return ratesByCurrency;
+      }, new Map()).values()
+    )
+      .map((currencyRates) => getRateValidForDate(currencyRates, dmyDate))
+      .filter(Boolean);
+
+    // Currency dropdown now filters the Archive table too — if a
+    // currency is selected, only that currency's row is kept.
+    if (currency) {
+      validRates = validRates.filter(
+        (rate) => String(rate.currency || "").toUpperCase() === currency.toUpperCase()
+      );
+    }
 
     if (year) {
       validRates = validRates.filter((rate) => getYear(rate.effectiveDate) === year);
@@ -983,27 +974,35 @@ export default function ExchangeRates() {
     };
   });
 
-  /* ---- CURRENT RATE CARD ---- */
-  const latest = tableRates[0];
-  const selectedDisplayYear = year || (date ? getYear(isoToDmy(date)) : "") || availableYears[0] || "";
+  /* ---- CURRENT RATE CARD ----
+     When no currency is selected (default "All" state) the Snapshot
+     card still defaults to showing USD. Once the user picks a specific
+     currency, tableRates is already filtered to just that currency, so
+     this lookup naturally follows the selection. */
+  const snapshotCurrency = currency || "USD";
+  const latest =
+    tableRates.find((r) => r.currency === snapshotCurrency) || tableRates[0];
 
-  // Get unique currencies for the marquee
+  // Marquee ticker always shows every currency's rate valid on the
+  // selected Search Date (defaults to today), one row per currency —
+  // this stays independent of the Currency dropdown by design.
   const marqueeRates = useMemo(() => {
-    const ratesMap = new Map();
-    
-    safeExchangeRates
-      .filter((r) => {
-        const rateYear = getYear(r.effectiveDate);
-        return selectedDisplayYear ? rateYear === selectedDisplayYear : true;
-      })
-      .sort((a, b) => parseDMY(b.effectiveDate) - parseDMY(a.effectiveDate))
-      .forEach(rate => {
-        if (!ratesMap.has(rate.currency)) {
-          ratesMap.set(rate.currency, rate);
-        }
-      });
-    return Array.from(ratesMap.values());
-  }, [safeExchangeRates, selectedDisplayYear]);
+    const dmyDate = isoToDmy(date);
+    if (!dmyDate) return [];
+
+    const ratesByCurrency = safeExchangeRates.reduce((map, rate) => {
+      const code = String(rate.currency || "").trim();
+      if (!code) return map;
+      if (!map.has(code)) map.set(code, []);
+      map.get(code).push(rate);
+      return map;
+    }, new Map());
+
+    return Array.from(ratesByCurrency.values())
+      .map((currencyRates) => getRateValidForDate(currencyRates, dmyDate))
+      .filter(Boolean)
+      .sort((a, b) => String(a.currency).localeCompare(String(b.currency)));
+  }, [safeExchangeRates, date]);
 
   return (
     <>
@@ -1031,14 +1030,14 @@ export default function ExchangeRates() {
             {/* Currency */}
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1">
-                Currency
+                Currency <span className="normal-case font-normal text-gray-400">(filters Snapshot &amp; Archive)</span>
               </label>
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
                 className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
               >
-                <option value="">Select currency</option>
+                <option value="">All currencies</option>
                 <option value="AED">AED – UAE Dirham</option>
                 <option value="AUD">AUD – Australian Dollar</option>
                 <option value="BHD">BHD – Bahraini Dinar</option>
@@ -1081,17 +1080,26 @@ export default function ExchangeRates() {
               </select>
             </div>
 
-            {/* Date Picker */}
+            {/* Date Picker + Go to Today button */}
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1">
                 Search Date
               </label>
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
-              />
+              <div className="flex gap-2">
+                <input
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
+                />
+                <button
+                  onClick={goToToday}
+                  title="View the Archive for the selected currency & date"
+                  className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 rounded-lg transition-colors"
+                >
+                  Go
+                </button>
+              </div>
             </div>
 
             <button
@@ -1108,10 +1116,11 @@ export default function ExchangeRates() {
         <div className="mb-8 bg-white rounded-xl shadow-md border border-gray-200 p-4">
           <div className="flex justify-between items-center mb-3 px-2">
             <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider">
-              Live Exchange Rates Ticker - All Currencies ({selectedDisplayYear})
+              Live Exchange Rates Ticker - All Currencies
+              {date ? ` (as on ${formatToDDMMYYYY(date)})` : ""}
             </h3>
             <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
-              {marqueeRates.length} rates in {selectedDisplayYear}
+              {marqueeRates.length} rates valid {date ? `on ${formatToDDMMYYYY(date)}` : ""}
             </span>
           </div>
 
@@ -1175,9 +1184,7 @@ export default function ExchangeRates() {
               <div>
                 <p className="text-blue-200 text-xs font-bold uppercase">
                   {date
-                    ? currency
-                      ? `${currency} rate on ${formatToDDMMYYYY(date)}`
-                      : `Latest snapshot on ${formatToDDMMYYYY(date)}`
+                    ? `${snapshotCurrency} rate on ${formatToDDMMYYYY(date)}`
                     : "Select a date"}
                 </p>
                 <div className="grid grid-cols-2 gap-4 mt-3">
@@ -1223,32 +1230,136 @@ export default function ExchangeRates() {
             )}
           </div>
 
-          {/* Chart section */}
-          <div className="lg:col-span-2 bg-white rounded-xl shadow-md border border-gray-200 p-6">
-            <h3 className="font-bold text-gray-700 mb-4">
-              {currency} Trend (Last Records)
-            </h3>
-            <div className="h-32 flex items-end justify-between gap-2 px-2 border-b border-l border-gray-200">
-              {tableRates.slice(0, 6).map((r, i) => (
-                <div
-                  key={i}
-                  className="w-1/6 bg-blue-100 rounded-t relative"
-                  style={{ height: `${60 + i * 5}%` }}
-                >
-                  <div className="absolute bottom-0 w-full bg-blue-500 rounded-t h-[85%]" />
-                </div>
-              ))}
+          {/* Chart section — follows the Currency + Year filters (uses
+              tableRates, same data as the Archive table). Selecting a
+              currency/year narrows this chart down just like the
+              Archive. Hover/tap a bar to see its detail card, rendered
+              via a portal so the chart itself stays compact and the
+              tooltip is never clipped or cut off at the edges. */}
+          <div className="lg:col-span-2 bg-white rounded-xl shadow-md border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-bold text-gray-700">
+                Snapshot Rates — {currency ? currency : "All Currencies"}
+                {year ? ` (${year})` : ""}
+                {date ? ` (${formatToDDMMYYYY(date)})` : ""}
+              </h3>
+              <span className="text-xs text-gray-400">{tableRates.length} {tableRates.length === 1 ? "currency" : "currencies"}</span>
+            </div>
+
+            <div className="overflow-x-auto pb-1">
+              <div className="h-20 flex items-end gap-2 px-2 border-b border-l border-gray-200 min-w-max">
+                {tableRates.map((r, i) => (
+                  <div
+                    key={i}
+                    className="relative w-7 h-full flex flex-col items-center justify-end shrink-0"
+                    onMouseEnter={(e) =>
+                      setActiveBar({ index: i, rect: e.currentTarget.getBoundingClientRect() })
+                    }
+                    onMouseLeave={() => setActiveBar(null)}
+                    onClick={(e) =>
+                      setActiveBar((current) =>
+                        current && current.index === i
+                          ? null
+                          : { index: i, rect: e.currentTarget.getBoundingClientRect() }
+                      )
+                    }
+                  >
+                    <div
+                      className="w-full bg-blue-100 rounded-t relative cursor-pointer"
+                      style={{ height: `${45 + (i % 8) * 6}%` }}
+                    >
+                      <div className="absolute bottom-0 w-full bg-blue-500 rounded-t h-[85%]" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Currency code labels, aligned under each bar */}
+              <div className="flex gap-2 px-2 mt-1 min-w-max">
+                {tableRates.map((r, i) => (
+                  <span
+                    key={i}
+                    className="w-7 shrink-0 text-center text-[10px] font-medium text-gray-500 truncate"
+                  >
+                    {r.currency}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Data Table - Shows SINGLE rate valid for the selected date */}
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+        {/* Bar detail tooltip — rendered at the document root via a
+            portal so it always sits on top and is never clipped by
+            the chart's horizontal scroll container. */}
+        {activeBar &&
+          tableRates[activeBar.index] &&
+          createPortal(
+            (() => {
+              const r = tableRates[activeBar.index];
+              const rect = activeBar.rect;
+              const gap = 8;
+              const tooltipHalfWidth = 72; // half of the 144px (w-36) tooltip
+              let left = rect.left + rect.width / 2;
+              let translateX = "-50%";
+              if (left - tooltipHalfWidth < 8) {
+                left = rect.left;
+                translateX = "0%";
+              } else if (left + tooltipHalfWidth > window.innerWidth - 8) {
+                left = rect.right;
+                translateX = "-100%";
+              }
+
+              return (
+                <div
+                  style={{
+                    position: "fixed",
+                    top: rect.top - gap,
+                    left,
+                    transform: `translate(${translateX}, -100%)`,
+                    zIndex: 9999,
+                  }}
+                  className="w-36 bg-white rounded-md shadow-lg border border-gray-100 overflow-hidden"
+                >
+                  <div className="flex">
+                    <div className="w-1 bg-teal-400 shrink-0" />
+                    <div className="py-2 pr-2 pl-1.5 flex-1 min-w-0">
+                      <p className="font-semibold text-gray-800 text-[11px] mb-1 truncate">
+                        {r.currency} {r.currencyName ? `– ${r.currencyName}` : ""}
+                      </p>
+                      <div className="space-y-0.5 text-[10px] leading-tight">
+                        <p className="text-cyan-500 font-medium truncate">
+                          Import : ₹{r.import}
+                        </p>
+                        <p className="text-red-500 font-medium truncate">
+                          Export : ₹{r.export}
+                        </p>
+                        <p className="text-emerald-500 font-medium truncate">
+                          Unit : {r.unit}
+                        </p>
+                        <p className="text-blue-500 font-medium truncate">
+                          Eff : {formatToDDMMYYYY(r.date)}
+                        </p>
+                        <p className="text-purple-500 font-medium truncate">
+                          Notif : {r.notification || "-"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })(),
+            document.body
+          )}
+
+        {/* Data Table - Shows SINGLE rate valid for the selected date,
+            filtered by the selected currency (and year, if chosen) */}
+        <div ref={archiveRef} className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
           <div className="px-6 py-4 border-b bg-gray-50 flex justify-between items-center">
             <h3 className="font-bold text-gray-800">Exchange Rate Archive</h3>
             <div className="flex items-center gap-3">
               <span className="text-xs text-gray-500 bg-white border px-3 py-1 rounded-full">
-                {currency || "All currencies"} {date ? `(valid on ${formatToDDMMYYYY(date)})` : selectedDisplayYear ? `(${selectedDisplayYear})` : ""}
+                {currency ? `${currency} only` : "All currencies"} {date ? `(valid on ${formatToDDMMYYYY(date)})` : ""}
               </span>
               <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
                 {tableRates.length} {tableRates.length === 1 ? 'record found' : 'records found'}
@@ -1323,7 +1434,7 @@ export default function ExchangeRates() {
             </div>
           ) : (
             <div className="p-8 text-center text-gray-500">
-              No exchange rates found {date ? `valid on ${formatToDDMMYYYY(date)}` : selectedDisplayYear ? `for ${selectedDisplayYear}` : ""}
+              No exchange rates found {date ? `valid on ${formatToDDMMYYYY(date)}` : ""}
             </div>
           )}
         </div>
