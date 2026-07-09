@@ -82,10 +82,13 @@ $backendItems = @(
 if ($IncludePdfDoc) {
     $backendItems += "PDF_DOC"
 } else {
-    # The DGFT notices API loads its index from this small workbook directory.
-    # Keep it in every backend deploy; the optional flag is only needed for the
-    # much larger PDF document archive.
+    # Keep the small regulatory data sets needed by the live APIs in every
+    # backend deploy. The optional flag is only needed for the much larger full
+    # PDF document archive.
     $backendItems += "PDF_DOC/DGFT/ALL_PDF"
+    $backendItems += "PDF_DOC/DGFT/Foreign_Trade_Policy"
+    $backendItems += "PDF_DOC/DGFT/Foreign_Trade_Policy_PDF"
+    $backendItems += "PDF_DOC/CBIC"
 }
 
 $existingBackendItems = @()

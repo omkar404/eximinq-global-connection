@@ -314,6 +314,7 @@ function processSheet(sheetData, targetArray, categoryName, sourceFile) {
   const dataRows = sheetData.slice(headerRowIndex + 1);
   dataRows.forEach((row, index) => {
     if (!row[0] && !row[1] && !row[2]) return;
+    if (String(row[2] || "").trim().toLowerCase() === "error") return;
 
     const hasThreeColumns =
       row.length >= 3 && row[2] && row[2].toString().trim() !== "";

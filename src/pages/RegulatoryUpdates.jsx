@@ -53,6 +53,29 @@ function buildLabel(authority, label) {
   return `${AUTHORITY_META[authority].label} > ${label}`;
 }
 
+function getDefaultOpenGroups(authority, activeTab) {
+  const groups = new Set([activeTab]);
+
+  if (authority === "dgft") {
+    groups.add("ftp");
+    groups.add("ftp-scomet");
+    groups.add("ftp-rodtep");
+  }
+
+  if (authority === "customs") {
+    groups.add("notifications");
+    groups.add("orders");
+    groups.add("forms");
+  }
+
+  if (authority === "gst") {
+    groups.add("notifications");
+    groups.add("forms");
+  }
+
+  return groups;
+}
+
 function getFinancialYearForItem(item) {
   const explicit = normalizeFinancialYear(item.financialYear || item.fy);
   if (explicit) return explicit;
@@ -125,7 +148,13 @@ function openExternal(url) {
   window.open(url, "_blank", "noopener,noreferrer");
 }
 
-function TableView({ items, columns }) {
+function TableView({ items, columns, sortConfig, onSort }) {
+  const getSortIndicator = (column) => {
+    if (!onSort || column.sortable === false) return null;
+    if (sortConfig?.key !== column.key) return <span className="ml-1 text-white/50">↕</span>;
+    return <span className="ml-1">{sortConfig.direction === "asc" ? "↑" : "↓"}</span>;
+  };
+
   return (
     <div className="overflow-x-auto rounded-xl border border-gray-200">
       <table className="min-w-full bg-white">
@@ -136,7 +165,18 @@ function TableView({ items, columns }) {
                 key={column.key}
                 className={`px-6 py-3 text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-indigo-700 ${column.center ? "text-center" : "text-left"}`}
               >
-                {column.label}
+                {onSort && column.sortable !== false ? (
+                  <button
+                    type="button"
+                    onClick={() => onSort(column.key)}
+                    className={`inline-flex items-center gap-1 ${column.center ? "justify-center" : "justify-start"} w-full`}
+                  >
+                    <span>{column.label}</span>
+                    {getSortIndicator(column)}
+                  </button>
+                ) : (
+                  column.label
+                )}
               </th>
             ))}
           </tr>
@@ -282,33 +322,58 @@ function SidebarNavItem({
 
       {isParent && isOpen && (
         <div className="bg-slate-50/60">
-          {item.children.map((child) => (
-            <div key={child.key}>
-              <button
-                onClick={() => onNavigate(child.key, buildLabel(activeAuthority, child.label))}
-                className={`w-full px-8 py-3 text-left text-[15px] transition-colors ${
-                  activeTab === child.key ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-100"
-                }`}
-              >
-                {child.label}
-              </button>
-              {Array.isArray(child.children) && child.children.length > 0 && activeTab !== child.key && (
-                <div className="bg-white/60">
-                  {child.children.map((grandchild) => (
-                    <button
-                      key={grandchild.key}
-                      onClick={() => onNavigate(grandchild.key, buildLabel(activeAuthority, grandchild.label))}
-                      className={`w-full px-12 py-2.5 text-left text-sm transition-colors ${
-                        activeTab === grandchild.key ? "bg-blue-50 text-blue-700" : "text-slate-500 hover:bg-slate-100"
-                      }`}
-                    >
-                      {grandchild.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+          {item.children.map((child) => {
+            const childHasChildren = Array.isArray(child.children) && child.children.length > 0;
+            const isChildGroupOpen =
+              childHasChildren &&
+              (openGroups.has(child.key) || child.children.some((grandchild) => grandchild.key === activeTab));
+
+            const handleChildClick = () => {
+              if (!childHasChildren) {
+                onNavigate(child.key, buildLabel(activeAuthority, child.label));
+                return;
+              }
+
+              setOpenGroups((previous) => {
+                const next = new Set(previous);
+                next.add(item.key);
+                next.add(child.key);
+                return next;
+              });
+              onNavigate(child.children[0].key, buildLabel(activeAuthority, child.children[0].label));
+            };
+
+            return (
+              <div key={child.key}>
+                <button
+                  onClick={handleChildClick}
+                  className={`w-full px-8 py-3 text-left text-[15px] transition-colors flex items-center justify-between ${
+                    activeTab === child.key || isChildGroupOpen
+                      ? "bg-blue-50 text-blue-700"
+                      : "text-slate-600 hover:bg-slate-100"
+                  }`}
+                >
+                  <span>{child.label}</span>
+                  {childHasChildren && (isChildGroupOpen ? <ChevronDown size={15} /> : <ChevronRight size={15} />)}
+                </button>
+                {childHasChildren && isChildGroupOpen && (
+                  <div className="bg-white/60">
+                    {child.children.map((grandchild) => (
+                      <button
+                        key={grandchild.key}
+                        onClick={() => onNavigate(grandchild.key, buildLabel(activeAuthority, grandchild.label))}
+                        className={`w-full px-12 py-2.5 text-left text-sm transition-colors ${
+                          activeTab === grandchild.key ? "bg-blue-50 text-blue-700" : "text-slate-500 hover:bg-slate-100"
+                        }`}
+                      >
+                        {grandchild.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
@@ -697,6 +762,7 @@ function CBICView({
   const [loadingHistory, setLoadingHistory] = useState(false);
   const [viewType, setViewType] = useState(activeTab === "rules" ? "ruleNumber" : "chapter");
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState({ key: "", direction: "asc" });
 
   useEffect(() => {
     setYear("");
@@ -707,6 +773,7 @@ function CBICView({
     setRuleNumber("");
     setViewType(activeTab === "acts" ? "chapter" : activeTab === "rules" ? "ruleNumber" : "chapter");
     setCurrentPage(1);
+    setSortConfig({ key: "", direction: "asc" });
   }, [activeTab]);
 
   const uniqueActs = [...new Set(data.map((item) => item.act).filter(Boolean))];
@@ -747,8 +814,63 @@ function CBICView({
     return true;
   });
 
-  const { startIndex, endIndex, totalPages } = getPaginationMeta(filteredData.length, currentPage, entries);
-  const displayedItems = filteredData.slice(startIndex, endIndex);
+  const getColumnSortValue = (item, key) => {
+    const fieldMap = {
+      download: "pdfFileName",
+      orderNumber: "orderNumber",
+      orderDate: "orderDate",
+      circularNo: "circularNo",
+      formNumber: "formNumber",
+      formName: "formName",
+      ruleNumber: "ruleNumber",
+      regulationNo: "regulationNo",
+    };
+    const mappedKey = fieldMap[key] || key;
+    return item[mappedKey] || item.number || item.title || item.subject || item.description || "";
+  };
+
+  const getSortableDateValue = (value) => {
+    const displayValue = parseDisplayDate(value);
+    const ddmmyyyy = String(displayValue || "").match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (ddmmyyyy) {
+      const [, day, month, yearValue] = ddmmyyyy;
+      return Date.UTC(Number(yearValue), Number(month) - 1, Number(day));
+    }
+
+    const parsed = Date.parse(displayValue);
+    return Number.isNaN(parsed) ? null : parsed;
+  };
+
+  const sortedData = [...filteredData].sort((a, b) => {
+    if (!sortConfig.key) return 0;
+
+    const aValue = getColumnSortValue(a, sortConfig.key);
+    const bValue = getColumnSortValue(b, sortConfig.key);
+    const aDate = getSortableDateValue(aValue);
+    const bDate = getSortableDateValue(bValue);
+
+    let comparison;
+    if (aDate !== null && bDate !== null) {
+      comparison = aDate - bDate;
+    } else {
+      comparison = String(aValue).localeCompare(String(bValue), undefined, {
+        numeric: true,
+        sensitivity: "base",
+      });
+    }
+
+    return sortConfig.direction === "asc" ? comparison : -comparison;
+  });
+
+  const handleSort = (key) => {
+    setSortConfig((previous) => ({
+      key,
+      direction: previous.key === key && previous.direction === "asc" ? "desc" : "asc",
+    }));
+  };
+
+  const { startIndex, endIndex, totalPages } = getPaginationMeta(sortedData.length, currentPage, entries);
+  const displayedItems = sortedData.slice(startIndex, endIndex);
   const isActs = activeTab === "acts";
   const isRules = activeTab === "rules";
   const isForms = activeTab === "forms" || activeTab.startsWith("forms-");
@@ -1145,9 +1267,14 @@ function CBICView({
         {!loading && !error && displayedItems.length === 0 && <CBICEmptyState />}
         {!loading && !error && displayedItems.length > 0 && (
           <>
-            <TableView items={displayedItems} columns={columns} />
+            <TableView
+              items={displayedItems}
+              columns={columns}
+              sortConfig={sortConfig}
+              onSort={handleSort}
+            />
             <PaginationControls
-              totalItems={filteredData.length}
+              totalItems={sortedData.length}
               currentPage={currentPage}
               pageSize={entries}
               onPageChange={setCurrentPage}
@@ -1338,8 +1465,10 @@ function AuthButton({ active, onClick, children }) {
 
 export default function RegulatoryUpdates() {
   const initialSnapshot = getInitialSnapshot();
-  const skipInitialFetch = useRef(Boolean(initialSnapshot));
-  const [loading, setLoading] = useState(!initialSnapshot);
+  const hasInitialSnapshotData =
+    Array.isArray(initialSnapshot?.notifications) && initialSnapshot.notifications.length > 0;
+  const skipInitialFetch = useRef(hasInitialSnapshotData);
+  const [loading, setLoading] = useState(!hasInitialSnapshotData);
   const [error, setError] = useState(null);
   const [notifications, setNotifications] = useState(initialSnapshot?.notifications || []);
   const [activeAuthority, setActiveAuthority] = useState(initialSnapshot?.activeAuthority || "dgft");
@@ -1348,7 +1477,9 @@ export default function RegulatoryUpdates() {
   const [activeLabel, setActiveLabel] = useState(initialSnapshot?.activeLabel || "DGFT > Public Notices");
   const [search, setSearch] = useState(initialSnapshot?.search || "");
   const [selectedAct, setSelectedAct] = useState(initialSnapshot?.selectedAct || "");
-  const [openGroups, setOpenGroups] = useState(new Set(["notifications", "ftp"]));
+  const [openGroups, setOpenGroups] = useState(
+    getDefaultOpenGroups(initialSnapshot?.activeAuthority || "dgft", initialSnapshot?.activeTab || "public")
+  );
 
   const loadData = useCallback(async () => {
     try {
@@ -1437,7 +1568,7 @@ export default function RegulatoryUpdates() {
     setNotifications([]);
     setSearch("");
     setSelectedAct("");
-    setOpenGroups(new Set(["notifications", "ftp", defaultTab]));
+    setOpenGroups(getDefaultOpenGroups(authority, defaultTab));
   };
 
   const handleNavigate = (key, label) => {

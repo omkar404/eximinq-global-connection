@@ -952,6 +952,24 @@ function processAllCustomsData() {
   }
 }
 
+function ensureCustomsDataLoaded() {
+  var totalNotifications = getTotalNotificationCount();
+  var totalRecords =
+    customsData.acts.length +
+    customsData.rules.length +
+    customsData.regulations.length +
+    customsData.forms.length +
+    customsData.circulars.length +
+    customsData.instructionsGuidelines.length +
+    customsData.orders.length +
+    customsData.alliedActs.length +
+    totalNotifications;
+
+  if (totalRecords === 0) {
+    processAllCustomsData();
+  }
+}
+
 // ==================== WATCHER ====================
 function startWatcher() {
   console.log("📂 Watching Customs folder:", CUSTOMS_BASE_FOLDER);
@@ -988,6 +1006,8 @@ function startWatcher() {
 
 // ==================== EXPORT FUNCTIONS ====================
 function getCustomsData() {
+  ensureCustomsDataLoaded();
+
   var allNotifications = []
     .concat(customsData.notifications.antiDumping)
     .concat(customsData.notifications.cvd)
@@ -1013,10 +1033,13 @@ function getCustomsData() {
 }
 
 function getRawCustomsData() {
+  ensureCustomsDataLoaded();
   return { lastUpdated: lastUpdated, data: customsData };
 }
 
 function getCustomsDataByType(type) {
+  ensureCustomsDataLoaded();
+
   var typeMap = {
     acts: customsData.acts,
     rules: customsData.rules,
@@ -1040,6 +1063,8 @@ function getCustomsDataByType(type) {
 }
 
 function getNotificationsByCategory(category) {
+  ensureCustomsDataLoaded();
+
   var categoryMap = {
     antiDumping: customsData.notifications.antiDumping,
     cvd: customsData.notifications.cvd,
@@ -1051,6 +1076,8 @@ function getNotificationsByCategory(category) {
 }
 
 function getCustomsDiagnostics() {
+  ensureCustomsDataLoaded();
+
   var notificationCounts = getNotificationCountMap();
   var totalNotifications = getTotalNotificationCount();
   var folderMap = {
