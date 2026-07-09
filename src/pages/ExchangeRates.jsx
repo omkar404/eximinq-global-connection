@@ -238,7 +238,7 @@ const getDownloadHref = (rate) => {
   }
 
   if (rate.notification) {
-    return `${API_BASE_URL}/api/exchange-rates/download?notification=${encodeURIComponent(
+    return `${API_BASE_URL}/api/Customsrates/download?notification=${encodeURIComponent(
       rate.notification
     )}`;
   }
@@ -301,7 +301,7 @@ export default function ExchangeRates() {
 
     const loadExchangeRates = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/exchange-rates`);
+        const response = await fetch(`${API_BASE_URL}/api/Customsrates`);
         if (!response.ok) {
           return;
         }
