@@ -6,6 +6,10 @@ export const defaultSEO = {
 };
 
 export const seoRoutes = {
+  "/foreign-trade-policy/customsrates/": {
+    title: "Customs Exchange Rates India | CBIC Import Export Rates & PDFs",
+    description: "Check CBIC notified Customs exchange rates for imports and exports in India. Search current and historical rates, notification dates, and official PDFs.",
+  },
   "/charates/": {
     title: "CHA Special Rates & Export-Import Service Pricing | EXIMINQ",
     description: "View EXIMINQ CHA special rates for IEC, RCMC, DSC, ICEGATE, DGFT, customs, export incentives, GST, FSSAI, EPR, and compliance services.",

@@ -1,610 +1,7 @@
-// import React, { useMemo, useState } from "react";
-// import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
-// import Marquee from "react-fast-marquee";
-// import {
-//   DollarSign,
-//   Filter,
-//   TrendingUp,
-//   TrendingDown,
-//   Minus,
-//   FileText,
-// } from "lucide-react";
-// import { Footer } from "../components/CloudDeskForeignTrade/Footer";
-// import { exchangeRates } from "../data/exchangeRates";
-
-// /* ---------------- UTILITIES ---------------- */
-
-// const safeExchangeRates = exchangeRates.filter(
-//   (r) => r.effectiveDate && typeof r.effectiveDate === "string"
-// );
-
-// const getYear = (dateStr) => {
-//   if (!dateStr) return null;
-//   const parts = dateStr.split("-");
-//   if (parts.length !== 3) return null;
-//   return parts[2];
-// };
-
-// const getTrend = (current, previous) => {
-//   if (!previous) return "stable";
-//   if (current > previous) return "up";
-//   if (current < previous) return "down";
-//   return "stable";
-// };
-
-// const getYearFromDate = (dateStr) => {
-//   const [day, month, year] = dateStr.split("-");
-//   return Number(year);
-// };
-
-// const getTodayISO = () => {
-//   const today = new Date();
-//   return today.toISOString().split("T")[0];
-// };
-
-// /* ---------------- DATE FORMATTING UTILITIES ---------------- */
-
-// const formatToDDMMYYYY = (input) => {
-//   if (!input) return '';
-  
-//   try {
-//     // Handle Date object
-//     if (input instanceof Date) {
-//       const day = String(input.getDate()).padStart(2, '0');
-//       const month = String(input.getMonth() + 1).padStart(2, '0');
-//       const year = input.getFullYear();
-//       return `${day}/${month}/${year}`;
-//     }
-    
-//     // Handle string input
-//     if (typeof input === 'string') {
-//       // YYYY-MM-DD (from date input)
-//       if (input.match(/^\d{4}-\d{2}-\d{2}$/)) {
-//         const [year, month, day] = input.split('-');
-//         return `${day}/${month}/${year}`;
-//       }
-      
-//       // DD-MM-YYYY (from your data)
-//       if (input.match(/^\d{2}-\d{2}-\d{4}$/)) {
-//         const [day, month, year] = input.split('-');
-//         return `${day}/${month}/${year}`;
-//       }
-      
-//       // DD/MM/YYYY format
-//       if (input.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
-//         return input;
-//       }
-//     }
-    
-//     return input;
-//   } catch (error) {
-//     console.error('Date formatting error:', error);
-//     return input;
-//   }
-// };
-
-// // Convert DD/MM/YYYY to YYYY-MM-DD for internal use
-// const ddmmyyyyToYyyymmdd = (ddmmyyyy) => {
-//   if (!ddmmyyyy) return '';
-//   const [day, month, year] = ddmmyyyy.split('/');
-//   return `${year}-${month}-${day}`;
-// };
-
-// // Validate DD/MM/YYYY format
-// const isValidDate = (dateStr) => {
-//   if (!dateStr) return false;
-//   const pattern = /^\d{2}\/\d{2}\/\d{4}$/;
-//   if (!pattern.test(dateStr)) return false;
-  
-//   const [day, month, year] = dateStr.split('/').map(Number);
-//   const date = new Date(year, month - 1, day);
-//   return date.getDate() === day && 
-//          date.getMonth() === month - 1 && 
-//          date.getFullYear() === year;
-// };
-
-// /* ---------------- COMPONENT ---------------- */
-
-// export default function ExchangeRates() {
-//   const [currency, setCurrency] = useState("USD");
-//   const [year, setYear] = useState("2026");
-//   const [date, setDate] = useState(getTodayISO());
-//   const [displayDate, setDisplayDate] = useState(formatToDDMMYYYY(getTodayISO()));
-//   const [dateError, setDateError] = useState('');
-
-//   // Handle custom date input change
-//   const handleDateChange = (e) => {
-//     const value = e.target.value;
-//     setDisplayDate(value);
-//     setDateError('');
-    
-//     // Auto-format as user types (add slashes)
-//     let formatted = value.replace(/[^\d]/g, '');
-//     if (formatted.length > 2) {
-//       formatted = formatted.slice(0, 2) + '/' + formatted.slice(2);
-//     }
-//     if (formatted.length > 5) {
-//       formatted = formatted.slice(0, 5) + '/' + formatted.slice(5, 9);
-//     }
-//     if (formatted.length > 10) {
-//       formatted = formatted.slice(0, 10);
-//     }
-    
-//     setDisplayDate(formatted);
-    
-//     // Validate when complete
-//     if (formatted.length === 10) {
-//       if (isValidDate(formatted)) {
-//         const [day, month, year] = formatted.split('/');
-//         const isoDate = `${year}-${month}-${day}`;
-//         setDate(isoDate);
-//         setDateError('');
-//       } else {
-//         setDateError('Please enter a valid date');
-//       }
-//     } else if (formatted.length === 0) {
-//       setDate('');
-//       setDateError('');
-//     }
-//   };
-
-//   const yearlyRates = useMemo(() => {
-//   return safeExchangeRates.filter(
-//     (r) => getYear(r.effectiveDate) === year
-//   );
-// }, [year]);
-
-//   // Handle date input blur
-//   const handleDateBlur = () => {
-//     if (displayDate && displayDate.length === 10 && isValidDate(displayDate)) {
-//       const [day, month, year] = displayDate.split('/');
-//       const isoDate = `${year}-${month}-${day}`;
-//       setDate(isoDate);
-//       setDateError('');
-//     } else if (displayDate && displayDate.length > 0) {
-//       setDateError('Please use format: dd/mm/yyyy');
-//     }
-//   };
-
-//   // Reset date
-//   const resetDate = () => {
-//     setDate('');
-//     setDisplayDate('');
-//     setDateError('');
-//   };
-
-//   // converts "DD-MM-YYYY" → Date object
-// const parseDMY = (dmy) => {
-//   if (!dmy || typeof dmy !== "string") return null;
-
-//   const parts = dmy.split("-");
-//   if (parts.length !== 3) return null;
-
-//   const [d, m, y] = parts.map(Number);
-//   return new Date(y, m - 1, d);
-// };
-
-//   /* ---- FILTER DATA - SHOW ALL RECORDS BEFORE SELECTED DATE ---- */
-// const filteredRates = useMemo(() => {
-
-//   // 1️⃣ Currency filter
-//   let list = safeExchangeRates.filter((r) => r.currency === currency);
-
-//   // 2️⃣ Sort oldest → newest
-// list.sort((a, b) => {
-//   const dateA = parseDMY(a.effectiveDate);
-//   const dateB = parseDMY(b.effectiveDate);
-
-//   if (!dateA) return 1;
-//   if (!dateB) return -1;
-
-//   return dateA - dateB;
-// });
-
-//   // 3️⃣ Date filter (show rates upto selected date)
-//   if (date) {
-
-//     const selectedDate = new Date(date);
-
-// list = list.filter((r) => {
-//   const eff = parseDMY(r.effectiveDate);
-//   return eff && eff <= selectedDate;
-// });
-
-//   }
-
-//   // 4️⃣ Financial year filter
-//   if (year) {
-//     list = list.filter(
-//       (r) => {
-//   const d = parseDMY(r.effectiveDate);
-//   return d && d.getFullYear() <= Number(year);
-// }
-//     );
-//   }
-
-//   // 5️⃣ newest first for UI
-// return list.sort((a, b) => {
-//   const dateA = parseDMY(a.effectiveDate);
-//   const dateB = parseDMY(b.effectiveDate);
-
-//   if (!dateA || !dateB) return 0;
-
-//   return dateB - dateA;
-// });
-
-// }, [currency, date, year]);
-
-//   const getPdfUrl = (effectiveDate) => {
-//     if (!effectiveDate) return null;
-//     return `/pdfs/${effectiveDate}.pdf`;
-//   };
-
-//   /* ---- MAP TABLE DATA WITH TREND ---- */
-//   const tableRates = filteredRates.map((r, index, array) => {
-//     const prev = array[index + 1];
-//     return {
-//       date: r.effectiveDate,
-//       notification: r.notification || "-",
-//       currency: r.currency,
-//       import: r.importRate,
-//       export: r.exportRate,
-//       trend: getTrend(r.importRate, prev?.importRate),
-//       pdfUrl: r.pdfUrl,
-//     };
-//   });
-
-//   /* ---- CURRENT RATE CARD (most recent record) ---- */
-//   const latest = tableRates[0];
-
-//   return (
-//     <>
-//       <Navbar />
-
-//       <main className="container mx-auto px-4 pt-28 pb-8 flex-grow">
-//         {/* Header */}
-//         <div className="mb-8">
-//           <h2 className="text-3xl font-bold text-slate-800 mb-2">
-//             Customs Exchange Rates History
-//           </h2>
-//           <p className="text-slate-500">
-//             Official exchange rates notified by CBIC under Section 14 of the
-//             Customs Act, 1962.
-//           </p>
-//         </div>
-
-//         {/* Filters */}
-//         <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 mb-8">
-//           <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider mb-4 border-b pb-2">
-//             Filter Data (2021 – Present)
-//           </h3>
-
-//           <div className="grid md:grid-cols-4 gap-6 items-end">
-//             {/* Currency */}
-//             <div>
-//               <label className="block text-xs font-semibold text-gray-500 mb-1">
-//                 Currency
-//               </label>
-//               <select
-//                 value={currency}
-//                 onChange={(e) => setCurrency(e.target.value)}
-//                 className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
-//               >
-//                 <option value="AED">AED – UAE Dirham</option>
-//                 <option value="AUD">AUD – Australian Dollar</option>
-//                 <option value="BHD">BHD – Bahraini Dinar</option>
-//                 <option value="CAD">CAD – Canadian Dollar</option>
-//                 <option value="CHF">CHF – Swiss Franc</option>
-//                 <option value="CNY">CNY – Chinese Yuan</option>
-//                 <option value="DKK">DKK – Danish Kroner</option>
-//                 <option value="EUR">EUR – Euro</option>
-//                 <option value="GBP">GBP – Pound Sterling</option>
-//                 <option value="HKD">HKD – Hongkong Dollar</option>
-//                 <option value="JPY">JPY – Japanese Yen</option>
-//                 <option value="KRW">KRW – Korean Won</option>
-//                 <option value="KWD">KWD – Kuwaiti Dinar</option>
-//                 <option value="NOK">NOK – Norwegian Kroner</option>
-//                 <option value="NZD">NZD – New Zealand Dollar</option>
-//                 <option value="QAR">QAR – Qatari Riyal</option>
-//                 <option value="SAR">SAR – Saudi Arabian Riyal</option>
-//                 <option value="SEK">SEK – Swedish Kroner</option>
-//                 <option value="SGD">SGD – Singapore Dollar</option>
-//                 <option value="TRY">TRY – Turkish Lira</option>
-//                 <option value="USD">USD – US Dollar</option>
-//                 <option value="ZAR">ZAR – South African Rand</option>
-//               </select>
-//             </div>
-
-//             {/* Year */}
-//             <div>
-//               <label className="block text-xs font-semibold text-gray-500 mb-1">
-//                 Financial Year
-//               </label>
-//               <select
-//                 value={year}
-//                 onChange={(e) => setYear(e.target.value)}
-//                 className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm"
-//               >
-//                 <option value="2026">2026</option>
-//                 <option value="2025">2025</option>
-//                 <option value="2024">2024</option>
-//               </select>
-//             </div>
-
-//             {/* Date - Custom with DD/MM/YYYY format */}
-//             <div>
-//               <label className="block text-xs font-semibold text-gray-500 mb-1">
-//                 Date (Optional)
-//               </label>
-//               <input
-//                 type="text"
-//                 value={displayDate}
-//                 onChange={handleDateChange}
-//                 onBlur={handleDateBlur}
-//                 placeholder="dd/mm/yyyy"
-//                 className={`w-full px-4 py-2.5 bg-gray-50 border rounded-lg text-sm ${
-//                   dateError ? 'border-red-500' : 'border-gray-300'
-//                 }`}
-//               />
-//               {dateError && (
-//                 <p className="text-xs text-red-500 mt-1">{dateError}</p>
-//               )}
-//             </div>
-
-//             <button
-//               onClick={resetDate}
-//               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-2"
-//             >
-//               <Filter className="w-4 h-4" />
-//               Reset Date
-//             </button>
-//           </div>
-//         </div>
-
-//         {/*Marquee example*/}
-//         <div className="mb-8 bg-white rounded-xl shadow-md border border-gray-200 p-4">
-//           <div className="flex justify-between items-center mb-3 px-2">
-//             <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider">
-//               Live Exchange Rates Ticker - All Currencies ({year})
-//             </h3>
-//             <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
-//               {
-// safeExchangeRates.filter((r) => {
-//   const parts = r.effectiveDate.split("-");
-// return getYear(r.effectiveDate) === year;
-// }).length
-//               }{" "}
-//               rates in {year}
-//             </span>
-//           </div>
-
-//           <div className="relative">
-//             <Marquee
-//               speed={60}
-//               gradient={true}
-//               gradientColor={[255, 255, 255]}
-//               gradientWidth={50}
-//               pauseOnHover={true}
-//               className="py-2"
-//             >
-//               {safeExchangeRates
-//   .filter((r) => {
-//     const parts = r.effectiveDate.split("-");
-//     const [, , yr] = parts;
-//     return yr === year;
-//   })
-//                 .map((rate, index) => (
-//                   <div
-//                     key={`${rate.currency}-${rate.effectiveDate}-${index}`}
-//                     className="mx-3 w-48 bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow"
-//                   >
-//                     <div className="flex items-center justify-between mb-2">
-//                       <span className="font-bold text-lg text-gray-800">
-//                         {rate.currency}
-//                       </span>
-//                       <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
-//                         Unit: {rate.unit}
-//                       </span>
-//                     </div>
-//                     <div className="text-xs text-gray-500 mb-2 truncate">
-//                       {rate.currencyName}
-//                     </div>
-//                     <div className="grid grid-cols-2 gap-2 text-center">
-//                       <div className="bg-green-50 rounded p-1">
-//                         <div className="text-xs text-green-600 font-medium">
-//                           IMP
-//                         </div>
-//                         <div className="font-bold text-gray-800">
-//                           ₹{rate.importRate}
-//                         </div>
-//                       </div>
-//                       <div className="bg-orange-50 rounded p-1">
-//                         <div className="text-xs text-orange-600 font-medium">
-//                           EXP
-//                         </div>
-//                         <div className="font-bold text-gray-800">
-//                           ₹{rate.exportRate}
-//                         </div>
-//                       </div>
-//                     </div>
-//                     <div className="mt-2 text-[10px] text-gray-400 flex justify-between">
-//                       <span>{formatToDDMMYYYY(rate.effectiveDate)}</span>
-//                       <span className="text-blue-600">{rate.notification}</span>
-//                     </div>
-//                     {rate.pdfUrl && (
-//                       <a
-//                         href={`https://eximinq.in/pdfs/${rate.pdfUrl}`}
-//                         target="_blank"
-//                         rel="noopener noreferrer"
-//                         className="absolute top-2 right-2 text-gray-400 hover:text-blue-600"
-//                       >
-//                         <FileText className="w-3 h-3" />
-//                       </a>
-//                     )}
-//                   </div>
-//                 ))}
-//             </Marquee>
-//           </div>
-//         </div>
-
-//         {/* Trend Cards */}
-//         <div className="grid lg:grid-cols-3 gap-8 mb-8">
-//           <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-6 text-white shadow-lg">
-//             <div className="flex justify-between items-start mb-4">
-//               <div>
-//                 <p className="text-blue-200 text-xs font-bold uppercase">
-//                   {date ? `Rate before ${formatToDDMMYYYY(date)}` : `Current ${currency} Rate`}
-//                 </p>
-//                 <div className="grid grid-cols-2 gap-4 mt-3">
-//                   <div>
-//                     <p className="text-sm text-blue-200">Import</p>
-//                     <h3 className="text-3xl font-bold">₹{latest?.import || 'N/A'}</h3>
-//                   </div>
-//                   <div>
-//                     <p className="text-sm text-blue-200">Export</p>
-//                     <h3 className="text-3xl font-bold">₹{latest?.export || 'N/A'}</h3>
-//                   </div>
-//                 </div>
-//               </div>
-//               <div className="bg-white/20 p-2 rounded-lg">
-//                 <DollarSign className="w-6 h-6" />
-//               </div>
-//             </div>
-//             <div className="flex items-center text-sm bg-black/20 rounded p-2">
-//               {latest?.trend === "up" && (
-//                 <span className="text-red-300 font-bold mr-2 flex items-center">
-//                   <TrendingUp className="w-4 h-4 mr-1" /> Rising
-//                 </span>
-//               )}
-//               {latest?.trend === "down" && (
-//                 <span className="text-green-300 font-bold mr-2 flex items-center">
-//                   <TrendingDown className="w-4 h-4 mr-1" /> Falling
-//                 </span>
-//               )}
-//               {latest?.trend === "stable" && (
-//                 <span className="text-gray-200 font-bold mr-2 flex items-center">
-//                   <Minus className="w-4 h-4 mr-1" /> Stable
-//                 </span>
-//               )}
-//             </div>
-//             {latest?.date && (
-//               <p className="text-[10px] text-blue-300 mt-4">
-//                 Effective from: {formatToDDMMYYYY(latest.date)}
-//               </p>
-//             )}
-//           </div>
-
-//           {/* Chart section */}
-//          <div className="lg:col-span-2 bg-white rounded-xl shadow-md border border-gray-200 p-6">
-//              <h3 className="font-bold text-gray-700 mb-4">
-//                {currency} Trend (Last Records)
-//              </h3>
-//              <div className="h-32 flex items-end justify-between gap-2 px-2 border-b border-l border-gray-200">
-//                {tableRates.slice(0, 6).map((r, i) => (
-//                 <div
-//                   key={i}
-//                   className="w-1/6 bg-blue-100 rounded-t relative"
-//                   style={{ height: `${60 + i * 5}%` }}
-//                 >
-//                   <div className="absolute bottom-0 w-full bg-blue-500 rounded-t h-[85%]" />
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Data Table */}
-//         <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
-//           <div className="px-6 py-4 border-b bg-gray-50 flex justify-between items-center">
-//             <h3 className="font-bold text-gray-800">Exchange Rate Archive</h3>
-//             <div className="flex items-center gap-3">
-//               <span className="text-xs text-gray-500 bg-white border px-3 py-1 rounded-full">
-//                 {currency} {date ? `(before ${formatToDDMMYYYY(date)})` : `(up to ${year})`}
-//               </span>
-//               <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
-//                 {tableRates.length} records found
-//               </span>
-//             </div>
-//           </div>
-
-//           {tableRates.length > 0 ? (
-//             <div className="overflow-x-auto">
-//               <table className="w-full text-sm">
-//                 <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
-//                   <tr>
-//                     <th className="px-6 py-4 text-left">Effective Date</th>
-//                     <th className="px-6 py-4 text-left">Notification</th>
-//                     <th className="px-6 py-4">Currency</th>
-//                     <th className="px-6 py-4 text-right">Import</th>
-//                     <th className="px-6 py-4 text-right">Export</th>
-//                     <th className="px-6 py-4 text-center">Trend</th>
-//                     <th className="px-6 py-4 text-center">PDF</th>
-//                   </tr>
-//                 </thead>
-
-//                 <tbody className="divide-y">
-//                   {tableRates.map((r, i) => (
-//                     <tr key={i} className="hover:bg-blue-50">
-//                       <td className="px-6 py-4 font-medium">
-//                         {formatToDDMMYYYY(r.date)}
-//                       </td>
-//                       <td className="px-6 py-4 text-blue-600">
-//                         {r.notification}
-//                       </td>
-//                       <td className="px-6 py-4 font-bold">{r.currency}</td>
-//                       <td className="px-6 py-4 text-right font-mono font-bold">
-//                         {r.import}
-//                       </td>
-//                       <td className="px-6 py-4 text-right font-mono text-gray-600">
-//                         {r.export}
-//                       </td>
-//                       <td className="px-6 py-4 text-center">
-//                         {r.trend === "up" && (
-//                           <TrendingUp className="w-4 h-4 text-red-600 inline" />
-//                         )}
-//                         {r.trend === "down" && (
-//                           <TrendingDown className="w-4 h-4 text-green-600 inline" />
-//                         )}
-//                         {r.trend === "stable" && (
-//                           <Minus className="w-4 h-4 text-gray-400 inline" />
-//                         )}
-//                       </td>
-//                       <td className="px-6 py-4 text-center">
-//                         {r.pdfUrl ? (
-//                           <a
-//                             href={`https://eximinq.in/pdfs/${r.pdfUrl}`}
-//                             target="_blank"
-//                             rel="noopener noreferrer"
-//                           >
-//                             <FileText className="w-4 h-4 text-gray-400 hover:text-blue-600 cursor-pointer inline" />
-//                           </a>
-//                         ) : (
-//                           <FileText className="w-4 h-4 text-gray-300 inline" />
-//                         )}
-//                       </td>
-//                     </tr>
-//                   ))}
-//                 </tbody>
-//               </table>
-//             </div>
-//           ) : (
-//             <div className="p-8 text-center text-gray-500">
-//               No exchange rates found {date ? `before ${formatToDDMMYYYY(date)}` : ''}
-//             </div>
-//           )}
-//         </div>
-//       </main>
-
-//       <Footer />
-//     </>
-//   );
-// }
-
-
-
 /*----------------------------*/
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { Helmet } from "react-helmet-async";
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
 import Marquee from "react-fast-marquee";
 import {
@@ -621,6 +18,50 @@ import { exchangeRates } from "../data/exchangeRates";
 /* ---------------- UTILITIES ---------------- */
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "";
+const CANONICAL_URL = "https://eximinq.in/foreign-trade-policy/Customsrates/";
+const CBIC_EXCHANGE_RATE_URL = "https://www.cbic.gov.in/entities/cbic-content-mst/MTcyNDQ%3D";
+const CBIC_TAX_INFORMATION_URL = "https://taxinformation.cbic.gov.in/";
+
+const targetKeywords = [
+  "Customs exchange rates",
+  "CBIC exchange rates",
+  "Customs notified exchange rates",
+  "Import exchange rate",
+  "Export exchange rate",
+  "Customs USD rate today",
+  "Section 14 Customs Act exchange rate",
+  "CBIC exchange rate notification PDF",
+  "Historical customs exchange rates India",
+  "Customs currency rates for Bill of Entry",
+];
+
+const faqItems = [
+  {
+    question: "What are Customs exchange rates in India?",
+    answer:
+      "Customs exchange rates are the notified currency conversion rates used by Indian Customs to determine assessable value for imported and exported goods when invoice currency is not INR.",
+  },
+  {
+    question: "Who notifies Customs exchange rates?",
+    answer:
+      "The Central Board of Indirect Taxes and Customs (CBIC) notifies Customs exchange rates for major foreign currencies under Section 14 of the Customs Act, 1962.",
+  },
+  {
+    question: "Are import and export exchange rates different?",
+    answer:
+      "Yes. CBIC notifications usually provide separate import and export rates for each currency, and trade documents should use the applicable rate for the relevant import or export transaction.",
+  },
+  {
+    question: "How often are CBIC exchange rates updated?",
+    answer:
+      "CBIC generally issues exchange rate notifications periodically and may revise them whenever required. Importers, exporters, CHA teams, and finance teams should verify the applicable notification for the shipment date.",
+  },
+  {
+    question: "Can I download the official CBIC exchange rate notification PDF?",
+    answer:
+      "Yes. Where available, the archive table provides a PDF link for the corresponding CBIC exchange rate notification so users can keep a compliance copy with their Bill of Entry, Shipping Bill, or audit records.",
+  },
+];
 
 const fallbackExchangeRates = exchangeRates.filter(
   (r) => r.effectiveDate && typeof r.effectiveDate === "string"
@@ -983,6 +424,108 @@ export default function ExchangeRates() {
   const latest =
     tableRates.find((r) => r.currency === snapshotCurrency) || tableRates[0];
 
+  const latestNotification = useMemo(() => {
+    return [...safeExchangeRates]
+      .filter((rate) => rate.effectiveDate)
+      .sort((a, b) => {
+        const dateA = parseDMY(a.effectiveDate);
+        const dateB = parseDMY(b.effectiveDate);
+        if (!dateA || !dateB) return 0;
+        return dateB - dateA;
+      })[0];
+  }, [safeExchangeRates]);
+
+  const latestEffectiveDate = latestNotification?.effectiveDate
+    ? formatToDDMMYYYY(latestNotification.effectiveDate)
+    : "the latest available CBIC notification";
+
+  const uniqueCurrenciesCount = useMemo(
+    () => new Set(safeExchangeRates.map((rate) => rate.currency).filter(Boolean)).size,
+    [safeExchangeRates]
+  );
+
+  const structuredData = useMemo(() => {
+    const webPage = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: "Customs Exchange Rates India - CBIC Notified Import Export Rates",
+      description:
+        "Search CBIC notified Customs exchange rates for imports and exports, download notification PDFs, and review historical currency rates for Indian customs compliance.",
+      inLanguage: "en-IN",
+      isPartOf: {
+        "@type": "WebSite",
+        name: "EXIMINQ",
+        url: "https://eximinq.in/",
+      },
+      about: [
+        "Customs exchange rates",
+        "CBIC exchange rates",
+        "Import export exchange rates",
+        "Customs Act Section 14",
+      ],
+      dateModified: new Date().toISOString().split("T")[0],
+    };
+
+    const breadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Foreign Trade Policy",
+          item: "https://eximinq.in/foreign-trade-policy/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Customs Exchange Rates",
+          item: CANONICAL_URL,
+        },
+      ],
+    };
+
+    const dataset = {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      name: "CBIC Customs Exchange Rates Archive",
+      description:
+        "Historical CBIC Customs notified exchange rates for import and export valuation in India, including currency, effective date, notification number, and PDF references where available.",
+      url: CANONICAL_URL,
+      temporalCoverage: `2024/${new Date().getFullYear()}`,
+      keywords: targetKeywords.join(", "),
+      creator: {
+        "@type": "Organization",
+        name: "EXIMINQ",
+        url: "https://eximinq.in/",
+      },
+      isAccessibleForFree: true,
+    };
+
+    const faq = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    };
+
+    return [webPage, breadcrumb, dataset, faq];
+  }, []);
+
   // Marquee ticker always shows every currency's rate valid on the
   // selected Search Date (defaults to today), one row per currency —
   // this stays independent of the Currency dropdown by design.
@@ -1006,25 +549,100 @@ export default function ExchangeRates() {
 
   return (
     <>
+      <Helmet>
+        <title>Customs Exchange Rates India | CBIC Import Export Rates & PDFs</title>
+        <meta
+          name="description"
+          content="Check CBIC notified Customs exchange rates for imports and exports in India. Search current and historical rates, view notification dates, and download official PDFs."
+        />
+        <meta
+          name="keywords"
+          content="Customs exchange rates, CBIC exchange rates, Customs notified exchange rates, import exchange rate, export exchange rate, customs USD rate today, Section 14 Customs Act exchange rate"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta property="og:title" content="Customs Exchange Rates India | CBIC Import Export Rates" />
+        <meta
+          property="og:description"
+          content="Search CBIC notified Customs exchange rates, historical import/export currency rates, notification PDFs, and compliance references."
+        />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Customs Exchange Rates India | CBIC Import Export Rates" />
+        <meta
+          name="twitter:description"
+          content="Check latest and historical CBIC Customs exchange rates for import and export valuation in India."
+        />
+        {structuredData.map((schema, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        ))}
+      </Helmet>
       <Navbar />
 
       <main className="container mx-auto px-4 pt-28 pb-8 flex-grow">
         {/* Header */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-slate-800 mb-2">
-            Customs Exchange Rates History
-          </h2>
-          <p className="text-slate-500">
-            Official exchange rates notified by CBIC under Section 14 of the
-            Customs Act, 1962.
+          <p className="text-sm font-semibold text-blue-700 uppercase tracking-[0.2em] mb-2">
+            CBIC notified customs exchange rates
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+            Customs Exchange Rates India: CBIC Import &amp; Export Currency Rates
+          </h1>
+          <p className="text-lg text-slate-600 max-w-4xl">
+            Search the latest available CBIC Customs exchange rates for import and export
+            valuation, compare historical rates, and download notification PDFs used for
+            Bills of Entry, Shipping Bills, duty calculation, GST valuation, and trade
+            compliance under Section 14 of the Customs Act, 1962.
           </p>
         </div>
 
+        <section className="grid lg:grid-cols-3 gap-6 mb-8" aria-label="Customs exchange rate overview">
+          <div className="lg:col-span-2 bg-white rounded-2xl shadow-md border border-gray-200 p-6">
+            <h2 className="text-2xl font-bold text-slate-900 mb-3">
+              Latest CBIC Customs Notified Exchange Rates
+            </h2>
+            <p className="text-slate-600 mb-4">
+              This archive is designed for importers, exporters, CHA/customs brokers,
+              freight forwarders, finance teams, and compliance teams who need fast access
+              to Customs notified exchange rates for foreign-currency invoices. Use the
+              date, currency, and year filters below to identify the applicable import rate
+              or export rate for a shipment date.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <div className="rounded-xl bg-blue-50 border border-blue-100 p-4">
+                <p className="text-xs font-bold text-blue-700 uppercase">Latest effective date</p>
+                <p className="text-xl font-bold text-slate-900 mt-1">{latestEffectiveDate}</p>
+              </div>
+              <div className="rounded-xl bg-emerald-50 border border-emerald-100 p-4">
+                <p className="text-xs font-bold text-emerald-700 uppercase">Currencies covered</p>
+                <p className="text-xl font-bold text-slate-900 mt-1">{uniqueCurrenciesCount || "22"}+</p>
+              </div>
+              <div className="rounded-xl bg-amber-50 border border-amber-100 p-4">
+                <p className="text-xs font-bold text-amber-700 uppercase">Documents</p>
+                <p className="text-xl font-bold text-slate-900 mt-1">PDF notifications</p>
+              </div>
+            </div>
+          </div>
+
+          <aside className="bg-slate-900 text-white rounded-2xl shadow-md p-6">
+            <h2 className="text-xl font-bold mb-3">High-intent searches covered</h2>
+            <div className="flex flex-wrap gap-2">
+              {targetKeywords.map((keyword) => (
+                <span key={keyword} className="text-xs bg-white/10 border border-white/15 rounded-full px-3 py-1">
+                  {keyword}
+                </span>
+              ))}
+            </div>
+          </aside>
+        </section>
+
         {/* Filters */}
         <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 mb-8">
-          <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider mb-4 border-b pb-2">
-            Filter Data (2021 – Present)
-          </h3>
+          <h2 className="text-sm font-bold text-gray-800 uppercase tracking-wider mb-4 border-b pb-2">
+            Filter Customs Exchange Rate Data (2024 - Present)
+          </h2>
 
           <div className="grid md:grid-cols-4 gap-6 items-end">
             {/* Currency */}
@@ -1352,11 +970,37 @@ export default function ExchangeRates() {
             document.body
           )}
 
+        <section className="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-3">
+            How to Use CBIC Exchange Rates for Import and Export Valuation
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6 text-slate-600">
+            <div>
+              <h3 className="font-bold text-slate-800 mb-2">For imports and Bill of Entry filing</h3>
+              <p>
+                Select the Bill of Entry date or shipment assessment date, choose the
+                invoice currency, and use the applicable CBIC import exchange rate for
+                assessable value and customs duty calculation. Always keep the matching
+                notification PDF with import documentation for audit readiness.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 mb-2">For exports and Shipping Bill filing</h3>
+              <p>
+                For export invoices raised in foreign currency, use the notified export
+                exchange rate that applies to the Shipping Bill date. The archive helps
+                exporters reconcile FOB value, export incentives, drawback, RoDTEP records,
+                e-BRC value, and GST documentation.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Data Table - Shows SINGLE rate valid for the selected date,
             filtered by the selected currency (and year, if chosen) */}
         <div ref={archiveRef} className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
           <div className="px-6 py-4 border-b bg-gray-50 flex justify-between items-center">
-            <h3 className="font-bold text-gray-800">Exchange Rate Archive</h3>
+            <h3 className="font-bold text-gray-800">Customs Exchange Rate Archive</h3>
             <div className="flex items-center gap-3">
               <span className="text-xs text-gray-500 bg-white border px-3 py-1 rounded-full">
                 {currency ? `${currency} only` : "All currencies"} {date ? `(valid on ${formatToDDMMYYYY(date)})` : ""}
@@ -1370,6 +1014,11 @@ export default function ExchangeRates() {
           {tableRates.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
+                <caption className="sr-only">
+                  Historical CBIC Customs exchange rates for import and export valuation,
+                  with notification date, effective date, currency, import rate, export
+                  rate, trend, and notification PDF download.
+                </caption>
                 <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
                   <tr>
                     <th className="px-6 py-4 text-left">Notification Date</th>
@@ -1419,6 +1068,7 @@ export default function ExchangeRates() {
                             href={getDownloadHref(r)}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`Download CBIC exchange rate notification PDF ${r.notification} for ${r.currency}`}
                             className="inline-block"
                           >
                             <FileText className="w-4 h-4 text-gray-500 hover:text-blue-600 cursor-pointer transition-colors" />
@@ -1438,6 +1088,70 @@ export default function ExchangeRates() {
             </div>
           )}
         </div>
+
+        <section className="grid lg:grid-cols-3 gap-6 mt-8">
+          <div className="lg:col-span-2 bg-white rounded-xl shadow-md border border-gray-200 p-6">
+            <h2 className="text-2xl font-bold text-slate-900 mb-3">
+              Official References and Related Import Export Resources
+            </h2>
+            <p className="text-slate-600 mb-4">
+              EXIMINQ keeps this page focused on practical trade usage while linking to
+              authoritative government sources and related compliance tools. For high-value
+              or time-sensitive shipments, compare the displayed rate with the latest CBIC
+              notification before filing.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-3 text-sm">
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href={CBIC_EXCHANGE_RATE_URL} target="_blank" rel="noopener noreferrer">
+                Official CBIC Exchange Rate Notifications
+              </a>
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href={CBIC_TAX_INFORMATION_URL} target="_blank" rel="noopener noreferrer">
+                CBIC Tax Information Portal
+              </a>
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href="/foreign-trade-policy/regulatory-updates/">
+                DGFT, CBIC &amp; GST Regulatory Updates
+              </a>
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href="/tools/duty-calculator-finder/">
+                Customs Duty Calculator
+              </a>
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href="/services/bill-of-entry-filing">
+                Bill of Entry Filing Support
+              </a>
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href="/services/shipping-bill-filing">
+                Shipping Bill Filing Support
+              </a>
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href="/services/cha-services">
+                CHA &amp; Customs Broker Services
+              </a>
+              <a className="rounded-lg border border-gray-200 p-3 hover:border-blue-300 hover:bg-blue-50 transition" href="/foreign-trade-policy/">
+                Foreign Trade Policy Resources
+              </a>
+            </div>
+          </div>
+
+          <aside className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+            <h2 className="text-xl font-bold text-slate-900 mb-3">E-E-A-T Compliance Notes</h2>
+            <ul className="space-y-3 text-sm text-slate-600 list-disc pl-5">
+              <li>Rates are mapped with notification number, notification date, and effective date.</li>
+              <li>PDF links are provided wherever the source notification file is available.</li>
+              <li>Content is written for customs valuation, import-export compliance, and audit use cases.</li>
+              <li>Official CBIC references are linked for independent verification.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section className="bg-white rounded-xl shadow-md border border-gray-200 p-6 mt-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">
+            Customs Exchange Rates FAQs
+          </h2>
+          <div className="space-y-4">
+            {faqItems.map((item) => (
+              <div key={item.question} className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                <h3 className="font-bold text-slate-800 mb-1">{item.question}</h3>
+                <p className="text-slate-600">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
 
       <Footer />

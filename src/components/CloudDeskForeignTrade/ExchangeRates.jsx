@@ -62,7 +62,7 @@ export function ExchangeRates() {
           <i class="fas fa-info-circle mr-1"></i>Notfn 18/2026
         </span>
         <a
-          href="https://eximinq.in/foreign-trade-policy/exchange-rates/"
+          href="https://eximinq.in/foreign-trade-policy/Customsrates/"
           target="_blank"
           class="text-blue-600 hover:underline"
         >
