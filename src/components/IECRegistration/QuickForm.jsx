@@ -183,7 +183,7 @@ const QuickForm = () => {
         {/* PERSON NAME FIELD */}
         <div className="mb-2.5">
           <label className="block text-xs font-semibold mb-1">
-            Your Name
+            Contact Person Name
           </label>
 
           <input
