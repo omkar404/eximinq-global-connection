@@ -54,7 +54,7 @@ async function sendEmail(record) {
           ${exportProduct ? `<tr><td><b>Export Product</b></td><td>${exportProduct}</td></tr>` : ""}
           ${importRawMaterial ? `<tr><td><b>Import Raw Material</b></td><td>${importRawMaterial}</td></tr>` : ""}
           ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Your Name</b></td><td>${personName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b></b>Contact Person Name</td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>

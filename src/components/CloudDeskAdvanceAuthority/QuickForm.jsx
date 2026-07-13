@@ -82,7 +82,7 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        name: form.personName,
+        personName: form.personName,
         companyName: form.companyName,
         email: form.email,
         mobile: form.mobile,
@@ -162,7 +162,7 @@ const QuickForm = () => {
         {/* Person Name */}
         <div className="mb-2.5">
           <label className="block text-xs font-semibold mb-1">
-            Your Name
+            Contact Person Name
           </label>
           <input
             type="text"
