@@ -143,9 +143,9 @@ exports.createImportExportCode = async (req, res) => {
 
     const emailHtml = normalizedType === "QUICK_FORM"
       ? `
-        <h3>New Quick Lead</h3>
+        <h3>New Quick Import export</h3>
         ${companyName ? `<p><strong>Company Name:</strong> ${companyName}</p>` : ""}
-        ${personName ? `<p><strong>Name:</strong> ${personName}</p>` : ""}
+        ${personName ? `<p><strong>Contact Person Name:</strong> ${personName}</p>` : ""}
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Mobile:</strong> ${mobile}</p>
         <p><strong>Submitted (IST):</strong> ${istTime}, ${istDate}</p>
