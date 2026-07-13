@@ -8,6 +8,18 @@ const AdcodeRegistrationSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      required: false,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      required: false,
+      trim: true,
+      default: null,
+    },
     portCategory: {
       type: String,
       required: false,

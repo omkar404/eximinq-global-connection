@@ -305,6 +305,9 @@ const portData = {
 };
 
 export default function QuickForm() {
+  const [companyName, setCompanyName] = useState("");
+  const [personName, setPersonName] = useState("");
+  const [email, setEmail] = useState("");
   const [portCategory, setPortCategory] = useState("");
   const [selectedPortCode, setSelectedPortCode] = useState("");
   const [portLocation, setPortLocation] = useState("");
@@ -381,6 +384,15 @@ export default function QuickForm() {
 
   const validate = () => {
     const newErrors = {};
+    if (!companyName.trim()) newErrors.companyName = "Company name is required";
+    else if (companyName.trim().length < 2) newErrors.companyName = "Company name must be at least 2 characters";
+
+    if (!personName.trim()) newErrors.personName = "Your name is required";
+    else if (personName.trim().length < 2) newErrors.personName = "Name must be at least 2 characters";
+
+    if (!email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = "Enter a valid email address";
+
     if (!portCategory) newErrors.portCategory = "Please select a port category";
     if (!selectedPortCode) newErrors.selectedPortCode = "Please select/enter a port code";
     else {
@@ -407,6 +419,9 @@ export default function QuickForm() {
     setLoading(true);
     try {
       const payload = {
+        companyName: companyName.trim(),
+        personName: personName.trim(),
+        email: email.trim(),
         portCategory,
         portCode: selectedPortCode,
         portLocation,
@@ -434,6 +449,9 @@ export default function QuickForm() {
 
       alert("✅ Request submitted successfully");
 
+      setCompanyName("");
+      setPersonName("");
+      setEmail("");
       setPortCategory("");
       setSelectedPortCode("");
       setPortLocation("");
@@ -448,18 +466,72 @@ export default function QuickForm() {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-brand-900 mb-2">Check Port Status</h3>
-      <p className="text-slate-500 mb-6 text-sm">Verify if your AD Code is active.</p>
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
+      <h3 className="text-lg font-bold text-brand-900 mb-1">Check Port Status</h3>
+      <p className="text-slate-500 mb-3 text-xs">Verify if your AD Code is active.</p>
 
       <form onSubmit={handleSubmit}>
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">Company Name</label>
+          <input
+            type="text"
+            placeholder="e.g. Acme Exports Pvt Ltd"
+            value={companyName}
+            onChange={(e) => {
+              setCompanyName(e.target.value);
+              setErrors((p) => ({ ...p, companyName: "" }));
+            }}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.companyName && <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>}
+        </div>
+
+        {/* Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">Contact Person Name</label>
+          <input
+            type="text"
+            placeholder="e.g. Rahul Sharma"
+            value={personName}
+            onChange={(e) => {
+              setPersonName(e.target.value);
+              setErrors((p) => ({ ...p, personName: "" }));
+            }}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.personName && <p className="text-red-500 text-xs mt-1">{errors.personName}</p>}
+        </div>
+
+        {/* Email */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">Email Id</label>
+          <input
+            type="email"
+            placeholder="e.g. rahul@acmeexports.com"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setErrors((p) => ({ ...p, email: "" }));
+            }}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+        </div>
+
         {/* Port Category */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Port Category</label>
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">Port Category</label>
           <select
             value={portCategory}
             onChange={handleCategoryChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.portCategory ? "border-red-500" : "border-slate-300"
             }`}
           >
@@ -475,8 +547,8 @@ export default function QuickForm() {
 
         {/* Port Code with custom left-aligned dropdown */}
         {portCategory && (
-          <div className="mb-4 relative" ref={wrapperRef}>
-            <label className="block text-sm font-semibold mb-1">Port Code</label>
+          <div className="mb-2.5 relative" ref={wrapperRef}>
+            <label className="block text-xs font-semibold mb-1">Port Code</label>
             <input
               ref={inputRef}
               type="text"
@@ -484,18 +556,18 @@ export default function QuickForm() {
               onChange={handlePortCodeChange}
               onFocus={() => setShowSuggestions(true)}
               placeholder="Type or select port code"
-              className={`w-full border rounded px-3 py-2 text-left focus:outline-none focus:border-brand-500 ${
+              className={`w-full border rounded px-2.5 py-1.5 text-sm text-left focus:outline-none focus:border-brand-500 ${
                 errors.selectedPortCode ? "border-red-500" : "border-slate-300"
               }`}
               autoComplete="off"
             />
             {showSuggestions && filteredCodes.length > 0 && (
-              <ul className="absolute z-10 w-full bg-white border border-slate-300 rounded mt-1 max-h-60 overflow-auto shadow-lg">
+              <ul className="absolute z-10 w-full bg-white border border-slate-300 rounded mt-1 max-h-60 overflow-auto shadow-lg text-sm">
                 {filteredCodes.map(code => (
                   <li
                     key={code}
                     onClick={() => handleSuggestionClick(code)}
-                    className="px-3 py-2 hover:bg-brand-50 cursor-pointer text-left"
+                    className="px-2.5 py-1.5 hover:bg-brand-50 cursor-pointer text-left"
                   >
                     {code}
                   </li>
@@ -508,15 +580,15 @@ export default function QuickForm() {
 
         {/* Port Location */}
         {portLocation && (
-          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
-            <label className="block text-sm font-semibold mb-1 text-blue-800">Port Location</label>
-            <p className="text-slate-700 text-sm">{portLocation}</p>
+          <div className="mb-2.5 p-2.5 bg-blue-50 border border-blue-200 rounded-md">
+            <label className="block text-xs font-semibold mb-1 text-blue-800">Port Location</label>
+            <p className="text-slate-700 text-xs">{portLocation}</p>
           </div>
         )}
 
         {/* Bank Name */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Bank Name</label>
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">Bank Name</label>
           <input
             type="text"
             placeholder="e.g. HDFC Bank"
@@ -525,7 +597,7 @@ export default function QuickForm() {
               setBank(e.target.value);
               setErrors((p) => ({ ...p, bank: "" }));
             }}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.bank ? "border-red-500" : "border-slate-300"
             }`}
           />
@@ -533,15 +605,15 @@ export default function QuickForm() {
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+        <div className="mb-3">
+          <label className="block text-xs font-semibold mb-1">Mobile Number</label>
           <input
             type="tel"
             placeholder="9876543210"
             value={mobile}
             maxLength={10}
             onChange={handleMobileChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
           />
@@ -552,7 +624,7 @@ export default function QuickForm() {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading ? "bg-brand-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-700"
           }`}
         >
