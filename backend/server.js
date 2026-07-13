@@ -7,7 +7,7 @@ const path = require("path");
 const fs = require("fs");
 const servicecertificateoforigin = require("./routes/servicecertificateoforigin.routes");
 const serviceaeocertification = require("./routes/serviceaeocertification.routes");
-// const cooEnrollRoutes = require("./routes/cooEnroll.routes");
+const cooEnrollRoutes = require("./routes/cooEnroll.routes");
 const enrollRoutes = require("./routes/enroll.routes");
 const industriesWePowerRoutes = require("./routes/industriesWePower.routes");
 const bisRegistrationRoutes = require("./routes/bisRegistrationRoutes.routes");
@@ -689,7 +689,7 @@ app.use("/api/gst", gstRegulatoryRoutes);
 // All other routes
 app.use("/api/certificate-of-origin", servicecertificateoforigin);
 app.use("/api/aeo-certification", serviceaeocertification);
-// app.use("/api/coo-enroll", cooEnrollRoutes);
+app.use("/api/coo-enroll", cooEnrollRoutes);
 app.use("/api/home-enroll", enrollRoutes);
 app.use("/api/individual-enroll", industriesWePowerRoutes);
 app.use("/api/bis-registration", bisRegistrationRoutes);
