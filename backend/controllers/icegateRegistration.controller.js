@@ -64,7 +64,7 @@ async function sendEmail(record) {
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
 
           ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Your Name</b></td><td>${personName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
 
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
           ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
