@@ -34,6 +34,9 @@ async function sendEmail(record) {
     issue,
     exportProduct,
     importRawMaterial,
+    companyName,
+    personName
+
   } = record;
 
   const serviceDisplay = service || "Advance Authorisation Registration";
@@ -50,6 +53,8 @@ async function sendEmail(record) {
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${exportProduct ? `<tr><td><b>Export Product</b></td><td>${exportProduct}</td></tr>` : ""}
           ${importRawMaterial ? `<tr><td><b>Import Raw Material</b></td><td>${importRawMaterial}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Your Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -106,6 +111,8 @@ exports.createadvanceAuthorisationRoutes = async (req, res) => {
       issue,
       exportProduct, // ✅ camelCase
       importRawMaterial, // ✅ camelCase
+      companyName,
+      personName
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -122,8 +129,10 @@ exports.createadvanceAuthorisationRoutes = async (req, res) => {
       mobile: mobile.trim(),
       importRawMaterial: importRawMaterial ? importRawMaterial.trim() : null, // ✅ use the correct variable
       exportProduct: exportProduct ? exportProduct.trim() : null, // ✅ use correct variable
-      name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      companyName: companyName ? companyName.trim() : null, // ✅ use correct variable
+      personName: personName ? personName.trim() : null, // ✅ use correct variable
+      name: name ? name.trim() : null,
+      email: email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),

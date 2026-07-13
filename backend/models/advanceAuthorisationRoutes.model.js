@@ -1,4 +1,4 @@
-const mongoose = require("mongoose"); // ✅ This line was missing
+const mongoose = require("mongoose");
 
 const advanceAuthorisationRoutesSchema = new mongoose.Schema(
   {
@@ -17,6 +17,16 @@ const advanceAuthorisationRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
       trim: true,
@@ -31,6 +41,7 @@ const advanceAuthorisationRoutesSchema = new mongoose.Schema(
       type: String,
       trim: true,
       default: null,
+      lowercase: true,
     },
     entity: {
       type: String,
