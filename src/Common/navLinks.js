@@ -15,7 +15,7 @@ export const navLinks = [
       { name: "Service Directory", path: "/services" },
       { name: "Foreign Trade Policy", path: "/foreign-trade-policy" },
       { name: "DGFT & Customs", path: "/dgft-customs-consultancy/" },
-      // { name: "COO (Cert. of Origin)", path: "/certificate-of-origin/" },
+      { name: "COO (Cert. of Origin)", path: "/certificate-of-origin/" },
       { name: "Compliance Audit", path: "/compliance-trade-india" },
     ],
   },
