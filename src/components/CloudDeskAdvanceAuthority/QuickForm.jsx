@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
+    email: "",
     exportProduct: "",
     importRawMaterial: "",
     mobile: "",
@@ -25,9 +28,27 @@ const QuickForm = () => {
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  // Validation (same pattern as QuickForm, with all three fields)
+  // Validation (same pattern as QuickForm, with all fields)
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
 
     if (!form.exportProduct.trim()) {
       newErrors.exportProduct = "Export product is required";
@@ -61,8 +82,9 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        name: form.exportProduct,
-        email: "lead@eximinq.com",
+        name: form.personName,
+        companyName: form.companyName,
+        email: form.email,
         mobile: form.mobile,
         type: "QUICK_FORM",
         service: "Benefit Calculator",
@@ -91,7 +113,14 @@ const QuickForm = () => {
       alert("✅ Benefit calculation request submitted successfully!");
 
       // Reset form
-      setForm({ exportProduct: "", importRawMaterial: "", mobile: "" });
+      setForm({
+        companyName: "",
+        personName: "",
+        email: "",
+        exportProduct: "",
+        importRawMaterial: "",
+        mobile: "",
+      });
     } catch (err) {
       console.error("❌ Error:", err);
       alert(`❌ Submission failed: ${err.message}`);
@@ -101,18 +130,78 @@ const QuickForm = () => {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-brand-900 mb-2">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
+      <h3 className="text-lg font-bold text-brand-900 mb-1">
         Benefit Calculator
       </h3>
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Estimate your duty savings.
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Your Name
+          </label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. rahul@acmeexports.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Export Product */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Export Product
           </label>
           <input
@@ -120,7 +209,7 @@ const QuickForm = () => {
             name="exportProduct"
             value={form.exportProduct}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.exportProduct ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="e.g. Stainless Steel Utensils"
@@ -131,8 +220,8 @@ const QuickForm = () => {
         </div>
 
         {/* Import Raw Material */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Import Raw Material
           </label>
           <input
@@ -140,7 +229,7 @@ const QuickForm = () => {
             name="importRawMaterial"
             value={form.importRawMaterial}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.importRawMaterial ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="e.g. SS Coils Grade 304"
@@ -151,8 +240,8 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile Number (with sanitization) */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
           <input
@@ -160,7 +249,7 @@ const QuickForm = () => {
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="e.g. 9876543210"
@@ -175,7 +264,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"
