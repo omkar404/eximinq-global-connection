@@ -30,6 +30,9 @@ async function sendEmail(record) {
     portCode,
     portLocation,
     bank,
+    companyName, // ✅ ADDED
+    personName,
+
   } = record;
 
   const serviceDisplay = service || "AD Code Registration";
@@ -51,6 +54,8 @@ async function sendEmail(record) {
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
           ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
@@ -85,6 +90,8 @@ exports.createAdcodeRegistration = async (req, res) => {
       portCode,
       portLocation,
       bank,
+      companyName, // ✅ ADDED
+      personName,  // ✅ ADDED
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -103,8 +110,12 @@ exports.createAdcodeRegistration = async (req, res) => {
       portCode: portCode ? portCode.trim() : null,
       portLocation: portLocation ? portLocation.trim() : null, // ✅ use correct variable
       bank : bank ? bank.trim() : null,
-      name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      companyName: companyName ? companyName.trim() : null, // ✅ ADDED
+      personName : personName ? personName.trim() : null ,
+      // 🔥 FIX: Quick Form now collects the person's name + email itself,
+      // so they're no longer forced to null for QUICK_FORM submissions.
+      name: name ? name.trim() : null,
+      email: email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),
