@@ -1,156 +1,9 @@
-
-// import { useState } from "react";
-
-// const QuickForm = () => {
-//   const [form, setForm] = useState({
-//     mobile: "",
-//     email: "",
-//   });
-
-//   const [errors, setErrors] = useState({});
-//   const [loading, setLoading] = useState(false);
-
-//   // const handleChange = (e) => {
-//   //   setFormData({
-//   //     ...formData,
-//   //     [e.target.name]: e.target.value
-//   //   });
-//   // };
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-
-//     if (name === "mobile") {
-//       const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
-//       setForm((prev) => ({ ...prev, [name]: digitsOnly }));
-//     } else {
-//       setForm((prev) => ({ ...prev, [name]: value }));
-//     }
-
-//     // Clear that field's error on typing
-//     setErrors((prev) => ({ ...prev, [name]: "" }));
-//   };
-
-//   /*----------------------
-//     VALIDATION
-//   -----------------------*/
-//   const validate = () => {
-//     const newErrors = {};
-
-//     if (!form.mobile) {
-//       newErrors.mobile = "Mobile number is required";
-//     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
-//       newErrors.mobile = "Enter valid 10 digit Indian mobile number";
-//     }
-
-//     return newErrors;
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     const validationErrors = validate();
-//     setErrors(validationErrors);
-
-//     if (Object.keys(validationErrors).length > 0) return;
-
-//     setLoading(true);
-
-//     try {
-//       const payload = {
-//         mobile: form.mobile,
-//         email: form.email,
-//         type: "QUICK_FORM",
-//       };
-
-//       console.log("📤 Sending data:", payload);
-
-//       const response = await fetch(
-//         `${process.env.REACT_APP_API_URL}/api/import-export-code`,
-//         // `http://localhost:5000/api/import-export-code`,
-//         {
-//           method: "POST",
-//           headers: {"Content-Type": "application/json",},
-//           body: JSON.stringify(payload),
-//         },
-//       );
-
-//       const data = await response.json();
-
-//       if (!response.ok || !data.success) {
-//         throw new Error( data.error || data.message || "Something went wrong");
-//       }
-
-//       alert("Request submitted successfully");
-//       setForm({ mobile: "", email: "" });
-//     } catch (error) {
-//       alert(error.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-//       <h3 className="text-2xl font-bold text-brand-900 mb-2">
-//         Get IEC in 24 Hours
-//       </h3>
-
-//       <p className="text-slate-500 mb-6 text-sm">
-//         Fill the details to get expert call back.
-//       </p>
-
-//       <form onSubmit={handleSubmit}>
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Mobile Number
-//           </label>
-//           <input
-//             type="tel"
-//             name="mobile"
-//             value={form.mobile}
-//             onChange={handleChange}
-//             placeholder="+917400096950"
-//             className="w-full border border-slate-300 rounded px-3 py-2"
-//             required
-//           />
-//         </div>
-
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Email Address
-//           </label>
-//           <input
-//             type="email"
-//             name="email"
-//             value={form.email}
-//             onChange={handleChange}
-//             placeholder="your@company.com"
-//             className="w-full border border-slate-300 rounded px-3 py-2"
-//             required
-//           />
-//         </div>
-
-//         <button
-//           type="submit"
-//           disabled={loading}
-//           className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg"
-//         >
-//           {loading ? "Submitting..." : "Apply Now"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default QuickForm;
-
-
-
 import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
     mobile: "",
     email: "",
   });
@@ -158,7 +11,6 @@ const QuickForm = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // ✅ Removed commented-out dead code that used undefined 'formData'
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -175,10 +27,28 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
       newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
     }
 
     return newErrors;
@@ -196,6 +66,9 @@ const QuickForm = () => {
 
     try {
       const payload = {
+        companyName: form.companyName,
+        personName: form.personName,
+        name: form.personName,
         mobile: form.mobile,
         email: form.email,
         type: "QUICK_FORM",
@@ -220,7 +93,7 @@ const QuickForm = () => {
       }
 
       alert("✅ Request submitted successfully");
-      setForm({ mobile: "", email: "" });
+      setForm({ companyName: "", personName: "", mobile: "", email: "" });
 
     } catch (error) {
       alert(`❌ ${error.message}`);
@@ -230,19 +103,59 @@ const QuickForm = () => {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-brand-900 mb-2">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
+      <h3 className="text-lg font-bold text-brand-900 mb-1">
         Get IEC in 24 Hours
       </h3>
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Fill the details to get expert call back.
       </p>
 
       <form onSubmit={handleSubmit}>
 
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Your Name
+          </label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            placeholder="e.g. Rahul Sharma"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          )}
+        </div>
+
         {/* Mobile */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
           <input
@@ -252,7 +165,7 @@ const QuickForm = () => {
             onChange={handleChange}
             placeholder="+91 74000 96950"
             maxLength={10}
-            className={`w-full border rounded px-3 py-2 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
               errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
           />
@@ -262,8 +175,8 @@ const QuickForm = () => {
         </div>
 
         {/* Email */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Email Address
           </label>
           <input
@@ -272,14 +185,19 @@ const QuickForm = () => {
             value={form.email}
             onChange={handleChange}
             placeholder="your@company.com"
-            className="w-full border border-slate-300 rounded px-3 py-2"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
           />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"
