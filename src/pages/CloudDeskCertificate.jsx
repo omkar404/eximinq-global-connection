@@ -226,10 +226,10 @@ const COO_FEES = [
 const EXPORTER_PACKAGES = [
   {
     name: "Startup / Small Plan",
-    price: "INR 25,000/-",
+    price: "₹ 25,000/-",
     unit: "/ mo",
-    limit: "Monthly Limit (Pref. COO): Up to 30",
-    extra: "Rate for Extra COOs: INR 1,250/- per COO",
+    limit: "Monthly Limit (Pref. COO): Up to 25",
+    extra: "Rate for Extra COOs: ₹ 1,250/- per COO",
     features: [
       "Monthly compliance review",
       "Data reconciliation",
@@ -239,10 +239,10 @@ const EXPORTER_PACKAGES = [
   },
   {
     name: "Mid-Size Exporter Plan",
-    price: "INR 50,000/-",
+    price: "₹ 60,000/-",
     unit: "/ mo",
     limit: "Monthly Limit (Pref. COO): Up to 75",
-    extra: "Rate for Extra COOs: INR 1,000/- per COO",
+    extra: "Rate for Extra COOs: ₹ 1000/- per COO",
     features: [
       "Monthly compliance review",
       "Data reconciliation",
@@ -254,10 +254,10 @@ const EXPORTER_PACKAGES = [
   },
   {
     name: "Large-Size Exporter Plan",
-    price: "INR 75,000/-",
+    price: "₹ 75,000/-",
     unit: "/ mo",
-    limit: "Monthly Limit (Pref. COO): Up to 100",
-    extra: "Rate for Extra COOs: INR 750/- per COO",
+    limit: "Monthly Limit (Pref. COO): Up to 125",
+    extra: "Rate for Extra COOs: ₹ 750/- per COO",
     features: [
       "Monthly compliance review",
       "Data reconciliation",
@@ -827,7 +827,7 @@ const CloudDeskCertificate = () => {
 
             <div className="flex flex-wrap gap-4 justify-center mt-10">
               <span className="bg-green-600 text-white font-semibold text-sm px-6 py-3 rounded-lg">
-                Exclusive Bonus: Non-Preferential COO at ₹250
+                Exclusive Bonus: Non-Preferential COO at ₹500
               </span>
               <span className="bg-slate-800 text-slate-300 font-medium text-sm px-6 py-3 rounded-lg">
                 No Advance Payment Required · Monthly Billing Cycle

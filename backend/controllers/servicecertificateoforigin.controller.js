@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
-    
+
 /* EMAIL HELPER */
 async function sendEmail(record) {
   const {
@@ -34,6 +34,8 @@ async function sendEmail(record) {
     monthlyCooLimit,
     additionalCooRate,
     planPrice,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "Certificate of Origin Registration";
@@ -56,6 +58,8 @@ async function sendEmail(record) {
           ${monthlyCooLimit ? `<tr><td><b>Monthly COO Limit</b></td><td>${monthlyCooLimit}</td></tr>` : ""}
           ${additionalCooRate ? `<tr><td><b>Rate for Additional COO</b></td><td>${additionalCooRate}</td></tr>` : ""}
           ${planPrice ? `<tr><td><b>Plan Price</b></td><td>${planPrice}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -97,6 +101,8 @@ exports.createservicecertificateoforigin = async (req, res) => {
       monthlyCooLimit,
       additionalCooRate,
       planPrice,
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -110,22 +116,45 @@ exports.createservicecertificateoforigin = async (req, res) => {
 
     const recordData = {
       service: service || "Certificate of Origin Registration",
+
       mobile: mobile.trim(),
-      destinationCountry: destinationCountry ? destinationCountry.trim() : null, // ✅ use the correct variable
-      hsCode: hsCode ? hsCode.trim() : null, // ✅ use correct variable
-      ftaagreement: ftaagreement ? ftaagreement.trim() : null, // ✅ was missing — now saved
-      planCategory: isQuickForm ? null : planCategory ? planCategory.trim() : null,
-      planName: isQuickForm ? null : planName ? planName.trim() : null,
-      monthlyCooLimit: isQuickForm ? null : monthlyCooLimit ? monthlyCooLimit.trim() : null,
-      additionalCooRate: isQuickForm ? null : additionalCooRate ? additionalCooRate.trim() : null,
-      planPrice: isQuickForm ? null : planPrice ? planPrice.trim() : null,
-      name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
-      entity: isQuickForm ? null : entity ? entity.trim() : null,
-      role: isQuickForm ? null : role || null,
-      partner: isQuickForm ? false : Boolean(partner),
-      type: type || "QUICK_FORM_COMPLIANCE",
+
+      destinationCountry: destinationCountry ? destinationCountry.trim() : null,
+
+      hsCode: hsCode ? hsCode.trim() : null,
+
+      ftaagreement: ftaagreement ? ftaagreement.trim() : null,
+
+      companyName: companyName ? companyName.trim() : null,
+
+      personName: personName ? personName.trim() : null,
+
+      // ✅ Always save email
+      email: email ? email.trim().toLowerCase() : null,
+
+      // ✅ Save these if available
+      name: name ? name.trim() : null,
+
+      entity: entity ? entity.trim() : null,
+
+      role: role || null,
+
+      partner: Boolean(partner),
+
+      planCategory: planCategory ? planCategory.trim() : null,
+
+      planName: planName ? planName.trim() : null,
+
+      monthlyCooLimit: monthlyCooLimit ? monthlyCooLimit.trim() : null,
+
+      additionalCooRate: additionalCooRate ? additionalCooRate.trim() : null,
+
+      planPrice: planPrice ? planPrice.trim() : null,
+
+      type: type || "QUICK_FORM",
+
       category: category || null,
+
       issue: issue || null,
     };
 
@@ -156,7 +185,9 @@ exports.createservicecertificateoforigin = async (req, res) => {
 /* GET ALL */
 exports.servicecertificateoforigin = async (req, res) => {
   try {
-    const data = await servicecertificateoforigin.find().sort({ createdAt: -1 });
+    const data = await servicecertificateoforigin
+      .find()
+      .sort({ createdAt: -1 });
     res.json({ success: true, data });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });

@@ -247,7 +247,6 @@ export default function CloudDeskEPRLanding() {
       <ContactEPR />
       <FooterEPR />
       {/* Modal */}
-      // isOpen → show
       <ModalEnrollEPR
         show={showEnrollModal.open} // ✅ yeh badlo
         onClose={() => setShowEnrollModal({ open: false, type: "" })}
