@@ -33,6 +33,8 @@ async function sendEmail(record) {
     issue,
     turnover,
     bonus,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "star-export-house";
@@ -51,7 +53,8 @@ async function sendEmail(record) {
 
           ${turnover ? `<tr><td><b>Turnover</b></td><td>${turnover}</td></tr>` : ""}
           ${bonus ? `<tr><td><b>Bonus</b></td><td>${bonus}</td></tr>` : ""}
-
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
 
@@ -102,6 +105,8 @@ exports.createstarExportHouse = async (req, res) => {
       issue,
       turnover,
       bonus,
+      companyName,
+      personName,
     } = req.body;
 
     // 🔥 Detect Quick Form
@@ -122,6 +127,9 @@ exports.createstarExportHouse = async (req, res) => {
 
       turnover: turnover ? turnover.trim() : null,   // ✅ ADDED
       bonus: bonus ? bonus.trim() : null,   // ✅ ADDED
+
+      companyName: companyName ? companyName.trim() : null,
+      personName: personName ? personName.trim() : null,
 
       // 🔥 KEY LOGIC (Quick Form fields ignore)
       name: isQuickForm ? null : name ? name.trim() : null,
