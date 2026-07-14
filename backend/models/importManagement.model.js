@@ -11,7 +11,12 @@ const importManagementRoutesSchema = new mongoose.Schema(
       type: String,
       trim: true,
       default: null,
-    },    
+    },  
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
       trim: true,
