@@ -291,11 +291,15 @@ const PORTS = [
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
+    email: "",
     port: "",
     cargo: "",
     mobile: "",
   });
 
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownStyle, setDropdownStyle] = useState({});
@@ -346,6 +350,7 @@ const QuickForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const filteredPorts = PORTS.filter((port) =>
@@ -355,13 +360,52 @@ const QuickForm = () => {
   const handlePortSelect = (selectedPort) => {
     setForm((prev) => ({ ...prev, port: selectedPort }));
     setShowDropdown(false);
+    setErrors((prev) => ({ ...prev, port: "" }));
+  };
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
+
+    if (!form.mobile.trim()) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    }
+
+    return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
     try {
       setLoading(true);
       const payload = {
+        companyName: form.companyName.trim(),
+        personName: form.personName.trim(),
+        email: form.email.trim(),
         mobile: form.mobile,
         port: form.port,   // ✅ matches backend: port field
         cargo: form.cargo, // ✅ matches backend: cargo field
@@ -381,7 +425,8 @@ const QuickForm = () => {
         throw new Error(data.error || data.message || "API failed");
       }
       alert("Request submitted successfully");
-      setForm({ port: "", cargo: "", mobile: "" });
+      setForm({ companyName: "", personName: "", email: "", port: "", cargo: "", mobile: "" });
+      setErrors({});
     } catch (error) {
       console.error("Submit error:", error);
       alert("Submission failed. Please try again.");
@@ -391,21 +436,75 @@ const QuickForm = () => {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
 
-      <h3 className="text-2xl font-bold text-brand-900 mb-2">
+      <h3 className="text-lg font-bold text-brand-900 mb-1">
         Get Quote for Clearance
       </h3>
 
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Need help with HS Code or Duty?
       </p>
 
       <form onSubmit={handleSubmit}>
 
+        {/* COMPANY NAME */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.companyName && <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>}
+        </div>
+
+        {/* CONTACT PERSON NAME */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            placeholder="e.g. Rahul Sharma"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.personName && <p className="text-red-500 text-xs mt-1">{errors.personName}</p>}
+        </div>
+
+        {/* EMAIL */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="e.g. rahul@acmeexports.com"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+        </div>
+
         {/* PORT OF IMPORT */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Port of Import
           </label>
 
@@ -425,8 +524,7 @@ const QuickForm = () => {
             }}
             placeholder="Type to search port or code..."
             autoComplete="off"
-            required
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className="w-full border border-slate-300 rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500"
           />
 
           {/* DROPDOWN — rendered via fixed position to escape parent overflow */}
@@ -475,8 +573,8 @@ const QuickForm = () => {
         </div>
 
         {/* NATURE OF CARGO */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Nature of Cargo
           </label>
           <input
@@ -485,14 +583,13 @@ const QuickForm = () => {
             value={form.cargo}
             onChange={handleChange}
             placeholder="e.g. Machinery parts, Fabric"
-            required
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className="w-full border border-slate-300 rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500"
           />
         </div>
 
         {/* MOBILE NUMBER */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-3">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
           <input
@@ -501,16 +598,19 @@ const QuickForm = () => {
             value={form.mobile}
             onChange={handleChange}
             placeholder="+91 74000 96950"
-            required
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            maxLength={10}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.mobile ? "border-red-500" : "border-slate-300"
+            }`}
           />
+          {errors.mobile && <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>}
         </div>
 
         {/* SUBMIT BUTTON */}
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"
