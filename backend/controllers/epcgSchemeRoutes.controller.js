@@ -21,9 +21,21 @@ const notificationRecipients = [
 /* EMAIL HELPER */
 async function sendEmail(record) {
   const {
-    _id, service, mobile, name, email, entity,
-    role, partner, type, category, issue,
-    machineValue, dutyRate,
+    _id,
+    service,
+    mobile,
+    name,
+    email,
+    entity,
+    role,
+    partner,
+    type,
+    category,
+    issue,
+    machineValue,
+    dutyRate,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "EPCG Scheme Enquiry Registration";
@@ -39,14 +51,16 @@ async function sendEmail(record) {
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${machineValue ? `<tr><td><b>Machine Value (CIF)</b></td><td>${machineValue}</td></tr>` : ""}
-          ${dutyRate     ? `<tr><td><b>Applicable Duty %</b></td><td>${dutyRate}</td></tr>`     : ""}
-          ${category     ? `<tr><td><b>Category</b></td><td>${category}</td></tr>`           : ""}
-          ${issue        ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>`                 : ""}
+          ${dutyRate ? `<tr><td><b>Applicable Duty %</b></td><td>${dutyRate}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
+          ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
+          ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
-          ${name   ? `<tr><td><b>Name</b></td><td>${name}</td></tr>`     : ""}
-          ${email  ? `<tr><td><b>Email</b></td><td>${email}</td></tr>`   : ""}
+          ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
-          ${role   ? `<tr><td><b>Role</b></td><td>${role}</td></tr>`     : ""}
+          ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
           ${type !== "QUICK_FORM" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
         </table>
         <p>
@@ -87,30 +101,45 @@ exports.createEpcgSchemeLead = async (req, res) => {
     console.log("📥 Incoming:", req.body);
 
     const {
-      service, mobile, name, email, entity, role,
-      partner, type, category, issue,
-      machineValue, dutyRate,
+      service,
+      mobile,
+      name,
+      email,
+      entity,
+      role,
+      partner,
+      type,
+      category,
+      issue,
+      machineValue,
+      dutyRate,
+      companyName,
+      personName,
     } = req.body;
 
     if (!mobile || !mobile.trim()) {
-      return res.status(400).json({ success: false, message: "Mobile is required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Mobile is required" });
     }
 
     const isQuickForm = type === "QUICK_FORM";
 
     const recordData = {
-      service:      service      ? service.trim()                         : "EPCG Scheme Enquiry Registration",
-      mobile:       mobile.trim(),
-      machineValue: machineValue ? machineValue.trim()                    : null,
-      dutyRate:     dutyRate     ? dutyRate.trim()                        : null,
-      name:         isQuickForm  ? null : name   ? name.trim()            : null,
-      email:        isQuickForm  ? null : email  ? email.trim().toLowerCase() : null,
-      entity:       isQuickForm  ? null : entity ? entity.trim()          : null,
-      role:         isQuickForm  ? null : role   || null,
-      partner:      isQuickForm  ? false : Boolean(partner),
-      type:         type         || "QUICK_FORM",
-      category:     category     || null,
-      issue:        issue        || null,
+      service: service ? service.trim() : "EPCG Scheme Enquiry Registration",
+      mobile: mobile.trim(),
+      machineValue: machineValue ? machineValue.trim() : null,
+      dutyRate: dutyRate ? dutyRate.trim() : null,
+
+      personName: personName ? personName.trim() : null,
+      name: isQuickForm ? null : name ? name.trim() : null,
+      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      entity: isQuickForm ? null : entity ? entity.trim() : null,
+      role: isQuickForm ? null : role || null,
+      partner: isQuickForm ? false : Boolean(partner),
+      type: type || "QUICK_FORM",
+      category: category || null,
+      issue: issue || null,
     };
 
     console.log("📦 Saving:", recordData);
@@ -176,7 +205,8 @@ exports.getAllEpcgSchemeLeads = async (req, res) => {
 exports.getEpcgSchemeLeadById = async (req, res) => {
   try {
     const data = await EpcgSchemeLeadModel.findById(req.params.id);
-    if (!data) return res.status(404).json({ success: false, message: "Not found" });
+    if (!data)
+      return res.status(404).json({ success: false, message: "Not found" });
     res.json({ success: true, data });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });

@@ -17,6 +17,16 @@ const EpcgSchemeLeadSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     mobile: {
       type: String,
       required: true,
@@ -67,7 +77,7 @@ const EpcgSchemeLeadSchema = new mongoose.Schema(
       default: null,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("EpcgSchemeLead", EpcgSchemeLeadSchema);
