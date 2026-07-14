@@ -22,6 +22,16 @@ const servicecertificateoforiginSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     planCategory: {
       type: String,
       trim: true,
