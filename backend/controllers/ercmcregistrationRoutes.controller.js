@@ -33,6 +33,8 @@ async function sendEmail(record) {
     issue,
     product,   // ✅ ADDED
     hsnCode,   // ✅ ADDED
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "E-RCMC Registration";
@@ -55,6 +57,8 @@ async function sendEmail(record) {
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
 
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
 
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
@@ -102,6 +106,8 @@ exports.createercmcregistrationRoutes = async (req, res) => {
       issue,
       product,   // ✅ ADDED
       hsnCode,   // ✅ ADDED
+      companyName,
+      personName
     } = req.body;
 
     // 🔥 Detect Quick Form
@@ -122,6 +128,9 @@ exports.createercmcregistrationRoutes = async (req, res) => {
 
     product: product ? product.trim() : null,   // ✅ ADDED
     hsnCode: hsnCode ? hsnCode.trim() : null,   // ✅ ADDED
+
+    companyName: companyName ? companyName.trim() : null,
+    personName: personName ? personName.trim() : null,
 
       // 🔥 KEY LOGIC (Quick Form fields ignore)
       name: isQuickForm ? null : name ? name.trim() : null,
