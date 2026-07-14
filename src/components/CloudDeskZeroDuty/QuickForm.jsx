@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Calculator } from "lucide-react";
 
 const DEFAULT_FORM = {
+  companyName: "",
+  personName: "",
+  email: "",
   machineValue: "",
   dutyRate: "",
   mobile: "",
@@ -50,6 +53,24 @@ const QuickForm = () => {
 
     const newErrors = {};
 
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
+
     if (!form.machineValue.trim()) {
       newErrors.machineValue = "Machine value is required";
     }
@@ -90,6 +111,9 @@ const QuickForm = () => {
 
       const payload = {
         service: "EPCG Scheme",
+        companyName: form.companyName.trim(),
+        personName: form.personName.trim(),
+        email: form.email.trim(),
         machineValue: form.machineValue,
         dutyRate: form.dutyRate,
         mobile: form.mobile,
@@ -136,21 +160,21 @@ const QuickForm = () => {
 
   return (
 
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
 
       {/* HEADER */}
-      <div className="flex items-center gap-3 mb-5">
+      <div className="flex items-center gap-2 mb-3">
 
-        <div className="bg-sky-100 p-2 rounded-lg">
-          <Calculator className="text-sky-600" size={20} />
+        <div className="bg-sky-100 p-1.5 rounded-lg">
+          <Calculator className="text-sky-600" size={16} />
         </div>
 
         <div>
-          <h3 className="text-2xl font-bold text-brand-900">
+          <h3 className="text-lg font-bold text-brand-900">
             Duty Savings Calculator
           </h3>
 
-          <p className="text-slate-500 text-sm">
+          <p className="text-slate-500 text-xs">
             See how much you save on machine import.
           </p>
         </div>
@@ -159,10 +183,94 @@ const QuickForm = () => {
 
       <form onSubmit={handleSubmit}>
 
-        {/* MACHINE VALUE */}
-        <div className="mb-4">
+        {/* COMPANY NAME */}
+        <div className="mb-2.5">
 
-          <label className="block text-sm font-semibold mb-1">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none ${
+              errors.companyName
+                ? "border-red-500"
+                : "border-slate-300"
+            }`}
+          />
+
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.companyName}
+            </p>
+          )}
+
+        </div>
+
+        {/* CONTACT PERSON NAME */}
+        <div className="mb-2.5">
+
+          <label className="block text-xs font-semibold mb-1">
+            Contact Person Name
+          </label>
+
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            placeholder="e.g. Rahul Sharma"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none ${
+              errors.personName
+                ? "border-red-500"
+                : "border-slate-300"
+            }`}
+          />
+
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.personName}
+            </p>
+          )}
+
+        </div>
+
+        {/* EMAIL */}
+        <div className="mb-2.5">
+
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="e.g. rahul@acmeexports.com"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none ${
+              errors.email
+                ? "border-red-500"
+                : "border-slate-300"
+            }`}
+          />
+
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.email}
+            </p>
+          )}
+
+        </div>
+
+        {/* MACHINE VALUE */}
+        <div className="mb-2.5">
+
+          <label className="block text-xs font-semibold mb-1">
             Machine Value (CIF)
           </label>
 
@@ -172,7 +280,7 @@ const QuickForm = () => {
             value={form.machineValue}
             onChange={handleChange}
             placeholder="e.g. Rs 50,00,000"
-            className={`w-full border rounded px-3 py-2 focus:outline-none ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none ${
               errors.machineValue
                 ? "border-red-500"
                 : "border-slate-300"
@@ -188,9 +296,9 @@ const QuickForm = () => {
         </div>
 
         {/* DUTY RATE */}
-        <div className="mb-4">
+        <div className="mb-2.5">
 
-          <label className="block text-sm font-semibold mb-1">
+          <label className="block text-xs font-semibold mb-1">
             Applicable Duty %
           </label>
 
@@ -200,7 +308,7 @@ const QuickForm = () => {
             value={form.dutyRate}
             onChange={handleChange}
             placeholder="e.g. 28% (BCD + IGST)"
-            className={`w-full border rounded px-3 py-2 focus:outline-none ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none ${
               errors.dutyRate
                 ? "border-red-500"
                 : "border-slate-300"
@@ -216,9 +324,9 @@ const QuickForm = () => {
         </div>
 
         {/* MOBILE */}
-        <div className="mb-4">
+        <div className="mb-3">
 
-          <label className="block text-sm font-semibold mb-1">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
 
@@ -229,7 +337,7 @@ const QuickForm = () => {
             onChange={handleChange}
             placeholder="Enter 10 digit mobile number"
             maxLength={10}
-            className={`w-full border rounded px-3 py-2 focus:outline-none ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none ${
               errors.mobile
                 ? "border-red-500"
                 : "border-slate-300"
@@ -248,14 +356,14 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2 ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition flex items-center justify-center gap-2 ${
             loading
               ? "bg-sky-400 cursor-not-allowed"
               : "bg-sky-600 hover:bg-sky-700"
           }`}
         >
 
-          <Calculator size={18} />
+          <Calculator size={16} />
 
           {loading ? "Submitting..." : "Calculate Savings"}
 
