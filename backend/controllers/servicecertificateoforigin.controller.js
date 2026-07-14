@@ -29,6 +29,11 @@ async function sendEmail(record) {
     destinationCountry,
     hsCode,
     ftaagreement,
+    planCategory,
+    planName,
+    monthlyCooLimit,
+    additionalCooRate,
+    planPrice,
   } = record;
 
   const serviceDisplay = service || "Certificate of Origin Registration";
@@ -46,6 +51,11 @@ async function sendEmail(record) {
           ${destinationCountry ? `<tr><td><b>Destination Country</b></td><td>${destinationCountry}</td></tr>` : ""}
           ${hsCode ? `<tr><td><b>HS Code (First 6 digits)</b></td><td>${hsCode}</td></tr>` : ""}
           ${ftaagreement ? `<tr><td><b>FTA Agreement</b></td><td>${ftaagreement}</td></tr>` : ""}
+          ${planCategory ? `<tr><td><b>Selected Plan Category</b></td><td>${planCategory}</td></tr>` : ""}
+          ${planName ? `<tr><td><b>Plan Name</b></td><td>${planName}</td></tr>` : ""}
+          ${monthlyCooLimit ? `<tr><td><b>Monthly COO Limit</b></td><td>${monthlyCooLimit}</td></tr>` : ""}
+          ${additionalCooRate ? `<tr><td><b>Rate for Additional COO</b></td><td>${additionalCooRate}</td></tr>` : ""}
+          ${planPrice ? `<tr><td><b>Plan Price</b></td><td>${planPrice}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -82,6 +92,11 @@ exports.createservicecertificateoforigin = async (req, res) => {
       destinationCountry, // ✅ camelCase
       hsCode, // ✅ camelCase
       ftaagreement,
+      planCategory,
+      planName,
+      monthlyCooLimit,
+      additionalCooRate,
+      planPrice,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -99,6 +114,11 @@ exports.createservicecertificateoforigin = async (req, res) => {
       destinationCountry: destinationCountry ? destinationCountry.trim() : null, // ✅ use the correct variable
       hsCode: hsCode ? hsCode.trim() : null, // ✅ use correct variable
       ftaagreement: ftaagreement ? ftaagreement.trim() : null, // ✅ was missing — now saved
+      planCategory: isQuickForm ? null : planCategory ? planCategory.trim() : null,
+      planName: isQuickForm ? null : planName ? planName.trim() : null,
+      monthlyCooLimit: isQuickForm ? null : monthlyCooLimit ? monthlyCooLimit.trim() : null,
+      additionalCooRate: isQuickForm ? null : additionalCooRate ? additionalCooRate.trim() : null,
+      planPrice: isQuickForm ? null : planPrice ? planPrice.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,

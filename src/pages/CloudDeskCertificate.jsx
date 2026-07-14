@@ -210,7 +210,7 @@ const COO_FEES = [
   {
     plan: "Non-Preferential CoO",
     tag: "General Exports",
-    price: "₹ 500",
+    price: "INR 750",
     unit: "+ GST (Per Certificate)",
     features: [
       "Standard Origin Proof",
@@ -226,10 +226,10 @@ const COO_FEES = [
 const EXPORTER_PACKAGES = [
   {
     name: "Startup / Small Plan",
-    price: "₹25,000",
+    price: "INR 25,000/-",
     unit: "/ mo",
-    limit: "Up to 30 Pref. COOs.",
-    extra: "Additional COOs billed extra",
+    limit: "Monthly Limit (Pref. COO): Up to 30",
+    extra: "Rate for Extra COOs: INR 1,250/- per COO",
     features: [
       "Monthly compliance review",
       "Data reconciliation",
@@ -239,10 +239,10 @@ const EXPORTER_PACKAGES = [
   },
   {
     name: "Mid-Size Exporter Plan",
-    price: "₹50,000",
+    price: "INR 50,000/-",
     unit: "/ mo",
-    limit: "Up to 75 Pref. COOs.",
-    extra: "Additional COOs billed extra",
+    limit: "Monthly Limit (Pref. COO): Up to 75",
+    extra: "Rate for Extra COOs: INR 1,000/- per COO",
     features: [
       "Monthly compliance review",
       "Data reconciliation",
@@ -254,10 +254,10 @@ const EXPORTER_PACKAGES = [
   },
   {
     name: "Large-Size Exporter Plan",
-    price: "₹75,000",
+    price: "INR 75,000/-",
     unit: "/ mo",
-    limit: "Up to 75 Pref. COOs.",
-    extra: "Additional COOs billed extra",
+    limit: "Monthly Limit (Pref. COO): Up to 100",
+    extra: "Rate for Extra COOs: INR 750/- per COO",
     features: [
       "Monthly compliance review",
       "Data reconciliation",
@@ -743,9 +743,8 @@ const CloudDeskCertificate = () => {
                 Exporter Monthly Packages
               </h2>
               <p className="text-slate-300 mt-4 max-w-2xl mx-auto">
-                For exporters filing Certificates of Origin regularly, a
-                monthly plan covers ongoing compliance review, reconciliation,
-                and audit support at a fixed cost.
+                Preferential COO subscription plans with monthly limits, fixed
+                monthly fees, and rates for extra COOs.
               </p>
             </div>
 

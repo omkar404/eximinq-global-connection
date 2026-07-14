@@ -1,12 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { X, Handshake, Building, Mail } from "lucide-react";
 
 export const ModalEnroll = ({ show, onClose, type }) => {
+  const PLAN_DETAILS = {
+    PREFERENTIAL_COO: {
+      planCategory: "Certificate of Origin",
+      planName: "Preferential CoO",
+      monthlyCooLimit: "Not applicable",
+      additionalCooRate: "Not applicable",
+      planPrice: "INR 1,500 + GST (Per Certificate)",
+    },
+    NON_PREFERENTIAL_COO: {
+      planCategory: "Certificate of Origin",
+      planName: "Non-Preferential CoO",
+      monthlyCooLimit: "Not applicable",
+      additionalCooRate: "Not applicable",
+      planPrice: "INR 750 + GST (Per Certificate)",
+    },
+    Startup_Small_Plan: {
+      planCategory: "Preferential COO Subscription",
+      planName: "Startup / Small Plan",
+      monthlyCooLimit: "Up to 30 Pref. COO",
+      additionalCooRate: "INR 1,250/- per COO",
+      planPrice: "INR 25,000/- / mo",
+    },
+    MID_SIZE_EXPORTER_PLAN: {
+      planCategory: "Preferential COO Subscription",
+      planName: "Mid-Size Exporter Plan",
+      monthlyCooLimit: "Up to 75 Pref. COO",
+      additionalCooRate: "INR 1,000/- per COO",
+      planPrice: "INR 50,000/- / mo",
+    },
+    LARGE_EXPORTER_PLAN: {
+      planCategory: "Preferential COO Subscription",
+      planName: "Large-Size Exporter Plan",
+      monthlyCooLimit: "Up to 100 Pref. COO",
+      additionalCooRate: "INR 750/- per COO",
+      planPrice: "INR 75,000/- / mo",
+    },
+  };
+
+  const PLAN_ALIASES = {
+    "Preferential CoO": "PREFERENTIAL_COO",
+    "Non-Preferential CoO": "NON_PREFERENTIAL_COO",
+    "Startup / Small Plan": "Startup_Small_Plan",
+    "Mid-Size Exporter Plan": "MID_SIZE_EXPORTER_PLAN",
+    "Large-Size Exporter Plan": "LARGE_EXPORTER_PLAN",
+  };
+
+  const normalizePlanType = (value) => PLAN_ALIASES[value] || value || "";
+  const initialPlanType = normalizePlanType(type);
+
   const [form, setForm] = useState({
     name: "",
     mobile: "",
     entity: "",
     email: "",
+    selectedPlanType: initialPlanType,
     role: "",
     partner: false,
     ftaagreement: "",
@@ -15,11 +65,25 @@ export const ModalEnroll = ({ show, onClose, type }) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const startup = type === "Startup_Small_Plan";
-  const midsize = type === "MID_SIZE_EXPORTER_PLAN";
-  const large = type === "LARGE_EXPORTER_PLAN";
-  const isPreferentialCOO = type === "PREFERENTIAL_COO";
-  const isNonPreferentialCOO = type === "NON_PREFERENTIAL_COO";
+  useEffect(() => {
+    if (!show) return;
+
+    setForm((prev) => ({
+      ...prev,
+      selectedPlanType: initialPlanType,
+    }));
+  }, [show, initialPlanType]);
+
+  const selectedPlanType = form.selectedPlanType || initialPlanType;
+  const selectedPlanDetails = PLAN_DETAILS[selectedPlanType] || null;
+  const isPreferentialCOO = selectedPlanType === "PREFERENTIAL_COO";
+  const isNonPreferentialCOO = selectedPlanType === "NON_PREFERENTIAL_COO";
+  const isExporterPlan = [
+    "Startup_Small_Plan",
+    "MID_SIZE_EXPORTER_PLAN",
+    "LARGE_EXPORTER_PLAN",
+  ].includes(selectedPlanType);
+  const selectedCertificateType = selectedPlanDetails?.planName || "";
 
   const PREFERENTIAL_AGREEMENT_OPTIONS = [
     "India-Japan Comprehensive Economic Partnership Agreement (IJCEPA)",
@@ -49,6 +113,7 @@ export const ModalEnroll = ({ show, onClose, type }) => {
       mobile: "",
       entity: "",
       email: "",
+      selectedPlanType: initialPlanType,
       role: "",
       partner: false,
       ftaagreement: "",
@@ -94,14 +159,20 @@ export const ModalEnroll = ({ show, onClose, type }) => {
 
       const payload = {
         ...form,
-        type,
+        type: selectedPlanType || type,
         certificateType:
-          type === "PREFERENTIAL_COO" || type === "NON_PREFERENTIAL_COO" ||
-          type === "Startup_Small_Plan" ||
-          type === "MID_SIZE_EXPORTER_PLAN" ||
-          type === "LARGE_EXPORTER_PLAN"
-            ? type
+          selectedPlanType === "PREFERENTIAL_COO" ||
+          selectedPlanType === "NON_PREFERENTIAL_COO" ||
+          selectedPlanType === "Startup_Small_Plan" ||
+          selectedPlanType === "MID_SIZE_EXPORTER_PLAN" ||
+          selectedPlanType === "LARGE_EXPORTER_PLAN"
+            ? selectedPlanType
             : null,
+        planCategory: selectedPlanDetails?.planCategory || null,
+        planName: selectedPlanDetails?.planName || null,
+        monthlyCooLimit: selectedPlanDetails?.monthlyCooLimit || null,
+        additionalCooRate: selectedPlanDetails?.additionalCooRate || null,
+        planPrice: selectedPlanDetails?.planPrice || null,
       };
 
       const res = await fetch(
@@ -241,6 +312,45 @@ export const ModalEnroll = ({ show, onClose, type }) => {
               )}
             </div>
 
+            {selectedPlanDetails && (
+              <div className="rounded-xl border border-indigo-100 bg-indigo-50/70 p-4">
+                <label className="block text-xs font-bold text-gray-700 mb-2 uppercase">
+                  Selected Plan
+                </label>
+                <select
+                  name="selectedPlanType"
+                  value={selectedPlanType}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-lg border border-indigo-200 bg-white text-gray-900"
+                >
+                  {Object.entries(PLAN_DETAILS).map(([key, details]) => (
+                    <option key={key} value={key}>
+                      {details.planName}
+                    </option>
+                  ))}
+                </select>
+
+                <dl className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                  {[
+                    ["Selected Plan Category", selectedPlanDetails.planCategory],
+                    ["Plan Name", selectedPlanDetails.planName],
+                    ["Monthly COO Limit", selectedPlanDetails.monthlyCooLimit],
+                    ["Rate for Additional COO", selectedPlanDetails.additionalCooRate],
+                    ["Plan Price", selectedPlanDetails.planPrice],
+                  ].map(([label, value]) => (
+                    <div key={label} className="rounded-lg bg-white p-3 border border-indigo-100">
+                      <dt className="text-[11px] font-bold uppercase text-gray-500">
+                        {label}
+                      </dt>
+                      <dd className="mt-1 font-semibold text-gray-900">
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+
             {/* Selected CoO */}
             {(isPreferentialCOO || isNonPreferentialCOO) && (
               <div>
@@ -285,42 +395,14 @@ export const ModalEnroll = ({ show, onClose, type }) => {
               </div>
             )}
 
-            {(startup) && (
+            {isExporterPlan && (
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
                   Selected Certificate Type
                 </label>
                 <input
                   type="text"
-                  value="Startup / Small Plan"
-                  disabled
-                  className="w-full p-3 rounded-lg border bg-gray-100"
-                />
-              </div>
-            )}
-
-            {(midsize) && (
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Selected Certificate Type
-                </label>
-                <input
-                  type="text"
-                  value="Mid-Size Exporter Plan"
-                  disabled
-                  className="w-full p-3 rounded-lg border bg-gray-100"
-                />
-              </div>
-            )}
-
-            {(large) && (
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1 uppercase">
-                  Selected Certificate Type
-                </label>
-                <input
-                  type="text"
-                  value="Large-Size Exporter Plan"
+                  value={selectedCertificateType}
                   disabled
                   className="w-full p-3 rounded-lg border bg-gray-100"
                 />
