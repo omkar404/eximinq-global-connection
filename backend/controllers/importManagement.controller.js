@@ -27,6 +27,7 @@ async function sendEmail(record) {
     category,
     issue,
     companyName,    // ✅ changed from duplicate service; use companyName
+    personName,
   } = record;
 
   const serviceDisplay = service || "import-management Registration";
@@ -49,6 +50,7 @@ async function sendEmail(record) {
            </tr>
           ${service ? `<tr><td><b>Service Type</b></td><td>${service}</td></tr>` : ""}
           ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr>
@@ -86,6 +88,7 @@ exports.createimportManagementRoutes = async (req, res) => {
       category,
       issue,
       companyName,   // ✅ use camelCase to match frontend
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -101,6 +104,7 @@ exports.createimportManagementRoutes = async (req, res) => {
       service: service || "import-management Registration",
       mobile: mobile.trim(),
       companyName: companyName ? companyName.trim() : null,   // ✅ use correct variable name
+      personName: personName ? personName.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
