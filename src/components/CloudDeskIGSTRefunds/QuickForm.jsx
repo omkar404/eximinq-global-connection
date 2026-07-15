@@ -7,6 +7,8 @@ const QuickForm = () => {
 
   // Single form state covering both tabs
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
     email: "",
     mobile: "",
     shippingBillNo: "",
@@ -36,6 +38,13 @@ const QuickForm = () => {
 
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) newErrors.companyName = "Company name is required";
+    else if (form.companyName.trim().length < 2) newErrors.companyName = "Company name must be at least 2 characters";
+
+    if (!form.personName.trim()) newErrors.personName = "Your name is required";
+    else if (form.personName.trim().length < 2) newErrors.personName = "Name must be at least 2 characters";
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!form.email.trim()) newErrors.email = "Email is required";
     else if (!emailRegex.test(form.email)) newErrors.email = "Invalid email";
@@ -70,6 +79,8 @@ const QuickForm = () => {
     try {
       // Build payload based on active tab
       const payload = {
+        companyName: form.companyName.trim(),
+        personName: form.personName.trim(),
         email: form.email,
         mobile: form.mobile,
         searchType: form.searchType,
@@ -105,6 +116,8 @@ const QuickForm = () => {
 
       // ✅ RESET ALL FIELDS (like a page refresh)
       setForm({
+        companyName: "",
+        personName: "",
         email: "",
         mobile: "",
         shippingBillNo: "",
@@ -115,6 +128,7 @@ const QuickForm = () => {
         igstPortCode: "",
         searchType: activeTab,
       });
+      setErrors({});
     } catch (err) {
       console.error(err);
       alert(err.message || "Submission failed. Please try again.");
@@ -124,21 +138,21 @@ const QuickForm = () => {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <div className="flex items-center gap-3 mb-4">
-        <RefreshCw className="text-brand-600 w-7 h-7" />
-        <h3 className="text-2xl font-bold text-brand-900">Refund Status Check</h3>
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
+      <div className="flex items-center gap-2 mb-2">
+        <RefreshCw className="text-brand-600 w-5 h-5" />
+        <h3 className="text-lg font-bold text-brand-900">Refund Status Check</h3>
       </div>
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Find out why your IGST refund is stuck.
       </p>
 
       {/* TABS */}
-      <div className="flex mb-6 border rounded-lg overflow-hidden">
+      <div className="flex mb-3 border rounded-lg overflow-hidden">
         <button
           type="button"
           onClick={() => handleTabChange("SB")}
-          className={`flex-1 py-2 text-sm font-bold transition ${
+          className={`flex-1 py-1.5 text-xs font-bold transition ${
             activeTab === "SB"
               ? "bg-brand-600 text-white"
               : "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -149,7 +163,7 @@ const QuickForm = () => {
         <button
           type="button"
           onClick={() => handleTabChange("IGST")}
-          className={`flex-1 py-2 text-sm font-bold transition ${
+          className={`flex-1 py-1.5 text-xs font-bold transition ${
             activeTab === "IGST"
               ? "bg-brand-600 text-white"
               : "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -159,18 +173,50 @@ const QuickForm = () => {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-2.5">
+        {/* Company Name */}
+        <div>
+          <label className="block text-xs font-semibold mb-1">Company Name</label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+          />
+          {errors.companyName && <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-xs font-semibold mb-1">Contact Person Name</label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.personName && <p className="text-red-500 text-xs mt-1">{errors.personName}</p>}
+        </div>
+
         {/* SHIPPING BILL WISE FIELDS */}
         {activeTab === "SB" && (
           <>
             <div>
-              <label className="block text-sm font-semibold mb-1">Shipping Bill No.</label>
+              <label className="block text-xs font-semibold mb-1">Shipping Bill No.</label>
               <input
                 type="text"
                 name="shippingBillNo"
                 value={form.shippingBillNo}
                 onChange={handleChange}
-                className={`w-full border rounded px-3 py-2 ${
+                className={`w-full border rounded px-2.5 py-1.5 text-sm ${
                   errors.shippingBillNo ? "border-red-500" : "border-slate-300"
                 }`}
                 placeholder="e.g. 1234567"
@@ -178,26 +224,26 @@ const QuickForm = () => {
               {errors.shippingBillNo && <p className="text-red-500 text-xs mt-1">{errors.shippingBillNo}</p>}
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-1">Shipping Bill Date</label>
+              <label className="block text-xs font-semibold mb-1">Shipping Bill Date</label>
               <input
                 type="date"
                 name="shippingBillDate"
                 value={form.shippingBillDate}
                 onChange={handleChange}
-                className={`w-full border rounded px-3 py-2 ${
+                className={`w-full border rounded px-2.5 py-1.5 text-sm ${
                   errors.shippingBillDate ? "border-red-500" : "border-slate-300"
                 }`}
               />
               {errors.shippingBillDate && <p className="text-red-500 text-xs mt-1">{errors.shippingBillDate}</p>}
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-1">Port Code</label>
+              <label className="block text-xs font-semibold mb-1">Port Code</label>
               <input
                 type="text"
                 name="portCode"
                 value={form.portCode}
                 onChange={handleChange}
-                className={`w-full border rounded px-3 py-2 ${
+                className={`w-full border rounded px-2.5 py-1.5 text-sm ${
                   errors.portCode ? "border-red-500" : "border-slate-300"
                 }`}
                 placeholder="e.g. INNSA1"
@@ -211,13 +257,13 @@ const QuickForm = () => {
         {activeTab === "IGST" && (
           <>
             <div>
-              <label className="block text-sm font-semibold mb-1">Total IGST Refund Pending (₹)</label>
+              <label className="block text-xs font-semibold mb-1">Total IGST Refund Pending (₹)</label>
               <input
                 type="number"
                 name="igstAmount"
                 value={form.igstAmount}
                 onChange={handleChange}
-                className={`w-full border rounded px-3 py-2 ${
+                className={`w-full border rounded px-2.5 py-1.5 text-sm ${
                   errors.igstAmount ? "border-red-500" : "border-slate-300"
                 }`}
                 placeholder="e.g. 1250000"
@@ -226,13 +272,13 @@ const QuickForm = () => {
               {errors.igstAmount && <p className="text-red-500 text-xs mt-1">{errors.igstAmount}</p>}
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-1">No. of Shipping Bills</label>
+              <label className="block text-xs font-semibold mb-1">No. of Shipping Bills</label>
               <input
                 type="number"
                 name="numberOfBills"
                 value={form.numberOfBills}
                 onChange={handleChange}
-                className={`w-full border rounded px-3 py-2 ${
+                className={`w-full border rounded px-2.5 py-1.5 text-sm ${
                   errors.numberOfBills ? "border-red-500" : "border-slate-300"
                 }`}
                 placeholder="e.g. 12"
@@ -241,13 +287,13 @@ const QuickForm = () => {
               {errors.numberOfBills && <p className="text-red-500 text-xs mt-1">{errors.numberOfBills}</p>}
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-1">Port Code</label>
+              <label className="block text-xs font-semibold mb-1">Port Code</label>
               <input
                 type="text"
                 name="igstPortCode"
                 value={form.igstPortCode}
                 onChange={handleChange}
-                className={`w-full border rounded px-3 py-2 ${
+                className={`w-full border rounded px-2.5 py-1.5 text-sm ${
                   errors.igstPortCode ? "border-red-500" : "border-slate-300"
                 }`}
                 placeholder="e.g. INNSA1"
@@ -259,13 +305,13 @@ const QuickForm = () => {
 
         {/* COMMON FIELDS */}
         <div>
-          <label className="block text-sm font-semibold mb-1">Email ID</label>
+          <label className="block text-xs font-semibold mb-1">Email ID</label>
           <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
               errors.email ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="official@company.com"
@@ -273,13 +319,13 @@ const QuickForm = () => {
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
         <div>
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+          <label className="block text-xs font-semibold mb-1">Mobile Number</label>
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm ${
               errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="9876543210"
@@ -291,7 +337,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition disabled:opacity-50"
+          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2 text-sm rounded-lg transition disabled:opacity-50"
         >
           {loading ? "Submitting..." : "Get Status Report"}
         </button>
