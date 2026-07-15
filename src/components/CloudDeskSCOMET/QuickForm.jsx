@@ -1,85 +1,12 @@
-
-// import { SearchCheck } from "lucide-react";
-
-// const QuickForm = () => {
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     alert("We will analyze the technical specifications and revert.");
-//   };
-
-//   return (
-//     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-
-//       <div className="flex items-center gap-3 mb-2">
-//         <SearchCheck className="w-6 h-6 text-brand-900" />
-//         <h3 className="text-2xl font-bold text-brand-900">Item Verification</h3>
-//       </div>
-
-//       <p className="text-slate-500 mb-6 text-sm">
-//         Check if your product requires a license.
-//       </p>
-
-//       <form onSubmit={handleSubmit}>
-//         {/* Product Name */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Product Name / CAS No.
-//           </label>
-//           <input
-//             type="text"
-//             className="w-full border border-slate-300 rounded px-3 py-2
-//                      focus:outline-none focus:border-brand-500"
-//             placeholder="e.g. Titanium Alloy / Triethanolamine"
-//           />
-//         </div>
-
-//         {/* Technical Specification */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Technical Specification
-//           </label>
-//           <input
-//             type="text"
-//             className="w-full border border-slate-300 rounded px-3 py-2
-//                      focus:outline-none focus:border-brand-500"
-//             placeholder="e.g. High speed machining center"
-//           />
-//         </div>
-
-//         {/* End User Country */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             End User Country
-//           </label>
-//           <input
-//             type="text"
-//             className="w-full border border-slate-300 rounded px-3 py-2
-//                      focus:outline-none focus:border-brand-500"
-//             placeholder="e.g. Germany"
-//           />
-//         </div>
-
-//         {/* Submit Button */}
-//         <button
-
-//           type="submit"
-//           className="w-full bg-brand-600 hover:bg-brand-700 text-white
-//                    font-bold py-3 rounded-lg transition"
-//         >
-//           Check Status
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default QuickForm;
-
 import { useState } from "react";
 import { SearchCheck } from "lucide-react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
+    email: "",
+    mobile: "",
     productName: "",
     technicalSpec: "",
     endUserCountry: "",
@@ -91,10 +18,15 @@ const QuickForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === "mobile") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, [name]: digitsOnly }));
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
 
     // clear error when typing
     setErrors((prev) => ({
@@ -109,6 +41,30 @@ const QuickForm = () => {
 
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
+
+    if (!form.mobile.trim()) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
+      newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    }
 
     // Product Name validation
     if (!form.productName.trim()) {
@@ -149,8 +105,11 @@ const handleSubmit = async (e) => {
 
     // Create payload with ALL required fields
     const payload = {
-      // Required: Mobile number                // Required: Email
-      type: "QUICK_FORM",                // Required: Type (changed from QUICK_FORM)
+      companyName: form.companyName.trim(),      // Contact fields
+      personName: form.personName.trim(),
+      email: form.email.trim(),
+      mobile: form.mobile,
+      type: "QUICK_FORM",
       productName: form.productName,              // Additional field
       technicalSpec: form.technicalSpec,          // Additional field
       endUserCountry: form.endUserCountry,        // Additional field
@@ -179,11 +138,15 @@ const handleSubmit = async (e) => {
 
     // Reset form
     setForm({
+      companyName: "",
+      personName: "",
+      email: "",
+      mobile: "",
       productName: "",
       technicalSpec: "",
       endUserCountry: "",
-      mobile: "",
     });
+    setErrors({});
 
   } catch (err) {
     console.error("Submission error:", err);
@@ -194,20 +157,101 @@ const handleSubmit = async (e) => {
 };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <div className="flex items-center gap-3 mb-2">
-        <SearchCheck className="w-6 h-6 text-brand-900" />
-        <h3 className="text-2xl font-bold text-brand-900">Item Verification</h3>
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
+      <div className="flex items-center gap-2 mb-1">
+        <SearchCheck className="w-5 h-5 text-brand-900" />
+        <h3 className="text-lg font-bold text-brand-900">Item Verification</h3>
       </div>
 
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Check if your product requires a license.
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm
+                     focus:outline-none focus:border-brand-500
+                     ${errors.companyName ? "border-red-500" : "border-slate-300"}`}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm
+                     focus:outline-none focus:border-brand-500
+                     ${errors.personName ? "border-red-500" : "border-slate-300"}`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm
+                     focus:outline-none focus:border-brand-500
+                     ${errors.email ? "border-red-500" : "border-slate-300"}`}
+            placeholder="e.g. rahul@acmeexports.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        {/* Mobile Number */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Mobile Number
+          </label>
+          <input
+            type="tel"
+            name="mobile"
+            value={form.mobile}
+            onChange={handleChange}
+            maxLength={10}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm
+                     focus:outline-none focus:border-brand-500
+                     ${errors.mobile ? "border-red-500" : "border-slate-300"}`}
+            placeholder="e.g. 9876543210"
+          />
+          {errors.mobile && (
+            <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+          )}
+        </div>
+
         {/* Product Name */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Product Name / CAS No. <span className="text-red-500"></span>
           </label>
           <input
@@ -215,19 +259,19 @@ const handleSubmit = async (e) => {
             name="productName"
             value={form.productName}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 
+            className={`w-full border rounded px-2.5 py-1.5 text-sm
                      focus:outline-none focus:border-brand-500
                      ${errors.productName ? "border-red-500" : "border-slate-300"}`}
             placeholder="e.g. Titanium Alloy / Triethanolamine"
           />
           {errors.productName && (
-            <p className="text-red-500 text-sm mt-1">{errors.productName}</p>
+            <p className="text-red-500 text-xs mt-1">{errors.productName}</p>
           )}
         </div>
 
         {/* Technical Specification */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Technical Specification <span className="text-red-500"></span>
           </label>
           <input
@@ -235,19 +279,19 @@ const handleSubmit = async (e) => {
             name="technicalSpec"
             value={form.technicalSpec}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 
+            className={`w-full border rounded px-2.5 py-1.5 text-sm
                      focus:outline-none focus:border-brand-500
                      ${errors.technicalSpec ? "border-red-500" : "border-slate-300"}`}
             placeholder="e.g. High speed machining center"
           />
           {errors.technicalSpec && (
-            <p className="text-red-500 text-sm mt-1">{errors.technicalSpec}</p>
+            <p className="text-red-500 text-xs mt-1">{errors.technicalSpec}</p>
           )}
         </div>
 
         {/* End User Country */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-3">
+          <label className="block text-xs font-semibold mb-1">
             End User Country <span className="text-red-500"></span>
           </label>
           <input
@@ -255,13 +299,13 @@ const handleSubmit = async (e) => {
             name="endUserCountry"
             value={form.endUserCountry}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 
+            className={`w-full border rounded px-2.5 py-1.5 text-sm
                      focus:outline-none focus:border-brand-500
                      ${errors.endUserCountry ? "border-red-500" : "border-slate-300"}`}
             placeholder="e.g. Germany"
           />
           {errors.endUserCountry && (
-            <p className="text-red-500 text-sm mt-1">{errors.endUserCountry}</p>
+            <p className="text-red-500 text-xs mt-1">{errors.endUserCountry}</p>
           )}
         </div>
 
@@ -269,7 +313,7 @@ const handleSubmit = async (e) => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

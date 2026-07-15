@@ -22,16 +22,26 @@ const scometlicensingRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
       trim: true,
       default: null,
     },
-    // mobile: {
-    //   type: String,
-    //   required: false,
-    //   trim: true,
-    // },
+    mobile: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     email: {
       type: String,
       trim: true,
