@@ -7,6 +7,16 @@ const dscServiceRoutesSchema = new mongoose.Schema(
       trim: true,
       default: "DSC Services Registration",
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     dscType: {
       type: String,
       trim: true,

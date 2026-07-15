@@ -28,6 +28,8 @@ async function sendEmail(record) {
     issue,
     dscType,
     validity,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "DSC Registration";
@@ -44,6 +46,8 @@ async function sendEmail(record) {
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${dscType ? `<tr><td><b>DSC Type</b></td><td>${dscType}</td></tr>` : ""}
           ${validity ? `<tr><td><b>Validity</b></td><td>${validity}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -79,6 +83,8 @@ exports.createdscServiceRoutes = async (req, res) => {
       issue,
       dscType, // ✅ camelCase
       validity, // ✅ camelCase
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -95,6 +101,8 @@ exports.createdscServiceRoutes = async (req, res) => {
       mobile: mobile.trim(),
       dscType: dscType ? dscType.trim() : null, // ✅ use the correct variable
       validity: validity ? validity.trim() : null, // ✅ use correct variable
+      companyName : companyName ? companyName.trim() : null,
+      personName : personName ? personName.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
