@@ -1,459 +1,116 @@
-// import React, { useState } from 'react';
-// import { Mail, PhoneCall } from 'lucide-react';
-
-// export default function ContactEPR({}) {
-//   const [formData, setFormData] = useState({
-//     companyName: '',
-//     contactPerson: '',
-//     email: '',
-//     phone: '',
-//     requirement: ''
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData(prev => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (!formData.companyName || !formData.contactPerson || !formData.email || !formData.phone) {
-//       alert('Please fill in all required fields.');
-//       return;
-//     }
-//     alert(`Thank you, ${formData.contactPerson}! Our compliance expert will contact you within 2 hours.`);
-//     setFormData({ companyName: '', contactPerson: '', email: '', phone: '', requirement: '' });
-//   };
-
-//   return (
-//     <section id="contact" className="py-20 bg-white relative border-t border-slate-100">
-//       <div className="container mx-auto px-6">
-//         <div className="flex flex-col lg:flex-row gap-16 items-center">
-//           <div className="w-full lg:w-1/2">
-//             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Secure Your Compliance Today.</h2>
-//             <p className="text-slate-600 mb-8 text-lg">
-//               Do not wait for a customs hold. Our experts handle the complex calculations and evidence linking required for successful EPR returns.
-//             </p>
-//             <div className="space-y-6">
-//               <div className="flex items-center p-4 bg-slate-50 rounded-lg border border-slate-100">
-//                 <Mail className="w-8 h-8 text-sky-600 mr-4 shrink-0" />
-//                 <div>
-//                   <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Email Us</div>
-//                   <div className="text-lg font-bold text-slate-900">clouddesk@eximinq.in</div>
-//                 </div>
-//               </div>
-//               <div className="flex items-center p-4 bg-slate-50 rounded-lg border border-slate-100">
-//                 <PhoneCall className="w-8 h-8 text-sky-600 mr-4 shrink-0" />
-//                 <div>
-//                   <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Call or WhatsApp</div>
-//                   <div className="text-lg font-bold text-slate-900">+91 74000 96950</div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//           <div className="w-full lg:w-1/2">
-//             <div className="bg-slate-900 rounded-2xl p-8 shadow-2xl">
-//               <h3 className="text-2xl font-bold text-white mb-6">Request Callback</h3>
-//               <form onSubmit={handleSubmit} className="space-y-5">
-//                 <input type="text" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Company Name" className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500" required />
-//                 <input type="text" name="contactPerson" value={formData.contactPerson} onChange={handleChange} placeholder="Contact Person" className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500" required />
-//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-//                   <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500" required />
-//                   <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500" required />
-//                 </div>
-//                 <select name="requirement" value={formData.requirement} onChange={handleChange} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 focus:outline-none focus:border-sky-500">
-//                   <option value="">Select Category Requirement</option>
-//                   <option value="plastic">EPR Plastic Return (Importer)</option>
-//                   <option value="ewaste">EPR E-Waste Return (Importer)</option>
-//                   <option value="both">Both</option>
-//                 </select>
-//                 <button type="submit" className="w-full py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-lg transition-colors text-lg mt-4 shadow-lg shadow-sky-900/50">
-//                   Get Started Now
-//                 </button>
-//             {/* <button
-//                 onClick={() =>
-//                   setShowEnrollModal({
-//                     open: true,
-//                     type: "Request_Callback",
-//                   })
-//                 }
-//                 className="w-full py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-lg transition-colors text-lg mt-4 shadow-lg shadow-sky-900/50"
-//               >
-//                 Get Started Now
-//           </button> */}
-//               </form>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-import React, { useState } from 'react';
-import { Mail, PhoneCall } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  FileText,
+  Briefcase,
+  Anchor,
+  Globe,
+  Package,
+  Zap,
+  ChevronRight,
+} from "lucide-react";
 
 export default function ContactEPR() {
-  const [formData, setFormData] = useState({
-    companyName: '',
-    Personname: '',
-    email: '',
-    mobile: '',
-    requirement: '',
-  });
-
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  /* -----------------------------
-     HANDLE INPUT CHANGE
-  ----------------------------- */
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: '',
-    }));
-  };
-
-  /* -----------------------------
-     VALIDATION
-  ----------------------------- */
-  const validate = () => {
-    const newErrors = {};
-
-    if (!formData.companyName.trim()) {
-      newErrors.companyName = 'Company name is required';
-    }
-
-    if (!formData.Personname.trim()) {
-      newErrors.Personname = 'person name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-        formData.email
-      )
-    ) {
-      newErrors.email = 'Invalid email address';
-    }
-
-    if (!formData.mobile.trim()) {
-      newErrors.mobile = 'Mobile number is required';
-    } else if (!/^[6-9]\d{9}$/.test(formData.mobile)) {
-      newErrors.mobile =
-        'Enter valid 10 digit Indian mobile number';
-    }
-
-    if (!formData.requirement) {
-      newErrors.requirement = 'Please select requirement';
-    }
-
-    return newErrors;
-  };
-
-  /* -----------------------------
-     SUBMIT FORM
-  ----------------------------- */
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const validationErrors = validate();
-
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const payload = {
-        companyName: formData.companyName,
-        Personname: formData.Personname,
-        email: formData.email,
-        mobile: formData.mobile,
-
-        // ✅ requirement + category
-        requirement: formData.requirement,
-        category: formData.requirement,
-
-        type: 'QUICK_FORM',
-
-        notifyEmails: [
-          'crm@eximinq.com',
-          'omkarmhetar100@gmail.com',
-          'sheshnathyadav1827499@gmail.com',
-        ],
-      };
-
-      console.log('📤 Sending Payload:', payload);
-
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/epr-annual-returns`,
-        // 'http://localhost:5000/api/epr-annual-returns',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || data.error || 'Submission failed'
-        );
-      }
-
-      alert(
-        `✅ Thank you, ${formData.Personname}! Our compliance expert will contact you within 2 hours.`
-      );
-
-      setFormData({
-        companyName: '',
-        Personname: '',
-        email: '',
-        mobile: '',
-        requirement: '',
-      });
-
-      setErrors({});
-    } catch (error) {
-      console.error('❌ Error:', error);
-
-      alert(`❌ ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const services = [
+    {
+      icon: FileText,
+      title: "COO (Certificate of Origin)",
+      desc: "Preferential and Non-Preferential COO issuance for your international shipments.",
+      href: "/services/certificate-of-origin",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+    {
+      icon: Briefcase,
+      title: "EPCG & Advance Lic Closure",
+      desc: "Expert handling of Export Obligation Discharges (EODC) and license redemptions.",
+      href: "/strategic-solutions/epcg-closure-services",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+    {
+      icon: Anchor,
+      title: "Duty Drawback (Duty Dbk)",
+      desc: "Maximize your customs duty refunds with accurate brand rate fixations and claims.",
+      href: "/services/duty-drawback",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+    {
+      icon: Globe,
+      title: "RoDTEP Claims",
+      desc: "Ensure you don't miss out on your Remission of Duties and Taxes on Exported Products.",
+      href: "/services/rodtep-rosctl-trading",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+    {
+      icon: Package,
+      title: "EPR Plastic Compliance",
+      desc: "New registrations, target auditing, and compliance management for PIBOs.",
+      href: "/services/epr-authorization",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+    {
+      icon: Zap,
+      title: "EPR E-Waste Compliance",
+      desc: "Complete portal management and target fulfillment for E-Waste importers.",
+      href: "/services/epr-authorization",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+  ];
 
   return (
-    <section
-      id="contact"
-      className="py-20 bg-white relative border-t border-slate-100"
-    >
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          
-          {/* LEFT SIDE */}
-          <div className="w-full lg:w-1/2">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-              Secure Your Compliance Today.
-            </h2>
-
-            <p className="text-slate-600 mb-8 text-lg">
-              Do not wait for a customs hold. Our experts
-              handle the complex calculations and evidence
-              linking required for successful EPR returns.
-            </p>
-
-            <div className="space-y-6">
-
-              {/* EMAIL */}
-              <div className="flex items-center p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <Mail className="w-8 h-8 text-sky-600 mr-4 shrink-0" />
-
-                <div>
-                  <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
-                    Email Us
-                  </div>
-
-                  <div className="text-lg font-bold text-slate-900">
-                    clouddesk@eximinq.in
-                  </div>
+    <section id="expertise" className="py-24 bg-slate-50">
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            Our Expertise
+          </h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">
+            Beyond Annual Returns, EXIMINQ Global Connections offers a
+            comprehensive suite of services to streamline your international
+            trade.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, idx) => (
+            <a
+              key={idx}
+              href={service.href}
+              target={service.target}
+              rel={service.rel}
+              className="bg-white rounded-xl p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] transition-all flex flex-col justify-between group cursor-pointer no-underline text-inherit"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
+                  <service.icon className="w-5 h-5" />
                 </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                  {service.desc}
+                </p>
               </div>
-
-              {/* PHONE */}
-              <div className="flex items-center p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <PhoneCall className="w-8 h-8 text-sky-600 mr-4 shrink-0" />
-
-                <div>
-                  <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
-                    Call or WhatsApp
-                  </div>
-
-                  <div className="text-lg font-bold text-slate-900">
-                    +91 74000 96950
-                  </div>
-                </div>
+              <div className="text-blue-600 text-sm font-semibold flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                Learn more <ChevronRight className="w-4 h-4 ml-1" />
               </div>
-
-            </div>
-          </div>
-
-          {/* RIGHT SIDE */}
-          <div className="w-full lg:w-1/2">
-            <div className="bg-slate-900 rounded-2xl p-8 shadow-2xl">
-
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Request Callback
-              </h3>
-
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-5"
-              >
-
-                {/* COMPANY */}
-                <div>
-                  <input
-                    type="text"
-                    name="companyName"
-                    value={formData.companyName}
-                    onChange={handleChange}
-                    placeholder="Company Name"
-                    className={`w-full px-4 py-3 bg-slate-800 border rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500 ${
-                      errors.companyName
-                        ? 'border-red-500'
-                        : 'border-slate-700'
-                    }`}
-                  />
-
-                  {errors.companyName && (
-                    <p className="text-red-400 text-xs mt-1">
-                      {errors.companyName}
-                    </p>
-                  )}
-                </div>
-
-                {/* CONTACT PERSON */}
-                <div>
-                  <input
-                    type="text"
-                    name="Personname"
-                    value={formData.Personname}
-                    onChange={handleChange}
-                    placeholder="Person Name"
-                    className={`w-full px-4 py-3 bg-slate-800 border rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500 ${
-                      errors.Personname
-                        ? 'border-red-500'
-                        : 'border-slate-700'
-                    }`}
-                  />
-
-                  {errors.Personname && (
-                    <p className="text-red-400 text-xs mt-1">
-                      {errors.Personname}
-                    </p>
-                  )}
-                </div>
-
-                {/* EMAIL + MOBILE */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-                  {/* EMAIL */}
-                  <div>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Email Address"
-                      className={`w-full px-4 py-3 bg-slate-800 border rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500 ${
-                        errors.email
-                          ? 'border-red-500'
-                          : 'border-slate-700'
-                      }`}
-                    />
-
-                    {errors.email && (
-                      <p className="text-red-400 text-xs mt-1">
-                        {errors.email}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* MOBILE */}
-                  <div>
-                    <input
-                      type="tel"
-                      name="mobile"
-                      value={formData.mobile}
-                      onChange={handleChange}
-                      placeholder="Mobile Number"
-                      maxLength={10}
-                      className={`w-full px-4 py-3 bg-slate-800 border rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500 ${
-                        errors.mobile
-                          ? 'border-red-500'
-                          : 'border-slate-700'
-                      }`}
-                    />
-
-                    {errors.mobile && (
-                      <p className="text-red-400 text-xs mt-1">
-                        {errors.mobile}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* REQUIREMENT */}
-                <div>
-                  <select
-                    name="requirement"
-                    value={formData.requirement}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-slate-800 border rounded-lg text-slate-300 focus:outline-none focus:border-sky-500 ${
-                      errors.requirement
-                        ? 'border-red-500'
-                        : 'border-slate-700'
-                    }`}
-                  >
-                    <option value="">
-                      Select Category Requirement
-                    </option>
-
-                    <option>
-                      EPR Plastic Return (Importer)
-                    </option>
-
-                    <option>
-                      EPR E-Waste Return (Importer)
-                    </option>
-
-                    <option>
-                      Both
-                    </option>
-                  </select>
-
-                  {errors.requirement && (
-                    <p className="text-red-400 text-xs mt-1">
-                      {errors.requirement}
-                    </p>
-                  )}
-                </div>
-
-                {/* SUBMIT BUTTON */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={`w-full py-4 text-white font-bold rounded-lg transition-colors text-lg mt-4 shadow-lg shadow-sky-900/50 ${
-                    loading
-                      ? 'bg-sky-800 cursor-not-allowed'
-                      : 'bg-sky-600 hover:bg-sky-500'
-                  }`}
-                >
-                  {loading
-                    ? 'Submitting...'
-                    : 'Get Started Now'}
-                </button>
-
-              </form>
-            </div>
-          </div>
+            </a>
+          ))}
+        </div>
+        <div className="text-center mt-12">
+          <a
+            href="https://eximinq.in/strategic-solutions/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky-600 text-lg font-bold hover:text-sky-700 transition-colors inline-flex items-center"
+          >
+            Explore all our services at eximinq.in/strategic-solutions{" "}
+            <ChevronRight className="w-5 h-5 ml-1" />
+          </a>
         </div>
       </div>
     </section>
