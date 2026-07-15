@@ -7,6 +7,16 @@ const igstrefundRoutesSchema = new mongoose.Schema(
       trim: true,
       default: "IGST Refund Registration",
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     shippingBillNo: {
       type: String,
       trim: true,

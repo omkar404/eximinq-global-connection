@@ -34,6 +34,8 @@ async function sendEmail(record) {
       igstAmount,
       numberOfBills,
       igstPortCode,
+      companyName,
+      personName,
     } = record;
 
     const serviceDisplay = service || "IGST Refund Registration";
@@ -139,6 +141,29 @@ async function sendEmail(record) {
                 <tr>
                   <td><b>IGST Port Code</b></td>
                   <td>${igstPortCode}</td>
+                </tr>
+              `
+                : ""
+            }
+
+            ${
+              companyName
+                ? `
+                <tr>
+                  <td><b>Company Name</b></td>
+                  <td>${companyName}</td>
+                </tr>
+              `
+                : ""
+            }
+
+
+            ${
+              personName
+                ? `
+                <tr>
+                  <td><b>Contact Person Name</b></td>
+                  <td>${personName}</td>
                 </tr>
               `
                 : ""
@@ -274,6 +299,8 @@ exports.createigstrefundRoutes = async (req, res) => {
       igstAmount,
       numberOfBills,
       igstPortCode,
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -315,6 +342,14 @@ exports.createigstrefundRoutes = async (req, res) => {
       service: service || "IGST Refund Registration",
 
       mobile: mobile.trim(),
+
+      companyName: companyName
+        ? companyName.trim()
+        : null,
+
+      personName: personName
+        ? personName.trim()
+        : null,
 
       shippingBillNo: shippingBillNo
         ? shippingBillNo.trim()
