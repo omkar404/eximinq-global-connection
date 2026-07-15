@@ -28,6 +28,8 @@ async function sendEmail(record) {
     issue,
     licenseType,
     pendingExport,
+    companyName,
+    contactPerson,
   } = record;
 
   const serviceDisplay = service || "EOP Registration";
@@ -44,6 +46,8 @@ async function sendEmail(record) {
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${licenseType ? `<tr><td><b>License Type</b></td><td>${licenseType}</td></tr>` : ""}
           ${pendingExport ? `<tr><td><b>Pending Export %</b></td><td>${pendingExport}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPerson ? `<tr><td><b>Contact Person Name</b></td><td>${contactPerson}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -79,6 +83,8 @@ exports.createeopextensionRoutes = async (req, res) => {
       issue,
       licenseType, // ✅ camelCase
       pendingExport, // ✅ camelCase
+      companyName,
+      contactPerson,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -95,6 +101,8 @@ exports.createeopextensionRoutes = async (req, res) => {
       mobile: mobile.trim(),
       licenseType: licenseType ? licenseType.trim() : null, // ✅ use the correct variable
       pendingExport: pendingExport ? pendingExport.trim() : null, // ✅ use correct variable
+      companyName : companyName ? companyName.trim() : null,
+      contactPerson : contactPerson ? contactPerson.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
