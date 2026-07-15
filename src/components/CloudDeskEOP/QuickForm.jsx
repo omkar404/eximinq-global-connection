@@ -8,12 +8,12 @@ const QuickForm = ({
   resetForm: externalResetForm,
 }) => {
   const [form, setForm] = useState({
-    licenseType: "",
-    pendingExport: "",
-    mobile: "",
     companyName: "",
     contactPerson: "",
     email: "",
+    licenseType: "",
+    pendingExport: "",
+    mobile: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -39,12 +39,12 @@ const QuickForm = ({
   // Internal reset function
   const resetForm = () => {
     setForm({
-      licenseType: "",
-      pendingExport: "",
-      mobile: "",
       companyName: "",
       contactPerson: "",
       email: "",
+      licenseType: "",
+      pendingExport: "",
+      mobile: "",
     });
     setErrors({});
 
@@ -58,6 +58,24 @@ const QuickForm = ({
   -------------------------- */
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.contactPerson.trim()) {
+      newErrors.contactPerson = "Your name is required";
+    } else if (form.contactPerson.trim().length < 2) {
+      newErrors.contactPerson = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
 
     if (!form.licenseType) {
       newErrors.licenseType = "Please select a license type";
@@ -108,8 +126,8 @@ const QuickForm = ({
       const finalType = type || "EOP_EXTENSION";
 
       const payload = {
-        name: form.companyName || form.contactPerson || "EOP Extension Lead",
-        email: form.email || "lead@eximinq.com",
+        name: form.contactPerson || form.companyName || "EOP Extension Lead",
+        email: form.email,
         mobile: form.mobile, // already sanitized
         type: finalType,
         service: "EOP Extension",
@@ -160,25 +178,85 @@ const QuickForm = ({
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-brand-900 mb-2">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
+      <h3 className="text-lg font-bold text-brand-900 mb-1">
         EOP Extension Assessment
       </h3>
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Find out your extension cost and submit request.
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <input
+            type="text"
+            name="contactPerson"
+            value={form.contactPerson}
+            onChange={handleChange}
+            placeholder="e.g. Rahul Sharma"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.contactPerson ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.contactPerson && (
+            <p className="text-red-500 text-xs mt-1">{errors.contactPerson}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="e.g. rahul@acmeexports.com"
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* License Type */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             License Type
           </label>
           <select
             name="licenseType"
             value={form.licenseType}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.licenseType ? "border-red-500" : "border-slate-300"
             }`}
           >
@@ -197,8 +275,8 @@ const QuickForm = ({
         </div>
 
         {/* Pending Export Percentage */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Pending Export %
           </label>
           <input
@@ -210,7 +288,7 @@ const QuickForm = ({
             min="0"
             max="100"
             step="0.1"
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.pendingExport ? "border-red-500" : "border-slate-300"
             }`}
           />
@@ -220,8 +298,8 @@ const QuickForm = ({
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-3">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
           <input
@@ -229,7 +307,7 @@ const QuickForm = ({
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="e.g. 9876543210"
@@ -244,7 +322,7 @@ const QuickForm = ({
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"
