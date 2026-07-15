@@ -29,6 +29,8 @@ async function sendEmail(record) {
     productName,
     technicalSpec,
     endUserCountry,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "SCOMET Licensing Registration";
@@ -46,6 +48,8 @@ async function sendEmail(record) {
           ${productName ? `<tr><td><b>Product Name / CAS No.</b></td><td>${productName}</td></tr>` : ""}
           ${technicalSpec ? `<tr><td><b>Technical Specification</b></td><td>${technicalSpec}</td></tr>` : ""}
           ${endUserCountry ? `<tr><td><b>End User Country</b></td><td>${endUserCountry}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
@@ -81,6 +85,8 @@ exports.createscometlicensingRoutes = async (req, res) => {
       productName,
       technicalSpec,
       endUserCountry,
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -99,6 +105,8 @@ exports.createscometlicensingRoutes = async (req, res) => {
       productName: productName ? productName.trim() : null,
       technicalSpec: technicalSpec ? technicalSpec.trim() : null,
       endUserCountry: endUserCountry ? endUserCountry.trim() : null,
+      companyName : companyName ? companyName.trim() : null ,
+      personName : personName ? personName.trim() : null,
       name: isQuickForm ? null : (name ? name.trim() : null),
       email: isQuickForm ? null : (email ? email.trim().toLowerCase() : null),
       entity: isQuickForm ? null : (entity ? entity.trim() : null),
