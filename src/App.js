@@ -55,6 +55,7 @@ import CloudDeskPolicyRelaxation from "./pages/CloudDeskPolicyRelaxation"
 import CloudDeskDigitalSignatures from "./pages/CloudDeskDigitalSignatures"
 import CloudDeskImporters from "./pages/CloudDeskImporters"
 import CloudDeskNoDue from "./pages/CloudDeskNoDue"
+import CloudDeskNoINC from "./pages/CloudDeskNoINC"
 import CloudDeskDisclaimer from "./pages/CloudDeskDisclaimer"
 import CloudDeskPrivacy from "./pages/CloudDeskPrivacy"
 import CloudDeskIES from "./pages/CloudDeskIES"
@@ -83,6 +84,8 @@ import CloudDeskHorticulture from "./pages/CloudDeskHorticulture"
 import CloudDeskPollution from "./pages/CloudDeskPollution"
 import CloudDeskBrand from "./pages/CloudDeskBrand";
 import CloudDeskCopyright from "./pages/CloudDeskCopyright";
+import CloudDeskBrandCopyright from "./pages/CloudDeskBrandCopyright"
+import CloudDeskLogoCopyright from "./pages/CloudDeskLogoCopyright"
 import CloudDeskBarcode from "./pages/CloudDeskBarcode"
 import CloudDeskDesign from "./pages/CloudDeskDesign";
 import CloudDeskRMCC from "./pages/CloudDeskRMCC";
@@ -268,10 +271,12 @@ function App() {
         <Route path="/services/no-due-certificate" element={<CloudDeskNoDue />} />
 
         {/* Consolidated URL redirect */}
-        <Route
+        {/* <Route
           path="/services/no-incentive-certificate"
           element={<Navigate to="/services/no-due-certificate/" replace />}
-        />
+        /> */}
+
+        <Route path="/services/no-incentive-certificate" element={<CloudDeskNoINC />} />
 
         {/* Interest Equalisation  */}
         <Route path="/services/interest-equalisation-scheme" element={<CloudDeskIES />} />
@@ -337,16 +342,20 @@ function App() {
         <Route path="/services/copyright-registration" element={<CloudDeskCopyright />} />
 
         {/* Consolidated URL redirect */}
-        <Route
+        {/* <Route
           path="/services/brand-copyright"
           element={<Navigate to="/services/copyright-registration/" replace />}
-        />
+        /> */}
+
+        <Route path="/services/brand-copyright" element={<CloudDeskBrandCopyright />} />
 
         {/* Consolidated URL redirect */}
-        <Route
+        {/* <Route
           path="/services/logo-copyright"
           element={<Navigate to="/services/copyright-registration/" replace />}
-        />
+        /> */}
+
+        <Route path="/services/logo-copyright" element={<CloudDeskLogoCopyright />} />
 
         {/* Official Barcode Registration */}
         <Route path="/services/barcode-registration" element={<CloudDeskBarcode />} />
