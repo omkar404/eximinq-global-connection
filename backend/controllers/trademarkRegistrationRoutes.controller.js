@@ -29,6 +29,8 @@ async function sendEmail(record) {
     brandName,
     activity,
     applicantType,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "Trademark Registration";
@@ -46,6 +48,8 @@ async function sendEmail(record) {
           ${brandName ? `<tr><td><b>Brand Name / Slogan</b></td><td>${brandName}</td></tr>` : ""}
           ${activity ? `<tr><td><b>Business Activity</b></td><td>${activity}</td></tr>` : ""}
           ${applicantType ? `<tr><td><b>Applicant Type</b></td><td>${applicantType}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""} 
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -82,6 +86,8 @@ exports.createtrademarkRegistrationRoutes = async (req, res) => {
       brandName, // ✅ camelCase
       activity, // ✅ camelCase
       applicantType,
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -98,6 +104,8 @@ exports.createtrademarkRegistrationRoutes = async (req, res) => {
       mobile: mobile.trim(),
       brandName: brandName ? brandName.trim() : null, // ✅ use the correct variable
       activity: activity ? activity.trim() : null, // ✅ use correct variable
+      companyName : companyName ? companyName.trim() : null,
+      personName : personName ? personName.trim() : null,
       applicantType: applicantType ? applicantType.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,

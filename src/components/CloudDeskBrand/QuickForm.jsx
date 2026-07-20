@@ -1,107 +1,10 @@
-// import { useState } from "react";
-
-// const QuickForm = ({ onSubmit }) => {
-//   const [form, setForm] = useState({
-//     sector: "",
-//     investment: "",
-//     mobile: "",
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setForm((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (!form.mobile) return;
-
-//     onSubmit?.(form);
-
-//     // same intent as original inline alert
-//     alert("We will classify your industry and contact you.");
-
-//     setForm({
-//       sector: "",
-//       investment: "",
-//       mobile: "",
-//     });
-//   };
-
-//   return (
-//     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-//       <h3 className="text-2xl font-bold text-eco-900 mb-2">
-//         Category Assessment
-//       </h3>
-//       <p className="text-slate-500 mb-6 text-sm">
-//         Find your industry classification.
-//       </p>
-
-//       <form onSubmit={handleSubmit}>
-//         {/* Industry Sector */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Industry Sector
-//           </label>
-//           <input
-//             type="text"
-//             name="sector"
-//             value={form.sector}
-//             onChange={handleChange}
-//             placeholder="e.g. Chemical / Textile / Engineering"
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           />
-//         </div>
-
-//         {/* Investment */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Investment (Plant & Machinery)
-//           </label>
-//           <input
-//             type="text"
-//             name="investment"
-//             value={form.investment}
-//             onChange={handleChange}
-//             placeholder="e.g. ₹ 5 Crores"
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           />
-//         </div>
-
-//         {/* Mobile */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Mobile Number
-//           </label>
-//           <input
-//             type="tel"
-//             name="mobile"
-//             value={form.mobile}
-//             onChange={handleChange}
-//             placeholder="+91 74000 96950"
-//             required
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           />
-//         </div>
-
-//         {/* Submit */}
-//         <button
-//           type="submit"
-//           className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition"
-//         >
-//           Check Status
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default QuickForm;
 import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
+    email: "",
     brandName: "",
     activity: "",
     applicantType: "",
@@ -131,6 +34,24 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
+
     if (!form.brandName) {
       newErrors.brandName = "Brand name / slogan is required";
     }
@@ -157,6 +78,9 @@ const QuickForm = () => {
 
     try {
       const payload = {
+        companyName: form.companyName.trim(),
+        personName: form.personName.trim(),
+        email: form.email.trim(),
         brandName: form.brandName,
         activity: form.activity,
         applicantType: form.applicantType,
@@ -186,11 +110,15 @@ const QuickForm = () => {
 
       // Reset form
       setForm({
+        companyName: "",
+        personName: "",
+        email: "",
         brandName: "",
         activity: "",
         applicantType: "",
         mobile: "",
       });
+      setErrors({});
     } catch (err) {
       console.error("❌ Error:", err);
       alert(`❌ Submission failed: ${err.message}`);
@@ -200,18 +128,78 @@ const QuickForm = () => {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-      <h3 className="text-2xl font-bold text-legal-900 mb-2">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
+      <h3 className="text-lg font-bold text-legal-900 mb-1">
         Free Brand Check
       </h3>
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Verify if your brand name is available.
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. rahul@acmeexports.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Brand Name */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Brand Name / Slogan
           </label>
           <input
@@ -219,7 +207,7 @@ const QuickForm = () => {
             name="brandName"
             value={form.brandName}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.brandName ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="e.g. EXIMINQ"
@@ -230,8 +218,8 @@ const QuickForm = () => {
         </div>
 
         {/* Business Activity */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Business Activity
           </label>
           <input
@@ -240,20 +228,20 @@ const QuickForm = () => {
             value={form.activity}
             onChange={handleChange}
             placeholder="e.g. Clothing / Software / Food"
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className="w-full border border-slate-300 rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500"
           />
         </div>
 
         {/* Applicant Type */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Applicant Type
           </label>
           <select
             name="applicantType"
             value={form.applicantType}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className="w-full border border-slate-300 rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500"
           >
             <option value="">Select applicant type</option>
             <option>Individual / Proprietor</option>
@@ -263,8 +251,8 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-3">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
           <input
@@ -272,7 +260,7 @@ const QuickForm = () => {
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.mobile ? "border-red-500" : "border-slate-300"
             }`}
             placeholder="e.g. 9876543210"
@@ -287,7 +275,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"
