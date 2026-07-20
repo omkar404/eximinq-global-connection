@@ -3,6 +3,9 @@ import { ClipboardList, MapPin, Phone } from "lucide-react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    personName: "",        // renamed from name → personName
+    companyName: "",
+    email: "",
     clearanceType: "",
     portLocation: "",
     mobile: "",
@@ -21,15 +24,21 @@ const QuickForm = () => {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
 
-    // Clear that field's error on typing
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  /*----------------------
-    VALIDATION
-  -----------------------*/
   const validate = () => {
     const newErrors = {};
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Please enter your full name";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email address is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
 
     if (!form.clearanceType) {
       newErrors.clearanceType = "Please select a clearance type";
@@ -46,9 +55,6 @@ const QuickForm = () => {
     return newErrors;
   };
 
-  /*----------------------
-    SUBMIT HANDLER (API CALL)
-  -----------------------*/
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -60,6 +66,9 @@ const QuickForm = () => {
 
     try {
       const payload = {
+        personName: form.personName,   // updated key
+        companyName: form.companyName,
+        email: form.email,
         clearanceType: form.clearanceType,
         portLocation: form.portLocation,
         mobile: form.mobile,
@@ -70,7 +79,7 @@ const QuickForm = () => {
 
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/cha-services`,
-        // "http://localhost:5000/api/cha-services", // ✅ http:// is required        
+       // "http://localhost:5000/api/cha-services", // ✅ http:// is required
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -86,8 +95,10 @@ const QuickForm = () => {
 
       alert("✅ Clearance enquiry submitted successfully");
 
-      // Reset form
       setForm({
+        personName: "",
+        companyName: "",
+        email: "",
         clearanceType: "",
         portLocation: "",
         mobile: "",
@@ -110,10 +121,65 @@ const QuickForm = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Person Name */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-1">
+            Full Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="personName"          // updated name attribute
+            value={form.personName}
+            onChange={handleChange}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rajesh Kumar"
+          />
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          )}
+        </div>
+
+        {/* Company Name */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            placeholder="e.g. ABC Logistics Pvt Ltd"
+          />
+        </div>
+
+        {/* Email ID */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="you@example.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Clearance Type */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Clearance Type
+            Clearance Type <span className="text-red-500">*</span>
           </label>
           <select
             name="clearanceType"
@@ -141,7 +207,7 @@ const QuickForm = () => {
         {/* Port Location */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Port Location
+            Port Location <span className="text-red-500">*</span>
           </label>
           <select
             name="portLocation"
@@ -166,7 +232,7 @@ const QuickForm = () => {
         {/* Mobile Number */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">
-            Mobile Number
+            Mobile Number <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"

@@ -28,6 +28,8 @@ async function sendEmail(record) {
     issue,
     clearanceType,
     portLocation,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "CHA Registration";
@@ -44,6 +46,8 @@ async function sendEmail(record) {
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${clearanceType ? `<tr><td><b>Clearance Type</b></td><td>${clearanceType}</td></tr>` : ""}
           ${portLocation ? `<tr><td><b>Port Location</b></td><td>${portLocation}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Full Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""} 
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -79,6 +83,8 @@ exports.createchaServicesRoutes = async (req, res) => {
       issue,
       clearanceType, // ✅ camelCase
       portLocation, // ✅ camelCase
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -95,6 +101,8 @@ exports.createchaServicesRoutes = async (req, res) => {
       mobile: mobile.trim(),
       clearanceType: clearanceType ? clearanceType.trim() : null, // ✅ use the correct variable
       portLocation: portLocation ? portLocation.trim() : null, // ✅ use correct variable
+      companyName: companyName ? companyName.trim() : null,
+      personName: personName ? personName.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
