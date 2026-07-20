@@ -34,6 +34,8 @@ async function sendEmail(record) {
     issue,
     targetMarket,     // ✅ replaces product
     productCategory,  // ✅ replaces hsnCode
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "AD Code Registration";
@@ -55,6 +57,9 @@ async function sendEmail(record) {
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
            ${productCategory ? `<tr><td><b>Product Category</b></td><td>${productCategory}</td></tr>` : ""}
            ${targetMarket ? `<tr><td><b>Target Market</b></td><td>${targetMarket}</td></tr>` : ""}
+
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Person Name</b></td><td>${personName}</td></tr>` : ""}
 
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
@@ -105,6 +110,8 @@ exports.createhalalCertificationRoutes = async (req, res) => {
       issue,
       targetMarket,   // ✅ ADDED
       productCategory,   // ✅ ADDED
+      companyName,
+      personName,
     } = req.body;
 
     // 🔥 Detect Quick Form
@@ -125,6 +132,9 @@ exports.createhalalCertificationRoutes = async (req, res) => {
 
     targetMarket: targetMarket ? targetMarket.trim() : null,   // ✅ ADDED
     productCategory: productCategory ? productCategory.trim() : null,   // ✅ ADDED
+
+    companyName: companyName ? companyName.trim() : null,
+    personName: personName ? personName.trim() : null,
 
       // 🔥 KEY LOGIC (Quick Form fields ignore)
       name: isQuickForm ? null : name ? name.trim() : null,
