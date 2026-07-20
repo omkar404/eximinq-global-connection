@@ -35,6 +35,8 @@ async function sendEmail(record) {
     cifValue,
     quantity,
     goodsDescription,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "Freight Forwarding";
@@ -57,7 +59,8 @@ async function sendEmail(record) {
           ${originPort ? `<tr><td><b>Origin Port</b></td><td>${originPort}</td></tr>` : ""}
           ${destinationPort ? `<tr><td><b>Destination Port</b></td><td>${destinationPort}</td></tr>` : ""}
           ${transportMode ? `<tr><td><b>Transport Mode</b></td><td>${transportMode}</td></tr>` : ""}
-          
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}          
           ${shipmentDate ? `<tr><td><b>Proposed Shipment Date</b></td><td>${shipmentDate}</td></tr>` : ""}
           ${cifValue ? `<tr><td><b>CIF Value (INR)</b></td><td>${cifValue}</td></tr>` : ""}
           ${quantity ? `<tr><td><b>Quantity (Metric Tons)</b></td><td>${quantity}</td></tr>` : ""}
@@ -103,6 +106,8 @@ exports.createfreightForwardingRoutes = async (req, res) => {
       cifValue,              // new
       quantity,              // new
       goodsDescription,      // new
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM" || type === "FREIGHT_FORWARDING";
@@ -123,6 +128,8 @@ exports.createfreightForwardingRoutes = async (req, res) => {
       destinationPort: destinationPort || null,
       transportMode: transportMode || null,
       shipmentDate: shipmentDate || null,
+      companyName: companyName ? companyName.trim() : null,
+      personName: personName ? personName.trim() : null,
       cifValue: cifValue || null,
       quantity: quantity || null,
       goodsDescription: goodsDescription || null,

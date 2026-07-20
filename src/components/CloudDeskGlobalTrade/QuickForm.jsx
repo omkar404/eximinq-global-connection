@@ -1,121 +1,9 @@
-// import { useState } from "react";
-
-// const QuickForm = () => {
-//   const [mode, setMode] = useState("import");
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     alert(
-//       "We have received your rate request. Our team will email you the best quote shortly."
-//     );
-//   };
-
-//   return (
-//     <div
-//       id="quote"
-//       className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8"
-//     >
-//       {/* Header */}
-//       <div className="flex justify-between items-center mb-6">
-//         <h3 className="text-2xl font-bold text-brand-900">
-//           Get Shipping Quote
-//         </h3>
-
-//         <div className="flex gap-2">
-//           <button
-//             className={`text-xs px-2 py-1 rounded font-bold ${
-//               mode === "import"
-//                 ? "bg-brand-100 text-brand-700"
-//                 : "bg-slate-100 text-slate-600"
-//             }`}
-//             onClick={() => setMode("import")}
-//           >
-//             Import
-//           </button>
-
-//           <button
-//             className={`text-xs px-2 py-1 rounded font-bold ${
-//               mode === "export"
-//                 ? "bg-brand-100 text-brand-700"
-//                 : "bg-slate-100 text-slate-600"
-//             }`}
-//             onClick={() => setMode("export")}
-//           >
-//             Export
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Form */}
-//       <form onSubmit={handleSubmit}>
-//         {/* Grid */}
-//         <div className="grid grid-cols-2 gap-4 mb-4">
-//           <div>
-//             <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
-//               Origin Port
-//             </label>
-//             <input
-//               type="text"
-//               className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
-//               placeholder="e.g. Shanghai"
-//             />
-//           </div>
-
-//           <div>
-//             <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
-//               Destination Port
-//             </label>
-//             <input
-//               type="text"
-//               className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
-//               placeholder="e.g. Nhava Sheva"
-//             />
-//           </div>
-//         </div>
-
-//         {/* Mode Type */}
-//         <div className="mb-4">
-//           <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
-//             Mode & Type
-//           </label>
-//           <select className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500">
-//             <option>Sea - FCL (Full Container)</option>
-//             <option>Sea - LCL (Less than Container)</option>
-//             <option>Air Freight</option>
-//             <option>Door-to-Door</option>
-//           </select>
-//         </div>
-
-//         {/* Contact */}
-//         <div className="mb-6">
-//           <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
-//             Email / Phone
-//           </label>
-//           <input
-//             type="text"
-//             required
-//             className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
-//             placeholder="Contact details"
-//           />
-//         </div>
-
-//         {/* Submit Button */}
-//         <button
-//           type="submit"
-//           className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition shadow-md flex justify-center items-center gap-2"
-//         >
-//           Get Best Rates <i className="fas fa-arrow-right"></i>
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default QuickForm;
 import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
     mode: "import",
     originPort: "",
     destinationPort: "",
@@ -165,6 +53,18 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
     // Common required fields
     if (!form.originPort) newErrors.originPort = "Origin port is required";
     if (!form.destinationPort) newErrors.destinationPort = "Destination port is required";
@@ -208,6 +108,8 @@ const QuickForm = () => {
     try {
       const payload = {
         ...form,
+        companyName: form.companyName.trim(),
+        personName: form.personName.trim(),
         type: "QUICK_FORM",
       };
 
@@ -233,6 +135,8 @@ const QuickForm = () => {
 
       // Reset form (keep mode as "import")
       setForm({
+        companyName: "",
+        personName: "",
         mode: "import",
         originPort: "",
         destinationPort: "",
@@ -244,6 +148,7 @@ const QuickForm = () => {
         email: "",
         mobile: "",
       });
+      setErrors({});
     } catch (err) {
       console.error("❌ Error:", err);
       alert(`❌ Submission failed: ${err.message}`);
@@ -284,6 +189,43 @@ const QuickForm = () => {
       </div>
 
       <form onSubmit={handleSubmit}>
+        {/* Company & Contact Person */}
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
+              Company Name
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              placeholder="e.g. Acme Exports Pvt Ltd"
+              className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+            {errors.companyName && <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>}
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
+              Contact Person Name
+            </label>
+            <input
+              type="text"
+              name="personName"
+              value={form.personName}
+              onChange={handleChange}
+              placeholder="e.g. Rahul Sharma"
+              className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 ${
+                errors.personName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+            {errors.personName && <p className="text-red-500 text-xs mt-1">{errors.personName}</p>}
+          </div>
+        </div>
+
         {/* Ports */}
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>

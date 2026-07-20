@@ -31,6 +31,16 @@ const freightForwardingSchema = new mongoose.Schema(
     type: { type: String, default: "FREIGHT_FORWARDING" },
     category: { type: String, default: null },
     issue: { type: String, default: null },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
   },
   { timestamps: true },
 );
