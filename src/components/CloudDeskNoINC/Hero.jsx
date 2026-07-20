@@ -9,11 +9,11 @@ const Hero = () => {
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         {/* TEXT SECTION */}
         <div>
-          <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full mb-4 border border-white/30">
+          <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full mb-4 border border-white/30">
             RE-IMPORT CLEARANCE
           </span>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">
               No Incentive Certificate
             </span>{" "}
             for Returned Goods

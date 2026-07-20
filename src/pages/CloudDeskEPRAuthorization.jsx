@@ -34,6 +34,11 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskEPRAuthorization/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskEPRAuthorization/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/epr-authorization/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+
 const CloudDeskEPRAuthorization = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -50,92 +55,157 @@ const CloudDeskEPRAuthorization = () => {
   };
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>
-          EPR Authorization for Responsible Business | EPR Authorization
-          Registration India | DGFT CUSTOMS Services | EXIMINQ
+          EPR Authorization Consultant India | CPCB Registration for PIBOs | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content="Mandatory CPCB Registration for Producers, Importers, and Brand Owners (PIBOs). We manage your compliance for E-waste, Plastic, Battery, and Waste Tyres end-to-end."
+          content="EPR authorization consultant in India for CPCB registration, PIBO compliance, plastic packaging, e-waste, battery and waste tyre EPR targets, credits and annual returns."
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
 
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/epr-authorization/"
-        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        {/* Open Graph */}
         <meta
           property="og:title"
-          content="EPR Authorization for Responsible Business Online in India | Eximinq"
+          content="EPR Authorization Consultant India | CPCB Registration for PIBOs"
         />
         <meta
           property="og:description"
-          content="Mandatory CPCB Registration for Producers, Importers, and Brand Owners (PIBOs). We manage your compliance for E-waste, Plastic, Battery, and Waste Tyres end-to-end."
+          content="CPCB EPR registration and compliance support for producers, importers and brand owners handling plastic, e-waste, battery and tyre waste obligations."
+        />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="EPR Authorization Consultant India | CPCB Registration for PIBOs"
         />
         <meta
-          property="og:url"
-          content="https://eximinq.in/services/epr-authorization/"
+          name="twitter:description"
+          content="EPR authorization, CPCB registration, target calculation, EPR credits and annual return support for PIBOs in India."
         />
-        <meta property="og:type" content="website" />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: "EPR Authorization for Responsible Business",
-            provider: {
-              "@type": "Organization",
-              name: "Eximinq Global Connections",
-              url: "https://eximinq.in",
-            },
-            areaServed: "India",
-            description:
-              "Mandatory CPCB Registration for Producers, Importers, and Brand Owners (PIBOs). We manage your compliance for E-waste, Plastic, Battery, and Waste Tyres end-to-end.",
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
+            "@graph": [
               {
-                "@type": "Question",
-                name: "Who needs EPR?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Any entity Importing, Manufacturing, or Selling products under their own brand that generate plastic, electronic, or battery waste. If you import a laptop, you need E-Waste EPR (for the device) and Plastic EPR (for the packaging).",
-                },
+                "@type": "Organization",
+                "@id": "https://eximinq.in/#organization",
+                "name": "Eximinq Global Connections",
+                "url": "https://eximinq.in",
+                "logo": OG_IMAGE_URL
               },
               {
-                "@type": "Question",
-                name: "Can I clear Customs without EPR in 2026?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `No. Customs authorities now verify EPR registration numbers in real-time. Missing EPR leads to "Environmental Compensation" (EC) fines starting at ₹1 Lakh and scaling to ₹1 Crore.`,
+                "@type": "WebPage",
+                "@id": `${CANONICAL_URL}#webpage`,
+                "url": CANONICAL_URL,
+                "name": "EPR Authorization Consultant India",
+                "description":
+                  "EPR authorization support page for CPCB registration, PIBO compliance, waste category assessment, EPR targets, credits and annual returns.",
+                "inLanguage": "en-IN",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "@id": "https://eximinq.in/#website",
+                  "url": "https://eximinq.in",
+                  "name": "EXIMINQ"
                 },
+                "about": {
+                  "@id": `${CANONICAL_URL}#service`
+                }
               },
               {
-                "@type": "Question",
-                name: "How long is the registration valid?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Initial registration is typically valid for 5 years, with mandatory annual returns and quarterly data updates.",
-                },
+                "@type": "BreadcrumbList",
+                "@id": `${CANONICAL_URL}#breadcrumb`,
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://eximinq.in"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Services",
+                    "item": "https://eximinq.in/services/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "EPR Authorization",
+                    "item": CANONICAL_URL
+                  }
+                ]
               },
               {
-                "@type": "Question",
-                name: "Do I have to physically collect the waste?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `No. Most importers fulfill their "Responsibility" by buying EPR Certificates (Credits) from CPCB-registered recyclers. CloudDesk facilitates these trades on the official portal.`,
+                "@type": "ProfessionalService",
+                "@id": `${CANONICAL_URL}#service`,
+                "name": "EPR Authorization and CPCB Registration",
+                "serviceType": "Extended Producer Responsibility Authorization and PIBO Compliance",
+                "url": CANONICAL_URL,
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Eximinq Global Connections",
+                  "url": "https://eximinq.in"
                 },
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "India"
+                },
+                "description":
+                  "EPR authorization assistance for producers, importers and brand owners covering CPCB registration, plastic packaging EPR, e-waste, battery waste, waste tyres, target calculation, EPR certificates and annual returns.",
+                "mainEntityOfPage": {
+                  "@id": `${CANONICAL_URL}#webpage`
+                }
               },
+              {
+                "@type": "FAQPage",
+                "@id": `${CANONICAL_URL}#faq`,
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "Who needs EPR?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Any entity importing, manufacturing, or selling products under their own brand that generate plastic, electronic, battery, or tyre waste may need EPR registration. Importers commonly need EPR for both the product and its packaging."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Can I clear Customs without EPR?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Customs authorities may verify EPR registration for regulated products and packaging. Missing EPR registration can cause clearance delays, compliance notices, and environmental compensation exposure."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How long is EPR registration valid?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Initial registration is typically valid for 5 years, with ongoing annual returns, quarterly data updates, and target fulfillment obligations."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Do I have to physically collect the waste?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Many businesses fulfill EPR obligations by purchasing EPR certificates or credits from CPCB-registered recyclers through the official portal, depending on the applicable waste rules."
+                    }
+                  }
+                ]
+              }
             ],
           })}
         </script>
@@ -672,6 +742,55 @@ const CloudDeskEPRAuthorization = () => {
           </div>
         </section>
 
+        <section className="py-16 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-10">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Related Environmental Compliance Support
+              </span>
+              <h2 className="text-3xl font-bold text-slate-900 mt-2">
+                Services PIBOs Often Need
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {[
+                {
+                  label: "BIS Registration",
+                  href: "/services/bis-registration/",
+                },
+                {
+                  label: "Pollution Control Consent",
+                  href: "/services/pollution-control/",
+                },
+                {
+                  label: "FSSAI Licensing",
+                  href: "/services/fssai-licensing/",
+                },
+                {
+                  label: "WPC ETA License",
+                  href: "/services/wpc-license/",
+                },
+                {
+                  label: "LMPC Registration",
+                  href: "/services/lmpc-registration/",
+                },
+                {
+                  label: "All Services",
+                  href: "/services/",
+                },
+              ].map((service) => (
+                <a
+                  key={service.href}
+                  href={service.href}
+                  className="bg-white border border-slate-200 rounded-lg p-4 font-semibold text-slate-800 hover:text-brand-700 hover:border-brand-300 transition"
+                >
+                  {service.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
@@ -702,24 +821,24 @@ const CloudDeskEPRAuthorization = () => {
             {/* QUICK LINKS */}
             <div>
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
-              <ul class="space-y-2 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/epr-authorization/#categories" className="hover:text-white transition">
                     E-Waste EPR
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/epr-authorization/#categories" className="hover:text-white transition">
                     Plastic EPR
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/epr-authorization/#categories" className="hover:text-white transition">
                     Battery EPR
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/bis-registration/" className="hover:text-white transition">
                     BIS Registration
                   </a>
                 </li>
@@ -729,24 +848,24 @@ const CloudDeskEPRAuthorization = () => {
             {/* OTHER SERVICES */}
             <div>
               <h4 className="text-white font-bold mb-6">Other Services</h4>
-              <ul class="space-y-2 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/epr-authorization/#process" className="hover:text-white transition">
                     CPCB Guidelines
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/epr-authorization/#targets" className="hover:text-white transition">
                     Recycler List
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/epr-authorization/#about" className="hover:text-white transition">
                     EPR Rules 2022
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/epr-authorization/#categories" className="hover:text-white transition">
                     Plastic Categories
                   </a>
                 </li>

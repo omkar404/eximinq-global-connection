@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     productCategory: "",
     manufacturerCountry: "",
     mobile: "",
@@ -33,6 +36,17 @@ const QuickForm = () => {
     if (!form.productCategory) {
       newErrors.productCategory = "Please select a product category";
     }
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -56,8 +70,12 @@ const QuickForm = () => {
 
     try {
       const payload = {
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        personName: form.contactPersonName.trim(),
+        email: form.email.trim().toLowerCase(),
         productCategory: form.productCategory,
-        manufacturerCountry: form.manufacturerCountry,
+        manufacturerCountry: form.manufacturerCountry.trim(),
         mobile: form.mobile,
         type: "QUICK_FORM",
       };
@@ -84,6 +102,9 @@ const QuickForm = () => {
 
       // Reset form
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         productCategory: "",
         manufacturerCountry: "",
         mobile: "",
@@ -105,9 +126,69 @@ const QuickForm = () => {
         Determine your product class and license type.
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            placeholder="e.g. ABC Lifesciences Pvt Ltd"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <input
+            type="text"
+            name="contactPersonName"
+            value={form.contactPersonName}
+            onChange={handleChange}
+            placeholder="e.g. Priya Sharma"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.contactPersonName ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">{errors.contactPersonName}</p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Email ID
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="e.g. compliance@company.com"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Product Category */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Product Category
           </label>
@@ -132,7 +213,7 @@ const QuickForm = () => {
         </div>
 
         {/* Manufacturer Country */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Manufacturer Country
           </label>
@@ -147,7 +228,7 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
             Mobile Number
           </label>
@@ -171,7 +252,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`md:col-span-2 w-full text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

@@ -131,6 +131,10 @@ export const seoRoutes = {
     title: "Policy Relaxation Committee (PRC) Representation | EXIMINQ",
     description: "Rejected by DGFT? Get representation at the Policy Relaxation Committee (PRC) in New Delhi to condone delays and fix genuine procedural errors."
   },
+  "/services/prc-relaxation": {
+    title: "PRC Relaxation Consultant India | Policy Relaxation Committee Representation | EXIMINQ",
+    description: "PRC relaxation consultant in India for DGFT Policy Relaxation Committee representation, EODC delay condonation, procedural lapse appeals, RA rejection cases and policy relief filings."
+  },
   "/services/eop-extension/": {
     title: "EOP Extension Consultant India | Export Obligation Period Extension for Advance Authorisation and EPCG | EXIMINQ",
     description: "EOP extension consultant in India for Advance Authorisation and EPCG. Get help with export obligation period extension, composition fee planning, DGFT filing, and default-risk regularisation."
@@ -158,8 +162,8 @@ export const seoRoutes = {
     description: "Import management registration consultant in India for SIMS, PIMS, NFMIMS, CIMS, CHIMS, ITC(HS) mapping, shipment timing, and DGFT import monitoring compliance."
   },
   "/services/aeo-certification": {
-    title: "AEO T1, T2, T3 Certification Consultant Mumbai | EXIMINQ",
-    description: "Get AEO Status for faster Customs clearance. Handle AEO T1, T2 & LO Application, Annexure filling, and Physical Verification support."
+    title: "AEO Certification in India | AEO T1, T2, T3 & AEO-LO | EXIMINQ",
+    description: "Get AEO certification in India for importers, exporters, CHA and logistics operators. Expert AEO T1, T2, T3 and AEO-LO documentation, compliance audit and filing support."
   },
   "/services/moowr-scheme/": {
     title: "MOOWR Scheme Consultant India | Bonded Warehouse, Section 58 and Section 65 Manufacturing Support | EXIMINQ",
@@ -174,12 +178,16 @@ export const seoRoutes = {
     description: "SVB consultant in India for Special Valuation Branch cases, related party import valuation, questionnaire replies, provisional assessment strategy, and customs valuation support."
   },
   "/services/rmcc-alert-removal": {
-    title: "RMCC Alert & Customs Hold Removal Consultant | EXIMINQ",
-    description: "Shipment stuck due to RMCC Alert? Handle immediate Alert Revocation and legal replies to DGFT/Customs to clear cargo at Mumbai ports."
+    title: "RMCC Alert Removal Consultant India | Customs Hold & Cargo Release Help | EXIMINQ",
+    description: "RMCC alert removal consultant in India for customs hold, RMS examination, valuation query, BOE alert, demurrage control, officer liaison, and urgent cargo release support."
+  },
+  "/services/rmcc-alert-removal/": {
+    title: "RMCC Alert Removal Consultant India | Customs Hold & Cargo Release Help | EXIMINQ",
+    description: "RMCC alert removal consultant in India for customs hold, RMS examination, valuation query, BOE alert, demurrage control, officer liaison, and urgent cargo release support."
   },
   "/services/project-cargo/": {
-    title: "Project Cargo & ODC Handling Agent Mumbai | EXIMINQ",
-    description: "Expert clearance for Over Dimensional Cargo (ODC) & Heavy Machinery. Handle Breakbulk, Flat Racks, and Project Logistics at Nhava Sheva & Mumbai Port."
+    title: "Project Cargo Handling Consultant India | ODC Heavy Lift Logistics | EXIMINQ",
+    description: "Project cargo handling consultant in India for over dimensional cargo, heavy machinery movement, route surveys, breakbulk shipping, hydraulic axle transport and customs clearance support."
   },
   "/services/dpd-registration/": {
     title: "DPD Registration Consultant Nhava Sheva (JNPT) | EXIMINQ",
@@ -193,17 +201,49 @@ export const seoRoutes = {
     title: "Bill of Entry (BE) Filing Agent Mumbai - Import | EXIMINQ",
     description: "Expert Bill of Entry filing for Home Consumption or Warehousing. Correct HS Code classification and Duty calculation at Nhava Sheva & Air Cargo."
   },
+  "/services/bill-of-entry-filing": {
+    title: "Bill of Entry Filing Consultant India | Import Customs Clearance & ICEGATE | EXIMINQ",
+    description: "Bill of Entry filing consultant in India for import customs clearance, HS code classification, duty assessment, ICEGATE filing, e-Sanchit documents and out-of-charge support."
+  },
+  "/services/bill-of-entry-filing/": {
+    title: "Bill of Entry Filing Consultant India | Import Customs Clearance & ICEGATE | EXIMINQ",
+    description: "Bill of Entry filing consultant in India for import customs clearance, HS code classification, duty assessment, ICEGATE filing, e-Sanchit documents and out-of-charge support."
+  },
   "/services/shipping-bill-export": {
     title: "Shipping Bill Filing Agent Mumbai - Export LEO | EXIMINQ",
     description: "Generate Shipping Bills instantly. Handle Checklist approval, LEO (Let Export Order), and export query replies on ICEGATE to move cargo fast."
+  },
+  "/services/shipping-bill-filing": {
+    title: "Shipping Bill Filing Consultant India | Export Customs Clearance & LEO | EXIMINQ",
+    description: "Shipping Bill filing consultant in India for export customs clearance, ICEGATE submission, LEO coordination, RoDTEP, duty drawback, IGST refund and EGM tracking support."
+  },
+  "/services/shipping-bill-filing/": {
+    title: "Shipping Bill Filing Consultant India | Export Customs Clearance & LEO | EXIMINQ",
+    description: "Shipping Bill filing consultant in India for export customs clearance, ICEGATE submission, LEO coordination, RoDTEP, duty drawback, IGST refund and EGM tracking support."
   },
   "/services/e-sanchit-support": {
     title: "e-Sanchit Document Upload & IRN Generation | EXIMINQ",
     description: "Fix Digital Signature errors on e-Sanchit. Upload Invoices/Packing Lists to ICEGATE, generate IRNs, and link them to the Bill of Entry."
   },
+  "/services/e-sanchit-filing": {
+    title: "e-Sanchit Filing Consultant India | IRN Generation & ICEGATE Document Upload | EXIMINQ",
+    description: "e-Sanchit filing consultant in India for ICEGATE document upload, IRN generation, DSC signing errors, PDF resizing, document code selection and customs clearance support."
+  },
+  "/services/e-sanchit-filing/": {
+    title: "e-Sanchit Filing Consultant India | IRN Generation & ICEGATE Document Upload | EXIMINQ",
+    description: "e-Sanchit filing consultant in India for ICEGATE document upload, IRN generation, DSC signing errors, PDF resizing, document code selection and customs clearance support."
+  },
   "/services/customs-duty-payment": {
     title: "Customs Duty Payment & ECL Wallet Manager | EXIMINQ",
     description: "Stuck with ICEGATE payments? Manage the Electronic Cash Ledger (ECL). Generate Challans, top-up wallets, and pay Customs Duty without failures."
+  },
+  "/services/duty-payment-ecl": {
+    title: "Duty Payment ECL Consultant India | ICEGATE Challan & Customs Duty Support | EXIMINQ",
+    description: "Duty Payment ECL consultant in India for ICEGATE challan generation, Electronic Cash Ledger top-up, customs duty payment, interest calculation, wallet reconciliation and refund tracking."
+  },
+  "/services/duty-payment-ecl/": {
+    title: "Duty Payment ECL Consultant India | ICEGATE Challan & Customs Duty Support | EXIMINQ",
+    description: "Duty Payment ECL consultant in India for ICEGATE challan generation, Electronic Cash Ledger top-up, customs duty payment, interest calculation, wallet reconciliation and refund tracking."
   },
   "/services/igst-refund": {
     title: "IGST Refund Consultant India | Export Refund Recovery, Shipping Bill and GST Mismatch Resolution | EXIMINQ",
@@ -212,6 +252,22 @@ export const seoRoutes = {
   "/services/bond-cancellation": {
     title: "Bond Cancellation & No Due Certificate (NDC) | EXIMINQ",
     description: "Release Bank Guarantee (BG). Handle Bond Cancellation and procure No Due Certificates (NDC) from Customs after Export Obligation is met."
+  },
+  "/services/no-due-certificate": {
+    title: "No Due Certificate Consultant India | DGFT NDC & DEL Removal | EXIMINQ",
+    description: "No Due Certificate consultant in India for DGFT NDC, IEC surrender, DEL removal, EPCG and Advance Authorisation closure, customs bond release and pending liability settlement."
+  },
+  "/services/no-due-certificate/": {
+    title: "No Due Certificate Consultant India | DGFT NDC & DEL Removal | EXIMINQ",
+    description: "No Due Certificate consultant in India for DGFT NDC, IEC surrender, DEL removal, EPCG and Advance Authorisation closure, customs bond release and pending liability settlement."
+  },
+  "/services/no-incentive-certificate": {
+    title: "No Incentive Certificate Consultant India | Returned Goods & Re-Import | EXIMINQ",
+    description: "No Incentive Certificate consultant in India for returned goods, re-import clearance, non-availment certificate, RoDTEP and drawback reversal, IGST refund verification and customs documentation."
+  },
+  "/services/no-incentive-certificate/": {
+    title: "No Incentive Certificate Consultant India | Returned Goods & Re-Import | EXIMINQ",
+    description: "No Incentive Certificate consultant in India for returned goods, re-import clearance, non-availment certificate, RoDTEP and drawback reversal, IGST refund verification and customs documentation."
   },
   "/services/non-availment-certificate": {
     title: "Non-Availment Certificate (Re-Import) Consultant | EXIMINQ",
@@ -228,16 +284,28 @@ export const seoRoutes = {
     description: "Licensed Customs House Agent (CHA) in Mumbai. Expert clearance for Import/Export cargo at JNPT, Air Cargo, and Mundra. Fast LEO & OOC generation."
   },
   "/services/warehousing-solutions": {
-    title: "Export-Import Warehousing & Bonded Storage Mumbai | EXIMINQ",
-    description: "Secure warehousing for export cargo near JNPT & Bhiwandi. Offer General Warehousing, Bonded Storage, and Palletization services."
+    title: "Warehousing Solutions Consultant India | Bonded Storage, FTWZ & 3PL Near Ports | EXIMINQ",
+    description: "Warehousing solutions consultant in India for bonded warehouse storage, FTWZ, 3PL distribution, port-side storage, inventory management, labelling, kitting and cold-chain support."
+  },
+  "/services/warehousing-solutions/": {
+    title: "Warehousing Solutions Consultant India | Bonded Storage, FTWZ & 3PL Near Ports | EXIMINQ",
+    description: "Warehousing solutions consultant in India for bonded warehouse storage, FTWZ, 3PL distribution, port-side storage, inventory management, labelling, kitting and cold-chain support."
   },
   "/services/inland-transportation": {
-    title: "Inland Container Transportation (Transport) Mumbai | EXIMINQ",
-    description: "Reliable trucking for Export Containers. First-mile pickup from factory to JNPT/Air Cargo. GPS-tracked 20ft/40ft trailers and LCVs."
+    title: "Inland Transportation Consultant India | Container Trucking, Factory Stuffing & ICD Movement | EXIMINQ",
+    description: "Inland transportation consultant in India for container trucking, factory stuffing, port delivery, ICD movement, GPS-tracked trailers, rail-road logistics and first-mile export cargo movement."
+  },
+  "/services/inland-transportation/": {
+    title: "Inland Transportation Consultant India | Container Trucking, Factory Stuffing & ICD Movement | EXIMINQ",
+    description: "Inland transportation consultant in India for container trucking, factory stuffing, port delivery, ICD movement, GPS-tracked trailers, rail-road logistics and first-mile export cargo movement."
   },
   "/services/marine-insurance": {
-    title: "Marine Cargo Insurance Policy for Exporters | EXIMINQ",
-    description: "Protect shipments against loss or damage. Instant Marine Insurance policy issuance (ICC-A, ICC-B) for Sea and Air cargo."
+    title: "Marine Insurance Consultant India | Cargo Insurance Policy for Import Export Shipments | EXIMINQ",
+    description: "Marine insurance consultant in India for import export cargo, ICC-A all-risk cover, open marine policy, single transit policy, war and SRCC riders, claims documentation and digital certificate support."
+  },
+  "/services/marine-insurance/": {
+    title: "Marine Insurance Consultant India | Cargo Insurance Policy for Import Export Shipments | EXIMINQ",
+    description: "Marine insurance consultant in India for import export cargo, ICC-A all-risk cover, open marine policy, single transit policy, war and SRCC riders, claims documentation and digital certificate support."
   },
 
   // --- REGULATORY SERVICES ---
@@ -262,84 +330,136 @@ export const seoRoutes = {
     description: "Free Sale Certificate consultant in India for FSC issuance, authority routing, domestic licence review, apostille, and export product registration support."
   },
   "/services/bis-registration": {
-    title: "BIS Registration (ISI Mark) Consultant for Import | EXIMINQ",
-    description: "Mandatory BIS Registration for Steel, Electronics & Toys. Handle Factory Audit, Lab Testing, and QCO Compliance to clear goods at Customs."
+    title: "BIS Registration Consultant India | ISI Mark & CRS Certification | EXIMINQ",
+    description: "BIS registration consultant in India for ISI Mark, CRS registration, FMCS, QCO compliance, BIS lab testing, factory audit coordination, AIR support, and import customs clearance."
+  },
+  "/services/bis-registration/": {
+    title: "BIS Registration Consultant India | ISI Mark & CRS Certification | EXIMINQ",
+    description: "BIS registration consultant in India for ISI Mark, CRS registration, FMCS, QCO compliance, BIS lab testing, factory audit coordination, AIR support, and import customs clearance."
   },
   "/services/epr-authorization": {
-    title: "EPR Authorization Consultant (Plastic & E-Waste) | EXIMINQ",
-    description: "Importing plastic packaging or electronics? Get Mandatory EPR Registration on CPCB portal. Handle target setting and annual filing to avoid penalties."
+    title: "EPR Authorization Consultant India | CPCB Registration for PIBOs | EXIMINQ",
+    description: "EPR authorization consultant in India for CPCB registration, PIBO compliance, plastic packaging, e-waste, battery and waste tyre EPR targets, credits and annual returns."
   },
   "/services/fssai-licensing": {
-    title: "FSSAI Import License & Food Safety Consultant | EXIMINQ",
-    description: "Importing Food Products? Handle FSSAI Central License and FICS Clearance at the port. Resolve labeling defects and non-conformance queries."
+    title: "FSSAI Licensing Consultant India | Food Import Clearance & FICS | EXIMINQ",
+    description: "FSSAI licensing consultant in India for food import clearance, FICS NOC, central license support, sampling, lab testing, labeling compliance and port clearance."
   },
   "/services/wpc-eta-license": {
     title: "WPC (ETA) License Consultant - Wireless Imports | EXIMINQ",
     description: "Importing Bluetooth/WiFi devices? Get WPC Equipment Type Approval (ETA) and Import License. Fix 'WPC Hold' status at Customs instantly."
   },
+  "/services/wpc-license": {
+    title: "WPC ETA License Consultant India | Equipment Type Approval for Wireless Imports | EXIMINQ",
+    description: "WPC ETA license consultant in India for wireless imports, Bluetooth devices, Wi-Fi routers, RFID products, RF test report review, Saral Sanchar filing and customs clearance support."
+  },
   "/services/legal-metrology-lmpc": {
     title: "LMPC Certificate Consultant - Legal Metrology | EXIMINQ",
     description: "Importing pre-packaged goods? Mandatory LMPC Registration is required before shipment. Ensure MRP stickers comply with Indian packaging laws."
+  },
+  "/services/lmpc-registration": {
+    title: "LMPC Registration Consultant India | Legal Metrology Certificate for Importers | EXIMINQ",
+    description: "LMPC registration consultant in India for importers of pre-packaged commodities, Rule 27 compliance, label declaration audit, MRP review and Legal Metrology certificate support."
   },
   "/services/edpms-ebrc/": {
     title: "EDPMS and eBRC Consultant India | Export Proceeds Reconciliation, IRM Mapping and AD Bank Closure Support | EXIMINQ",
     description: "EDPMS and eBRC consultant in India for export proceeds reconciliation, IRM mapping, open shipping bill closure, short realisation, extension, write-off, AD bank follow-up, and DGFT-linked export compliance support."
   },
   "/services/aqcs-pqms": {
-    title: "AQCS & PQMS Clearance Agent (Animal & Plant) | EXIMINQ",
-    description: "Importing Leather, Pet Food, or Plants? Handle AQCS (Animal Quarantine) and PQMS (Plant Quarantine) clearance and NOC at Mumbai ports."
+    title: "AQCS & PQMS Clearance Consultant India | Animal & Plant Quarantine NOC | EXIMINQ",
+    description: "AQCS and PQMS clearance consultant in India for animal quarantine, plant quarantine, import permits, NOC filing, inspection coordination, biosecurity documentation, and customs clearance support."
+  },
+  "/services/aqcs-pqms/": {
+    title: "AQCS & PQMS Clearance Consultant India | Animal & Plant Quarantine NOC | EXIMINQ",
+    description: "AQCS and PQMS clearance consultant in India for animal quarantine, plant quarantine, import permits, NOC filing, inspection coordination, biosecurity documentation, and customs clearance support."
   },
   "/services/cdsco-drug-controller": {
     title: "CDSCO Import Registration (Form 41/10) Agent | EXIMINQ",
     description: "Importing Cosmetics, Drugs, or Medical Devices? Handle CDSCO Port Registration, ADC NOC, and Test License (Form 11) for fast clearance."
+  },
+  "/services/cdsco-compliance": {
+    title: "CDSCO Registration Consultant India | Medical Device, Drug & Cosmetics Import License | EXIMINQ",
+    description: "CDSCO registration consultant in India for medical devices, drugs, APIs, cosmetics, SUGAM portal filing, MD-14 import license, Form 10, Form 43 and customs NOC support."
+  },
+  "/services/cdsco-compliance/": {
+    title: "CDSCO Registration Consultant India | Medical Device, Drug & Cosmetics Import License | EXIMINQ",
+    description: "CDSCO registration consultant in India for medical devices, drugs, APIs, cosmetics, SUGAM portal filing, MD-14 import license, Form 10, Form 43 and customs NOC support."
   },
   "/services/certificate-of-origin/": {
     title: "Certificate of Origin Consultant India | Preferential & Non-Preferential COO | EXIMINQ",
     description: "Certificate of Origin consultant in India for preferential and non-preferential COO, Rules of Origin checks, FTA eligibility review, and DGFT filing support."
   },
   "/services/gst-lut-filing/": {
-    title: "GST LUT Filing for Exporters (Letter of Undertaking) | EXIMINQ",
-    description: "Export without paying IGST. File annual GST LUT (Form RFD-11) instantly. Mandatory for all Zero-Rated Supply exports."
+    title: "GST LUT Filing Consultant India | Letter of Undertaking for Export Without IGST | EXIMINQ",
+    description: "GST LUT filing consultant in India for exporters. Get Letter of Undertaking support for export without IGST payment, LUT renewal, eligibility review, GST portal filing, bond and export documentation."
+  },
+  "/services/gst-lut-filing": {
+    title: "GST LUT Filing Consultant India | Letter of Undertaking for Export Without IGST | EXIMINQ",
+    description: "GST LUT filing consultant in India for exporters. Get Letter of Undertaking support for export without IGST payment, LUT renewal, eligibility review, GST portal filing, bond and export documentation."
   },
   "/services/rex-registration": {
-    title: "REX Registration Consultant - Export to EU | EXIMINQ",
-    description: "Exporting to Europe? Get Registered Exporter (REX) number for self-certification. Mandatory for claiming GSP duty benefits in EU/UK markets."
+    title: "REX Registration Consultant India | Registered Exporter Number for EU GSP | EXIMINQ",
+    description: "REX registration consultant in India for EU GSP exports, Registered Exporter number, statement on origin, rules of origin review, HSN mapping and duty-free export documentation."
   },
   "/services/dsc-services": {
     title: "Class 3 DSC Consultant India | Digital Signature for DGFT, ICEGATE, GST & MCA | EXIMINQ",
     description: "Class 3 DSC consultant in India for DGFT, ICEGATE, GST, MCA, token support, issuance, renewal, and portal-ready digital signature workflows."
   },
   "/services/igcr-returns": {
-    title: "IGCR Rules 2022 Compliance & Monthly Returns | EXIMINQ",
-    description: "Importing at Concessional Duty? Manage IGCR Intimation, Bond execution, and file mandatory Monthly Returns (IGCR-3) to prevent duty recovery."
+    title: "IGCR Returns Filing Consultant India | IGCR-3 Monthly Statement & IIN Compliance | EXIMINQ",
+    description: "IGCR returns filing consultant in India for concessional imports, IGCR-3 monthly statements, IIN compliance, notification tracking, bond management, and ICEGATE filing support."
+  },
+  "/services/igcr-returns/": {
+    title: "IGCR Returns Filing Consultant India | IGCR-3 Monthly Statement & IIN Compliance | EXIMINQ",
+    description: "IGCR returns filing consultant in India for concessional imports, IGCR-3 monthly statements, IIN compliance, notification tracking, bond management, and ICEGATE filing support."
   },
   "/services/iem-registration": {
-    title: "IEM Registration Consultant (Industrial Entrepreneur) | EXIMINQ",
-    description: "Setting up a factory? File IEM Part A (Intent) and Part B (Production) with DPIIT. Mandatory for large-scale industries not under MSME."
+    title: "IEM Registration Consultant India | DPIIT Part A & Part B Filing | EXIMINQ",
+    description: "IEM registration consultant in India for DPIIT Industrial Entrepreneur Memorandum Part A and Part B filing, NIC code mapping, documents, amendments and G2B portal support."
+  },
+  "/services/defence-exim-license": {
+    title: "Defence EXIM License Consultant India | SCOMET Category 6 Authorization | EXIMINQ",
+    description: "Defence EXIM license consultant in India for SCOMET Category 6 munitions, MoD and DDP approvals, end-use certificates, OGEL support and defence export compliance."
   },
   "/services/industrial-license": {
-    title: "Industrial License Consultant (IDRA) India | EXIMINQ",
-    description: "Manufacturing Explosives, Chemicals, or Defence items? Secure Compulsory Industrial License (IL) from DPIIT and Ministry of Home Affairs."
+    title: "Industrial License Registration in India | DPIIT & MHA Approval | EXIMINQ",
+    description: "Industrial license consultant in India for regulated sectors including defence, explosives, hazardous chemicals, tobacco and alcohol manufacturing. DPIIT, MHA and NSWS approval support."
   },
   "/services/factory-license/": {
-    title: "Factory License Registration (DISH) Consultant Mumbai | EXIMINQ",
-    description: "Get Factory Plan Approval & License from DISH (Directorate of Industrial Safety). Handle compliance for factories with >10 workers in Maharashtra."
+    title: "Factory License Registration & Renewal in India | DISH Consultant | EXIMINQ",
+    description: "Factory license registration and renewal consultant in India for DISH approvals, factory plan approval, stability certificate, inspection support, annual returns and compliance."
   },
   "/services/gst-returns": {
-    title: "GST Return Filing for Exporters (GSTR-1, 3B, 9) | EXIMINQ",
-    description: "Expert GST Filing for Exporters. Ensure correct reporting of Zero-Rated Supplies (Table 6A) in GSTR-1 to ensure IGST Refund is never blocked."
+    title: "GST Return Filing Consultant India | GSTR-1, GSTR-3B & Export Table 6A Support | EXIMINQ",
+    description: "GST return filing consultant in India for exporters. Get GSTR-1, GSTR-3B, Table 6A, LUT export reporting, IGST refund matching, invoice reconciliation and annual return support."
+  },
+  "/services/gst-returns/": {
+    title: "GST Return Filing Consultant India | GSTR-1, GSTR-3B & Export Table 6A Support | EXIMINQ",
+    description: "GST return filing consultant in India for exporters. Get GSTR-1, GSTR-3B, Table 6A, LUT export reporting, IGST refund matching, invoice reconciliation and annual return support."
   },
   "/services/pollution-control": {
-    title: "Pollution Control Board (MPCB) Consent Agent Mumbai | EXIMINQ",
-    description: "Get Consent to Establish (CTE) & Operate (CTO) from MPCB. Handle Pollution Control compliance for Red, Orange & Green category industries."
+    title: "Pollution Control Board Consent Consultant India | CTE & CTO Registration | EXIMINQ",
+    description: "Pollution Control Board consent consultant in India for Consent to Establish, Consent to Operate, red orange green category classification, SPCB filing, documents and renewal support."
+  },
+  "/services/pollution-control/": {
+    title: "Pollution Control Board Consent Consultant India | CTE & CTO Registration | EXIMINQ",
+    description: "Pollution Control Board consent consultant in India for Consent to Establish, Consent to Operate, red orange green category classification, SPCB filing, documents and renewal support."
   },
   "/services/warehouse-license": {
     title: "Warehouse Licence Consultant India | Public and Private Bonded Warehouse Registration, Section 57 and Section 58 Support | EXIMINQ",
     description: "Warehouse licence consultant in India for public and private bonded warehouse registration, Section 57 and Section 58 support, customs duty deferment, warehouse compliance, controls, records, and implementation guidance."
   },
   "/services/un-iip-certification": {
-    title: "UN IIP Certification Consultant - Dangerous Goods | EXIMINQ",
-    description: "Exporting Hazardous Chemicals? Get UN IIP Certificate for packaging. Handle Indian Institute of Packaging (IIP) testing and certification."
+    title: "UN IIP Packaging Certification Consultant India | UN Mark for Dangerous Goods | EXIMINQ",
+    description: "UN IIP packaging certification consultant in India for dangerous goods exports, UN Mark testing, packaging group mapping, IIP sample submission and IMDG/IATA support."
+  },
+  "/services/ca-certification-export-import": {
+    title: "CA Certification Consultant India | Export Turnover & DGFT Certificates | EXIMINQ",
+    description: "CA certification consultant in India for export turnover certificates, EPCG and Advance Authorisation redemption, EODC support, foreign exchange earnings, RCMC turnover and DGFT filings."
+  },
+  "/services/ca-certification-export-import/": {
+    title: "CA Certification Consultant India | Export Turnover & DGFT Certificates | EXIMINQ",
+    description: "CA certification consultant in India for export turnover certificates, EPCG and Advance Authorisation redemption, EODC support, foreign exchange earnings, RCMC turnover and DGFT filings."
   },
   "/services/ca-certification": {
     title: "CA Certificate for DGFT & Customs (Net Worth) | EXIMINQ",
@@ -350,8 +470,8 @@ export const seoRoutes = {
     description: "Import export compliance audit consultant in India for EPCG, Advance Authorisation, IGST refunds, duty drawback, DGFT records, customs exposure, and transactional health-check support."
   },
   "/services/customs-adjudication": {
-    title: "Customs Adjudication & Appeal Consultant Mumbai | EXIMINQ",
-    description: "Received a Show Cause Notice (SCN)? Draft legal replies, attend Personal Hearings (PH), and handle appeals at Commissioner (Appeals) & CESTAT."
+    title: "Customs Adjudication Consultant India | SCN Reply & Appeal Support | EXIMINQ",
+    description: "Customs adjudication consultant in India for show cause notice replies, personal hearing representation, Order-in-Original appeals, duty demands, penalties and CESTAT support."
   },
   "/services/iso-certification": {
     title: "ISO 9001, 14001, 45001 Certification Consultant | EXIMINQ",
@@ -364,19 +484,31 @@ export const seoRoutes = {
     description: "Protect brand identity. Expert Trademark filing in Mumbai for Class 5, 9, 35 & more. Fast approval & objection handling."
   },
   "/services/copyright-registration": {
-    title: "Copyright Registration Consultant Mumbai - Artwork & Code | EXIMINQ",
-    description: "Protect creative work. Handle Copyright Registration for Software Code, Literary works, and Artistic designs. Lifetime validity for IP."
+    title: "Copyright Registration Consultant India | Software, Logo & Artwork | EXIMINQ",
+    description: "Copyright registration consultant in India for software code, books, music, videos, logos, artwork, website content, TM-C support, objections, and IP ownership documentation."
+  },
+  "/services/copyright-registration/": {
+    title: "Copyright Registration Consultant India | Software, Logo & Artwork | EXIMINQ",
+    description: "Copyright registration consultant in India for software code, books, music, videos, logos, artwork, website content, TM-C support, objections, and IP ownership documentation."
   },
   "/services/logo-brand-copyright": {
     title: "Logo & Brand Copyright Registration (Artistic Work) | EXIMINQ",
     description: "Don't just Trademark it, Copyright it. Secure Logo's artistic design under the Copyright Act to prevent unauthorized reproduction by competitors."
   },
   "/services/barcode-registration": {
-    title: "Barcode Registration (GS1 India) & GTIN Consultant | EXIMINQ",
-    description: "Need Barcodes for Retail Export? Register products with GS1 India to generate GTIN/EAN codes. Mandatory for Amazon & Global Retail chains."
+    title: "Barcode Registration Consultant India | GS1 GTIN EAN UPC Barcodes | EXIMINQ",
+    description: "Barcode registration consultant in India for GS1 India registration, GTIN, EAN-13, UPC, DataKart setup, SKU planning, barcode generation, retail listing, and export product identification."
+  },
+  "/services/barcode-registration/": {
+    title: "Barcode Registration Consultant India | GS1 GTIN EAN UPC Barcodes | EXIMINQ",
+    description: "Barcode registration consultant in India for GS1 India registration, GTIN, EAN-13, UPC, DataKart setup, SKU planning, barcode generation, retail listing, and export product identification."
   },
   "/services/design-registration": {
-    title: "Industrial Design Registration Consultant Mumbai | EXIMINQ",
-    description: "Protect the shape and look of products. File Design Registration (Patents Office) to stop competitors from copying product aesthetics."
+    title: "Design Registration Consultant India | Industrial Design Filing | EXIMINQ",
+    description: "Design registration consultant in India for industrial design filing, product shape protection, Locarno classification, novelty search, drawings, objections, and registration support."
+  },
+  "/services/design-registration/": {
+    title: "Design Registration Consultant India | Industrial Design Filing | EXIMINQ",
+    description: "Design registration consultant in India for industrial design filing, product shape protection, Locarno classification, novelty search, drawings, objections, and registration support."
   }
 };

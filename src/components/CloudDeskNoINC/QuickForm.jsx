@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { Building2, Mail, Phone, User } from "lucide-react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     reason: "",
     shippingBill: "",
     portOfExport: "",
@@ -44,6 +48,20 @@ const QuickForm = () => {
   ------------------------- */
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
 
     // Reason
     if (!form.reason) {
@@ -91,10 +109,13 @@ const QuickForm = () => {
 
     try {
       const payload = {
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
         reason: form.reason,
-        shippingBill: form.shippingBill,
-        portOfExport: form.portOfExport,
-        mobile: form.mobile,
+        shippingBill: form.shippingBill.trim(),
+        portOfExport: form.portOfExport.trim(),
+        mobile: form.mobile.trim(),
         type: "QUICK_FORM",
       };
 
@@ -126,6 +147,9 @@ const QuickForm = () => {
 
       // Reset form
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         reason: "",
         shippingBill: "",
         portOfExport: "",
@@ -154,11 +178,91 @@ const QuickForm = () => {
       </p>
 
       {/* Form */}
-      <form onSubmit={handleSubmit}>
-        {/* Reason */}
-        <div className="mb-4">
+      <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
           <label className="block text-sm font-semibold mb-1">
-            Reason for Return
+            Company Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Building2
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              placeholder="e.g. ABC Exports Pvt Ltd"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-blue-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <User
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              placeholder="e.g. Rohan Mehta"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-blue-500 ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Mail
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="official@company.com"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-blue-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        {/* Reason */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Reason for Return <span className="text-red-500">*</span>
           </label>
 
           <select
@@ -198,9 +302,9 @@ const QuickForm = () => {
         </div>
 
         {/* Shipping Bill */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
-            Original Shipping Bill No.
+            Original Shipping Bill No. <span className="text-red-500">*</span>
           </label>
 
           <input
@@ -224,9 +328,9 @@ const QuickForm = () => {
         </div>
 
         {/* Port of Export */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
-            Port of Export
+            Port of Export <span className="text-red-500">*</span>
           </label>
 
           <input
@@ -250,24 +354,30 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile */}
-        <div className="mb-6">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
-            Mobile Number
+            Mobile Number <span className="text-red-500">*</span>
           </label>
 
-          <input
-            type="tel"
-            name="mobile"
-            value={form.mobile}
-            onChange={handleChange}
-            placeholder="e.g. 9876543210"
-            maxLength={10}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500 ${
-              errors.mobile
-                ? "border-red-500"
-                : "border-slate-300"
-            }`}
-          />
+          <div className="relative">
+            <Phone
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="tel"
+              name="mobile"
+              value={form.mobile}
+              onChange={handleChange}
+              placeholder="e.g. 9876543210"
+              maxLength={10}
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-blue-500 ${
+                errors.mobile
+                  ? "border-red-500"
+                  : "border-slate-300"
+              }`}
+            />
+          </div>
 
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">
@@ -280,7 +390,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition duration-300 ${
+          className={`md:col-span-2 w-full text-white font-bold py-3 rounded-lg transition duration-300 ${
             loading
               ? "bg-blue-400 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700"

@@ -9,10 +9,10 @@ const Navbar = () => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#about" class="hover:text-brand-600 transition">What is LMPC?</a>
-                <a href="#declarations" class="hover:text-brand-600 transition">Mandatory Labels</a>
-                <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#about" className="hover:text-brand-600 transition">What is LMPC?</a>
+                <a href="#declarations" className="hover:text-brand-600 transition">Mandatory Labels</a>
+                <a href="#documents" className="hover:text-brand-600 transition">Documents</a>
+                <a href="#process" className="hover:text-brand-600 transition">Process</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -36,10 +36,10 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">What is LMPC?</a>
-            <a href="#declarations" class="block py-2 text-slate-600">Mandatory Labels</a>
-            <a href="#process" class="block py-2 text-slate-600">Process</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Get Certificate</a>
+            <a href="#about" className="block py-2 text-slate-600">What is LMPC?</a>
+            <a href="#declarations" className="block py-2 text-slate-600">Mandatory Labels</a>
+            <a href="#process" className="block py-2 text-slate-600">Process</a>
+            <a href="#contact" className="block py-2 text-brand-600 font-bold">Get Certificate</a>
           {/* <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"

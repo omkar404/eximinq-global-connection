@@ -1,19 +1,18 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskDesign/ToBar";
 import Navbar from "../components/CloudDeskDesign/Navbar";
 import Hero from "../components/CloudDeskDesign/Hero";
 import Fees from "../components/CloudDeskDesign/Fees";
 import {
   Check,
-  ChevronDown,
   Linkedin,
   Twitter,
   Facebook,
   Phone,
   Mail,
   MapPin,
-  Sparkles, 
-  Lock, 
+  Sparkles,
+  Lock,
   Lightbulb,
   Ban,
   Wrench,
@@ -22,6 +21,40 @@ import {
 import { MainNavbar } from "../components/CloudDeskDesign/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskDesign/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
+
+const CANONICAL_URL = "https://eximinq.in/services/design-registration/";
+const META_TITLE =
+  "Design Registration Consultant India | Industrial Design Filing | EXIMINQ";
+const META_DESCRIPTION =
+  "Design registration consultant in India for industrial design filing, product shape protection, Locarno classification, novelty search, drawings, objections, and registration support.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "What does design registration protect?",
+    answer:
+      "Design registration protects the visual features of an article, including shape, configuration, pattern, ornamentation, and composition of lines or colours applied to a product.",
+  },
+  {
+    question: "How long is design registration valid in India?",
+    answer:
+      "A registered design is initially protected for 10 years and can usually be extended once for another 5 years by filing the renewal request in time.",
+  },
+  {
+    question: "What is not protected by design registration?",
+    answer:
+      "Purely functional features, mechanical principles, trademarks, property marks, and artistic works unrelated to industrial application are generally outside design registration protection.",
+  },
+  {
+    question: "Is novelty required for design registration?",
+    answer:
+      "Yes. The design should be new or original and should not have been disclosed publicly before the filing date in a way that destroys novelty.",
+  },
+  {
+    question: "What details are required for design filing?",
+    answer:
+      "Typical filing details include product category, applicant details, ownership documents, drawings or photographs showing views of the article, Locarno class, and first publication details if applicable.",
+  },
+];
 
 const CloudDeskDesign = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -35,14 +68,111 @@ const CloudDeskDesign = () => {
     // TODO → send API call
     // axios.post("/api/enroll", formData)
 
-    alert("Form submitted - check console for data.")
+    alert("Form submitted - check console for data.");
   }
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://eximinq.in/#organization",
+        name: "EXIMINQ Global Connections",
+        url: "https://eximinq.in/",
+        logo: "https://eximinq.in/logo512.png",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${CANONICAL_URL}#webpage`,
+        url: CANONICAL_URL,
+        name: META_TITLE,
+        description: META_DESCRIPTION,
+        isPartOf: { "@id": "https://eximinq.in/#website" },
+        about: { "@id": `${CANONICAL_URL}#service` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://eximinq.in/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: "https://eximinq.in/services/",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Design Registration",
+            item: CANONICAL_URL,
+          },
+        ],
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${CANONICAL_URL}#service`,
+        name: "Design Registration Consultant",
+        url: CANONICAL_URL,
+        image: OG_IMAGE_URL,
+        description: META_DESCRIPTION,
+        provider: { "@id": "https://eximinq.in/#organization" },
+        areaServed: {
+          "@type": "Country",
+          name: "India",
+        },
+        serviceType: [
+          "Design registration",
+          "Industrial design filing",
+          "Novelty search",
+          "Locarno classification",
+          "Design drawings preparation",
+          "Design objection response",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${CANONICAL_URL}#faq`,
+        mainEntity: FAQ_ITEMS.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
   
   return (
+    <>
+      <Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      {/* <TopBar /> */}
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
@@ -298,7 +428,7 @@ const CloudDeskDesign = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -306,13 +436,13 @@ const CloudDeskDesign = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ on LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ on X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ on Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -322,10 +452,10 @@ const CloudDeskDesign = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Design Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">Trademark Filing</a></li>
-                    <li><a href="#" class="hover:text-white transition">Copyright Protection</a></li>
-                    <li><a href="#" class="hover:text-white transition">Patent Drafting</a></li>
+                    <li><a href="/services/design-registration/" className="hover:text-white transition">Design Registration</a></li>
+                    <li><a href="/services/trademark-registration" className="hover:text-white transition">Trademark Filing</a></li>
+                    <li><a href="/services/copyright-registration/" className="hover:text-white transition">Copyright Protection</a></li>
+                    <li><a href="/services/design-registration/#coverage" className="hover:text-white transition">Patent vs Design</a></li>
             </ul>
           </div>
 
@@ -333,10 +463,10 @@ const CloudDeskDesign = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Designs Act 2000</a></li>
-                    <li><a href="#" class="hover:text-white transition">Locarno Classification</a></li>
-                    <li><a href="#" class="hover:text-white transition">IPR Fee Structure</a></li>
-                    <li><a href="#" class="hover:text-white transition">Design Journal</a></li>
+                    <li><a href="/services/design-registration/#about" className="hover:text-white transition">Designs Act 2000</a></li>
+                    <li><a href="/services/design-registration/#coverage" className="hover:text-white transition">Locarno Classification</a></li>
+                    <li><a href="/services/design-registration/#fees" className="hover:text-white transition">IPR Fee Structure</a></li>
+                    <li><a href="/services/design-registration/#process" className="hover:text-white transition">Design Filing Process</a></li>
             </ul>
           </div>
 
@@ -369,8 +499,8 @@ const CloudDeskDesign = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 
 export default CloudDeskDesign;
-

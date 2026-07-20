@@ -10,11 +10,11 @@ const Navbar = ({
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-             <a href="#about" class="hover:brand-600 transition">What is RMC?</a>
-                <a href="#reasons" class="hover:brand-600 transition">Why the Hold?</a>
-                <a href="#services" class="hover:brand-600 transition">Resolution Services</a>
-                <a href="#pricing" class="hover:text-brand-600 transition">Action Plan</a>
+          <a href="#home" className="hover:text-brand-600 transition">Home</a>
+             <a href="#about" className="hover:text-brand-600 transition">What is RMC?</a>
+                <a href="#reasons" className="hover:text-brand-600 transition">Why the Hold?</a>
+                <a href="#services" className="hover:text-brand-600 transition">Resolution Services</a>
+                <a href="#pricing" className="hover:text-brand-600 transition">Action Plan</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -58,11 +58,11 @@ const Navbar = ({
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-            <a href="#about" class="hover:brand-600 transition">What is RMC?</a>
-                <a href="#reasons" class="hover:brand-600 transition">Why the Hold?</a>
-                <a href="#services" class="hover:brand-600 transition">Resolution Services</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Action Plan</a>
+          <a href="#home" className="hover:text-brand-600 transition">Home</a>
+            <a href="#about" className="hover:text-brand-600 transition">What is RMC?</a>
+                <a href="#reasons" className="hover:text-brand-600 transition">Why the Hold?</a>
+                <a href="#services" className="hover:text-brand-600 transition">Resolution Services</a>
+                <a href="#contact" className="hover:text-brand-600 transition">Action Plan</a>
           <button
             onClick={() =>
               setShowEnrollModal({

@@ -1,6 +1,5 @@
-import  { Helmet } from "react-helmet-async";
-import React, { useState } from "react";
-import TopBar from "../components/CloudDeskWarehousing/TopBar";
+import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskWarehousing/Navbar";
 import Hero from "../components/CloudDeskWarehousing/Hero";
 import {
@@ -15,12 +14,8 @@ import {
   Phone,
   Mail,
   MapPin,
-  TrainFront,
-  Weight,
-  Train,
   MapPinned,
   ShieldCheck,
-  Hourglass,
   Boxes,
   Tags,
   HandGrab,
@@ -32,6 +27,123 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskWarehousing/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskWarehousing/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/warehousing-solutions/";
+const META_TITLE =
+  "Warehousing Solutions Consultant India | Bonded Storage, FTWZ & 3PL Near Ports | EXIMINQ";
+const META_DESCRIPTION =
+  "Warehousing solutions consultant in India for bonded warehouse storage, FTWZ, 3PL distribution, port-side storage, inventory management, labelling, kitting and cold-chain support.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const FAQ_ITEMS = [
+  {
+    question: 'What is a "Customs Bonded Warehouse"?',
+    answer:
+      'It is a secured area where imported goods can be stored without paying duty immediately. Duty is deferred until the goods are cleared for home consumption, and re-exported goods may avoid import duty.',
+  },
+  {
+    question: "What is an FTWZ and how is it different?",
+    answer:
+      'An FTWZ is a Free Trade Warehousing Zone under the SEZ framework. It supports duty-deferred storage, re-export planning and simplified trading operations for eligible cargo.',
+  },
+  {
+    question: "Can I perform manufacturing in a warehouse?",
+    answer:
+      "Full manufacturing generally requires a MOOWR or Section 65 structure. Standard warehouses are usually used for storage, labelling, repacking and other permitted value-added activities.",
+  },
+  {
+    question: "How are warehousing charges calculated?",
+    answer:
+      "Warehousing charges are usually based on area or volume, storage duration, handling movements, special storage conditions and value-added services such as labelling or kitting.",
+  },
+];
+const WAREHOUSING_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Warehousing Solutions",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Warehousing Solutions Consultant India",
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "Bonded warehousing",
+        "FTWZ storage",
+        "3PL warehousing",
+        "Port-side cargo storage",
+        "Labelling and kitting",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 
 const CloudDeskWarehousing = () => {
     const [showEnrollModal, setShowEnrollModal] = useState({
@@ -50,137 +162,22 @@ const CloudDeskWarehousing = () => {
 
   return (
 <>
-<Helmet>
-        <title>
-          Flexible Warehousing Solutions Near Major Ports | Warehousing Solutions Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="Avoid high detention charges. Access secure Bonded and General
-            warehousing space for storage, labeling, and distribution at Nhava
-            Sheva, Mundra, and Chennai."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/warehousing-solutions/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Flexible Warehousing Solutions Near Major Ports Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Avoid high detention charges. Access secure Bonded and General
-            warehousing space for storage, labeling, and distribution at Nhava
-            Sheva, Mundra, and Chennai."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/warehousing-solutions/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Flexible Warehousing Solutions Near Major Ports",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Avoid high detention charges. Access secure Bonded and General warehousing space for storage, labeling, and distribution at Nhava Sheva, Mundra, and Chennai."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name":  `What is a "Customs Bonded Warehouse"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It is a secured area where you can store imported goods without paying duty immediately. The duty is "deferred" until you take the goods out for sale in India. If you re-export them from the warehouse, you never pay the duty.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is an FTWZ and how is it different?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `An FTWZ (Free Trade Warehousing Zone) is a category of SEZ. It offers even more flexibility than a standard bonded warehouse, including the ability to hold foreign currency transactions and simplified "Trading" operations without paying GST on the storage services.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I perform manufacturing in a warehouse?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Only if you have a MOOWR (Section 65) license. A standard warehouse is for storage and basic "Value Addition" (labelling/packing). For full manufacturing, CloudDesk helps you convert your storage space into a MOOWR unit.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How are warehousing charges calculated?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Usually based on (1) Area (Sq. Ft.) or Volume (CBM), (2) Duration (Per Week/Month), and (3) Handling (Inward/Outward movements). CloudDesk provides a "Pay-as-you-use" model for startups to keep overheads low.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Cross-Docking"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `This is when goods are moved directly from an incoming truck/container to an outgoing one with little to no storage time. CloudDesk uses cross-docking at port-side warehouses to slash your "Port-to-Customer" delivery time by 48 hours`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is my cargo insured in the warehouse?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Standard insurance only covers the building. You must take out a "Marine-cum-Storage" or "Fire & Allied Perils" policy for your specific stock. CloudDesk’s integrated platform allows you to add insurance coverage with a single click during the "Inward" process.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do I track my inventory in a bonded warehouse?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `You get access to the CloudDesk WMS (Warehouse Management System). It gives you a real-time view of your "Bonded vs. Non-Bonded" stock levels, batch numbers, and expiry dates, synced directly with your ICEGATE records.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can Customs seize goods from a warehouse?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes, if the goods are prohibited, mis-declared, or if the "Bond Validity" has expired. CloudDesk’s Bond-Sentinel alerts you 30 days before your storage permission expires to ensure you either clear the goods or extend the bond.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(WAREHOUSING_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -747,12 +744,72 @@ const CloudDeskWarehousing = () => {
         </div>
       </section>
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-8">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Logistics Services
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Support Around Warehousing
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                copy: "File into-bond, ex-bond and home-consumption import declarations.",
+              },
+              {
+                title: "Duty Payment ECL",
+                href: "/services/duty-payment-ecl/",
+                copy: "Manage ECL top-ups, challan payments and customs duty reconciliation.",
+              },
+              {
+                title: "Project Cargo",
+                href: "/services/project-cargo/",
+                copy: "Plan heavy, oversized and special cargo movement into storage facilities.",
+              },
+              {
+                title: "Marine Insurance",
+                href: "/services/marine-insurance/",
+                copy: "Cover cargo during transit, storage and port-side handling windows.",
+              },
+              {
+                title: "LMPC Registration",
+                href: "/services/lmpc-registration/",
+                copy: "Align labels, declarations and MRP stickers before distribution.",
+              },
+              {
+                title: "CHA Services",
+                href: "/services/cha-services/",
+                copy: "Coordinate customs broker support for port-side clearance and storage.",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition"
+              >
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {service.copy}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -760,13 +817,25 @@ const CloudDeskWarehousing = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq/"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -775,24 +844,24 @@ const CloudDeskWarehousing = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#bonded" className="hover:text-white transition">
                   Bonded Warehousing
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#general" className="hover:text-white transition">
                   3PL Services
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#about" className="hover:text-white transition">
                   Inventory Management
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/inland-transportation/" className="hover:text-white transition">
                   Transportation
                 </a>
               </li>
@@ -802,24 +871,24 @@ const CloudDeskWarehousing = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
                   Bhiwandi / Panvel
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/project-cargo/" className="hover:text-white transition">
                   Mundra
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/cha-services/" className="hover:text-white transition">
                   Chennai
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/freight-forwarding/" className="hover:text-white transition">
                   Delhi NCR
                 </a>
               </li>

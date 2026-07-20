@@ -28,6 +28,9 @@ async function sendEmail(record) {
     issue,
     productCategory,
     manufacturerCountry,
+    companyName,
+    personName,
+    contactPersonName,
   } = record;
 
   const serviceDisplay = service || "CDSCO Registration";
@@ -42,13 +45,15 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email ID</b></td><td>${email}</td></tr>` : ""}
           ${productCategory ? `<tr><td><b>Product Category</b></td><td>${productCategory}</td></tr>` : ""}
           ${manufacturerCountry ? `<tr><td><b>Manufacturer Country</b></td><td>${manufacturerCountry}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
           ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
@@ -79,24 +84,69 @@ exports.createcdscoComplianceRoutes = async (req, res) => {
       issue,
       productCategory, // ✅ camelCase
       manufacturerCountry, // ✅ camelCase
+      companyName,
+      personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanMobile = mobile ? mobile.trim() : "";
+    const cleanEmail = email ? email.trim().toLowerCase() : "";
+    const cleanCompanyName = companyName ? companyName.trim() : "";
+    const cleanContactPersonName = (contactPersonName || personName || name || "").trim();
 
-    if (!mobile || !mobile.trim()) {
+    if (!cleanMobile) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
       });
     }
 
+    if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter valid 10 digit Indian mobile number",
+      });
+    }
+
+    if (isQuickForm) {
+      if (!cleanCompanyName) {
+        return res.status(400).json({
+          success: false,
+          message: "Company name is required",
+        });
+      }
+      if (!cleanContactPersonName) {
+        return res.status(400).json({
+          success: false,
+          message: "Contact person name is required",
+        });
+      }
+      if (!cleanEmail) {
+        return res.status(400).json({
+          success: false,
+          message: "Email ID is required",
+        });
+      }
+    }
+
+    if (cleanEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid email ID",
+      });
+    }
+
     const recordData = {
       service: service || "CDSCO Registration",
-      mobile: mobile.trim(),
+      mobile: cleanMobile,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
       productCategory: productCategory ? productCategory.trim() : null, // ✅ use the correct variable
       manufacturerCountry: manufacturerCountry ? manufacturerCountry.trim() : null, // ✅ use correct variable
-      name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      name: isQuickForm ? cleanContactPersonName : name ? name.trim() : null,
+      email: cleanEmail || null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),

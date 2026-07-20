@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskCDSCO/TopBar";
 import Navbar from "../components/CloudDeskCDSCO/Navbar";
 import Hero from "../components/CloudDeskCDSCO/Hero";
 import Fees from "../components/CloudDeskCDSCO/Fees";
@@ -11,13 +10,10 @@ import {
   Facebook,
   AlertTriangle,
   Building,
-  ShieldUser, 
   CheckCircle,   
   Phone,
   Mail,
   MapPin,
-  IdCard,
-  PackageOpen,
   Microscope,
   Check,
   Pill,
@@ -28,12 +24,102 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskCDSCO/MainNavbar";
 import { ModalEnroll} from "../components/CloudDeskCDSCO/ModalEnroll";
+
+const CANONICAL_URL = "https://eximinq.in/services/cdsco-compliance/";
+const META_TITLE =
+  "CDSCO Registration Consultant India | Medical Device, Drug & Cosmetics Import License | EXIMINQ";
+const META_DESCRIPTION =
+  "CDSCO registration consultant in India for medical devices, drugs, APIs, cosmetics, SUGAM portal filing, MD-14 import license, Form 10, Form 43 and customs NOC support.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "What is the risk-based classification for medical devices in India?",
+    answer:
+      "Medical devices are classified from Class A to Class D based on risk, from low-risk devices such as bandages to high-risk devices such as implants, stents and pacemakers."
+  },
+  {
+    question: "Can I import unapproved drugs for personal use?",
+    answer:
+      "Small quantities may be imported for personal use through the applicable CDSCO permission route with valid medical documentation, but this is not a commercial import route."
+  },
+  {
+    question: "Do diagnostic kits need a CDSCO license?",
+    answer:
+      "Yes. In-vitro diagnostic kits are regulated as medical devices and their classification depends on the disease, risk profile and intended use."
+  },
+  {
+    question: "How long is a CDSCO registration certificate valid?",
+    answer:
+      "Validity and retention obligations depend on the product category and current CDSCO rules. Importers should track renewals, retention fees and post-market compliance carefully."
+  }
+];
+
 const CloudDeskCDSCO = () => {
 const [showEnrollModal, setShowEnrollModal] = useState({ 
   open: false, 
   type: "", 
 });
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://eximinq.in/#organization",
+        name: "EXIMINQ Global Connections",
+        url: "https://eximinq.in/",
+        logo: OG_IMAGE_URL
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${CANONICAL_URL}#webpage`,
+        url: CANONICAL_URL,
+        name: META_TITLE,
+        description: META_DESCRIPTION,
+        isPartOf: { "@id": "https://eximinq.in/#website" },
+        about: { "@id": `${CANONICAL_URL}#service` },
+        inLanguage: "en-IN"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://eximinq.in/" },
+          { "@type": "ListItem", position: 2, name: "Services", item: "https://eximinq.in/services/" },
+          { "@type": "ListItem", position: 3, name: "CDSCO Compliance", item: CANONICAL_URL }
+        ]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${CANONICAL_URL}#service`,
+        name: "CDSCO Registration Consultant India",
+        url: CANONICAL_URL,
+        image: OG_IMAGE_URL,
+        provider: { "@id": "https://eximinq.in/#organization" },
+        areaServed: "India",
+        serviceType: [
+          "CDSCO registration",
+          "Medical device import license",
+          "Drug import license",
+          "Cosmetics registration",
+          "SUGAM portal compliance"
+        ],
+        description: META_DESCRIPTION
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${CANONICAL_URL}#faq`,
+        mainEntity: FAQ_ITEMS.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer
+          }
+        }))
+      }
+    ]
+  };
 
   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
@@ -45,118 +131,43 @@ const [showEnrollModal, setShowEnrollModal] = useState({
   }
   return (
 <>
-<Helmet>
-        <title>
-          Simplifying CDSCO Registration for Importers | CDSCO Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
 
         <meta
           name="description"
-          content="Navigate India's rigorous regulatory landscape. We provide end-to-end licensing for Medical Devices (MD-14), Drugs (Form 10), and Cosmetics (Form 43) via the SUGAM portal."
+          content={META_DESCRIPTION}
         />
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/cdsco-compliance/"
+          href={CANONICAL_URL}
         />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         {/* Open Graph */}
         <meta
           property="og:title"
-          content="Simplifying CDSCO Registration for Importers Online in India | Eximinq"
+          content={META_TITLE}
         />
         <meta
           property="og:description"
-          content="Navigate India's rigorous regulatory landscape. We provide end-to-end licensing for Medical Devices (MD-14), Drugs (Form 10), and Cosmetics (Form 43) via the SUGAM portal."
+          content={META_DESCRIPTION}
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/cdsco-compliance/"
+          content={CANONICAL_URL}
         />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Simplifying CDSCO Registration for Importers",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Navigate India's rigorous regulatory landscape. We provide end-to-end licensing for Medical Devices (MD-14), Drugs (Form 10), and Cosmetics (Form 43) via the SUGAM portal."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the risk-based classification for Medical Devices in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Class A Low Risk (e.g., Absorbent cotton, Surgical tape).
-                     Class B Low-Moderate Risk (e.g., Needles, Catheters).
-                     Class C Moderate-High Risk (e.g., Bone bolts, Lenses).
-                     Class D High Risk (e.g., Heart valves, Pacemakers).`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Can I import "Unapproved" drugs for personal use?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, via Form 12A. You can import small quantities for personal use with a valid doctor's prescription, but this is restricted to non-commercial use."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Do I need a CDSCO license for "Diagnostic Kits"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. In-Vitro Diagnostics (IVD) are treated as medical devices. Depending on the disease they detect (e.g., HIV/Malaria), they are usually Class C or D."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long is a CDSCO Registration Certificate (RC) valid?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `In 2026, the RC is valid perpetually, provided the Retention Fee is paid every five years. CloudDesk's "Compliance Calendar" manages these fee payments for you.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What are the government fees for Medical Device Import?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It varies by class. For Class A, it's approximately $1,000, scaling up significantly for Class D. CloudDesk provides an exact Fee Estimator based on your product specs."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is a "Dual-Use" NOC?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "If you import a chemical that could be used as a drug but you are using it for industrial purposes, you need a Dual-Use NOC from the CDSCO to clear Customs."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(structuredData)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -699,7 +710,7 @@ const [showEnrollModal, setShowEnrollModal] = useState({
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -707,13 +718,13 @@ const [showEnrollModal, setShowEnrollModal] = useState({
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition" aria-label="EXIMINQ on LinkedIn">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://twitter.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition" aria-label="EXIMINQ on X">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition" aria-label="EXIMINQ on Facebook">
                 <Facebook size={18} />
               </a>
             </div>
@@ -722,24 +733,24 @@ const [showEnrollModal, setShowEnrollModal] = useState({
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#medical-devices" className="hover:text-white transition">
                   Medical Device Reg
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#drugs" className="hover:text-white transition">
                   Drug Import License
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#cosmetics" className="hover:text-white transition">
                   Cosmetics Reg
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#drugs" className="hover:text-white transition">
                   Test License
                 </a>
               </li>
@@ -749,25 +760,25 @@ const [showEnrollModal, setShowEnrollModal] = useState({
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#contact" className="hover:text-white transition">
                   Fee Structure
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#medical-devices" className="hover:text-white transition">
                   Device Classification
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  GHTF Countries List
+                <a href="/services/free-sale-certificate/" className="hover:text-white transition">
+                  Free Sale Certificate
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Labeling Rules
+                <a href="/services/bis-registration/" className="hover:text-white transition">
+                  BIS Registration
                 </a>
               </li>
             </ul>

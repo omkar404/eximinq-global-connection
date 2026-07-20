@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskGSTFiling/TopBar";
 import Navbar from "../components/CloudDeskGSTFiling/Navbar";
 import Hero from "../components/CloudDeskGSTFiling/Hero";
 import Fees from "../components/CloudDeskGSTFiling/Fees";
@@ -24,6 +23,128 @@ AlertCircle
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskGSTFiling/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskGSTFiling/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/gst-returns/";
+const META_TITLE =
+  "GST Return Filing Consultant India | GSTR-1, GSTR-3B & Export Table 6A Support | EXIMINQ";
+const META_DESCRIPTION =
+  "GST return filing consultant in India for exporters. Get GSTR-1, GSTR-3B, Table 6A, LUT export reporting, IGST refund matching, invoice reconciliation and annual return support.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const FAQ_ITEMS = [
+  {
+    question: "What is the due date for GSTR-1 for exporters?",
+    answer:
+      "Monthly GSTR-1 is generally due by the 11th of the following month. Export invoice details must be filed correctly so data can flow for refund and compliance matching.",
+  },
+  {
+    question: "Should exporters select export with payment or without payment?",
+    answer:
+      "Use export with payment when IGST was charged and refund will be claimed. Use export without payment when shipments are made under LUT or bond.",
+  },
+  {
+    question: "Why is Table 6A important for exporters?",
+    answer:
+      "Table 6A captures export invoice, shipping bill and port details. Mistakes can delay or block IGST refund matching with customs data.",
+  },
+  {
+    question: "Is GSTR-9 annual return mandatory?",
+    answer:
+      "GSTR-9 applicability depends on turnover thresholds and current GST notifications. Exporters should reconcile annual turnover, zero-rated supplies and refunds before filing.",
+  },
+  {
+    question: "Can wrong shipping bill details be corrected in GST returns?",
+    answer:
+      "Yes, export invoice and shipping bill errors may be corrected through amendments in later returns, but delays can affect refund timing.",
+  },
+];
+const GST_RETURNS_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "GST Returns",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "GST Return Filing Consultant India",
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "GSTR-1 filing",
+        "GSTR-3B filing",
+        "Export Table 6A reconciliation",
+        "IGST refund matching",
+        "GST annual return support",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 
 const CloudDeskGSTFiling = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -42,160 +163,22 @@ const CloudDeskGSTFiling = () => {
   return (
 <>
 
-<Helmet>
-        <title>
-          Error-Free GST Filing for Exporters | GST Filing Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="A single mismatch in Table 6A can block your IGST Refund for months. We specialize in filing GSTR-1 and GSTR-3B that perfectly match your Shipping Bills."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/gst-returns/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Error-Free GST Filing for Exporters Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="A single mismatch in Table 6A can block your IGST Refund for months. We specialize in filing GSTR-1 and GSTR-3B that perfectly match your Shipping Bills."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/gst-returns/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Error-Free GST Filing for Exporters",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "A single mismatch in Table 6A can block your IGST Refund for months. We specialize in filing GSTR-1 and GSTR-3B that perfectly match your Shipping Bills."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the due date for GSTR-1 for exporters?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "For monthly filers, the due date is the 11th of the following month. We strongly recommend filing by this date because the export data is pushed to ICEGATE only after GSTR-1 is filed."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Should I select "Export with Payment" or "Without Payment"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `If you paid IGST on the invoice to claim a refund later, select "Export with Payment of Tax". If you are exporting under LUT (Bond), select "Export Without Payment of Tax".`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is GSTR-9 (Annual Return) mandatory?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, for businesses with a turnover above ₹2 Crores. It consolidates all monthly returns filed during the financial year."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if I forget to mention the Port Code in GSTR-1?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "In 2026, the GST portal will allow you to file, but Customs will never trigger your refund. You will have to file an Amendment (Table 9A) in the next month, delaying your cash flow by 30–60 days."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I file GSTR-1 after the deadline?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes, but with a Late Fee of ₹50 per day. More importantly, late filing delays the "Invoice Matching" for your foreign buyer (if they are a GST-registered Indian subsidiary), straining your business relationship.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do I report exports made via Courier (e-commerce)?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "You must use the CSB-V (Courier Shipping Bill) details. Even for small value exports, the HSN code and the courier tracking number must be mapped to the invoice in GSTR-1."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "Rule 96" Refund?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "This is the Automatic IGST Refund. If you pay IGST on export and your GSTR-1 matches your Shipping Bill, Customs will credit the refund to your bank account automatically without any separate application."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "RFD-01" Refund?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `This is for Unutilized ITC (for those exporting under LUT). This is NOT automatic. You must file a separate application on the GST portal. CloudDesk specializes in RFD-01 filing, achieving a 95% "No-Deficiency" rate.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Why is my refund stuck with "Error SB006"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `SB006 means a "Gateway EGM Error." Your goods have left the port, but the carrier (airline/shipping line) hasn't filed the Export General Manifest correctly. CloudDesk liaisons with the shipping lines to fix this.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is GSTR-9 (Annual Return) mandatory for exporters?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `n 2026, it is mandatory if your aggregate turnover exceeds ₹2 Crore. For exporters, this is a "Reconciliation Statement" where we prove that all exported goods actually left the country.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "GST Audit" threshold in 2026?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Self-certification of GSTR-9C (Reconciliation Statement) is required for turnover above ₹5 Crore. CloudDesk provides the Certification Assistance to ensure your export data stands up to department scrutiny."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(GST_RETURNS_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -621,13 +604,71 @@ const CloudDeskGSTFiling = () => {
 </section>
 
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="mb-8">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Services
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Strengthen Your Export GST Workflow
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                label: "GST LUT Filing",
+                href: "/services/gst-lut-filing/",
+                text: "File LUT correctly for export without payment of IGST.",
+              },
+              {
+                label: "IGST Refund",
+                href: "/services/igst-refund/",
+                text: "Resolve export refund delays and shipping bill mismatches.",
+              },
+              {
+                label: "Shipping Bill Filing",
+                href: "/services/shipping-bill-filing/",
+                text: "Keep customs export data aligned with GST return details.",
+              },
+              {
+                label: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                text: "Support import records, duty payment and input credit documentation.",
+              },
+              {
+                label: "CA Certification",
+                href: "/services/ca-certification-export-import/",
+                text: "Prepare export turnover and incentive certification support.",
+              },
+              {
+                label: "Compliance Audit",
+                href: "/features/compliance-audit/",
+                text: "Review export data before mismatches become notices.",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="block bg-white border border-slate-200 rounded-lg p-5 hover:border-brand-500 hover:shadow-md transition"
+              >
+                <h3 className="font-bold text-slate-900 mb-2">{service.label}</h3>
+                <p className="text-sm text-slate-600">{service.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">
+              EXIMINQ
+            </a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -635,13 +676,25 @@ const CloudDeskGSTFiling = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -651,10 +704,10 @@ const CloudDeskGSTFiling = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Monthly Returns</a></li>
-                    <li><a href="#" class="hover:text-white transition">LUT Filing</a></li>
-                    <li><a href="#" class="hover:text-white transition">IGST Refund</a></li>
-                    <li><a href="#" class="hover:text-white transition">GST Registration</a></li>
+                    <li><a href="#services" className="hover:text-white transition">Monthly Returns</a></li>
+                    <li><a href="/services/gst-lut-filing/" className="hover:text-white transition">LUT Filing</a></li>
+                    <li><a href="/services/igst-refund/" className="hover:text-white transition">IGST Refund</a></li>
+                    <li><a href="/services/gst-returns/" className="hover:text-white transition">GST Registration</a></li>
             </ul>
           </div>
 
@@ -662,10 +715,10 @@ const CloudDeskGSTFiling = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">HSN SAC Codes</a></li>
-                    <li><a href="#" class="hover:text-white transition">GST Rate Finder</a></li>
-                    <li><a href="#" class="hover:text-white transition">Refund Manual</a></li>
-                    <li><a href="#" class="hover:text-white transition">Invoice Format</a></li>
+                    <li><a href="/services/hsn-code-finder/" className="hover:text-white transition">HSN SAC Codes</a></li>
+                    <li><a href="/services/duty-calculator/" className="hover:text-white transition">GST Rate Finder</a></li>
+                    <li><a href="/services/igst-refund/" className="hover:text-white transition">Refund Manual</a></li>
+                    <li><a href="/services/invoice-generator/" className="hover:text-white transition">Invoice Format</a></li>
             </ul>
           </div>
 

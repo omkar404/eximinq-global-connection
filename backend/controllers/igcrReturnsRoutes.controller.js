@@ -28,6 +28,9 @@ async function sendEmail(record) {
     issue,
     iec,
     notification,
+    companyName,
+    personName,
+    contactPersonName,
   } = record;
 
   const serviceDisplay = service || "IGCR Return Registration";
@@ -42,6 +45,8 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type || "QUICK_FORM"}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
           ${iec ? `<tr><td><b>Company IEC</b></td><td>${iec}</td></tr>` : ""}
           ${notification ? `<tr><td><b>Notification No.</b></td><td>${notification}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
@@ -79,24 +84,57 @@ exports.createigcrReturnsRoutes = async (req, res) => {
       issue,
       iec, // ✅ camelCase
       notification, // ✅ camelCase
+      companyName,
+      personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanMobile = typeof mobile === "string" ? mobile.trim() : "";
+    const cleanCompanyName =
+      typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
 
-    if (!mobile || !mobile.trim()) {
+    if (!cleanMobile) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
       });
     }
 
+    if (isQuickForm) {
+      if (!cleanCompanyName || !cleanContactPersonName || !cleanEmail) {
+        return res.status(400).json({
+          success: false,
+          message: "Company name, contact person name, and email are required",
+        });
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+        return res.status(400).json({
+          success: false,
+          message: "Enter a valid email ID",
+        });
+      }
+    }
+
     const recordData = {
       service: service || "IGCR Return Registration",
-      mobile: mobile.trim(),
+      mobile: cleanMobile,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
       iec: iec ? iec.trim() : null,
       notification: notification ? notification.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      email: cleanEmail || null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),

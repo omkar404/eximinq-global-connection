@@ -162,15 +162,23 @@ function App() {
 
         {/* {Bill of Entry} */}
         <Route path="/services/bill-of-entry-filing" element={<CloudDeskBankEntry />} />
+        <Route path="/services/services/bill-of-entry-filing" element={<Navigate to="/services/bill-of-entry-filing/" replace />} />
+        <Route path="/services/services//bill-of-entry-filing" element={<Navigate to="/services/bill-of-entry-filing/" replace />} />
 
         {/* Shipping Bills */}
         <Route path="/services/shipping-bill-filing" element={<CloudDeskShippingBills />} />
+        <Route path="/services/services/shipping-bill-filing" element={<Navigate to="/services/shipping-bill-filing/" replace />} />
+        <Route path="/services/services//shipping-bill-filing" element={<Navigate to="/services/shipping-bill-filing/" replace />} />
 
         {/* E-Sanchit */}
         <Route path="/services/e-sanchit-filing" element={<CloudDeskESANCHIT />} />
+        <Route path="/services/services/e-sanchit-filing" element={<Navigate to="/services/e-sanchit-filing/" replace />} />
+        <Route path="/services/services//e-sanchit-filing" element={<Navigate to="/services/e-sanchit-filing/" replace />} />
 
         {/* Duty Payment */}
         <Route path="/services/duty-payment-ecl" element={<CloudDeskDutyPayment />} />
+        <Route path="/services/services/duty-payment-ecl" element={<Navigate to="/services/duty-payment-ecl/" replace />} />
+        <Route path="/services/services//duty-payment-ecl" element={<Navigate to="/services/duty-payment-ecl/" replace />} />
 
         {/* AEO Certificate */}
         <Route path="/services/aeo-certification" element={<CloudDeskAEOCertificate />} />
@@ -184,14 +192,20 @@ function App() {
         {/* CHA Services */}
         <Route path="/services/cha-services" element={<CloudDeskCHAServices />} />
 
-        {/* Inland Transportation */}
+        {/* Warehousing */}
         <Route path="/services/warehousing-solutions" element={<CloudDeskWarehousing />} />
+        <Route path="/services/services/warehousing-solutions" element={<Navigate to="/services/warehousing-solutions/" replace />} />
+        <Route path="/services/services//warehousing-solutions" element={<Navigate to="/services/warehousing-solutions/" replace />} />
 
         {/* Inland Transportation */}
         <Route path="/services/inland-transportation" element={<CloudDeskInlandTransport />} />
+        <Route path="/services/services/inland-transportation" element={<Navigate to="/services/inland-transportation/" replace />} />
+        <Route path="/services/services//inland-transportation" element={<Navigate to="/services/inland-transportation/" replace />} />
 
         {/* Marine Insrance */}
         <Route path="/services/marine-insurance" element={<CloudDeskMarine />} />
+        <Route path="/services/services/marine-insurance" element={<Navigate to="/services/marine-insurance/" replace />} />
+        <Route path="/services/services//marine-insurance" element={<Navigate to="/services/marine-insurance/" replace />} />
 
         {/* Project Cargo */}
         <Route path="/services/project-cargo/" element={<CloudDeskProjectCargo />} />
@@ -215,7 +229,10 @@ function App() {
         <Route path="/services/duty-drawback/" element={<CloudDeskDutyDrawBack />} />
 
         {/* BIS Certification */}
-        <Route path="/services/bis-registration" element={<CloudDeskBisRegistration />} />
+        <Route path="/services/bis-registration/" element={<CloudDeskBisRegistration />} />
+        <Route path="/services/bis-registration" element={<Navigate to="/services/bis-registration/" replace />} />
+        <Route path="/services/services/bis-registration" element={<Navigate to="/services/bis-registration/" replace />} />
+        <Route path="/services/services//bis-registration" element={<Navigate to="/services/bis-registration/" replace />} />
 
         {/* EPR Authorization */}
         <Route path="/services/epr-authorization" element={<CloudDeskEPRAuthorization />} />
@@ -232,17 +249,26 @@ function App() {
         {/* EDPMS  */}
         <Route path="/services/edpms-ebrc/" element={<CloudDeskEDPMS />} />
 
-        {/* EDPMS & e-BRC */}
-        <Route path="/services/aqcs-pqms" element={<CloudDeskEBRC />} />
+        {/* AQCS & PQMS */}
+        <Route path="/services/aqcs-pqms/" element={<CloudDeskEBRC />} />
+        <Route path="/services/aqcs-pqms" element={<Navigate to="/services/aqcs-pqms/" replace />} />
+        <Route path="/services/services/aqcs-pqms" element={<Navigate to="/services/aqcs-pqms/" replace />} />
+        <Route path="/services/services//aqcs-pqms" element={<Navigate to="/services/aqcs-pqms/" replace />} />
 
         {/* CDSCO Registration */}
-        <Route path="/services/cdsco-compliance" element={<CloudDeskCDSCO />} />
+        <Route path="/services/cdsco-compliance/" element={<CloudDeskCDSCO />} />
+        <Route path="/services/cdsco-compliance" element={<Navigate to="/services/cdsco-compliance/" replace />} />
+        <Route path="/services/services/cdsco-compliance" element={<Navigate to="/services/cdsco-compliance/" replace />} />
+        <Route path="/services/services//cdsco-compliance" element={<Navigate to="/services/cdsco-compliance/" replace />} />
 
         {/* Certificate of Origin */}
         <Route path="/services/certificate-of-origin/" element={<CloudDeskCertificate />} />
 
         {/* GST LUT Filing */}
+        <Route path="/services/gst-lut-filing" element={<Navigate to="/services/gst-lut-filing/" replace />} />
         <Route path="/services/gst-lut-filing/" element={<CloudDeskGSTLUT />} />
+        <Route path="/services/services/gst-lut-filing" element={<Navigate to="/services/gst-lut-filing/" replace />} />
+        <Route path="/services/services//gst-lut-filing" element={<Navigate to="/services/gst-lut-filing/" replace />} />
 
         {/* REX Registration */}
         <Route path="/services/rex-registration" element={<CloudDeskREX />} />
@@ -270,12 +296,16 @@ function App() {
         {/* No Due Certificate */}
         <Route path="/services/no-due-certificate" element={<CloudDeskNoDue />} />
 
+<<<<<<< HEAD
         {/* Consolidated URL redirect */}
         {/* <Route
           path="/services/no-incentive-certificate"
           element={<Navigate to="/services/no-due-certificate/" replace />}
         /> */}
 
+=======
+        {/* No Incentive Certificate */}
+>>>>>>> bf8549d (feat: add WebSocket symbols and File API types)
         <Route path="/services/no-incentive-certificate" element={<CloudDeskNoINC />} />
 
         {/* Interest Equalisation  */}
@@ -288,7 +318,10 @@ function App() {
         <Route path="/services/halal-certification" element={<CloudDeskHalal />} />
 
         {/* IGCR Returns */}
-        <Route path="/services/igcr-returns" element={<CloudDeskIGCR />} />
+        <Route path="/services/igcr-returns/" element={<CloudDeskIGCR />} />
+        <Route path="/services/igcr-returns" element={<Navigate to="/services/igcr-returns/" replace />} />
+        <Route path="/services/services/igcr-returns" element={<Navigate to="/services/igcr-returns/" replace />} />
+        <Route path="/services/services//igcr-returns" element={<Navigate to="/services/igcr-returns/" replace />} />
 
         {/* Boost Credibility with ISO Certification */}
         <Route path="/services/iso-certification" element={<CloudDeskISO />} />
@@ -328,18 +361,24 @@ function App() {
 
         {/* GST Filing */}
         <Route path="/services/gst-returns" element={<CloudDeskGSTFiling />} />
+        <Route path="/services/services/gst-returns" element={<Navigate to="/services/gst-returns/" replace />} />
+        <Route path="/services/services//gst-returns" element={<Navigate to="/services/gst-returns/" replace />} />
 
         {/* Horticulture Export License */}
         <Route path="/services/horticulture" element={<CloudDeskHorticulture />} />
 
         {/* Pollution Control Board Registration */}
         <Route path="/services/pollution-control" element={<CloudDeskPollution />} />
+        <Route path="/services/services/pollution-control" element={<Navigate to="/services/pollution-control/" replace />} />
 
         {/* Secure Your Brand Identity */}
         <Route path="/services/trademark-registration" element={<CloudDeskBrand />} />
 
         {/* Copyright Registration */}
-        <Route path="/services/copyright-registration" element={<CloudDeskCopyright />} />
+        <Route path="/services/copyright-registration/" element={<CloudDeskCopyright />} />
+        <Route path="/services/copyright-registration" element={<Navigate to="/services/copyright-registration/" replace />} />
+        <Route path="/services/services/copyright-registration" element={<Navigate to="/services/copyright-registration/" replace />} />
+        <Route path="/services/services//copyright-registration" element={<Navigate to="/services/copyright-registration/" replace />} />
 
         {/* Consolidated URL redirect */}
         {/* <Route
@@ -358,13 +397,22 @@ function App() {
         <Route path="/services/logo-copyright" element={<CloudDeskLogoCopyright />} />
 
         {/* Official Barcode Registration */}
-        <Route path="/services/barcode-registration" element={<CloudDeskBarcode />} />
+        <Route path="/services/barcode-registration/" element={<CloudDeskBarcode />} />
+        <Route path="/services/barcode-registration" element={<Navigate to="/services/barcode-registration/" replace />} />
+        <Route path="/services/services/barcode-registration" element={<Navigate to="/services/barcode-registration/" replace />} />
+        <Route path="/services/services//barcode-registration" element={<Navigate to="/services/barcode-registration/" replace />} />
 
         {/* Design Registration */}
-        <Route path="/services/design-registration" element={<CloudDeskDesign />} />
+        <Route path="/services/design-registration/" element={<CloudDeskDesign />} />
+        <Route path="/services/design-registration" element={<Navigate to="/services/design-registration/" replace />} />
+        <Route path="/services/services/design-registration" element={<Navigate to="/services/design-registration/" replace />} />
+        <Route path="/services/services//design-registration" element={<Navigate to="/services/design-registration/" replace />} />
 
         {/* RMCC Alert Removal */}
-        <Route path="/services/rmcc-alert-removal" element={<CloudDeskRMCC />} />
+        <Route path="/services/rmcc-alert-removal/" element={<CloudDeskRMCC />} />
+        <Route path="/services/rmcc-alert-removal" element={<Navigate to="/services/rmcc-alert-removal/" replace />} />
+        <Route path="/services/services/rmcc-alert-removal" element={<Navigate to="/services/rmcc-alert-removal/" replace />} />
+        <Route path="/services/services//rmcc-alert-removal" element={<Navigate to="/services/rmcc-alert-removal/" replace />} />
 
         {/* Svb Registration */}
         <Route path="/services/svb-registration" element={<CloudDeskSVB />} />

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { AlertTriangle, Phone } from "lucide-react";
+import { AlertTriangle, Building2, Mail, Phone, User } from "lucide-react";
+import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 const UN_IIP_CATEGORIES = [
   {
@@ -83,6 +84,9 @@ const UN_IIP_CATEGORIES = [
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     unNumber: "",
     packagingType: "",
     mobile: "",
@@ -118,6 +122,20 @@ const QuickForm = () => {
   -----------------------*/
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
 
     if (!form.unNumber) {
       newErrors.unNumber = "UN Number is required";
@@ -155,35 +173,39 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        unNumber: form.unNumber,
-        category: category,
-        packagingType: packagingType,
-        mobile: form.mobile,
+        serviceKey: "un-iip-certification",
+        serviceLabel: "UN IIP Packaging Certification",
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
         type: "QUICK_FORM",
+        source: "UN IIP DG Cargo Assessment",
+        details: {
+          "Company Name": form.companyName.trim(),
+          "Contact Person Name": form.contactPersonName.trim(),
+          "Email ID": form.email.trim(),
+          "UN Number / Name": form.unNumber.trim(),
+          "Packaging Category": category,
+          "Packaging Type": packagingType,
+          "Mobile Number": form.mobile.trim(),
+        },
       };
 
       console.log("📤 Sending data:", payload);
 
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/un-iip-certification`,
-        // "http://localhost:5000/api/un-iip-certification",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        },
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message || "Something went wrong");
-      }
+      await submitServiceQuickForm(payload);
 
       alert("✅ Request submitted successfully");
 
-      // Reset form
-      setForm({ unNumber: "", mobile: "" });
+      setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
+        unNumber: "",
+        packagingType: "",
+        mobile: "",
+      });
       setCategory("");
       setPackagingType("");
     } catch (err) {
@@ -208,9 +230,87 @@ const QuickForm = () => {
         Find the required Packaging Group for your product.
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Building2
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              placeholder="e.g. ABC Chemicals Pvt Ltd"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <User
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              placeholder="e.g. Rohan Mehta"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">{errors.contactPersonName}</p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Mail
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="official@company.com"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* UN Number */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             UN Number / Name
           </label>
@@ -230,7 +330,7 @@ const QuickForm = () => {
         </div>
 
         {/* STEP 1: Packaging Category */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Packaging Category
           </label>
@@ -255,7 +355,7 @@ const QuickForm = () => {
 
         {/* SELECTED CATEGORY DISPLAY */}
         {category && selectedCategoryData && (
-          <div className="mb-4 bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
+          <div className="md:col-span-2 bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
             <p className="text-xs font-bold text-blue-700 uppercase mb-0.5">Selected Category</p>
             <p className="text-sm text-blue-900 font-medium">{selectedCategoryData.label}</p>
           </div>
@@ -263,7 +363,7 @@ const QuickForm = () => {
 
         {/* STEP 2: Packaging Type — appears after category selected */}
         {category && selectedCategoryData && (
-          <div className="mb-4">
+          <div>
             <label className="block text-sm font-semibold mb-1">
               Packaging Type
             </label>
@@ -291,7 +391,7 @@ const QuickForm = () => {
         )}
 
         {/* Mobile */}
-        <div className="mb-6">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Mobile Number <span className="text-red-500">*</span>
           </label>
@@ -321,7 +421,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`md:col-span-2 w-full text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

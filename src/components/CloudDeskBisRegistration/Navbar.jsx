@@ -9,11 +9,11 @@ const Navbar = ({ setShowEnrollModal }) => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#home" class="hover:text-brand-600 transition">Home</a>
-                <a href="#about" class="hover:text-brand-600 transition">Overview</a>
-                <a href="#schemes" class="hover:text-brand-600 transition">Schemes (ISI/CRS)</a>
-                <a href="#products" class="hover:text-brand-600 transition">Mandatory List</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
+                <a href="#home" className="hover:text-brand-600 transition">Home</a>
+                <a href="#about" className="hover:text-brand-600 transition">Overview</a>
+                <a href="#schemes" className="hover:text-brand-600 transition">Schemes (ISI/CRS)</a>
+                <a href="#products" className="hover:text-brand-600 transition">Mandatory List</a>
+                <a href="#process" className="hover:text-brand-600 transition">Process</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -49,10 +49,10 @@ const Navbar = ({ setShowEnrollModal }) => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">Overview</a>
-            <a href="#schemes" class="block py-2 text-slate-600">Schemes</a>
-            <a href="#products" class="block py-2 text-slate-600">Mandatory List</a>
-            <a href="#home" class="block py-2 text-brand-600 font-bold">Check Product</a>
+            <a href="#about" className="block py-2 text-slate-600">Overview</a>
+            <a href="#schemes" className="block py-2 text-slate-600">Schemes</a>
+            <a href="#products" className="block py-2 text-slate-600">Mandatory List</a>
+            <a href="#home" className="block py-2 text-brand-600 font-bold">Check Product</a>
           {/* <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"

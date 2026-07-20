@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import React, { useState } from "react";
-import TopBar from "../components/CloudDeskDutyPayment/TopBar";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskDutyPayment/Navbar";
 import Hero from "../components/CloudDeskDutyPayment/Hero";
 import Fees from "../components/CloudDeskDutyPayment/Fees";
@@ -17,20 +16,129 @@ import {
   MapPin,
   Check,
   FileText,
-  Key,
-  Laptop2,
   CheckCircle,
-  XCircle,
-  Lightbulb,
-  ScanLine,
-  SlidersHorizontal,
-  Signature,
   Calculator,
   Wallet,
   Info,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskDutyPayment/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskDutyPayment/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/duty-payment-ecl/";
+const META_TITLE =
+  "Duty Payment ECL Consultant India | ICEGATE Challan & Customs Duty Support | EXIMINQ";
+const META_DESCRIPTION =
+  "Duty Payment ECL consultant in India for ICEGATE challan generation, Electronic Cash Ledger top-up, customs duty payment, interest calculation, wallet reconciliation and refund tracking.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const FAQ_ITEMS = [
+  {
+    question: "Can I get a refund of the balance in my ECL?",
+    answer:
+      "Yes, any unutilized balance in the Electronic Cash Ledger can be refunded to your registered bank account by filing a refund application on the ICEGATE portal.",
+  },
+  {
+    question: "Does ECL work on weekends and holidays?",
+    answer:
+      "The ICEGATE portal is available 24/7. However, NEFT and RTGS transfers depend on banking hours. Netbanking top-ups are usually faster for supported banks.",
+  },
+  {
+    question: "Can I pay duty for multiple Bills of Entry at once?",
+    answer:
+      "Yes. You can top up a lump sum amount and select multiple pending challans for payment from the ECL wallet when sufficient balance is available.",
+  },
+  {
+    question: "What is the Electronic Cash Ledger?",
+    answer:
+      "The Electronic Cash Ledger is a digital account on ICEGATE where importers deposit money in advance to pay customs duties, taxes, interest and fees.",
+  },
+];
+const DUTY_PAYMENT_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Duty Payment ECL",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Duty Payment ECL Consultant India",
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "ICEGATE ECL top-up",
+        "Customs duty challan generation",
+        "Bill of Entry duty payment",
+        "ECL reconciliation",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 
 const CloudDeskDutyPayment = () => {
     const [showEnrollModal, setShowEnrollModal] = useState({
@@ -50,160 +158,22 @@ const CloudDeskDutyPayment = () => {
 
 <>
 
-<Helmet>
-        <title>
-          Fast & Secure Duty Payment via ECL | Duty Payment Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="Avoid interest penalties on imports. We manage your <strong>Electronic Cash Ledger (ECL)</strong>, create challans, and ensure instant duty clearance at all ports."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/duty-payment-ecl/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Fast & Secure Duty Payment via ECL Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Avoid interest penalties on imports. We manage your <strong>Electronic Cash Ledger (ECL)</strong>, create challans, and ensure instant duty clearance at all ports."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/duty-payment-ecl/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Fast & Secure Duty Payment via ECL",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Avoid interest penalties on imports. We manage your <strong>Electronic Cash Ledger (ECL)</strong>, create challans, and ensure instant duty clearance at all ports."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Can I get a refund of the balance in my ECL?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, any unutilized balance in the Electronic Cash Ledger can be refunded to your registered bank account by filing a refund application on the ICEGATE portal."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does ECL work on weekends/holidays?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The ICEGATE portal is available 24/7. However, NEFT/RTGS transfers depend on banking hours. If you use Netbanking (available for select banks), the top-up is usually instant even on holidays."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I pay duty for multiple Bills of Entry at once?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, this is the main advantage of ECL. You can top up a lump sum amount and then select multiple challans to pay them simultaneously from the wallet balance."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the Electronic Cash Ledger (ECL)?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The ECL is a digital account on the ICEGATE portal where importers can deposit money in advance. This money can then be used to pay Customs duties, taxes, and fees for any number of shipments."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is it mandatory to use ECL for all duty payments?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. As of 2026, all major EDI ports require payments to be routed through the ECL. Direct bank-to-challan payments are being phased out in favor of this "Wallet" system to ensure transparency and faster reconciliation.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I use the balance in my GST Electronic Cash Ledger to pay Customs duty?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. The GST Ledger (GSTN) and Customs Ledger (ICEGATE) are separate systems. You must deposit money specifically into the Customs ECL to clear your imports."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `How do I "Top Up" my ECL?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "You can deposit funds via Internet Banking, NEFT, or RTGS by generating an E-Challan on the ICEGATE portal. CloudDesk generates these top-up challans for you based on your upcoming shipment projections."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if I pay more than the required duty?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `The excess money stays in your ECL "Wallet." You can either use it for your next shipment or apply for a Digital Refund through the portal.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I pay duty for multiple Bills of Entry at once?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. The ECL allows you to select multiple pending challans and pay them in a single batch, provided you have a sufficient balance in your ledger."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "My bank debited the money, but the ECL balance isn't showing. What now?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `This is a common "Bank-to-Portal Sync" error. CloudDesk’s Transaction Recovery Tool pings the ICEGATE API to force-refresh your status. We also provide the "Transaction Reference Number" (TRN) required to raise a ticket with the helpdesk.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does money in the ECL earn interest?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. Money kept in the Customs ECL does not earn any interest. It is strictly a non-interest-bearing deposit for duty payment purposes."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(DUTY_PAYMENT_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -488,7 +458,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 Yes, any unutilized balance in the Electronic Cash Ledger can be
                 refunded to your registered bank account by filing a refund
                 application on the ICEGATE portal.
@@ -505,7 +475,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 The ICEGATE portal is available 24/7. However, NEFT/RTGS
                 transfers depend on banking hours. If you use Netbanking
                 (available for select banks), the top-up is usually instant even
@@ -523,7 +493,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 Yes, this is the main advantage of ECL. You can top up a lump
                 sum amount and then select multiple challans to pay them
                 simultaneously from the wallet balance.
@@ -540,7 +510,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 The ECL is a digital account on the ICEGATE portal where importers can deposit money in advance. This money can then be used to pay Customs duties, taxes, and fees for any number of shipments.
               </p>
             </details>
@@ -555,7 +525,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 Yes. As of 2026, all major EDI ports require payments to be routed through the ECL. Direct bank-to-challan payments are being phased out in favor of this "Wallet" system to ensure transparency and faster reconciliation.
               </p>
             </details>
@@ -570,7 +540,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 No. The GST Ledger (GSTN) and Customs Ledger (ICEGATE) are separate systems. You must deposit money specifically into the Customs ECL to clear your imports.
               </p>
             </details>
@@ -586,7 +556,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 You can deposit funds via Internet Banking, NEFT, or RTGS by generating an E-Challan on the ICEGATE portal. CloudDesk generates these top-up challans for you based on your upcoming shipment projections.
               </p>
             </details>
@@ -602,7 +572,7 @@ const CloudDeskDutyPayment = () => {
                 />
               </summary>
 
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 The excess money stays in your ECL "Wallet." You can either use it for your next shipment or apply for a Digital Refund through the portal.
               </p>
             </details>
@@ -617,7 +587,7 @@ const CloudDeskDutyPayment = () => {
                   size={20}
                 />
               </summary>
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 Yes. The ECL allows you to select multiple pending challans and pay them in a single batch, provided you have a sufficient balance in your ledger.
               </p>
             </details>
@@ -632,7 +602,7 @@ const CloudDeskDutyPayment = () => {
                   size={20}
                 />
               </summary>
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 This is a common "Bank-to-Portal Sync" error. CloudDesk’s Transaction Recovery Tool pings the ICEGATE API to force-refresh your status. We also provide the "Transaction Reference Number" (TRN) required to raise a ticket with the helpdesk.
               </p>
             </details>
@@ -646,10 +616,70 @@ const CloudDeskDutyPayment = () => {
                   size={20}
                 />
               </summary>
-              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-4 leading-relaxed">
                 No. Money kept in the Customs ECL does not earn any interest. It is strictly a non-interest-bearing deposit for duty payment purposes.
               </p>
             </details>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-8">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Customs Services
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Keep Your Import Clearance Moving
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                copy: "Prepare import declarations, HS code details and duty payment records.",
+              },
+              {
+                title: "ICEGATE Registration",
+                href: "/services/icegate-registration/",
+                copy: "Set up portal access, digital signing and customs user credentials.",
+              },
+              {
+                title: "CHA Services",
+                href: "/services/cha-services/",
+                copy: "Coordinate broker support for customs queries, duty payment and OOC.",
+              },
+              {
+                title: "e-Sanchit Filing",
+                href: "/services/e-sanchit-filing/",
+                copy: "Upload supporting documents and link IRNs to import declarations.",
+              },
+              {
+                title: "IGST Refund",
+                href: "/services/igst-refund/",
+                copy: "Resolve export refund mismatches, scroll delays and ICEGATE issues.",
+              },
+              {
+                title: "Shipping Bill Filing",
+                href: "/services/shipping-bill-filing/",
+                copy: "File export declarations with scheme, incentive and compliance checks.",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition"
+              >
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {service.copy}
+                </p>
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -659,7 +689,7 @@ const CloudDeskDutyPayment = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -667,13 +697,25 @@ const CloudDeskDutyPayment = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq/"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -682,24 +724,24 @@ const CloudDeskDutyPayment = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#home" className="hover:text-white transition">
                   Duty Payment
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
                   Bill of Entry Filing
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  IGST Payment
+                <a href="/services/igst-refund/" className="hover:text-white transition">
+                  IGST Refund
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#process" className="hover:text-white transition">
                   Interest Calculation
                 </a>
               </li>
@@ -709,24 +751,24 @@ const CloudDeskDutyPayment = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/e-sanchit-filing/" className="hover:text-white transition">
                   ECL User Manual
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/foreign-trade-policy/customsrates/" className="hover:text-white transition">
                   Exchange Rates
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/tools/duty-calculator-finder" className="hover:text-white transition">
                   Duty Calculator
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/ad-code-registration/" className="hover:text-white transition">
                   Banking Partners
                 </a>
               </li>

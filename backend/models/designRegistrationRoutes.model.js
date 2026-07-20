@@ -1,4 +1,4 @@
-const mongoose = require("mongoose"); // ✅ This line was missing
+const mongoose = require("mongoose");
 
 const designRegistrationRoutesSchema = new mongoose.Schema(
   {
@@ -6,6 +6,21 @@ const designRegistrationRoutesSchema = new mongoose.Schema(
       type: String,
       trim: true,
       default: "Design Registration",
+    },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
     },
     Category: {
       type: String,

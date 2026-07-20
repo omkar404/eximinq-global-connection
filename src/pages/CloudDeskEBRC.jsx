@@ -1,4 +1,3 @@
-import TopBar from "../components/CloudDeskEBRC/TopBar";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Navbar from "../components/CloudDeskEBRC/Navbar";
@@ -11,16 +10,11 @@ import {
   Facebook,
   AlertTriangle,
   Building,
-  ShieldUser, 
   CheckCircle,
   Phone,
   Mail,
   MapPin,
   Check,
-  XCircle,
-  Link2,
-  Award,
-  Eraser,
   Leaf,
   Bone,
   Dog,
@@ -30,11 +24,123 @@ import {
 import { MainNavbar } from "../components/CloudDeskEBRC/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskEBRC/ModalEnroll";
 
+const CANONICAL_URL = "https://eximinq.in/services/aqcs-pqms/";
+const META_TITLE =
+  "AQCS & PQMS Clearance Consultant India | Animal & Plant Quarantine NOC | EXIMINQ";
+const META_DESCRIPTION =
+  "AQCS and PQMS clearance consultant in India for animal quarantine, plant quarantine, import permits, NOC filing, inspection coordination, biosecurity documentation, and customs clearance support.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "What is AQCS clearance?",
+    answer:
+      "AQCS clearance is animal quarantine approval for eligible livestock, pets, animal-origin goods, and related imports subject to health and biosecurity checks.",
+  },
+  {
+    question: "What is PQMS clearance?",
+    answer:
+      "PQMS clearance covers plant quarantine requirements for plants, seeds, timber, fruits, vegetables, and other regulated agricultural consignments.",
+  },
+  {
+    question: "When is an import permit required for quarantine clearance?",
+    answer:
+      "An import permit may be required before shipment for regulated animal, plant, timber, seed, and agricultural products depending on commodity and country of origin.",
+  },
+  {
+    question: "Can customs clearance happen without AQCS or PQMS NOC?",
+    answer:
+      "For regulated consignments, Customs generally requires the AQCS or PQMS NOC before final clearance and release.",
+  },
+  {
+    question: "What documents are needed for AQCS or PQMS clearance?",
+    answer:
+      "Common documents include invoice, packing list, airway bill or bill of lading, health certificate, phytosanitary certificate, import permit, product details, and country-of-origin documents.",
+  },
+];
+
 const CloudDeskEBRC = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
     type: "",
   });
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://eximinq.in/#organization",
+        name: "EXIMINQ Global Connections",
+        url: "https://eximinq.in/",
+        logo: "https://eximinq.in/logo512.png",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${CANONICAL_URL}#webpage`,
+        url: CANONICAL_URL,
+        name: META_TITLE,
+        description: META_DESCRIPTION,
+        isPartOf: { "@id": "https://eximinq.in/#website" },
+        about: { "@id": `${CANONICAL_URL}#service` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://eximinq.in/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: "https://eximinq.in/services/",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "AQCS & PQMS Clearance",
+            item: CANONICAL_URL,
+          },
+        ],
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${CANONICAL_URL}#service`,
+        name: "AQCS & PQMS Clearance Consultant",
+        url: CANONICAL_URL,
+        image: OG_IMAGE_URL,
+        description: META_DESCRIPTION,
+        provider: { "@id": "https://eximinq.in/#organization" },
+        areaServed: {
+          "@type": "Country",
+          name: "India",
+        },
+        serviceType: [
+          "AQCS clearance",
+          "PQMS clearance",
+          "Animal quarantine NOC",
+          "Plant quarantine import permit",
+          "Biosecurity documentation",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${CANONICAL_URL}#faq`,
+        mainEntity: FAQ_ITEMS.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
 
   const handleEnrollmentSubmit = (formData) => {
     console.log("Enrollment Submitted:", formData);
@@ -46,142 +152,22 @@ const CloudDeskEBRC = () => {
   }
   return (
 <>
-<Helmet>
-        <title>
-          Hassle-Free Quarantine Approvals | Quarantine Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/aqcs-pqms/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Hassle-Free Quarantine Approvals Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/aqcs-pqms/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Hassle-Free Quarantine Approvals",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Importing livestock, pet animals, plants, or timber? We manage the rigorous AQCS & PQMS documentation, inspection, and NOC process to ensure 100% compliance."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Is Fumigation mandatory for all wood packaging?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, under ISPM-15 standards, all wooden pallets and crates must be fumigated and marked with the IPPC logo at the country of origin. If not, Indian PQ authorities will order fumigation at the port (with penalty) or deportation."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I bring my pet dog to India as cargo?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, but it requires a DGFT Import License unless you are transferring residence to India (in which case, up to 2 pets are allowed as baggage with an AQCS NOC)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if pests are found during inspection?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "If quarantine pests are found, the consignment may be subjected to fumigation/treatment. If the pest is a critical quarantine species not present in India, the shipment will be destroyed or deported."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does my wooden furniture import need PQMS?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. Any timber or wood-based product (including pallets/crates used for packing) must be either Heat Treated (HT) or Fumigated with Methyl Bromide (MB) as per ISPM-15 standards"
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is a "Post-Entry Quarantine" (PEQ)?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `For high-risk items like live plants or seeds, the government may require you to grow them in a "PEQ Facility" (monitored greenhouse) for a specific period to ensure no dormant diseases emerge. CloudDesk helps set up and get approval for your PEQ site.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Can I import "Prohibited" plants for research?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, but you need a specialized Import Permit for Research/Scientific Purposes and clearance from the Directorate of Plant Protection."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Can I bring my dog/cat to India as a "Tourist"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `In 2026, you can bring up to two pets as "Accompanied Baggage" provided you have stayed abroad for at least two years. You still need an AQCS ANOC. Commercial pet import (for sale) is strictly prohibited.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Which animal products are under the "Restricted" category?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Items like Raw Hides, Skins, and certain Dairy products. These require a Sanitary Import Permit (SIP) issued by the Ministry of Fisheries, Animal Husbandry, and Dairying."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if AQCS rejects my shipment?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `The shipment must be either re-exported or incinerated (destroyed) at the importer's cost. There is no "Repair/Rectification" allowed for failed animal health standards.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(structuredData)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -672,7 +658,7 @@ const CloudDeskEBRC = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -680,13 +666,13 @@ const CloudDeskEBRC = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ on LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ on X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ on Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -695,24 +681,24 @@ const CloudDeskEBRC = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/aqcs-pqms/" className="hover:text-white transition">
                   Plant Quarantine (PQ)
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/aqcs-pqms/" className="hover:text-white transition">
                   Animal Quarantine (AQ)
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/import-export-code/" className="hover:text-white transition">
                   Import Permit
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/horticulture" className="hover:text-white transition">
                   Phytosanitary Cert
                 </a>
               </li>
@@ -722,24 +708,24 @@ const CloudDeskEBRC = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/horticulture" className="hover:text-white transition">
                   Restricted Plant List
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/aqcs-pqms/" className="hover:text-white transition">
                   Pet Import Rules
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/bill-of-entry-filing" className="hover:text-white transition">
                   Fumigation Norms
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/customs-adjudication" className="hover:text-white transition">
                   PQMS User Manual
                 </a>
               </li>

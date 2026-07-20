@@ -5,6 +5,8 @@ const QuickForm = () => {
   const [form, setForm] = useState({
     issueType: "",
     companyName: "",
+    contactPersonName: "",
+    email: "",
     mobile: "",
   });
 
@@ -30,6 +32,21 @@ const QuickForm = () => {
     if (!form.issueType) {
       newErrors.issueType = "Please select an issue type";
     }
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    } else if (form.contactPersonName.trim().length < 2) {
+      newErrors.contactPersonName = "Contact person name must be at least 2 characters";
+    }
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -51,7 +68,10 @@ const QuickForm = () => {
     try {
       const payload = {
         issueType: form.issueType,
-        companyName: form.companyName,
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        personName: form.contactPersonName.trim(),
+        email: form.email.trim(),
         mobile: form.mobile,
         type: "QUICK_FORM",
       };
@@ -79,6 +99,8 @@ const QuickForm = () => {
       setForm({
         issueType: "",
         companyName: "",
+        contactPersonName: "",
+        email: "",
         mobile: "",
       });
     } catch (err) {
@@ -100,15 +122,17 @@ const QuickForm = () => {
         Facing issues with document upload?
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Issue Type */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">Issue Type</label>
           <select
             name="issueType"
             value={form.issueType}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.issueType ? "border-red-500" : "border-slate-300"
+            }`}
           >
             <option value="" disabled>Select DSC</option>
             <option>DSC Not Detected</option>
@@ -122,28 +146,79 @@ const QuickForm = () => {
           )}
         </div>
 
-        {/* Company Name - simplified */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Company Name</label>
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name <span className="text-red-500">*</span>
+          </label>
           <input
             type="text"
             name="companyName"
             value={form.companyName}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
             placeholder="e.g. ABC Exports"
           />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
         </div>
 
-        {/* Mobile Number - simplified, with error styling */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="contactPersonName"
+            value={form.contactPersonName}
+            onChange={handleChange}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.contactPersonName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">{errors.contactPersonName}</p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. rahul@abcexports.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        {/* Mobile Number */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Mobile Number <span className="text-red-500">*</span>
+          </label>
           <input
             type="tel"
             name="mobile"
             value={form.mobile}
             onChange={handleChange}
-            className={`w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500`}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.mobile ? "border-red-500" : "border-slate-300"
+            }`}
             placeholder="e.g. 9876543210"
             maxLength={10}
           />
@@ -156,7 +231,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`md:col-span-2 w-full text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

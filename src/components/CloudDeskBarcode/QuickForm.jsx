@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     skus: "",
     turnover: "",
     mobile: "",
@@ -29,6 +32,20 @@ const QuickForm = () => {
   -----------------------*/
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
 
     if (!form.skus) {
       newErrors.skus = "Please select SKU volume";
@@ -62,6 +79,10 @@ const QuickForm = () => {
 
     try {
       const payload = {
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        personName: form.contactPersonName.trim(),
+        email: form.email.trim().toLowerCase(),
         skus: form.skus,
         turnover: form.turnover,
         mobile: form.mobile,
@@ -89,7 +110,15 @@ const QuickForm = () => {
       alert("✅ We will send the barcode package details to you shortly.");
 
       // Reset form
-      setForm({ skus: "", turnover: "", mobile: "" });
+      setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
+        skus: "",
+        turnover: "",
+        mobile: "",
+      });
+      setErrors({});
     } catch (err) {
       console.error("❌ Error:", err);
       alert(`❌ Submission failed: ${err.message}`);
@@ -108,6 +137,67 @@ const QuickForm = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-semibold mb-1">
+              Company Name
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. ABC Foods Pvt Ltd"
+            />
+            {errors.companyName && (
+              <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">
+              Contact Person Name
+            </label>
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. Rahul Sharma"
+            />
+            {errors.contactPersonName && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.contactPersonName}
+              </p>
+            )}
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-semibold mb-1">
+              Email ID
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. products@example.com"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+            )}
+          </div>
+        </div>
+
         {/* Number of SKUs */}
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-1">

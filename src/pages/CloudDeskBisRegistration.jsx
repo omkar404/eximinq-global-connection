@@ -1,9 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskBisRegistration/TopBar";
 import Navbar from "../components/CloudDeskBisRegistration/Navbar";
 import Hero from "../components/CloudDeskBisRegistration/Hero";
-import Fees from "../components/CloudDeskBisRegistration/Fees";
 import {
   ChevronDown,
   Linkedin,
@@ -11,7 +9,7 @@ import {
   Facebook,
   AlertTriangle,
   Building,
-  ShieldUser, 
+  ShieldUser,
   CheckCircle,
   HardHat,
   FlaskConical,
@@ -28,6 +26,40 @@ import {
 import { MainNavbar } from "../components/CloudDeskBisRegistration/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskBisRegistration/ModalEnroll";
 
+const CANONICAL_URL = "https://eximinq.in/services/bis-registration/";
+const META_TITLE =
+  "BIS Registration Consultant India | ISI Mark & CRS Certification | EXIMINQ";
+const META_DESCRIPTION =
+  "BIS registration consultant in India for ISI Mark, CRS registration, FMCS, QCO compliance, BIS lab testing, factory audit coordination, AIR support, and import customs clearance.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "What is the difference between BIS CRS and ISI Mark?",
+    answer:
+      "CRS is mainly used for electronics, IT, solar, and similar notified products through self-declaration after testing. ISI Mark certification applies to core products such as steel, cement, cables, toys, and chemicals and usually involves factory audit.",
+  },
+  {
+    question: "How do I know if my product needs BIS registration?",
+    answer:
+      "You need to check whether the product and Indian Standard are covered under a Quality Control Order or the BIS compulsory registration list. HSN mapping and product specification review help confirm applicability.",
+  },
+  {
+    question: "Can imported samples be cleared for BIS testing?",
+    answer:
+      "Limited samples can often be imported for testing or certification under applicable customs and BIS procedures, subject to proper documentation and approvals.",
+  },
+  {
+    question: "What is an Authorized Indian Representative for BIS?",
+    answer:
+      "For foreign manufacturers, an Authorized Indian Representative is a local Indian entity responsible for regulatory communication and compliance support for BIS certification.",
+  },
+  {
+    question: "How long does BIS registration take?",
+    answer:
+      "CRS applications may move faster after lab reports are ready, while ISI Mark or FMCS certification can take longer because of testing, documentation, and factory audit requirements.",
+  },
+];
+
 const CloudDeskBisRegistration = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -42,142 +74,107 @@ const CloudDeskBisRegistration = () => {
 
     alert("Form submitted - check console for data.");
   };
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://eximinq.in/#organization",
+        name: "EXIMINQ Global Connections",
+        url: "https://eximinq.in/",
+        logo: "https://eximinq.in/logo512.png",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${CANONICAL_URL}#webpage`,
+        url: CANONICAL_URL,
+        name: META_TITLE,
+        description: META_DESCRIPTION,
+        isPartOf: { "@id": "https://eximinq.in/#website" },
+        about: { "@id": `${CANONICAL_URL}#service` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://eximinq.in/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: "https://eximinq.in/services/",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "BIS Registration",
+            item: CANONICAL_URL,
+          },
+        ],
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${CANONICAL_URL}#service`,
+        name: "BIS Registration Consultant",
+        url: CANONICAL_URL,
+        image: OG_IMAGE_URL,
+        description: META_DESCRIPTION,
+        provider: { "@id": "https://eximinq.in/#organization" },
+        areaServed: {
+          "@type": "Country",
+          name: "India",
+        },
+        serviceType: [
+          "BIS registration",
+          "ISI Mark certification",
+          "CRS registration",
+          "FMCS certification",
+          "QCO compliance",
+          "BIS lab testing coordination",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${CANONICAL_URL}#faq`,
+        mainEntity: FAQ_ITEMS.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
   return (
 <>
-<Helmet>
-        <title>
-          Mandatory BIS Certification for Imports | BIS Certification Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/bis-registration/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Mandatory BIS Certification for Imports Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/bis-registration/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Mandatory BIS Certification for Imports",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Customs will not clear your goods without a valid BIS License. We help foreign manufacturers and Indian importers obtain ISI Mark and CRS Registration efficiently."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the difference between BIS CRS and ISI Mark?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `CRS Mostly for Electronics, IT products, and Solar (e.g., Laptops, Mobile phones). It is based on Self-Declaration of conformity.
-                     ISI Mark For "Core" sectors like Steel, Cement, Electrical Cables, Toys, and Chemicals. It involves a Factory Audit by BIS officials.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do I know if my product needs BIS?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "You must check the Compulsory Registration List on the BIS portal. In 2026, over 600 products are under mandatory certification. CloudDesk provides an HSN-to-BIS Mapping service to confirm your status instantly."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Can I import "Samples" for testing without BIS?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. You can import limited samples for R&D or BIS testing by obtaining an Exemption Letter or a "Provisional Entry" from Customs. CloudDesk manages this specialized clearance.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I use my UL, CE, or IEC test reports for BIS?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. While Indian Standards (IS) are often aligned with International Standards (ISO/IEC), BIS mandates testing in an Indian Lab for most categories."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the role of an "Authorized Indian Representative" (AIR)?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "For foreign manufacturers, an AIR is a local legal entity (like CloudDesk) that takes responsibility for the product's quality and compliance in India. Having a competent AIR is a mandatory requirement for FMCS and CRS."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does the registration take?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `CRS 15–30 days (after lab reports).
-                     ISI/FMCS 3–6 months (due to factory inspections and international travel for officers).`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long is the BIS certificate valid?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Typically 2 years. You must apply for renewal at least 3 months before expiry. CloudDesk's Renewal Bot ensures your certification never lapses."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What are the penalties for selling without BIS?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Under the BIS Act, 2016, penalties include heavy fines (up to 10x the value of goods), seizure of stock, and even imprisonment for company directors. In 2026, Customs has "Zero Tolerance" for BIS violations.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(structuredData)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
-      {/* <TopBar /> */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
@@ -685,7 +682,7 @@ const CloudDeskBisRegistration = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -693,13 +690,13 @@ const CloudDeskBisRegistration = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ on LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ on X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ on Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -708,25 +705,25 @@ const CloudDeskBisRegistration = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Duty Drawback
+                <a href="/services/bis-registration/" className="hover:text-white transition">
+                  BIS Registration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  RoDTEP Scheme
+                <a href="/services/wpc-license" className="hover:text-white transition">
+                  WPC License
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  IGST Refund
+                <a href="/services/epr-authorization/" className="hover:text-white transition">
+                  EPR Authorization
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  MOOWR Scheme
+                <a href="/services/fssai-licensing" className="hover:text-white transition">
+                  FSSAI Licensing
                 </a>
               </li>
             </ul>
@@ -735,25 +732,25 @@ const CloudDeskBisRegistration = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Drawback Schedule
+                <a href="/services/bis-registration/#schemes" className="hover:text-white transition">
+                  ISI & CRS Schemes
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Rule 6 Guidelines
+                <a href="/services/bis-registration/#products" className="hover:text-white transition">
+                  Mandatory BIS List
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Section 74 Rules
+                <a href="/services/bis-registration/#process" className="hover:text-white transition">
+                  BIS Process
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Depreciation Chart
+                <a href="/services/import-export-code/" className="hover:text-white transition">
+                  Import Export Code
                 </a>
               </li>
             </ul>

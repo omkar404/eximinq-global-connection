@@ -28,6 +28,127 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskShippingBills/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskShippingBills/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/shipping-bill-filing/";
+const META_TITLE =
+  "Shipping Bill Filing Consultant India | Export Customs Clearance & LEO | EXIMINQ";
+const META_DESCRIPTION =
+  "Shipping Bill filing consultant in India for export customs clearance, ICEGATE submission, LEO coordination, RoDTEP, duty drawback, IGST refund and EGM tracking support.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const SHIPPING_BILL_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Shipping Bill Filing",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Shipping Bill Filing for Export Customs Clearance",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "Shipping Bill Filing",
+        "Export Customs Clearance",
+        "ICEGATE Filing",
+        "Let Export Order Coordination",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "When should a Shipping Bill be filed?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A Shipping Bill should be filed before export cargo is presented for customs clearance so the checklist, assessment and Let Export Order process can be completed on time.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is Let Export Order?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Let Export Order is the customs permission that allows export goods to be loaded after the Shipping Bill, documents and examination requirements are cleared.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can export incentives be claimed through the Shipping Bill?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Eligible export incentives such as RoDTEP, duty drawback and scheme benefits depend on correct declaration in the Shipping Bill and supporting export documents.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why is EGM tracking important?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Export General Manifest confirmation is important because refunds and incentives are generally processed only after customs systems confirm that the goods have left India.",
+          },
+        },
+      ],
+    },
+  ],
+};
 const CloudDeskShippingBills = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -44,149 +165,28 @@ const CloudDeskShippingBills = () => {
   };
   return (
     <>
-      <Helmet>
-        <title>
-          Shipping Bill Filing Service in India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+      <Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Professional Shipping Bill filing service for export customs clearance in India. Documentation review, incentive declaration and ICEGATE submission support."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/shipping-bill-filing/"
-        />
-
-        <meta
-          property="og:title"
-          content="Shipping Bill Filing Service in India"
-        />
-        <meta
-          property="og:description"
-          content="Export Shipping Bill filing, LEO process, incentive declaration and EGM tracking support."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/shipping-bill-filing/"
-        />
-        <meta property="og:type" content="article" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                  {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://eximinq.in"
-                  },
-                  {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Services",
-                    "item": "https://eximinq.in/services/"
-                  },
-                  {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "Shipping Bill Filing",
-                    "item": "https://eximinq.in/services/shipping-bill-filing/"
-                  }
-                ]
-              },
-              {
-                "@type": "Service",
-                "name": "Shipping Bill Filing Service",
-                "serviceType": "Export Customs Clearance Filing",
-                "description":
-                  "Shipping Bill preparation and filing for export clearance including incentive declaration, documentation review and ICEGATE submission.",
-                "provider": {
-                  "@type": "Organization",
-                  "name": "Eximinq Global Connections",
-                  "url": "https://eximinq.in"
-                },
-                "areaServed": {
-                  "@type": "Country",
-                  "name": "India"
-                }
-              },
-              {
-                "@type": "FAQPage",
-                "mainEntity": [
-                  {
-                    "@type": "Question",
-                    "name": "When should a Shipping Bill be filed?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "A Shipping Bill must be filed before goods enter the customs area. In practice, exporters file it prior to cargo arrival to avoid delays at the port."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is \"LEO\" (Let Export Order)?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "LEO is the final approval granted by the customs officer permitting goods to be loaded for export. After LEO, amendments become difficult."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How do I ensure I get my RoDTEP and Duty Drawback?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Yes, exporters may claim IGST refund and eligible duty drawback benefits, subject to scheme conditions and correct declaration."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Can I claim IGST refund and Duty Drawback together?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "The Export General Manifest (EGM) is filed by the carrier as proof that goods have left India. Refunds and incentives are processed only after EGM confirmation."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is the \"SB005\" error, and how does CloudDesk fix it?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Amendments are possible under Section 149 but require formal procedures and may involve additional scrutiny."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Can I amend a Shipping Bill after the ship has sailed?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "A checklist is a draft summary of the Shipping Bill details provided to the exporter for verification before final submission."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is an EGM, and why is it important for me?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "A checklist is a draft summary of the Shipping Bill details provided to the exporter for verification before final submission."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is a \"Checklist\"?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "A checklist is a draft summary of the Shipping Bill details provided to the exporter for verification before final submission."
-                    }
-                  },
-                ]
-              }
-            ]
-          })}
+          {JSON.stringify(SHIPPING_BILL_SCHEMA)}
         </script>
       </Helmet>
       <div className="bg-slate-50 text-slate-800">
@@ -750,12 +750,73 @@ const CloudDeskShippingBills = () => {
           </div>
         </section>
 
+        <section className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Related Export Clearance Support
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Services Often Needed With Shipping Bill Filing
+              </h2>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {[
+                {
+                  title: "Bill of Entry Filing",
+                  href: "/services/bill-of-entry-filing/",
+                  copy: "Coordinate import customs documentation, duty assessment and out-of-charge support.",
+                },
+                {
+                  title: "AD Code Registration",
+                  href: "/services/ad-code-registration/",
+                  copy: "Register bank AD codes at ports before export Shipping Bill filing.",
+                },
+                {
+                  title: "RoDTEP Support",
+                  href: "/services/rodtep/",
+                  copy: "Review scheme declarations, scrip credit issues and exporter incentive eligibility.",
+                },
+                {
+                  title: "IGST Refund",
+                  href: "/services/igst-refund/",
+                  copy: "Track refund blocks, SB005 issues, EGM mismatches and export GST data.",
+                },
+                {
+                  title: "e-Sanchit Filing",
+                  href: "/services/e-sanchit-filing/",
+                  copy: "Upload invoices, packing lists and supporting export documents for customs filing.",
+                },
+                {
+                  title: "CHA Services",
+                  href: "/services/cha-services/",
+                  copy: "Coordinate customs broker support for examination, LEO and export clearance.",
+                },
+              ].map((service) => (
+                <a
+                  key={service.href}
+                  href={service.href}
+                  className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition"
+                >
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {service.copy}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
             {/* BRAND */}
             <div>
-              <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+              <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
               <p className="text-sm mb-6">
                 EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -763,13 +824,25 @@ const CloudDeskShippingBills = () => {
               </p>
 
               <div className="flex gap-4">
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://www.linkedin.com/company/eximinq/"
+                  aria-label="EXIMINQ on LinkedIn"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Linkedin size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://x.com/eximinq"
+                  aria-label="EXIMINQ on X"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Twitter size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://www.facebook.com/eximinq"
+                  aria-label="EXIMINQ on Facebook"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Facebook size={18} />
                 </a>
               </div>
@@ -780,22 +853,22 @@ const CloudDeskShippingBills = () => {
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="#home" className="hover:text-white transition">
                     Shipping Bill Filing
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
                     Bill of Entry Filing
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/ad-code-registration/" className="hover:text-white transition">
                     AD Code Registration
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/rodtep/" className="hover:text-white transition">
                     RoDTEP Scrip
                   </a>
                 </li>
@@ -807,22 +880,22 @@ const CloudDeskShippingBills = () => {
               <h4 className="text-white font-bold mb-6">Other Services</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/tools/hs-code-finder/" className="hover:text-white transition">
                     HSN Code Finder
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/foreign-trade-policy/Customsrates/" className="hover:text-white transition">
                     Exchange Rates
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/duty-drawback/" className="hover:text-white transition">
                     Drawback Schedule
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/freight-forwarding/" className="hover:text-white transition">
                     Container Tracking
                   </a>
                 </li>

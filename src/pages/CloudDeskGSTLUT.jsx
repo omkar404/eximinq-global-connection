@@ -1,4 +1,3 @@
-import TopBar from "../components/CloudDeskGSTLUT/TopBar";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Navbar from "../components/CloudDeskGSTLUT/Navbar";
@@ -27,6 +26,130 @@ import {
 import { MainNavbar } from "../components/CloudDeskGSTLUT/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskGSTLUT/ModalEnroll";
 
+const CANONICAL_URL = "https://eximinq.in/services/gst-lut-filing/";
+const META_TITLE =
+  "GST LUT Filing Consultant India | Letter of Undertaking for Export Without IGST | EXIMINQ";
+const META_DESCRIPTION =
+  "GST LUT filing consultant in India for exporters. Get Letter of Undertaking support for export without IGST payment, LUT renewal, eligibility review, GST portal filing, bond and export documentation.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "What is LUT under GST for exporters?",
+    answer:
+      "A Letter of Undertaking allows eligible exporters to export goods or services without paying IGST upfront, subject to GST rules and annual filing requirements.",
+  },
+  {
+    question: "Who can file GST LUT?",
+    answer:
+      "Most registered exporters can file LUT if they are eligible under GST rules and do not have disqualifying prosecution history for specified tax offences.",
+  },
+  {
+    question: "Is GST LUT required every financial year?",
+    answer:
+      "Yes. LUT is generally filed for each financial year before making zero-rated exports without payment of IGST.",
+  },
+  {
+    question: "What happens if LUT is not filed before export?",
+    answer:
+      "The exporter may need to export with payment of IGST and then claim refund, or regularise the filing depending on facts and portal status.",
+  },
+  {
+    question: "Can services exporters use LUT?",
+    answer:
+      "Yes. Eligible service exporters can use LUT to export services without paying IGST upfront when conditions for export of services are met.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      about: {
+        "@id": `${CANONICAL_URL}#service`,
+      },
+      breadcrumb: {
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "GST LUT Filing",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "GST LUT Filing Consultant India",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: "India",
+      serviceType: [
+        "GST LUT filing",
+        "Letter of Undertaking",
+        "Export without IGST",
+        "LUT renewal",
+        "GST export compliance",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
+
 const CloudDeskGSTLUT = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -42,163 +165,25 @@ const CloudDeskGSTLUT = () => {
   }
   return (
 <>
-<Helmet>
-        <title>
-          Export Without Paying IGST | IGST Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Save working capital by filing a Letter of Undertaking (LUT) under GST for the current financial year and exporting goods or services without upfront IGST payment."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/gst-lut-filing/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Export Without Paying IGST Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Save working capital by filing a Letter of Undertaking (LUT) under GST for the current financial year and exporting goods or services without upfront IGST payment."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/gst-lut-filing/"
-        />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Export Without Paying IGST",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Save working capital by filing a Letter of Undertaking (LUT) under GST for the current financial year and exporting goods or services without upfront IGST payment.",
-            "url": "https://eximinq.in/services/gst-lut-filing/"
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Is LUT valid for a lifetime?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. The LUT is valid only for one Financial Year (1st April to 31st March). It must be renewed at the start of every new year."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the difference between LUT and Bond?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "An LUT is a simple undertaking used by eligible exporters. A Bond with a Bank Guarantee is required only when the exporter is not eligible for LUT or has been prosecuted for tax evasion above ₹2.5 Crores."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is LUT required for Service Exports?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. Service exporters (IT, Consultancy, BPO, SaaS, etc.) must file LUT to issue export invoices without charging IGST."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the validity of a GST LUT?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "An LUT is valid for one financial year only (April 1 to March 31). You must file a fresh renewal for FY 2026-27 immediately after the current year ends."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Who is eligible to file an LUT?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Any registered GST taxpayer who has not been prosecuted for tax evasion exceeding ₹2.5 Crore. If you are under investigation or have a history of major fraud, you must furnish a Bond (on Stamp Paper) instead of an LUT."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I file an LUT mid-year?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. But it only applies to exports made after the filing date. You cannot apply it retroactively to shipments already dispatched."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Do I need to upload any documents on the GST portal?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "In 2026, the process is mostly self-declaration. You don't need to upload the IEC or GST cert, but you must have the Previous Year's LUT ARN handy if you are renewing."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can a Service Exporter (SaaS/Freelancer) file an LUT?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Absolutely. Whether you export software, consulting, or car parts, the LUT route is the standard way to avoid IGST."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if I forget to mention the LUT ARN on my export invoice?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Customs may reject the shipping bill, or the GST department may treat it as a "Taxable Supply," demanding IGST. CloudDesk provides a Standard Invoice Template that includes the mandatory "Export under LUT" declaration.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "Export Timeline" I agree to in the LUT?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `You undertake to
-                    1. Export the goods within 3 months of the invoice date.
-                    2. Realize the payment in foreign currency within 1 year (or as per RBI rules).`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "If I fail to export within 3 months, what happens?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "You must pay the applicable IGST plus 18% interest within 15 days of the expiry of the 3-month period. If you don't, your LUT facility can be withdrawn."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(structuredData)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -736,7 +721,7 @@ const CloudDeskGSTLUT = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -744,13 +729,13 @@ const CloudDeskGSTLUT = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq" aria-label="EXIMINQ on LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://twitter.com/eximinq" aria-label="EXIMINQ on Twitter" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ on Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -759,24 +744,24 @@ const CloudDeskGSTLUT = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/gst-lut-filing/" className="hover:text-white transition">
                   GST LUT Filing
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/igst-refund" className="hover:text-white transition">
                   IGST Refund
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/rodtep-scheme" className="hover:text-white transition">
                   RoDTEP Scrips
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/import-export-code/" className="hover:text-white transition">
                   Export Licensing
                 </a>
               </li>
@@ -786,25 +771,25 @@ const CloudDeskGSTLUT = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
-                  GST Circulars
+                <a href="/services/gst-returns" className="hover:text-white transition">
+                  GST Returns
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  LUT Format
+                <a href="/services/ca-certification-export-import" className="hover:text-white transition">
+                  CA Certification
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Export Invoicing
+                <a href="/services/shipping-bill-filing" className="hover:text-white transition">
+                  Shipping Bill Filing
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Refund Manual
+                <a href="/services/bill-of-entry-filing" className="hover:text-white transition">
+                  Bill of Entry Filing
                 </a>
               </li>
             </ul>

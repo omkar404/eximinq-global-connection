@@ -28,6 +28,9 @@ async function sendEmail(record) {
     type,       // ✅ added
     category,   // ✅ added
     issue,      // ✅ added
+    companyName,
+    personName,
+    contactPersonName,
   } = record;
 
   const serviceDisplay = service || "GST Filing Health Check"; // ✅ added
@@ -44,6 +47,8 @@ async function sendEmail(record) {
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${gstin ? `<tr><td><b>GSTIN Number</b></td><td>${gstin}</td></tr>` : ""}
           ${financialYear ? `<tr><td><b>Financial Year</b></td><td>${financialYear}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -75,15 +80,45 @@ exports.creategstFilingRoutes = async (req, res) => {
       financialYear,
       type,     // ✅ added
       source,   // ✅ added
+      companyName,
+      personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanMobile = typeof mobile === "string" ? mobile.trim() : "";
+    const cleanCompanyName =
+      typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
 
-    if (!mobile || !mobile.trim()) {
+    if (!cleanMobile) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
       });
+    }
+
+    if (isQuickForm) {
+      if (!cleanCompanyName || !cleanContactPersonName || !cleanEmail) {
+        return res.status(400).json({
+          success: false,
+          message: "Company name, contact person name, and email are required",
+        });
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+        return res.status(400).json({
+          success: false,
+          message: "Enter a valid email ID",
+        });
+      }
     }
 
     const invoiceCount =
@@ -102,9 +137,12 @@ exports.creategstFilingRoutes = async (req, res) => {
       service: service || "GST Filing Health Check",
       gstin: gstin ? gstin.trim() : null,
       financialYear: financialYear ? financialYear.trim() : null,
-      mobile: mobile.trim(),
+      mobile: cleanMobile,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
       name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      email: cleanEmail || null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),

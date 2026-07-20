@@ -89,7 +89,7 @@ const SEOManager = () => {
   const canonicalUrl = `${CANONICAL_ORIGIN}${toCanonicalPath(normalizedPath)}`;
 
   return (
-    <Helmet>
+    <Helmet defer={false}>
       <title>{meta.title}</title>
       <meta name="description" content={meta.description} />
       <meta name="robots" content="index, follow" />

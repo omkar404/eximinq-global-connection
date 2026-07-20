@@ -27,6 +27,127 @@ import {
 import { MainNavbar } from "../components/CloudDeskCA/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskCA/ModalEnroll";
 import { FaRegistered } from "react-icons/fa";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/ca-certification-export-import/";
+const META_TITLE =
+  "CA Certification Consultant India | Export Turnover & DGFT Certificates | EXIMINQ";
+const META_DESCRIPTION =
+  "CA certification consultant in India for export turnover certificates, EPCG and Advance Authorisation redemption, EODC support, foreign exchange earnings, RCMC turnover and DGFT filings.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const CA_SERVICE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "CA Certification for Export Import",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "CA Certification for Export Import",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "Export Turnover CA Certificate",
+        "EPCG Redemption Certification",
+        "Advance Authorisation Redemption Certification",
+        "DGFT CA Certification",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Why do I need a CA for EPCG closure?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "You must prove that the machinery was installed and that export obligation was fulfilled. A practising CA verifies shipping bills, e-BRCs, installation records and scheme annexures for DGFT closure.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is an Average Export Performance certificate?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "It is a CA-certified statement of export performance over earlier financial years, commonly required for DGFT licence applications and export obligation calculations.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can my internal company accountant sign DGFT CA certificates?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. DGFT and customs certificates must be issued by an independent practising Chartered Accountant with a valid certificate of practice and UDIN.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How is a CA certificate verified?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The certificate can be verified through the ICAI UDIN portal using the UDIN printed on the signed document.",
+          },
+        },
+      ],
+    },
+  ],
+};
 
 const CloudDeskCA = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -46,133 +167,28 @@ const CloudDeskCA = () => {
   return (
 
 <>
-<Helmet>
-        <title>
-          In-House CA Certification for Export Turnover | CA Certification Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Fast, reliable, and compliant CA Certificates required by DGFT, Customs, and RBI for all major export incentive and obligation schemes."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/ca-certification-export-import/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="In-House CA Certification for Export Turnover Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Fast, reliable, and compliant CA Certificates required by DGFT, Customs, and RBI for all major export incentive and obligation schemes."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/ca-certification-export-import/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "In-House CA Certification for Export Turnover",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Fast, reliable, and compliant CA Certificates required by DGFT, Customs, and RBI for all major export incentive and obligation schemes."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Why do I need a CA for EPCG closure?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `You must prove you installed the machinery (Installation Certificate) and used it to export (Appendix 5C). A CA verifies that the specific Shipping Bills used for EO haven't been "double-counted" for other licenses.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is an "Average Export Performance" certificate?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "When applying for a new license, DGFT often asks for your average exports over the last 3 years. A CA certifies this so the government knows you have the capacity to fulfill future obligations."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can my internal company accountant sign these?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. It must be a Practicing Chartered Accountant (holding a Certificate of Practice) who is independent of the firm."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "When is Form 15CB mandatory in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It is mandatory if the remittance to a non-resident exceeds ₹5 Lakh in a financial year AND the payment is taxable in India."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the penalty for a wrong CA Certificate?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "If a CA provides false data, both the exporter and the CA face penalties under the FTDR Act and Customs Act, including blacklisting (DEL) and professional misconduct proceedings by ICAI."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Does a CA need to verify my "Consumption of Inputs"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. For Advance Authorization, a CA (or a Chartered Engineer) must certify that the raw materials imported duty-free were actually consumed in the final export product as per SION norms."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do I verify if my CA's certificate is genuine?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Go to the ICAI UDIN Portal and enter the 18-digit number printed on the document. It will show you the CA's name and the specific values they certified (e.g., Turnover amount)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What if my CA forgot to generate a UDIN?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `In 2026, the CA has 15 days to update the UDIN. If they fail, the document becomes "Invalid" and your DGFT application will be automatically rejected by the system.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(CA_SERVICE_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -576,12 +592,79 @@ const CloudDeskCA = () => {
   </div>
 </section>    
 
+      <section className="py-16 bg-slate-50" aria-labelledby="related-ca-services">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Export Certification Support
+            </span>
+            <h2
+              id="related-ca-services"
+              className="text-3xl md:text-4xl font-bold text-slate-900 mt-2"
+            >
+              Services Often Needed With CA Certification
+            </h2>
+            <p className="text-slate-600 mt-3">
+              Link your CA certificate workflow with DGFT redemption, export
+              proceeds reconciliation, licence closure, and compliance filing
+              support.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            {[
+              {
+                title: "EPCG Scheme Support",
+                desc: "Export obligation tracking, installation certificate review, and EODC closure support.",
+                href: "/services/epcg-scheme/",
+              },
+              {
+                title: "EOP Extension",
+                desc: "DGFT extension strategy for export obligation periods and pending redemption cases.",
+                href: "/services/eop-extension/",
+              },
+              {
+                title: "Advance Authorisation",
+                desc: "Input consumption reconciliation, SION review, and licence redemption documentation.",
+                href: "/services/advance-authorisation/",
+              },
+              {
+                title: "EDPMS and eBRC",
+                desc: "IRM mapping, eBRC reconciliation, and AD bank follow-up for export proceeds.",
+                href: "/services/edpms-ebrc/",
+              },
+              {
+                title: "GST LUT Filing",
+                desc: "Annual LUT filing for zero-rated exports without IGST payment.",
+                href: "/services/gst-lut-filing/",
+              },
+              {
+                title: "DGFT Services",
+                desc: "Licence applications, amendments, closure filings, and export-import compliance support.",
+                href: "/services/",
+              },
+            ].map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-brand-300 transition"
+              >
+                <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {item.desc}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -589,13 +672,25 @@ const CloudDeskCA = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq/"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -605,10 +700,10 @@ const CloudDeskCA = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                          <li><a href="#" class="hover:text-white transition">Export Turnover Cert</a></li>
-                    <li><a href="#" class="hover:text-white transition">EODC Consumption Cert</a></li>
-                    <li><a href="#" class="hover:text-white transition">Installation Cert</a></li>
-                    <li><a href="#" class="hover:text-white transition">Average Export Cert</a></li>
+                          <li><a href="/services/ca-certification-export-import/" className="hover:text-white transition">Export Turnover Cert</a></li>
+                    <li><a href="/services/epcg-scheme/" className="hover:text-white transition">EODC Consumption Cert</a></li>
+                    <li><a href="/services/epcg-scheme/" className="hover:text-white transition">Installation Cert</a></li>
+                    <li><a href="#schemes" className="hover:text-white transition">Average Export Cert</a></li>
             </ul>
           </div>
 
@@ -616,10 +711,10 @@ const CloudDeskCA = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">DGFT Appendix List</a></li>
-                    <li><a href="#" class="hover:text-white transition">e-BRC Verification</a></li>
-                    <li><a href="#" class="hover:text-white transition">ICAI CA Verification</a></li>
-                    <li><a href="#" class="hover:text-white transition">FTP 2023 Guidelines</a></li>
+                    <li><a href="/foreign-trade-policy/" className="hover:text-white transition">DGFT Appendix List</a></li>
+                    <li><a href="/services/edpms-ebrc/" className="hover:text-white transition">e-BRC Verification</a></li>
+                    <li><a href="#process" className="hover:text-white transition">ICAI CA Verification</a></li>
+                    <li><a href="/foreign-trade-policy/" className="hover:text-white transition">FTP 2023 Guidelines</a></li>
             </ul>
           </div>
 

@@ -28,7 +28,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
-  const isEnroll = type === "Enroll";
 
   /* Only show category dropdown for IEC profile update (not for fee services) */
   const showCategory = type === "IEC_PROFILE_UPDATE";
@@ -109,7 +108,7 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/rmcc-alert-remova`,
+        `${process.env.REACT_APP_API_URL}/api/rmcc-alert-removal`,
         // "http://localhost:5000/api/rmcc-alert-removal",
         {
           method: "POST",

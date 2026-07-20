@@ -12,6 +12,16 @@ const noincentiveCertificateRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     shippingBill: {
       type: String,
       trim: true,

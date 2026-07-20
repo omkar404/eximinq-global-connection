@@ -18,6 +18,9 @@ async function sendEmail(record) {
     _id,
     service,
     mobile,
+    companyName,
+    personName,
+    contactPersonName,
     name,
     email,
     entity,
@@ -50,9 +53,11 @@ async function sendEmail(record) {
           ${dropLocation ? `<tr><td><b>Drop Location</b></td><td>${dropLocation}</td></tr>` : ""}
           ${portYardIcd ? `<tr><td><b>Port / Yard / ICD</b></td><td>${portYardIcd}</td></tr>` : ""}
           ${vehicleType ? `<tr><td><b>Vehicle Type</b></td><td>${vehicleType}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email ID</b></td><td>${email}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
           ${partner ? `<tr><td><b>Partner</b></td><td>Yes</td></tr>` : ""}
@@ -73,6 +78,9 @@ exports.createinlandTransportationRoutes = async (req, res) => {
     const {
       service,
       mobile,
+      companyName,
+      personName,
+      contactPersonName,
       name,
       email,
       entity,
@@ -89,24 +97,68 @@ exports.createinlandTransportationRoutes = async (req, res) => {
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM" || type === "INLAND_TRANSPORT";
+    const cleanMobile = typeof mobile === "string" ? mobile.trim() : "";
+    const cleanCompanyName =
+      typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
 
-    if (!mobile || !mobile.trim()) {
+    if (!cleanMobile) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
       });
     }
+    if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter valid 10 digit Indian mobile number",
+      });
+    }
+    if (isQuickForm && !cleanCompanyName) {
+      return res.status(400).json({
+        success: false,
+        message: "Company Name is required",
+      });
+    }
+    if (isQuickForm && !cleanContactPersonName) {
+      return res.status(400).json({
+        success: false,
+        message: "Contact Person Name is required",
+      });
+    }
+    if (isQuickForm && !cleanEmail) {
+      return res.status(400).json({
+        success: false,
+        message: "Email ID is required",
+      });
+    }
+    if (cleanEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid Email ID",
+      });
+    }
 
     const recordData = {
       service: service || "Inland Transport",
-      mobile: mobile.trim(),
+      mobile: cleanMobile,
       mode: mode || null,
       pickupLocation: pickupLocation || null,
       dropLocation: dropLocation || null,
       portYardIcd: portYardIcd || null,
       vehicleType: vehicleType || null,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
       name: isQuickForm ? null : (name ? name.trim() : null),
-      email: isQuickForm ? null : (email ? email.trim().toLowerCase() : null),
+      email: cleanEmail || null,
       entity: isQuickForm ? null : (entity ? entity.trim() : null),
       role: isQuickForm ? null : (role || null),
       partner: isQuickForm ? false : Boolean(partner),

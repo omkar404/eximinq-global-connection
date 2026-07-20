@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { Building2, Mail, User } from "lucide-react";
+import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     itemDescription: "",
     endUse: "Military / Armed Forces",
     mobile: "",               // renamed from 'contact'
@@ -30,7 +35,23 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
-    if (!form.itemDescription) {
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!emailRegex.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
+
+    if (!form.itemDescription.trim()) {
       newErrors.itemDescription = "Item description is required";
     }
 
@@ -57,34 +78,35 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        itemDescription: form.itemDescription,
-        endUse: form.endUse,
-        mobile: form.mobile,
-        type: "Quick Form",
+        serviceKey: "defence-exim-license",
+        serviceLabel: "Defence EXIM Authorization",
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
+        type: "QUICK_FORM",
+        source: "Defence EXIM Technical Assessment",
+        details: {
+          "Company Name": form.companyName.trim(),
+          "Contact Person Name": form.contactPersonName.trim(),
+          "Email ID": form.email.trim(),
+          "Item Description": form.itemDescription.trim(),
+          "End Use": form.endUse,
+          "Contact Securely": form.mobile.trim(),
+        },
       };
 
       console.log("📤 Sending data:", payload);
 
-      const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/defence-exim-license`,
-      // "http://localhost:5000/api/defence-exim-license", // ✅ http:// is required
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message || "Something went wrong");
-      }
+      await submitServiceQuickForm(payload);
 
       alert("✅ Technical assessment submitted successfully");
 
       // Reset form (keep default endUse)
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         itemDescription: "",
         endUse: "Military / Armed Forces",
         mobile: "",
@@ -106,7 +128,87 @@ const QuickForm = () => {
         Classify your item against the Munitions List.
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name
+          </label>
+          <div className="relative">
+            <Building2
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              placeholder="Enter company name"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <div className="relative">
+            <User
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              placeholder="Enter contact person name"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName
+                  ? "border-red-500"
+                  : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">Email ID</label>
+          <div className="relative">
+            <Mail
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="official@company.com"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Item Description */}
         <div>
           <label className="block text-sm font-semibold mb-1">
@@ -170,7 +272,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full md:col-span-2 text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

@@ -27,6 +27,11 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskFSSAILicensing/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskFSSAILicensing/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/fssai-licensing/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+
 const CloudDeskFSSAILicensing = () => {
 
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -44,158 +49,162 @@ const CloudDeskFSSAILicensing = () => {
   };
   return (
 <>
-<Helmet>
+<Helmet defer={false}>
         <title>
-          FSSAI Licensing & Import Clearance | FSSAI Licensing Registration India | DGFT CUSTOMS Services | EXIMINQ
+          FSSAI Licensing Consultant India | Food Import Clearance & FICS | EXIMINQ
         </title>
-
         <meta
           name="description"
-          content="Importing food products? You need a mandatory Central License and FICS clearance. We manage sampling, lab testing, and NOC generation to prevent shipment rejection."
+          content="FSSAI licensing consultant in India for food import clearance, FICS NOC, central license support, sampling, lab testing, labeling compliance and port clearance."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/fssai-licensing/"
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        {/* Open Graph */}
         <meta
           property="og:title"
-          content="FSSAI Licensing & Import Clearance Online in India | Eximinq"
+          content="FSSAI Licensing Consultant India | Food Import Clearance & FICS"
         />
         <meta
           property="og:description"
-          content="Importing food products? You need a mandatory Central License and FICS clearance. We manage sampling, lab testing, and NOC generation to prevent shipment rejection."
+          content="FSSAI central license and food import clearance support for FICS NOC, sampling, lab testing, labeling checks and port clearance."
+        />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="FSSAI Licensing Consultant India | Food Import Clearance & FICS"
         />
         <meta
-          property="og:url"
-          content="https://eximinq.in/services/fssai-licensing/"
+          name="twitter:description"
+          content="FSSAI central license and food import clearance support for FICS NOC, sampling, lab testing, labeling checks and port clearance."
         />
-        <meta property="og:type" content="website" />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "FSSAI Licensing & Import Clearance",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Importing food products? You need a mandatory Central License and FICS clearance. We manage sampling, lab testing, and NOC generation to prevent shipment rejection."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
+            "@graph": [
               {
-                "@type": "Question",
-                "name": "What if the sample fails the lab test?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "If a sample fails, you can apply for a re-test at a referral lab. If that also fails, the shipment gets a Non-Conformance Report (NCR) and must be re-exported or destroyed. It cannot be cleared for consumption."
-                }
+                "@type": "Organization",
+                "@id": "https://eximinq.in/#organization",
+                name: "EXIMINQ Global Connections",
+                url: "https://eximinq.in/",
+                logo: OG_IMAGE_URL,
+                sameAs: [
+                  "https://www.linkedin.com/company/eximinq-global-connections/"
+                ]
               },
               {
-                "@type": "Question",
-                "name": "Is FSSAI required for 100% Export Oriented Units (EOU)?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes, even 100% Export Oriented Units must obtain a Central License under the category of "Exporting FBO". However, import clearance procedures may be simplified if the goods are for re-export.`
-                }
+                "@type": "WebPage",
+                "@id": `${CANONICAL_URL}#webpage`,
+                url: CANONICAL_URL,
+                name:
+                  "FSSAI Licensing Consultant India | Food Import Clearance & FICS",
+                description:
+                  "FSSAI licensing consultant in India for food import clearance, FICS NOC, central license support, sampling, lab testing, labeling compliance and port clearance.",
+                isPartOf: {
+                  "@id": "https://eximinq.in/#website"
+                },
+                about: {
+                  "@id": `${CANONICAL_URL}#service`
+                },
+                breadcrumb: {
+                  "@id": `${CANONICAL_URL}#breadcrumb`
+                },
+                inLanguage: "en-IN"
               },
               {
-                "@type": "Question",
-                "name": "Can I stick labels after the goods arrive in India?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Generally, labels should be affixed before shipment. However, FSSAI allows rectification of labeling deficiencies (like adding Importer details or Veg/Non-Veg logo) at the Customs Bonded Warehouse under officer supervision for a fee."
-                }
+                "@type": "BreadcrumbList",
+                "@id": `${CANONICAL_URL}#breadcrumb`,
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "FSSAI Licensing & Import Clearance",
+                    item: CANONICAL_URL
+                  }
+                ]
               },
               {
-                "@type": "Question",
-                "name": "Do I need a State or Central License?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "In 2026, all Importers and Exporters must obtain a Central License, regardless of turnover. State Licenses are only for domestic-only traders/manufacturers with turnover between ₹12 Lakh and ₹20 Crore."
-                }
+                "@type": "ProfessionalService",
+                "@id": `${CANONICAL_URL}#service`,
+                name: "FSSAI Licensing & Import Clearance",
+                url: CANONICAL_URL,
+                image: OG_IMAGE_URL,
+                provider: {
+                  "@id": "https://eximinq.in/#organization"
+                },
+                areaServed: {
+                  "@type": "Country",
+                  name: "India"
+                },
+                serviceType:
+                  "FSSAI central license, FICS clearance and food import compliance",
+                description:
+                  "FSSAI licensing, food import clearance, FICS NOC, sampling, lab testing, label review and port clearance support for Indian importers.",
+                telephone: "+917400096950",
+                email: "clouddesk@eximinq.in"
               },
               {
-                "@type": "Question",
-                "name": "What is the cost of an FSSAI Central License in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The government fee is ₹7,500 per year. You can apply for up to 5 years (₹37,500) to avoid annual renewal hassles."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I use one license for multiple locations?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No. FSSAI is Premise-Based. You can have a "Head Office" license to manage the brand, but every warehouse or cold storage facility must have its own license/registration.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do I link my FSSAI license to my Bill of Entry?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Under SWIFT 2.0, this is automatic. When you file your BE on ICEGATE, the system fetches your FSSAI details using your IEC. CloudDesk ensures this mapping is active before you ship your first container."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What happens if my product fails the lab test?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `If the sample is non-conforming, a Non-Conforming Report (NCR) is issued. You have the right to appeal for a "Second Referral" to a Referral Lab. CloudDesk manages this appeal process (Form 6) to save your shipment.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Are "Rectifiable Labels" allowed?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes, for certain missing details like the FSSAI Logo, Importer Name/Address, or Veg/Non-Veg symbol. You can fix these in a Customs Bonded Warehouse before the NOC is issued. However, "Date of Manufacture" or "Expiry" are NOT rectifiable.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "When is the FSSAI Annual Return (Form D1) due?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Every licensed manufacturer and importer must file the annual return by May 31st for the previous financial year."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the penalty for late renewal?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "In 2026, the late fee is ₹100 per day from the date of expiry. If you don't renew within 30 days of expiry, the license is permanently terminated and you must apply for a fresh one"
-                }
-              },
+                "@type": "FAQPage",
+                "@id": `${CANONICAL_URL}#faq`,
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "Is FSSAI required for 100% Export Oriented Units?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "Yes. Export Oriented Units dealing with food products still need the applicable FSSAI central license category, while import clearance may vary depending on the shipment purpose."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Do food importers need a state or central FSSAI license?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "Food importers need a Central FSSAI License. State and basic registrations are for domestic-only food businesses and cannot be used for food import clearance."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Can labels be corrected after imported goods arrive?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "Some rectifiable label deficiencies may be corrected in a customs bonded warehouse under officer supervision before NOC, but key details like manufacturing date and expiry are generally not rectifiable."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What happens if an imported food sample fails lab testing?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "If the sample fails, the importer may request referral testing where allowed. If the product remains non-conforming, it may need to be re-exported or destroyed."
+                    }
+                  }
+                ]
+              }
             ]
           })}
         </script>
@@ -767,6 +776,64 @@ const CloudDeskFSSAILicensing = () => {
   </div>
 </section>
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Food Import Compliance Support
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Services Food Importers Often Need
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                label: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                text: "Prepare and file food import customs entries with accurate supporting details."
+              },
+              {
+                label: "AQCS / PQMS Clearance",
+                href: "/services/aqcs-pqms/",
+                text: "Handle animal and plant quarantine checks for regulated imported products."
+              },
+              {
+                label: "Free Sale Certificate",
+                href: "/services/free-sale-certificate/",
+                text: "Arrange product sale certificates and export-market compliance documents."
+              },
+              {
+                label: "LMPC Registration",
+                href: "/services/legal-metrology-lmpc/",
+                text: "Align packaged commodity declarations before customs clearance."
+              },
+              {
+                label: "Customs Adjudication",
+                href: "/services/customs-adjudication/",
+                text: "Respond to customs notices, valuation objections and classification disputes."
+              },
+              {
+                label: "All Services",
+                href: "/services/",
+                text: "Explore DGFT, customs, licensing and regulatory support from CloudDesk."
+              }
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="block bg-white border border-slate-200 rounded-lg p-5 hover:border-brand-400 hover:shadow-md transition"
+              >
+                <span className="font-bold text-slate-900">{link.label}</span>
+                <p className="text-sm text-slate-500 mt-2 leading-relaxed">
+                  {link.text}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
@@ -795,24 +862,24 @@ const CloudDeskFSSAILicensing = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#license" className="hover:text-white transition">
                   Central FSSAI License
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#process" className="hover:text-white transition">
                   FICS Clearance
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#labeling" className="hover:text-white transition">
                   Labeling Consultancy
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#contact" className="hover:text-white transition">
                   Annual Returns
                 </a>
               </li>
@@ -822,24 +889,24 @@ const CloudDeskFSSAILicensing = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#about" className="hover:text-white transition">
                   Product Categorization
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#contact" className="hover:text-white transition">
                   Fee Structure
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/aqcs-pqms/" className="hover:text-white transition">
                   NABL Lab List
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/" className="hover:text-white transition">
                   Import Regulations
                 </a>
               </li>

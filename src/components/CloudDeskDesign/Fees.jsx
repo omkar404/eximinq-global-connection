@@ -1,5 +1,3 @@
-import { Check } from "lucide-react";
-
 const Fees = ({ setShowEnrollModal }) => {
 return (
 <section id="fees" className="py-20 bg-brand-50">

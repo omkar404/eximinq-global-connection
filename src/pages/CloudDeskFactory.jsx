@@ -32,6 +32,10 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskFactory/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskFactory/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/factory-license/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
 
 const CloudDeskFactory = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -46,59 +50,130 @@ const CloudDeskFactory = () => {
   }
   return (
 <>
-<Helmet>
+<Helmet defer={false}>
         <title>
-          Factory License Registration & Renewal | Factory License Registration India | DGFT CUSTOMS Services | EXIMINQ
+          Factory License Registration & Renewal in India | DISH Consultant | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content="Setting up a manufacturing unit? We assist with Factory Plan Approval, Stability Certification, and Licensing from the Directorate of Industrial Safety and Health (DISH)."
+          content="Factory license registration and renewal consultant in India for DISH approvals, factory plan approval, stability certificate, inspection support, annual returns and compliance."
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/factory-license/"
+          href={CANONICAL_URL}
         />
 
         {/* Open Graph */}
         <meta
           property="og:title"
-          content="Factory License Registration & Renewal in India | Eximinq"
+          content="Factory License Registration & Renewal in India | DISH Consultant"
         />
         <meta
           property="og:description"
-          content="Setting up a manufacturing unit? We assist with Factory Plan Approval, Stability Certification, and Licensing from the Directorate of Industrial Safety and Health (DISH)."
+          content="DISH factory license support for plan approval, stability certificate, inspection coordination, renewal, amendment and annual compliance."
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/factory-license/"
+          content={CANONICAL_URL}
         />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Factory License Registration & Renewal in India | DISH Consultant"
+        />
+        <meta
+          name="twitter:description"
+          content="Factory license registration, renewal, plan approval and DISH compliance support for manufacturing units in India."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Factory License Registration & Renewal",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Setting up a manufacturing unit? We assist with Factory Plan Approval, Stability Certification, and Licensing from the Directorate of Industrial Safety and Health (DISH)."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
+            "@graph": [
+              {
+                "@type": "Organization",
+                "@id": "https://eximinq.in/#organization",
+                "name": "Eximinq Global Connections",
+                "url": "https://eximinq.in",
+                "logo": OG_IMAGE_URL
+              },
+              {
+                "@type": "WebPage",
+                "@id": `${CANONICAL_URL}#webpage`,
+                "url": CANONICAL_URL,
+                "name": "Factory License Registration & Renewal in India",
+                "description":
+                  "Factory license registration and renewal service page for DISH approvals, factory plan approval, stability certificate, inspection support and compliance.",
+                "inLanguage": "en-IN",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "@id": "https://eximinq.in/#website",
+                  "url": "https://eximinq.in",
+                  "name": "EXIMINQ"
+                },
+                "about": {
+                  "@id": `${CANONICAL_URL}#service`
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": `${CANONICAL_URL}#breadcrumb`,
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://eximinq.in"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Services",
+                    "item": "https://eximinq.in/services/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Factory License",
+                    "item": CANONICAL_URL
+                  }
+                ]
+              },
+              {
+                "@type": "ProfessionalService",
+                "@id": `${CANONICAL_URL}#service`,
+                "name": "Factory License Registration & Renewal",
+                "serviceType": "Factory License Registration, Renewal and DISH Compliance",
+                "url": CANONICAL_URL,
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Eximinq Global Connections",
+                  "url": "https://eximinq.in"
+                },
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "India"
+                },
+                "description":
+                  "Factory license registration and renewal assistance including factory plan approval, stability certificate, DISH application filing, inspection support and annual compliance.",
+                "mainEntityOfPage": {
+                  "@id": `${CANONICAL_URL}#webpage`
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "@id": `${CANONICAL_URL}#faq`,
+                "mainEntity": [
               {
                 "@type": "Question",
                 "name": "Do I need a Factory License if I only have 5 workers?",
@@ -175,6 +250,8 @@ const CloudDeskFactory = () => {
                     `Yes. If the "Occupier" changes or the business is sold, you must file an Amendment Application with the new details and the transfer deed.`
                 }
               },
+            ]
+              }
             ]
           })}
         </script>
@@ -696,6 +773,55 @@ const CloudDeskFactory = () => {
   </div>
 </section>    
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Industrial Compliance
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Services Manufacturers Often Need
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                label: "Pollution Control Consent",
+                href: "/services/pollution-control/",
+              },
+              {
+                label: "IEM Registration",
+                href: "/services/iem-registration/",
+              },
+              {
+                label: "Industrial License",
+                href: "/services/industrial-license/",
+              },
+              {
+                label: "Factory Stuffing Permission",
+                href: "/services/factory-stuffing/",
+              },
+              {
+                label: "GST Return Filing",
+                href: "/services/gst-returns/",
+              },
+              {
+                label: "All Services",
+                href: "/services/",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="bg-white border border-slate-200 rounded-lg p-4 font-semibold text-slate-800 hover:text-brand-700 hover:border-brand-300 transition"
+              >
+                {service.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
@@ -725,10 +851,10 @@ const CloudDeskFactory = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">New Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">License Renewal</a></li>
-                    <li><a href="#" class="hover:text-white transition">Plan Approval</a></li>
-                    <li><a href="#" class="hover:text-white transition">Pollution NOC</a></li>
+                    <li><a href="/services/factory-license/" className="hover:text-white transition">New Registration</a></li>
+                    <li><a href="/services/factory-license/#fees" className="hover:text-white transition">License Renewal</a></li>
+                    <li><a href="/services/factory-license/#process" className="hover:text-white transition">Plan Approval</a></li>
+                    <li><a href="/services/pollution-control/" className="hover:text-white transition">Pollution NOC</a></li>
             </ul>
           </div>
 
@@ -736,10 +862,10 @@ const CloudDeskFactory = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Factories Act 1948</a></li>
-                    <li><a href="#" class="hover:text-white transition">State Rules (DISB)</a></li>
-                    <li><a href="#" class="hover:text-white transition">Safety Guidelines</a></li>
-                    <li><a href="#" class="hover:text-white transition">Fee Calculator</a></li>
+                    <li><a href="/services/industrial-license/" className="hover:text-white transition">Industrial License</a></li>
+                    <li><a href="/services/iem-registration/" className="hover:text-white transition">IEM Registration</a></li>
+                    <li><a href="/services/factory-stuffing/" className="hover:text-white transition">Factory Stuffing</a></li>
+                    <li><a href="/services/" className="hover:text-white transition">All Services</a></li>
             </ul>
           </div>
 

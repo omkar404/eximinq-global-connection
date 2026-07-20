@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 /* EMAIL HELPER */
 async function sendEmail(record) {
   const {
-    _id, service, mobile, name, email,
+    _id, service, mobile, name, email, companyName, contactPersonName,
     entity, role, partner, type,
     category, issue, iecCode, issueType,
   } = record;
@@ -32,13 +32,15 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email ID</b></td><td>${email}</td></tr>` : ""}
           ${iecCode   ? `<tr><td><b>Company IEC Code</b></td><td>${iecCode}</td></tr>`   : ""}
           ${issueType ? `<tr><td><b>Issue Type</b></td><td>${issueType}</td></tr>`       : ""}
           ${category  ? `<tr><td><b>Category</b></td><td>${category}</td></tr>`          : ""}
           ${issue     ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>`                : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name   ? `<tr><td><b>Name</b></td><td>${name}</td></tr>`     : ""}
-          ${email  ? `<tr><td><b>Email</b></td><td>${email}</td></tr>`   : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role   ? `<tr><td><b>Role</b></td><td>${role}</td></tr>`     : ""}
           ${type !== "QUICK_FORM_COMPLIANCE"
@@ -62,10 +64,16 @@ exports.createnodueCertificateRoutes = async (req, res) => {
     console.log("📥 Incoming:", req.body);
 
     const {
-      service, mobile, name, email, entity,
+      service, mobile, name, email, companyName, contactPersonName, entity,
       role, partner, type, category, issue,
       iecCode, issueType,
     } = req.body;
+
+    const isQuickForm = type === "QUICK_FORM";
+    const cleanCompanyName = typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string" ? contactPersonName.trim() : "";
+    const cleanEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
 
     // ✅ Mobile validation
     if (!mobile || !/^[6-9]\d{9}$/.test(mobile.trim())) {
@@ -83,15 +91,29 @@ exports.createnodueCertificateRoutes = async (req, res) => {
       });
     }
 
-    const isQuickForm = type === "QUICK_FORM";
+    if (isQuickForm && (!cleanCompanyName || !cleanContactPersonName || !cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Company name, contact person name and email ID are required",
+      });
+    }
+
+    if (cleanEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid email ID",
+      });
+    }
 
     const recordData = {
       service:   service || "No due Registration",
       mobile:    mobile.trim(),
       iecCode:   iecCode   ? iecCode.trim()                 : null,
+      companyName: cleanCompanyName || null,
+      contactPersonName: cleanContactPersonName || null,
       issueType: issueType ? issueType.trim()               : null,
       name:      isQuickForm ? null : name   ? name.trim()  : null,
-      email:     isQuickForm ? null : email  ? email.trim().toLowerCase() : null,
+      email:     cleanEmail || null,
       entity:    isQuickForm ? null : entity ? entity.trim(): null,
       role:      isQuickForm ? null : role   || null,
       partner:   isQuickForm ? false : Boolean(partner),

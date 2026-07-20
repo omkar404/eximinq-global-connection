@@ -6,6 +6,9 @@ const QuickForm = () => {
     sumInsured: "",
     fromCountry: "",
     toCountry: "",
+    companyName: "",
+    contactPersonName: "",
+    email: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -34,6 +37,17 @@ const QuickForm = () => {
     if (!form.toCountry.trim()) {
       newErrors.toCountry = "Destination country is required";
     }
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company Name is required";
+    }
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact Person Name is required";
+    }
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid Email ID";
+    }
 
     return newErrors;
   };
@@ -51,8 +65,12 @@ const QuickForm = () => {
       const payload = {
         commodityType: form.commodityType,
         sumInsured: form.sumInsured,
-        fromCountry: form.fromCountry,
-        toCountry: form.toCountry,
+        fromCountry: form.fromCountry.trim(),
+        toCountry: form.toCountry.trim(),
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        personName: form.contactPersonName.trim(),
+        email: form.email.trim(),
         type: "QUICK_FORM",
       };
 
@@ -82,6 +100,9 @@ const QuickForm = () => {
         sumInsured: "",
         fromCountry: "",
         toCountry: "",
+        companyName: "",
+        contactPersonName: "",
+        email: "",
       });
     } catch (err) {
       console.error("❌ Error:", err);
@@ -182,6 +203,67 @@ const QuickForm = () => {
             />
             {errors.toCountry && (
               <p className="text-red-500 text-xs mt-1">{errors.toCountry}</p>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-semibold mb-1">
+              Company Name *
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. ABC Exports Pvt Ltd"
+            />
+            {errors.companyName && (
+              <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">
+              Contact Person Name *
+            </label>
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. Rahul Sharma"
+            />
+            {errors.contactPersonName && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.contactPersonName}
+              </p>
+            )}
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-semibold mb-1">
+              Email ID *
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. logistics@example.com"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
             )}
           </div>
         </div>

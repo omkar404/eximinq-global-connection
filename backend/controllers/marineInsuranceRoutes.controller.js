@@ -30,6 +30,9 @@ async function sendEmail(record) {
     sumInsured,
     fromCountry,
     toCountry,
+    companyName,
+    personName,
+    contactPersonName,
   } = record;
 
   const serviceDisplay = service || "Marine Registration";
@@ -48,11 +51,13 @@ async function sendEmail(record) {
           ${sumInsured ? `<tr><td><b>Sum Insured (Invoice Value + 10%)</b></td><td>${sumInsured}</td></tr>` : ""}
           ${fromCountry ? `<tr><td><b>From Country</b></td><td>${fromCountry}</td></tr>` : ""}
           ${toCountry ? `<tr><td><b>To Country</b></td><td>${toCountry}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email ID</b></td><td>${email}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           ${mobile ? `<tr><td><b>Mobile</b></td><td>${mobile}</td></tr>` : ""}
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
           ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
@@ -85,11 +90,48 @@ exports.createmarineInsuranceRoutes = async (req, res) => {
       sumInsured,
       fromCountry,
       toCountry,
+      companyName,
+      personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanCompanyName =
+      typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
 
     // ✅ No mandatory mobile check – completely optional
+    if (isQuickForm && !cleanCompanyName) {
+      return res.status(400).json({
+        success: false,
+        message: "Company Name is required",
+      });
+    }
+    if (isQuickForm && !cleanContactPersonName) {
+      return res.status(400).json({
+        success: false,
+        message: "Contact Person Name is required",
+      });
+    }
+    if (isQuickForm && !cleanEmail) {
+      return res.status(400).json({
+        success: false,
+        message: "Email ID is required",
+      });
+    }
+    if (cleanEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid Email ID",
+      });
+    }
 
     const recordData = {
       service: service || "Marine Registration",
@@ -98,8 +140,11 @@ exports.createmarineInsuranceRoutes = async (req, res) => {
       sumInsured: sumInsured ? sumInsured.trim() : null,
       fromCountry: fromCountry ? fromCountry.trim() : null,
       toCountry: toCountry ? toCountry.trim() : null,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
       name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      email: cleanEmail || null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),

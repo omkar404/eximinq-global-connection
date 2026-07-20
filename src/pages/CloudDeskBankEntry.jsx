@@ -25,6 +25,127 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskBankEntry/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskBankEntry/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/bill-of-entry-filing/";
+const META_TITLE =
+  "Bill of Entry Filing Consultant India | Import Customs Clearance & ICEGATE | EXIMINQ";
+const META_DESCRIPTION =
+  "Bill of Entry filing consultant in India for import customs clearance, HS code classification, duty assessment, ICEGATE filing, e-Sanchit documents and out-of-charge support.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const BILL_OF_ENTRY_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Bill of Entry Filing",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Bill of Entry Filing for Import Customs Clearance",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "Bill of Entry Filing",
+        "Import Customs Clearance",
+        "ICEGATE Filing",
+        "Customs Duty Assessment",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is a Bill of Entry?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A Bill of Entry is the import declaration filed with Indian Customs for assessment, duty payment and clearance of imported goods.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "When should a Bill of Entry be filed?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A Bill of Entry is generally filed before or shortly after arrival of goods, and advance filing helps reduce demurrage and port dwell time.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What documents are needed for Bill of Entry filing?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Typical documents include commercial invoice, packing list, bill of lading or airway bill, insurance, certificate of origin, licences and supporting e-Sanchit documents.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can HSN errors be corrected after filing?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "HSN or declaration errors may be corrected through amendment or reassessment depending on the Bill of Entry stage and customs approval.",
+          },
+        },
+      ],
+    },
+  ],
+};
 const CloudDeskBankEntry = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -41,186 +162,28 @@ const CloudDeskBankEntry = () => {
   };
   return (
     <>
-      <Helmet>
-        {/* Primary SEO */}
-        <title>
-          Bill of Entry Filing Service in India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
+      <Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
         <meta
-          name="description"
-          content="Professional Bill of Entry filing service in India for import customs clearance. Accurate documentation, duty assessment and ICEGATE submission support."
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/bill-of-entry-filing/"
-        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Bill of Entry Filing Service in India | ICEGATE Customs Clearance"
-        />
-        <meta
-          property="og:description"
-          content="Bill of Entry filing support for import customs clearance in India with proper documentation and ICEGATE submission."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/bill-of-entry-filing/"
-        />
-        <meta property="og:type" content="article" />
-
-        {/* Structured Data */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Home",
-                    item: "https://eximinq.in",
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: "Services",
-                    item: "https://eximinq.in/services/",
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 3,
-                    name: "Bill of Entry Filing",
-                    item: "https://eximinq.in/services/bill-of-entry-filing/",
-                  },
-                ],
-              },
-              {
-                "@type": "Service",
-                name: "Bill of Entry Filing Service",
-                serviceType: "Customs Import Clearance Filing",
-                description:
-                  "Bill of Entry filing service for import customs clearance in India including documentation review, duty calculation and ICEGATE submission.",
-                provider: {
-                  "@type": "Organization",
-                  name: "Eximinq Global Connections",
-                  url: "https://eximinq.in",
-                },
-                areaServed: {
-                  "@type": "Country",
-                  name: "India",
-                },
-                hasOfferCatalog: {
-                  "@type": "OfferCatalog",
-                  name: "Bill of Entry Filing Services",
-                  itemListElement: [
-                    {
-                      "@type": "Offer",
-                      itemOffered: {
-                        "@type": "Service",
-                        name: "Document Verification",
-                      },
-                    },
-                    {
-                      "@type": "Offer",
-                      itemOffered: {
-                        "@type": "Service",
-                        name: "Customs Duty Assessment",
-                      },
-                    },
-                    {
-                      "@type": "Offer",
-                      itemOffered: {
-                        "@type": "Service",
-                        name: "ICEGATE Filing Support",
-                      },
-                    },
-                    {
-                      "@type": "Offer",
-                      itemOffered: {
-                        "@type": "Service",
-                        name: "Import Compliance Review",
-                      },
-                    },
-                  ],
-                },
-              },
-              {
-                "@type": "FAQPage",
-                mainEntity: [
-                  {
-                    "@type": "Question",
-                    name: "What is the mandatory timeline for filing a Bill of Entry?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: 'Under Section 46, you must file the BoE before the end of the next day (excluding holidays) following the day on which the aircraft/vessel/vehicle carrying the goods arrives. • The Penalty: If you fail to meet this deadline, a "Late Fee" is charged (typically ₹5,000 per day for the first 3 days, and ₹10,000 per day thereafter). CloudDesk’s Timer Alert ensures you never pay a single rupee in late fees.',
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "Can I file a Bill of Entry without a Bill of Lading (BL)?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: 'You can file a "Prior" BoE using a Master BL/AWB number. However, for the final assessment and "Out of Charge," the House BL and final invoice must be uploaded.',
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "What is the difference between a White, Yellow, and Green Bill of Entry?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "White (Home Consumption): When you want to pay the duty and take the goods directly to your factory/shop.Yellow (Into-Bond/Warehouse): When you want to store the goods in a Customs Warehouse without paying duty immediately (Duty is deferred).Green (Ex-Bond): When you want to take goods out of the warehouse for consumption (you pay the duty at this stage).",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: 'What is an "Advance Bill of Entry"?',
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "It is a BoE filed up to 30 days before the expected arrival of the goods. This is the gold standard for high-volume importers who want zero port-dwell time.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: 'What is "Faceless Assessment"?',
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "Your BoE is no longer assessed by an officer at the port of arrival. It could be assessed by an officer in Bangalore even if your goods are at Nhava Sheva. This makes e-Sanchit documentation critical. If your digital documents aren't clear, your cargo gets stuck.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "How can I check if my duty payment has been reflected?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: 'You can check the "Challan Status" on ICEGATE. CloudDesk provides a Payment Verification Tracker that notifies you the moment the "Duty Paid" status is updated, triggering the next step: "Examination" or "Out of Charge."',
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "I made a mistake in the HSN code after filing. Can I change it?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: 'Yes, but it requires a Section 149 Amendment. If the "Out of Charge" hasn\'t been given, it\'s easier. Once "OOC" is granted, you have to go through a formal "Re-assessment" process. CloudDesk manages these amendments to minimize delays.',
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: 'What is "RMS" (Risk Management System)?',
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: 'RMS is an AI-driven system that decides which BoE needs to be checked and which can be cleared immediately ("Green Channel"). CloudDesk helps you maintain a "High Compliance Score" to increase your chances of 100% Green Channel clearances.',
-                    },
-                  },
-                ],
-              },
-            ],
-          })}
+          {JSON.stringify(BILL_OF_ENTRY_SCHEMA)}
         </script>
       </Helmet>
       <div className="bg-slate-50 text-slate-800">
@@ -828,12 +791,73 @@ const CloudDeskBankEntry = () => {
           </div>
         </section>
 
+        <section className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Related Import Clearance Support
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Services Often Needed With Bill of Entry Filing
+              </h2>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {[
+                {
+                  title: "e-Sanchit Filing",
+                  href: "/services/e-sanchit-filing/",
+                  copy: "Upload import documents, generate IRNs and link them to customs filings.",
+                },
+                {
+                  title: "Customs Duty Payment",
+                  href: "/services/duty-payment-ecl/",
+                  copy: "Manage ECL wallet, challans and duty payment for faster out-of-charge.",
+                },
+                {
+                  title: "AD Code Registration",
+                  href: "/services/ad-code-registration/",
+                  copy: "Map bank AD codes and customs locations before import-export transactions.",
+                },
+                {
+                  title: "ICEGATE Registration",
+                  href: "/services/icegate-registration/",
+                  copy: "Set up ICEGATE access for import documentation and customs workflows.",
+                },
+                {
+                  title: "CHA Services",
+                  href: "/services/cha-services/",
+                  copy: "Coordinate customs broker support for clearance, examination and delivery.",
+                },
+                {
+                  title: "SVB Registration",
+                  href: "/services/svb-registration/",
+                  copy: "Handle related-party valuation reviews and provisional assessment cases.",
+                },
+              ].map((service) => (
+                <a
+                  key={service.href}
+                  href={service.href}
+                  className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition"
+                >
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {service.copy}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
             {/* BRAND */}
             <div>
-              <a className="text-2xl font-bold text-white mb-4 block">
+              <a href="/" className="text-2xl font-bold text-white mb-4 block">
                 EXIMINQ
               </a>
 
@@ -843,13 +867,25 @@ const CloudDeskBankEntry = () => {
               </p>
 
               <div className="flex gap-4">
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://www.linkedin.com/company/eximinq/"
+                  aria-label="EXIMINQ on LinkedIn"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Linkedin size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://x.com/eximinq"
+                  aria-label="EXIMINQ on X"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Twitter size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://www.facebook.com/eximinq"
+                  aria-label="EXIMINQ on Facebook"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Facebook size={18} />
                 </a>
               </div>
@@ -860,22 +896,22 @@ const CloudDeskBankEntry = () => {
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="#home" className="hover:text-white transition">
                     Bill of Entry Filing
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/shipping-bill-filing/" className="hover:text-white transition">
                     Shipping Bill Filing
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/ad-code-registration/" className="hover:text-white transition">
                     AD Code Registration
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/igst-refund/" className="hover:text-white transition">
                     IGST Refund
                   </a>
                 </li>
@@ -887,22 +923,22 @@ const CloudDeskBankEntry = () => {
               <h4 className="text-white font-bold mb-6">Other Services</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/tools/hs-code-finder/" className="hover:text-white transition">
                     HSN Code Finder
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/foreign-trade-policy/Customsrates/" className="hover:text-white transition">
                     Exchange Rates
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/services/duty-drawback/" className="hover:text-white transition">
                     Duty Drawback
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="/foreign-trade-policy/regulatory-updates/" className="hover:text-white transition">
                     Customs Circulars
                   </a>
                 </li>

@@ -30,6 +30,10 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskIndustrial/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskIndustrial/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/industrial-license/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
 
 const CloudDeskIndustrial = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -49,59 +53,130 @@ const CloudDeskIndustrial = () => {
   return (
 
 <>
-<Helmet>
+<Helmet defer={false}>
         <title>
-          Industrial License for Regulated Sectors | Industrial License Registration India | DGFT CUSTOMS Services | EXIMINQ
+          Industrial License Registration in India | DPIIT & MHA Approval | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content="Planning to manufacture Defense Equipment, Explosives, or Hazardous Chemicals? You cannot just file an IEM. You need a formal Industrial License (IL) from DPIIT & MHA."
+          content="Industrial license consultant in India for regulated sectors including defence, explosives, hazardous chemicals, tobacco and alcohol manufacturing. DPIIT, MHA and NSWS approval support."
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/industrial-license/"
+          href={CANONICAL_URL}
         />
 
         {/* Open Graph */}
         <meta
           property="og:title"
-          content="Industrial License for Regulated Sectors in India | Eximinq"
+          content="Industrial License Registration in India | DPIIT & MHA Approval"
         />
         <meta
           property="og:description"
-          content="Planning to manufacture Defense Equipment, Explosives, or Hazardous Chemicals? You cannot just file an IEM. You need a formal Industrial License (IL) from DPIIT & MHA."
+          content="Industrial License support for regulated manufacturing sectors, DPIIT filing, MHA security clearance, NSWS application and Letter of Intent follow-up."
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/industrial-license/"
+          content={CANONICAL_URL}
         />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Industrial License Registration in India | DPIIT & MHA Approval"
+        />
+        <meta
+          name="twitter:description"
+          content="Industrial License registration support for regulated sectors, DPIIT filing, MHA clearance, NSWS application and compliance follow-up."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Industrial License for Regulated Sectors",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Planning to manufacture Defense Equipment, Explosives, or Hazardous Chemicals? You cannot just file an IEM. You need a formal Industrial License (IL) from DPIIT & MHA."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
+            "@graph": [
+              {
+                "@type": "Organization",
+                "@id": "https://eximinq.in/#organization",
+                "name": "Eximinq Global Connections",
+                "url": "https://eximinq.in",
+                "logo": OG_IMAGE_URL
+              },
+              {
+                "@type": "WebPage",
+                "@id": `${CANONICAL_URL}#webpage`,
+                "url": CANONICAL_URL,
+                "name": "Industrial License Registration in India",
+                "description":
+                  "Industrial License registration page for regulated sectors requiring DPIIT, MHA, NSWS and inter-ministerial approval support.",
+                "inLanguage": "en-IN",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "@id": "https://eximinq.in/#website",
+                  "url": "https://eximinq.in",
+                  "name": "EXIMINQ"
+                },
+                "about": {
+                  "@id": `${CANONICAL_URL}#service`
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": `${CANONICAL_URL}#breadcrumb`,
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://eximinq.in"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Services",
+                    "item": "https://eximinq.in/services/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Industrial License",
+                    "item": CANONICAL_URL
+                  }
+                ]
+              },
+              {
+                "@type": "ProfessionalService",
+                "@id": `${CANONICAL_URL}#service`,
+                "name": "Industrial License Registration",
+                "serviceType": "Industrial License Registration and Regulatory Approval",
+                "url": CANONICAL_URL,
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Eximinq Global Connections",
+                  "url": "https://eximinq.in"
+                },
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "India"
+                },
+                "description":
+                  "Industrial License assistance for regulated sectors including defence, aerospace, explosives, hazardous chemicals, tobacco and alcohol manufacturing with DPIIT, MHA and NSWS support.",
+                "mainEntityOfPage": {
+                  "@id": `${CANONICAL_URL}#webpage`
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "@id": `${CANONICAL_URL}#faq`,
+                "mainEntity": [
               {
                 "@type": "Question",
                 "name": "What is the difference between an IEM and an Industrial License?",
@@ -175,6 +250,8 @@ const CloudDeskIndustrial = () => {
                     "The government first issues an LOI. Once you fulfill the conditions (like getting environmental clearance or setting up the plant), the LOI is converted into a formal Industrial License."
                 }
               },
+            ]
+              }
             ]
           })}
         </script>
@@ -587,6 +664,55 @@ const CloudDeskIndustrial = () => {
   </div>
 </section>
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Regulated-Sector Support
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Services Manufacturers Often Need
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                label: "IEM Registration",
+                href: "/services/iem-registration",
+              },
+              {
+                label: "SCOMET Licensing",
+                href: "/services/scomet-licensing",
+              },
+              {
+                label: "Defence EXIM License",
+                href: "/services/defence-exim-license",
+              },
+              {
+                label: "Factory License",
+                href: "/services/factory-license/",
+              },
+              {
+                label: "Pollution Control Consent",
+                href: "/services/pollution-control",
+              },
+              {
+                label: "All Services",
+                href: "/services/",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="bg-white border border-slate-200 rounded-lg p-4 font-semibold text-slate-800 hover:text-brand-700 hover:border-brand-300 transition"
+              >
+                {service.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
@@ -616,10 +742,10 @@ const CloudDeskIndustrial = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Defense License</a></li>
-                    <li><a href="#" class="hover:text-white transition">Explosives License</a></li>
-                    <li><a href="#" class="hover:text-white transition">IEM Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">SCOMET Authorization</a></li>
+                    <li><a href="/services/defence-exim-license" className="hover:text-white transition">Defense License</a></li>
+                    <li><a href="/services/industrial-license" className="hover:text-white transition">Explosives License</a></li>
+                    <li><a href="/services/iem-registration" className="hover:text-white transition">IEM Registration</a></li>
+                    <li><a href="/services/scomet-licensing" className="hover:text-white transition">SCOMET Authorization</a></li>
             </ul>
           </div>
 
@@ -627,10 +753,10 @@ const CloudDeskIndustrial = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">IDR Act 1951</a></li>
-                    <li><a href="#" class="hover:text-white transition">Compulsory List PDF</a></li>
-                    <li><a href="#" class="hover:text-white transition">Press Note 3 (FDI)</a></li>
-                    <li><a href="#" class="hover:text-white transition">Location Policy</a></li>
+                    <li><a href="/services/industrial-license#about" className="hover:text-white transition">IDR Act 1951</a></li>
+                    <li><a href="/services/industrial-license#sectors" className="hover:text-white transition">Compulsory Licensing List</a></li>
+                    <li><a href="/services/epr-authorization" className="hover:text-white transition">EPR Authorization</a></li>
+                    <li><a href="/services/" className="hover:text-white transition">All Services</a></li>
             </ul>
           </div>
 

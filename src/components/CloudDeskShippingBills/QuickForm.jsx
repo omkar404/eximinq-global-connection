@@ -415,7 +415,7 @@ const QuickForm = () => {
 
   const [form, setForm] = useState({
     companyName: "",
-    personName: "",
+    contactPersonName: "",
     email: "",
     Incentive: "",
     port: "",
@@ -446,23 +446,23 @@ const QuickForm = () => {
       newErrors.companyName = "Company name must be at least 2 characters";
     }
 
-    if (!form.personName.trim()) {
-      newErrors.personName = "Your name is required";
-    } else if (form.personName.trim().length < 2) {
-      newErrors.personName = "Name must be at least 2 characters";
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    } else if (form.contactPersonName.trim().length < 2) {
+      newErrors.contactPersonName = "Contact person name must be at least 2 characters";
     }
 
     if (!form.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Email ID is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      newErrors.email = "Enter a valid email address";
+      newErrors.email = "Enter a valid email ID";
     }
 
     if (!form.Incentive) newErrors.Incentive = "Please select an Incentive";
     if (!form.port) newErrors.port = "Please select a port";
     const mobileRegex = /^[6-9]\d{9}$/;
     if (!form.mobile.trim()) newErrors.mobile = "Mobile number is required";
-    else if (!mobileRegex.test(form.mobile)) newErrors.mobile = "Enter valid 10 digit Indian mobile number";
+    else if (!mobileRegex.test(form.mobile.trim())) newErrors.mobile = "Enter valid 10 digit Indian mobile number";
     return newErrors;
   };
 
@@ -477,11 +477,12 @@ const QuickForm = () => {
       setLoading(true);
       const payload = {
         companyName: form.companyName.trim(),
-        personName: form.personName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        personName: form.contactPersonName.trim(),
         email: form.email.trim(),
         Incentive: form.Incentive,
         port: form.port,
-        mobile: form.mobile,
+        mobile: form.mobile.trim(),
         partner: form.partner,
         type: "QUICK_FORM",
       };
@@ -504,7 +505,7 @@ const QuickForm = () => {
       alert("Request submitted successfully");
       setForm({
         companyName: "",
-        personName: "",
+        contactPersonName: "",
         email: "",
         Incentive: "",
         port: "",
@@ -531,12 +532,12 @@ const QuickForm = () => {
         Need help with Drawback rates?
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 md:grid-cols-2 gap-3">
 
         {/* COMPANY NAME */}
-        <div className="mb-2.5">
+        <div>
           <label className="block text-xs font-semibold mb-1">
-            Company Name
+            Company Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -554,29 +555,29 @@ const QuickForm = () => {
         </div>
 
         {/* CONTACT PERSON NAME */}
-        <div className="mb-2.5">
+        <div>
           <label className="block text-xs font-semibold mb-1">
-            Contact Person Name
+            Contact Person Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
-            name="personName"
-            value={form.personName}
+            name="contactPersonName"
+            value={form.contactPersonName}
             onChange={handleChange}
             placeholder="e.g. Rahul Sharma"
             className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
-              errors.personName ? "border-red-500" : "border-slate-300"
+              errors.contactPersonName ? "border-red-500" : "border-slate-300"
             }`}
           />
-          {errors.personName && (
-            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">{errors.contactPersonName}</p>
           )}
         </div>
 
         {/* EMAIL */}
-        <div className="mb-2.5">
+        <div className="md:col-span-2">
           <label className="block text-xs font-semibold mb-1">
-            Email Id
+            Email ID <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
@@ -594,7 +595,7 @@ const QuickForm = () => {
         </div>
 
         {/* PORT OF LOADING */}
-        <div className="mb-2.5">
+        <div className="md:col-span-2">
           <label className="block text-xs font-semibold mb-1">
             Port of Loading
           </label>
@@ -612,7 +613,7 @@ const QuickForm = () => {
         </div>
 
         {/* INCENTIVE TYPE */}
-        <div className="mb-2.5">
+        <div className="md:col-span-2">
           <label className="block text-xs font-semibold mb-1">
             Incentive Type
           </label>
@@ -636,9 +637,9 @@ const QuickForm = () => {
         </div>
 
         {/* MOBILE */}
-        <div className="mb-3">
+        <div className="md:col-span-2">
           <label className="block text-xs font-semibold mb-1">
-            Mobile Number
+            Mobile Number <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
@@ -660,7 +661,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2 text-sm rounded-lg transition flex items-center justify-center gap-2"
+          className="md:col-span-2 w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2 text-sm rounded-lg transition flex items-center justify-center gap-2"
         >
           <SendHorizontal size={16} />
           {loading ? "Submitting..." : "Get Estimate"}

@@ -8,16 +8,16 @@ const Navbar = () => {
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#about" class="hover:text-brand-600 transition">
+          <a href="#about" className="hover:text-brand-600 transition">
             Solutions
           </a>
-          <a href="#bonded" class="hover:text-brand-600 transition">
+          <a href="#bonded" className="hover:text-brand-600 transition">
             Bonded
           </a>
-          <a href="#general" class="hover:text-brand-600 transition">
+          <a href="#general" className="hover:text-brand-600 transition">
             General
           </a>
-          <a href="#locations" class="hover:text-brand-600 transition">
+          <a href="#locations" className="hover:text-brand-600 transition">
             Locations
           </a>
         </div>
@@ -42,16 +42,16 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#about" class="block py-2 text-slate-600">
+          <a href="#about" className="block py-2 text-slate-600">
             Solutions
           </a>
-          <a href="#bonded" class="block py-2 text-slate-600">
+          <a href="#bonded" className="block py-2 text-slate-600">
             Bonded
           </a>
-          <a href="#general" class="block py-2 text-slate-600">
+          <a href="#general" className="block py-2 text-slate-600">
             General
           </a>
-          <a href="#locations" class="block py-2 text-brand-600 font-bold">
+          <a href="#locations" className="block py-2 text-brand-600 font-bold">
             Book Space
           </a>
 

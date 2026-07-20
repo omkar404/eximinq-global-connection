@@ -30,6 +30,149 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskWPCETA/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskWPCETA/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/wpc-license/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const META_TITLE =
+  "WPC ETA License Consultant India | Equipment Type Approval for Wireless Imports | EXIMINQ";
+const META_DESCRIPTION =
+  "WPC ETA license consultant in India for wireless imports, Bluetooth devices, Wi-Fi routers, RFID products, RF test report review, Saral Sanchar filing and customs clearance support.";
+
+const wpcSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "EXIMINQ Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": "https://eximinq.in/#website",
+        url: "https://eximinq.in/",
+        name: "EXIMINQ",
+      },
+      about: {
+        "@id": `${CANONICAL_URL}#service`,
+      },
+      breadcrumb: {
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "WPC ETA License",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "WPC ETA License Consultant India",
+      serviceType: "WPC Equipment Type Approval and Wireless Import Compliance",
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "WPC ETA License Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "ETA self-declaration filing",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "RF test report review",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Wireless import license support",
+            },
+          },
+        ],
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Does every Bluetooth device need WPC ETA approval?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Devices using Bluetooth, Wi-Fi, RFID, NFC or Zigbee generally need WPC ETA approval before sale or import into India.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is the difference between ETA and a WPC import license?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "ETA confirms the wireless product design and frequency parameters. A WPC import license is permission to import a specific shipment or model quantity and may be needed after ETA.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can FCC or CE RF test reports be used for WPC ETA?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "They can be used when issued by an accepted accredited laboratory and when the report covers Indian de-licensed frequency parameters.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 const CloudDeskWPCETA = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -47,135 +190,29 @@ const CloudDeskWPCETA = () => {
   return (
 <>
 
-<Helmet>
-        <title>
-          Mandatory WPC (ETA) for Wireless Imports | WPC Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Importing Bluetooth headphones, Smartwatches, or Wi-Fi Routers? You need an <strong>Equipment Type Approval (ETA)</strong> from the WPC Wing before customs clearance."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/wpc-license/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Mandatory WPC (ETA) for Wireless Imports Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Importing Bluetooth headphones, Smartwatches, or Wi-Fi Routers? You need an <strong>Equipment Type Approval (ETA)</strong> from the WPC Wing before customs clearance."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/wpc-license/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Mandatory WPC (ETA) for Wireless Imports",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Importing Bluetooth headphones, Smartwatches, or Wi-Fi Routers? You need an <strong>Equipment Type Approval (ETA)</strong> from the WPC Wing before customs clearance."
-          })}
-        </script>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – FAQ */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Does every Bluetooth device need WPC?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. Any device using Bluetooth, Wi-Fi, RFID, NFC, or Zigbee must have an ETA. In 2026, even "Passive" RFID tags in high volumes are being scrutinized at major ports.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the difference between ETA and a WPC Import License?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `ETA (Equipment Type Approval) Certifies the product design is safe for Indian frequencies.
-                     Import License A permission to bring a specific quantity or model into the country. You usually need the ETA to apply for the Import License.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Which products are under the "Self-Declaration" (ETA-SD) route?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Consumer electronics like Mobile phones, Laptops, Tablets, Smartwatches, and Wireless Peripherals (mouse/keyboard). Items like Drones, Radars, and Jammers are strictly under the "Scrutiny" route (manual review).`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I use my FCC or CE test reports for WPC?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, if they are from an ILAC-accredited lab and the testing parameters match the Indian de-licensed frequency bands. CloudDesk provides a Report Gap-Analysis to see if your global reports are sufficient or if fresh testing is needed."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does the WPC ETA process take?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Self-Declaration (ETA-SD) 1-3 working days.
-                     Scrutiny-Based ETA 4-8 weeks (requires manual officer review).`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the validity of a WPC ETA?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It is valid for the lifetime of that specific product model. If you change the wireless module or the frequency parameters in a newer version, you must apply for a fresh ETA."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can Customs seize my goods for a WPC error?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. Under the Indian Telegraph Act, Customs can seize "Unauthorized Wireless Apparatus." In 2026, fines can reach up to ₹50 Lakh for large commercial shipments lacking ETA.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "Red Channel" flag for WPC?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                      `If your HSN code identifies the product as "Wireless" but no ETA number is mentioned in the Bill of Entry, the Risk Management System (RMS) will divert the cargo for 100% inspection.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(wpcSchema)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -704,12 +741,78 @@ const CloudDeskWPCETA = () => {
   </div>
 </section>
 
+      <section className="py-16 bg-white" aria-labelledby="wpc-related-services">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Import Compliance
+            </span>
+            <h2
+              id="wpc-related-services"
+              className="text-3xl font-bold text-slate-900 mt-2"
+            >
+              Services Importers Often Need With WPC ETA
+            </h2>
+            <p className="text-slate-600 mt-3">
+              Wireless shipments often need linked product, customs, and
+              environmental registrations before clearance.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "BIS Registration",
+                href: "/services/bis-registration/",
+                text: "For electronics, IT hardware, and products under compulsory registration.",
+              },
+              {
+                title: "EPR Authorization",
+                href: "/services/epr-authorization/",
+                text: "For producers, importers, and brand owners handling e-waste or battery obligations.",
+              },
+              {
+                title: "LMPC Registration",
+                href: "/services/lmpc-registration/",
+                text: "For pre-packaged imported goods requiring label declaration compliance.",
+              },
+              {
+                title: "IEC Update",
+                href: "/services/import-export-code/",
+                text: "Keep importer-exporter code details current before license and customs filings.",
+              },
+              {
+                title: "Customs Duty Calculator",
+                href: "/tools/duty-calculator-finder/",
+                text: "Estimate landed cost and duty impact before importing wireless devices.",
+              },
+              {
+                title: "All Import Services",
+                href: "/services/",
+                text: "Explore connected DGFT, customs, product compliance, and documentation services.",
+              },
+            ].map((service) => (
+              <a
+                key={service.title}
+                href={service.href}
+                className="block border border-slate-200 rounded-xl p-5 hover:border-brand-500 hover:shadow-md transition"
+              >
+                <h3 className="text-lg font-bold text-slate-900">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-slate-600 mt-2">{service.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -717,13 +820,13 @@ const CloudDeskWPCETA = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -732,24 +835,24 @@ const CloudDeskWPCETA = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/wpc-license/" className="hover:text-white transition">
                   WPC ETA Approval
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/import-export-code/" className="hover:text-white transition">
                   Import License
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/bis-registration/" className="hover:text-white transition">
                   BIS Registration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/epr-authorization/" className="hover:text-white transition">
                   EPR Authorization
                 </a>
               </li>
@@ -759,24 +862,24 @@ const CloudDeskWPCETA = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#about" className="hover:text-white transition">
                   De-licensed Bands
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#process" className="hover:text-white transition">
                   Saral Sanchar FAQ
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#contact" className="hover:text-white transition">
                   Fee Structure
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#documents" className="hover:text-white transition">
                   Test Report Format
                 </a>
               </li>

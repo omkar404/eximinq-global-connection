@@ -1,11 +1,9 @@
 import { useState } from "react";
-import TopBar from "../components/CloudDeskBarcode/TopBar";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/CloudDeskBarcode/Navbar";
 import Hero from "../components/CloudDeskBarcode/Hero";
 import Fees from "../components/CloudDeskBarcode/Fees";
 import {
-  Check,
-  ChevronDown,
   Linkedin,
   Twitter,
   Facebook,
@@ -20,7 +18,40 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskBarcode/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskBarcode/ModalEnroll";
-import { BiRegistered } from "react-icons/bi";
+
+const CANONICAL_URL = "https://eximinq.in/services/barcode-registration/";
+const META_TITLE =
+  "Barcode Registration Consultant India | GS1 GTIN EAN UPC Barcodes | EXIMINQ";
+const META_DESCRIPTION =
+  "Barcode registration consultant in India for GS1 India registration, GTIN, EAN-13, UPC, DataKart setup, SKU planning, barcode generation, retail listing, and export product identification.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "What is GS1 barcode registration?",
+    answer:
+      "GS1 barcode registration gives your company globally unique product identification numbers such as GTINs, which are used for retail, ecommerce, inventory, and export supply chains.",
+  },
+  {
+    question: "Do I need a barcode to sell on Amazon or Flipkart?",
+    answer:
+      "Most marketplaces and modern retailers require valid GTIN, EAN, or UPC identifiers for product listing, billing, inventory tracking, and catalog verification.",
+  },
+  {
+    question: "What documents are needed for barcode registration in India?",
+    answer:
+      "Common documents include company registration details, PAN, GST certificate, address proof, turnover details, product or SKU information, and authorized signatory details.",
+  },
+  {
+    question: "How many barcodes should I apply for?",
+    answer:
+      "The required barcode package depends on the number of SKUs, product variants, sizes, flavors, colors, bundles, and future product expansion plans.",
+  },
+  {
+    question: "Can barcode details be used for exports?",
+    answer:
+      "Yes. GS1 GTINs are globally recognized and help international buyers, retailers, and logistics partners identify products across supply chains.",
+  },
+];
 
 const CloudDeskBarcode = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -37,12 +68,107 @@ const CloudDeskBarcode = () => {
 
     alert("Form submitted - check console for data.")
   }
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://eximinq.in/#organization",
+        name: "EXIMINQ Global Connections",
+        url: "https://eximinq.in/",
+        logo: "https://eximinq.in/logo512.png",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${CANONICAL_URL}#webpage`,
+        url: CANONICAL_URL,
+        name: META_TITLE,
+        description: META_DESCRIPTION,
+        isPartOf: { "@id": "https://eximinq.in/#website" },
+        about: { "@id": `${CANONICAL_URL}#service` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://eximinq.in/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: "https://eximinq.in/services/",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Barcode Registration",
+            item: CANONICAL_URL,
+          },
+        ],
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${CANONICAL_URL}#service`,
+        name: "Barcode Registration Consultant",
+        url: CANONICAL_URL,
+        image: OG_IMAGE_URL,
+        description: META_DESCRIPTION,
+        provider: { "@id": "https://eximinq.in/#organization" },
+        areaServed: {
+          "@type": "Country",
+          name: "India",
+        },
+        serviceType: [
+          "GS1 barcode registration",
+          "GTIN registration",
+          "EAN-13 barcode generation",
+          "UPC barcode support",
+          "DataKart product setup",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${CANONICAL_URL}#faq`,
+        mainEntity: FAQ_ITEMS.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
   
   return (
     <div className="bg-slate-50 text-slate-800">
+      <Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      {/* <TopBar /> */}
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
       
@@ -215,7 +341,7 @@ const CloudDeskBarcode = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -223,13 +349,13 @@ const CloudDeskBarcode = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ on LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ on X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ on Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -239,10 +365,10 @@ const CloudDeskBarcode = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Barcode Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">Trademark Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">Brand Copyright</a></li>
-                    <li><a href="#" class="hover:text-white transition">FSSAI License</a></li>
+                    <li><a href="/services/barcode-registration/" className="hover:text-white transition">Barcode Registration</a></li>
+                    <li><a href="/services/trademark-registration" className="hover:text-white transition">Trademark Registration</a></li>
+                    <li><a href="/services/fssai-licensing" className="hover:text-white transition">Brand & Food Compliance</a></li>
+                    <li><a href="/services/fssai-licensing" className="hover:text-white transition">FSSAI License</a></li>
             </ul>
           </div>
 
@@ -250,10 +376,10 @@ const CloudDeskBarcode = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">GS1 Fee Structure</a></li>
-                    <li><a href="#" class="hover:text-white transition">DataKart Guide</a></li>
-                    <li><a href="#" class="hover:text-white transition">GTIN Verification</a></li>
-                    <li><a href="#" class="hover:text-white transition">Barcode Types (EAN/UPC)</a></li>
+                    <li><a href="/services/barcode-registration/#fees" className="hover:text-white transition">GS1 Fee Structure</a></li>
+                    <li><a href="/services/barcode-registration/#process" className="hover:text-white transition">DataKart Guide</a></li>
+                    <li><a href="/services/barcode-registration/#about" className="hover:text-white transition">GTIN Verification</a></li>
+                    <li><a href="/services/barcode-registration/#coverage" className="hover:text-white transition">Barcode Types (EAN/UPC)</a></li>
             </ul>
           </div>
 

@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import React, { useState } from "react";
-import TopBar from "../components/CloudDeskInlandTransport/TopBar";
+import { useState } from "react";
 import Navbar from "../components/CloudDeskInlandTransport/Navbar";
 import Hero from "../components/CloudDeskInlandTransport/Hero";
 import {
@@ -30,6 +29,123 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskInlandTransport/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskInlandTransport/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/inland-transportation/";
+const META_TITLE =
+  "Inland Transportation Consultant India | Container Trucking, Factory Stuffing & ICD Movement | EXIMINQ";
+const META_DESCRIPTION =
+  "Inland transportation consultant in India for container trucking, factory stuffing, port delivery, ICD movement, GPS-tracked trailers, rail-road logistics and first-mile export cargo movement.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const FAQ_ITEMS = [
+  {
+    question: "What is Inland Haulage?",
+    answer:
+      "Inland haulage is the movement of cargo or containers between a factory, warehouse, ICD, CFS, port or customer location by road or rail.",
+  },
+  {
+    question: "What is the difference between a trailer and a truck?",
+    answer:
+      "Trucks usually move loose or domestic cargo, while trailers are designed for 20 ft and 40 ft shipping containers used in import and export logistics.",
+  },
+  {
+    question: "Can I use my own transport for export or import?",
+    answer:
+      "Yes, if the vehicle and driver meet port, ICD and gate-pass requirements. Verified fleets reduce delays because drivers understand port security and documentation processes.",
+  },
+  {
+    question: "What are detention charges in inland transport?",
+    answer:
+      "Detention charges are waiting fees charged when loading or unloading takes longer than the allowed free time at a factory, warehouse, port, ICD or CFS.",
+  },
+];
+const INLAND_TRANSPORT_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Inland Transportation",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Inland Transportation Consultant India",
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "Container trucking",
+        "Factory stuffing transport",
+        "Port delivery",
+        "ICD movement",
+        "Rail-road logistics",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 
 const CloudDeskInlandTransport = () => {
     const [showEnrollModal, setShowEnrollModal] = useState({
@@ -48,134 +164,22 @@ const CloudDeskInlandTransport = () => {
 
   return (
 <>
-<Helmet>
-        <title>
-          Reliable Inland Transportation for Factories & Ports | Inland Transportation Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="Connecting your warehouse to the world. We provide GPS-enabled Trailers for Factory Stuffing, Port Delivery, and ICD movements with guaranteed on-time performance."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/inland-transportation/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Reliable Inland Transportation for Factories & Ports Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Connecting your warehouse to the world. We provide GPS-enabled Trailers for Factory Stuffing, Port Delivery, and ICD movements with guaranteed on-time performance."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/inland-transportation/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Reliable Inland Transportation for Factories & Ports",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Connecting your warehouse to the world. We provide GPS-enabled Trailers for Factory Stuffing, Port Delivery, and ICD movements with guaranteed on-time performance."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": `What is "Inland Haulage" (IHC)?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It is the cost and process of moving a container from an Inland Container Depot (ICD) to a Gateway Sea Port (or vice versa) via rail or road."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the difference between a "Trailer" and a "Truck"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `"Trucks Used for ""Loose Cargo"" (LCL or domestic).
-                      Trailers: Specialized vehicles (20ft/40ft) designed specifically to carry international shipping containers. CloudDesk only uses certified trailers for FCL movement to ensure cargo safety."`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I use my own transport for export/import?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes, provided the vehicle is registered and the driver has a valid "Gate Pass" for the Port or ICD. However, most exporters use CloudDesk’s Verified Fleet because our drivers are pre-vetted for Port-Security protocols.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is GST applicable on inland transportation for exports?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No. As of 2026, under GST law, the service of transporting goods from India to a place outside India (and the inland leg thereof) is exempt/zero-rated, provided specific conditions are met. CloudDesk ensures your transporters issue "Zero-Rated" invoices correctly.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What are "Detention Charges" in inland transport?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `If your factory takes too long to load/unload a truck (typically more than 6–12 hours), the transporter charges a "Waiting Fee" per day. CloudDesk’s Loading-Dock Manager helps you track these times to avoid unnecessary penalties.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Does the "Per Ton" rate include toll and parking?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Usually, no. Tolls (Fastag) and Green Taxes are charged on actuals. CloudDesk provides an "All-Inclusive" Quote that covers freight, tolls, and documentation to give you a final landed cost.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Transit Insurance"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "While your marine insurance covers the sea leg, you need Inland Transit Insurance (Road/Rail) to cover accidents, theft, or fire during the land journey. CloudDesk bundles this with your transport booking for peace of mind."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Direct Port Entry" (DPE)?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "DPE allows factory-stuffed containers to go directly to the port without stopping at a CFS (Container Freight Station). CloudDesk’s DPE-Certified Fleet saves you 24–48 hours in the export cycle."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(INLAND_TRANSPORT_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -641,13 +645,73 @@ const CloudDeskInlandTransport = () => {
         </div>
       </section>
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-8">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Logistics Services
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Move Cargo With the Right Support
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Warehousing Solutions",
+                href: "/services/warehousing-solutions/",
+                copy: "Plan bonded, general and port-side storage before or after movement.",
+              },
+              {
+                title: "Project Cargo",
+                href: "/services/project-cargo/",
+                copy: "Handle oversized machinery, route surveys and heavy-lift transportation.",
+              },
+              {
+                title: "Marine Insurance",
+                href: "/services/marine-insurance/",
+                copy: "Cover cargo during road, rail, storage and port handling windows.",
+              },
+              {
+                title: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                copy: "Align import declarations and customs clearance with transport timing.",
+              },
+              {
+                title: "Shipping Bill Filing",
+                href: "/services/shipping-bill-filing/",
+                copy: "Coordinate export documents, LEO timing and port gate cut-off readiness.",
+              },
+              {
+                title: "CHA Services",
+                href: "/services/cha-services/",
+                copy: "Connect transport movement with customs broker and port clearance support.",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition"
+              >
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {service.copy}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -655,13 +719,25 @@ const CloudDeskInlandTransport = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq/"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -670,24 +746,24 @@ const CloudDeskInlandTransport = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#about" className="hover:text-white transition">
                   Road Transportation
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#rail" className="hover:text-white transition">
                   Rail Logistics
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/project-cargo/" className="hover:text-white transition">
                   ODC Movement
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#home" className="hover:text-white transition">
                   Factory Stuffing
                 </a>
               </li>
@@ -697,24 +773,24 @@ const CloudDeskInlandTransport = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
                   Nhava Sheva
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/project-cargo/" className="hover:text-white transition">
                   Mundra
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/cha-services/" className="hover:text-white transition">
                   Chennai
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/warehousing-solutions/" className="hover:text-white transition">
                   Delhi / NCR
                 </a>
               </li>

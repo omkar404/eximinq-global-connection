@@ -26,6 +26,102 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskLegalMetrology/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskLegalMetrology/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/lmpc-registration/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+
+const lmpcSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "EXIMINQ Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: "LMPC Registration Consultant for Importers",
+      description:
+        "LMPC registration consultant in India for importers of pre-packaged commodities, label declaration review, Rule 27 compliance, documents and customs clearance support.",
+      isPartOf: { "@id": "https://eximinq.in/#website" },
+      about: { "@id": `${CANONICAL_URL}#service` },
+      breadcrumb: { "@id": `${CANONICAL_URL}#breadcrumb` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "LMPC Registration",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "LMPC Registration for Importers",
+      provider: { "@id": "https://eximinq.in/#organization" },
+      areaServed: "India",
+      serviceType: "Legal Metrology Packaged Commodities Registration",
+      url: CANONICAL_URL,
+      description:
+        "LMPC certificate support for importers, including product category review, label declaration audit, importer details, MRP, consumer care and Legal Metrology Rule 27 compliance.",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Can I stick labels after importing?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "If goods arrive without proper labels, importers may seek permission to complete labeling in a Customs Bonded Warehouse, but compliant labels are required before home consumption clearance.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is LMPC required for industrial raw materials?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Goods meant for industrial or institutional consumers may be exempt when they are purchased directly for use and not for retail sale, subject to proper package marking.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How long does LMPC registration take?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "LMPC registration timelines typically depend on the state authority, document readiness and query response time, often ranging from 7 to 20 working days.",
+          },
+        },
+      ],
+    },
+  ],
+};
 
 const CloudDeskLegalMetrology = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -44,167 +140,34 @@ const CloudDeskLegalMetrology = () => {
   return (
 
 <>
-<Helmet>
-        <title>
-          Mandatory LMPC Registration for Importers | LMPC Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
+<Helmet defer={false}>
+        <title>LMPC Registration Consultant India | Legal Metrology Certificate for Importers | EXIMINQ</title>
         <meta
           name="description"
-          content="Ensure your pre-packaged goods comply with Rule 27 of the Legal Metrology Act. Avoid customs detention and market seizures with correct MRP labeling."
+          content="LMPC registration consultant in India for importers of pre-packaged commodities, Rule 27 compliance, label declaration audit, MRP review and Legal Metrology certificate support."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/lmpc-registration/"
-        />
-
-        {/* Open Graph */}
         <meta
-          property="og:title"
-          content="Mandatory LMPC Registration for Importers Online in India | Eximinq"
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content="LMPC Registration Consultant India | EXIMINQ" />
         <meta
           property="og:description"
-          content="Ensure your pre-packaged goods comply with Rule 27 of the Legal Metrology Act. Avoid customs detention and market seizures with correct MRP labeling."
+          content="Get LMPC registration and label compliance support for imported pre-packaged commodities under Legal Metrology Packaged Commodities Rules."
         />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/lmpc-registration/"
-        />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Mandatory LMPC Registration for Importers",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Obtain mandatory licensing under Section 57, 58, or 65 of the Customs Act. We handle the process of converting your facility into a legally recognized Bonded Warehouse"
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Can I stick labels after importing?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, if the goods arrive without proper labels, you can apply for permission to carry out labeling in a Customs Bonded Warehouse. However, goods cannot be cleared for home consumption without compliance."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is LMPC required for industrial raw materials?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No. Goods meant for industrial or institutional consumers (who buy directly for use and not for resale) are exempt from LMPC rules, provided the package is marked "Not for Retail Sale".`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does it take to get the certificate?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It typically takes 7 to 20 working days depending on the state department's workload and query response time."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is a "Pre-Packaged Commodity"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Any commodity placed in a package of whatever nature, without the purchaser being present, such that the quantity has a predetermined value. If you sell it in a box, tin, or bottle with a weight/volume/number on it, you need LMPC."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Who is exempt from LMPC registration?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "In 2026, exemptions are narrow (1) Packages over 25kg or 25L (except cement/fertilizer), (2) Institutional/Industrial consumers who buy directly for their own use (not for retail), and (3) Packages weighing 10g/10ml or less."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Can I stick a "Correction Sticker" at the port?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Only for specific fields. You can fix the Importer's address, MRP, and the Veg/Non-Veg logo in a Customs Bonded Warehouse. However, you cannot "sticker over" an incorrect Net Quantity or Date of Import/Manufacture.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What MUST be on every retail label in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `1. Name and Address of the Manufacturer/Packer/Importer.
-                     2. Common/Generic Name of the commodity.
-                     3. Net Quantity (Standard units only kg, l, m, or number).
-                     4. Month and Year of Manufacture/Import.
-                     5. Maximum Retail Price (MRP) (Inclusive of all taxes).
-                     6. Country of Origin (Mandatory for imports).
-                     7. Consumer Care Details (Name, address, phone, and email).`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Are "MRP Stickers" allowed?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. In 2026, the MRP must be printed on the package. Stickers are generally considered a violation and are only allowed in very specific, pre-authorized scenarios (like price changes due to GST revisions)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What are the government fees for LMPC?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The registration fee is generally ₹500, but varies slightly by state. However, the true cost of non-compliance is the penalty — starting at ₹10,000 for the first offense and scaling to ₹50,000 or imprisonment for repeat violations."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long is the certificate valid?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Usually between 1 to 5 years. CloudDesk recommends the 5-year option to minimize the administrative burden of frequent renewals."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Section 36" of the Legal Metrology Act?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `This is the most "feared" section by importers. It empowers officials to seize non-standard packages and impose heavy fines for misleading declarations.`
-                }
-              },
-            ]
-          })}
-        </script>
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="LMPC Registration Consultant India | EXIMINQ" />
+        <meta
+          name="twitter:description"
+          content="Legal Metrology certificate support for LMPC registration, label declarations, Rule 27 compliance and importer documentation."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <script type="application/ld+json">{JSON.stringify(lmpcSchema)}</script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
@@ -710,12 +673,68 @@ const CloudDeskLegalMetrology = () => {
   </div>
 </section>
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-10 text-center">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Compliance Support
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Services Importers Often Need With LMPC
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                title: "BIS Registration",
+                text: "Certification support for notified Indian standard products.",
+                href: "/services/bis-registration/",
+              },
+              {
+                title: "WPC ETA Approval",
+                text: "Wireless approval for Bluetooth, Wi-Fi and RF-enabled imports.",
+                href: "/services/wpc-license/",
+              },
+              {
+                title: "EPR Authorization",
+                text: "CPCB registration for electronics, plastic, battery and tyre waste.",
+                href: "/services/epr-authorization/",
+              },
+              {
+                title: "FSSAI Licensing",
+                text: "Food import licensing and FICS clearance support.",
+                href: "/services/fssai-licensing/",
+              },
+              {
+                title: "CDSCO Compliance",
+                text: "Regulatory support for medical and cosmetic imports.",
+                href: "/services/cdsco-compliance/",
+              },
+              {
+                title: "All Import Services",
+                text: "Explore DGFT, Customs and regulatory import compliance services.",
+                href: "/services/",
+              },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="block bg-white p-5 rounded-lg border border-slate-200 shadow-sm hover:border-brand-300 hover:shadow-md transition"
+              >
+                <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600">{item.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -723,13 +742,13 @@ const CloudDeskLegalMetrology = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -738,24 +757,24 @@ const CloudDeskLegalMetrology = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/lmpc-registration/" className="hover:text-white transition">
                   LMPC Registration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/bis-registration/" className="hover:text-white transition">
                   BIS Certification
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/wpc-license/" className="hover:text-white transition">
                   WPC Approval
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/epr-authorization/" className="hover:text-white transition">
                   EPR Authorization
                 </a>
               </li>
@@ -765,24 +784,24 @@ const CloudDeskLegalMetrology = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#declarations" className="hover:text-white transition">
                   Labeling Guidelines
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#about" className="hover:text-white transition">
                   Rule 27 Explained
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#process" className="hover:text-white transition">
                   Penalty Clauses
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#documents" className="hover:text-white transition">
                   Exemptions List
                 </a>
               </li>

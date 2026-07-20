@@ -18,9 +18,24 @@ const dutypaymentEclRoutesSchema = new mongoose.Schema(
       default: null,
     },
     country: {
-        type: String,
-        trim: true,
-        default: null,
+      type: String,
+      trim: true,
+      default: null,
+    },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
     },
     name: {
       type: String,

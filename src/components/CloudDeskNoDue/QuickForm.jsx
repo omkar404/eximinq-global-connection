@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { Building2, Mail, Phone, User } from "lucide-react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     iecCode: "",
     issueType: "", // ← was "Placed in DEL (Denied Entity List)"
     mobile: "",
@@ -30,6 +34,20 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
+
     if (!form.issueType) {
       newErrors.issueType = "Please select an issue type";
     }
@@ -57,9 +75,12 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        iecCode: form.iecCode,
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        iecCode: form.iecCode.trim(),
         issueType: form.issueType,
-        mobile: form.mobile,
+        mobile: form.mobile.trim(),
         type: "QUICK_FORM",
       };
 
@@ -85,6 +106,9 @@ const QuickForm = () => {
 
       // Reset form (keep default issueType)
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         iecCode: "",
         issueType: "", // ← reset back to empty so placeholder shows again
         mobile: "",
@@ -106,9 +130,89 @@ const QuickForm = () => {
         Find out pending dues against your IEC.
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Building2
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. ABC Exports Pvt Ltd"
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <User
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. Rohan Mehta"
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Mail
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="official@company.com"
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* IEC Code */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
             Company IEC Code
           </label>
@@ -124,9 +228,9 @@ const QuickForm = () => {
         </div>
 
         {/* Issue Type */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
-            Issue Type 
+            Issue Type <span className="text-red-500">*</span>
           </label>
           <select
             name="issueType"
@@ -148,21 +252,27 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
-            Mobile Number 
+            Mobile Number <span className="text-red-500">*</span>
           </label>
-          <input
-            type="tel"
-            name="mobile"
-            value={form.mobile}
-            onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
-              errors.mobile ? "border-red-500" : "border-slate-300"
-            }`}
-            placeholder="e.g. 9876543210"
-            maxLength={10}
-          />
+          <div className="relative">
+            <Phone
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="tel"
+              name="mobile"
+              value={form.mobile}
+              onChange={handleChange}
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.mobile ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. 9876543210"
+              maxLength={10}
+            />
+          </div>
           {errors.mobile && (
             <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
           )}
@@ -172,7 +282,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`md:col-span-2 w-full text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

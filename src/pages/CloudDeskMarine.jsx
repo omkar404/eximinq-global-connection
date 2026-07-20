@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskMarine/TopBar";
 import Navbar from "../components/CloudDeskMarine/Navbar";
 import Hero from "../components/CloudDeskMarine/Hero";
 import {
@@ -23,6 +22,128 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskMarine/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskMarine/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/marine-insurance/";
+const META_TITLE =
+  "Marine Insurance Consultant India | Cargo Insurance Policy for Import Export Shipments | EXIMINQ";
+const META_DESCRIPTION =
+  "Marine insurance consultant in India for import export cargo, ICC-A all-risk cover, open marine policy, single transit policy, war and SRCC riders, claims documentation and digital certificate support.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const FAQ_ITEMS = [
+  {
+    question: "Can I insure my goods for more than the invoice value?",
+    answer:
+      "Yes. It is common to insure cargo for 110% of CIF value so incidental costs and anticipated profit are also protected.",
+  },
+  {
+    question: "Does Marine Insurance cover War and Strikes?",
+    answer:
+      "Standard cargo insurance usually excludes war and strikes, but Institute War Clauses and Institute Strikes Clauses can be added as optional riders.",
+  },
+  {
+    question: "What is an Open Marine Policy?",
+    answer:
+      "An open marine policy covers repeated shipments during a policy period. Exporters declare each shipment instead of buying a separate policy every time.",
+  },
+  {
+    question: "What are ICC-A, ICC-B and ICC-C cargo clauses?",
+    answer:
+      "ICC-A offers the widest all-risk cargo cover, ICC-B covers selected named risks, and ICC-C is a basic policy for major transit casualties.",
+  },
+  {
+    question: "What should I do if cargo arrives damaged?",
+    answer:
+      "Do not give a clean receipt. Mark the delivery note as received in damaged condition, take photos and videos, preserve packaging, and notify the insurer immediately.",
+  },
+];
+const MARINE_INSURANCE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Marine Insurance",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Marine Insurance Consultant India",
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "Marine cargo insurance",
+        "Import export cargo insurance",
+        "Open marine policy",
+        "Single transit policy",
+        "Cargo claims support",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 
 const CloudDeskMarine = () => {
 
@@ -42,160 +163,22 @@ const CloudDeskMarine = () => {
 
   return (
 <>
-<Helmet>
-        <title>
-          Zero Duty Import of Capital Goods | Zero Duty Import Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/marine-insurance/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Zero Duty Import of Capital Goods Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/marine-insurance/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Zero Duty Import of Capital Goods",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Can I insure my goods for more than the invoice value?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, it is standard practice to insure for 110% of the CIF value(Cost + Insurance + Freight). The additional 10% covers incidental expenses and anticipated profit."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does Marine Insurance cover War and Strikes?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Standard ICC clauses exclude War and Strikes. You can add Institute War Clauses and Institute Strikes Clauses as optional riders for complete protection."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is an "Open Policy"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "If you ship frequently, an Open Policy covers all your shipments automatically for a year (up to a limit). You only need to declare shipments periodically instead of obtaining individual certificates each time."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What are ICC-A, B, and C?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `"ICC (C) The most basic. Covers only major ""Accidents"" (sinking, fire, collision).ICC (B) Mid-level. Covers (C) plus ""Natural Calamities"" (earthquakes, lightning, water entry).ICC (A) The ""All-Risk"" policy. Covers everything except specific exclusions (like war or inherent vice). CloudDesk recommends ICC (A) for 99% of shipments."`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does Marine Insurance cover War and Strikes?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Standard policies do not. However, CloudDesk allows you to add "War & SRCC" (Strikes, Riots, and Civil Commotions) covers as an add-on, which is essential in 2026 for routes through volatile regions.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Duty Insurance"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "For importers, if the goods are damaged after you paid the Customs duty, you lose the duty amount too. CloudDesk offers Duty Insurance to ensure you are reimbursed for the tax paid on damaged goods."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How much does Marine Insurance cost?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The premium is usually a tiny fraction of the cargo value (typically 0.05% to 0.20%). The cost is influenced by the commodity, the destination, and the mode of transport."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What value should I insure my goods for?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `The standard is CIF + 10% (Cost, Insurance, Freight + 10%). The extra 10% is to cover the "Imaginary Profit" and administrative costs incurred due to the loss.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is an "Open Cover" vs. "Single Voyage" policy?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `"Single Voyage For one-off shipments.Open Cover A one-year ""blanket"" policy for regular exporters. You just ""declare"" each shipment as it happens. CloudDesk manages your Open Cover Balance automatically."`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "My cargo arrived damaged. What is the first thing I should do?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `My cargo arrived damaged. What is the first thing I should do?`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Inherent Vice" in insurance terms?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It refers to damage caused by the nature of the product itself (e.g., fruit rotting naturally or iron rusting). This is never covered by insurance. CloudDesk helps you document "External Damage" to prove the loss wasn't an inherent vice.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(MARINE_INSURANCE_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -736,6 +719,62 @@ const CloudDeskMarine = () => {
       </section>
 
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="mb-8">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Services
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Connect Marine Insurance With Your Export Workflow
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                label: "Freight Forwarding",
+                href: "/services/freight-forwarding/",
+                text: "Coordinate cargo movement and insurance for sea and air shipments.",
+              },
+              {
+                label: "Shipping Bill Filing",
+                href: "/services/shipping-bill-filing/",
+                text: "Align export customs documents with policy and claim records.",
+              },
+              {
+                label: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                text: "Support import clearance when insured cargo arrives in India.",
+              },
+              {
+                label: "Inland Transportation",
+                href: "/services/inland-transportation/",
+                text: "Extend cargo planning from warehouse pickup to port delivery.",
+              },
+              {
+                label: "Warehousing Solutions",
+                href: "/services/warehousing-solutions/",
+                text: "Protect stored cargo with connected logistics support.",
+              },
+              {
+                label: "Project Cargo",
+                href: "/services/project-cargo/",
+                text: "Plan high-value ODC and machinery insurance with movement support.",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="block bg-white border border-slate-200 rounded-lg p-5 hover:border-brand-500 hover:shadow-md transition"
+              >
+                <h3 className="font-bold text-slate-900 mb-2">{service.label}</h3>
+                <p className="text-sm text-slate-600">{service.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       
 
       {/* Footer */}
@@ -743,7 +782,9 @@ const CloudDeskMarine = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">
+              EXIMINQ
+            </a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -751,13 +792,25 @@ const CloudDeskMarine = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -766,24 +819,24 @@ const CloudDeskMarine = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#home" className="hover:text-white transition">
                   Single Transit Policy
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#coverage" className="hover:text-white transition">
                   Open Marine Policy
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/freight-forwarding/" className="hover:text-white transition">
                   Freight Forwarding
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/cha-services/" className="hover:text-white transition">
                   Customs Clearance
                 </a>
               </li>
@@ -793,25 +846,25 @@ const CloudDeskMarine = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Bhiwandi / Panvel
+                <a href="/services/warehousing-solutions/" className="hover:text-white transition">
+                  Warehousing Solutions
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Mundra
+                <a href="/services/inland-transportation/" className="hover:text-white transition">
+                  Inland Transportation
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Chennai
+                <a href="/services/project-cargo/" className="hover:text-white transition">
+                  Project Cargo
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  Delhi NCR
+                <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
+                  Bill of Entry Filing
                 </a>
               </li>
             </ul>

@@ -30,6 +30,11 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskCustomsAdjudication/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskCustomsAdjudication/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/customs-adjudication/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+
 const CloudDeskCustomsAdjudication = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -46,63 +51,123 @@ const CloudDeskCustomsAdjudication = () => {
   }
   return (
 <>
-<Helmet>
+<Helmet defer={false}>
         <title>
-          Policy Relaxation Committee (PRC) Representation | Policy Relaxation Committee Registration India | DGFT CUSTOMS Services | EXIMINQ
+          Customs Adjudication Consultant India | SCN Reply & Appeal Support | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content="Has your application been rejected by the Regional Authority due to
-            a procedural lapse? We represent your case at DGFT Headquarters to
-            condone delays and relax policy provisions."
+          content="Customs adjudication consultant in India for show cause notice replies, personal hearing representation, Order-in-Original appeals, duty demands, penalties and CESTAT support."
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
 
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/customs-adjudication/"
-        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        {/* Open Graph */}
         <meta
           property="og:title"
-          content="Policy Relaxation Committee (PRC) Representation Online in India | Eximinq"
+          content="Customs Adjudication Consultant India | SCN Reply & Appeal Support"
         />
         <meta
           property="og:description"
-          content="Has your application been rejected by the Regional Authority due to
-            a procedural lapse? We represent your case at DGFT Headquarters to
-            condone delays and relax policy provisions."
+          content="Expert customs adjudication support for SCN replies, personal hearings, Order-in-Original appeals, penalty defence, duty demands and CESTAT escalation."
+        />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Customs Adjudication Consultant India | SCN Reply & Appeal Support"
         />
         <meta
-          property="og:url"
-          content="https://eximinq.in/services/customs-adjudication/"
+          name="twitter:description"
+          content="SCN reply drafting, customs personal hearing representation, OIO appeal support, penalty defence and recovery-risk management for importers and exporters."
         />
-        <meta property="og:type" content="website" />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Policy Relaxation Committee (PRC) Representation",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Has your application been rejected by the Regional Authority due to a procedural lapse? We represent your case at DGFT Headquarters to condone delays and relax policy provisions."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
+            "@graph": [
+              {
+                "@type": "Organization",
+                "@id": "https://eximinq.in/#organization",
+                "name": "Eximinq Global Connections",
+                "url": "https://eximinq.in",
+                "logo": OG_IMAGE_URL
+              },
+              {
+                "@type": "WebPage",
+                "@id": `${CANONICAL_URL}#webpage`,
+                "url": CANONICAL_URL,
+                "name": "Customs Adjudication Consultant India",
+                "description":
+                  "Customs adjudication support page for show cause notice replies, personal hearing representation, OIO appeals, penalties and CESTAT escalation.",
+                "inLanguage": "en-IN",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "@id": "https://eximinq.in/#website",
+                  "url": "https://eximinq.in",
+                  "name": "EXIMINQ"
+                },
+                "about": {
+                  "@id": `${CANONICAL_URL}#service`
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": `${CANONICAL_URL}#breadcrumb`,
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://eximinq.in"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Services",
+                    "item": "https://eximinq.in/services/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Customs Adjudication",
+                    "item": CANONICAL_URL
+                  }
+                ]
+              },
+              {
+                "@type": "ProfessionalService",
+                "@id": `${CANONICAL_URL}#service`,
+                "name": "Customs Adjudication and SCN Reply Support",
+                "serviceType": "Customs Adjudication, Show Cause Notice Reply and Appeal Representation",
+                "url": CANONICAL_URL,
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Eximinq Global Connections",
+                  "url": "https://eximinq.in"
+                },
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "India"
+                },
+                "description":
+                  "Customs adjudication assistance for SCN reply drafting, personal hearing preparation, Order-in-Original appeal support, valuation disputes, HS code reclassification, duty demand and penalty defence.",
+                "mainEntityOfPage": {
+                  "@id": `${CANONICAL_URL}#webpage`
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "@id": `${CANONICAL_URL}#faq`,
+                "mainEntity": [
               {
                 "@type": "Question",
                 "name": "Can I attend the Personal Hearing myself?",
@@ -202,6 +267,8 @@ const CloudDeskCustomsAdjudication = () => {
                     "In 2026, you must make a Pre-Deposit of 7.5% of the disputed duty or penalty (Section 129E) to stay the recovery and have your appeal heard."
                 }
               },
+            ]
+              }
             ]
           })}
         </script>
@@ -634,6 +701,55 @@ const CloudDeskCustomsAdjudication = () => {
   </div>
 </section>
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Customs Dispute Support
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Services Importers Often Need
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                label: "HS Code Finder",
+                href: "/tools/hs-code-finder/",
+              },
+              {
+                label: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+              },
+              {
+                label: "Duty Payment ECL",
+                href: "/services/duty-payment-ecl/",
+              },
+              {
+                label: "SVB Registration",
+                href: "/services/svb-registration/",
+              },
+              {
+                label: "RMCC Alert Removal",
+                href: "/services/rmcc-alert-removal/",
+              },
+              {
+                label: "All Services",
+                href: "/services/",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="bg-white border border-slate-200 rounded-lg p-4 font-semibold text-slate-800 hover:text-brand-700 hover:border-brand-300 transition"
+              >
+                {service.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
@@ -663,54 +779,52 @@ const CloudDeskCustomsAdjudication = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
-              <ul class="space-y-2 text-sm">
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    Customs Act 1962
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    Valuation Rules
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    CESTAT Orders
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    Penalty Provisions
-                  </a>
-                </li>
-              </ul>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="/services/customs-adjudication/#about" className="hover:text-white transition">
+                  Customs Act 1962
+                </a>
+              </li>
+              <li>
+                <a href="/services/customs-adjudication/#cases" className="hover:text-white transition">
+                  Legal Services
+                </a>
+              </li>
+              <li>
+                <a href="/services/customs-adjudication/#process" className="hover:text-white transition">
+                  Adjudication Procedure
+                </a>
+              </li>
+              <li>
+                <a href="/services/customs-adjudication/#pricing" className="hover:text-white transition">
+                  Fees
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
-                  EU GSP Rules
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
-                  Invoice Declaration
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/tools/hs-code-finder/" className="hover:text-white transition">
                   HS Code Finder
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
-                  DGFT Helpdesk
+                <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
+                  Bill of Entry Filing
+                </a>
+              </li>
+              <li>
+                <a href="/services/svb-registration/" className="hover:text-white transition">
+                  SVB Registration
+                </a>
+              </li>
+              <li>
+                <a href="/services/" className="hover:text-white transition">
+                  All Services
                 </a>
               </li>
             </ul>

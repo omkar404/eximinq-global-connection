@@ -12,6 +12,16 @@ const nodueCertificateRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     portLocation: {
       type: String,
       trim: true,
@@ -62,6 +72,11 @@ const nodueCertificateRoutesSchema = new mongoose.Schema(
       default: null,
     },
     issue: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    issueType: {
       type: String,
       trim: true,
       default: null,

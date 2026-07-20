@@ -8,22 +8,22 @@ const Navbar = ({ setShowEnrollModal }) => {
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">
+          <a href="#home" className="hover:text-brand-600 transition">
             Home
           </a>
-          <a href="#about" class="hover:text-brand-600 transition">
+          <a href="#about" className="hover:text-brand-600 transition">
             Why Insure?
           </a>
-          <a href="#coverage" class="hover:text-brand-600 transition">
+          <a href="#coverage" className="hover:text-brand-600 transition">
             Coverage Types
           </a>
-          <a href="#obligation" class="hover:text-brand-600 transition">
+          <a href="#obligation" className="hover:text-brand-600 transition">
             Claims Process
           </a>
-          <a href="#home" class="hover:text-brand-600 transition">
+          <a href="#home" className="hover:text-brand-600 transition">
             Get Quote
           </a>
-          {/* <a href="#fees" class="hover:text-brand-600 transition">
+          {/* <a href="#fees" className="hover:text-brand-600 transition">
             Fees
           </a> */}
         </div>
@@ -66,16 +66,16 @@ const Navbar = ({ setShowEnrollModal }) => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#about" class="block py-2 text-slate-600">
+          <a href="#about" className="block py-2 text-slate-600">
             What is EPCG?
           </a>
-          <a href="#coverage" class="block py-2 text-slate-600">
+          <a href="#coverage" className="block py-2 text-slate-600">
             Coverage
           </a>
-          <a href="#obligation" class="block py-2 text-slate-600">
+          <a href="#obligation" className="block py-2 text-slate-600">
             Export Obligation
           </a>
-          <a href="#contact" class="block py-2 text-brand-600 font-bold">
+          <a href="#contact" className="block py-2 text-brand-600 font-bold">
             Apply License
           </a>
           <button

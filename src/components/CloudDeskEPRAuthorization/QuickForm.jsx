@@ -20,7 +20,7 @@
 //         }}
 //       >
 //         {/* Business Type */}
-//         <div className="mb-4">
+//         <div>
 //           <label className="block text-sm font-semibold mb-1">Business Type</label>
 //           <div className="relative">
 //             <select className="w-full border border-slate-300 rounded px-3 py-2 pr-10 focus:outline-none focus:border-brand-500">
@@ -34,7 +34,7 @@
 //         </div>
 
 //         {/* Waste Category */}
-//         <div className="mb-4">
+//         <div>
 //           <label className="block text-sm font-semibold mb-1">Waste Category</label>
 //           <div className="relative">
 //             <select className="w-full border border-slate-300 rounded px-3 py-2 pr-10 focus:outline-none focus:border-brand-500">
@@ -48,7 +48,7 @@
 //         </div>
 
 //         {/* Mobile Number */}
-//         <div className="mb-4">
+//         <div>
 //           <label className="block text-sm font-semibold mb-1">Mobile Number</label>
 //           <div className="relative">
 //             <input
@@ -76,10 +76,22 @@
 // export default QuickForm;
 
 import { useState } from "react";
-import { ShieldCheck, Phone, Factory, Recycle } from "lucide-react";
+import {
+  Building2,
+  Factory,
+  Mail,
+  Phone,
+  Recycle,
+  ShieldCheck,
+  User,
+} from "lucide-react";
+import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     businessType: "",
     wasteCategory: "",
     mobile: "",
@@ -106,6 +118,30 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!emailRegex.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
+
+    if (!form.businessType) {
+      newErrors.businessType = "Please select a business type";
+    }
+
+    if (!form.wasteCategory) {
+      newErrors.wasteCategory = "Please select a waste category";
+    }
+
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -128,35 +164,35 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        businessType: form.businessType,
-        wasteCategory: form.wasteCategory,
-        mobile: form.mobile,
-        type: "QUICK_FORM", // or any identifier your backend expects
+        serviceKey: "epr-authorization",
+        serviceLabel: "EPR Authorization Compliance Check",
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
+        type: "QUICK_FORM",
+        source: "EPR Authorization Compliance Check",
+        details: {
+          "Company Name": form.companyName.trim(),
+          "Contact Person Name": form.contactPersonName.trim(),
+          "Email ID": form.email.trim(),
+          "Business Type": form.businessType,
+          "Waste Category": form.wasteCategory,
+          "Mobile Number": form.mobile.trim(),
+        },
       };
 
       console.log("📤 Sending data:", payload);
 
-      // Replace with your actual API endpoint
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/epr-authorization`,
-        // "http://localhost:5000/api/epr-authorization",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message || "Something went wrong");
-      }
+      await submitServiceQuickForm(payload);
 
       alert("✅ EPR quote request submitted successfully");
 
       // Reset form
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         businessType: "",
         wasteCategory: "",
         mobile: "",
@@ -180,9 +216,89 @@ const QuickForm = () => {
       <p className="text-slate-500 mb-6 text-sm">Are you a PIBO?</p>
 
       {/* Form */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name
+          </label>
+          <div className="relative">
+            <Building2
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              placeholder="Enter company name"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <div className="relative">
+            <User
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              placeholder="Enter contact person name"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName
+                  ? "border-red-500"
+                  : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">Email ID</label>
+          <div className="relative">
+            <Mail
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="official@company.com"
+              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Business Type */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Business Type
           </label>
@@ -191,7 +307,9 @@ const QuickForm = () => {
               name="businessType"
               value={form.businessType}
               onChange={handleChange}
-              className="w-full border border-slate-300 rounded px-3 py-2 pr-10 focus:outline-none focus:border-brand-500"
+              className={`w-full border rounded px-3 py-2 pr-10 focus:outline-none focus:border-brand-500 ${
+                errors.businessType ? "border-red-500" : "border-slate-300"
+              }`}
             >
               <option value="">Select business type</option>
               <option>Importer</option>
@@ -201,10 +319,13 @@ const QuickForm = () => {
             </select>
             <Factory className="w-4 h-4 absolute right-3 top-3 text-slate-400 pointer-events-none" />
           </div>
+          {errors.businessType && (
+            <p className="text-red-500 text-xs mt-1">{errors.businessType}</p>
+          )}
         </div>
 
         {/* Waste Category */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Waste Category
           </label>
@@ -213,7 +334,9 @@ const QuickForm = () => {
               name="wasteCategory"
               value={form.wasteCategory}
               onChange={handleChange}
-              className="w-full border border-slate-300 rounded px-3 py-2 pr-10 focus:outline-none focus:border-brand-500"
+              className={`w-full border rounded px-3 py-2 pr-10 focus:outline-none focus:border-brand-500 ${
+                errors.wasteCategory ? "border-red-500" : "border-slate-300"
+              }`}
             >
               <option value="">Select waste category</option>
               <option>Plastic Packaging</option>
@@ -223,10 +346,13 @@ const QuickForm = () => {
             </select>
             <Recycle className="w-4 h-4 absolute right-3 top-3 text-slate-400 pointer-events-none" />
           </div>
+          {errors.wasteCategory && (
+            <p className="text-red-500 text-xs mt-1">{errors.wasteCategory}</p>
+          )}
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Mobile Number
           </label>
@@ -253,7 +379,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full md:col-span-2 text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

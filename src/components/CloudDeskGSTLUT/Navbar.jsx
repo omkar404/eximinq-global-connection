@@ -9,11 +9,11 @@ const Navbar = ({ setShowEnrollModal }) => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#about" class="hover:text-brand-600 transition">What is LUT?</a>
-                <a href="#benefits" class="hover:text-brand-600 transition">Benefits</a>
-                <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
+                <a href="#about" className="hover:text-brand-600 transition">What is LUT?</a>
+                <a href="#benefits" className="hover:text-brand-600 transition">Benefits</a>
+                <a href="#documents" className="hover:text-brand-600 transition">Documents</a>
+                <a href="#process" className="hover:text-brand-600 transition">Process</a>
+                <a href="#contact" className="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -37,9 +37,9 @@ const Navbar = ({ setShowEnrollModal }) => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">What is LUT?</a>
-            <a href="#benefits" class="block py-2 text-slate-600">Benefits</a>
-            <a href="#documents" class="block py-2 text-slate-600">Documents</a>
+            <a href="#about" className="block py-2 text-slate-600">What is LUT?</a>
+            <a href="#benefits" className="block py-2 text-slate-600">Benefits</a>
+            <a href="#documents" className="block py-2 text-slate-600">Documents</a>
             <button
               onClick={() =>
                 setShowEnrollModal({

@@ -97,6 +97,9 @@ const QuickForm = () => {
     dropLocation: "",       // used when mode = "drop"
     portYardIcd: "",
     vehicleType: "",
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     mobile: "",
   });
 
@@ -143,6 +146,17 @@ const QuickForm = () => {
     if (!form.vehicleType) {
       newErrors.vehicleType = "Please select a vehicle type";
     }
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company Name is required";
+    }
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact Person Name is required";
+    }
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid Email ID";
+    }
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -171,6 +185,10 @@ const QuickForm = () => {
         dropLocation: form.dropLocation,
         portYardIcd: form.portYardIcd,
         vehicleType: form.vehicleType,
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        personName: form.contactPersonName.trim(),
+        email: form.email.trim(),
         mobile: form.mobile,
         type: "QUICK_FORM",
       };
@@ -202,6 +220,9 @@ const QuickForm = () => {
         dropLocation: "",
         portYardIcd: "",
         vehicleType: "",
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         mobile: "",
       });
     } catch (err) {
@@ -255,7 +276,7 @@ const QuickForm = () => {
 
       <form onSubmit={handleSubmit}>
         {/* Locations – dynamic label & field */}
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase">
               {form.mode === "pickup" ? "Pick-up Location" : "Drop Location"}
@@ -327,6 +348,67 @@ const QuickForm = () => {
           {errors.vehicleType && (
             <p className="text-red-500 text-xs mt-1">{errors.vehicleType}</p>
           )}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-semibold mb-1">
+              Company Name *
+            </label>
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. ABC Logistics Pvt Ltd"
+            />
+            {errors.companyName && (
+              <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">
+              Contact Person Name *
+            </label>
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. Rahul Sharma"
+            />
+            {errors.contactPersonName && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.contactPersonName}
+              </p>
+            )}
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-semibold mb-1">
+              Email ID *
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. logistics@example.com"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+            )}
+          </div>
         </div>
 
         {/* Mobile Number */}

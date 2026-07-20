@@ -17,6 +17,16 @@ const pollutionControlRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
       trim: true,

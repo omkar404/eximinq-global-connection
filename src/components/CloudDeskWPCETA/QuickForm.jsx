@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { Building2, Mail, User } from "lucide-react";
+import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 export default function QuickForm() {
   // ---------- Unified state (like first component) ----------
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     productName: "",
     frequency: "2.4 GHz (Bluetooth/Wi-Fi)",
     mobile: "",
@@ -27,9 +32,27 @@ export default function QuickForm() {
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  // ---------- Validation (only mobile required, like first component) ----------
+  // ---------- Validation ----------
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
+
+    if (!form.productName.trim()) {
+      newErrors.productName = "Product name is required";
+    }
 
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
@@ -53,34 +76,35 @@ export default function QuickForm() {
 
     try {
       const payload = {
-        productName: form.productName,
-        frequency: form.frequency,
-        mobile: form.mobile,
-        type: "QUICK_FORM", // Differentiate from EPC form
+        serviceKey: "wpc-license",
+        serviceLabel: "WPC ETA License",
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
+        type: "QUICK_FORM",
+        source: "WPC ETA Requirement Check",
+        details: {
+          "Company Name": form.companyName.trim(),
+          "Contact Person Name": form.contactPersonName.trim(),
+          "Email ID": form.email.trim(),
+          "Product Name": form.productName.trim(),
+          "Frequency Band": form.frequency,
+          "Mobile Number": form.mobile.trim(),
+        },
       };
 
       console.log("📤 Sending WPC data:", payload);
 
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/wpc-license`,
-        // "http://localhost:5000/api/wpc-license", // for local testing
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message || "Something went wrong");
-      }
+      await submitServiceQuickForm(payload);
 
       alert("✅ We will check the frequency band and revert.");
 
       // Reset form (keep default frequency)
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         productName: "",
         frequency: "2.4 GHz (Bluetooth/Wi-Fi)",
         mobile: "",
@@ -103,25 +127,104 @@ export default function QuickForm() {
         Does your product need WPC?
       </p>
 
-      <form onSubmit={handleSubmit}>
-        {/* Product Name */}
-        <div className="mb-4">
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+      >
+        {/* Company Name */}
+        <div>
           <label className="block text-sm font-semibold mb-1">
-            Product Name
+            Company Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 pl-10 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. ABC Electronics Pvt Ltd"
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 pl-10 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="e.g. Rohan Mehta"
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 pl-10 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="official@company.com"
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        {/* Product Name */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Product Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             name="productName"
             value={form.productName}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2
-                       focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.productName ? "border-red-500" : "border-slate-300"
+            }`}
             placeholder="e.g. Wireless Mouse, Drone"
           />
+          {errors.productName && (
+            <p className="text-red-500 text-xs mt-1">{errors.productName}</p>
+          )}
         </div>
 
         {/* Frequency Band */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
             Frequency Band
           </label>
@@ -140,7 +243,7 @@ export default function QuickForm() {
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
           <label className="block text-sm font-semibold mb-1">
             Mobile Number <span className="text-red-500">*</span>
           </label>
@@ -164,7 +267,7 @@ export default function QuickForm() {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`md:col-span-2 w-full text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

@@ -1,4 +1,3 @@
-import TopBar from "../components/CloudDeskESANCHIT/TopBar";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Navbar from "../components/CloudDeskESANCHIT/Navbar";
@@ -28,6 +27,127 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskESANCHIT/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskESANCHIT/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/e-sanchit-filing/";
+const META_TITLE =
+  "e-Sanchit Filing Consultant India | IRN Generation & ICEGATE Document Upload | EXIMINQ";
+const META_DESCRIPTION =
+  "e-Sanchit filing consultant in India for ICEGATE document upload, IRN generation, DSC signing errors, PDF resizing, document code selection and customs clearance support.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const ESANCHIT_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "e-Sanchit Filing",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "e-Sanchit Filing and IRN Generation Support",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "e-Sanchit Filing",
+        "IRN Generation",
+        "ICEGATE Document Upload",
+        "Digital Signature Support",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is e-Sanchit?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "e-Sanchit is the ICEGATE document upload system used to submit digitally signed supporting documents and generate IRNs for customs filings.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is an IRN?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "An Image Reference Number is generated after a document is successfully uploaded and digitally signed in e-Sanchit, and it is then referenced in customs filings.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why does digital signature verification fail?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Signature verification may fail if the DSC is not mapped to the ICEGATE user, the signer utility is outdated, or the PDF signing process does not meet ICEGATE requirements.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can documents be uploaded after filing?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Additional documents may be uploaded through post-filing workflows where supported, using the relevant job details and new IRNs for linking.",
+          },
+        },
+      ],
+    },
+  ],
+};
 const CloudDeskESANCHIT = () => {
   const [showEnrollModal , setShowEnrollModal] = useState({
     open: false,
@@ -46,165 +166,28 @@ const CloudDeskESANCHIT = () => {
 
 <>
 
-<Helmet>
-        <title>
-          Hassle-Free e-Sanchit & IRN Generation | e-Sanchit Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+      <Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Struggling with Digital Signature errors? We handle document
-            resizing, PDF signing, and instant upload to ICEGATE for seamless
-            clearance."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/e-sanchit-filing/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Hassle-Free e-Sanchit & IRN Generation Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Struggling with Digital Signature errors? We handle document
-            resizing, PDF signing, and instant upload to ICEGATE for seamless
-            clearance."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/e-sanchit-filing/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Hassle-Free e-Sanchit & IRN Generation",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Struggling with Digital Signature errors? We handle document resizing, PDF signing, and instant upload to ICEGATE for seamless clearance."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is a DRN vs IRN?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `DRN (Document Reference Number) Generated temporarily when a document is uploaded.
-                     IRN (Image Reference Number) Generated after the DRN is digitally signed and submitted. Only the IRN is valid for customs filing.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Why am I getting "Digital Signature Not Verified" error?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "This happens if the DSC used to sign the PDF is not registered under the same ICEGATE ID being used for upload. It may also occur if the Signing Utility (Signer) is outdated."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I upload documents after filing the Bill of Entry?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes — use the e-Sanchit (Post Filing) option. You must provide the Job Number and Date to link the additional documents to the existing Bill of Entry."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What are the exact file specifications for e-Sanchit in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Documents must be in PDF format, preferably in black and white (to save space). Each file must be less than 1 MB. The filename should not contain spaces or special characters (e.g., use Invoice_123.pdf instead of Invoice #123.pdf)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is a Digital Signature mandatory for every upload?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. Every document uploaded to e-Sanchit must be digitally signed by the person registered on the ICEGATE profile (either the Importer/Exporter or the authorized CHA)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I upload a photograph of a document?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No. Photographs (JPEG/PNG) are not accepted. You must scan the document and convert it to a clear, legible PDF. CloudDesk’s mobile app includes a "Customs-Grade Scanner" that does this automatically.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is an IRN, and how long does it take to generate?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `An Image Reference Number (IRN) is a unique 16-digit number generated by the system for every successful upload. Usually, it is generated instantly. If it’s "Pending," CloudDesk’s Ping-Bot monitors the status and alerts you the moment it’s ready`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Once I have an IRN, is the document permanently saved?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, the document is stored in the ICEGATE repository. However, an IRN is typically linked to a specific job. If you need to use the same document (like an Annual Insurance Policy) for multiple shipments, CloudDesk helps you re-use the IRN, saving you from redundant uploads."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What should I do if the system says "Signature Verification Failed"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "This usually happens if the DSC used for signing is not the same as the one mapped to the ICEGATE ID. CloudDesk’s DSC-Verify Tool checks the mapping before you sign to prevent this error."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I delete a document after generating an IRN?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No, you cannot delete it from the Customs server once the IRN is generated. If you uploaded the wrong file, you must upload the correct one, generate a new IRN, and use the new one in your filing."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How many documents can I link to a single Bill of Entry?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `There is no hard limit, but you must upload all "Mandatory Documents" (Invoice, PL, BL) plus any "Supportive Documents" required for duty exemptions. CloudDesk provides a Checklist per HSN so you know exactly which documents need an IRN.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(ESANCHIT_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -223,7 +206,7 @@ const CloudDeskESANCHIT = () => {
 
       {/* ---------- STATIC PAGE CONTENT BELOW ---------- */}
 
-      <section id="about" class="py-20 bg-white">
+      <section id="about" className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">
@@ -694,12 +677,73 @@ const CloudDeskESANCHIT = () => {
         </div>
       </section>
 
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Customs Documentation Support
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+              Services Often Needed With e-Sanchit Filing
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                copy: "Link IRNs to import declarations and support customs assessment workflows.",
+              },
+              {
+                title: "Shipping Bill Filing",
+                href: "/services/shipping-bill-filing/",
+                copy: "Use signed export documents and IRNs for faster LEO and EGM processing.",
+              },
+              {
+                title: "ICEGATE Registration",
+                href: "/services/icegate-registration/",
+                copy: "Set up ICEGATE access, DSC mapping and customs portal readiness.",
+              },
+              {
+                title: "AD Code Registration",
+                href: "/services/ad-code-registration/",
+                copy: "Upload bank and port registration documents for exporter setup.",
+              },
+              {
+                title: "Duty Payment ECL",
+                href: "/services/duty-payment-ecl/",
+                copy: "Resolve customs duty payment, challan and ECL wallet workflow issues.",
+              },
+              {
+                title: "CHA Services",
+                href: "/services/cha-services/",
+                copy: "Coordinate broker support for documents, customs queries and clearance.",
+              },
+            ].map((service) => (
+              <a
+                key={service.href}
+                href={service.href}
+                className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition"
+              >
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {service.copy}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -707,13 +751,25 @@ const CloudDeskESANCHIT = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq/"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -722,35 +778,35 @@ const CloudDeskESANCHIT = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">e-Sanchit Upload</a></li>
-                    <li><a href="#" class="hover:text-white transition">DSC Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">AD Code Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">IGST Refund</a></li>
+                <ul className="space-y-2 text-sm">
+                    <li><a href="#home" className="hover:text-white transition">e-Sanchit Upload</a></li>
+                    <li><a href="/services/dsc-services" className="hover:text-white transition">DSC Registration</a></li>
+                    <li><a href="/services/ad-code-registration/" className="hover:text-white transition">AD Code Registration</a></li>
+                    <li><a href="/services/igst-refund/" className="hover:text-white transition">IGST Refund</a></li>
                 </ul>
           </div>
 
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
                   Document Code List
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/dsc-services" className="hover:text-white transition">
                   DSC Utility Guide
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/icegate-registration/" className="hover:text-white transition">
                   ICEGATE Advisory
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/cha-services" className="hover:text-white transition">
                   Java Settings
                 </a>
               </li>

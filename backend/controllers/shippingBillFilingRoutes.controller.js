@@ -30,6 +30,7 @@ async function sendEmail(record) {
     port,
     companyName,
     personName,
+    contactPersonName,
   } = record;
 
   const serviceDisplay = service || "Shipping Bill  Registration";
@@ -47,12 +48,12 @@ async function sendEmail(record) {
           ${Incentive ? `<tr><td><b>Incentive Type</b></td><td>${Incentive}</td></tr>` : ""}
           ${port ? `<tr><td><b>Port of Loading</b></td><td>${port}</td></tr>` : ""}
           ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email ID</b></td><td>${email}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
           ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
@@ -85,14 +86,37 @@ exports.createshippingBillFilingRoutes = async (req, res) => {
       port, // ✅ camelCase
       companyName,
       personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanCompanyName = typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
 
-    if (!mobile || !mobile.trim()) {
+    if (!mobile || !/^[6-9]\d{9}$/.test(mobile.trim())) {
       return res.status(400).json({
         success: false,
-        message: "Mobile is required",
+        message: "Enter valid 10 digit Indian mobile number",
+      });
+    }
+
+    if (isQuickForm && (!cleanCompanyName || !cleanContactPersonName || !cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Company name, contact person name and email ID are required",
+      });
+    }
+
+    if (cleanEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid email ID",
       });
     }
 
@@ -101,10 +125,11 @@ exports.createshippingBillFilingRoutes = async (req, res) => {
       mobile: mobile.trim(),
       Incentive: Incentive ? Incentive.trim() : null, // ✅ use the correct variable
       port: port ? port.trim() : null, // ✅ use correct variable
-      companyName : companyName ? companyName.trim() : null,
-      personName : personName ? personName.trim() : null,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
       name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      email: cleanEmail || null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),

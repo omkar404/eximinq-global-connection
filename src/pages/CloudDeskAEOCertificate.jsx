@@ -31,6 +31,10 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskAeoCertification/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskAeoCertification/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/aeo-certification/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
 
 const CloudDeskAeoCertification = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -49,41 +53,83 @@ const CloudDeskAeoCertification = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>
-          AEO Certification in India | DGFT CUSTOMS Services | EXIMINQ
+          AEO Certification in India | AEO T1, T2, T3 & AEO-LO | EXIMINQ
         </title>
 
         <meta
           name="description"
-          content="Apply for AEO Certification in India. Assistance for AEO T1, T2, T3 and AEO-LO with documentation, compliance audit and application filing support."
+          content="Get AEO certification in India for importers, exporters, CHA and logistics operators. Expert AEO T1, T2, T3 and AEO-LO documentation, compliance audit and filing support."
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
 
         <link
           rel="canonical"
-          href="https://eximinq.in/services/aeo-certification/"
+          href={CANONICAL_URL}
         />
 
         <meta
           property="og:title"
-          content="AEO Certification in India"
+          content="AEO Certification in India | AEO T1, T2, T3 & AEO-LO"
         />
         <meta
           property="og:description"
-          content="Authorized Economic Operator (AEO) certification support including documentation, compliance review and application filing."
+          content="Authorized Economic Operator certification support for AEO T1, T2, T3 and AEO-LO with documentation, compliance audit and application filing."
         />
         <meta
           property="og:url"
-          content="https://eximinq.in/services/aeo-certification/"
+          content={CANONICAL_URL}
         />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
         <meta property="og:type" content="article" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="AEO Certification in India | AEO T1, T2, T3 & AEO-LO"
+        />
+        <meta
+          name="twitter:description"
+          content="AEO certification documentation, compliance audit and application filing support for Indian importers, exporters and logistics operators."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
               {
+                "@type": "Organization",
+                "@id": "https://eximinq.in/#organization",
+                "name": "Eximinq Global Connections",
+                "url": "https://eximinq.in",
+                "logo": OG_IMAGE_URL
+              },
+              {
+                "@type": "WebPage",
+                "@id": `${CANONICAL_URL}#webpage`,
+                "url": CANONICAL_URL,
+                "name": "AEO Certification in India",
+                "description":
+                  "AEO certification service page for AEO T1, T2, T3 and AEO-LO documentation, compliance audit and application filing support.",
+                "inLanguage": "en-IN",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "@id": "https://eximinq.in/#website",
+                  "url": "https://eximinq.in",
+                  "name": "EXIMINQ"
+                },
+                "about": {
+                  "@id": `${CANONICAL_URL}#service`
+                }
+              },
+              {
                 "@type": "BreadcrumbList",
+                "@id": `${CANONICAL_URL}#breadcrumb`,
                 "itemListElement": [
                   {
                     "@type": "ListItem",
@@ -101,12 +147,13 @@ const CloudDeskAeoCertification = () => {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "AEO Certification",
-                    "item": "https://eximinq.in/services/aeo-certification/"
+                    "item": CANONICAL_URL
                   }
                 ]
               },
               {
                 "@type": "Service",
+                "@id": `${CANONICAL_URL}#service`,
                 "name": "AEO Certification Service",
                 "serviceType": "Authorized Economic Operator Registration",
                 "description":
@@ -119,10 +166,15 @@ const CloudDeskAeoCertification = () => {
                 "areaServed": {
                   "@type": "Country",
                   "name": "India"
+                },
+                "url": CANONICAL_URL,
+                "mainEntityOfPage": {
+                  "@id": `${CANONICAL_URL}#webpage`
                 }
               },
               {
                 "@type": "FAQPage",
+                "@id": `${CANONICAL_URL}#faq`,
                 "mainEntity": [
                   {
                     "@type": "Question",
@@ -137,7 +189,7 @@ const CloudDeskAeoCertification = () => {
                     "name": "How long do I need to be in business to apply for AEO?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "The government does not charge an application fee for AEO certification. Costs may arise from compliance upgrades and professional assistance."
+                      "text": "Applicants generally need to have handled at least 25 customs documents in the last financial year and should have been in business for at least three financial years."
                     }
                   },
                   {
@@ -145,7 +197,7 @@ const CloudDeskAeoCertification = () => {
                     "name": "Is there a fee for AEO certification?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "AEO T1 and T2 are typically valid for three years. AEO T3 is generally valid for five years, subject to compliance conditions."
+                      "text": "The government does not charge an application fee for AEO certification. Costs may arise from compliance upgrades, documentation and professional assistance."
                     }
                   },
                   {
@@ -153,7 +205,7 @@ const CloudDeskAeoCertification = () => {
                     "name": "What is the \"Bank Guarantee (BG) Waiver\" benefit?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "Yes. AEO status may be suspended or revoked if compliance conditions are not maintained or serious customs violations occur."
+                      "text": "AEO status can reduce bank guarantee requirements. AEO T1 may receive a 50% waiver, while AEO T2 and T3 may receive a 100% waiver, subject to scheme conditions."
                     }
                   },
                   {
@@ -772,6 +824,55 @@ const CloudDeskAeoCertification = () => {
           </div>
         </section>
 
+        <section className="py-16 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="text-center mb-10">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Related Compliance Support
+              </span>
+              <h2 className="text-3xl font-bold text-slate-900 mt-2">
+                Services Exporters Often Need with AEO
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {[
+                {
+                  label: "Customs Compliance Audit",
+                  href: "/services/compliance-audit/",
+                },
+                {
+                  label: "Certificate of Origin",
+                  href: "/services/certificate-of-origin/",
+                },
+                {
+                  label: "ICEGATE Registration",
+                  href: "/services/icegate-registration/",
+                },
+                {
+                  label: "e-RCMC Registration",
+                  href: "/services/e-rcmc-registration/",
+                },
+                {
+                  label: "Import Export Code",
+                  href: "/services/import-export-code/",
+                },
+                {
+                  label: "Shipping Bill Filing",
+                  href: "/services/shipping-bill-filing/",
+                },
+              ].map((service) => (
+                <a
+                  key={service.href}
+                  href={service.href}
+                  className="bg-white border border-slate-200 rounded-lg p-4 font-semibold text-slate-800 hover:text-brand-700 hover:border-brand-300 transition"
+                >
+                  {service.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
@@ -801,24 +902,24 @@ const CloudDeskAeoCertification = () => {
             {/* QUICK LINKS */}
             <div>
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
-              <ul class="space-y-2 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/aeo-certification/" className="hover:text-white transition">
                     AEO Certification
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/bill-of-entry-filing/" className="hover:text-white transition">
                     Bill of Entry Filing
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/shipping-bill-filing/" className="hover:text-white transition">
                     Shipping Bill Filing
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/duty-payment-ecl/" className="hover:text-white transition">
                     Duty Payment
                   </a>
                 </li>
@@ -828,25 +929,25 @@ const CloudDeskAeoCertification = () => {
             {/* OTHER SERVICES */}
             <div>
               <h4 className="text-white font-bold mb-6">Other Services</h4>
-              <ul class="space-y-2 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" class="hover:text-white transition">
-                    AEO Circulars
+                  <a href="/dgft-customs-consultancy/" className="hover:text-white transition">
+                    DGFT & Customs Consultancy
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
-                    SOP Templates
+                  <a href="/services/compliance-audit/" className="hover:text-white transition">
+                    Compliance Audit
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
-                    Security Guidelines
+                  <a href="/services/icegate-registration/" className="hover:text-white transition">
+                    ICEGATE Registration
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
-                    Client Success Stories
+                  <a href="/services/" className="hover:text-white transition">
+                    All Services
                   </a>
                 </li>
               </ul>

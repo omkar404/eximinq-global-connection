@@ -25,7 +25,102 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskUN/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskUN/ModalEnroll";
-import { FaRegistered } from "react-icons/fa";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/un-iip-certification/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+
+const unIipSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "EXIMINQ Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: "UN IIP Packaging Certification Consultant India",
+      description:
+        "UN IIP packaging certification consultant in India for dangerous goods exports, UN Mark testing, IIP sample submission, packaging group mapping and IMDG/IATA support.",
+      isPartOf: { "@id": "https://eximinq.in/#website" },
+      about: { "@id": `${CANONICAL_URL}#service` },
+      breadcrumb: { "@id": `${CANONICAL_URL}#breadcrumb` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "UN IIP Certification",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "UN IIP Packaging Certification",
+      provider: { "@id": "https://eximinq.in/#organization" },
+      areaServed: "India",
+      serviceType: "Dangerous Goods Packaging Certification",
+      url: CANONICAL_URL,
+      description:
+        "UN IIP certification support for hazardous cargo packaging, including UN number mapping, packing group review, package testing coordination and UN Mark certification through the Indian Institute of Packaging.",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is the UN Mark?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "The UN Mark is a package code that confirms a specific packaging design has passed dangerous goods performance tests for transport acceptance.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Which products need UN IIP Certification?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Products classified as dangerous goods, including flammable liquids, chemicals, batteries, pesticides, aerosols and compressed gases, may require UN IIP packaging certification.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How long does UN IIP certification take?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "After sample readiness and submission, normal certification commonly takes 7 to 10 working days, with faster options depending on IIP availability and package type.",
+          },
+        },
+      ],
+    },
+  ],
+};
 
 const CloudDeskUN = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -44,143 +139,34 @@ const CloudDeskUN = () => {
   }
   return (
 <>
-<Helmet>
-        <title>
-          Mandatory UN IIP Packaging Certification | Mandatory UN IIP Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
+<Helmet defer={false}>
+        <title>UN IIP Packaging Certification Consultant India | UN Mark for Dangerous Goods | EXIMINQ</title>
         <meta
           name="description"
-          content="Exporting Chemicals, Flammable Liquids, or Explosives? Your packaging must carry the UN Mark. We manage the testing and certification process through the Indian Institute of Packaging (IIP)."
+          content="UN IIP packaging certification consultant in India for dangerous goods exports, UN Mark testing, packaging group mapping, IIP sample submission and IMDG/IATA support."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/un-iip-certification/"
-        />
-
-        {/* Open Graph */}
         <meta
-          property="og:title"
-          content="Mandatory UN IIP Packaging Certification Online in India | Eximinq"
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content="UN IIP Packaging Certification Consultant India | EXIMINQ" />
         <meta
           property="og:description"
-          content="Exporting Chemicals, Flammable Liquids, or Explosives? Your packaging must carry the UN Mark. We manage the testing and certification process through the Indian Institute of Packaging (IIP)."
+          content="Get UN Mark packaging certification support for hazardous cargo, dangerous goods exports, IIP testing and packaging group compliance."
         />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/un-iip-certification/"
-        />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Mandatory UN IIP Packaging Certification",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Exporting Chemicals, Flammable Liquids, or Explosives? Your packaging must carry the UN Mark. We manage the testing and certification process through the Indian Institute of Packaging (IIP)."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the UN Mark?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It is a unique code (e.g., 4G/X15/S/26/IND/IIP-1234) printed on the package. It tells port authorities that this specific design has passed the UN's rigorous safety tests for dangerous goods."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Which products need UN IIP Certification?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Any item classified under the 9 Classes of Dangerous Goods, including:
-                     Chemicals & Flammable Liquids (Paints, Solvents).
-                     Lithium Batteries & Lead-Acid Batteries.
-                     Pesticides & Pharmaceuticals.
-                     Aerosols & Compressed Gases.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is the certificate issued for the product or the package?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The certificate is issued to the Packaging Manufacturer for a specific Package Design. However, it also lists the Exporter's Name who will be using that specific packaging."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How many samples do I need to send for testing?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Depending on the package type (Drums, Boxes, Bags), you typically need to send 18 to 24 empty samples to the nearest IIP lab (Mumbai, Delhi, Chennai, Kolkata, Hyderabad, or Ahmedabad)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the validity of the UN IIP Certificate in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    ` ISO-Certified Manufacturers 18 Months.
-                      Non-ISO Manufacturers 9 Months.
-                      Note No extensions are granted. You must re-test fresh samples before expiry.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "X, Y, Z" marking?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    ` X Packing Group I (High Danger).
-                      Y Packing Group II (Medium Danger).
-                      Z Packing Group III (Low Danger).
-                     Pro-Tip An 'X' certified box can carry Y and Z goods, but a 'Z' box cannot carry X goods.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does the process take?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "From sample submission to certificate issuance, it takes 7 to 10 working days (Normal) or 3 to 5 days (Tatkal/Express)."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I use the same certificate for both Sea and Air?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. You can apply for a Combined Certificate that complies with both IMDG (Sea) and IATA/ICAO (Air) regulations. CloudDesk always recommends the combined route to give you logistics flexibility."
-                }
-              },
-            ]
-          })}
-        </script>
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="UN IIP Packaging Certification Consultant India | EXIMINQ" />
+        <meta
+          name="twitter:description"
+          content="Dangerous goods packaging certification support with UN number mapping, sample testing coordination and UN Mark guidance."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <script type="application/ld+json">{JSON.stringify(unIipSchema)}</script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
@@ -667,13 +653,69 @@ const CloudDeskUN = () => {
   </div>
 </section>    
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-10 text-center">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Export Compliance Support
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Services Dangerous Goods Exporters Often Need
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                title: "Scomet Licensing",
+                text: "Export control support for restricted and sensitive items.",
+                href: "/services/scomet-licensing/",
+              },
+              {
+                title: "Shipping Bill Filing",
+                text: "Customs export filing support for compliant cargo movement.",
+                href: "/services/shipping-bill-filing/",
+              },
+              {
+                title: "Freight Forwarding",
+                text: "Shipment coordination for air, sea and multimodal exports.",
+                href: "/services/freight-forwarding/",
+              },
+              {
+                title: "Marine Insurance",
+                text: "Transit risk coverage support for export consignments.",
+                href: "/services/marine-insurance/",
+              },
+              {
+                title: "Certificate of Origin",
+                text: "Preferential and non-preferential COO filing support.",
+                href: "/services/certificate-of-origin/",
+              },
+              {
+                title: "All Export Services",
+                text: "Explore DGFT, Customs and export compliance services.",
+                href: "/services/",
+              },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="block bg-white p-5 rounded-lg border border-slate-200 shadow-sm hover:border-brand-300 hover:shadow-md transition"
+              >
+                <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600">{item.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -681,13 +723,13 @@ const CloudDeskUN = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -697,10 +739,10 @@ const CloudDeskUN = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                 <li><a href="#" class="hover:text-white transition">IIP Test Locations</a></li>
-                    <li><a href="#" class="hover:text-white transition">UN Packing Instruction</a></li>
-                    <li><a href="#" class="hover:text-white transition">DG Class List</a></li>
-                    <li><a href="#" class="hover:text-white transition">Carrier Policies</a></li>
+                 <li><a href="#tests" className="hover:text-white transition">IIP Test Locations</a></li>
+                    <li><a href="#marking" className="hover:text-white transition">UN Packing Instruction</a></li>
+                    <li><a href="#about" className="hover:text-white transition">DG Class List</a></li>
+                    <li><a href="#process" className="hover:text-white transition">Carrier Policies</a></li>
             </ul>
           </div>
 
@@ -708,10 +750,10 @@ const CloudDeskUN = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Bond Forms (B/C/D)</a></li>
-                    <li><a href="#" class="hover:text-white transition">Customs Act (Sec 57-65)</a></li>
-                    <li><a href="#" class="hover:text-white transition">Site Security Norms</a></li>
-                    <li><a href="#" class="hover:text-white transition">BG Reduction Rules</a></li>
+                    <li><a href="/services/shipping-bill-filing/" className="hover:text-white transition">Shipping Bill Filing</a></li>
+                    <li><a href="/services/freight-forwarding/" className="hover:text-white transition">Freight Forwarding</a></li>
+                    <li><a href="/services/marine-insurance/" className="hover:text-white transition">Marine Insurance</a></li>
+                    <li><a href="/services/scomet-licensing/" className="hover:text-white transition">Scomet Licensing</a></li>
             </ul>
           </div>
 

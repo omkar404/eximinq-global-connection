@@ -9,11 +9,11 @@ const Navbar = () => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#about" class="hover:text-brand-600 transition">CDSCO Overview</a>
-                <a href="#medical-devices" class="hover:text-brand-600 transition">Medical Devices</a>
-                <a href="#drugs" class="hover:text-brand-600 transition">Drugs & Pharma</a>
-                <a href="#cosmetics" class="hover:text-brand-600 transition">Cosmetics</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
+                <a href="#about" className="hover:text-brand-600 transition">CDSCO Overview</a>
+                <a href="#medical-devices" className="hover:text-brand-600 transition">Medical Devices</a>
+                <a href="#drugs" className="hover:text-brand-600 transition">Drugs & Pharma</a>
+                <a href="#cosmetics" className="hover:text-brand-600 transition">Cosmetics</a>
+                <a href="#contact" className="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -37,10 +37,10 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">CDSCO Overview</a>
-            <a href="#medical-devices" class="block py-2 text-slate-600">Medical Devices</a>
-            <a href="#drugs" class="block py-2 text-slate-600">Drugs</a>
-            <a href="#contact" class="block py-2 text-medical-600 font-bold">Get Regulated</a>
+            <a href="#about" className="block py-2 text-slate-600">CDSCO Overview</a>
+            <a href="#medical-devices" className="block py-2 text-slate-600">Medical Devices</a>
+            <a href="#drugs" className="block py-2 text-slate-600">Drugs</a>
+            <a href="#contact" className="block py-2 text-medical-600 font-bold">Get Regulated</a>
 
           {/* <a 
             href="#contact"

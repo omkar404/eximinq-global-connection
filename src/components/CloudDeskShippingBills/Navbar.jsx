@@ -9,12 +9,12 @@ const Navbar = () => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#home" class="hover:text-brand-600 transition">Home?</a>
-                <a href="#about" class="hover:text-brand-600 transition">What is SB?</a>
-                <a href="#types" class="hover:text-brand-600 transition">Types of Bill</a>
-                <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
-                <a href="#fees" class="hover:text-brand-600 transition">Fees</a>
+                <a href="#home" className="hover:text-brand-600 transition">Home</a>
+                <a href="#about" className="hover:text-brand-600 transition">What is SB?</a>
+                <a href="#types" className="hover:text-brand-600 transition">Types of Bill</a>
+                <a href="#documents" className="hover:text-brand-600 transition">Documents</a>
+                <a href="#process" className="hover:text-brand-600 transition">Process</a>
+                <a href="#fees" className="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -38,10 +38,10 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">What is SB?</a>
-            <a href="#types" class="block py-2 text-slate-600">Types of Bill</a>
-            <a href="#documents" class="block py-2 text-slate-600">Documents</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">File Shipping Bill</a>
+            <a href="#about" className="block py-2 text-slate-600">What is SB?</a>
+            <a href="#types" className="block py-2 text-slate-600">Types of Bill</a>
+            <a href="#documents" className="block py-2 text-slate-600">Documents</a>
+            <a href="#contact" className="block py-2 text-brand-600 font-bold">File Shipping Bill</a>
           {/* <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"

@@ -6,6 +6,9 @@ const QuickForm = () => {
     hsn: "",
     cifValue: "",
     country: "",
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     mobile: "",
   });
 
@@ -43,6 +46,17 @@ const QuickForm = () => {
     if (!form.country) {
       newErrors.country = "Country of origin is required";
     }
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company Name is required";
+    }
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact Person Name is required";
+    }
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid Email ID";
+    }
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -69,6 +83,10 @@ const QuickForm = () => {
         hsn: form.hsn,
         cifValue: form.cifValue,
         country: form.country,
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        personName: form.contactPersonName.trim(),
+        email: form.email.trim(),
         mobile: form.mobile,
         type: "QUICK_FORM",
       };
@@ -98,6 +116,9 @@ const QuickForm = () => {
         hsn: "",
         cifValue: "",
         country: "",
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         mobile: "",
       });
     } catch (err) {
@@ -121,9 +142,10 @@ const QuickForm = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* HSN Code */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">HSN Code</label>
+        <div>
+          <label className="block text-sm font-semibold mb-1">HSN Code *</label>
           <input
             type="text"
             name="hsn"
@@ -138,8 +160,8 @@ const QuickForm = () => {
         </div>
 
         {/* CIF Value */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">CIF Value (INR)</label>
+        <div>
+          <label className="block text-sm font-semibold mb-1">CIF Value (INR) *</label>
           <input
             type="text"
             name="cifValue"
@@ -154,8 +176,8 @@ const QuickForm = () => {
         </div>
 
         {/* Country of Origin */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">Country of Origin</label>
+        <div>
+          <label className="block text-sm font-semibold mb-1">Country of Origin *</label>
           <input
             type="text"
             name="country"
@@ -169,9 +191,65 @@ const QuickForm = () => {
           {errors.country && <p className="text-red-500 text-xs mt-1">{errors.country}</p>}
         </div>
 
+        <div>
+          <label className="block text-sm font-semibold mb-1">Company Name *</label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. ABC Imports Pvt Ltd"
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name *
+          </label>
+          <input
+            type="text"
+            name="contactPersonName"
+            value={form.contactPersonName}
+            onChange={handleChange}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.contactPersonName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold mb-1">Email ID *</label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. accounts@example.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+        </div>
+
         {/* Mobile Number */}
         <div className="mb-6">
-          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+          <label className="block text-sm font-semibold mb-1">Mobile Number *</label>
           <input
             type="tel"
             name="mobile"

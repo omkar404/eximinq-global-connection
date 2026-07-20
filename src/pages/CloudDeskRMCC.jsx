@@ -1,11 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskRMCC/TopBar";
 import Navbar from "../components/CloudDeskRMCC/Navbar";
 import Hero from "../components/CloudDeskRMCC/Hero";
 import Fees from "../components/CloudDeskRMCC/Fees";
 import {
-  Check,
   ChevronDown,
   Linkedin,
   Twitter,
@@ -26,7 +24,130 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskRMCC/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskRMCC/ModalEnroll";
-import { FaRegistered } from "react-icons/fa";
+
+const CANONICAL_URL = "https://eximinq.in/services/rmcc-alert-removal/";
+const META_TITLE =
+  "RMCC Alert Removal Consultant India | Customs Hold & Cargo Release Help | EXIMINQ";
+const META_DESCRIPTION =
+  "RMCC alert removal consultant in India for customs hold, RMS examination, valuation query, BOE alert, demurrage control, officer liaison, and urgent cargo release support.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "How do I know if I have an RMCC Alert on my IEC?",
+    answer:
+      "You may see referral to RMS, mandatory examination, document call-up, valuation hold, or an alert flag that delays Bill of Entry or Shipping Bill clearance.",
+  },
+  {
+    question: "Why did Customs place an RMCC alert on my shipment?",
+    answer:
+      "Common triggers include valuation mismatch, HSN risk, compliance history, supplier risk, unusual trade patterns, or unresolved notices linked to the IEC.",
+  },
+  {
+    question: "How quickly can an RMCC alert be removed?",
+    answer:
+      "Timelines depend on the alert reason and authority involved. Documentation-based administrative holds can often move faster than investigation-linked alerts.",
+  },
+  {
+    question: "Can goods be cleared while an RMCC alert is active?",
+    answer:
+      "Goods may still be cleared, but examination and document checks can create delay, demurrage, and detention unless the hold reason is resolved quickly.",
+  },
+  {
+    question: "What documents help in RMCC alert removal?",
+    answer:
+      "Useful documents can include BOE details, invoices, packing lists, payment proof, catalogues, valuation support, past import records, and compliance undertakings.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      about: {
+        "@id": `${CANONICAL_URL}#service`,
+      },
+      breadcrumb: {
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "RMCC Alert Removal",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "RMCC Alert Removal Consultant India",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: "India",
+      serviceType: [
+        "RMCC alert removal",
+        "Customs hold removal",
+        "RMS alert resolution",
+        "Bill of Entry hold support",
+        "Cargo release assistance",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 
 const CloudDeskRMCC = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -44,133 +165,25 @@ const CloudDeskRMCC = () => {
   }  
   return (
 <>
-<Helmet>
-        <title>
-          Immediate RMCC Alert & Customs Hold Removal | RMCC Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Every hour counts. Cargo flagged for Examination or Valuation Hold incurs massive demurrage. Our experts specialize in rapid technical documentation and officer liaison."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/rmcc-alert-removal/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Immediate RMCC Alert & Customs Hold Removal Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Every hour counts. Cargo flagged for Examination or Valuation Hold incurs massive demurrage. Our experts specialize in rapid technical documentation and officer liaison."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/rmcc-alert-removal/"
-        />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Immediate RMCC Alert & Customs Hold Removal",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Every hour counts. Cargo flagged for Examination or Valuation Hold incurs massive demurrage. Our experts specialize in rapid technical documentation and officer liaison."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "How do I know if I have an RMCC Alert on my IEC?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `You will notice it when your Bill of Entry/Shipping Bill status on ICEGATE says "Referral to RMS" and subsequently mandates "100% Examination." In severe cases, you will see an "Alert Flag" on the ICEGATE dashboard preventing any filing.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Why did the RMCC place an alert on my business?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Common triggers in 2026 include: (1) Undervaluation of goods compared to the NIDB (National Import Database) average, (2) Mis-declaration of HSN codes to bypass restrictions, (3) Linkage with a blacklisted supplier/buyer, or (4) Outstanding "Show Cause Notices" (SCN) that were ignored.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can an alert be placed automatically by the system?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. The Customs RMS uses AI to spot patterns. If your business profile suddenly changes (e.g., a leather exporter suddenly starts importing high-end electronics), the system flags it for "Profile Divergence."`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does it take to remove an RMCC alert?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `A standard alert based on data clarification takes 7 to 15 working days. However, if the alert is from the DRI or involves an investigation into fraud, it can take several months. CloudDesk focuses on "Administrative Alerts" that can be resolved via documentation.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What documents are required for alert removal?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It depends on the trigger, but usually (1) Proof of transaction value (Bank Swift/LC), (2) Manufacturer’s Invoice and Price List, (3) Last 3 years' ITR and Audit Reports, and (4) A formal undertaking of future compliance.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does removing the alert clear my past mistakes?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "No. Removing the alert allows you to resume trade. Any past duty short-payments or penalties discovered during the alert period must still be settled."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I still clear my goods while the alert is active?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes, but expect extreme delays. Every single box will be opened, and every document scrutinized. This usually leads to heavy Demurrage and Detention charges. CloudDesk’s goal is to remove the alert to stop these daily losses."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Will an RMCC alert affect my AEO status?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. An active alert is a "Fatal Error" for AEO certification. If you are an AEO holder, your status will be suspended immediately until the alert is cleared.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(structuredData)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -557,7 +570,7 @@ const CloudDeskRMCC = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -565,13 +578,13 @@ const CloudDeskRMCC = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq" aria-label="EXIMINQ on LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://twitter.com/eximinq" aria-label="EXIMINQ on Twitter" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ on Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -581,10 +594,10 @@ const CloudDeskRMCC = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Customs Adjudication</a></li>
-                    <li><a href="#" class="hover:text-white transition">Bill of Entry Filing</a></li>
-                    <li><a href="#" class="hover:text-white transition">AEO Certification</a></li>
-                    <li><a href="#" class="hover:text-white transition">Customs Valuation</a></li>
+                    <li><a href="/services/customs-adjudication" className="hover:text-white transition">Customs Adjudication</a></li>
+                    <li><a href="/services/bill-of-entry-filing" className="hover:text-white transition">Bill of Entry Filing</a></li>
+                    <li><a href="/services/aeo-certification" className="hover:text-white transition">AEO Certification</a></li>
+                    <li><a href="/services/rmcc-alert-removal/" className="hover:text-white transition">Customs Valuation</a></li>
             </ul>
           </div>
 
@@ -592,10 +605,10 @@ const CloudDeskRMCC = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">RMS Guidelines</a></li>
-                    <li><a href="#" class="hover:text-white transition">Demurrage Rules</a></li>
-                    <li><a href="#" class="hover:text-white transition">Valuation Rules 2007</a></li>
-                    <li><a href="#" class="hover:text-white transition">CESTAT Orders</a></li>
+                    <li><a href="/services/rmcc-alert-removal/" className="hover:text-white transition">RMS Guidelines</a></li>
+                    <li><a href="/services/project-cargo" className="hover:text-white transition">Demurrage Rules</a></li>
+                    <li><a href="/services/customs-adjudication" className="hover:text-white transition">Valuation Rules 2007</a></li>
+                    <li><a href="/services/no-due-certificate" className="hover:text-white transition">CESTAT Orders</a></li>
             </ul>
           </div>
 

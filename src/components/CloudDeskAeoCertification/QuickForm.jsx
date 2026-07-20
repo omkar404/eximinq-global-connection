@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { ShieldCheck, Phone } from "lucide-react";
+import { Building2, Mail, Phone, ShieldCheck, User } from "lucide-react";
+import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     businessType: "",
     yearsInBusiness: "",
     mobile: "",
@@ -27,6 +31,22 @@ const QuickForm = () => {
 
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!emailRegex.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
 
     if (!form.businessType) {
       newErrors.businessType = "Please select business type";
@@ -59,32 +79,31 @@ const QuickForm = () => {
       setLoading(true);
 
       const payload = {
-        name: form.businessType, // temporary name
-        mobile: form.mobile,
+        serviceKey: "aeo-certification",
+        serviceLabel: "AEO Certification",
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
         type: "QUICK_FORM",
-        yearsInBusiness: form.yearsInBusiness,
+        source: "AEO Certification Readiness Check",
+        details: {
+          "Company Name": form.companyName.trim(),
+          "Contact Person Name": form.contactPersonName.trim(),
+          "Email ID": form.email.trim(),
+          "Business Type": form.businessType,
+          "Years in Business": form.yearsInBusiness,
+        },
       };
 
-      const response = await fetch(
-       `${process.env.REACT_APP_API_URL}/api/aeo-certification"`,
-        // "http://localhost:5000/api/aeo-certification",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        },
-      );
-
-      
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message);
-      }
+      await submitServiceQuickForm(payload);
 
       alert("Request submitted successfully");
 
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         businessType: "",
         yearsInBusiness: "",
         mobile: "",
@@ -110,9 +129,90 @@ const QuickForm = () => {
         Find out if you qualify for T1 or T2 status.
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name
+          </label>
+
+          <div className="relative">
+            <Building2
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              placeholder="Enter company name"
+              className="w-full pl-9 border border-slate-300 rounded px-3 py-2"
+            />
+          </div>
+
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name
+          </label>
+
+          <div className="relative">
+            <User
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              placeholder="Enter contact person name"
+              className="w-full pl-9 border border-slate-300 rounded px-3 py-2"
+            />
+          </div>
+
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">Email ID</label>
+
+          <div className="relative">
+            <Mail
+              size={16}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="official@company.com"
+              className="w-full pl-9 border border-slate-300 rounded px-3 py-2"
+            />
+          </div>
+
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Business Type */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Business Type
           </label>
@@ -136,7 +236,7 @@ const QuickForm = () => {
         </div>
 
         {/* Years */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Years in Business
           </label>
@@ -160,7 +260,7 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile */}
-        <div className="mb-6">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Mobile Number
           </label>
@@ -189,7 +289,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full md:col-span-2 text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

@@ -29,21 +29,26 @@ async function sendEmail(record) {
     workType,
     title,
     source,
+    companyName,
+    personName,
+    contactPersonName,
   } = record;
 
-const serviceDisplay = service || "Logo Copyright Registration";
+const serviceDisplay = service || "Copyright Registration";
 
   await transporter.sendMail({
     from: `"EXIMINQ CloudDesk" <${process.env.SMTP_USER}>`,
     to: "crm@eximinq.com, omkarmhetar100@gmail.com,sheshnathyadav1827499@gmail.com",
-    subject: `Logo Copyright Registration — ${serviceDisplay}`,
+    subject: `Copyright Registration — ${serviceDisplay}`,
     html: `
       <div style="font-family:Arial;">
-        <h2>Logo Copyright Registration</h2>
+        <h2>Copyright Registration</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Type</b></td><td>${type}</td></tr>
           ${source ? `<tr><td><b>Source</b></td><td>${source}</td></tr>` : ""}
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
           ${workType ? `<tr><td><b>Type of Work</b></td><td>${workType}</td></tr>` : ""}
           ${title ? `<tr><td><b>Title of Work</b></td><td>${title}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
@@ -82,24 +87,57 @@ exports.createcopyrightRegistrationRoutes = async (req, res) => {
       workType, // ✅ camelCase
       title, // ✅ camelCase
       source,
+      companyName,
+      personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanMobile = typeof mobile === "string" ? mobile.trim() : "";
+    const cleanCompanyName =
+      typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
 
-    if (!mobile || !mobile.trim()) {
+    if (!cleanMobile) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
       });
     }
 
+    if (isQuickForm) {
+      if (!cleanCompanyName || !cleanContactPersonName || !cleanEmail) {
+        return res.status(400).json({
+          success: false,
+          message: "Company name, contact person name, and email are required",
+        });
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+        return res.status(400).json({
+          success: false,
+          message: "Enter a valid email ID",
+        });
+      }
+    }
+
     const recordData = {
-      service: service || "Logo Copyright Registration",
-      mobile: mobile.trim(),
+      service: service || "Copyright Registration",
+      mobile: cleanMobile,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
       workType: workType ? workType.trim() : null, // ✅ use the correct variable
       title: title ? title.trim() : null, // ✅ use correct variable
       name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      email: cleanEmail || null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),

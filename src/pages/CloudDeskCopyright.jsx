@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import TopBar from "../components/CloudDeskCopyright/TopBar";
 import Navbar from "../components/CloudDeskCopyright/Navbar";
 import Hero from "../components/CloudDeskCopyright/Hero";
 import Fees from "../components/CloudDeskCopyright/Fees";
@@ -13,24 +12,55 @@ import {
   Phone,
   Mail,
   MapPin,
-Code, 
-Paintbrush, 
-Hourglass,
-Book, 
-Palette, 
-Info,
-Award,
-
+  Code,
+  Paintbrush,
+  Hourglass,
+  Book,
+  Palette,
+  Info,
+  Award,
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskCopyright/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskCopyright/ModalEnroll";
+
+const CANONICAL_URL = "https://eximinq.in/services/copyright-registration/";
+const META_TITLE =
+  "Copyright Registration Consultant India | Software, Logo & Artwork | EXIMINQ";
+const META_DESCRIPTION =
+  "Copyright registration consultant in India for software code, books, music, videos, logos, artwork, website content, TM-C support, objections, and IP ownership documentation.";
+const OG_IMAGE_URL = "https://eximinq.in/logo512.png";
+const FAQ_ITEMS = [
+  {
+    question: "Is software patented or copyrighted in India?",
+    answer:
+      "In India, software code is protected under the Copyright Act as a literary work. Patent protection is usually limited unless the software is tied to a qualifying technical invention.",
+  },
+  {
+    question: "What is the difference between trademark and copyright?",
+    answer:
+      "Trademark protects brand identifiers used in commerce, such as names, logos, and slogans. Copyright protects creative expression such as artwork, books, website content, music, video, and software code.",
+  },
+  {
+    question: "Is copyright registration mandatory?",
+    answer:
+      "Copyright exists automatically when original work is created, but registration gives formal evidence of ownership and is useful for enforcement, licensing, takedowns, and infringement claims.",
+  },
+  {
+    question: "Do logos need both copyright and trademark protection?",
+    answer:
+      "A logo can need both protections. Copyright protects the artistic expression, while trademark protects use of the logo as a source identifier for goods or services.",
+  },
+  {
+    question: "What details are needed for copyright filing?",
+    answer:
+      "Typical details include the work category, title, author or owner details, creation and publication information, assignment documents where applicable, and copies of the work.",
+  },
+];
 
 const CloudDeskCopyright = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
     type: "",
-    type: "",
-    // source: "services/copyright-registration",
   });
 
   const handleEnrollmentSubmit = (formData) => {
@@ -39,99 +69,111 @@ const CloudDeskCopyright = () => {
     // TODO → send API call
     // axios.post("/api/enroll", formData)
 
-    alert("Form submitted - check console for data.")
+    alert("Form submitted - check console for data.");
   }
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://eximinq.in/#organization",
+        name: "EXIMINQ Global Connections",
+        url: "https://eximinq.in/",
+        logo: "https://eximinq.in/logo512.png",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${CANONICAL_URL}#webpage`,
+        url: CANONICAL_URL,
+        name: META_TITLE,
+        description: META_DESCRIPTION,
+        isPartOf: { "@id": "https://eximinq.in/#website" },
+        about: { "@id": `${CANONICAL_URL}#service` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://eximinq.in/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Services",
+            item: "https://eximinq.in/services/",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Copyright Registration",
+            item: CANONICAL_URL,
+          },
+        ],
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${CANONICAL_URL}#service`,
+        name: "Copyright Registration Consultant",
+        url: CANONICAL_URL,
+        image: OG_IMAGE_URL,
+        description: META_DESCRIPTION,
+        provider: { "@id": "https://eximinq.in/#organization" },
+        areaServed: {
+          "@type": "Country",
+          name: "India",
+        },
+        serviceType: [
+          "Copyright registration",
+          "Software copyright registration",
+          "Logo copyright registration",
+          "Artistic work copyright",
+          "TM-C support",
+          "IP documentation",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${CANONICAL_URL}#faq`,
+        mainEntity: FAQ_ITEMS.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
   
   return (
 <>
-<Helmet>
-        <title>
-          Copyright Registration for Original Works | Copyright  Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
-        <meta
-          name="description"
-          content="Secure your ownership over Software Code, Books, Artistic Logos, Music, and Videos. Prevent unauthorized copying and piracy with legal protection under the Copyright Act, 1957."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/copyright-registration/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Copyright Registration for Original Works Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Secure your ownership over Software Code, Books, Artistic Logos, Music, and Videos. Prevent unauthorized copying and piracy with legal protection under the Copyright Act, 1957."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/copyright-registration/"
-        />
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Copyright Registration for Original Works",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Secure your ownership over Software Code, Books, Artistic Logos, Music, and Videos. Prevent unauthorized copying and piracy with legal protection under the Copyright Act, 1957."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Is software patented or copyrighted in India?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `In India, software code is protected under the Copyright Act as a “Literary Work”. It is generally not patentable unless it is embedded in hardware with a unique technical effect.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the difference between Trademark and Copyright?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Trademark protects your Brand Identity (Name, Logo, Slogan) used in trade. Copyright protects the creative expression (Artistic design of the logo, content of a book, code of an app). For a logo, it is recommended to get both."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is copyright registration mandatory?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Registration is not mandatory for protection (copyright exists automatically upon creation), but the registration certificate is the primary evidence required to file a lawsuit for infringement or claim damages."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(structuredData)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
       <MainNavbar setShowEnrollModal={setShowEnrollModal} />
-      {/* <TopBar /> */}
       <Navbar setShowEnrollModal={setShowEnrollModal} />
       <Hero setShowEnrollModal={setShowEnrollModal} />
 
@@ -538,7 +580,7 @@ const CloudDeskCopyright = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -546,13 +588,13 @@ const CloudDeskCopyright = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ on LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ on X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ on Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -562,10 +604,10 @@ const CloudDeskCopyright = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Copyright Filing</a></li>
-                    <li><a href="#" class="hover:text-white transition">Trademark Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">Design Registration</a></li>
-                    <li><a href="#" class="hover:text-white transition">IPR Litigation</a></li>
+                    <li><a href="/services/copyright-registration/" className="hover:text-white transition">Copyright Filing</a></li>
+                    <li><a href="/services/trademark-registration" className="hover:text-white transition">Trademark Registration</a></li>
+                    <li><a href="/services/copyright-registration/#categories" className="hover:text-white transition">Design Registration</a></li>
+                    <li><a href="/services/copyright-registration/#faq" className="hover:text-white transition">IPR Guidance</a></li>
             </ul>
           </div>
 
@@ -573,10 +615,10 @@ const CloudDeskCopyright = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Copyright Act 1957</a></li>
-                    <li><a href="#" class="hover:text-white transition">Fee Calculator</a></li>
-                    <li><a href="#" class="hover:text-white transition">TM-C Search</a></li>
-                    <li><a href="#" class="hover:text-white transition">Software Protection</a></li>
+                    <li><a href="/services/copyright-registration/#about" className="hover:text-white transition">Copyright Act 1957</a></li>
+                    <li><a href="/services/copyright-registration/#fees" className="hover:text-white transition">Fee Calculator</a></li>
+                    <li><a href="/services/copyright-registration/#logo-brand-copyright" className="hover:text-white transition">TM-C Search</a></li>
+                    <li><a href="/services/copyright-registration/#categories" className="hover:text-white transition">Software Protection</a></li>
             </ul>
           </div>
 

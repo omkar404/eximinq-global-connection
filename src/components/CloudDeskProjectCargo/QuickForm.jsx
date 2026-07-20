@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { Building2, Mail, User } from "lucide-react";
+import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     cargoType: "",
     weight: "",
     dimension: "",
@@ -48,6 +53,20 @@ const QuickForm = () => {
   /* VALIDATION */
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
 
     if (!form.cargoType) {
       newErrors.cargoType = "Please select cargo type";
@@ -104,37 +123,28 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        cargoType: form.cargoType,
-        weightMt: parseFloat(form.weight),
-        dimension: form.dimension.trim(),
-        mobile: form.mobile,
+        serviceKey: "project-cargo",
+        serviceLabel: "Project Cargo and ODC Handling",
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
         type: "QUICK_FORM",
+        source: "Project Cargo Enquiry",
+        details: {
+          "Company Name": form.companyName.trim(),
+          "Contact Person Name": form.contactPersonName.trim(),
+          "Email ID": form.email.trim(),
+          "Cargo Type": form.cargoType,
+          "Weight (MT)": parseFloat(form.weight),
+          "Max Dimension": form.dimension.trim(),
+          "Mobile Number": form.mobile.trim(),
+        },
       };
 
       console.log("📤 Sending data:", payload);
 
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/project-cargo`,
-        // "http://localhost:5000/api/project-cargo", // ✅ http:// is required        
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.error ||
-            data.message ||
-            "Something went wrong"
-        );
-      }
+      await submitServiceQuickForm(payload);
 
       alert(
         "✅ Request submitted successfully – we'll contact you shortly."
@@ -142,6 +152,9 @@ const QuickForm = () => {
 
       // Reset form
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         cargoType: "",
         weight: "",
         dimension: "",
@@ -175,13 +188,88 @@ const QuickForm = () => {
       <form
         onSubmit={handleSubmit}
         noValidate
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
       >
+        {/* Company Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Company Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              placeholder="e.g. ABC Engineering Pvt Ltd"
+              className={`w-full border ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              } rounded-lg px-3 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent`}
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.companyName}
+            </p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              placeholder="e.g. Rohan Mehta"
+              className={`w-full border ${
+                errors.contactPersonName ? "border-red-500" : "border-slate-300"
+              } rounded-lg px-3 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent`}
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="official@company.com"
+              className={`w-full border ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              } rounded-lg px-3 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent`}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.email}
+            </p>
+          )}
+        </div>
 
         {/* Cargo Type */}
-        <div className="mb-4">
+        <div className="md:col-span-2">
 
           <label className="block text-sm font-semibold mb-1">
-            Cargo Type
+            Cargo Type <span className="text-red-500">*</span>
           </label>
 
           <select
@@ -230,7 +318,7 @@ const QuickForm = () => {
         </div>
 
         {/* Weight + Dimension */}
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:col-span-2">
 
           {/* Weight */}
           <div>
@@ -291,10 +379,10 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile */}
-        <div className="mb-5">
+        <div className="md:col-span-2">
 
           <label className="block text-sm font-semibold mb-1">
-            Mobile Number
+            Mobile Number <span className="text-red-500">*</span>
           </label>
 
           <input
@@ -323,7 +411,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition disabled:opacity-70 disabled:cursor-not-allowed"
+          className="md:col-span-2 w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition disabled:opacity-70 disabled:cursor-not-allowed"
         >
 
           {loading

@@ -25,6 +25,10 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskIEM/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskIEM/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/iem-registration/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
 
 const CloudDeskIEM = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -43,124 +47,162 @@ const CloudDeskIEM = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>
-          IEM Registration with DPIIT | IEM Registration India | DGFT CUSTOMS
-          Services | EXIMINQ
+          IEM Registration Consultant India | DPIIT Part A & Part B Filing | EXIMINQ
         </title>
-
         <meta
           name="description"
-          content="Have you outgrown the MSME limit? Industrial undertakings exempted from Compulsory Licensing must file an Industrial Entrepreneur Memorandum (IEM) to secure government recognition."
+          content="IEM registration consultant in India for DPIIT Industrial Entrepreneur Memorandum Part A and Part B filing, NIC code mapping, documents, amendments and G2B portal support."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/iem-registration/"
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        {/* Open Graph */}
         <meta
           property="og:title"
-          content="IEM Registration with DPIIT in India | Eximinq"
+          content="IEM Registration Consultant India | DPIIT Part A & Part B Filing"
         />
         <meta
           property="og:description"
-          content="Have you outgrown the MSME limit? Industrial undertakings exempted from Compulsory Licensing must file an Industrial Entrepreneur Memorandum (IEM) to secure government recognition."
+          content="DPIIT IEM registration support for large-scale industrial undertakings, Part A intent filing, Part B production filing, documents and NIC code mapping."
+        />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ CloudDesk" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="IEM Registration Consultant India | DPIIT Part A & Part B Filing"
         />
         <meta
-          property="og:url"
-          content="https://eximinq.in/services/iem-registration/"
+          name="twitter:description"
+          content="DPIIT IEM registration support for large-scale industrial undertakings, Part A intent filing, Part B production filing, documents and NIC code mapping."
         />
-        <meta property="og:type" content="website" />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: "IEM Registration with DPIIT",
-            provider: {
-              "@type": "Organization",
-              name: "Eximinq Global Connections",
-              url: "https://eximinq.in",
-            },
-            areaServed: "India",
-            description:
-              "Have you outgrown the MSME limit? Industrial undertakings exempted from Compulsory Licensing must file an Industrial Entrepreneur Memorandum (IEM) to secure government recognition.",
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
+            "@graph": [
               {
-                "@type": "Question",
-                name: "Who needs to file an IEM?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Any industrial undertaking that (1) is NOT an MSME (i.e., investment in plant/machinery > ₹50 Crore), (2) is in the "Non-Licensed" sector (most manufacturing), and (3) is not covered under the MSMED Act.`,
-                },
+                "@type": "Organization",
+                "@id": "https://eximinq.in/#organization",
+                name: "EXIMINQ Global Connections",
+                url: "https://eximinq.in/",
+                logo: OG_IMAGE_URL,
+                sameAs: [
+                  "https://www.linkedin.com/company/eximinq-global-connections/"
+                ]
               },
               {
-                "@type": "Question",
-                name: "Can an MSME file an IEM?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "No. MSMEs must register under Udyam. If an MSME grows and crosses the ₹50Cr/₹250Cr limit, they must transition from Udyam to IEM.",
+                "@type": "WebPage",
+                "@id": `${CANONICAL_URL}#webpage`,
+                url: CANONICAL_URL,
+                name:
+                  "IEM Registration Consultant India | DPIIT Part A & Part B Filing",
+                description:
+                  "IEM registration consultant in India for DPIIT Industrial Entrepreneur Memorandum Part A and Part B filing, NIC code mapping, documents, amendments and G2B portal support.",
+                isPartOf: {
+                  "@id": "https://eximinq.in/#website"
                 },
+                about: {
+                  "@id": `${CANONICAL_URL}#service`
+                },
+                breadcrumb: {
+                  "@id": `${CANONICAL_URL}#breadcrumb`
+                },
+                inLanguage: "en-IN"
               },
               {
-                "@type": "Question",
-                name: "Is IEM required for Service-based industries?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "No. IEM is strictly for Industrial Undertakings (Manufacturing/Processing). Services usually fall under Shop & Establishment or Udyam (for service MSMEs).",
-                },
+                "@type": "BreadcrumbList",
+                "@id": `${CANONICAL_URL}#breadcrumb`,
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://eximinq.in/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Services",
+                    item: "https://eximinq.in/services/"
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: "IEM Registration",
+                    item: CANONICAL_URL
+                  }
+                ]
               },
               {
-                "@type": "Question",
-                name: "When should I file IEM Part A?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `As soon as you have "Taken Effective Steps" to set up the unit — this means you have acquired land, placed orders for machinery, or secured financing.`,
+                "@type": "ProfessionalService",
+                "@id": `${CANONICAL_URL}#service`,
+                name: "IEM Registration with DPIIT",
+                url: CANONICAL_URL,
+                image: OG_IMAGE_URL,
+                provider: {
+                  "@id": "https://eximinq.in/#organization"
                 },
+                areaServed: {
+                  "@type": "Country",
+                  name: "India"
+                },
+                serviceType:
+                  "Industrial Entrepreneur Memorandum registration and DPIIT filing",
+                description:
+                  "DPIIT IEM registration, Part A intent filing, Part B commencement filing, NIC code mapping, document review and G2B portal support for industrial undertakings.",
+                telephone: "+917400096950",
+                email: "clouddesk@eximinq.in"
               },
               {
-                "@type": "Question",
-                name: "What is the deadline for filing Part B?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "You must file Part B (Commencement of Production) within 6 months of starting commercial operations. Failure to do so can lead to the cancellation of your Part A acknowledgment.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What if my investment amount changes from Part A to Part B?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `This is common. Part B allows you to report the actual final investment and employment figures. CloudDesk manages the "Variation Analysis" to ensure the deviation is within acceptable limits.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `Is IEM a "Certificate of Origin"?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "No. IEM is an industrial license. However, a copy of your IEM is often required by the DGFT when you apply for a Certificate of Origin or Export Incentives.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What are the fees for IEM registration in 2026?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "The government fee is currently ₹1,000 for Part A. There is no fee for Part B, but professional management is key to ensuring the data matches your GST and Income Tax filings.",
-                },
-              },
+                "@type": "FAQPage",
+                "@id": `${CANONICAL_URL}#faq`,
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "Who needs to file an IEM?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "Industrial undertakings outside the MSME threshold and not covered by compulsory industrial licensing generally file IEM with DPIIT for eligible manufacturing or processing activities."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Can an MSME file an IEM?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "MSMEs normally register under Udyam. If the enterprise grows beyond MSME limits, it may need to transition to IEM depending on the activity and investment."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    name: "When should IEM Part A be filed?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "IEM Part A is filed when effective steps are being taken to set up the industrial undertaking, such as land acquisition, finance, or machinery planning."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    name: "When should IEM Part B be filed?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        "Part B is filed after commencement of commercial production, generally within the prescribed timeline from the start of production."
+                    }
+                  }
+                ]
+              }
             ],
           })}
         </script>
@@ -340,22 +382,22 @@ const CloudDeskIEM = () => {
           </div>
         </section>
 
-        <section id="documents" class="py-20 bg-brand-900 text-white">
-          <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
+        <section id="documents" className="py-20 bg-brand-900 text-white">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   Required Documentation
                 </h2>
-                <p class="text-slate-300 mb-8 leading-relaxed">
+                <p className="text-slate-300 mb-8 leading-relaxed">
                   Accurate documentation is key to avoiding queries from DPIIT.
                   The list varies slightly for Part A and Part B.
                 </p>
 
-                <div class="space-y-6">
-                  <div class="bg-brand-800 p-4 rounded-lg border-l-4 border-accent-400">
-                    <h4 class="font-bold text-lg mb-2">For Part A</h4>
-                    <ul class="text-sm text-slate-400 space-y-1">
+                <div className="space-y-6">
+                  <div className="bg-brand-800 p-4 rounded-lg border-l-4 border-accent-400">
+                    <h4 className="font-bold text-lg mb-2">For Part A</h4>
+                    <ul className="text-sm text-slate-400 space-y-1">
                       <li>• Certificate of Incorporation / MOA / AOA</li>
                       <li>• Authorization Letter for Signatory</li>
                       <li>
@@ -363,9 +405,9 @@ const CloudDeskIEM = () => {
                       </li>
                     </ul>
                   </div>
-                  <div class="bg-brand-800 p-4 rounded-lg border-l-4 border-green-500">
-                    <h4 class="font-bold text-lg mb-2">For Part B</h4>
-                    <ul class="text-sm text-slate-400 space-y-1">
+                  <div className="bg-brand-800 p-4 rounded-lg border-l-4 border-green-500">
+                    <h4 className="font-bold text-lg mb-2">For Part B</h4>
+                    <ul className="text-sm text-slate-400 space-y-1">
                       <li>• Copy of IEM Part A Acknowledgement</li>
                       <li>• Date of Commencement of Commercial Production</li>
                       <li>
@@ -376,22 +418,16 @@ const CloudDeskIEM = () => {
                   </div>
                 </div>
               </div>
-              <div class="bg-white text-slate-800 rounded-xl p-8 shadow-2xl border border-gray-200">
-                <h3 class="text-xl font-bold mb-4 text-industry-900 border-b pb-4">
+              <div className="bg-white text-slate-800 rounded-xl p-8 shadow-2xl border border-gray-200">
+                <h3 className="text-xl font-bold mb-4 text-industry-900 border-b pb-4">
                   Licensing Exception
                 </h3>
-                <p class="text-sm text-slate-600 mb-6">
+                <p className="text-sm text-slate-600 mb-6">
                   <strong>Important:</strong> If your industry falls under the
                   "Compulsory Licensing" list (e.g., Defense, Explosives,
                   Hazardous Chemicals), you cannot file IEM. You must apply for
                   an <strong>Industrial License (IL)</strong> instead.
                 </p>
-                {/* <a
-                  href="#contact"
-                  class="block text-center bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-industry-700 transition"
-                >
-                  Check IL Applicability
-                </a> */}
                 <a
                     href="/services/industrial-license"
                     target="_blank"
@@ -727,6 +763,64 @@ const CloudDeskIEM = () => {
           </div>
         </section>
 
+        <section className="py-16 bg-slate-50">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-10">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Related Industrial Setup Support
+              </span>
+              <h2 className="text-3xl font-bold text-slate-900 mt-2">
+                Services Industrial Units Often Need
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                {
+                  label: "Industrial License",
+                  href: "/services/industrial-license/",
+                  text: "Confirm whether your activity requires compulsory industrial licensing instead of IEM."
+                },
+                {
+                  label: "Factory License",
+                  href: "/services/factory-license/",
+                  text: "Handle factory plan approval, DISH licensing, renewals and inspection support."
+                },
+                {
+                  label: "Factory Stuffing Permission",
+                  href: "/services/factory-stuffing/",
+                  text: "Set up factory stuffing approvals for export cargo movement and supervision."
+                },
+                {
+                  label: "Pollution Control Consent",
+                  href: "/services/pollution-control/",
+                  text: "Manage consent and environmental compliance for industrial undertakings."
+                },
+                {
+                  label: "CA Certification",
+                  href: "/services/ca-certification-export-import/",
+                  text: "Arrange certified investment, export-import and compliance statements."
+                },
+                {
+                  label: "All Services",
+                  href: "/services/",
+                  text: "Explore DGFT, customs, licensing and regulatory support from CloudDesk."
+                }
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block bg-white border border-slate-200 rounded-lg p-5 hover:border-brand-400 hover:shadow-md transition"
+                >
+                  <span className="font-bold text-slate-900">{link.label}</span>
+                  <p className="text-sm text-slate-500 mt-2 leading-relaxed">
+                    {link.text}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
@@ -759,22 +853,22 @@ const CloudDeskIEM = () => {
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#parts" className="hover:text-white transition">
                     IEM Part A
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#parts" className="hover:text-white transition">
                     IEM Part B
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/industrial-license/" className="hover:text-white transition">
                     Industrial License
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#about" className="hover:text-white transition">
                     Udyam Registration
                   </a>
                 </li>
@@ -786,22 +880,22 @@ const CloudDeskIEM = () => {
               <h4 className="text-white font-bold mb-6">Other Services</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#about" className="hover:text-white transition">
                     NIC Code List
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#process" className="hover:text-white transition">
                     DPIIT Manual
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="/services/industrial-license/" className="hover:text-white transition">
                     Compulsory Lic. List
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:text-white transition">
+                  <a href="#about" className="hover:text-white transition">
                     Investment Limit
                   </a>
                 </li>

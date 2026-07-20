@@ -1,86 +1,19 @@
-// import { ClipboardCheck, MapPin, Phone } from "lucide-react";
-
-// const QuickForm = () => {
-//   return (
-//     <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-//       <h3 className="text-2xl font-bold text-brand-900 mb-2 flex items-center gap-2">
-//         <ClipboardCheck className="w-6 h-6 text-brand-900" />
-//         Compliance Check
-//       </h3>
-
-//       <p className="text-slate-500 mb-6 text-sm">
-//         Verify product category eligibility.
-//       </p>
-
-//       <form
-//         onSubmit={(e) => {
-//           e.preventDefault();
-//           alert("We will analyze the product composition and revert.");
-//         }}
-//       >
-//         {/* Product Type */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Product Type
-//           </label>
-//           <select className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500">
-//             <option>Health Supplements / Nutraceuticals</option>
-//             <option>Confectionery / Chocolates</option>
-//             <option>Beverages (Alcoholic/Non-Alcoholic)</option>
-//             <option>Dairy Products</option>
-//             <option>Raw Material / Additives</option>
-//           </select>
-//         </div>
-
-//         {/* Port of Import */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Port of Import
-//           </label>
-//           <div className="relative">
-//             <MapPin className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
-//             <input
-//               type="text"
-//               className="w-full border border-slate-300 rounded pl-9 pr-3 py-2 focus:outline-none focus:border-brand-500"
-//               placeholder="e.g. Nhava Sheva / Delhi Airport"
-//             />
-//           </div>
-//         </div>
-
-//         {/* Mobile Number */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Mobile Number
-//           </label>
-//           <div className="relative">
-//             <Phone className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
-//             <input
-//               type="tel"
-//               required
-//               className="w-full border border-slate-300 rounded pl-9 pr-3 py-2 focus:outline-none focus:border-brand-500"
-//               placeholder="+91 74000 96950"
-//             />
-//           </div>
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition"
-//         >
-//           Check Requirements
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default QuickForm;
-
 import { useState } from "react";
-import { ClipboardCheck, MapPin, Phone } from "lucide-react";
+import {
+  Building2,
+  ClipboardCheck,
+  Mail,
+  MapPin,
+  Phone,
+  User,
+} from "lucide-react";
+import { submitServiceQuickForm } from "../../utils/submitServiceQuickForm";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    contactPersonName: "",
+    email: "",
     productType: "",
     portOfImport: "",
     mobile: "",
@@ -107,6 +40,28 @@ const QuickForm = () => {
   const validate = () => {
     const newErrors = {};
 
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+
+    if (!form.contactPersonName.trim()) {
+      newErrors.contactPersonName = "Contact person name is required";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email ID";
+    }
+
+    if (!form.productType) {
+      newErrors.productType = "Product type is required";
+    }
+
+    if (!form.portOfImport.trim()) {
+      newErrors.portOfImport = "Port of import is required";
+    }
+
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^[6-9]\d{9}$/.test(form.mobile)) {
@@ -129,35 +84,33 @@ const QuickForm = () => {
 
     try {
       const payload = {
-        productType: form.productType,
-        portOfImport: form.portOfImport,
-        mobile: form.mobile,
-        type: "QUICK_FORM", // or any identifier you need
+        serviceKey: "fssai-licensing",
+        serviceLabel: "FSSAI Licensing & Import Clearance",
+        companyName: form.companyName.trim(),
+        contactPersonName: form.contactPersonName.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
+        type: "QUICK_FORM",
+        source: "FSSAI Licensing Compliance Check",
+        details: {
+          "Company Name": form.companyName.trim(),
+          "Contact Person Name": form.contactPersonName.trim(),
+          "Email ID": form.email.trim(),
+          "Product Type": form.productType,
+          "Port of Import": form.portOfImport.trim(),
+          "Mobile Number": form.mobile.trim(),
+        },
       };
 
-      console.log("📤 Sending data:", payload);
-
-      // Use your actual API endpoint
-      const response = await fetch(
-         `${process.env.REACT_APP_API_URL}/api/fssai-licensing`,
-        // "http://localhost:5000/api/fssai-licensing",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || data.message || "Something went wrong");
-      }
+      await submitServiceQuickForm(payload);
 
       alert("✅ Request submitted successfully! We'll analyze and revert.");
 
       // Reset form
       setForm({
+        companyName: "",
+        contactPersonName: "",
+        email: "",
         productType: "",
         portOfImport: "",
         mobile: "",
@@ -181,17 +134,92 @@ const QuickForm = () => {
         Verify product category eligibility.
       </p>
 
-      <form onSubmit={handleSubmit}>
-        {/* Product Type */}
-        <div className="mb-4">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Company Name */}
+        <div>
           <label className="block text-sm font-semibold mb-1">
-            Product Type
+            Company Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Building2 className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              name="companyName"
+              value={form.companyName}
+              onChange={handleChange}
+              className={`w-full border rounded pl-9 pr-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.companyName ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="Enter company name"
+            />
+          </div>
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Contact Person Name <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <User className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              name="contactPersonName"
+              value={form.contactPersonName}
+              onChange={handleChange}
+              className={`w-full border rounded pl-9 pr-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.contactPersonName
+                  ? "border-red-500"
+                  : "border-slate-300"
+              }`}
+              placeholder="Enter contact person name"
+            />
+          </div>
+          {errors.contactPersonName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.contactPersonName}
+            </p>
+          )}
+        </div>
+
+        {/* Email ID */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Email ID <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className={`w-full border rounded pl-9 pr-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.email ? "border-red-500" : "border-slate-300"
+              }`}
+              placeholder="official@company.com"
+            />
+          </div>
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        {/* Product Type */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">
+            Product Type <span className="text-red-500">*</span>
           </label>
           <select
             name="productType"
             value={form.productType}
             onChange={handleChange}
-            className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
+            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              errors.productType ? "border-red-500" : "border-slate-300"
+            }`}
           >
             <option value="">Select product type</option>
             <option>Health Supplements / Nutraceuticals</option>
@@ -200,12 +228,15 @@ const QuickForm = () => {
             <option>Dairy Products</option>
             <option>Raw Material / Additives</option>
           </select>
+          {errors.productType && (
+            <p className="text-red-500 text-xs mt-1">{errors.productType}</p>
+          )}
         </div>
 
         {/* Port of Import */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
-            Port of Import
+            Port of Import <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <MapPin className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
@@ -214,14 +245,19 @@ const QuickForm = () => {
               name="portOfImport"
               value={form.portOfImport}
               onChange={handleChange}
-              className="w-full border border-slate-300 rounded pl-9 pr-3 py-2 focus:outline-none focus:border-brand-500"
+              className={`w-full border rounded pl-9 pr-3 py-2 focus:outline-none focus:border-brand-500 ${
+                errors.portOfImport ? "border-red-500" : "border-slate-300"
+              }`}
               placeholder="e.g. Nhava Sheva / Delhi Airport"
             />
           </div>
+          {errors.portOfImport && (
+            <p className="text-red-500 text-xs mt-1">{errors.portOfImport}</p>
+          )}
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-4">
+        <div>
           <label className="block text-sm font-semibold mb-1">
             Mobile Number <span className="text-red-500">*</span>
           </label>
@@ -248,7 +284,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full md:col-span-2 text-white font-bold py-3 rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"

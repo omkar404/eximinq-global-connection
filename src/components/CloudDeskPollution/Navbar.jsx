@@ -10,11 +10,11 @@ const Navbar = ({
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#home" class="hover:text-brand-600 transition">Home</a>
-                <a href="#about" class="hover:text-brand-600 transition">What is PCB?</a>
-                <a href="#categories" class="hover:text-brand-600 transition">Categories (Red/Orange)</a>
-                <a href="#process" class="hover:text-brand-600 transition">CTE vs CTO</a>
-                <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
+                <a href="#home" className="hover:text-brand-600 transition">Home</a>
+                <a href="#about" className="hover:text-brand-600 transition">What is PCB?</a>
+                <a href="#categories" className="hover:text-brand-600 transition">Categories (Red/Orange)</a>
+                <a href="#process" className="hover:text-brand-600 transition">CTE vs CTO</a>
+                <a href="#documents" className="hover:text-brand-600 transition">Documents</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -46,11 +46,11 @@ const Navbar = ({
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-            <a href="#about" class="block py-2 text-slate-600">What is NOC?</a>
-            <a href="#categories" class="block py-2 text-slate-600">Categories</a>
-            <a href="#process" class="block py-2 text-slate-600">Process</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Apply for Consent</a>
+          <a href="#home" className="hover:text-brand-600 transition">Home</a>
+            <a href="#about" className="block py-2 text-slate-600">What is NOC?</a>
+            <a href="#categories" className="block py-2 text-slate-600">Categories</a>
+            <a href="#process" className="block py-2 text-slate-600">Process</a>
+            <a href="#contact" className="block py-2 text-brand-600 font-bold">Apply for Consent</a>
           <a 
             href="#contact"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"

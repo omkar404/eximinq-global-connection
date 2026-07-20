@@ -8,19 +8,19 @@ const Navbar = () => {
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">
+          <a href="#home" className="hover:text-brand-600 transition">
             Home
           </a>
-          <a href="#about" class="hover:text-brand-600 transition">
+          <a href="#about" className="hover:text-brand-600 transition">
             Services
           </a>
-          <a href="#fleet" class="hover:text-brand-600 transition">
+          <a href="#fleet" className="hover:text-brand-600 transition">
             Our Fleet
           </a>
-          <a href="#rail" class="hover:text-brand-600 transition">
+          <a href="#rail" className="hover:text-brand-600 transition">
             Rail Logistics
           </a>
-          <a href="#locations" class="hover:text-brand-600 transition">
+          <a href="#locations" className="hover:text-brand-600 transition">
             Network
           </a>
         </div>
@@ -45,20 +45,20 @@ const Navbar = () => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#about" class="block py-2 text-slate-600">
+          <a href="#about" className="block py-2 text-slate-600">
             Services
           </a>
-          <a href="#fleet" class="block py-2 text-slate-600">
+          <a href="#fleet" className="block py-2 text-slate-600">
             Our Fleet
           </a>
-          <a href="#rail" class="block py-2 text-slate-600">
+          <a href="#rail" className="block py-2 text-slate-600">
             Rail Logistics
           </a>
-          <a href="#contact" class="block py-2 text-brand-600 font-bold">
+          <a href="#contact" className="block py-2 text-brand-600 font-bold">
             Book Trailer
           </a>
           <a 
-            href="#"
+            href="#home"
             className="block py-3 mt-2 bg-accent-500 text-white rounded-md shadow-md"
           >
             Apply Now

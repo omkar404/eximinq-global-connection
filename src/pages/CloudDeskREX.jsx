@@ -33,6 +33,103 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskREX/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskREX/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/rex-registration/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+
+const rexSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "EXIMINQ Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: "REX Registration Consultant India",
+      description:
+        "REX registration consultant in India for EU GSP, Registered Exporter number, statement on origin, rules of origin review and duty-free export documentation.",
+      isPartOf: { "@id": "https://eximinq.in/#website" },
+      about: { "@id": `${CANONICAL_URL}#service` },
+      breadcrumb: { "@id": `${CANONICAL_URL}#breadcrumb` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "REX Registration",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "REX Registration",
+      provider: { "@id": "https://eximinq.in/#organization" },
+      areaServed: "India",
+      serviceType: "Registered Exporter Number Registration",
+      url: CANONICAL_URL,
+      description:
+        "REX registration support for exporters claiming EU GSP and self-certifying origin with statement on origin, HSN mapping, IEC review and local administrator coordination.",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is the REX System?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "The Registered Exporter system allows approved exporters to self-certify origin by placing a statement on origin on the invoice instead of obtaining Form A for each shipment.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is REX mandatory for all exports to the EU?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "REX is required when an exporter wants to claim GSP preferential duty benefits for eligible shipments above EUR 6,000. Smaller shipments may be self-certified without a REX number.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How long does REX registration take?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "After the application is complete and accepted by the relevant administrator, REX number generation commonly takes about 3 to 5 working days.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 const CloudDeskREX = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -51,134 +148,34 @@ const CloudDeskREX = () => {
 
 <>
 
-<Helmet>
-        <title>
-          Registered Exporter (REX) System | Registered Exporter Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
-
+<Helmet defer={false}>
+        <title>REX Registration Consultant India | Registered Exporter Number for EU GSP | EXIMINQ</title>
         <meta
           name="description"
-          content="Stop paying for physical Certificates of Origin (Form A). Get your <strong>REX Number</strong> and self-certify the origin of your goods for duty-free exports to the EU & UK."
+          content="REX registration consultant in India for EU GSP exports, Registered Exporter number, statement on origin, rules of origin review, HSN mapping and duty-free export documentation."
         />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/rex-registration/"
-        />
-
-        {/* Open Graph */}
         <meta
-          property="og:title"
-          content="Registered Exporter (REX) System Online in India | Eximinq"
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:title" content="REX Registration Consultant India | EXIMINQ" />
         <meta
           property="og:description"
-          content="Stop paying for physical Certificates of Origin (Form A). Get your <strong>REX Number</strong> and self-certify the origin of your goods for duty-free exports to the EU & UK."
+          content="Get REX number support for EU GSP exports, statement on origin, HSN mapping and rules of origin compliance."
         />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/rex-registration/"
-        />
+        <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
-
-        {/* Structured Data – Professional Service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Registered Exporter (REX) System",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Stop paying for physical Certificates of Origin (Form A). Get your <strong>REX Number</strong> and self-certify the origin of your goods for duty-free exports to the EU & UK."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the REX System?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It is a system of certification of origin based on a principle of Self-Certification. Exporters who are "Registered" can certify the origin of their goods themselves via a "Statement on Origin" on the invoice.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is REX mandatory for all exports to the EU?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It is mandatory for shipments where you want to claim GSP (Preferential) duty benefits and the value exceeds €6,000. For shipments below €6,000, any exporter can self-certify without a REX number."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does REX apply to the UK?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "In 2026, the UK uses the DCTS (Developing Countries Trading Scheme). While similar to REX, it has its own registration requirements. CloudDesk manages both REX (EU/Switzerland/Norway) and DCTS (UK) registrations."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does it take to get a REX number?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Once the application is submitted on the EU portal and approved by the local Indian agency (like EIC), the number is generated in 3-5 working days."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "Statement on Origin"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It is a specific piece of text that MUST be on your invoice. Example: "The exporter [REX Number] of the products covered by this document declares that, except where otherwise clearly indicated, these products are of Indian preferential origin."`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Do I need a REX number for every product?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No. One REX number covers your entire IEC. However, you must list all the HSN Sections you intend to export in your REX application. CloudDesk helps you "Future-Proof" your application by including relevant HSNs.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Does the REX registration expire?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No, the REX registration has no expiry date. However, it can be revoked if you fail to maintain records for 3 years or if an "Origin Audit" proves your goods don't meet the value-addition criteria.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What if I make a mistake in my REX statement?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "If the EU Customs finds a discrepancy, they will deny the duty benefit to your buyer and charge the Full MFN Duty plus penalties. CloudDesk provides a Statement Validator to ensure every invoice is perfect."
-                }
-              },
-            ]
-          })}
-        </script>
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="REX Registration Consultant India | EXIMINQ" />
+        <meta
+          name="twitter:description"
+          content="Registered Exporter number support for EU GSP, self-certified origin statements and preferential export documentation."
+        />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <script type="application/ld+json">{JSON.stringify(rexSchema)}</script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
       {/* Dynamic Sections */}
@@ -660,12 +657,68 @@ const CloudDeskREX = () => {
 </section>
 
 
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-10 text-center">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Export Documentation
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2">
+              Services Exporters Often Need With REX
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                title: "Certificate of Origin",
+                text: "Preferential and non-preferential COO support for export shipments.",
+                href: "/services/certificate-of-origin/",
+              },
+              {
+                title: "GST LUT Filing",
+                text: "Annual LUT filing for exports without IGST payment.",
+                href: "/services/gst-lut-filing/",
+              },
+              {
+                title: "Shipping Bill Filing",
+                text: "Customs export declaration and shipment filing support.",
+                href: "/services/shipping-bill-filing/",
+              },
+              {
+                title: "RoDTEP Scheme",
+                text: "RoDTEP claim support for eligible export incentives.",
+                href: "/services/rodtep-scheme/",
+              },
+              {
+                title: "IEC Update",
+                text: "IEC modification and profile update support for exporters.",
+                href: "/services/import-export-code/",
+              },
+              {
+                title: "All Export Services",
+                text: "Explore DGFT, Customs and export compliance services.",
+                href: "/services/",
+              },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="block bg-white p-5 rounded-lg border border-slate-200 shadow-sm hover:border-brand-300 hover:shadow-md transition"
+              >
+                <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600">{item.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -673,13 +726,13 @@ const CloudDeskREX = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" aria-label="EXIMINQ LinkedIn" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" aria-label="EXIMINQ X" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" aria-label="EXIMINQ Facebook" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -688,24 +741,24 @@ const CloudDeskREX = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/rex-registration/" className="hover:text-white transition">
                   REX Registration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/certificate-of-origin/" className="hover:text-white transition">
                   Certificate of Origin
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/ad-code-registration/" className="hover:text-white transition">
                   AD Code Registration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/import-export-code/" className="hover:text-white transition">
                   IEC Update
                 </a>
               </li>
@@ -715,24 +768,24 @@ const CloudDeskREX = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#benefits" className="hover:text-white transition">
                   EU GSP Rules
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#countries" className="hover:text-white transition">
                   Invoice Declaration
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/tools/hs-code-finder/" className="hover:text-white transition">
                   HS Code Finder
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/contact-us/" className="hover:text-white transition">
                   DGFT Helpdesk
                 </a>
               </li>

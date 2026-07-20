@@ -9,11 +9,11 @@ const Navbar = ({setShowEnrollModal}) => {
 
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-                <a href="#about" class="hover:text-brand-600 transition">What is FICS?</a>
-                <a href="#license" class="hover:text-brand-600 transition">Central License</a>
-                <a href="#process" class="hover:text-brand-600 transition">Clearance Process</a>
-                <a href="#labeling" class="hover:text-brand-600 transition">Labeling Norms</a>
-                <a href="#contact" class="hover:text-brand-600 transition">Fees</a>
+                <a href="#about" className="hover:text-brand-600 transition">What is FICS?</a>
+                <a href="#license" className="hover:text-brand-600 transition">Central License</a>
+                <a href="#process" className="hover:text-brand-600 transition">Clearance Process</a>
+                <a href="#labeling" className="hover:text-brand-600 transition">Labeling Norms</a>
+                <a href="#contact" className="hover:text-brand-600 transition">Fees</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -37,10 +37,10 @@ const Navbar = ({setShowEnrollModal}) => {
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-            <a href="#about" class="block py-2 text-slate-600">What is FICS?</a>
-            <a href="#license" class="block py-2 text-slate-600">Central License</a>
-            <a href="#process" class="block py-2 text-slate-600">Clearance Process</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">Get License</a>
+            <a href="#about" className="block py-2 text-slate-600">What is FICS?</a>
+            <a href="#license" className="block py-2 text-slate-600">Central License</a>
+            <a href="#process" className="block py-2 text-slate-600">Clearance Process</a>
+            <a href="#contact" className="block py-2 text-brand-600 font-bold">Get License</a>
 
           {/* <a 
             href="#contact"

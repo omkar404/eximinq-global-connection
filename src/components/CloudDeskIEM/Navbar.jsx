@@ -10,11 +10,11 @@ const Navbar = ({
       <nav className="container mx-auto px-4 py-4 flex justify-center items-center">
         {/* CENTERED MENU */}
         <div className="hidden md:flex gap-10 font-bold text-sm text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-                <a href="#about" class="hover:text-brand-600 transition">What is IEM?</a>
-                <a href="#parts" class="hover:text-brand-600 transition">Part A & B</a>
-                <a href="#documents" class="hover:text-brand-600 transition">Documents</a>
-                <a href="#process" class="hover:text-brand-600 transition">Process</a>
+          <a href="#home" className="hover:text-brand-600 transition">Home</a>
+                <a href="#about" className="hover:text-brand-600 transition">What is IEM?</a>
+                <a href="#parts" className="hover:text-brand-600 transition">Part A & B</a>
+                <a href="#documents" className="hover:text-brand-600 transition">Documents</a>
+                <a href="#process" className="hover:text-brand-600 transition">Process</a>
         </div>
 
         {/* Apply Now Button - STILL RIGHT ALIGNED (optional) */}
@@ -45,11 +45,11 @@ const Navbar = ({
       {/* MOBILE MENU DROPDOWN */}
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 p-4 text-center font-bold text-slate-700">
-          <a href="#home" class="hover:text-brand-600 transition">Home</a>
-            <a href="#about" class="block py-2 text-slate-600">What is IEM?</a>
-            <a href="#parts" class="block py-2 text-slate-600">Part A & B</a>
-            <a href="#documents" class="block py-2 text-slate-600">Documents</a>
-            <a href="#contact" class="block py-2 text-brand-600 font-bold">File IEM</a>
+          <a href="#home" className="hover:text-brand-600 transition">Home</a>
+            <a href="#about" className="block py-2 text-slate-600">What is IEM?</a>
+            <a href="#parts" className="block py-2 text-slate-600">Part A & B</a>
+            <a href="#documents" className="block py-2 text-slate-600">Documents</a>
+            <a href="#contact" className="block py-2 text-brand-600 font-bold">File IEM</a>
 
           <a 
             href="#contact"

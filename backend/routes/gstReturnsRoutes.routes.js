@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-// ✅ Fix: "controll" → "controller"
-const  {creategstReturnsRoutes} = require("../controllers/gstReturnsRoutes.controller");
+const {
+  creategstReturnsRoutes,
+  gstReturnsRoutes,
+  gstReturnsRoutesById,
+} = require("../controllers/gstReturnsRoutes.controller");
 
 router.post("/", creategstReturnsRoutes);
+router.get("/", gstReturnsRoutes);
+router.get("/:id", gstReturnsRoutesById);
 
 module.exports = router;

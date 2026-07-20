@@ -24,6 +24,127 @@ IndianRupee
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskPollution/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskPollution/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/pollution-control/";
+const META_TITLE =
+  "Pollution Control Board Consent Consultant India | CTE & CTO Registration | EXIMINQ";
+const META_DESCRIPTION =
+  "Pollution Control Board consent consultant in India for Consent to Establish, Consent to Operate, red orange green category classification, SPCB filing, documents and renewal support.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const POLLUTION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Pollution Control Board Consent",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Pollution Control Board CTE and CTO Consent",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "Pollution Control Board Consent",
+        "Consent to Establish",
+        "Consent to Operate",
+        "SPCB Registration",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is Consent to Establish?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Consent to Establish is the approval required before construction, installation or setup of an industrial unit that may generate air, water or other pollution.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is Consent to Operate?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Consent to Operate is required before commercial production starts and confirms that pollution control systems such as ETP, STP or air pollution controls are installed.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Which pollution category applies to my industry?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Industries are generally classified as red, orange, green or white based on pollution potential and the applicable State Pollution Control Board norms.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can a factory operate without PCB consent?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Operating without valid PCB consent can lead to closure directions, utility disconnection, environmental compensation and legal action.",
+          },
+        },
+      ],
+    },
+  ],
+};
 
 const CloudDeskPollution = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
@@ -43,133 +164,28 @@ const CloudDeskPollution = () => {
   return (
 
 <>
-<Helmet>
-        <title>
-          Pollution Control Board Registration | Pollution Control Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Mandatory environmental consent for industries. We help you obtain Consent to Establish (CTE) and Consent to Operate (CTO) from State Pollution Control Boards (SPCB)."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/pollution-control/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Pollution Control Board Registration Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Mandatory environmental consent for industries. We help you obtain Consent to Establish (CTE) and Consent to Operate (CTO) from State Pollution Control Boards (SPCB)."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/pollution-control/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Pollution Control Board Registration",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Mandatory environmental consent for industries. We help you obtain Consent to Establish (CTE) and Consent to Operate (CTO) from State Pollution Control Boards (SPCB)."
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is Consent to Establish (CTE)?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It is the "Permission to Build." You must get this before you lay a single brick or install any machinery. It validates that your location and pollution control plans are legal.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is Consent to Operate (CTO)?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It is the "Permission to Run." Once the factory is built, we apply for CTO. An inspector (or auditor) verifies that you actually installed the ETP/STP you promised in the CTE. You cannot start commercial production without this.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I skip CTE if I am moving into an existing building?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No. If the "Process" or "Capacity" changes, a fresh CTE (or an Amendment) is required.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Is the "Periodic Renewal" of CTO really gone?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Yes. Under the 2026 framework, once granted, the CTO stays valid for the chosen period (up to 25 years) as long as you pay the annual fee and don't violate the pollution norms."
-                }
-              },
-              {
-                "@type": "Question",
-                "name":  `What is the "One-Time Fee" system?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "State boards now allow you to pay the consent fee for a block of 5, 10, or 25 years upfront. CloudDesk calculates the most tax-efficient block for your business scale."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Does the "White Category" really need zero paperwork?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Not zero. You must submit an Online Intimation and a Self-Declaration. If you fail to do this and are caught, you are treated as an "Unregistered Unit."`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "Polluter Pays" fine in 2026?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "If you exceed discharge limits, the PCB calculates Environmental Compensation based on the duration of the violation. For a medium-scale Orange unit, this can easily reach ₹5,000 to ₹10,000 per day."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can my CEO be imprisoned for pollution?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. Under the Water and Air Acts, the "Person in Charge" can face 1.5 to 6 years of imprisonment for continued non-compliance or operating without consent.`
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(POLLUTION_SCHEMA)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -654,13 +670,74 @@ const CloudDeskPollution = () => {
   </div>
 </section>
 
+<section className="py-20 bg-slate-50">
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-12">
+      <span className="text-eco-600 font-bold uppercase tracking-wider text-sm">
+        Related Compliance Services
+      </span>
+      <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+        Services Often Needed With PCB Consent
+      </h2>
+    </div>
+
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {[
+        {
+          title: "Factory License",
+          href: "/services/factory-license/",
+          copy: "Coordinate factory registration, plan approval and operational compliance.",
+        },
+        {
+          title: "EPR Authorization",
+          href: "/services/epr-authorization/",
+          copy: "Manage CPCB registration and ongoing producer responsibility compliance.",
+        },
+        {
+          title: "Industrial License",
+          href: "/services/industrial-license/",
+          copy: "Handle regulated-sector licensing where environment consent is also needed.",
+        },
+        {
+          title: "IEM Registration",
+          href: "/services/iem-registration/",
+          copy: "File DPIIT IEM requirements for larger manufacturing projects.",
+        },
+        {
+          title: "Project Cargo",
+          href: "/services/project-cargo/",
+          copy: "Plan movement and customs clearance for heavy plant and machinery.",
+        },
+        {
+          title: "Compliance Audit",
+          href: "/services/compliance-audit/",
+          copy: "Review documentation gaps before regulatory inspection or renewal.",
+        },
+      ].map((service) => (
+        <a
+          key={service.href}
+          href={service.href}
+          className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-eco-200 transition"
+        >
+          <h3 className="text-lg font-bold text-slate-900 mb-2">
+            {service.title}
+          </h3>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            {service.copy}
+          </p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -668,13 +745,25 @@ const CloudDeskPollution = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq/"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -684,10 +773,10 @@ const CloudDeskPollution = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Consent to Establish</a></li>
-                    <li><a href="#" class="hover:text-white transition">Consent to Operate</a></li>
-                    <li><a href="#" class="hover:text-white transition">Factory License</a></li>
-                    <li><a href="#" class="hover:text-white transition">EPR Authorization</a></li>
+                    <li><a href="#process" className="hover:text-white transition">Consent to Establish</a></li>
+                    <li><a href="#process" className="hover:text-white transition">Consent to Operate</a></li>
+                    <li><a href="/services/factory-license/" className="hover:text-white transition">Factory License</a></li>
+                    <li><a href="/services/epr-authorization/" className="hover:text-white transition">EPR Authorization</a></li>
             </ul>
           </div>
 
@@ -695,10 +784,10 @@ const CloudDeskPollution = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Industry Categorization</a></li>
-                    <li><a href="#" class="hover:text-white transition">Fee Structure</a></li>
-                    <li><a href="#" class="hover:text-white transition">Emission Standards</a></li>
-                    <li><a href="#" class="hover:text-white transition">Water Act Guidelines</a></li>
+                    <li><a href="#categories" className="hover:text-white transition">Industry Categorization</a></li>
+                    <li><a href="#contact" className="hover:text-white transition">Fee Structure</a></li>
+                    <li><a href="#documents" className="hover:text-white transition">Emission Standards</a></li>
+                    <li><a href="#about" className="hover:text-white transition">Water Act Guidelines</a></li>
             </ul>
           </div>
 

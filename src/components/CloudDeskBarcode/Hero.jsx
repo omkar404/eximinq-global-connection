@@ -12,9 +12,9 @@ const Hero = ({ setShowEnrollModal }) => {
           <span className="inline-block bg-accent-500 text-brand-900 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-accent-400">
             GLOBAL STANDARD 1 (GS1)
           </span>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             Official{" "}
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-white">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-white">
               Barcode Registration
             </span>{" "}
             for Your Products

@@ -26,7 +26,6 @@ export const ModalEnroll = ({ show, onClose, onSubmit, type }) => {
 
   const serviceConfig = SERVICE_MAP[type];
   const predefinedService = serviceConfig?.service;
-  const isEnroll = type === "Enroll";
 
   /* Only show category dropdown for IEC profile update (not for fee services) */
   const showCategory = type === "IEC_PROFILE_UPDATE";

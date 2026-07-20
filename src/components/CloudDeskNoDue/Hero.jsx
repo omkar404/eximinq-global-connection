@@ -10,8 +10,8 @@ const Hero = () => {
                 <span className="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 border border-red-400">
                     CLEAN CHIT FROM DGFT
                 </span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                    Obtain <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">No Due Certificate</span> &amp; Clear DEL Status
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    Obtain <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-600">No Due Certificate</span> &amp; Clear DEL Status
                 </h1>
                 <p className="text-lg text-slate-200 mb-8 leading-relaxed">
                     Is your IEC on the Denied Entity List (Blacklist)? Or are you closing your business? We help you resolve old liabilities, pay penalties, and get a formal No Due Certificate from DGFT.

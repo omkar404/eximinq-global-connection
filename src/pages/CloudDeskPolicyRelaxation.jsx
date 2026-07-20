@@ -20,6 +20,149 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskPolicyRelaxation/MainNavbar";
 import { ModalEnroll} from "../components/CloudDeskPolicyRelaxation/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/prc-relaxation/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const META_TITLE =
+  "PRC Relaxation Consultant India | Policy Relaxation Committee Representation | EXIMINQ";
+const META_DESCRIPTION =
+  "PRC relaxation consultant in India for DGFT Policy Relaxation Committee representation, EODC delay condonation, procedural lapse appeals, RA rejection cases and policy relief filings.";
+
+const prcSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "EXIMINQ Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": "https://eximinq.in/#website",
+        url: "https://eximinq.in/",
+        name: "EXIMINQ",
+      },
+      about: {
+        "@id": `${CANONICAL_URL}#service`,
+      },
+      breadcrumb: {
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "PRC Relaxation",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "PRC Relaxation Consultant India",
+      serviceType: "DGFT Policy Relaxation Committee Representation",
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "PRC Relaxation Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "PRC appeal drafting and filing",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "DGFT RA rejection case review",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Policy relaxation order follow-up",
+            },
+          },
+        ],
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What kind of cases does the PRC handle?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The Policy Relaxation Committee handles genuine hardship and procedural lapse cases such as delayed EODC submissions, EO extension issues, expired scrip revalidation, shipping bill benefit-claim errors and license clubbing matters.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How long does a PRC decision take?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "After filing, a PRC matter typically takes one to three months depending on meeting schedules, deficiencies and the complexity of the representation.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can a rejected PRC case be reviewed?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A review application may be filed when new evidence or stronger justification is available. If administrative remedies are exhausted, legal recourse may be considered separately.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 const CloudDeskPolicyRelaxation = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -37,169 +180,29 @@ const CloudDeskPolicyRelaxation = () => {
   return (
 
 <>
-<Helmet>
-        <title>
-          Policy Relaxation Committee (PRC) Representation | Policy Relaxation Committee Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Has your application been rejected by the Regional Authority due to
-            a procedural lapse? We represent your case at DGFT Headquarters to
-            condone delays and relax policy provisions."
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/prc-relaxation/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Policy Relaxation Committee (PRC) Representation Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Has your application been rejected by the Regional Authority due to
-            a procedural lapse? We represent your case at DGFT Headquarters to
-            condone delays and relax policy provisions."
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/prc-relaxation/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Policy Relaxation Committee (PRC) Representation",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Has your application been rejected by the Regional Authority due to a procedural lapse? We represent your case at DGFT Headquarters to condone delays and relax policy provisions."
-          })}
-        </script>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – FAQ */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Is the PRC decision final?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Generally, yes. The decision of the Policy Relaxation Committee is communicated to the RA for implementation. If rejected, further legal recourse may involve filing a Writ Petition in the High Court, but administrative remedies within DGFT are usually exhausted at this stage."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What constitutes "Genuine Hardship"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It refers to situations beyond the control of the exporter, such as natural calamities, sudden policy changes by foreign governments, or financial insolvency of the buyer. Mere negligence or ignorance of law is usually not considered genuine hardship."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does it take for a decision?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The PRC typically meets once a month. Once the application is complete and filed, it may take 1–3 months to get listed for a meeting and receive the minutes."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What kind of cases does the PRC handle?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Common cases include
-                     Extension of Export Obligation (EO) period after all regular extensions are exhausted.
-                     Revalidation of expired Duty Credit Scrips (MEIS/SEIS/RoDTEP).
-                     Acceptance of Shipping Bills where the "Intent to claim benefits" was marked "No" by mistake.
-                     Clubbing of licenses that don't meet the standard "same HSN" criteria.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Public Interest" in a PRC context?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `If your failure to export causes massive job losses, or if a government system (like ICEGATE) was down during your deadline, the PRC considers relaxation to be in the "Public Interest."`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I apply to the PRC if I just forgot the deadline?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `No. Mere negligence is not "Genuine Hardship." You must show a reason that a "reasonable person" could not have avoided.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the fee for a PRC application in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Fresh Application ₹2,000.
-                     Review Application (if rejected once) ₹5,000.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does a PRC decision take?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "The committee usually meets once or twice a month. From filing to the publication of Minutes of the Meeting (MoM), it typically takes 45 to 90 days."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I track my PRC case online?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. Under "Submitted Applications" on the DGFT portal, you can see the "Life Cycle" of your PRC file.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `My case was "Deferred." What does that mean?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `It means the committee wants more data or a clarification. You will receive a Deficiency Letter. You must respond within the stipulated time, or the case will be "Rejected" in the next meeting.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "If the PRC rejects my case, is it over?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "You can file a Review Application (with the ₹5,000 fee) if you have new evidence that wasn't presented the first time. If the Review is also rejected, your only remaining option is a Writ Petition in the High Court."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(prcSchema)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -649,12 +652,78 @@ const CloudDeskPolicyRelaxation = () => {
   </div>
 </section>
 
+      <section className="py-16 bg-white" aria-labelledby="prc-related-services">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related DGFT Support
+            </span>
+            <h2
+              id="prc-related-services"
+              className="text-3xl font-bold text-slate-900 mt-2"
+            >
+              Services Often Needed With PRC Relaxation
+            </h2>
+            <p className="text-slate-600 mt-3">
+              PRC cases often connect with DGFT authorisation, export
+              obligation, and customs dispute workflows.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "EOP Extension",
+                href: "/services/eop-extension/",
+                text: "Review export obligation period extension options before escalating to PRC.",
+              },
+              {
+                title: "EPCG Scheme",
+                href: "/services/epcg-scheme/",
+                text: "Resolve EPCG authorisation, EO and redemption issues tied to DGFT relaxations.",
+              },
+              {
+                title: "Advance Authorisation",
+                href: "/services/advance-authorisation/",
+                text: "Check authorisation conditions, clubbing, redemption and regularisation needs.",
+              },
+              {
+                title: "Customs Adjudication",
+                href: "/services/customs-adjudication/",
+                text: "Coordinate legal replies and personal hearing support for related customs notices.",
+              },
+              {
+                title: "DGFT Consultancy",
+                href: "/dgft-customs-consultancy/",
+                text: "Get connected DGFT, customs and foreign trade policy support.",
+              },
+              {
+                title: "All Services",
+                href: "/services/",
+                text: "Explore DGFT, customs, licensing and documentation services in one place.",
+              },
+            ].map((service) => (
+              <a
+                key={service.title}
+                href={service.href}
+                className="block border border-slate-200 rounded-xl p-5 hover:border-brand-500 hover:shadow-md transition"
+              >
+                <h3 className="text-lg font-bold text-slate-900">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-slate-600 mt-2">{service.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -662,13 +731,13 @@ const CloudDeskPolicyRelaxation = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -677,53 +746,51 @@ const CloudDeskPolicyRelaxation = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
-              <ul class="space-y-2 text-sm">
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    PRC Appeal
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    SCN Reply
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    Personal Hearing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:text-white transition">
-                    DGFT Liaison
-                  </a>
-                </li>
-              </ul>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="/services/prc-relaxation/" className="hover:text-white transition">
+                  PRC Appeal
+                </a>
+              </li>
+              <li>
+                <a href="/services/customs-adjudication/" className="hover:text-white transition">
+                  SCN Reply
+                </a>
+              </li>
+              <li>
+                <a href="#process" className="hover:text-white transition">
+                  Personal Hearing
+                </a>
+              </li>
+              <li>
+                <a href="/dgft-customs-consultancy/" className="hover:text-white transition">
+                  DGFT Liaison
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#about" className="hover:text-white transition">
                   FTP Para 2.58
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#process" className="hover:text-white transition">
                   PRC Meeting Minutes
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#process" className="hover:text-white transition">
                   ANF 2D Form
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/foreign-trade-policy/regulatory-updates/" className="hover:text-white transition">
                   Public Notices
                 </a>
               </li>

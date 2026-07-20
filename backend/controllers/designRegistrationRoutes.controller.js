@@ -28,6 +28,9 @@ async function sendEmail(record) {
     issue,
     Category,
     publicationDate,
+    companyName,
+    personName,
+    contactPersonName,
   } = record;
 
   const serviceDisplay = service || "Design Registration";
@@ -42,6 +45,8 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
           ${Category ? `<tr><td><b>Product Category</b></td><td>${Category}</td></tr>` : ""}
           ${publicationDate ? `<tr><td><b>Date of First Publication</b></td><td>${publicationDate}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
@@ -79,29 +84,68 @@ exports.createdesignRegistrationRoutes = async (req, res) => {
       issue,
       Category, // ✅ camelCase
       publicationDate, // ✅ camelCase
+      companyName,
+      personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanMobile = typeof mobile === "string" ? mobile.trim() : "";
+    const cleanCompanyName =
+      typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
+    const cleanProductCategory =
+      typeof Category === "string" && Category.trim()
+        ? Category.trim()
+        : typeof category === "string"
+          ? category.trim()
+          : "";
 
-    if (!mobile || !mobile.trim()) {
+    if (!cleanMobile) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
       });
     }
 
+    if (isQuickForm) {
+      if (!cleanCompanyName || !cleanContactPersonName || !cleanEmail) {
+        return res.status(400).json({
+          success: false,
+          message: "Company name, contact person name, and email are required",
+        });
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+        return res.status(400).json({
+          success: false,
+          message: "Enter a valid email ID",
+        });
+      }
+    }
+
     const recordData = {
       service: service || "Design Registration",
-      mobile: mobile.trim(),
-      Category: Category ? Category.trim() : null, // ✅ use the correct variable
+      mobile: cleanMobile,
+      companyName: cleanCompanyName || null,
+      personName: cleanContactPersonName || null,
+      contactPersonName: cleanContactPersonName || null,
+      Category: cleanProductCategory || null, // ✅ use the correct variable
       publicationDate: publicationDate ? publicationDate.trim() : null, // ✅ use correct variable
       name: isQuickForm ? null : name ? name.trim() : null,
-      email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
+      email: cleanEmail || null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
       partner: isQuickForm ? false : Boolean(partner),
       type: type || "QUICK_FORM_COMPLIANCE",
-      category: category || null,
+      category: isQuickForm ? null : category || null,
       issue: issue || null,
     };
 

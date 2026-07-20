@@ -12,10 +12,26 @@ const serviceQuickFormLeadSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      default: null,
+    },
     mobile: {
       type: String,
-      required: true,
       trim: true,
+      default: null,
     },
     type: {
       type: String,

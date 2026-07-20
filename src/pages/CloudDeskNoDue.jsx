@@ -27,6 +27,128 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskNoDue/MainNavbar"; 
 import { ModalEnroll } from "../components/CloudDeskNoDue/ModalEnroll"; 
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/no-due-certificate/";
+const META_TITLE =
+  "No Due Certificate Consultant India | DGFT NDC & DEL Removal | EXIMINQ";
+const META_DESCRIPTION =
+  "No Due Certificate consultant in India for DGFT NDC, IEC surrender, DEL removal, EPCG and Advance Authorisation closure, customs bond release and pending liability settlement.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const NO_DUE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "No Due Certificate",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "No Due Certificate and DEL Removal Support",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "DGFT No Due Certificate",
+        "IEC Surrender Support",
+        "DEL Removal",
+        "Customs Bond Release",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Why do I need an NDC for my EPCG or Advance Authorisation license?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A No Due Certificate confirms that export obligations, administrative fees, late fees, penalties and pending liabilities linked to the IEC have been cleared.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I get my bank guarantee back without a No Due Certificate?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. Customs generally releases the bond or bank guarantee only after the licence cell and relevant recovery sections confirm that no dues remain.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can a show cause notice block my NDC?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Pending show cause notices, demands or adjudication matters can block NDC processing until the liability is settled or regularised.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is NDC required for IEC surrender?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. IEC surrender usually requires confirmation that there are no incomplete export obligations or open authorisations against the IEC.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 const CloudDeskNoDue = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -43,124 +165,28 @@ const CloudDeskNoDue = () => {
   };
   return (
     <>
-      <Helmet>
-        <title>
-          No Due Certificate Services | DGFT and Customs Closure Support | EXIMINQ
-        </title>
+      <Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content={`Get No Due Certificate and No Incentive Certificate support for IEC surrender, DGFT closure, returned goods, and export benefit reversal.`}
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/no-due-certificate/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="No Due Certificate Services Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content={`Get No Due Certificate and No Incentive Certificate support for IEC surrender, DGFT closure, returned goods, and export benefit reversal.`}
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/no-due-certificate/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: "Obtain No Due Certificate & Clear DEL Status",
-            provider: {
-              "@type": "Organization",
-              name: "Eximinq Global Connections",
-              url: "https://eximinq.in",
-            },
-            areaServed: "India",
-            description: `Is your IEC on the Denied Entity List (Blacklist)? Or are you closing your business? We help you resolve old liabilities, pay penalties, and get a formal No Due Certificate from DGFT.`,
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "Why do I need an NDC for my EPCG/AA license?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `The NDC proves that you have not only fulfilled the "Export Obligation" but have also paid any administrative fees, late fees, or penalties that might have been levied during the 6-year license tenure.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Can I get my Bank Guarantee back without an NDC?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `No. Customs will only "Cancel" the bond and release the BG once the License Cell issues a "Closure Order," which is contingent upon an NDC from the Fine & Penalty (F&P) section.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "How long does it take to get a No Due Certificate from Customs?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `If your records are clear, it takes 7–15 working days. If there are pending "Queries" or unpaid "Demands," it can take months. CloudDesk’s Pre-Check identifies these demands before you apply.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `What is a "Shipping Line NDC"?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `It is a digital or physical document issued by the carrier (e.g., Maersk, MSC) confirming that ocean freight, local charges, and "Detention" (if any) are paid. Without this, you cannot get the Delivery Order (DO).`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Does a CFS issue an NDC for every container?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Yes. The CFS NDC (or "Pass-out") confirms that handling, scanning, and "Demurrage" (storage) charges are settled. CloudDesk integrates these payments into your dashboard for one-click clearance.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "I want to close my IEC. Do I need an NDC?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Yes. You must prove to the DGFT that there are no "Incomplete Export Obligations" linked to your IEC. If you have open licenses, you must either fulfill them or "Regularize" them (pay duty + interest) to get the NDC.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `Can a "Show Cause Notice" block my NDC?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Absolutely. Even an unproven notice will block your NDC. CloudDesk helps you file an "Ad-hoc Bond" or resolve the notice through the Adjudication process to clear the path for the NDC.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `What is an "Internal NDC" in a large company?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `For large corporates, the EXIM department must provide an NDC to the Finance department before an "Export Incentive" is booked as profit. CloudDesk provides the Compliance Report that serves as this internal NDC.`,
-                },
-              },
-            ],
-          })}
+          {JSON.stringify(NO_DUE_SCHEMA)}
         </script>
       </Helmet>
       <div className="bg-slate-50 text-slate-800">
@@ -685,12 +711,78 @@ const CloudDeskNoDue = () => {
           </div>
         </section>
 
+        <section className="py-16 bg-slate-50" aria-labelledby="related-no-due-services">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-3xl mx-auto mb-10">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Related DGFT Closure Support
+              </span>
+              <h2
+                id="related-no-due-services"
+                className="text-3xl md:text-4xl font-bold text-slate-900 mt-2"
+              >
+                Services Often Needed With No Due Certificate
+              </h2>
+              <p className="text-slate-600 mt-3">
+                Connect NDC processing with licence redemption, DEL removal,
+                customs adjudication, and export proceeds reconciliation.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+              {[
+                {
+                  title: "EPCG Scheme Closure",
+                  desc: "Export obligation tracking, installation certificate review, and EODC closure support.",
+                  href: "/services/epcg-scheme/",
+                },
+                {
+                  title: "Advance Authorisation",
+                  desc: "Input consumption reconciliation, SION review, and licence redemption documentation.",
+                  href: "/services/advance-authorisation/",
+                },
+                {
+                  title: "Customs Adjudication",
+                  desc: "Show cause notice reply, personal hearing preparation, and demand resolution support.",
+                  href: "/services/customs-adjudication/",
+                },
+                {
+                  title: "EDPMS and eBRC",
+                  desc: "IRM mapping, eBRC reconciliation, and AD bank follow-up for export proceeds.",
+                  href: "/services/edpms-ebrc/",
+                },
+                {
+                  title: "CA Certification",
+                  desc: "Export turnover and redemption certificate support for DGFT filings.",
+                  href: "/services/ca-certification-export-import/",
+                },
+                {
+                  title: "DGFT Services",
+                  desc: "Licence applications, amendments, closure filings, and export-import compliance support.",
+                  href: "/services/",
+                },
+              ].map((item) => (
+                <a
+                  key={item.title}
+                  href={item.href}
+                  className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-brand-300 transition"
+                >
+                  <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -698,13 +790,25 @@ const CloudDeskNoDue = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.linkedin.com/company/eximinq/"
+                aria-label="EXIMINQ on LinkedIn"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://x.com/eximinq"
+                aria-label="EXIMINQ on X"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a
+                href="https://www.facebook.com/eximinq"
+                aria-label="EXIMINQ on Facebook"
+                className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+              >
                 <Facebook size={18} />
               </a>
             </div>
@@ -715,22 +819,22 @@ const CloudDeskNoDue = () => {
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="#scenarios" className="hover:text-white transition">
                   DEL Removal
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="/services/import-export-code/" className="hover:text-white transition">
                   IEC Update
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="/services/epcg-scheme/" className="hover:text-white transition">
                   EODC Redemption
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="/services/customs-adjudication/" className="hover:text-white transition">
                   Legal Adjudication
                 </a>
               </li>
@@ -742,22 +846,22 @@ const CloudDeskNoDue = () => {
             <h4 className="text-white font-bold mb-6">Other Services</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="#home" className="hover:text-white transition">
                   DEL List Check
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="/tools/duty-calculator-finder/" className="hover:text-white transition">
                   Penalty Calculator
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="/foreign-trade-policy/regulatory-updates/" className="hover:text-white transition">
                   DGFT Public Notices
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="/foreign-trade-policy/" className="hover:text-white transition">
                   Amnesty Scheme
                 </a>
               </li>
@@ -798,4 +902,3 @@ const CloudDeskNoDue = () => {
 };
 
 export default CloudDeskNoDue;
-

@@ -18,8 +18,8 @@ const TopBar = () => {
         </div>
 
         <div className="flex gap-4 ml-auto">
-          <a href="#" className="hover:text-accent-400">DGFT Notifications</a>
-          <a href="#" className="hover:text-accent-400">Contact Login</a>
+          <a href="/services/" className="hover:text-accent-400">DGFT Notifications</a>
+          <a href="/contact" className="hover:text-accent-400">Contact Login</a>
         </div>
 
       </div>

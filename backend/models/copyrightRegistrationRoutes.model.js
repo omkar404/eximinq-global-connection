@@ -1,11 +1,26 @@
-const mongoose = require("mongoose"); // ✅ This line was missing
+const mongoose = require("mongoose");
 
 const copyrightRegistrationRoutesSchema = new mongoose.Schema(
   {
     service: {
       type: String,
       trim: true,
-      default: "Logo Copyright Registration",
+      default: "Copyright Registration",
+    },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
     },
     workType: {
       type: String,

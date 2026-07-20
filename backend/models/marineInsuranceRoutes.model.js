@@ -27,16 +27,31 @@ const marineInsuranceRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    personName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: {
       type: String,
       trim: true,
       default: null,
     },
-    // mobile: {
-    //   type: String,
-    //   required: true,
-    //   trim: true,
-    // },
+    mobile: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     email: {
       type: String,
       trim: true,

@@ -36,6 +36,128 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskNoINC/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskNoINC/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/no-incentive-certificate/";
+const META_TITLE =
+  "No Incentive Certificate Consultant India | Returned Goods & Re-Import | EXIMINQ";
+const META_DESCRIPTION =
+  "No Incentive Certificate consultant in India for returned goods, re-import clearance, non-availment certificate, RoDTEP and drawback reversal, IGST refund verification and customs documentation.";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const NO_INCENTIVE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "Eximinq Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@id": "https://eximinq.in/#website",
+      },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "No Incentive Certificate",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "No Incentive Certificate for Returned Goods",
+      url: CANONICAL_URL,
+      image: OG_IMAGE_URL,
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      serviceType: [
+        "No Incentive Certificate",
+        "Non-Availment Certificate",
+        "Returned Goods Re-Import Support",
+        "Export Benefit Reversal",
+      ],
+      description: META_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is a No Incentive Certificate?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A No Incentive Certificate confirms that no export incentives such as RoDTEP, duty drawback, IGST refund or scrip benefits were claimed for specified shipping bills or goods.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "When is a No Incentive Certificate required?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "It is commonly required for returned goods, re-import clearance, Section 74 drawback, benefit reversal, licence closure and cases where customs needs proof of non-availment.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What if RoDTEP or drawback was automatically credited?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The credited benefit generally needs to be reversed or surrendered with applicable interest before a No Incentive Certificate can be issued.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I use a self-declaration instead of a No Incentive Certificate?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "For low-risk cases a self-declaration or CA certificate may be accepted, but high-value re-imports and refunds often require customs or DGFT verification.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 const CloudDeskNoINC = () => {
   const [showEnrollModal, setShowEnrollModal] = useState({
     open: false,
@@ -52,127 +174,28 @@ const CloudDeskNoINC = () => {
   };
   return (
     <>
-      <Helmet>
-        <title>
-          No Incentive Certificate Services | DGFT and Customs Closure
-          Support | EXIMINQ
-        </title>
+      <Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content={`Get No Due Certificate and No Incentive Certificate support for IEC surrender, DGFT closure, returned goods, and export benefit reversal.`}
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/no-incentive-certificate/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="No Incentive Certificate Services Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content={`Get No Due Certificate and No Incentive Certificate support for IEC surrender, DGFT closure, returned goods, and export benefit reversal.`}
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/no-incentive-certificate/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: "No Incentive Certificate for Returned Goods",
-            provider: {
-              "@type": "Organization",
-              name: "Eximinq Global Connections",
-              url: "https://eximinq.in",
-            },
-            areaServed: "India",
-            description: `Exported goods returning due to rejection or repair? Avoid paying Import Duty again. We facilitate the "Non-Availment Certificate" from Customs to prove you didn't claim benefits.`,
-          })}
-        </script>
-
-        {/* Structured Data – FAQ */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: `"What exactly is a "No Incentive Certificate"?"`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `It is a formal declaration from an authority (Customs or DGFT) stating that for a particular set of Shipping Bills or a particular License, no export incentives (like RoDTEP, Drawback, or Scrips) have been claimed or disbursed.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "When is an NIC mandatory?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `• When claiming Section 74 Drawback (Re-exports).
-                         • When Regularizing/Closing an Advance Authorisation or EPCG license where no exports were made.
-                         • When applying for a Brand Rate Fixation (to prove you haven't taken the All Industry Rate).`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Can I self-declare an NIC?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `In some cases, a Self-Declaration + CA Certificate works. However, for high-value refunds, Customs will insist on an EDI-generated NIC from the ICEGATE system or a manual one from the DGFT.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `How does CloudDesk verify "Non-Availment"?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `We scan your Electronic Duty Credit Ledger (EDCL) on ICEGATE and your E-BRC list on the DGFT portal. If a benefit was granted, we help you surrender it (with interest, if applicable) to get the NIC.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What if RoDTEP was automatically scrolled in my Shipping Bill?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `This is a common 2026 problem. Even if you didn't "ask" for it, the system might have processed it. To get an NIC, you must first refund the RoDTEP amount to the government. We manage this "Benefit Reversal" process.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Does the NIC mention the specific amount?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `No. An NIC usually certifies that "No benefit has been availed under [Scheme Name] for Shipping Bill No. [X] dated [Y]."`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `Is there an expiry for a No Incentive Certificate?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `The certificate itself doesn't expire, but it must be submitted to the requesting authority (like the Drawback Department) within their specific filing window (usually 30–90 days).`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `Can I get an NIC for "Deemed Exports"?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `Yes. If you are a domestic supplier to an EOU/SEZ and the buyer is claiming the benefits, you need to provide an NIC to prove you haven't claimed them, ensuring the buyer’s claim is valid.`,
-                },
-              },
-            ],
-          })}
+          {JSON.stringify(NO_INCENTIVE_SCHEMA)}
         </script>
       </Helmet>
       <div className="bg-slate-50 text-slate-800">
@@ -599,7 +622,8 @@ const CloudDeskNoINC = () => {
                 </summary>
 
                 <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                    `No. An NIC usually certifies that "No benefit has been availed under [Scheme Name] for Shipping Bill No. [X] dated [Y]."`
+                  No. An NIC usually certifies that no benefit has been availed
+                  under a named scheme for the relevant shipping bill and date.
                 </p>
               </details>
 
@@ -636,12 +660,73 @@ const CloudDeskNoINC = () => {
           </div>
         </section>
 
+        <section className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+                Related Returned Goods & Incentive Support
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+                Services Often Needed With No Incentive Certificate
+              </h2>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {[
+                {
+                  title: "No Due Certificate",
+                  href: "/services/no-due-certificate/",
+                  copy: "Resolve pending liabilities and obtain DGFT or customs clearance certificates.",
+                },
+                {
+                  title: "Customs Adjudication",
+                  href: "/services/customs-adjudication/",
+                  copy: "Prepare replies and representation for customs notices and benefit disputes.",
+                },
+                {
+                  title: "Duty Drawback",
+                  href: "/services/duty-drawback/",
+                  copy: "Review drawback claims, reversals, Section 74 cases and incentive recovery.",
+                },
+                {
+                  title: "RoDTEP Scheme",
+                  href: "/services/rodtep-scheme/",
+                  copy: "Verify RoDTEP credits, rates, caps and reversal requirements for export bills.",
+                },
+                {
+                  title: "IGST Refund",
+                  href: "/services/igst-refund/",
+                  copy: "Fix refund mismatches, scroll delays and shipping bill GST reconciliation issues.",
+                },
+                {
+                  title: "CA Certification",
+                  href: "/services/ca-certification-export-import/",
+                  copy: "Get CA-backed certificates for export turnover, incentives and compliance records.",
+                },
+              ].map((service) => (
+                <a
+                  key={service.href}
+                  href={service.href}
+                  className="block bg-white rounded-lg border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition"
+                >
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {service.copy}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
             {/* BRAND */}
             <div>
-              <a className="text-2xl font-bold text-white mb-4 block">
+              <a href="/" className="text-2xl font-bold text-white mb-4 block">
                 EXIMINQ
               </a>
 
@@ -651,13 +736,25 @@ const CloudDeskNoINC = () => {
               </p>
 
               <div className="flex gap-4">
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://www.linkedin.com/company/eximinq/"
+                  aria-label="EXIMINQ on LinkedIn"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Linkedin size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://x.com/eximinq"
+                  aria-label="EXIMINQ on X"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Twitter size={18} />
                 </a>
-                <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+                <a
+                  href="https://www.facebook.com/eximinq"
+                  aria-label="EXIMINQ on Facebook"
+                  className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition"
+                >
                   <Facebook size={18} />
                 </a>
               </div>
@@ -668,23 +765,26 @@ const CloudDeskNoINC = () => {
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    DEL Removal
+                  <a href="#about" className="hover:text-white transition">
+                    Re-import Clearance
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    IEC Update
+                  <a href="#process" className="hover:text-white transition">
+                    Benefit Reversal
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    EODC Redemption
+                  <a href="#documents" className="hover:text-white transition">
+                    Returned Goods Docs
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    Legal Adjudication
+                  <a
+                    href="/services/customs-adjudication/"
+                    className="hover:text-white transition"
+                  >
+                    Customs Support
                   </a>
                 </li>
               </ul>
@@ -695,23 +795,35 @@ const CloudDeskNoINC = () => {
               <h4 className="text-white font-bold mb-6">Other Services</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    DEL List Check
+                  <a
+                    href="/services/no-due-certificate/"
+                    className="hover:text-white transition"
+                  >
+                    No Due Certificate
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    Penalty Calculator
+                  <a
+                    href="/services/duty-drawback/"
+                    className="hover:text-white transition"
+                  >
+                    Duty Drawback
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    DGFT Public Notices
+                  <a
+                    href="/services/rodtep-scheme/"
+                    className="hover:text-white transition"
+                  >
+                    RoDTEP Scheme
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
-                    Amnesty Scheme
+                  <a
+                    href="/services/igst-refund/"
+                    className="hover:text-white transition"
+                  >
+                    IGST Refund
                   </a>
                 </li>
               </ul>

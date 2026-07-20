@@ -31,6 +31,148 @@ import {
 } from "lucide-react";
 import { MainNavbar } from "../components/CloudDeskProjectCargo/MainNavbar";
 import { ModalEnroll } from "../components/CloudDeskProjectCargo/ModalEnroll";
+import logo from "../assets/images/logo.png";
+
+const CANONICAL_URL = "https://eximinq.in/services/project-cargo/";
+const OG_IMAGE_URL = `https://eximinq.in${logo}`;
+const META_TITLE =
+  "Project Cargo Handling Consultant India | ODC Heavy Lift Logistics | EXIMINQ";
+const META_DESCRIPTION =
+  "Project cargo handling consultant in India for over dimensional cargo, heavy machinery movement, route surveys, breakbulk shipping, hydraulic axle transport and customs clearance support.";
+
+const projectCargoSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eximinq.in/#organization",
+      name: "EXIMINQ Global Connections",
+      url: "https://eximinq.in/",
+      logo: OG_IMAGE_URL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-74000-96950",
+        contactType: "customer support",
+        areaServed: "IN",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL_URL}#webpage`,
+      url: CANONICAL_URL,
+      name: META_TITLE,
+      description: META_DESCRIPTION,
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": "https://eximinq.in/#website",
+        url: "https://eximinq.in/",
+        name: "EXIMINQ",
+      },
+      about: {
+        "@id": `${CANONICAL_URL}#service`,
+      },
+      breadcrumb: {
+        "@id": `${CANONICAL_URL}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${CANONICAL_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://eximinq.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: "https://eximinq.in/services/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Project Cargo",
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${CANONICAL_URL}#service`,
+      name: "Project Cargo Handling Consultant India",
+      serviceType: "Over Dimensional Cargo and Heavy Lift Logistics",
+      provider: {
+        "@id": "https://eximinq.in/#organization",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      url: CANONICAL_URL,
+      description: META_DESCRIPTION,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Project Cargo Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "ODC route survey and feasibility report",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Breakbulk and flat rack shipment planning",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Heavy machinery customs clearance",
+            },
+          },
+        ],
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${CANONICAL_URL}#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What qualifies as project cargo?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Project cargo is cargo that is too large, heavy or complex for standard container movement, including over-dimensional cargo, turbines, boilers, plant machinery and infrastructure equipment.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do ODC shipments need route surveys?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Route surveys help verify road width, bridge capacity, turning radius, overhead clearance, permits and escort needs before heavy cargo movement.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can project cargo be cleared through customs?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Project cargo can be cleared with appropriate classification, documents, valuation support, port handling coordination and applicable project import or duty-benefit compliance.",
+          },
+        },
+      ],
+    },
+  ],
+};
 
 const CloudDeskProjectCargo = () => {
     const [showEnrollModal, setShowEnrollModal] = useState({
@@ -50,133 +192,29 @@ const CloudDeskProjectCargo = () => {
 
 <>
 
-<Helmet>
-        <title>
-          Zero Duty Import of Capital Goods | Capital Goods Registration India | DGFT CUSTOMS Services | EXIMINQ
-        </title>
+<Helmet defer={false}>
+        <title>{META_TITLE}</title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={CANONICAL_URL} />
 
-        <meta
-          name="description"
-          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
-        />
-
-        <link
-          rel="canonical"
-          href="https://eximinq.in/services/project-cargo/"
-        />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="Zero Duty Import of Capital Goods Online in India | Eximinq"
-        />
-        <meta
-          property="og:description"
-          content="Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
-        />
-        <meta
-          property="og:url"
-          content="https://eximinq.in/services/project-cargo/"
-        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EXIMINQ" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – Professional Service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Zero Duty Import of Capital Goods",
-            "provider": {
-              "@type": "Organization",
-              "name": "Eximinq Global Connections",
-              "url": "https://eximinq.in"
-            },
-            "areaServed": "India",
-            "description":
-              "Modernize your factory. Import machinery, spares, moulds, and dies without paying Customs Duty. Fulfill obligation over 6 years"
-          })}
-        </script>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
 
-        {/* Structured Data – FAQ */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": `What qualifies as "Project Cargo"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Any cargo that is too big or too heavy to fit into a standard 20ft or 40ft container. This includes "Over-Dimensional" (width/height) and "Over-Weight" (tonnage) shipments that require Flat Racks, Open Tops, or Breakbulk vessels.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is "Breakbulk" shipping?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It is a method of shipping where cargo is loaded individually onto the ship's deck or hold, rather than inside a container. It’s the standard for massive pipes, boilers, and heavy machinery."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What are "Hydraulic Axles"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "For extremely heavy cargo (over 50–100 tons), standard trucks fail. We use Multi-Axle Hydraulic Trailers that can distribute weight evenly and tilt to navigate uneven terrain, ensuring the cargo stays level."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Do I need special permits for ODC movement in India?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes. You need "Over Dimensional" permits from the Ministry of Road Transport and Highways (MoRTH) and often state-level police clearances. CloudDesk’s Compliance Team handles these permits for every state the cargo traverses.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `Can Project Cargo be imported under "Zero Duty"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Yes, if the project falls under specific government schemes like EPCG or if it is a "Mega Power Project" or "Infrastructure Project" with a valid Essentiality Certificate. CloudDesk helps you secure these certificates.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is the "Escort Vehicle" requirement?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "For cargo exceeding specific width/length limits, an escort vehicle with warning lights is mandatory to guide traffic. CloudDesk provides Pilot Cars to ensure public safety and legal compliance during transit."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is standard Marine Insurance enough for Project Cargo?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    `Usually, no. You need a "Loading & Unloading" add-on and often a "Marine Warranty Survey" (MWS). CloudDesk works with specialized underwriters to provide tailored project insurance that covers the high risks of heavy lifting.`
-                }
-              },
-              {
-                "@type": "Question",
-                "name": `What is a "Lashing Certificate"?`,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "It is a document issued by a certified surveyor confirming that the cargo has been secured (lashed) properly to the vessel or trailer. Without this, most insurance claims for transit damage will be rejected."
-                }
-              },
-            ]
-          })}
+          {JSON.stringify(projectCargoSchema)}
         </script>
       </Helmet>
     <div className="bg-slate-50 text-slate-800">
@@ -698,12 +736,81 @@ const CloudDeskProjectCargo = () => {
       </section>
 
 
+      <section
+        className="py-16 bg-white"
+        aria-labelledby="project-cargo-related-services"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mb-10">
+            <span className="text-brand-600 font-bold uppercase tracking-wider text-sm">
+              Related Logistics Support
+            </span>
+            <h2
+              id="project-cargo-related-services"
+              className="text-3xl font-bold text-slate-900 mt-2"
+            >
+              Services Often Needed With Project Cargo
+            </h2>
+            <p className="text-slate-600 mt-3">
+              Heavy machinery and ODC movement often needs customs, insurance,
+              warehousing, and transport coordination before dispatch.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Marine Insurance",
+                href: "/services/marine-insurance/",
+                text: "Arrange transit cover, loading-unloading extensions, and survey support.",
+              },
+              {
+                title: "Warehousing Solutions",
+                href: "/services/warehousing-solutions/",
+                text: "Plan storage, open-yard handling, and staging before final movement.",
+              },
+              {
+                title: "Inland Transportation",
+                href: "/services/inland-transportation/",
+                text: "Coordinate road movement, trailers, escorts, permits, and route execution.",
+              },
+              {
+                title: "Bill of Entry Filing",
+                href: "/services/bill-of-entry-filing/",
+                text: "Handle import clearance documentation for heavy machinery and equipment.",
+              },
+              {
+                title: "EPCG Scheme",
+                href: "/services/epcg-scheme/",
+                text: "Review duty-saving options for eligible capital goods imports.",
+              },
+              {
+                title: "All Logistics Services",
+                href: "/services/",
+                text: "Explore customs, logistics, documentation, and compliance support.",
+              },
+            ].map((service) => (
+              <a
+                key={service.title}
+                href={service.href}
+                className="block border border-slate-200 rounded-xl p-5 hover:border-brand-500 hover:shadow-md transition"
+              >
+                <h3 className="text-lg font-bold text-slate-900">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-slate-600 mt-2">{service.text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer id="contact" className="bg-brand-900 text-slate-300 py-16">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
           {/* BRAND */}
           <div>
-            <a className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
+            <a href="/" className="text-2xl font-bold text-white mb-4 block">EXIMINQ</a>
 
             <p className="text-sm mb-6">
               EXIMINQ Contact: Your trusted partner for DGFT, Customs, and
@@ -711,13 +818,13 @@ const CloudDeskProjectCargo = () => {
             </p>
 
             <div className="flex gap-4">
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.linkedin.com/company/eximinq/" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Linkedin size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://x.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Twitter size={18} />
               </a>
-              <a className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
+              <a href="https://www.facebook.com/eximinq" className="w-8 h-8 rounded bg-brand-800 flex items-center justify-center hover:bg-brand-700 transition">
                 <Facebook size={18} />
               </a>
             </div>
@@ -726,24 +833,24 @@ const CloudDeskProjectCargo = () => {
           {/* QUICK LINKS */}
           <div>
             <h4 className="text-white font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#about" className="hover:text-white transition">
                   Route Survey
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/inland-transportation/" className="hover:text-white transition">
                   Heavy Lift Transport
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#benefits" className="hover:text-white transition">
                   Breakbulk Shipping
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/project-cargo/" className="hover:text-white transition">
                   Project Registration
                 </a>
               </li>
@@ -753,24 +860,24 @@ const CloudDeskProjectCargo = () => {
           {/* OTHER SERVICES */}
           <div>
             <h4 className="text-white font-bold mb-6">Other Services</h4>
-            <ul class="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#process" className="hover:text-white transition">
                   Hydraulic Axles
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="/services/inland-transportation/" className="hover:text-white transition">
                   Low Bed Trailers
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#benefits" className="hover:text-white transition">
                   Flat Rack Containers
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">
+                <a href="#benefits" className="hover:text-white transition">
                   Open Top Containers
                 </a>
               </li>

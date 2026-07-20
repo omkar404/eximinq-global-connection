@@ -29,6 +29,9 @@ async function sendEmail(record) {
       issue,
       export: exportType,
       invoices,
+      companyName,
+      personName,
+      contactPersonName,
     } = record;
 
     const serviceDisplay = service || "GST Returns Registration";
@@ -86,6 +89,39 @@ async function sendEmail(record) {
             }
 
             ${
+              companyName
+                ? `
+                <tr>
+                  <td><b>Company Name</b></td>
+                  <td>${companyName}</td>
+                </tr>
+              `
+                : ""
+            }
+
+            ${
+              contactPersonName || personName
+                ? `
+                <tr>
+                  <td><b>Contact Person Name</b></td>
+                  <td>${contactPersonName || personName}</td>
+                </tr>
+              `
+                : ""
+            }
+
+            ${
+              email
+                ? `
+                <tr>
+                  <td><b>Email ID</b></td>
+                  <td>${email}</td>
+                </tr>
+              `
+                : ""
+            }
+
+            ${
               category
                 ? `
                 <tr>
@@ -118,17 +154,6 @@ async function sendEmail(record) {
                 <tr>
                   <td><b>Name</b></td>
                   <td>${name}</td>
-                </tr>
-              `
-                : ""
-            }
-
-            ${
-              email
-                ? `
-                <tr>
-                  <td><b>Email</b></td>
-                  <td>${email}</td>
                 </tr>
               `
                 : ""
@@ -210,16 +235,60 @@ exports.creategstReturnsRoutes = async (req, res) => {
       issue,
       export: exportType,
       invoices,
+      companyName,
+      personName,
+      contactPersonName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const cleanMobile = typeof mobile === "string" ? mobile.trim() : "";
+    const cleanCompanyName =
+      typeof companyName === "string" ? companyName.trim() : "";
+    const cleanContactPersonName =
+      typeof contactPersonName === "string"
+        ? contactPersonName.trim()
+        : typeof personName === "string"
+          ? personName.trim()
+          : "";
+    const cleanEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
 
     /* VALIDATION */
 
-    if (!mobile || !mobile.trim()) {
+    if (!cleanMobile) {
       return res.status(400).json({
         success: false,
         message: "Mobile is required",
+      });
+    }
+    if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter valid 10 digit Indian mobile number",
+      });
+    }
+    if (isQuickForm && !cleanCompanyName) {
+      return res.status(400).json({
+        success: false,
+        message: "Company Name is required",
+      });
+    }
+    if (isQuickForm && !cleanContactPersonName) {
+      return res.status(400).json({
+        success: false,
+        message: "Contact Person Name is required",
+      });
+    }
+    if (isQuickForm && !cleanEmail) {
+      return res.status(400).json({
+        success: false,
+        message: "Email ID is required",
+      });
+    }
+    if (cleanEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid Email ID",
       });
     }
 
@@ -228,16 +297,22 @@ exports.creategstReturnsRoutes = async (req, res) => {
     const recordData = {
       service: service || "GST Returns Registration",
 
-      mobile: mobile.trim(),
+      mobile: cleanMobile,
 
       export: exportType ? exportType.trim() : null,
 
       invoices: invoices ? invoices.toString().trim() : null,
 
+      companyName: cleanCompanyName || null,
+
+      personName: cleanContactPersonName || null,
+
+      contactPersonName: cleanContactPersonName || null,
+
       name: isQuickForm ? null : name ? name.trim() : null,
 
       // ✅ QUICK FORM EMAIL ALSO SAVES
-      email: email ? email.trim().toLowerCase() : "",
+      email: cleanEmail || null,
 
       entity: isQuickForm ? null : entity ? entity.trim() : null,
 
