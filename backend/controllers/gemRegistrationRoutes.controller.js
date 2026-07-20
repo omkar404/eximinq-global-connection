@@ -28,6 +28,8 @@ async function sendEmail(record) {
     issue,
     businessType,
     productCategory,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "Gem Registration";
@@ -44,6 +46,8 @@ async function sendEmail(record) {
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           ${businessType ? `<tr><td><b>Business Type</b></td><td>${businessType}</td></tr>` : ""}
           ${productCategory ? `<tr><td><b>Product Category</b></td><td>${productCategory}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -79,6 +83,8 @@ exports.creategemRegistrationRoutes = async (req, res) => {
       issue,
       businessType, // ✅ camelCase
       productCategory, // ✅ camelCase
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -95,6 +101,8 @@ exports.creategemRegistrationRoutes = async (req, res) => {
       mobile: mobile.trim(),
       businessType: businessType ? businessType.trim() : null, // ✅ use the correct variable
       productCategory: productCategory ? productCategory.trim() : null, // ✅ use correct variable
+      companyName: companyName ? companyName.trim() : null,
+      personName: personName ? personName.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
