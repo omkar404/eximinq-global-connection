@@ -1,3 +1,4 @@
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 const igstrefundRoutes = require("../models/igstrefundRoutes.model");
 const nodemailer = require("nodemailer");
 
@@ -36,6 +37,7 @@ async function sendEmail(record) {
       igstPortCode,
       companyName,
       personName,
+      contactPersonName,
     } = record;
 
     const serviceDisplay = service || "IGST Refund Registration";
@@ -159,11 +161,22 @@ async function sendEmail(record) {
 
 
             ${
-              personName
+              contactPersonName || personName
                 ? `
                 <tr>
                   <td><b>Contact Person Name</b></td>
-                  <td>${personName}</td>
+                  <td>${contactPersonName || personName}</td>
+                </tr>
+              `
+                : ""
+            }
+
+            ${
+              email
+                ? `
+                <tr>
+                  <td><b>Email ID</b></td>
+                  <td>${email}</td>
                 </tr>
               `
                 : ""
@@ -408,6 +421,8 @@ exports.createigstrefundRoutes = async (req, res) => {
 
       searchType: searchType || null,
     };
+
+    normalizeQuickContactFields(recordData, req.body);
 
     console.log("📦 Saving:", recordData);
 

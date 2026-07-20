@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 
 const AuditComplianceFormSchema = new mongoose.Schema(
     {
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
         company: {
             type: String,
             required: true,

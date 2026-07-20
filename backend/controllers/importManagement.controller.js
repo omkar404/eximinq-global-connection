@@ -1,3 +1,4 @@
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 const importManagementRoutes = require("../models/importManagement.model");
 const nodemailer = require("nodemailer");
 
@@ -28,6 +29,7 @@ async function sendEmail(record) {
     issue,
     companyName,    // ✅ changed from duplicate service; use companyName
     personName,
+    contactPersonName,
   } = record;
 
   const serviceDisplay = service || "import-management Registration";
@@ -48,9 +50,10 @@ async function sendEmail(record) {
             <td><b>Service</b></td>
             <td>${serviceDisplay}</td>
            </tr>
-          ${service ? `<tr><td><b>Service Type</b></td><td>${service}</td></tr>` : ""}
           ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
+          ${contactPersonName || personName || name ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName || name}</td></tr>` : ""}
+          ${email ? `<tr><td><b>Email ID</b></td><td>${email}</td></tr>` : ""}
+          ${service ? `<tr><td><b>Service Type</b></td><td>${service}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr>
@@ -58,7 +61,6 @@ async function sendEmail(record) {
             <td>${mobile}</td>
            </tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
           ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
@@ -114,6 +116,8 @@ exports.createimportManagementRoutes = async (req, res) => {
       category: category || null,
       issue: issue || null,
     };
+
+    normalizeQuickContactFields(recordData, req.body);
 
     console.log("📦 Saving:", recordData);
 

@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const EPCGClosure = require("../models/epcgClosureServicesRoutes.model");
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 
 /* ---------------- Allowed Values ---------------- */
 
@@ -42,6 +43,9 @@ async function sendEmail(record) {
     name,
     mobile,
     email,
+    companyName,
+    contactPersonName,
+    personName,
     licenseType,
     licenseNumber,
     issueDescription,
@@ -61,8 +65,13 @@ async function sendEmail(record) {
       <table cellpadding="6" style="border-collapse:collapse;font-family:Arial;">
       
         <tr>
-          <td><b>Name</b></td>
-          <td>${name}</td>
+          <td><b>Company Name</b></td>
+          <td>${companyName || "N/A"}</td>
+        </tr>
+
+        <tr>
+          <td><b>Contact Person Name</b></td>
+          <td>${contactPersonName || personName || name || "N/A"}</td>
         </tr>
 
         <tr>
@@ -71,7 +80,7 @@ async function sendEmail(record) {
         </tr>
 
         <tr>
-          <td><b>Email</b></td>
+          <td><b>Email ID</b></td>
           <td>${email}</td>
         </tr>
 
@@ -190,8 +199,7 @@ exports.createepcgClosureServicesRoutes = async (req, res) => {
 
     /* -------- Save Record -------- */
 
-    const record = await EPCGClosure.create({
-
+    const recordData = {
       name: name.trim(),
 
       mobile: mobile.trim(),
@@ -207,7 +215,11 @@ exports.createepcgClosureServicesRoutes = async (req, res) => {
       additionalDetails: additionalDetails || null,
 
       type
-    });
+    };
+
+    normalizeQuickContactFields(recordData, req.body);
+
+    const record = await EPCGClosure.create(recordData);
 
     console.log("Saved EPCG Closure Record:", record._id);
 

@@ -44,6 +44,12 @@ const AdcodeRegistrationSchema = new mongoose.Schema(
       trim: true,
       default: null,
     },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
     mobile: {
       type: String,
       required: true,

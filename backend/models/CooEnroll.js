@@ -3,6 +3,17 @@ const mongoose = require("mongoose");
 const CooEnrollSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
     mobile: { type: String, required: true },
     entity: { type: String },
     email: { type: String, required: true },

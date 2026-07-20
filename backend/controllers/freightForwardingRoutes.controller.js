@@ -1,3 +1,4 @@
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 const freightForwardingRoutes = require("../models/freightForwardingRoutes.model");
 const nodemailer = require("nodemailer");
 
@@ -49,6 +50,9 @@ async function sendEmail(record) {
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
           
+          ${record.companyName ? `<tr><td><b>Company Name</b></td><td>${record.companyName}</td></tr>` : ""}
+          ${record.contactPersonName || record.personName ? `<tr><td><b>Contact Person Name</b></td><td>${record.contactPersonName || record.personName}</td></tr>` : ""}
+          ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${mode ? `<tr><td><b>Mode (Import/Export)</b></td><td>${mode}</td></tr>` : ""}
           ${originPort ? `<tr><td><b>Origin Port</b></td><td>${originPort}</td></tr>` : ""}
           ${destinationPort ? `<tr><td><b>Destination Port</b></td><td>${destinationPort}</td></tr>` : ""}
@@ -130,6 +134,8 @@ exports.createfreightForwardingRoutes = async (req, res) => {
       category: category || null,
       issue: issue || null,
     };
+
+    normalizeQuickContactFields(recordData, req.body);
 
     console.log("📦 Saving:", recordData);
 

@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 
 const MainContactInfoSchema = new mongoose.Schema(
     {
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
         firstname: {
             type: String,
             required: true,

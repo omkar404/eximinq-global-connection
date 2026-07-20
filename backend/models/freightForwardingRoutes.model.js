@@ -3,6 +3,17 @@ const mongoose = require("mongoose");
 const freightForwardingSchema = new mongoose.Schema(
   {
     service: { type: String, default: "Freight Forwarding" },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
     mobile: { type: String, required: true, trim: true },
     email: { type: String, trim: true, lowercase: true },
     mode: { type: String, enum: ["import", "export"], default: "import" },

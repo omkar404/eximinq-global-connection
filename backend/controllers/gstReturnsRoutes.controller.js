@@ -1,3 +1,4 @@
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 const gstReturnsRoutes = require("../models/gstReturnsRoutes.model");
 const nodemailer = require("nodemailer");
 
@@ -326,6 +327,8 @@ exports.creategstReturnsRoutes = async (req, res) => {
 
       issue: issue || null,
     };
+
+    normalizeQuickContactFields(recordData, req.body);
 
     console.log("📦 Saving:", recordData);
 

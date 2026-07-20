@@ -1,3 +1,4 @@
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 const inlandTransportationRoutes = require("../models/inlandTransportationRoutes.model");
 const nodemailer = require("nodemailer");
 
@@ -48,14 +49,14 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${record.companyName ? `<tr><td><b>Company Name</b></td><td>${record.companyName}</td></tr>` : ""}
+          ${record.contactPersonName || record.personName ? `<tr><td><b>Contact Person Name</b></td><td>${record.contactPersonName || record.personName}</td></tr>` : ""}
+          ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${mode ? `<tr><td><b>Mode (Pickup/Drop)</b></td><td>${mode}</td></tr>` : ""}
           ${pickupLocation ? `<tr><td><b>Pick‑up Location</b></td><td>${pickupLocation}</td></tr>` : ""}
           ${dropLocation ? `<tr><td><b>Drop Location</b></td><td>${dropLocation}</td></tr>` : ""}
           ${portYardIcd ? `<tr><td><b>Port / Yard / ICD</b></td><td>${portYardIcd}</td></tr>` : ""}
           ${vehicleType ? `<tr><td><b>Vehicle Type</b></td><td>${vehicleType}</td></tr>` : ""}
-          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${contactPersonName || personName ? `<tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email ID</b></td><td>${email}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
@@ -166,6 +167,8 @@ exports.createinlandTransportationRoutes = async (req, res) => {
       category: category || null,
       issue: issue || null,
     };
+
+    normalizeQuickContactFields(recordData, req.body);
 
     console.log("📦 Saving:", recordData);
 

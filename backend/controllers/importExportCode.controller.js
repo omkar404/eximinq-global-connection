@@ -2,6 +2,7 @@
 
 const ImportExportCode = require("../models/importExportCode.model.js");
 const nodemailer = require("nodemailer");
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 
 // FIX 4: Removed dependency on ../utils/dateTime.
 // If that file doesn't exist, the entire server crashes on startup
@@ -46,7 +47,7 @@ exports.createImportExportCode = async (req, res) => {
       name, mobile, entity, email,
       role, partner, type,
       category, issue,
-      companyName, personName, // ✅ added — collected by the Quick Form
+      companyName, personName, contactPersonName, // ✅ added — collected by the Quick Form
     } = req.body;
 
     // ---------------- TYPE NORMALISATION ----------------
@@ -117,14 +118,15 @@ exports.createImportExportCode = async (req, res) => {
     const istTimestamp = getISTTimestamp();
 
     // ---------------- SAVE TO DB ----------------
-    const newEntry = await ImportExportCode.create({
+    const recordData = {
       // ✅ Quick Form now collects the person's name — use it instead of
       // the old hardcoded "Quick Lead" placeholder when available.
       name:        normalizedType === "QUICK_FORM"
-        ? (personName || "Quick Lead")
+        ? (contactPersonName || personName || "Quick Lead")
         : name,
       companyName: companyName || null, // ✅ added
       personName:  personName  || null, // ✅ added
+      contactPersonName: contactPersonName || personName || null,
       mobile,
       entity:      entity || null,
       email,
@@ -134,7 +136,11 @@ exports.createImportExportCode = async (req, res) => {
       category:    category || null,
       issue:       issue    || null,
       submittedAt: istTimestamp,  // FIX 3: now saved AND in schema
-    });
+    };
+
+    normalizeQuickContactFields(recordData, req.body);
+
+    const newEntry = await ImportExportCode.create(recordData);
 
     // ---------------- EMAIL ----------------
     const emailSubject = normalizedType === "QUICK_FORM"
@@ -144,9 +150,9 @@ exports.createImportExportCode = async (req, res) => {
     const emailHtml = normalizedType === "QUICK_FORM"
       ? `
         <h3>New Quick Import export</h3>
-        ${companyName ? `<p><strong>Company Name:</strong> ${companyName}</p>` : ""}
-        ${personName ? `<p><strong>Contact Person Name:</strong> ${personName}</p>` : ""}
-        <p><strong>Email:</strong> ${email}</p>
+        ${newEntry.companyName ? `<p><strong>Company Name:</strong> ${newEntry.companyName}</p>` : ""}
+        ${newEntry.contactPersonName || newEntry.personName ? `<p><strong>Contact Person Name:</strong> ${newEntry.contactPersonName || newEntry.personName}</p>` : ""}
+        <p><strong>Email ID:</strong> ${newEntry.email}</p>
         <p><strong>Mobile:</strong> ${mobile}</p>
         <p><strong>Submitted (IST):</strong> ${istTime}, ${istDate}</p>
       `
@@ -154,9 +160,10 @@ exports.createImportExportCode = async (req, res) => {
         <h3>New Import Export Code Request</h3>
         <table cellpadding="6" style="border-collapse:collapse; font-family:Arial,sans-serif;">
           <tr><td><b>Name</b></td><td>${name}</td></tr>
-          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${newEntry.companyName ? `<tr><td><b>Company Name</b></td><td>${newEntry.companyName}</td></tr>` : ""}
+          ${newEntry.contactPersonName || newEntry.personName ? `<tr><td><b>Contact Person Name</b></td><td>${newEntry.contactPersonName || newEntry.personName}</td></tr>` : ""}
           <tr><td><b>Entity</b></td><td>${entity || "N/A"}</td></tr>
-          <tr><td><b>Email</b></td><td>${email}</td></tr>
+          <tr><td><b>Email ID</b></td><td>${newEntry.email}</td></tr>
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           <tr><td><b>Role</b></td><td>${role}</td></tr>
           <tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>

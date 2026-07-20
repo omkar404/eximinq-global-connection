@@ -104,6 +104,17 @@ const ISSUE_TYPES = [
 const rodtepRefundRecoverySchema = new mongoose.Schema(
   {
     name:              { type: String, required: true, trim: true },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
     mobile:            { type: String, default: null, trim: true }, // ✅ Fix: required → optional
     email:             { type: String, required: true, trim: true, lowercase: true },
     licenseType:       { type: String, enum: LICENSE_TYPES, default: null },

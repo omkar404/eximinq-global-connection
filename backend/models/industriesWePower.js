@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 
 const IndustrialSchema = new mongoose.Schema(
   {
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     name: String,
     mobile: String,
     entity: String,

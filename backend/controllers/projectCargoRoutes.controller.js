@@ -1,3 +1,4 @@
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 const projectCargoRoutes = require("../models/projectCargoRoutes.model");
 const nodemailer = require("nodemailer");
 
@@ -43,6 +44,9 @@ async function sendEmail(record) {
         <table border="1" cellpadding="6" style="border-collapse:collapse;">
           <tr><td><b>Submission Type</b></td><td>${type || "QUICK_FORM"}</td></tr>
           <tr><td><b>Service</b></td><td>${serviceDisplay}</td></tr>
+          ${record.companyName ? `<tr><td><b>Company Name</b></td><td>${record.companyName}</td></tr>` : ""}
+          ${record.contactPersonName || record.personName ? `<tr><td><b>Contact Person Name</b></td><td>${record.contactPersonName || record.personName}</td></tr>` : ""}
+          ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${cargoType ? `<tr><td><b>Cargo Type</b></td><td>${cargoType}</td></tr>` : ""}
           ${weight ? `<tr><td><b>Weight (MT)</b></td><td>${weight}</td></tr>` : ""}
           ${dimension ? `<tr><td><b>Max Dimension</b></td><td>${dimension}</td></tr>` : ""}
@@ -50,7 +54,6 @@ async function sendEmail(record) {
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
           ${name ? `<tr><td><b>Name</b></td><td>${name}</td></tr>` : ""}
-          ${email ? `<tr><td><b>Email</b></td><td>${email}</td></tr>` : ""}
           ${entity ? `<tr><td><b>Entity</b></td><td>${entity}</td></tr>` : ""}
           ${role ? `<tr><td><b>Role</b></td><td>${role}</td></tr>` : ""}
           ${type !== "QUICK_FORM_COMPLIANCE" ? `<tr><td><b>Partner</b></td><td>${partner ? "Yes" : "No"}</td></tr>` : ""}
@@ -109,6 +112,8 @@ exports.createprojectCargoRoutes = async (req, res) => {
       issue: issue || null,
       // ❌ source: source ? source.trim() : null,  ← model mein nahi hai, hata do
     };
+
+    normalizeQuickContactFields(recordData, req.body);
 
     console.log("📦 Saving:", recordData);
 

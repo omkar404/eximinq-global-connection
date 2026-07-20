@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const rodtepRefundRecoveryRoutes = require("../models/rodtepRefundRecoveryRoutes.model");
+const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 
 /* ---------------- Allowed Values ---------------- */
 
@@ -55,6 +56,9 @@ async function sendEmail(record) {
       _id,
       name,
       email,
+      companyName,
+      contactPersonName,
+      personName,
       licenseType,
       estimatedAmount,
       issueDescription,
@@ -69,8 +73,9 @@ async function sendEmail(record) {
         <h3>New rodtep-refund-recovery Request</h3>
 
         <table cellpadding="6" style="border-collapse:collapse;font-family:Arial;">
-          <tr><td><b>Name</b></td><td>${name}</td></tr>
-          <tr><td><b>Email</b></td><td>${email}</td></tr>
+          <tr><td><b>Company Name</b></td><td>${companyName || "N/A"}</td></tr>
+          <tr><td><b>Contact Person Name</b></td><td>${contactPersonName || personName || name || "N/A"}</td></tr>
+          <tr><td><b>Email ID</b></td><td>${email}</td></tr>
           <tr><td><b>Incentive Type</b></td><td>${Incentive_Type[licenseType] || "N/A"}</td></tr>
           <tr><td><b>Estimated Amount</b></td><td>${estimatedAmount || "N/A"}</td></tr>
           <tr><td><b>Issue</b></td><td>${issueDescription || "N/A"}</td></tr>
@@ -155,7 +160,7 @@ exports.createRecoveryAudit = async (req, res) => {
 
     /* -------- SAVE -------- */
 
-    const record = await rodtepRefundRecoveryRoutes.create({
+    const recordData = {
       name: name.trim(),
       email: email.trim().toLowerCase(),
       licenseType: licenseType || null,
@@ -163,7 +168,11 @@ exports.createRecoveryAudit = async (req, res) => {
       issueDescription: issueDescription || null,
       additionalDetails: additionalDetails || null,
       type
-    });
+    };
+
+    normalizeQuickContactFields(recordData, req.body);
+
+    const record = await rodtepRefundRecoveryRoutes.create(recordData);
 
     console.log("✅ Saved:", record._id);
 

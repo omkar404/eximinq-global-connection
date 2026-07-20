@@ -30,6 +30,12 @@ const icegateRegistrationSchema = new mongoose.Schema(
       trim: true,
       default: null,     // ✅ Not required — null for QUICK_FORM
     },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
     mobile: {
       type: String,
       required: true,

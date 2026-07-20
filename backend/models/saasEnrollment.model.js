@@ -13,6 +13,17 @@ const saasEnrollmentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
 
     mobile: {
       type: String,

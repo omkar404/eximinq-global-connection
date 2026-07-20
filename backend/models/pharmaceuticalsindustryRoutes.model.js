@@ -18,6 +18,17 @@ const pharmaceuticalsindustryRoutesSchema = new mongoose.Schema(
       trim: true,
       default: null,     // ✅ Not required — null for QUICK_FORM
     },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
     mobile: {
       type: String,
       default: null,

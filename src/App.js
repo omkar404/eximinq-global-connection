@@ -296,16 +296,13 @@ function App() {
         {/* No Due Certificate */}
         <Route path="/services/no-due-certificate" element={<CloudDeskNoDue />} />
 
-<<<<<<< HEAD
         {/* Consolidated URL redirect */}
         {/* <Route
           path="/services/no-incentive-certificate"
           element={<Navigate to="/services/no-due-certificate/" replace />}
         /> */}
 
-=======
         {/* No Incentive Certificate */}
->>>>>>> bf8549d (feat: add WebSocket symbols and File API types)
         <Route path="/services/no-incentive-certificate" element={<CloudDeskNoINC />} />
 
         {/* Interest Equalisation  */}

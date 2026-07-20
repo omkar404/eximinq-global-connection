@@ -3,6 +3,17 @@ const mongoose = require("mongoose");
 const MainCooSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
+    companyName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    contactPersonName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
     mobile: { type: String, required: true, trim: true },
     email: { type: String, required: true, lowercase: true, trim: true },
     entity: { type: String, trim: true },
