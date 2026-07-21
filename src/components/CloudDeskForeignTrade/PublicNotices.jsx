@@ -41,9 +41,9 @@ const NOTICES = [
   },
   {
     type: "Customs",
-    date: "02 Jun 2026",
-    title: "Instruction No. 07/2026-Customs",
-    desc: "Streamlining of mechanism for seeking clarification on interpretation of Foreign Trade Policy (FTP) provisions from DGFT.",
+    date: "03 Jul 2026",
+    title: "Instruction No. 13/2026-Customs",
+    desc: "Provisional assessment and furnishing of guarantee in respect of imports of “Glufosinate and its salt” originating in or exported from China PR.",
     color: "green",
   },
   // {
@@ -76,16 +76,16 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "03 Jun 2026",
-    title: "Trade Notice 07/2026-27",
-    desc: "Request for comments on alignment of Schedule-II (Export Policy) of ITC (HS), 2022 consequent to amendments introduced under the Finance Act, 2026 – regarding.",
+    date: "20 Jul 2026",
+    title: "Trade Notice 14/2026-27",
+    desc: "Inputs on proposed amendment to Para 2.57 of FTP 2023 relating to de minimis exemption from RCMC requirements for low-value exports – regarding.",
     color: "purple",
   },
   {
     type: "Public Notice",
-    date: "04 Jun 2026",
-    title: "Public Notice 17/2026-27",
-    desc: "Enlistment under Appendix 2E of FTP, 2023-Agency Authorised to issue Certificate of Origin (Non-Preferential)-regarding.",
+    date: "20 Jul 2026",
+    title: "Public Notice 22/2026-27",
+    desc: "Inviting TRQ Applications under India – United Kingdom Comprehensive Economic and Trade Agreement (CETA) for Calendar Year (CY) 2026-reg.",
     color: "gray",
   },
 ];
