@@ -67,49 +67,58 @@ const fallbackExchangeRates = exchangeRates.filter(
   (r) => r.effectiveDate && typeof r.effectiveDate === "string"
 );
 
+const normalizeYear = (year) => {
+  const numericYear = Number(year);
+  if (!Number.isInteger(numericYear)) return null;
+  return numericYear < 100 ? 2000 + numericYear : numericYear;
+};
+
+const getRateKey = (rate) =>
+  [rate.notification, rate.effectiveDate, rate.currency]
+    .map((value) => String(value || "").trim().toUpperCase())
+    .join("::");
+
+const mergeExchangeRates = (apiRates, authoritativeRates) => {
+  const mergedRates = new Map();
+
+  apiRates.forEach((rate) => mergedRates.set(getRateKey(rate), rate));
+  authoritativeRates.forEach((rate) => {
+    const key = getRateKey(rate);
+    mergedRates.set(key, { ...mergedRates.get(key), ...rate });
+  });
+
+  return Array.from(mergedRates.values());
+};
+
 // Get year from date string (handles DD-MM-YYYY format)
 const getYear = (dateStr) => {
   if (!dateStr) return null;
-
-  // Handle DD-MM-YYYY format
-  if (dateStr.includes('-')) {
-    const parts = dateStr.split("-");
-    if (parts.length !== 3) return null;
-    return parts[2];
-  }
-
-  // Handle DD/MM/YYYY format
-  if (dateStr.includes('/')) {
-    const parts = dateStr.split("/");
-    if (parts.length !== 3) return null;
-    return parts[2];
-  }
-
-  return null;
+  const parts = dateStr.split(/[/-]/);
+  if (parts.length !== 3) return null;
+  const normalizedYear = normalizeYear(parts[2]);
+  return normalizedYear ? String(normalizedYear) : null;
 };
 
 // Parse DD-MM-YYYY or DD/MM/YYYY to Date object
 const parseDMY = (dmy) => {
   if (!dmy || typeof dmy !== "string") return null;
+  const parts = dmy.split(/[/-]/);
+  if (parts.length !== 3) return null;
 
-  // Handle DD-MM-YYYY format
-  if (dmy.includes('-')) {
-    const parts = dmy.split("-");
-    if (parts.length !== 3) return null;
-    const [d, m, y] = parts.map(Number);
-    // Use UTC to avoid timezone issues
-    return new Date(Date.UTC(y, m - 1, d));
+  const [day, month, rawYear] = parts.map(Number);
+  const year = normalizeYear(rawYear);
+  if (!year || !day || !month) return null;
+
+  const parsedDate = new Date(Date.UTC(year, month - 1, day));
+  if (
+    parsedDate.getUTCFullYear() !== year ||
+    parsedDate.getUTCMonth() !== month - 1 ||
+    parsedDate.getUTCDate() !== day
+  ) {
+    return null;
   }
 
-  // Handle DD/MM/YYYY format
-  if (dmy.includes('/')) {
-    const parts = dmy.split("/");
-    if (parts.length !== 3) return null;
-    const [d, m, y] = parts.map(Number);
-    return new Date(Date.UTC(y, m - 1, d));
-  }
-
-  return null;
+  return parsedDate;
 };
 
 // Check if a date is within the validity period
@@ -197,6 +206,13 @@ const formatToDDMMYYYY = (input) => {
         return input;
       }
 
+      // Handle DD-MM-YY and DD/MM/YY formats used by recent records
+      if (input.match(/^\d{1,2}[/-]\d{1,2}[/-]\d{2}$/)) {
+        const [day, month, rawYear] = input.split(/[/-]/);
+        const year = normalizeYear(rawYear);
+        return `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`;
+      }
+
       // Handle DD/MM/YYYY format
       if (input.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
         const [day, month, year] = input.split('/');
@@ -238,7 +254,7 @@ const getDownloadHref = (rate) => {
   }
 
   if (rate.notification) {
-    return `${API_BASE_URL}/api/Customsrates/download?notification=${encodeURIComponent(
+    return `${API_BASE_URL}/api/exchange-rates/download?notification=${encodeURIComponent(
       rate.notification
     )}`;
   }
@@ -279,7 +295,11 @@ const getTodayIso = () => {
 /* ---------------- COMPONENT ---------------- */
 
 export default function ExchangeRates() {
-  const [ratesData, setRatesData] = useState(fallbackExchangeRates);
+  const [apiRates, setApiRates] = useState([]);
+  const ratesData = useMemo(
+    () => mergeExchangeRates(apiRates, fallbackExchangeRates),
+    [apiRates]
+  );
   // Default currency filter is "All" (empty) so the Archive table shows
   // every currency out of the box, same as the original behavior.
   // The Snapshot card still defaults to USD (see `latest` below) even
@@ -301,14 +321,19 @@ export default function ExchangeRates() {
 
     const loadExchangeRates = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/Customsrates`);
+        const response = await fetch(
+          `${API_BASE_URL}/api/exchange-rates?refresh=${Date.now()}`,
+          {
+            cache: "no-store",
+          }
+        );
         if (!response.ok) {
           return;
         }
 
         const payload = await response.json();
         if (isMounted && payload.success && Array.isArray(payload.data) && payload.data.length) {
-          setRatesData(payload.data);
+          setApiRates(payload.data);
         }
       } catch (error) {
         console.error("Exchange rates API fallback in use:", error);

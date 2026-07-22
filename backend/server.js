@@ -536,8 +536,17 @@ app.get("/api/dgft/pdf-download", (req, res) => {
 
 /* ── Exchange Rates ── */
 app.get("/api/exchange-rates", (req, res) => {
-  try { res.json(exchangeRatesService.getExchangeRatesData()); }
-  catch (error) { res.status(500).json({ success: false, error: error.message }); }
+  try {
+    res.set({
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+      "Surrogate-Control": "no-store",
+    });
+    res.json(exchangeRatesService.getExchangeRatesData());
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 });
 
 app.get("/api/exchange-rates/download", (req, res) => {
