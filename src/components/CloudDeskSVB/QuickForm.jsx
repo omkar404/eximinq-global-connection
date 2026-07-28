@@ -1,127 +1,11 @@
-
-// import { useState } from "react";
-// import { ShieldAlert, Phone } from "lucide-react";
-
-// const QuickForm = ({ onSubmit }) => {
-//   const [form, setForm] = useState({
-//     relationshipType: "",
-//     importValue: "",
-//     mobile: "",
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setForm((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (!form.relationshipType || !form.importValue || !form.mobile) return;
-
-//     onSubmit?.(form);
-
-//     alert(
-//       "We will assess your valuation risk profile and contact you shortly."
-//     );
-
-//     setForm({
-//       relationshipType: "",
-//       importValue: "",
-//       mobile: "",
-//     });
-//   };
-
-//   return (
-//    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-//       {/* Heading */}
-//       <div className="flex items-center gap-3 mb-2">
-//         <ShieldAlert className="text-brand-600" size={26} />
-//         <h3 className="text-2xl font-bold text-brand-900">
-//           Compliance Risk Check
-//         </h3>
-//       </div>
-
-//       <p className="text-slate-500 mb-6 text-sm">
-//         Facing a Customs Hold due to SVB?
-//       </p>
-
-//       <form onSubmit={handleSubmit}>
-//         {/* Relationship Type */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Relationship Type
-//           </label>
-//           <select
-//             name="relationshipType"
-//             value={form.relationshipType}
-//             onChange={handleChange}
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           >
-//             <option value="">Select relationship</option>
-//             <option>Subsidiary / Parent Company</option>
-//             <option>Joint Venture Partner</option>
-//             <option>Sole Distributor / Agent</option>
-//             <option>Common Directors / Management</option>
-//           </select>
-//         </div>
-
-//         {/* Import Value */}
-//         <div className="mb-4">
-//           <label className="block text-sm font-semibold mb-1">
-//             Annual Import Value (USD)
-//           </label>
-//           <input
-//             type="number"
-//             name="importValue"
-//             value={form.importValue}
-//             onChange={handleChange}
-//             placeholder="e.g. 5,000,000"
-//             className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//           />
-//         </div>
-
-//         {/* Mobile */}
-//         <div className="mb-6">
-//           <label className="block text-sm font-semibold mb-1">
-//             Mobile Number
-//           </label>
-//           <div className="relative">
-//             <Phone
-//               size={16}
-//               className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-//             />
-//             <input
-//               type="tel"
-//               name="mobile"
-//               value={form.mobile}
-//               onChange={handleChange}
-//               placeholder="+91 74000 96950"
-//               required
-//               className="w-full pl-9 border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-500"
-//             />
-//           </div>
-//         </div>
-
-//         {/* Submit */}
-//         <button
-//           type="submit"
-//           className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-lg transition"
-//         >
-//           Submit for Assessment
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default QuickForm;
-
 import { useState } from "react";
 import { ShieldAlert, Phone } from "lucide-react";
 
 const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
+    email: "",
     relationshipType: "",
     importValue: "",
     mobile: "",
@@ -147,6 +31,24 @@ const QuickForm = () => {
   /* VALIDATION */
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
 
     if (!form.mobile) {
       newErrors.mobile = "Mobile number is required";
@@ -180,6 +82,9 @@ const QuickForm = () => {
     try {
       // ✅ Map frontend fields to backend expectations
       const payload = {
+        companyName: form.companyName.trim(),
+        personName: form.personName.trim(),
+        email: form.email.trim(),
         relationshipType: form.relationshipType,   // Backend expects 'businessType'
         importValue: form.importValue,
         mobile: form.mobile,
@@ -208,10 +113,14 @@ const QuickForm = () => {
 
       // Reset form
       setForm({
+        companyName: "",
+        personName: "",
+        email: "",
         relationshipType: "",
         importValue: "",
         mobile: "",
       });
+      setErrors({});
     } catch (err) {
       console.error("❌ Error:", err);
       alert(`❌ Submission failed: ${err.message}`);
@@ -221,30 +130,90 @@ const QuickForm = () => {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
       {/* Heading */}
-      <div className="flex items-center gap-3 mb-2">
-        <ShieldAlert className="text-brand-600" size={26} />
-        <h3 className="text-2xl font-bold text-brand-900">
+      <div className="flex items-center gap-2 mb-1">
+        <ShieldAlert className="text-brand-600" size={20} />
+        <h3 className="text-lg font-bold text-brand-900">
           Compliance Risk Check
         </h3>
       </div>
 
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Facing a Customs Hold due to SVB?
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. rahul@acmeexports.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Relationship Type */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Relationship Type
           </label>
           <select
             name="relationshipType"
             value={form.relationshipType}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.relationshipType ? "border-red-500" : "border-slate-300"
             }`}
           >
@@ -260,8 +229,8 @@ const QuickForm = () => {
         </div>
 
         {/* Import Value */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Annual Import Value (USD)
           </label>
           <input
@@ -270,7 +239,7 @@ const QuickForm = () => {
             value={form.importValue}
             onChange={handleChange}
             placeholder="e.g. 5000000"
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.importValue ? "border-red-500" : "border-slate-300"
             }`}
           />
@@ -280,14 +249,14 @@ const QuickForm = () => {
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-3">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
           <div className="relative">
             <Phone
               size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"
             />
             <input
               type="tel"
@@ -296,7 +265,7 @@ const QuickForm = () => {
               onChange={handleChange}
               maxLength={10}
               placeholder="9876543210"
-              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              className={`w-full pl-9 border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
                 errors.mobile ? "border-red-500" : "border-slate-300"
               }`}
             />
@@ -310,7 +279,7 @@ const QuickForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"
