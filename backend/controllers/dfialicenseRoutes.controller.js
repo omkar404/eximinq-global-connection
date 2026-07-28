@@ -27,6 +27,8 @@ async function sendEmail(record) {
     issue,
     productType,
     fobValue,
+    companyName,
+    personName,
   } = record;
   const serviceDisplay = service || "DFIA license Registration";
 
@@ -43,8 +45,10 @@ async function sendEmail(record) {
           ${record.companyName ? `<tr><td><b>Company Name</b></td><td>${record.companyName}</td></tr>` : ""}
           ${record.contactPersonName || record.personName ? `<tr><td><b>Contact Person Name</b></td><td>${record.contactPersonName || record.personName}</td></tr>` : ""}
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
-          ${productType ? `<tr><td><b>Product Type (SION)</b></td><td>${productType}</td></tr>` : ""}
+          ${productType ? `<tr><td><b>Product Type (SION)</b></td><td>${productType}</td></tr>` : ""}          
           ${fobValue ? `<tr><td><b>FOB Value (₹)</b></td><td>${fobValue}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -76,6 +80,8 @@ exports.createdfialicenseRoutes = async (req, res) => {
       issue,
       productType,
       fobValue,
+      companyName,
+      personName,
     } = req.body;
 
     if (!mobile || !mobile.trim()) {
@@ -89,6 +95,8 @@ exports.createdfialicenseRoutes = async (req, res) => {
       service: service || "DFIA license Registration",
       mobile: mobile.trim(),
       productType: productType ? productType.trim() : null,
+      companyName : companyName ? companyName.trim() : null,
+      personName : personName ? personName.trim() : null,
       fobValue: fobValue ? fobValue.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
