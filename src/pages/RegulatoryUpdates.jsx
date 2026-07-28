@@ -15,6 +15,8 @@ import { CBIC_NAV } from "../features/regulatory-updates/config/cbic";
 import { DGFT_DEFAULT_TAB, DGFT_FTP_TABS, DGFT_NAV } from "../features/regulatory-updates/config/dgft";
 import { FINANCIAL_YEARS } from "../features/regulatory-updates/config/financialYears";
 import { GST_NAV } from "../features/regulatory-updates/config/gst";
+import GstActsExplorer from "../features/regulatory-updates/components/GstActsExplorer";
+import GstRulesExplorer from "../features/regulatory-updates/components/GstRulesExplorer";
 import { AUTHORITY_META, PARENT_ONLY_KEYS } from "../features/regulatory-updates/config/shared";
 import { getRegulatoryApiBase } from "../features/regulatory-updates/utils/apiBase";
 import {
@@ -1591,9 +1593,9 @@ export default function RegulatoryUpdates() {
           <p className="text-slate-500 mb-6">Centralized database for DGFT, CBIC (Customs), and GST trade regulations.</p>
         </div>
 
-        <div className="flex gap-8 items-start">
-          <aside className="w-72 flex-shrink-0 sticky top-24">
-            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+        <div className="flex flex-col gap-6 items-start lg:flex-row lg:gap-8">
+          <aside className="w-full flex-shrink-0 lg:sticky lg:top-24 lg:w-72">
+            <div className="max-h-[28rem] overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-sm lg:max-h-none lg:overflow-hidden">
               <div className="flex p-3 gap-2 border-b border-slate-100">
                 <AuthButton active={activeAuthority === "dgft"} onClick={() => switchAuthority("dgft")}>
                   DGFT
@@ -1642,7 +1644,11 @@ export default function RegulatoryUpdates() {
           </aside>
 
           <div className="flex-1 min-w-0">
-            {activeAuthority === "dgft" ? (
+            {activeAuthority === "gst" && activeTab === "acts" ? (
+              <GstActsExplorer activeLabel={activeLabel} />
+            ) : activeAuthority === "gst" && activeTab === "rules" ? (
+              <GstRulesExplorer activeLabel={activeLabel} />
+            ) : activeAuthority === "dgft" ? (
               isFTPTab ? (
                 <FTPView
                   loading={loading}

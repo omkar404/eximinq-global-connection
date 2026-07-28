@@ -46,6 +46,7 @@ export function getRequestUrl(authority, tabKey) {
 
 export async function fetchRegulatoryData(authority, tabKey) {
   const response = await fetch(getRequestUrl(authority, tabKey), {
+    cache: "no-store",
     headers: { "Content-Type": "application/json" },
   });
   const payload = await response.json();
@@ -63,4 +64,35 @@ export async function fetchRegulatoryData(authority, tabKey) {
   const items = Array.isArray(payload.data) ? payload.data : [];
   const tabConfig = getAuthorityTabConfig(authority, tabKey);
   return applyClientFilter(items, tabConfig?.clientFilter);
+}
+
+async function fetchGstLegalEndpoint(type, path) {
+  const apiBase = getRegulatoryApiBase();
+  const response = await fetch(`${apiBase}/api/gst/${type}/${path}`, {
+    cache: "no-store",
+    headers: { "Content-Type": "application/json" },
+  });
+  const payload = await response.json();
+
+  if (!response.ok || !payload.success) {
+    throw new Error(payload.message || `Failed to fetch GST ${type}`);
+  }
+
+  return payload.data;
+}
+
+export function fetchGstActsCatalog() {
+  return fetchGstLegalEndpoint("acts", "catalog");
+}
+
+export function fetchGstActDetail(actId) {
+  return fetchGstLegalEndpoint("acts", encodeURIComponent(actId));
+}
+
+export function fetchGstRulesCatalog() {
+  return fetchGstLegalEndpoint("rules", "catalog");
+}
+
+export function fetchGstRuleDetail(ruleId) {
+  return fetchGstLegalEndpoint("rules", encodeURIComponent(ruleId));
 }

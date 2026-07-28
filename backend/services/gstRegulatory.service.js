@@ -1,7 +1,6 @@
 const fs = require("fs");
 const XLSX = require("xlsx");
-const acts = require("../data/regulatory/gst/acts");
-const rules = require("../data/regulatory/gst/rules");
+const legacyActs = require("../data/regulatory/gst/acts");
 const orders = require("../data/regulatory/gst/orders");
 const path = require("path");
 const {
@@ -12,6 +11,8 @@ const {
 
 const GST_BASE_FOLDER = path.join(__dirname, "../PDF_DOC/GST");
 const GST_DOWNLOAD_ROUTE = "/api/gst/pdf-download";
+const GST_ACTS_FOLDER = path.join(GST_BASE_FOLDER, "Acts");
+const GST_RULES_FOLDER = path.join(GST_BASE_FOLDER, "Rules");
 const GST_FORMS_FILE = path.join(GST_BASE_FOLDER, "Forms", "Forms.xlsx");
 const GST_CIRCULARS_FOLDER = path.join(GST_BASE_FOLDER, "Circulars");
 const GST_INSTRUCTIONS_FILE = path.join(
@@ -33,6 +34,7 @@ const GST_NOTIFICATION_FOLDER_MAP = {
 };
 
 let gstCache = null;
+let gstCacheSignature = "";
 
 function getYearHint(item) {
   const value = String(item?.year || item?.date || "").trim();
@@ -232,20 +234,416 @@ function normalizeKey(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+function normalizeCell(value) {
+  return String(value || "")
+    .replace(/\u00a0/g, " ")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\r\n?/g, "\n")
+    .trim();
+}
+
+function getExcelFiles(folderPath) {
+  if (!fs.existsSync(folderPath)) return [];
+
+  return fs
+    .readdirSync(folderPath, { withFileTypes: true })
+    .flatMap((entry) => {
+      const entryPath = path.join(folderPath, entry.name);
+      if (entry.isDirectory()) return getExcelFiles(entryPath);
+      return /\.xlsx?$/i.test(entry.name) ? [entryPath] : [];
+    })
+    .sort((left, right) => left.localeCompare(right));
+}
+
+function getGstFolderSignature() {
+  return getExcelFiles(GST_BASE_FOLDER)
+    .map((filePath) => {
+      const stats = fs.statSync(filePath);
+      return `${filePath}:${stats.size}:${stats.mtimeMs}`;
+    })
+    .join("|");
+}
+
+function parseRuleHeading(value) {
+  const heading = normalizeCell(value);
+  const match = heading.match(/^rule\s+([0-9]+[a-z]*)\s*[.\-:–—]*\s*(.*)$/i);
+  if (!match) return null;
+
+  return {
+    number: match[1].toUpperCase(),
+    title: match[2].replace(/\s*[-–—]\s*$/, "").trim() || `Rule ${match[1]}`,
+    heading,
+  };
+}
+
+function getRuleChapterLabel(sheetName, rows) {
+  const chapterHeading = rows
+    .flat()
+    .map(normalizeCell)
+    .find((value) => /^chapter\s+[ivxlcdm0-9]+\b/i.test(value));
+  if (chapterHeading) return chapterHeading;
+
+  const normalizedSheet = normalizeCell(sheetName);
+  if (normalizedSheet && !/^sheet\d*$/i.test(normalizedSheet)) return normalizedSheet;
+  return "Rules";
+}
+
+function parseRuleWorkbook(filePath, folderName) {
+  const workbook = XLSX.readFile(filePath, { cellDates: true });
+  const chaptersById = new Map();
+  let ruleSetTitle = normalizeCell(folderName);
+  let ruleSequence = 0;
+
+  workbook.SheetNames.forEach((sheetName) => {
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
+      header: 1,
+      defval: "",
+      raw: false,
+    });
+    const workbookTitle = rows.flat().map(normalizeCell).find(Boolean);
+    if (
+      workbookTitle &&
+      !parseRuleHeading(workbookTitle) &&
+      !/^chapter\b/i.test(workbookTitle) &&
+      /\brules?\b/i.test(workbookTitle)
+    ) {
+      ruleSetTitle = workbookTitle;
+    }
+
+    const chapterLabel = getRuleChapterLabel(sheetName, rows);
+    const chapterId = normalizeKey(chapterLabel) || "rules";
+    if (!chaptersById.has(chapterId)) {
+      chaptersById.set(chapterId, {
+        id: chapterId,
+        label: chapterLabel,
+        title: chapterLabel,
+        rules: [],
+      });
+    }
+
+    let activeRule = null;
+    const commitRule = () => {
+      if (!activeRule) return;
+      ruleSequence += 1;
+      const label = `Rule ${activeRule.number}`;
+      const content = activeRule.content.filter(Boolean);
+      chaptersById.get(chapterId).rules.push({
+        id: `${chapterId}-${normalizeKey(label)}-${ruleSequence}`,
+        kind: "rule",
+        number: activeRule.number,
+        label,
+        title: activeRule.title,
+        heading: activeRule.heading,
+        content,
+        searchableText: [label, activeRule.title, ...content].join(" "),
+      });
+      activeRule = null;
+    };
+
+    rows.forEach((row) => {
+      const cells = row.map(normalizeCell).filter(Boolean);
+      if (cells.length === 0) return;
+      const marker = parseRuleHeading(cells[0]);
+      if (marker) {
+        commitRule();
+        activeRule = { ...marker, content: cells.slice(1) };
+      } else if (activeRule) {
+        activeRule.content.push(...cells);
+      }
+    });
+    commitRule();
+  });
+
+  const id = normalizeKey(folderName || ruleSetTitle);
+  const pdfMetadata = getGstPdfMetadata(
+    findBestPdfMatch(GST_RULES_FOLDER, [ruleSetTitle, folderName], { pathHints: [folderName] }),
+    null
+  );
+  const chapters = Array.from(chaptersById.values())
+    .filter((chapter) => chapter.rules.length > 0)
+    .map((chapter) => ({ ...chapter, ruleCount: chapter.rules.length }));
+
+  return {
+    id,
+    type: "rules",
+    ruleSet: ruleSetTitle,
+    title: ruleSetTitle,
+    year: String(ruleSetTitle.match(/\b(20\d{2})\b/)?.[1] || ""),
+    sourceFileName: path.basename(filePath),
+    chapters,
+    ruleCount: chapters.reduce((total, chapter) => total + chapter.rules.length, 0),
+    ...pdfMetadata,
+  };
+}
+
+function loadGstRulesFromFolder() {
+  return getExcelFiles(GST_RULES_FOLDER)
+    .map((filePath) => parseRuleWorkbook(filePath, path.basename(path.dirname(filePath))))
+    .filter((ruleSet) => ruleSet.ruleCount > 0)
+    .sort((left, right) => left.title.localeCompare(right.title));
+}
+
+function flattenGstRules(ruleDocuments) {
+  return ruleDocuments.flatMap((ruleSet) =>
+    ruleSet.chapters.flatMap((chapter) =>
+      chapter.rules.map((rule) => ({
+        id: `${ruleSet.id}-${rule.id}`,
+        type: "rules",
+        ruleName: ruleSet.title,
+        ruleSet: ruleSet.title,
+        ruleSetId: ruleSet.id,
+        year: ruleSet.year,
+        chapter: chapter.label,
+        chapterId: chapter.id,
+        ruleNumber: rule.number,
+        ruleId: rule.id,
+        title: rule.title,
+        description: rule.content.join("\n\n"),
+        content: rule.content,
+        pdfUrl: ruleSet.pdfUrl,
+        pdfFileName: ruleSet.pdfFileName,
+      }))
+    )
+  );
+}
+
+function parseSectionHeading(value) {
+  const heading = normalizeCell(value);
+  const sectionMatch = heading.match(/^section\s+([0-9]+[a-z]?)\s*[.\-:]*\s*(.*)$/i);
+  if (sectionMatch) {
+    return {
+      kind: "section",
+      number: sectionMatch[1].toUpperCase(),
+      title: sectionMatch[2].replace(/\s*[-–—]\s*$/, "").trim() || `Section ${sectionMatch[1]}`,
+      heading,
+    };
+  }
+
+  const scheduleMatch = heading.match(/^schedule\s*([ivxlcdm0-9]*)\s*[.\-:]*\s*(.*)$/i);
+  if (scheduleMatch) {
+    const number = scheduleMatch[1] || "";
+    return {
+      kind: "schedule",
+      number: number.toUpperCase(),
+      title: scheduleMatch[2].trim() || `Schedule${number ? ` ${number.toUpperCase()}` : ""}`,
+      heading,
+    };
+  }
+
+  if (/^introduction\b/i.test(heading)) {
+    return { kind: "introduction", number: "", title: "Introduction", heading };
+  }
+
+  return null;
+}
+
+function getChapterLabel(sheetName, sectionKind) {
+  const normalizedSheet = normalizeCell(sheetName);
+  if (sectionKind === "schedule" || /schedule/i.test(normalizedSheet)) return "Schedules";
+  if (normalizedSheet && !/^sheet\d*$/i.test(normalizedSheet) && normalizedSheet !== "Section") {
+    return normalizedSheet;
+  }
+  return "Act Sections";
+}
+
+function parseActWorkbook(filePath, folderName) {
+  const workbook = XLSX.readFile(filePath, { cellDates: true });
+  const chaptersById = new Map();
+  let actTitle = normalizeCell(folderName);
+  let sectionSequence = 0;
+
+  workbook.SheetNames.forEach((sheetName) => {
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
+      header: 1,
+      defval: "",
+      raw: false,
+    });
+    const workbookTitle = rows.flat().map(normalizeCell).find(Boolean);
+    if (workbookTitle && !parseSectionHeading(workbookTitle)) actTitle = workbookTitle;
+
+    let activeSection = null;
+
+    const commitSection = () => {
+      if (!activeSection) return;
+      const content = activeSection.content.filter(Boolean);
+      const chapterLabel = getChapterLabel(sheetName, activeSection.kind);
+      const chapterId = normalizeKey(chapterLabel) || "act-sections";
+      if (!chaptersById.has(chapterId)) {
+        chaptersById.set(chapterId, {
+          id: chapterId,
+          label: chapterLabel,
+          title: chapterLabel,
+          sections: [],
+        });
+      }
+
+      sectionSequence += 1;
+      const sectionLabel =
+        activeSection.kind === "section"
+          ? `Section ${activeSection.number}`
+          : activeSection.kind === "schedule"
+            ? `Schedule${activeSection.number ? ` ${activeSection.number}` : ""}`
+            : "Introduction";
+      const sectionId = `${chapterId}-${normalizeKey(sectionLabel)}-${sectionSequence}`;
+      chaptersById.get(chapterId).sections.push({
+        id: sectionId,
+        kind: activeSection.kind,
+        number: activeSection.number,
+        label: sectionLabel,
+        title: activeSection.title,
+        heading: activeSection.heading,
+        content,
+        searchableText: [sectionLabel, activeSection.title, ...content].join(" "),
+      });
+      activeSection = null;
+    };
+
+    rows.forEach((row, rowIndex) => {
+      const cells = row.map(normalizeCell).filter(Boolean);
+      if (cells.length === 0) return;
+
+      const marker = parseSectionHeading(cells[0]);
+      if (marker) {
+        commitSection();
+        activeSection = { ...marker, content: cells.slice(1) };
+        return;
+      }
+
+      if (!activeSection) {
+        if (rowIndex <= 3 || cells.every((cell) => cell === actTitle)) return;
+        activeSection = {
+          kind: "introduction",
+          number: "",
+          title: "Introduction",
+          heading: "Introduction",
+          content: [],
+        };
+      }
+      activeSection.content.push(...cells);
+    });
+
+    commitSection();
+  });
+
+  const id = normalizeKey(folderName || actTitle);
+  const pdfMetadata = getGstPdfMetadata(
+    findBestPdfMatch(GST_ACTS_FOLDER, [actTitle, folderName], {
+      pathHints: [folderName],
+    }),
+    null
+  );
+  const chapters = Array.from(chaptersById.values()).map((chapter) => ({
+    ...chapter,
+    sectionCount: chapter.sections.length,
+  }));
+
+  return {
+    id,
+    type: "acts",
+    act: actTitle,
+    title: actTitle,
+    sourceFileName: path.basename(filePath),
+    chapters,
+    sectionCount: chapters.reduce((total, chapter) => total + chapter.sections.length, 0),
+    ...pdfMetadata,
+  };
+}
+
+function loadGstActsFromFolder() {
+  return getExcelFiles(GST_ACTS_FOLDER)
+    .map((filePath) => parseActWorkbook(filePath, path.basename(path.dirname(filePath))))
+    .filter((act) => act.sectionCount > 0)
+    .sort((left, right) => left.title.localeCompare(right.title));
+}
+
+function flattenGstActs(actDocuments) {
+  return actDocuments.flatMap((act) =>
+    act.chapters.flatMap((chapter) =>
+      chapter.sections.map((section) => ({
+        id: `${act.id}-${section.id}`,
+        type: "acts",
+        act: act.title,
+        actId: act.id,
+        chapter: chapter.label,
+        chapterId: chapter.id,
+        section: section.label,
+        sectionId: section.id,
+        title: section.title,
+        description: section.content.join("\n\n"),
+        content: section.content,
+        pdfUrl: act.pdfUrl,
+        pdfFileName: act.pdfFileName,
+      }))
+    )
+  );
+}
+
 function getGstDataStore() {
-  if (gstCache) return gstCache;
+  const currentSignature = getGstFolderSignature();
+  if (gstCache && currentSignature === gstCacheSignature) return gstCache;
+
+  const actDocuments = loadGstActsFromFolder();
+  const ruleDocuments = loadGstRulesFromFolder();
 
   gstCache = {
-    acts,
-    rules,
+    actDocuments,
+    ruleDocuments,
+    acts: flattenGstActs(actDocuments),
+    rules: flattenGstRules(ruleDocuments),
     forms: loadGstFormsFromFolder(),
     notifications: loadGstNotificationsFromFolder(),
     circulars: loadGstCircularsFromFolder(),
     instructions: loadGstInstructionsFromFolder(),
     orders,
   };
+  gstCacheSignature = currentSignature;
 
   return gstCache;
+}
+
+function getGstRulesCatalog() {
+  return getGstDataStore().ruleDocuments.map((ruleSet) => ({
+    id: ruleSet.id,
+    title: ruleSet.title,
+    ruleSet: ruleSet.ruleSet,
+    year: ruleSet.year,
+    ruleCount: ruleSet.ruleCount,
+    sourceFileName: ruleSet.sourceFileName,
+    pdfUrl: ruleSet.pdfUrl,
+    pdfFileName: ruleSet.pdfFileName,
+    chapters: ruleSet.chapters.map((chapter) => ({
+      id: chapter.id,
+      label: chapter.label,
+      title: chapter.title,
+      ruleCount: chapter.ruleCount,
+    })),
+  }));
+}
+
+function getGstRuleById(ruleId) {
+  return getGstDataStore().ruleDocuments.find((ruleSet) => ruleSet.id === ruleId) || null;
+}
+
+function getGstActsCatalog() {
+  return getGstDataStore().actDocuments.map((act) => ({
+    id: act.id,
+    title: act.title,
+    act: act.act,
+    sectionCount: act.sectionCount,
+    sourceFileName: act.sourceFileName,
+    pdfUrl: act.pdfUrl,
+    pdfFileName: act.pdfFileName,
+    chapters: act.chapters.map((chapter) => ({
+      id: chapter.id,
+      label: chapter.label,
+      title: chapter.title,
+      sectionCount: chapter.sectionCount,
+    })),
+  }));
+}
+
+function getGstActById(actId) {
+  return getGstDataStore().actDocuments.find((act) => act.id === actId) || null;
 }
 
 function getGstPdfMetadata(filePath, fallbackUrl) {
@@ -375,7 +773,7 @@ function getNotificationsByCategory(category) {
 }
 
 function getAmendmentHistory(documentName) {
-  const document = acts.find((item) => item.act === documentName);
+  const document = legacyActs.find((item) => item.act === documentName);
   return document?.amendmentHistory || [];
 }
 
@@ -411,6 +809,10 @@ module.exports = {
   getAllGstData,
   getAmendmentHistory,
   getGstDataByType,
+  getGstActsCatalog,
+  getGstActById,
+  getGstRulesCatalog,
+  getGstRuleById,
   getNotificationsByCategory,
   resolveGstPdfDownloadPath,
 };

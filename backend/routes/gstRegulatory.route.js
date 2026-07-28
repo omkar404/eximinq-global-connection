@@ -55,8 +55,55 @@ router.get("/pdf-download", (req, res) => {
   }
 });
 
+router.get("/acts/catalog", (_req, res) => {
+  try {
+    res.set("Cache-Control", "no-store, max-age=0");
+    const data = gstRegulatoryService.getGstActsCatalog();
+    return res.json({ success: true, count: data.length, data });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+router.get("/acts/:actId", (req, res) => {
+  try {
+    res.set("Cache-Control", "no-store, max-age=0");
+    const data = gstRegulatoryService.getGstActById(req.params.actId);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "GST Act not found" });
+    }
+    return res.json({ success: true, data });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+router.get("/rules/catalog", (_req, res) => {
+  try {
+    res.set("Cache-Control", "no-store, max-age=0");
+    const data = gstRegulatoryService.getGstRulesCatalog();
+    return res.json({ success: true, count: data.length, data });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+router.get("/rules/:ruleId", (req, res) => {
+  try {
+    res.set("Cache-Control", "no-store, max-age=0");
+    const data = gstRegulatoryService.getGstRuleById(req.params.ruleId);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "GST Rules not found" });
+    }
+    return res.json({ success: true, data });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 router.get("/:type", (req, res) => {
   try {
+    res.set("Cache-Control", "no-store, max-age=0");
     const data = gstRegulatoryService.getGstDataByType(req.params.type);
     return res.json({
       success: true,

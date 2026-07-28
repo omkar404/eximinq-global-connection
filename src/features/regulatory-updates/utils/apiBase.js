@@ -8,15 +8,14 @@ export function getRegulatoryApiBase() {
   if (typeof window !== "undefined") {
     const browserHost = window.location.hostname;
 
+    if (isLocalhost(browserHost)) {
+      return "http://localhost:5000";
+    }
+
     if (raw) {
       try {
         const parsed = new URL(raw, window.location.origin);
         const envHost = parsed.hostname;
-        const envPort = parsed.port;
-
-        if (isLocalhost(browserHost) && envHost === "localhost" && envPort === "3000") {
-          return "http://localhost:5000";
-        }
 
         if (!isLocalhost(browserHost) && isLocalhost(envHost)) {
           return "";
@@ -28,9 +27,8 @@ export function getRegulatoryApiBase() {
       }
     }
 
-    return isLocalhost(browserHost) ? "http://localhost:5000" : "";
+    return "";
   }
 
   return raw || "http://localhost:5000";
 }
-
