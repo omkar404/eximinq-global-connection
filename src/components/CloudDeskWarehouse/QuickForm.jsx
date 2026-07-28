@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Warehouse, Phone } from "lucide-react";
 
 
-const Fees = () => {
+const QuickForm = () => {
   const [form, setForm] = useState({
+    companyName: "",
+    personName: "",
+    email: "",
     Type: "",
     location: "",
     mobile: "",
@@ -31,6 +34,24 @@ const Fees = () => {
   -----------------------*/
   const validate = () => {
     const newErrors = {};
+
+    if (!form.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    } else if (form.companyName.trim().length < 2) {
+      newErrors.companyName = "Company name must be at least 2 characters";
+    }
+
+    if (!form.personName.trim()) {
+      newErrors.personName = "Your name is required";
+    } else if (form.personName.trim().length < 2) {
+      newErrors.personName = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Enter a valid email address";
+    }
 
     if (!form.Type) {
       newErrors.Type = "Proposed type is required";
@@ -61,6 +82,9 @@ const Fees = () => {
 
     try {
       const payload = {
+        companyName: form.companyName.trim(),
+        personName: form.personName.trim(),
+        email: form.email.trim(),
         Type: form.Type,
         location: form.location,
         mobile: form.mobile,
@@ -88,7 +112,14 @@ const Fees = () => {
       alert("✅ Compliance report request submitted successfully");
 
       // Reset form
-      setForm({ Type: "", location: "", mobile: "" });
+      setForm({
+        companyName: "",
+        personName: "",
+        email: "",
+        Type: "",
+        location: "",
+        mobile: "",
+      });
       setErrors({});
     } catch (err) {
       console.error("❌ Error:", err);
@@ -99,30 +130,90 @@ const Fees = () => {
   };
 
   return (
-    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+    <div className="bg-white text-slate-800 rounded-xl shadow-2xl p-4 md:p-5">
       {/* Heading */}
-      <div className="flex items-center gap-3 mb-2">
-        <Warehouse className="text-brand-600" size={26} />
-        <h3 className="text-2xl font-bold text-brand-900">
+      <div className="flex items-center gap-2 mb-1">
+        <Warehouse className="text-brand-600" size={20} />
+        <h3 className="text-lg font-bold text-brand-900">
           License Feasibility Check
         </h3>
       </div>
 
-      <p className="text-slate-500 mb-6 text-sm">
+      <p className="text-slate-500 mb-3 text-xs">
         Find the right license for your operations.
       </p>
 
       <form onSubmit={handleSubmit}>
+        {/* Company Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Company Name
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.companyName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Acme Exports Pvt Ltd"
+          />
+          {errors.companyName && (
+            <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+          )}
+        </div>
+
+        {/* Contact Person Name */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Contact Person Name
+          </label>
+          <input
+            type="text"
+            name="personName"
+            value={form.personName}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.personName ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. Rahul Sharma"
+          />
+          {errors.personName && (
+            <p className="text-red-500 text-xs mt-1">{errors.personName}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
+            Email Id
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
+              errors.email ? "border-red-500" : "border-slate-300"
+            }`}
+            placeholder="e.g. rahul@acmeexports.com"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+          )}
+        </div>
+
         {/* Proposed Type */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Proposed Type
           </label>
           <select
             name="Type"
             value={form.Type}
             onChange={handleChange}
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.Type ? "border-red-500" : "border-slate-300"
             }`}
           >
@@ -138,8 +229,8 @@ const Fees = () => {
         </div>
 
         {/* Location */}
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-2.5">
+          <label className="block text-xs font-semibold mb-1">
             Location
           </label>
           <input
@@ -148,7 +239,7 @@ const Fees = () => {
             value={form.location}
             onChange={handleChange}
             placeholder="e.g. Near JNPT, Mumbai"
-            className={`w-full border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+            className={`w-full border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
               errors.location ? "border-red-500" : "border-slate-300"
             }`}
           />
@@ -158,14 +249,14 @@ const Fees = () => {
         </div>
 
         {/* Mobile Number */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold mb-1">
+        <div className="mb-3">
+          <label className="block text-xs font-semibold mb-1">
             Mobile Number
           </label>
           <div className="relative">
             <Phone
               size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"
             />
             <input
               type="tel"
@@ -174,7 +265,7 @@ const Fees = () => {
               onChange={handleChange}
               placeholder="9876543210"
               maxLength={10}
-              className={`w-full pl-9 border rounded px-3 py-2 focus:outline-none focus:border-brand-500 ${
+              className={`w-full pl-9 border rounded px-2.5 py-1.5 text-sm focus:outline-none focus:border-brand-500 ${
                 errors.mobile ? "border-red-500" : "border-slate-300"
               }`}
             />
@@ -188,7 +279,7 @@ const Fees = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-bold py-3 rounded-lg transition ${
+          className={`w-full text-white font-bold py-2 text-sm rounded-lg transition ${
             loading
               ? "bg-brand-400 cursor-not-allowed"
               : "bg-brand-600 hover:bg-brand-700"
@@ -201,4 +292,4 @@ const Fees = () => {
   );
 };
 
-export default Fees;
+export default QuickForm; 
