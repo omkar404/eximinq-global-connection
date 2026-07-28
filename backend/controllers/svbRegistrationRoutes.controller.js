@@ -29,6 +29,8 @@ async function sendEmail(record) {
     issue,
     relationshipType,
     importValue,
+    companyName,
+    personName,    
   } = record;
 
   const serviceDisplay = service || "SVB Registration";
@@ -48,6 +50,8 @@ async function sendEmail(record) {
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${relationshipType ? `<tr><td><b>Relationship Type</b></td><td>${relationshipType}</td></tr>` : ""}
           ${importValue ? `<tr><td><b>Annual Import Value (USD)</b></td><td>${importValue}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Full Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -82,6 +86,8 @@ exports.createsvbRegistrationRoutes = async (req, res) => {
       issue,
       relationshipType, // ✅ camelCase
       importValue, // ✅ camelCase
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -99,6 +105,8 @@ exports.createsvbRegistrationRoutes = async (req, res) => {
       relationshipType: relationshipType ? relationshipType.trim() : null, // ✅ use the correct variable
       importValue: importValue ? importValue.trim() : null, // ✅ use correct variable
       name: isQuickForm ? null : name ? name.trim() : null,
+      companyName: companyName ? companyName.trim() : null,
+      personName: personName ? personName.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
       role: isQuickForm ? null : role || null,
