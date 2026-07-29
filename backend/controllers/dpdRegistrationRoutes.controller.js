@@ -29,6 +29,8 @@ async function sendEmail(record) {
     issue,
     volume,
     port,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "DPD Registration";
@@ -47,6 +49,8 @@ async function sendEmail(record) {
           ${record.contactPersonName || record.personName ? `<tr><td><b>Contact Person Name</b></td><td>${record.contactPersonName || record.personName}</td></tr>` : ""}
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${volume ? `<tr><td><b>Monthly Volume (TEUs)</b></td><td>${volume}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${port ? `<tr><td><b>Current Port</b></td><td>${port}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
@@ -82,6 +86,8 @@ exports.createdpdRegistrationRoutes = async (req, res) => {
       issue,
       volume, // ✅ camelCase
       port, // ✅ camelCase
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -98,6 +104,8 @@ exports.createdpdRegistrationRoutes = async (req, res) => {
       mobile: mobile.trim(),
       volume: volume ? volume.trim() : null, // ✅ use the correct variable
       port: port ? port.trim() : null, // ✅ use correct variable
+      companyName: companyName ? companyName.trim() : null,
+      personName: personName ? personName.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
