@@ -29,6 +29,8 @@ async function sendEmail(record) {
     issue,
     iec,
     bank,
+    companyName,
+    personName,
   } = record;
 
   const serviceDisplay = service || "EDPMS Registration";
@@ -48,6 +50,8 @@ async function sendEmail(record) {
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${iec ? `<tr><td><b>Company IEC</b></td><td>${iec}</td></tr>` : ""}
           ${bank ? `<tr><td><b>Bank Name</b></td><td>${bank}</td></tr>` : ""}
+          ${companyName ? `<tr><td><b>Full Name</b></td><td>${companyName}</td></tr>` : ""}
+          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>
@@ -82,6 +86,8 @@ exports.createedpmsEbrcRoutes = async (req, res) => {
       issue,
       iec, // ✅ camelCase
       bank, // ✅ camelCase
+      companyName,
+      personName,
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
@@ -98,6 +104,8 @@ exports.createedpmsEbrcRoutes = async (req, res) => {
       mobile: mobile.trim(),
       iec: iec ? iec.trim() : null, // ✅ use the correct variable
       bank: bank ? bank.trim() : null, // ✅ use correct variable
+      companyName: companyName ? companyName.trim() : null,
+      personName: personName ? personName.trim() : null,
       name: isQuickForm ? null : name ? name.trim() : null,
       email: isQuickForm ? null : email ? email.trim().toLowerCase() : null,
       entity: isQuickForm ? null : entity ? entity.trim() : null,
