@@ -1537,7 +1537,7 @@ export default function StrategicSolutions() {
                   <td className="px-6 py-4 font-medium text-slate-900">
                     {/* Customs License */}
                     <a
-                      href="/services/epcg-scheme"
+                      href="/services/customs-license-registration"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-blue-600 transition"
