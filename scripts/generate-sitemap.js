@@ -7,7 +7,7 @@ const PACKAGE_FILE = path.join(ROOT_DIR, "package.json");
 const SITEMAP_FILE = path.join(ROOT_DIR, "public", "sitemap.xml");
 
 const SITE_URL = "https://eximinq.in";
-const REACT_SNAP_EXCLUDED_ROUTES = new Set();
+const EXCLUDED_PUBLIC_ROUTES = new Set(["/demo-of-clouddesk/"]);
 const REACT_SNAP_PRIORITY_ROUTES = [
   "/advance-authorization-redemption/",
   "/services/advance-authorisation/",
@@ -193,7 +193,7 @@ function updateReactSnapInclude(routePaths) {
   const packageJson = JSON.parse(fs.readFileSync(PACKAGE_FILE, "utf8"));
   packageJson.reactSnap = packageJson.reactSnap || {};
   const routeSet = new Set(
-    routePaths.filter((routePath) => !REACT_SNAP_EXCLUDED_ROUTES.has(routePath))
+    routePaths.filter((routePath) => !EXCLUDED_PUBLIC_ROUTES.has(routePath))
   );
   packageJson.reactSnap.include = [
     ...REACT_SNAP_PRIORITY_ROUTES.filter((routePath) => routeSet.delete(routePath)),
@@ -205,11 +205,13 @@ function updateReactSnapInclude(routePaths) {
 function main() {
   const appSource = fs.readFileSync(APP_FILE, "utf8");
   const importMap = getImportMap(appSource);
-  const routes = getRoutes(appSource, importMap).map((route) => ({
-    ...route,
-    path: toCanonicalRoutePath(route.path),
-    lastmod: getLastModified(route),
-  }));
+  const routes = getRoutes(appSource, importMap)
+    .map((route) => ({
+      ...route,
+      path: toCanonicalRoutePath(route.path),
+      lastmod: getLastModified(route),
+    }))
+    .filter((route) => !EXCLUDED_PUBLIC_ROUTES.has(route.path));
 
   fs.writeFileSync(SITEMAP_FILE, buildSitemapXml(routes));
   updateReactSnapInclude(routes.map((route) => route.path));

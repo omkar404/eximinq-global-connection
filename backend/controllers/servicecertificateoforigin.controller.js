@@ -2,6 +2,30 @@ const { normalizeQuickContactFields } = require("../utils/quickContactFields");
 const servicecertificateoforigin = require("../models/servicecertificateoforigin");
 const nodemailer = require("nodemailer");
 
+const EXPORTER_PLAN_DETAILS = {
+  Startup_Small_Plan: {
+    planCategory: "Preferential COO Subscription",
+    planName: "Startup / Small Plan",
+    monthlyCooLimit: "Up to 25 Pref. COO",
+    additionalCooRate: "INR 1,250/- per COO",
+    planPrice: "INR 30,000/- / mo",
+  },
+  MID_SIZE_EXPORTER_PLAN: {
+    planCategory: "Preferential COO Subscription",
+    planName: "Mid-Size Exporter Plan",
+    monthlyCooLimit: "Up to 50 Pref. COO",
+    additionalCooRate: "INR 1,150/- per COO",
+    planPrice: "INR 55,000/- / mo",
+  },
+  LARGE_EXPORTER_PLAN: {
+    planCategory: "Preferential COO Subscription",
+    planName: "Large-Size Exporter Plan",
+    monthlyCooLimit: "Up to 75 Pref. COO",
+    additionalCooRate: "INR 1,050/- per COO",
+    planPrice: "INR 75,000/- / mo",
+  },
+};
+
 /* SMTP TRANSPORTER */
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -107,6 +131,7 @@ exports.createservicecertificateoforigin = async (req, res) => {
     } = req.body;
 
     const isQuickForm = type === "QUICK_FORM";
+    const canonicalPlan = EXPORTER_PLAN_DETAILS[type] || null;
 
     if (!mobile || !mobile.trim()) {
       return res.status(400).json({
@@ -142,15 +167,22 @@ exports.createservicecertificateoforigin = async (req, res) => {
 
       partner: Boolean(partner),
 
-      planCategory: planCategory ? planCategory.trim() : null,
+      planCategory:
+        canonicalPlan?.planCategory ||
+        (planCategory ? planCategory.trim() : null),
 
-      planName: planName ? planName.trim() : null,
+      planName: canonicalPlan?.planName || (planName ? planName.trim() : null),
 
-      monthlyCooLimit: monthlyCooLimit ? monthlyCooLimit.trim() : null,
+      monthlyCooLimit:
+        canonicalPlan?.monthlyCooLimit ||
+        (monthlyCooLimit ? monthlyCooLimit.trim() : null),
 
-      additionalCooRate: additionalCooRate ? additionalCooRate.trim() : null,
+      additionalCooRate:
+        canonicalPlan?.additionalCooRate ||
+        (additionalCooRate ? additionalCooRate.trim() : null),
 
-      planPrice: planPrice ? planPrice.trim() : null,
+      planPrice:
+        canonicalPlan?.planPrice || (planPrice ? planPrice.trim() : null),
 
       type: type || "QUICK_FORM",
 
