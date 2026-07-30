@@ -120,7 +120,7 @@ const CloudDeskRodstep = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {showImportantUpdate && (
+      {/* {showImportantUpdate && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/75 p-3 backdrop-blur-sm sm:p-5"
           role="dialog"
@@ -259,7 +259,7 @@ const CloudDeskRodstep = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       <Navbar scrolled={scrolled} />
       <SecondaryNavbar scrollToSection={scrollToSection} />
