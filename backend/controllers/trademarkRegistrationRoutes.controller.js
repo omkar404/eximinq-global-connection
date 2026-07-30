@@ -52,8 +52,6 @@ async function sendEmail(record) {
           ${brandName ? `<tr><td><b>Brand Name / Slogan</b></td><td>${brandName}</td></tr>` : ""}
           ${activity ? `<tr><td><b>Business Activity</b></td><td>${activity}</td></tr>` : ""}
           ${applicantType ? `<tr><td><b>Applicant Type</b></td><td>${applicantType}</td></tr>` : ""}
-          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""} 
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>

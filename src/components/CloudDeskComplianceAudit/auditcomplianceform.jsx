@@ -9,15 +9,24 @@ const AuditComplianceForm = () => {
     company: "",
     name: "",
     email: "",
+    mobile: "",
     epcgActive: "",
     aaActive: "",
     igstPending: "",
-    drawbackFrequency: "Monthly",
+    drawbackFrequency: "",
   });
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
+    if (name === "mobile") {
+      // Keep only digits, cap at 10
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+      setFormData((current) => ({ ...current, mobile: digitsOnly }));
+      return;
+    }
+
     setFormData((current) => ({ ...current, [name]: value }));
   };
 
@@ -27,15 +36,22 @@ const AuditComplianceForm = () => {
     if (!formData.company.trim()) validationErrors.company = "Company name is required.";
     if (!formData.name.trim()) validationErrors.name = "Full name is required.";
     if (!formData.email.trim()) validationErrors.email = "Work email is required.";
+    if (!formData.mobile.trim()) {
+      validationErrors.mobile = "Mobile number is required.";
+    } else if (!/^[6-9]\d{9}$/.test(formData.mobile.trim())) {
+      validationErrors.mobile = "Enter a valid 10-digit mobile number.";
+    }
     if (formData.epcgActive === "") validationErrors.epcgActive = "Required.";
     if (formData.aaActive === "") validationErrors.aaActive = "Required.";
     if (!formData.igstPending.trim()) validationErrors.igstPending = "Required.";
+    if (!formData.drawbackFrequency) validationErrors.drawbackFrequency = "Please select a frequency.";
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length) return;
 
     const payload = {
       company: formData.company.trim(),
       name: formData.name.trim(),
+      mobile: formData.mobile.trim(),
       epcgActive: String(formData.epcgActive),
       aaActive: String(formData.aaActive),
       igstPending: formData.igstPending.trim(),
@@ -101,11 +117,27 @@ const AuditComplianceForm = () => {
                   {errors.name && <span className="block text-xs text-red-600 mt-1">{errors.name}</span>}
                 </label>
               </div>
-              <label className="block text-sm font-semibold text-slate-700">
-                Work Email
-                <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="mt-1 w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-200 focus:border-brand-500 outline-none" placeholder="name@company.com" />
-                {errors.email && <span className="block text-xs text-red-600 mt-1">{errors.email}</span>}
-              </label>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <label className="text-sm font-semibold text-slate-700">
+                  Work Email
+                  <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="mt-1 w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-200 focus:border-brand-500 outline-none" placeholder="name@company.com" />
+                  {errors.email && <span className="block text-xs text-red-600 mt-1">{errors.email}</span>}
+                </label>
+                <label className="text-sm font-semibold text-slate-700">
+                  Mobile Number
+                  <input
+                    type="tel"
+                    name="mobile"
+                    inputMode="numeric"
+                    value={formData.mobile}
+                    onChange={handleInputChange}
+                    maxLength={10}
+                    className="mt-1 w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-200 focus:border-brand-500 outline-none"
+                    placeholder="10-digit mobile number"
+                  />
+                  {errors.mobile && <span className="block text-xs text-red-600 mt-1">{errors.mobile}</span>}
+                </label>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <label className="text-xs font-semibold text-slate-700">
                   Active EPCG
@@ -125,12 +157,19 @@ const AuditComplianceForm = () => {
               </div>
               <label className="block text-sm font-semibold text-slate-700">
                 Drawback Claim Frequency
-                <select name="drawbackFrequency" value={formData.drawbackFrequency} onChange={handleInputChange} className="mt-1 w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-brand-200 focus:border-brand-500 outline-none">
+                <select
+                  name="drawbackFrequency"
+                  value={formData.drawbackFrequency}
+                  onChange={handleInputChange}
+                  className="mt-1 w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-brand-200 focus:border-brand-500 outline-none"
+                >
+                  <option value="" disabled>Select the drawback frequency</option>
                   <option>Weekly</option>
                   <option>Monthly</option>
                   <option>Quarterly</option>
                   <option>Sporadic</option>
                 </select>
+                {errors.drawbackFrequency && <span className="block text-xs text-red-600 mt-1">{errors.drawbackFrequency}</span>}
               </label>
               {errors.submit && <p className="text-sm text-red-600">{errors.submit}</p>}
               <button

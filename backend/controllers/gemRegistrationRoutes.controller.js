@@ -50,8 +50,6 @@ async function sendEmail(record) {
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${businessType ? `<tr><td><b>Business Type</b></td><td>${businessType}</td></tr>` : ""}
           ${productCategory ? `<tr><td><b>Product Category</b></td><td>${productCategory}</td></tr>` : ""}
-          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}
           <tr><td><b>Mobile</b></td><td>${mobile}</td></tr>

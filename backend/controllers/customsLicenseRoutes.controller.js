@@ -50,8 +50,6 @@ async function sendEmail(record) {
           ${record.contactPersonName || record.personName ? `<tr><td><b>Contact Person Name</b></td><td>${record.contactPersonName || record.personName}</td></tr>` : ""}
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${licenseType ? `<tr><td><b>License Type</b></td><td>${licenseType}</td></tr>` : ""}
-          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${port ? `<tr><td><b>Port of Import</b></td><td>${port}</td></tr>` : ""}
           ${dutyValue ? `<tr><td><b>License Value (Duty Saved)</b></td><td>${dutyValue}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
