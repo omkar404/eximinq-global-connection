@@ -49,8 +49,6 @@ async function sendEmail(record) {
           ${record.contactPersonName || record.personName ? `<tr><td><b>Contact Person Name</b></td><td>${record.contactPersonName || record.personName}</td></tr>` : ""}
           ${record.email ? `<tr><td><b>Email ID</b></td><td>${record.email}</td></tr>` : ""}
           ${volume ? `<tr><td><b>Monthly Volume (TEUs)</b></td><td>${volume}</td></tr>` : ""}
-          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}
           ${port ? `<tr><td><b>Current Port</b></td><td>${port}</td></tr>` : ""}
           ${category ? `<tr><td><b>Category</b></td><td>${category}</td></tr>` : ""}
           ${issue ? `<tr><td><b>Issue</b></td><td>${issue}</td></tr>` : ""}

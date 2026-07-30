@@ -21,6 +21,7 @@ exports.createAuditComplianceForm = async (req, res) => {
         const {
             company,
             name,
+            mobile,
             epcgActive,
             aaActive,
             igstPending,
@@ -28,10 +29,17 @@ exports.createAuditComplianceForm = async (req, res) => {
             email,
         } = req.body;
 
-        if (!company || !name || !epcgActive || !aaActive || !igstPending || !drawbackFrequency || !email) {
+        if (!company || !name || !mobile || !epcgActive || !aaActive || !igstPending || !drawbackFrequency || !email) {
             return res.status(400).json({
                 success: false,
-                error: "company, name, epcgActive, aaActive, igstPending, drawbackFrequency and email are required",
+                error: "company, name, mobile, epcgActive, aaActive, igstPending, drawbackFrequency and email are required",
+            });
+        }
+
+        if (!/^[6-9]\d{9}$/.test(mobile)) {
+            return res.status(400).json({
+                success: false,
+                error: "Enter a valid 10-digit mobile number",
             });
         }
 
@@ -42,6 +50,7 @@ exports.createAuditComplianceForm = async (req, res) => {
         const saved = await auditcomplianceformService.create({
             company,
             name,
+            mobile,
             epcgActive,
             aaActive,
             igstPending,
@@ -57,6 +66,7 @@ exports.createAuditComplianceForm = async (req, res) => {
       <h2>New Audit Compliance Form</h2>
       <p><strong>Organization Identity:</strong> ${company}</p>
       <p><strong>Official Full Name:</strong> ${name}</p>
+      <p><strong>Mobile Number:</strong> ${mobile}</p>
       <p><strong>Active EPCG Licenses:</strong> ${epcgActive}</p>
       <p><strong>Active AA Auths:</strong> ${aaActive}</p>
       <p><strong>Pending IGST Refund:</strong> ${igstPending}</p>

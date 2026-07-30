@@ -23,6 +23,11 @@ const AuditComplianceFormSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        mobile: {
+            type: String,
+            required: true,
+            trim: true,
+        },
         epcgActive: {
             type: String,
             required: true,
@@ -52,4 +57,3 @@ const AuditComplianceFormSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("auditcomplianceformService", AuditComplianceFormSchema);
-

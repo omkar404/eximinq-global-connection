@@ -58,9 +58,7 @@ async function sendEmail(record) {
           ${mode ? `<tr><td><b>Mode (Import/Export)</b></td><td>${mode}</td></tr>` : ""}
           ${originPort ? `<tr><td><b>Origin Port</b></td><td>${originPort}</td></tr>` : ""}
           ${destinationPort ? `<tr><td><b>Destination Port</b></td><td>${destinationPort}</td></tr>` : ""}
-          ${transportMode ? `<tr><td><b>Transport Mode</b></td><td>${transportMode}</td></tr>` : ""}
-          ${companyName ? `<tr><td><b>Company Name</b></td><td>${companyName}</td></tr>` : ""}
-          ${personName ? `<tr><td><b>Contact Person Name</b></td><td>${personName}</td></tr>` : ""}          
+          ${transportMode ? `<tr><td><b>Transport Mode</b></td><td>${transportMode}</td></tr>` : ""}        
           ${shipmentDate ? `<tr><td><b>Proposed Shipment Date</b></td><td>${shipmentDate}</td></tr>` : ""}
           ${cifValue ? `<tr><td><b>CIF Value (INR)</b></td><td>${cifValue}</td></tr>` : ""}
           ${quantity ? `<tr><td><b>Quantity (Metric Tons)</b></td><td>${quantity}</td></tr>` : ""}
