@@ -228,7 +228,7 @@ const EXPORTER_PACKAGES = [
     name: "Startup / Small Plan",
     price: "₹ 30,000/-",
     unit: "/ mo",
-    limit: "Monthly Limit (Pref. COO): Up to 25",
+    limit: "Monthly Limit : Up to 25 (Pref. COO)",
     extra: "Rate for Extra COOs: ₹ 1,250/- per COO",
     features: [
       "Monthly compliance review",
@@ -241,7 +241,7 @@ const EXPORTER_PACKAGES = [
     name: "Mid-Size Exporter Plan",
     price: "₹ 55,000/-",
     unit: "/ mo",
-    limit: "Monthly Limit (Pref. COO): Up to 50",
+    limit: "Monthly Limit : Up to 50 (Pref. COO)",
     extra: "Rate for Extra COOs: ₹ 1,150/- per COO",
     features: [
       "Monthly compliance review",
@@ -256,7 +256,7 @@ const EXPORTER_PACKAGES = [
     name: "Large-Size Exporter Plan",
     price: "₹ 75,000/-",
     unit: "/ mo",
-    limit: "Monthly Limit (Pref. COO): Up to 75",
+    limit: "Monthly Limit : Up to 75 (Pref. COO)",
     extra: "Rate for Extra COOs: ₹ 1,050/- per COO",
     features: [
       "Monthly compliance review",
