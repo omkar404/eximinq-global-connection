@@ -11,6 +11,19 @@ import {
   TrendingDown,
   Minus,
   FileText,
+  BadgeCheck,
+  Banknote,
+  Building2,
+  ClipboardCheck,
+  Clock3,
+  Database,
+  Factory,
+  FileBadge,
+  Globe2,
+  Landmark,
+  ShieldCheck,
+  Ship,
+  Warehouse,
 } from "lucide-react";
 import { Footer } from "../components/CloudDeskForeignTrade/Footer";
 import { exchangeRates } from "../data/exchangeRates";
@@ -33,6 +46,29 @@ const targetKeywords = [
   "CBIC exchange rate notification PDF",
   "Historical customs exchange rates India",
   "Customs currency rates for Bill of Entry",
+];
+
+const highIntentServiceLinks = [
+  { label: "IEC Registration & Annual Update", href: "/services/import-export-code/", icon: FileBadge, tone: "blue" },
+  { label: "AD Code Registration on ICEGATE", href: "/services/ad-code-registration/", icon: Landmark, tone: "indigo" },
+  { label: "ICEGATE Registration for Importers & Exporters", href: "/services/icegate-registration/", icon: Database, tone: "cyan" },
+  { label: "Certificate of Origin Consultant", href: "/services/certificate-of-origin/", icon: BadgeCheck, tone: "emerald" },
+  { label: "Advance Authorisation Consultant", href: "/services/advance-authorisation/", icon: FileText, tone: "violet" },
+  { label: "EPCG Scheme Consultant", href: "/services/epcg-scheme/", icon: Factory, tone: "amber" },
+  { label: "e-RCMC Registration Consultant", href: "/services/e-rcmc-registration/", icon: Globe2, tone: "teal" },
+  { label: "Duty Drawback Consultant", href: "/services/duty-drawback/", icon: Banknote, tone: "green" },
+  { label: "IGST Export Refund Consultant", href: "/services/igst-refund/", icon: Banknote, tone: "rose" },
+  { label: "SCOMET Licence Consultant", href: "/services/scomet-licensing/", icon: ShieldCheck, tone: "slate" },
+  { label: "MOOWR Scheme Consultant", href: "/services/moowr-scheme/", icon: Building2, tone: "orange" },
+  { label: "Factory Stuffing & Self-Sealing Permission", href: "/services/factory-stuffing/", icon: Ship, tone: "sky" },
+  { label: "Customs Warehouse Licence Consultant", href: "/services/warehouse-license/", icon: Warehouse, tone: "yellow" },
+  { label: "SVB Registration & Related-Party Valuation", href: "/services/svb-registration/", icon: Landmark, tone: "purple" },
+  { label: "Export-Import Compliance Audit", href: "/services/compliance-audit/", icon: ClipboardCheck, tone: "blue" },
+  { label: "Interest Equalisation Scheme Consultant", href: "/services/interest-equalisation-scheme/", icon: Banknote, tone: "emerald" },
+  { label: "Import Management Registration", href: "/services/import-management-registration/", icon: Database, tone: "cyan" },
+  { label: "EDPMS Closure & e-BRC Support", href: "/services/edpms-ebrc/", icon: BadgeCheck, tone: "indigo" },
+  { label: "Free Sale Certificate Consultant", href: "/services/free-sale-certificate/", icon: Globe2, tone: "teal" },
+  { label: "Export Obligation Period Extension", href: "/services/eop-extension/", icon: Clock3, tone: "amber" },
 ];
 
 const faqItems = [
@@ -1176,6 +1212,46 @@ export default function ExchangeRates() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="mt-8 overflow-hidden rounded-xl bg-gradient-to-r from-blue-700 to-indigo-700 p-6 text-white shadow-lg sm:p-8">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="max-w-2xl">
+             
+              <p className="mt-2 text-blue-100">
+                Explore EXIMINQ Strategic Solutions for customs, DGFT, Import-export Compliance, Licensing, and Incentive Support.
+              </p>
+            </div>
+            <a
+              href="https://eximinq.in/strategic-solutions"
+              className="inline-flex shrink-0 items-center justify-center rounded-lg bg-white px-5 py-3 font-semibold text-blue-700 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700"
+              aria-label="Explore EXIMINQ Strategic Solutions"
+            >
+              Explore Strategic Solutions
+            </a>
+          </div>
+        </section>
+
+        <section className="mx-auto mt-8 max-w-6xl rounded-xl border border-gray-200 bg-white p-6 shadow-md sm:p-8">
+          <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Trending Searches Covered</h2>
+          <p className="mt-3 max-w-5xl text-sm leading-6 text-slate-600 sm:text-base">
+            Explore EXIMINQ’s frequently searched DGFT, Customs, export-incentive, registration, and trade-compliance services. Select any service to review eligibility, documents, process, and timelines.
+          </p>
+
+          <nav className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5" aria-label="Popular import export service searches">
+            {highIntentServiceLinks.map(({ label, href }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-h-[64px] items-center rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium leading-5 text-slate-800 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label={`${label} - opens in a new tab`}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
         </section>
       </main>
 
