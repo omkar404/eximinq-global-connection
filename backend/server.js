@@ -187,6 +187,15 @@ const normalizeQuoteDetails = (quoteDetails) => {
     };
   }
 
+  if (quoteDetails.workflow === "buy" || Number(quoteDetails.requiredValue) > 0) {
+    const requiredValue = Number(quoteDetails.requiredValue);
+    return {
+      ...baseDetails,
+      type: "purchase",
+      requiredValue: formatCurrencyINR(requiredValue),
+    };
+  }
+
   return {
     ...baseDetails,
     type: "single",
@@ -242,6 +251,14 @@ const buildQuoteDetailsEmailHtml = (normalizedQuoteDetails) => {
       </table>
       <p style="margin-top:12px;"><strong>Total Face Value:</strong> ${escapeHtml(normalizedQuoteDetails.totals.totalFaceValue)}</p>
       <p><strong>Total Quote Value:</strong> ${escapeHtml(normalizedQuoteDetails.totals.totalQuoteValue)}</p>
+    `;
+  }
+
+  if (normalizedQuoteDetails.type === "purchase") {
+    return `
+      <p><strong>Purchase Requirement:</strong></p>
+      ${summaryHtml}
+      <p><strong>Required Scrip Face Value:</strong> ${escapeHtml(normalizedQuoteDetails.requiredValue)}</p>
     `;
   }
 
@@ -307,6 +324,33 @@ const RodtepRosctlTrading = mongoose.model("RodtepRosctlTrading", new mongoose.S
   iecNo:       { type: String, default: null, trim: true },
   quoteDetails:{ type: mongoose.Schema.Types.Mixed, default: null },
   source:      { type: String, default: "website" },
+}, { timestamps: true }));
+
+const RodtepRosctlSellRequest = mongoose.model("RodtepRosctlSellRequest", new mongoose.Schema({
+  name: { type: String, required: true, trim: true },
+  companyName: { type: String, required: true, trim: true },
+  scheme: { type: String, enum: ["RODTEP", "RoSCTL"], required: true },
+  mobile: { type: String, required: true, trim: true },
+  email: { type: String, required: true, lowercase: true, trim: true },
+  icegateId: { type: String, required: true, trim: true },
+  iecNo: { type: String, required: true, trim: true },
+  quoteDetails: { type: mongoose.Schema.Types.Mixed, default: null },
+  workflow: { type: String, default: "sell" },
+  status: { type: String, default: "Submitted" },
+  source: { type: String, default: "website" },
+}, { timestamps: true }));
+
+const RodtepRosctlBuyRequest = mongoose.model("RodtepRosctlBuyRequest", new mongoose.Schema({
+  name: { type: String, required: true, trim: true },
+  companyName: { type: String, required: true, trim: true },
+  scheme: { type: String, enum: ["RODTEP", "RoSCTL"], required: true },
+  mobile: { type: String, required: true, trim: true },
+  email: { type: String, required: true, lowercase: true, trim: true },
+  requiredValue: { type: Number, required: true, min: 1 },
+  quoteDetails: { type: mongoose.Schema.Types.Mixed, default: null },
+  workflow: { type: String, default: "buy" },
+  status: { type: String, default: "Submitted" },
+  source: { type: String, default: "website" },
 }, { timestamps: true }));
 
 const isValidEmail = (value) =>
@@ -435,6 +479,128 @@ app.post("/api/enquiry/services", async (req, res) => {
   } catch (err) { res.status(500).json({ success: false, error: err.message }); }
 });
 
+app.post("/api/rodtep-rosctl-trading/sell-request", async (req, res) => {
+  try {
+    const { name, companyName, scheme, mobile, email, icegateId, iecNo, quoteDetails } = req.body;
+    if (!name || !companyName || !scheme || !mobile || !email || !icegateId || !iecNo) {
+      return res.status(400).json({ success: false, error: "name, companyName, scheme, mobile, email, icegateId and iecNo are required" });
+    }
+    if (!["RODTEP", "RoSCTL"].includes(scheme)) {
+      return res.status(400).json({ success: false, error: "scheme must be either RODTEP or RoSCTL" });
+    }
+    const cleanMobile = normalizeMobile(mobile);
+    if (cleanMobile.length < 10 || cleanMobile.length > 15) {
+      return res.status(400).json({ success: false, error: "mobile must contain 10 to 15 digits" });
+    }
+    if (!email || !isValidEmail(email)) {
+      return res.status(400).json({ success: false, error: "a valid email is required" });
+    }
+    const quoteValidation = validateQuoteDetails(quoteDetails);
+    if (!quoteValidation.valid) {
+      return res.status(400).json({ success: false, error: quoteValidation.error });
+    }
+    const saved = await RodtepRosctlSellRequest.create({
+      name: String(name).trim(), companyName: String(companyName).trim(), scheme,
+      mobile: cleanMobile, email: String(email).trim().toLowerCase(),
+      icegateId: String(icegateId).trim(), iecNo: String(iecNo).trim(),
+      quoteDetails: quoteValidation.value,
+    });
+    const normalizedQuoteDetails = normalizeQuoteDetails(quoteValidation.value);
+    await transporter.sendMail({
+      from: `"EXIMINQ Scrip Sell Desk" <${process.env.SMTP_USER}>`,
+      to: "crm@eximinq.com, omkarmhetar100@gmail.com",
+      subject: `New ${scheme} Sell Request - ${companyName}`,
+      html: `<h2>New Scrip Sell Request</h2>
+        <p><strong>Workflow:</strong> Client selling to EXIMINQ</p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
+        <p><strong>Mobile:</strong> ${escapeHtml(cleanMobile)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>ICEGATE ID:</strong> ${escapeHtml(icegateId)}</p>
+        <p><strong>IEC No:</strong> ${escapeHtml(iecNo)}</p>
+        ${buildQuoteDetailsEmailHtml(normalizedQuoteDetails)}
+        <p><strong>Submitted (IST):</strong> ${formatISTDateTime(saved.createdAt)}</p>`,
+    });
+    return res.status(201).json({ success: true, message: "Sell request submitted successfully", data: { id: saved._id, workflow: "sell", scheme: saved.scheme, submittedAt: { iso: saved.createdAt.toISOString(), ist: formatISTDateTime(saved.createdAt) } } });
+  } catch (err) {
+    console.error("Sell request error:", err);
+    return res.status(500).json({ success: false, error: "Unable to process sell request" });
+  }
+});
+
+app.post("/api/rodtep-rosctl-trading/buy-request", async (req, res) => {
+  try {
+    const { name, companyName, scheme, mobile, email, requiredValue, quoteDetails } = req.body;
+    if (!name || !companyName || !scheme || !mobile || !email || !(Number(requiredValue) > 0)) {
+      return res.status(400).json({ success: false, error: "name, companyName, scheme, mobile, email and requiredValue are required" });
+    }
+    if (!["RODTEP", "RoSCTL"].includes(scheme)) {
+      return res.status(400).json({ success: false, error: "scheme must be either RODTEP or RoSCTL" });
+    }
+    const cleanMobile = normalizeMobile(mobile);
+    if (cleanMobile.length < 10 || cleanMobile.length > 15) {
+      return res.status(400).json({ success: false, error: "mobile must contain 10 to 15 digits" });
+    }
+    if (!email || !isValidEmail(email)) {
+      return res.status(400).json({ success: false, error: "a valid email is required" });
+    }
+    const quoteValidation = validateQuoteDetails(quoteDetails);
+    if (!quoteValidation.valid) {
+      return res.status(400).json({ success: false, error: quoteValidation.error });
+    }
+    const saved = await RodtepRosctlBuyRequest.create({
+      name: String(name).trim(), companyName: String(companyName).trim(), scheme,
+      mobile: cleanMobile, email: String(email).trim().toLowerCase(),
+      requiredValue: Number(requiredValue), quoteDetails: quoteValidation.value,
+    });
+    const normalizedQuoteDetails = normalizeQuoteDetails(quoteValidation.value);
+    await transporter.sendMail({
+      from: `"EXIMINQ Scrip Buy Desk" <${process.env.SMTP_USER}>`,
+      to: "crm@eximinq.com, omkarmhetar100@gmail.com",
+      subject: `New ${scheme} Buy Request - ${companyName}`,
+      html: `<h2>New Scrip Buy Request</h2>
+        <p><strong>Workflow:</strong> Client buying from EXIMINQ</p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
+        <p><strong>Mobile:</strong> ${escapeHtml(cleanMobile)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Required Value:</strong> ${escapeHtml(formatCurrencyINR(requiredValue))}</p>
+        ${buildQuoteDetailsEmailHtml(normalizedQuoteDetails)}
+        <p><strong>Submitted (IST):</strong> ${formatISTDateTime(saved.createdAt)}</p>`,
+    });
+    return res.status(201).json({ success: true, message: "Buy request submitted successfully", data: { id: saved._id, workflow: "buy", scheme: saved.scheme, requiredValue: saved.requiredValue, submittedAt: { iso: saved.createdAt.toISOString(), ist: formatISTDateTime(saved.createdAt) } } });
+  } catch (err) {
+    console.error("Buy request error:", err);
+    return res.status(500).json({ success: false, error: "Unable to process buy request" });
+  }
+});
+
+app.get("/api/admin/rodtep-rosctl-trading-requests", async (req, res) => {
+  const configuredKey = process.env.ADMIN_DASHBOARD_API_KEY;
+  if (!configuredKey) {
+    return res.status(503).json({ success: false, error: "Admin dashboard API is not configured" });
+  }
+  if (req.get("x-admin-key") !== configuredKey) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+
+  try {
+    const [sellRequests, buyRequests] = await Promise.all([
+      RodtepRosctlSellRequest.find().sort({ createdAt: -1 }).lean(),
+      RodtepRosctlBuyRequest.find().sort({ createdAt: -1 }).lean(),
+    ]);
+    const requests = [
+      ...sellRequests.map((request) => ({ ...request, requestType: "SELL", selectedScriptType: request.scheme })),
+      ...buyRequests.map((request) => ({ ...request, requestType: "BUY", selectedScriptType: request.scheme })),
+    ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return res.json({ success: true, count: requests.length, data: requests });
+  } catch (err) {
+    console.error("Admin trading requests error:", err);
+    return res.status(500).json({ success: false, error: "Unable to load trading requests" });
+  }
+});
+
+// Legacy combined endpoint retained for backwards compatibility with older clients.
 app.post("/api/rodtep-rosctl-trading", async (req, res) => {
   try {
     const { name, companyName, scheme, action, mobile, email, icegateId, iecNo, quoteDetails } = req.body;
@@ -504,8 +670,13 @@ app.post("/api/rodtep-rosctl-trading", async (req, res) => {
         action: saved.action,
         mobile: saved.mobile,
         email: saved.email,
-        icegateId: saved.icegateId,
-        iecNo: saved.iecNo,
+        ...(saved.action === "Selling" ? {
+          icegateId: saved.icegateId,
+          iecNo: saved.iecNo,
+        } : {}),
+        ...(saved.action === "Buying" && normalizedQuoteDetails?.requiredValue ? {
+          requiredValue: normalizedQuoteDetails.requiredValue,
+        } : {}),
         quoteDetails: normalizedQuoteDetails,
         submittedAt: {
           iso: saved.createdAt.toISOString(),

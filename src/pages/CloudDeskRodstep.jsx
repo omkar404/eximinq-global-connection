@@ -7,11 +7,9 @@ import LiveRates from "../components/CloudDeskRodstep/LiveRates";
 import ProcessSteps from "../components/CloudDeskRodstep/ProcessSteps";
 import Features from "../components/CloudDeskRodstep/Features";
 import Calculator from "../components/CloudDeskRodstep/Calculator";
-import InfoSection from "../components/CloudDeskRodstep/InfoSection";
 import ContactCTA from "../components/CloudDeskRodstep/ContactCTA";
 import Footer from "../components/CloudDeskRodstep/Footer";
 
-import useLiveRates from "../components/CloudDeskRodstep/useLiveRates";
 import { SLABS } from "../components/CloudDeskRodstep/slabs";
 import {
   AlertTriangle,
@@ -27,27 +25,9 @@ const IMPORTANT_UPDATE_SESSION_KEY =
 const CloudDeskRodstep = () => {
   const [scrolled, setScrolled] = useState(false);
   const [quoteDetails, setQuoteDetails] = useState(null);
+  const [selectedWorkflow, setSelectedWorkflow] = useState("sell");
+  const [calculatorRequest, setCalculatorRequest] = useState({ workflow: "sell", scheme: "rodtep" });
   const [showImportantUpdate, setShowImportantUpdate] = useState(false);
-
-  const {
-    calcAmount,
-    setCalcAmount,
-    calcType,
-    setCalcType,
-    calcScheme,
-    setCalcScheme,
-    calculateTotal,
-    appliedRate,
-    buyRows,
-    setBuyRows,
-    getRowRate,
-    getRowComputedValue,
-    buySummary,
-    formatCurrency,
-  } = useLiveRates();
-
-  const selectedAction = calcType === "buy" ? "Buying" : "Selling";
-  const selectedScheme = calcScheme === "rodtep" ? "RODTEP" : "RoSCTL";
 
   const rates = useMemo(() => SLABS[0].rates, []);
 
@@ -86,36 +66,16 @@ const CloudDeskRodstep = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleQuoteRequest = () => {
-    const nextQuoteDetails =
-      calcType === "buy"
-        ? {
-            action: selectedAction,
-            scheme: selectedScheme,
-            rows: buyRows.map((row) => ({
-              ...row,
-              rate: getRowRate(row.scripValue),
-              quoteValue: getRowComputedValue(row.scripValue),
-            })),
-            totalFaceValue: formatCurrency(buySummary.totalFaceValue),
-            totalQuoteValue: formatCurrency(buySummary.totalQuoteValue),
-          }
-        : {
-            action: selectedAction,
-            scheme: selectedScheme,
-            faceValue: formatCurrency(calcAmount),
-            appliedRate: `${Number(appliedRate).toFixed(2)}%`,
-            totalQuoteValue: calculateTotal(),
-          };
-
-    setQuoteDetails(nextQuoteDetails);
-    scrollToSection("contact");
+  const handleQuoteRequest = (details, workflow) => {
+    setSelectedWorkflow(workflow);
+    setQuoteDetails(details);
   };
 
   const handleLiveRateAction = (scheme, actionType) => {
-    setCalcScheme(String(scheme).toLowerCase() === "rosctl" ? "rosctl" : "rodtep");
-    setCalcType(String(actionType).toLowerCase() === "buy" ? "buy" : "sell");
-    scrollToSection("calculator");
+    const workflow = String(actionType).toLowerCase() === "buy" ? "sell" : "buy";
+    const normalizedScheme = String(scheme).toLowerCase() === "rosctl" ? "rosctl" : "rodtep";
+    setCalculatorRequest({ workflow, scheme: normalizedScheme });
+    scrollToSection(`${workflow}-calculator`);
   };
 
   return (
@@ -269,28 +229,15 @@ const CloudDeskRodstep = () => {
       <Features />
       <Calculator
         rates={rates}
-        calcAmount={calcAmount}
-        setCalcAmount={setCalcAmount}
-        calcType={calcType}
-        setCalcType={setCalcType}
-        calcScheme={calcScheme}
-        setCalcScheme={setCalcScheme}
-        calculateTotal={calculateTotal}
-        appliedRate={appliedRate}
-        buyRows={buyRows}
-        setBuyRows={setBuyRows}
-        getRowRate={getRowRate}
-        getRowComputedValue={getRowComputedValue}
-        buySummary={buySummary}
+        requestedTrade={calculatorRequest}
         onSendQuote={handleQuoteRequest}
       />
-      {/* <InfoSection /> */}
       <ContactCTA
-        selectedAction={selectedAction}
-        selectedScheme={selectedScheme}
+        selectedWorkflow={selectedWorkflow}
+        selectedScheme={quoteDetails?.scheme || "RODTEP"}
         quoteDetails={quoteDetails}
+        onClose={() => setQuoteDetails(null)}
       />
-      <InfoSection />
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}

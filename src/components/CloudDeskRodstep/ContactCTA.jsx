@@ -1,435 +1,310 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Phone, Mail } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Mail, Phone, X } from "lucide-react";
 
 const getApiBase = () => {
   const raw = (process.env.REACT_APP_API_URL || "").trim().replace(/\/$/, "");
-
-  if (typeof window !== "undefined") {
-    const browserHost = window.location.hostname;
-    const isLocalBrowser = browserHost === "localhost" || browserHost === "127.0.0.1";
-
-    if (!isLocalBrowser) {
-      return window.location.origin.replace(/\/$/, "");
-    }
-
-    if (raw) {
-      try {
-        const parsed = new URL(raw, window.location.origin);
-        const envHost = parsed.hostname;
-        const envPort = parsed.port;
-
-        if (isLocalBrowser && envHost === "localhost" && envPort === "3000") {
-          return "http://localhost:5000";
-        }
-
-        return parsed.origin.replace(/\/$/, "");
-      } catch (_error) {
-        return raw;
-      }
-    }
-
-    return "http://localhost:5000";
-  }
-
-  return raw || "http://localhost:5000";
+  if (!raw || /^https?:\/\/localhost(?::\d+)?$/i.test(raw)) return "";
+  return raw;
 };
 
-const renderFieldValue = (value) => value || "Not provided";
+const readApiResponse = async (response) => {
+  const contentType = response.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) return response.json();
 
-const QuoteDetailsSummary = ({ quoteDetails }) => {
+  return {
+    success: false,
+    error: response.status === 404
+      ? "This form service is not available on the server yet."
+      : "The server returned an unexpected response. Please try again.",
+  };
+};
+
+const initialSellForm = {
+  name: "",
+  companyName: "",
+  mobile: "",
+  email: "",
+  icegateId: "",
+  iecNo: "",
+  scheme: "RODTEP",
+};
+
+const initialBuyForm = {
+  name: "",
+  companyName: "",
+  mobile: "",
+  email: "",
+  requiredValue: "",
+  scheme: "RODTEP",
+};
+
+const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const mobileDigits = (value) => String(value || "").replace(/\D/g, "");
+
+const ContactCTA = ({
+  selectedWorkflow = "sell",
+  selectedScheme = "RODTEP",
+  quoteDetails = null,
+  onClose,
+}) => {
+  const [workflow, setWorkflow] = useState(selectedWorkflow);
+  const [sellForm, setSellForm] = useState(initialSellForm);
+  const [buyForm, setBuyForm] = useState(initialBuyForm);
+  const [sellErrors, setSellErrors] = useState({});
+  const [buyErrors, setBuyErrors] = useState({});
+  const [sellLoading, setSellLoading] = useState(false);
+  const [buyLoading, setBuyLoading] = useState(false);
+  const [sellResult, setSellResult] = useState(null);
+  const [buyResult, setBuyResult] = useState(null);
+
+  useEffect(() => setWorkflow(selectedWorkflow), [selectedWorkflow]);
+
+  useEffect(() => {
+    setSellForm((previous) => ({ ...previous, scheme: selectedScheme }));
+    setBuyForm((previous) => ({
+      ...previous,
+      scheme: selectedScheme,
+      requiredValue: quoteDetails?.faceValueAmount || previous.requiredValue,
+    }));
+  }, [selectedScheme, quoteDetails]);
+
+  useEffect(() => {
+    if (!quoteDetails) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") onClose?.();
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [quoteDetails, onClose]);
+
+  const updateForm = (setter) => (event) => {
+    const { name, value } = event.target;
+    setter((previous) => ({ ...previous, [name]: value }));
+  };
+
+  const validateSell = () => {
+    const errors = {};
+    if (!sellForm.name.trim()) errors.name = "Contact name is required";
+    if (!sellForm.companyName.trim()) errors.companyName = "Company name is required";
+    if (mobileDigits(sellForm.mobile).length < 10) errors.mobile = "Enter a valid mobile number";
+    if (!isEmail(sellForm.email.trim())) errors.email = "Enter a valid email address";
+    if (!sellForm.icegateId.trim()) errors.icegateId = "ICEGATE ID is required to sell scrips";
+    if (!sellForm.iecNo.trim()) errors.iecNo = "IEC number is required";
+    setSellErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const validateBuy = () => {
+    const errors = {};
+    if (!buyForm.name.trim()) errors.name = "Contact name is required";
+    if (!buyForm.companyName.trim()) errors.companyName = "Company name is required";
+    if (mobileDigits(buyForm.mobile).length < 10) errors.mobile = "Enter a valid mobile number";
+    if (!isEmail(buyForm.email.trim())) errors.email = "Enter a valid email address";
+    if (!(Number(buyForm.requiredValue) > 0)) errors.requiredValue = "Enter the required purchase value";
+    setBuyErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const submitSellRequest = async (event) => {
+    event.preventDefault();
+    if (!validateSell()) return;
+    setSellLoading(true);
+    setSellResult(null);
+    try {
+      const requestBody = { ...sellForm, quoteDetails };
+      let response = await fetch(`${getApiBase()}/api/rodtep-rosctl-trading/sell-request`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.status === 404) {
+        response = await fetch(`${getApiBase()}/api/rodtep-rosctl-trading`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...requestBody, action: "Selling" }),
+        });
+      }
+
+      const data = await readApiResponse(response);
+      if (!response.ok || !data.success) throw new Error(data.error || "Sell request failed");
+      setSellResult(data.data);
+      setSellForm({ ...initialSellForm, scheme: sellForm.scheme });
+    } catch (error) {
+      setSellErrors({ submit: error.message || "Unable to submit sell request" });
+    } finally {
+      setSellLoading(false);
+    }
+  };
+
+  const submitBuyRequest = async (event) => {
+    event.preventDefault();
+    if (!validateBuy()) return;
+    setBuyLoading(true);
+    setBuyResult(null);
+    try {
+      const requestBody = { ...buyForm, quoteDetails };
+      let response = await fetch(`${getApiBase()}/api/rodtep-rosctl-trading/buy-request`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.status === 404) {
+        response = await fetch(`${getApiBase()}/api/rodtep-rosctl-trading`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...requestBody,
+            action: "Buying",
+            quoteDetails: {
+              ...quoteDetails,
+              scheme: buyForm.scheme,
+              action: "Buying",
+              workflow: "buy",
+              requiredValue: Number(buyForm.requiredValue),
+              faceValue: new Intl.NumberFormat("en-IN", {
+                style: "currency",
+                currency: "INR",
+                maximumFractionDigits: 0,
+              }).format(Number(buyForm.requiredValue)),
+              totalQuoteValue: "Not applicable",
+            },
+          }),
+        });
+      }
+
+      const data = await readApiResponse(response);
+      if (!response.ok || !data.success) throw new Error(data.error || "Buy request failed");
+      setBuyResult(data.data);
+      setBuyForm({ ...initialBuyForm, scheme: buyForm.scheme });
+    } catch (error) {
+      setBuyErrors({ submit: error.message || "Unable to submit buy request" });
+    } finally {
+      setBuyLoading(false);
+    }
+  };
+
   if (!quoteDetails) return null;
 
-  if (quoteDetails.type === "portfolio") {
-    return (
-      <div className="space-y-4">
-        <div className="grid gap-3 md:grid-cols-2">
-          <SummaryLine label="Scheme" value={quoteDetails.scheme} />
-          <SummaryLine label="Action" value={quoteDetails.action} />
-          <SummaryLine
-            label="Total Face Value"
-            value={quoteDetails.totals?.totalFaceValue}
-          />
-          <SummaryLine
-            label="Total Quote Value"
-            value={quoteDetails.totals?.totalQuoteValue}
-          />
-        </div>
-
-        <div className="overflow-x-auto rounded-2xl border border-emerald-100">
-          <table className="min-w-full text-sm">
-            <thead className="bg-emerald-50 text-slate-700">
-              <tr>
-                <th className="px-3 py-3 text-left font-semibold">#</th>
-                <th className="px-3 py-3 text-left font-semibold">Scrip No</th>
-                <th className="px-3 py-3 text-left font-semibold">Scrip Date</th>
-                <th className="px-3 py-3 text-left font-semibold">Port</th>
-                <th className="px-3 py-3 text-left font-semibold">Face Value</th>
-                <th className="px-3 py-3 text-left font-semibold">Rate</th>
-                <th className="px-3 py-3 text-left font-semibold">Quote Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {quoteDetails.rows?.map((row) => (
-                <tr key={`${row.lineNo}-${row.scripNo || "row"}`} className="border-t border-emerald-100 bg-white">
-                  <td className="px-3 py-3">{row.lineNo}</td>
-                  <td className="px-3 py-3">{renderFieldValue(row.scripNo)}</td>
-                  <td className="px-3 py-3">{renderFieldValue(row.scripDate)}</td>
-                  <td className="px-3 py-3">{renderFieldValue(row.port)}</td>
-                  <td className="px-3 py-3">{renderFieldValue(row.scripValue)}</td>
-                  <td className="px-3 py-3">{renderFieldValue(row.rate)}</td>
-                  <td className="px-3 py-3">{renderFieldValue(row.quoteValue)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  return (
+    <div
+      id="contact"
+      className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-slate-950/80 p-3 backdrop-blur-sm sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={workflow === "sell" ? "Sell scrip request" : "Buy scrip request"}
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose?.();
+      }}
+    >
+      <div className="relative my-auto flex max-h-[94vh] w-full max-w-6xl flex-col overflow-y-auto rounded-[2rem] bg-white shadow-2xl lg:flex-row">
+        <button type="button" onClick={onClose} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/10 text-slate-700 transition hover:bg-slate-900 hover:text-white" aria-label="Close request form">
+          <X size={20} />
+        </button>
+        <TradeSupportPanel workflow={workflow} />
+        <div className="bg-white p-6 sm:p-10 lg:w-[54%]">
+          {workflow === "sell" ? (
+            <SellRequestForm
+              form={sellForm}
+              errors={sellErrors}
+              loading={sellLoading}
+              result={sellResult}
+              quoteDetails={selectedWorkflow === "sell" ? quoteDetails : null}
+              onChange={updateForm(setSellForm)}
+              onSubmit={submitSellRequest}
+            />
+          ) : (
+            <BuyRequestForm
+              form={buyForm}
+              errors={buyErrors}
+              loading={buyLoading}
+              result={buyResult}
+              quoteDetails={selectedWorkflow === "buy" ? quoteDetails : null}
+              onChange={updateForm(setBuyForm)}
+              onSubmit={submitBuyRequest}
+            />
+          )}
         </div>
       </div>
-    );
-  }
-
-  return (
-    <div className="grid gap-3 md:grid-cols-2">
-      <SummaryLine label="Scheme" value={quoteDetails.scheme} />
-      <SummaryLine label="Action" value={quoteDetails.action} />
-      <SummaryLine label="Face Value" value={quoteDetails.faceValue} />
-      <SummaryLine label="Applied Rate" value={quoteDetails.appliedRate} />
-      <SummaryLine
-        label="Total Quote Value"
-        value={quoteDetails.totalQuoteValue}
-      />
     </div>
   );
 };
 
-function SummaryLine({ label, value }) {
+function TradeSupportPanel({ workflow }) {
+  const isSell = workflow === "sell";
   return (
-    <div className="rounded-xl bg-white/80 px-4 py-3">
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-        {label}
+    <div className={`${isSell ? "bg-blue-700" : "bg-indigo-700"} flex flex-col justify-center p-8 text-white sm:p-10 lg:w-[46%]`}>
+      <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">{isSell ? "Seller workflow" : "Buyer workflow"}</p>
+      <h2 className="mt-3 text-4xl font-bold">{isSell ? "Sell Your Scrips" : "Buy Duty Scrips"}</h2>
+      <p className="mt-5 text-lg leading-relaxed text-blue-100">
+        {isSell ? "Submit verified scrip and ICEGATE details for rate confirmation, transfer coordination, and settlement." : "Tell us your required value and port so our trading desk can source an eligible scrip and confirm purchase cost."}
       </p>
-      <p className="mt-1 text-sm font-semibold text-slate-900">
-        {renderFieldValue(value)}
-      </p>
+      <div className="mt-8 space-y-5">
+        <ContactLine icon={Phone} eyebrow="Call us 24/7" value="+91 74000 96950" />
+        <ContactLine icon={Mail} eyebrow="Email us" value="clouddesk@eximinq.in" />
+      </div>
     </div>
   );
 }
 
-const ContactCTA = ({
-  selectedAction = "Selling",
-  selectedScheme = "RODTEP",
-  quoteDetails = null,
-}) => {
-  const [form, setForm] = useState({
-    name: "",
-    companyName: "",
-    mobile: "",
-    email: "",
-    icegateId: "",
-    iecNo: "",
-    scripType: selectedScheme,
-    action: selectedAction,
-  });
-  const [loading, setLoading] = useState(false);
-  const [submissionResult, setSubmissionResult] = useState(null);
+function ContactLine({ icon: Icon, eyebrow, value }) {
+  return <div className="flex items-center gap-4"><span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10"><Icon size={20} /></span><div><p className="text-xs font-bold uppercase tracking-wider text-blue-200">{eyebrow}</p><p className="text-lg font-bold sm:text-2xl">{value}</p></div></div>;
+}
 
-  useEffect(() => {
-    setForm((previous) => ({
-      ...previous,
-      scripType: selectedScheme,
-      action: selectedAction,
-    }));
-  }, [selectedAction, selectedScheme]);
-
-  const actionCopy = useMemo(() => {
-    return form.action === "Buying"
-      ? {
-          heading: "Request Official Buy Quote",
-          subheading: "Share your scrip details and our desk will validate the live buying rate.",
-          button: "Submit Buy Request",
-        }
-      : {
-          heading: "Request Official Sell Quote",
-          subheading: "Lock in the live selling rate and let our desk handle settlement support.",
-          button: "Submit Sell Request",
-        };
-  }, [form.action]);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm((previous) => ({ ...previous, [name]: value }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!form.companyName || !form.mobile) {
-      alert("Company name and mobile are required");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      const payload = {
-        name: form.name,
-        companyName: form.companyName,
-        scheme: form.scripType,
-        action: form.action,
-        mobile: form.mobile,
-        email: form.email,
-        icegateId: form.icegateId,
-        iecNo: form.iecNo,
-        quoteDetails,
-      };
-
-      const response = await fetch(`${getApiBase()}/api/rodtep-rosctl-trading`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || "API failed");
-      }
-
-      setSubmissionResult(data.data || null);
-      setForm((previous) => ({
-        ...previous,
-        name: "",
-        companyName: "",
-        mobile: "",
-        email: "",
-        icegateId: "",
-        iecNo: "",
-      }));
-    } catch (error) {
-      console.error("Submit error:", error);
-      setSubmissionResult(null);
-      alert("Submission failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+function SellRequestForm({ form, errors, loading, result, quoteDetails, onChange, onSubmit }) {
   return (
-    <section
-      id="contact"
-      className="bg-slate-900 py-20 px-4 sm:px-6 lg:px-8"
-    >
-      <div className="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row">
-        <div className="p-10 lg:w-[46%] bg-blue-700 text-white flex flex-col justify-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Trade?</h2>
-          <p className="text-blue-100 mb-8 text-lg leading-relaxed">
-            Lock in today&apos;s rates with our CloudDesk. We manage the complete
-            documentation and settlement process.
-          </p>
-
-          <div className="space-y-5">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
-                <Phone size={20} />
-              </div>
-              <div>
-                <p className="text-xs uppercase font-bold text-blue-200 tracking-wider">
-                  Call Us 24/7
-                </p>
-                <p className="text-2xl font-bold">+91 74000 96950</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
-                <Mail size={20} />
-              </div>
-              <div>
-                <p className="text-xs uppercase font-bold text-blue-200 tracking-wider">
-                  Email Us
-                </p>
-                <p className="text-2xl font-bold">clouddesk@eximinq.in</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-10 lg:w-[54%] bg-white">
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <h3 className="text-2xl font-bold text-slate-900">
-              {actionCopy.heading}
-            </h3>
-            <p className="text-sm text-slate-500">
-              {actionCopy.subheading}
-            </p>
-
-            {quoteDetails && (
-              <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm">
-                <p className="font-semibold text-blue-800">
-                  Selected Summary
-                </p>
-                <p className="mt-1 text-blue-700">
-                  Scheme: {quoteDetails.scheme} | Action: {quoteDetails.action}
-                </p>
-                {quoteDetails.totalFaceValue ? (
-                  <p className="text-blue-700">
-                    Face Value: {quoteDetails.totalFaceValue} | Quote Value: {quoteDetails.totalQuoteValue}
-                  </p>
-                ) : (
-                  <p className="text-blue-700">
-                    Face Value: {quoteDetails.faceValue} | Applied Rate: {quoteDetails.appliedRate}
-                  </p>
-                )}
-              </div>
-            )}
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <Field
-                label="Contact Name"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Enter full name"
-              />
-              <Field
-                label="Company Name"
-                name="companyName"
-                value={form.companyName}
-                onChange={handleChange}
-                placeholder="Enter company name"
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <Field
-                label="Mobile Number"
-                name="mobile"
-                value={form.mobile}
-                onChange={handleChange}
-                placeholder="+91"
-              />
-              <Field
-                label="Email ID"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Enter email address"
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Scrip Type
-                </label>
-                <select
-                  name="scripType"
-                  value={form.scripType}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200"
-                >
-                  <option value="RODTEP">RODTEP</option>
-                  <option value="RoSCTL">RoSCTL</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Action
-                </label>
-                <select
-                  name="action"
-                  value={form.action}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200"
-                >
-                  <option value="Buying">Buying</option>
-                  <option value="Selling">Selling</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <Field
-                label="Icegate ID"
-                name="icegateId"
-                value={form.icegateId}
-                onChange={handleChange}
-                placeholder="Enter Icegate ID"
-              />
-              <Field
-                label="IEC No"
-                name="iecNo"
-                value={form.iecNo}
-                onChange={handleChange}
-                placeholder="Enter IEC No"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-slate-800"
-            >
-              {loading ? "Submitting..." : actionCopy.button}
-            </button>
-
-            {submissionResult && (
-              <div className="rounded-[1.5rem] border border-emerald-200 bg-emerald-50 p-5">
-                <div className="flex flex-col gap-2 border-b border-emerald-200 pb-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">
-                    Submission Received
-                  </p>
-                  <h4 className="text-xl font-bold text-slate-900">
-                    Quote request submitted successfully
-                  </h4>
-                  <p className="text-sm text-slate-600">
-                    Request ID: {submissionResult.id}
-                  </p>
-                  <p className="text-sm text-slate-600">
-                    Submitted (IST): {submissionResult.submittedAt?.ist || "Not available"}
-                  </p>
-                </div>
-
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
-                  <SummaryLine label="Contact Name" value={submissionResult.name} />
-                  <SummaryLine label="Company Name" value={submissionResult.companyName} />
-                  <SummaryLine label="Mobile Number" value={submissionResult.mobile} />
-                  <SummaryLine label="Email ID" value={submissionResult.email} />
-                  <SummaryLine label="Icegate ID" value={submissionResult.icegateId} />
-                  <SummaryLine label="IEC No" value={submissionResult.iecNo} />
-                </div>
-
-                <div className="mt-5 rounded-2xl border border-emerald-100 bg-white/70 p-4">
-                  <p className="text-sm font-bold text-slate-900 mb-3">
-                    Quote Details
-                  </p>
-                  <QuoteDetailsSummary quoteDetails={submissionResult.quoteDetails} />
-                </div>
-              </div>
-            )}
-          </form>
-        </div>
-      </div>
-    </section>
+    <form className="space-y-4" onSubmit={onSubmit} noValidate>
+      <FormHeading title="Request Official Sell Quote" text="Share your ownership and scrip details. Our desk will validate the live payout rate." />
+      <QuoteSummary quoteDetails={quoteDetails} />
+      <div className="grid gap-4 md:grid-cols-2"><Field label="Contact Name" name="name" value={form.name} onChange={onChange} error={errors.name} /><Field label="Company Name" name="companyName" value={form.companyName} onChange={onChange} error={errors.companyName} /></div>
+      <div className="grid gap-4 md:grid-cols-2"><Field label="Mobile Number" name="mobile" value={form.mobile} onChange={onChange} error={errors.mobile} placeholder="+91" /><Field label="Email ID" name="email" type="email" value={form.email} onChange={onChange} error={errors.email} /></div>
+      <SchemeField value={form.scheme} onChange={onChange} />
+      <div className="grid gap-4 md:grid-cols-2"><Field label="ICEGATE ID" name="icegateId" value={form.icegateId} onChange={onChange} error={errors.icegateId} /><Field label="IEC No" name="iecNo" value={form.iecNo} onChange={onChange} error={errors.iecNo} /></div>
+      <SubmitButton loading={loading} label="Submit Sell Request" />
+      <SubmissionMessage result={result} error={errors.submit} workflow="sell" />
+    </form>
   );
-};
+}
 
-function Field({ label, name, value, onChange, placeholder }) {
+function BuyRequestForm({ form, errors, loading, result, quoteDetails, onChange, onSubmit }) {
   return (
-    <div>
-      <label className="block text-sm font-medium text-slate-700 mb-1">
-        {label}
-      </label>
-      <input
-        type="text"
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl border border-slate-200"
-      />
-    </div>
+    <form className="space-y-4" onSubmit={onSubmit} noValidate>
+      <FormHeading title="Request Official Buy Quote" text="Share your purchase requirement and our desk will confirm availability and contact you." />
+      <div className="grid gap-4 md:grid-cols-2"><Field label="Contact Name" name="name" value={form.name} onChange={onChange} error={errors.name} /><Field label="Company Name" name="companyName" value={form.companyName} onChange={onChange} error={errors.companyName} /></div>
+      <div className="grid gap-4 md:grid-cols-2"><Field label="Mobile Number" name="mobile" value={form.mobile} onChange={onChange} error={errors.mobile} placeholder="+91" /><Field label="Email ID" name="email" type="email" value={form.email} onChange={onChange} error={errors.email} /></div>
+      <SchemeField value={form.scheme} onChange={onChange} />
+      <Field label="Required Scrip Face Value (₹)" name="requiredValue" type="number" value={form.requiredValue} onChange={onChange} error={errors.requiredValue} />
+      <SubmitButton loading={loading} label="Submit Buy Request" />
+      <SubmissionMessage result={result} error={errors.submit} workflow="buy" />
+    </form>
   );
+}
+
+function FormHeading({ title, text }) { return <div><h3 className="text-2xl font-bold text-slate-900">{title}</h3><p className="mt-2 text-sm text-slate-500">{text}</p></div>; }
+
+function SchemeField({ value }) { return <div><label className="mb-1 block text-sm font-medium text-slate-700">Selected Scrip Type</label><input value={value} readOnly className="w-full rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 font-semibold text-blue-800" /><p className="mt-1 text-xs text-slate-500">Carried forward automatically from your calculator selection.</p></div>; }
+
+function Field({ label, name, value, onChange, error, placeholder, type = "text" }) {
+  return <div><label className="mb-1 block text-sm font-medium text-slate-700">{label}</label><input type={type} name={name} value={value} onChange={onChange} placeholder={placeholder || `Enter ${label.toLowerCase()}`} className={`w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 ${error ? "border-red-400" : "border-slate-200"}`} />{error && <p className="mt-1 text-xs text-red-600">{error}</p>}</div>;
+}
+
+function SubmitButton({ loading, label }) { return <button type="submit" disabled={loading} className="w-full rounded-xl bg-slate-900 py-4 font-bold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60">{loading ? "Submitting..." : label}</button>; }
+
+function QuoteSummary({ quoteDetails }) {
+  if (!quoteDetails) return null;
+  return <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-800"><p className="font-bold">Selected calculator details</p><p className="mt-1">Scrip Type: {quoteDetails.scheme}</p><p>{quoteDetails.rows?.length ? `Scrip Entries: ${quoteDetails.rows.length} · ` : ""}Face Value: {quoteDetails.totalFaceValue || quoteDetails.faceValue}</p><p>Estimated Quote: {quoteDetails.totalQuoteValue}</p>{quoteDetails.preferredPort && <p>Preferred Port: {quoteDetails.preferredPort}</p>}</div>;
+}
+
+function SubmissionMessage({ result, error, workflow }) {
+  if (error) return <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</p>;
+  if (!result) return null;
+  return <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4"><p className="font-bold text-emerald-800">{workflow === "sell" ? "Sell" : "Buy"} request received</p><p className="mt-1 text-sm text-emerald-700">Request ID: {result.id}</p><p className="text-sm text-emerald-700">Submitted: {result.submittedAt?.ist}</p></div>;
 }
 
 export default ContactCTA;
