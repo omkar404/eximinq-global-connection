@@ -83,9 +83,9 @@ const NOTICES = [
   },
   {
     type: "Public Notice",
-    date: "03 Aug 2026",
-    title: "Public Notice 24/2026-27",
-    desc: "Inviting TRQ Applications under India–Oman Comprehensive Economic Partnership Agreement (CEPA) for Financial Year (FY) 2026-27 -reg.",
+    date: "05 Aug 2026",
+    title: "Public Notice 25/2026-27",
+    desc: "Operationalisation of the Inventory-based Cross-border E-Commerce Facilitation Framework under the Handbook of Procedures, 2023",
     color: "gray",
   },
 ];
