@@ -83,9 +83,9 @@ const NOTICES = [
   },
   {
     type: "Public Notice",
-    date: "20 Jul 2026",
-    title: "Public Notice 22/2026-27",
-    desc: "Inviting TRQ Applications under India – United Kingdom Comprehensive Economic and Trade Agreement (CETA) for Calendar Year (CY) 2026-reg.",
+    date: "03 Aug 2026",
+    title: "Public Notice 24/2026-27",
+    desc: "Inviting TRQ Applications under India–Oman Comprehensive Economic Partnership Agreement (CEPA) for Financial Year (FY) 2026-27 -reg.",
     color: "gray",
   },
 ];
