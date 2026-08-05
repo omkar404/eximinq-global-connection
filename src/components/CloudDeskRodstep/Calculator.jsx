@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { getSlabByAmount } from "./slabs";
 import InfoSection from "./InfoSection";
+import ContactCTA from "./ContactCTA";
 
 const currency = (value) =>
   new Intl.NumberFormat("en-IN", {
@@ -35,15 +36,30 @@ const readApiResponse = async (response) => {
   };
 };
 
-const Calculator = ({ requestedTrade, onSendQuote }) => (
-  <div id="calculator">
-    <SellCalculator requestedTrade={requestedTrade} onSendQuote={onSendQuote} />
+const Calculator = ({ requestedTrade, onSendQuote, quoteDetails, onCloseQuote }) => {
+  const [sellDraft, setSellDraft] = useState({
+    action: "Sell to EXIMINQ",
+    scheme: "RODTEP",
+    rows: [{ id: 1, scripNo: "", scripDate: "", port: "", scripValue: 127000, rate: 95.1, quoteValue: 120777 }],
+    totalFaceValue: currency(127000),
+    totalQuoteValue: currency(120777),
+  });
+
+  return <div id="calculator">
+    <SellCalculator requestedTrade={requestedTrade} onSendQuote={onSendQuote} onDetailsChange={setSellDraft} />
+    <ContactCTA
+        inline
+        selectedWorkflow="sell"
+        selectedScheme={(sellDraft || quoteDetails)?.scheme || "RODTEP"}
+        quoteDetails={sellDraft || quoteDetails}
+        onClose={onCloseQuote}
+      />
     <InfoSection />
     <BuyCalculator requestedTrade={requestedTrade} onSendQuote={onSendQuote} />
-  </div>
-);
+  </div>;
+};
 
-function SellCalculator({ requestedTrade, onSendQuote }) {
+function SellCalculator({ requestedTrade, onSendQuote, onDetailsChange }) {
   const [scheme, setScheme] = useState("rodtep");
   const [rows, setRows] = useState([
     { id: 1, scripNo: "", scripDate: "", port: "", scripValue: 127000 },
@@ -69,6 +85,20 @@ function SellCalculator({ requestedTrade, onSendQuote }) {
     [rows, scheme],
   );
 
+  useEffect(() => {
+    onDetailsChange({
+      action: "Sell to EXIMINQ",
+      scheme: schemeLabel(scheme),
+      rows: rows.map((row) => ({
+        ...row,
+        rate: rowRate(row.scripValue),
+        quoteValue: rowQuote(row.scripValue),
+      })),
+      totalFaceValue: currency(totals.face),
+      totalQuoteValue: currency(totals.quote),
+    });
+  }, [rows, scheme, totals.face, totals.quote, onDetailsChange]);
+
   const updateRow = (id, field, value) => {
     const nextValue =
       field === "scripNo"
@@ -84,13 +114,9 @@ function SellCalculator({ requestedTrade, onSendQuote }) {
   const submit = () => {
     const nextErrors = {};
     rows.forEach((row, index) => {
-      if (
-        !/^\d{10}$/.test(row.scripNo) ||
-        !row.scripDate ||
-        !row.port.trim() ||
-        !(Number(row.scripValue) > 0)
-      )
-        nextErrors[row.id] = `Complete all fields for Scrip Entry ${index + 1}`;
+      if (!(Number(row.scripValue) > 0)) {
+        nextErrors[row.id] = `Enter a valid Scrip Value for Scrip Entry ${index + 1}`;
+      }
     });
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
@@ -438,7 +464,7 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
         <div>
           <p className="font-bold">Scrip Entry {index + 1}</p>
           <p className="text-xs text-slate-500">
-            Complete ownership details for this scrip.
+            Enter the scrip value. The remaining details are optional.
           </p>
         </div>
         <button
@@ -453,12 +479,14 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Field
           label="Scrip No"
+          optional
           value={row.scripNo}
           onChange={(event) => updateRow(row.id, "scripNo", event.target.value)}
           placeholder="10 digits"
         />
         <Field
           label="Scrip Date"
+          optional
           type="date"
           value={row.scripDate}
           onChange={(event) =>
@@ -467,12 +495,14 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
         />
         <Field
           label="Port"
+          optional
           value={row.port}
           onChange={(event) => updateRow(row.id, "port", event.target.value)}
           placeholder="INNSA1"
         />
         <Field
           label="Scrip Value"
+          required
           type="number"
           value={row.scripValue}
           onChange={(event) =>
@@ -489,15 +519,16 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
   );
 }
 
-function Field({ label, value, onChange, type = "text", placeholder }) {
+function Field({ label, value, onChange, type = "text", placeholder, optional = false, required = false }) {
   return (
     <label className="block text-xs font-semibold text-slate-600">
-      {label}
+      {label}{optional && <span className="ml-1 font-normal text-slate-400">(Optional)</span>}{required && <span className="ml-1 text-red-500">*</span>}
       <input
         type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        required={required}
         className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 text-base font-normal text-slate-900 outline-none focus:ring-2 focus:ring-blue-500"
       />
     </label>

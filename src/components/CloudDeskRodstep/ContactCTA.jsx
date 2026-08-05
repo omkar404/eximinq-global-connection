@@ -46,6 +46,7 @@ const ContactCTA = ({
   selectedScheme = "RODTEP",
   quoteDetails = null,
   onClose,
+  inline = false,
 }) => {
   const [workflow, setWorkflow] = useState(selectedWorkflow);
   const [sellForm, setSellForm] = useState(initialSellForm);
@@ -69,7 +70,7 @@ const ContactCTA = ({
   }, [selectedScheme, quoteDetails]);
 
   useEffect(() => {
-    if (!quoteDetails) return undefined;
+    if (!quoteDetails || inline) return undefined;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const closeOnEscape = (event) => {
@@ -80,7 +81,7 @@ const ContactCTA = ({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [quoteDetails, onClose]);
+  }, [quoteDetails, onClose, inline]);
 
   const updateForm = (setter) => (event) => {
     const { name, value } = event.target;
@@ -195,18 +196,20 @@ const ContactCTA = ({
   return (
     <div
       id="contact"
-      className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-slate-950/80 p-3 backdrop-blur-sm sm:p-6"
-      role="dialog"
-      aria-modal="true"
+      className={inline
+        ? "bg-slate-950 px-3 py-16 sm:px-6"
+        : "fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-slate-950/80 p-3 backdrop-blur-sm sm:p-6"}
+      role={inline ? undefined : "dialog"}
+      aria-modal={inline ? undefined : "true"}
       aria-label={workflow === "sell" ? "Sell scrip request" : "Buy scrip request"}
       onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose?.();
+        if (!inline && event.target === event.currentTarget) onClose?.();
       }}
     >
-      <div className="relative my-auto flex max-h-[94vh] w-full max-w-6xl flex-col overflow-y-auto rounded-[2rem] bg-white shadow-2xl lg:flex-row">
-        <button type="button" onClick={onClose} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/10 text-slate-700 transition hover:bg-slate-900 hover:text-white" aria-label="Close request form">
+      <div className={`relative flex w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] bg-white shadow-2xl lg:flex-row ${inline ? "mx-auto" : "my-auto max-h-[94vh] overflow-y-auto"}`}>
+        {!inline && <button type="button" onClick={onClose} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/10 text-slate-700 transition hover:bg-slate-900 hover:text-white" aria-label="Close request form">
           <X size={20} />
-        </button>
+        </button>}
         <TradeSupportPanel workflow={workflow} />
         <div className="bg-white p-6 sm:p-10 lg:w-[54%]">
           {workflow === "sell" ? (

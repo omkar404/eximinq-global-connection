@@ -7,7 +7,6 @@ import LiveRates from "../components/CloudDeskRodstep/LiveRates";
 import ProcessSteps from "../components/CloudDeskRodstep/ProcessSteps";
 import Features from "../components/CloudDeskRodstep/Features";
 import Calculator from "../components/CloudDeskRodstep/Calculator";
-import ContactCTA from "../components/CloudDeskRodstep/ContactCTA";
 import Footer from "../components/CloudDeskRodstep/Footer";
 
 import { SLABS } from "../components/CloudDeskRodstep/slabs";
@@ -69,6 +68,9 @@ const CloudDeskRodstep = () => {
   const handleQuoteRequest = (details, workflow) => {
     setSelectedWorkflow(workflow);
     setQuoteDetails(details);
+    if (workflow === "sell") {
+      window.setTimeout(() => scrollToSection("contact"), 0);
+    }
   };
 
   const handleLiveRateAction = (scheme, actionType) => {
@@ -231,12 +233,9 @@ const CloudDeskRodstep = () => {
         rates={rates}
         requestedTrade={calculatorRequest}
         onSendQuote={handleQuoteRequest}
-      />
-      <ContactCTA
         selectedWorkflow={selectedWorkflow}
-        selectedScheme={quoteDetails?.scheme || "RODTEP"}
         quoteDetails={quoteDetails}
-        onClose={() => setQuoteDetails(null)}
+        onCloseQuote={() => setQuoteDetails(null)}
       />
 
 
