@@ -76,16 +76,16 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "20 Jul 2026",
-    title: "Trade Notice 14/2026-27",
-    desc: "Inputs on proposed amendment to Para 2.57 of FTP 2023 relating to de minimis exemption from RCMC requirements for low-value exports – regarding.",
+    date: "05 Aug 2026",
+    title: "Trade Notice 15/2026-27",
+    desc: "Availability of License-wise Voluntary Duty Payment Details for processing of Export Obligation Discharge Certificate (EODC) applications under Advance Authorisation (AA) and Export Promotion Capital Goods (EPCG) Schemes – reg",
     color: "purple",
   },
   {
     type: "Public Notice",
     date: "05 Aug 2026",
-    title: "Public Notice 25/2026-27",
-    desc: "Operationalisation of the Inventory-based Cross-border E-Commerce Facilitation Framework under the Handbook of Procedures, 2023",
+    title: "Public Notice 26/2026-27",
+    desc: "Extension of Last Date for Submission of TRQ Applications under the India–United Kingdom Comprehensive Economic and Trade Agreement (CETA) for FY 2026–27 – reg.",
     color: "gray",
   },
 ];
