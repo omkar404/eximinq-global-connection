@@ -1,7 +1,7 @@
 const fs = require("fs");
 const XLSX = require("xlsx");
 const legacyActs = require("../data/regulatory/gst/acts");
-const orders = require("../data/regulatory/gst/orders");
+const legacyOrders = require("../data/regulatory/gst/orders");
 const path = require("path");
 const {
   buildPdfDownloadUrl,
@@ -21,6 +21,7 @@ const GST_INSTRUCTIONS_FILE = path.join(
   "Instruction And Guidelines.xlsx"
 );
 const GST_NOTIFICATIONS_FOLDER = path.join(GST_BASE_FOLDER, "Notifications");
+const GST_ORDERS_FOLDER = path.join(GST_BASE_FOLDER, "Orders");
 
 const GST_NOTIFICATION_FOLDER_MAP = {
   centralTax: "Central Tax",
@@ -76,7 +77,7 @@ function findHeaderRowIndex(rows, headerValue) {
 function loadGstFormsFromFolder() {
   if (!fs.existsSync(GST_FORMS_FILE)) return [];
 
-  const workbook = XLSX.readFile(GST_FORMS_FILE, { cellDates: true });
+  const workbook = XLSX.readFile(GST_FORMS_FILE, { cellDates: false });
   const items = [];
 
   workbook.SheetNames.forEach((rawSheetName) => {
@@ -120,7 +121,7 @@ function loadGstCircularsFromFolder() {
     const excelPath = path.join(folderPath, `${folder.name}.xlsx`);
     if (!fs.existsSync(excelPath)) return;
 
-    const workbook = XLSX.readFile(excelPath, { cellDates: true });
+    const workbook = XLSX.readFile(excelPath, { cellDates: false });
     workbook.SheetNames.forEach((sheetName) => {
       const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: "" });
       if (rows.length < 2) return;
@@ -153,7 +154,7 @@ function loadGstCircularsFromFolder() {
 function loadGstInstructionsFromFolder() {
   if (!fs.existsSync(GST_INSTRUCTIONS_FILE)) return [];
 
-  const workbook = XLSX.readFile(GST_INSTRUCTIONS_FILE, { cellDates: true });
+  const workbook = XLSX.readFile(GST_INSTRUCTIONS_FILE, { cellDates: false });
   const items = [];
 
   workbook.SheetNames.forEach((sheetName) => {
@@ -184,6 +185,39 @@ function loadGstInstructionsFromFolder() {
   return items;
 }
 
+function loadGstOrdersFromFolder() {
+  if (!fs.existsSync(GST_ORDERS_FOLDER)) return legacyOrders;
+  const items = [];
+
+  getExcelFiles(GST_ORDERS_FOLDER).forEach((filePath) => {
+    const workbook = XLSX.readFile(filePath, { cellDates: false });
+    workbook.SheetNames.forEach((sheetName) => {
+      const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: "" });
+      const headerRowIndex = findHeaderRowIndex(rows, "Number");
+      rows.slice((headerRowIndex >= 0 ? headerRowIndex : 0) + 1).forEach((row, index) => {
+        if (!row.some((cell) => String(cell || "").trim())) return;
+        const number = String(row[0] || "").trim();
+        const subject = String(row[2] || row[1] || "").trim();
+        if (!number || number === "Number") return;
+        items.push({
+          id: `gst-order-${normalizeKey(path.basename(filePath))}-${normalizeKey(sheetName)}-${index}`,
+          type: "orders",
+          folderCategory: path.basename(path.dirname(filePath)),
+          number,
+          date: formatDate(row[1]),
+          year: String(sheetName).trim(),
+          financialYear: getFinancialYearFromYear(sheetName),
+          subject,
+          sourceFileName: path.basename(filePath),
+          sourceSheet: sheetName,
+        });
+      });
+    });
+  });
+
+  return items.length > 0 ? items : legacyOrders;
+}
+
 function loadGstNotificationsFromFolder() {
   if (!fs.existsSync(GST_NOTIFICATIONS_FOLDER)) return {};
 
@@ -196,7 +230,7 @@ function loadGstNotificationsFromFolder() {
     const excelPath = path.join(folderPath, `${folderName}.xlsx`);
     if (!fs.existsSync(excelPath)) return;
 
-    const workbook = XLSX.readFile(excelPath, { cellDates: true });
+    const workbook = XLSX.readFile(excelPath, { cellDates: false });
     workbook.SheetNames.forEach((sheetName) => {
       const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: "" });
       if (rows.length < 2) return;
@@ -250,13 +284,28 @@ function getExcelFiles(folderPath) {
     .flatMap((entry) => {
       const entryPath = path.join(folderPath, entry.name);
       if (entry.isDirectory()) return getExcelFiles(entryPath);
+      if (entry.name.startsWith("._") || entry.name.startsWith("~$")) return [];
       return /\.xlsx?$/i.test(entry.name) ? [entryPath] : [];
     })
     .sort((left, right) => left.localeCompare(right));
 }
 
+function getGstSourceFiles(folderPath) {
+  if (!fs.existsSync(folderPath)) return [];
+
+  return fs
+    .readdirSync(folderPath, { withFileTypes: true })
+    .flatMap((entry) => {
+      const entryPath = path.join(folderPath, entry.name);
+      if (entry.isDirectory()) return getGstSourceFiles(entryPath);
+      if (entry.name.startsWith("._") || entry.name.startsWith("~$")) return [];
+      return /\.(xlsx?|pdf)$/i.test(entry.name) ? [entryPath] : [];
+    })
+    .sort((left, right) => left.localeCompare(right));
+}
+
 function getGstFolderSignature() {
-  return getExcelFiles(GST_BASE_FOLDER)
+  return getGstSourceFiles(GST_BASE_FOLDER)
     .map((filePath) => {
       const stats = fs.statSync(filePath);
       return `${filePath}:${stats.size}:${stats.mtimeMs}`;
@@ -289,7 +338,7 @@ function getRuleChapterLabel(sheetName, rows) {
 }
 
 function parseRuleWorkbook(filePath, folderName) {
-  const workbook = XLSX.readFile(filePath, { cellDates: true });
+  const workbook = XLSX.readFile(filePath, { cellDates: false });
   const chaptersById = new Map();
   let ruleSetTitle = normalizeCell(folderName);
   let ruleSequence = 0;
@@ -447,7 +496,7 @@ function getChapterLabel(sheetName, sectionKind) {
 }
 
 function parseActWorkbook(filePath, folderName) {
-  const workbook = XLSX.readFile(filePath, { cellDates: true });
+  const workbook = XLSX.readFile(filePath, { cellDates: false });
   const chaptersById = new Map();
   let actTitle = normalizeCell(folderName);
   let sectionSequence = 0;
@@ -582,6 +631,7 @@ function getGstDataStore() {
   const currentSignature = getGstFolderSignature();
   if (gstCache && currentSignature === gstCacheSignature) return gstCache;
 
+  clearPdfCache(GST_BASE_FOLDER);
   const actDocuments = loadGstActsFromFolder();
   const ruleDocuments = loadGstRulesFromFolder();
 
@@ -594,7 +644,7 @@ function getGstDataStore() {
     notifications: loadGstNotificationsFromFolder(),
     circulars: loadGstCircularsFromFolder(),
     instructions: loadGstInstructionsFromFolder(),
-    orders,
+    orders: loadGstOrdersFromFolder(),
   };
   gstCacheSignature = currentSignature;
 

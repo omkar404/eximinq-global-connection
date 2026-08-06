@@ -29,7 +29,7 @@ function listPdfFilesRecursive(baseFolder) {
         return;
       }
 
-      if (path.extname(entry.name).toLowerCase() === ".pdf") {
+      if (!entry.name.startsWith("._") && path.extname(entry.name).toLowerCase() === ".pdf") {
         results.push(entryPath);
       }
     });

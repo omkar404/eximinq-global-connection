@@ -45,10 +45,14 @@ export function getRequestUrl(authority, tabKey) {
 }
 
 export async function fetchRegulatoryData(authority, tabKey) {
-  const response = await fetch(getRequestUrl(authority, tabKey), {
+  const requestUrl = new URL(getRequestUrl(authority, tabKey), window.location.origin);
+  requestUrl.searchParams.set("_fresh", Date.now().toString());
+  const response = await fetch(requestUrl.toString(), {
     cache: "no-store",
-    headers: { "Content-Type": "application/json" },
+    headers: { Accept: "application/json", "Cache-Control": "no-cache" },
   });
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) throw new Error("The regulatory data service returned an invalid response");
   const payload = await response.json();
 
   if (!response.ok || !payload.success) {

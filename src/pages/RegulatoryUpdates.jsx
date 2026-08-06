@@ -1469,7 +1469,6 @@ export default function RegulatoryUpdates() {
   const initialSnapshot = getInitialSnapshot();
   const hasInitialSnapshotData =
     Array.isArray(initialSnapshot?.notifications) && initialSnapshot.notifications.length > 0;
-  const skipInitialFetch = useRef(hasInitialSnapshotData);
   const [loading, setLoading] = useState(!hasInitialSnapshotData);
   const [error, setError] = useState(null);
   const [notifications, setNotifications] = useState(initialSnapshot?.notifications || []);
@@ -1482,29 +1481,45 @@ export default function RegulatoryUpdates() {
   const [openGroups, setOpenGroups] = useState(
     getDefaultOpenGroups(initialSnapshot?.activeAuthority || "dgft", initialSnapshot?.activeTab || "public")
   );
+  const requestSequence = useRef(0);
 
-  const loadData = useCallback(async () => {
+  const loadData = useCallback(async (silent = false) => {
+    const requestId = ++requestSequence.current;
     try {
-      setLoading(true);
+      if (!silent) setLoading(true);
       setError(null);
       const list = await fetchRegulatoryData(activeAuthority, activeTab);
-      setNotifications(list);
+      if (requestId === requestSequence.current) setNotifications(list);
     } catch (fetchError) {
-      setNotifications([]);
-      setError(fetchError.message || "Failed to fetch");
+      if (requestId === requestSequence.current) {
+        if (!silent) {
+          setNotifications([]);
+          setError(fetchError.message || "Failed to fetch");
+        }
+      }
     } finally {
-      setLoading(false);
+      if (!silent && requestId === requestSequence.current) setLoading(false);
     }
   }, [activeAuthority, activeTab]);
 
   useEffect(() => {
-    if (skipInitialFetch.current) {
-      skipInitialFetch.current = false;
-      return;
-    }
-
     if (PARENT_ONLY_KEYS.has(activeTab)) return;
     loadData();
+  }, [activeTab, loadData]);
+
+  useEffect(() => {
+    if (PARENT_ONLY_KEYS.has(activeTab)) return undefined;
+    const refresh = () => {
+      if (document.visibilityState === "visible") loadData(true);
+    };
+    const intervalId = window.setInterval(refresh, 15000);
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
+    };
   }, [activeTab, loadData]);
 
   useEffect(() => {

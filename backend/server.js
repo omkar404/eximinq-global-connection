@@ -279,6 +279,15 @@ const formattedDateTime = formatISTDateTime();
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(["/api/dgft", "/api/ftp", "/api/customs", "/api/gst", "/api/exchange-rates"], (_req, res, next) => {
+  res.set({
+    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+    Pragma: "no-cache",
+    Expires: "0",
+    "Surrogate-Control": "no-store",
+  });
+  next();
+});
 app.use(require("prerender-node").set("prerenderToken", process.env.PRERENDER_TOKEN));
 
 /* ─────────────────────────────────────────────
@@ -694,7 +703,9 @@ app.get("/api/dgft/notices", (req, res) => {
   const data = getExcelData();
   if (!data.data.length)
     return res.status(404).json({ success: false, message: "No DGFT data loaded" });
-  res.json({ success: true, ...data });
+  const requestedType = String(req.query.type || "").trim().toLowerCase();
+  const records = requestedType ? data.data.filter((record) => record.type === requestedType) : data.data;
+  res.json({ success: true, filename: data.filename, type: requestedType || "all", count: records.length, data: records });
 });
 
 app.get("/api/dgft/pdf-download", (req, res) => {

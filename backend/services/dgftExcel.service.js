@@ -10,6 +10,7 @@ const PDF_FOLDER = path.join(DGFT_BASE_FOLDER, "PDF_FILES");
 
 let excelData = [];
 let lastFileName = "";
+let sourceSignature = "";
 
 // right now what i wanted 
 
@@ -57,11 +58,6 @@ function normalizeFinancialYear(value, fallbackDate = "") {
     const [start, end] = text.split("-");
     return `${start}-${end.slice(-2)}`;
   }
-  if (/^\d{4}$/.test(text)) {
-    const start = Number(text);
-    return `${start}-${String(start + 1).slice(-2)}`;
-  }
-
   const normalizedDate = String(fallbackDate || "").trim();
   const match = normalizedDate.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
   if (match) {
@@ -69,6 +65,11 @@ function normalizeFinancialYear(value, fallbackDate = "") {
     const monthNumber = Number(month);
     const startYear = monthNumber >= 4 ? Number(year) : Number(year) - 1;
     return `${startYear}-${String(startYear + 1).slice(-2)}`;
+  }
+
+  if (/^\d{4}$/.test(text)) {
+    const start = Number(text);
+    return `${start}-${String(start + 1).slice(-2)}`;
   }
 
   return text;
@@ -86,13 +87,34 @@ function normalizeNoticeNumber(value, sheetName) {
   return raw;
 }
 
-function normalizeString(str) {
-  if (!str) return "";
+function normalizePdfKey(value) {
+  if (!value) return "";
 
-  return str
-    .toString()
+  return String(value)
+    .trim()
+    .replace(/\.pdf$/i, "")
+    .replace(/\((?:copy\s*)?\d+\)\s*$/i, "")
     .toLowerCase()
-    .replace(/[\/\\\-\_\s]/g, ""); 
+    .replace(/notifiaction/g, "notification")
+    .replace(/(\d{4})[\/.\-](\d{4})/g, (_, startYear, endYear) =>
+      `${startYear}-${endYear.slice(-2)}`
+    )
+    .replace(/\b(?:the|no\.?)\b/g, "")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function getPdfLookupKeys(value) {
+  const rawValue = String(value || "").trim();
+  const keys = new Set([normalizePdfKey(rawValue)]);
+  const singleYearMatch = rawValue.match(/(?:^|[\/.\-])(\d{4})\s*$/);
+
+  if (singleYearMatch) {
+    const startYear = Number(singleYearMatch[1]);
+    keys.add(normalizePdfKey(`${rawValue}-${String(startYear + 1).slice(-2)}`));
+  }
+
+  keys.delete("");
+  return keys;
 }
 
 
@@ -179,47 +201,13 @@ function normalizeSheetType(sheetName) {
 // }
 
 function findPDFFile(noticeNo) {
-
   if (!noticeNo) return null;
 
-  // 🔥 TRIM HERE
-  noticeNo = noticeNo.toString().trim();
-
-  console.log(`\n🔍 Searching for PDF with Notice No: "${noticeNo}"`);
-  
   try {
     const files = fs.readdirSync(PDF_FOLDER);
-    console.log(`📂 Total files in PDF folder: ${files.length}`);
-    
-    if (files.length === 0) {
-      console.log('⚠️  PDF folder is empty!');
-      return null;
-    }
-    
     const pdfFiles = files.filter(f => path.extname(f).toLowerCase() === '.pdf');
-    console.log(`📄 PDF files found: ${pdfFiles.length}`);
-    
-    const normalizedNotice = normalizeString(noticeNo);
-    console.log(`🔤 Normalized Notice No: "${noticeNo}" → "${normalizedNotice}"`);
-    
-    // Exact match
-    let pdfFile = pdfFiles.find(file => {
-      const fileNameWithoutExt = path.parse(file).name.trim();
-      return fileNameWithoutExt === noticeNo;
-    });
-    
-    if (pdfFile) {
-      return path.join(PDF_FOLDER, pdfFile);
-    }
-    
-    // Normalized match
-    pdfFile = pdfFiles.find(file => {
-      const fileNameWithoutExt = path.parse(file).name.trim();
-      const normalizedFileName = normalizeString(fileNameWithoutExt);
-
-      return normalizedFileName === normalizedNotice || 
-             normalizedFileName.includes(normalizedNotice);
-    });
+    const lookupKeys = getPdfLookupKeys(noticeNo);
+    const pdfFile = pdfFiles.find(file => lookupKeys.has(normalizePdfKey(file)));
 
     if (pdfFile) {
       return path.join(PDF_FOLDER, pdfFile);
@@ -236,29 +224,26 @@ function findPDFFile(noticeNo) {
 
 function startWatcher() {
   console.log("📂 Watching folder:", EXCEL_FOLDER);
-
-  // 🔥 First load existing files
-  const existingFiles = fs.readdirSync(EXCEL_FOLDER);
-  existingFiles.forEach((file) => {
-    const fullPath = path.join(EXCEL_FOLDER, file);
-    if (path.extname(fullPath) === ".xlsx") {
-      console.log("📥 Loading existing file:", fullPath);
-      processExcel(fullPath);
-    }
-  });
+  loadAllExcelFiles();
 
   // 🔥 Then start watcher
   const watcher = chokidar.watch(EXCEL_FOLDER, {
     persistent: true,
+    ignoreInitial: true,
+    awaitWriteFinish: { stabilityThreshold: 750, pollInterval: 100 },
   });
 
   watcher.on("ready", () => {
     console.log("✅ DGFT Watcher is ready...");
   });
 
-  watcher.on("add", (filePath) => {
-    console.log("📥 New file detected:", filePath);
-    processExcel(filePath);
+  ["add", "change", "unlink"].forEach((eventName) => {
+    watcher.on(eventName, (filePath) => {
+      if (/\.xlsx?$/i.test(filePath)) {
+        console.log(`📥 DGFT Excel ${eventName}:`, filePath);
+        loadAllExcelFiles();
+      }
+    });
   });
 
   watcher.on("error", (err) => {
@@ -266,21 +251,39 @@ function startWatcher() {
   });
 }
 
-function processExcel(filePath) {
-  if (path.extname(filePath) !== ".xlsx") return;
+function getExcelFiles() {
+  return fs.readdirSync(EXCEL_FOLDER, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.xlsx?$/i.test(entry.name) && !entry.name.startsWith("~$"))
+    .map((entry) => path.join(EXCEL_FOLDER, entry.name))
+    .sort();
+}
+
+function getSourceSignature() {
+  return getExcelFiles().map((filePath) => {
+    const stat = fs.statSync(filePath);
+    return `${filePath}:${stat.size}:${stat.mtimeMs}`;
+  }).join("|");
+}
+
+function parseExcel(filePath) {
+  if (!/\.xlsx?$/i.test(filePath)) return [];
 
   console.log("📊 Processing:", filePath);
 
-  const workbook = XLSX.readFile(filePath, { cellDates: true });
+  // Keep Excel dates as serial numbers. Converting them to JS Date here causes
+  // timezone-dependent one-day shifts for date-only cells.
+  const workbook = XLSX.readFile(filePath, { cellDates: false });
 
-  excelData = [];
+  const records = [];
 
   workbook.SheetNames.forEach((sheetName) => {
     const worksheet = workbook.Sheets[sheetName];
 
+    const decodedRange = XLSX.utils.decode_range(worksheet["!ref"] || "A1:E1");
     const sheetData = XLSX.utils.sheet_to_json(worksheet, {
       header: 1,
       defval: "",
+      range: { s: { r: 0, c: 0 }, e: { r: decodedRange.e.r, c: 4 } },
     });
 
     if (sheetData.length < 4) return;
@@ -295,8 +298,8 @@ function processExcel(filePath) {
       const formattedDate = formatDate(row[4]);
       const financialYear = normalizeFinancialYear(row[2], formattedDate);
 
-      excelData.push({
-        id: excelData.length + 1,
+      records.push({
+        id: 0,
         type,
         srNo: row[0],
         noticeNo,
@@ -305,18 +308,37 @@ function processExcel(filePath) {
         title: row[3],
         date: formattedDate,
         authority: "DGFT",
+        sourceFile: path.basename(filePath),
+        sourceSheet: sheetName,
       });
     });
   });
 
-  lastFileName = path.basename(filePath);
+  return records;
+}
 
-  console.log("✅ DGFT Excel Loaded:", lastFileName);
-  console.log("📦 Total Records:", excelData.length);
+function loadAllExcelFiles() {
+  try {
+    const files = getExcelFiles();
+    const nextData = files.flatMap(parseExcel).map((record, index) => ({ ...record, id: index + 1 }));
+    const nextFileName = files.map((filePath) => path.basename(filePath)).join(", ");
+    const nextSignature = getSourceSignature();
+
+    // Publish the new snapshot only after every workbook has parsed successfully.
+    // Requests therefore never observe a partially rebuilt dataset.
+    excelData = nextData;
+    lastFileName = nextFileName;
+    sourceSignature = nextSignature;
+    console.log("✅ DGFT Excel Loaded:", lastFileName);
+    console.log("📦 Total Records:", excelData.length);
+  } catch (error) {
+    console.error("❌ DGFT reload failed; retaining the last complete snapshot:", error.message);
+  }
 }
 
 
 function getExcelData() {
+  if (getSourceSignature() !== sourceSignature) loadAllExcelFiles();
   return {
     filename: lastFileName,
     count: excelData.length,

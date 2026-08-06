@@ -37,6 +37,18 @@ let customsData = {
 };
 
 let lastUpdated = "";
+let sourceSignature = "";
+
+function getExcelSourceSignature(folderPath) {
+  if (!fs.existsSync(folderPath)) return "";
+  return fs.readdirSync(folderPath, { withFileTypes: true }).flatMap(function(entry) {
+    var entryPath = path.join(folderPath, entry.name);
+    if (entry.isDirectory()) return [getExcelSourceSignature(entryPath)];
+    if (!/\.xlsx?$/i.test(entry.name) || entry.name.startsWith("~$")) return [];
+    var stat = fs.statSync(entryPath);
+    return [entryPath + ":" + stat.size + ":" + stat.mtimeMs];
+  }).join("|");
+}
 
 function getNotificationCountMap() {
   return {
@@ -926,6 +938,7 @@ function processAllCustomsData() {
     }
     
     lastUpdated = new Date().toISOString();
+    sourceSignature = getExcelSourceSignature(CUSTOMS_BASE_FOLDER);
     
     console.log("\n📊 ========== FINAL SUMMARY SHESHNATH ==========");
     console.log("  Acts: " + customsData.acts.length);
@@ -965,7 +978,7 @@ function ensureCustomsDataLoaded() {
     customsData.alliedActs.length +
     totalNotifications;
 
-  if (totalRecords === 0) {
+  if (totalRecords === 0 || getExcelSourceSignature(CUSTOMS_BASE_FOLDER) !== sourceSignature) {
     processAllCustomsData();
   }
 }
@@ -978,7 +991,8 @@ function startWatcher() {
   var watcher = chokidar.watch(CUSTOMS_BASE_FOLDER, {
     persistent: true,
     ignoreInitial: true,
-    depth: 4
+    depth: 8,
+    awaitWriteFinish: { stabilityThreshold: 750, pollInterval: 100 }
   });
   
   watcher.on("ready", function() {
@@ -996,6 +1010,13 @@ function startWatcher() {
     if (path.extname(filePath) === ".xlsx") {
       console.log("📝 Excel file changed:", filePath);
       setTimeout(function() { processAllCustomsData(); }, 1000);
+    }
+  });
+
+  watcher.on("unlink", function(filePath) {
+    if (/\.xlsx?$/i.test(filePath)) {
+      console.log("🗑️ Excel file removed:", filePath);
+      setTimeout(function() { processAllCustomsData(); }, 250);
     }
   });
   
@@ -1145,6 +1166,5 @@ module.exports = {
   processAllCustomsData: processAllCustomsData,
   resolveCustomsPdfDownloadPath: resolveCustomsPdfDownloadPath
 };
-
 
 
