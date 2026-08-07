@@ -94,6 +94,7 @@ const ecommerceindustryRoutes = require("./routes/ecommerceindustryRoutes.routes
 const { startWatcher, getExcelData, findPDFFile } = require("./services/dgftExcel.service");
 const customsService = require("./services/customsExcel.service");
 const exchangeRatesService = require("./services/exchangeRates.service");
+const dataSyncService = require("./services/dataSync.service");
 const maincontactRoutes = require("./routes/maincontactRoutes.routes");
 const auditcomplianceformRoutes = require("./routes/auditcomplianceform.routes");
 const saasEnrollmentRoutes = require("./routes/saasEnrollment.routes");
@@ -279,7 +280,7 @@ const formattedDateTime = formatISTDateTime();
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(["/api/dgft", "/api/ftp", "/api/customs", "/api/gst", "/api/exchange-rates"], (_req, res, next) => {
+app.use(["/api/dgft", "/api/ftp", "/api/customs", "/api/gst", "/api/exchange-rates", "/api/data-sync"], (_req, res, next) => {
   res.set({
     "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
     Pragma: "no-cache",
@@ -746,6 +747,36 @@ app.get("/api/exchange-rates/download", (req, res) => {
   } catch (error) { res.status(500).json({ success: false, error: error.message }); }
 });
 
+app.get("/api/exchange-rates/pdf", (req, res) => {
+  try {
+    const { notification, notificationDate, effectiveDate } = req.query;
+    if (!notification && !notificationDate && !effectiveDate) {
+      return res.status(400).json({
+        success: false,
+        message: "notification, notificationDate, or effectiveDate is required",
+      });
+    }
+
+    const pdf = exchangeRatesService.getExchangeRateNotificationPdf({
+      notification,
+      notificationDate,
+      effectiveDate,
+    });
+    if (!pdf) {
+      return res.status(404).json({ success: false, message: "Exchange rate notification PDF not found" });
+    }
+
+    res.setHeader("Content-Disposition", `inline; filename="${pdf.fileName.replace(/"/g, "")}"`);
+    return res.sendFile(pdf.filePath);
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.get("/api/data-sync/status", (_req, res) => {
+  res.json(dataSyncService.getDataSyncStatus());
+});
+
 /* ── Customs ── */
 app.use("/pdfs", express.static(CUSTOMS_PDF_PATH));
 
@@ -864,6 +895,9 @@ catch (e) { console.error("❌ Exchange rates watcher failed:", e.message); }
 
 try { ftpService.startWatcher();        console.log("✅ FTP watcher started"); }
 catch (e) { console.error("❌ FTP watcher failed:", e.message); }
+
+try { dataSyncService.startDataSyncWatcher(); console.log("✅ Project data watcher started"); }
+catch (e) { console.error("❌ Project data watcher failed:", e.message); }
 
 startWatcher(); // DGFT
 

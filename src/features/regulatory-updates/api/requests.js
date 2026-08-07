@@ -4,6 +4,7 @@ import { GST_TAB_CONFIG } from "../config/gst";
 import { getRegulatoryApiBase } from "../utils/apiBase";
 
 export const SNAPSHOT_EVENT = "regulatory-updates:snapshot-ready";
+const DATA_SYNC_POLL_INTERVAL = 5000;
 
 function getAuthorityTabConfig(authority, tabKey) {
   if (authority === "gst") return GST_TAB_CONFIG[tabKey] || GST_TAB_CONFIG.acts;
@@ -68,6 +69,34 @@ export async function fetchRegulatoryData(authority, tabKey) {
   const items = Array.isArray(payload.data) ? payload.data : [];
   const tabConfig = getAuthorityTabConfig(authority, tabKey);
   return applyClientFilter(items, tabConfig?.clientFilter);
+}
+
+export function subscribeToDataSync(onChange) {
+  const apiBase = getRegulatoryApiBase();
+  let lastRevision = null;
+
+  const poll = async () => {
+    try {
+      const response = await fetch(`${apiBase}/api/data-sync/status?_fresh=${Date.now()}`, {
+        cache: "no-store",
+        headers: { Accept: "application/json", "Cache-Control": "no-cache" },
+      });
+      if (!response.ok) return;
+      const payload = await response.json();
+      if (!payload.success) return;
+
+      if (lastRevision !== null && payload.revision !== lastRevision) onChange(payload);
+      lastRevision = payload.revision;
+    } catch (_error) {
+      // The next poll retries automatically; page data remains usable meanwhile.
+    }
+  };
+
+  poll();
+  const intervalId = window.setInterval(poll, DATA_SYNC_POLL_INTERVAL);
+  return () => {
+    window.clearInterval(intervalId);
+  };
 }
 
 async function fetchGstLegalEndpoint(type, path) {

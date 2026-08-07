@@ -1,0 +1,111 @@
+name: Validate and deploy
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+concurrency:
+  group: eximinq-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+        env:
+          CI: "false"
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Validate backend JavaScript
+        working-directory: backend
+        run: |
+          node --check server.js
+          find services routes controllers models utils -type f -name '*.js' -print0 | xargs -0 -n1 node --check
+
+      - name: Package frontend
+        if: github.ref == 'refs/heads/master'
+        run: tar -czf frontend-build.tgz -C build .
+
+      - name: Package backend
+        if: github.ref == 'refs/heads/master'
+        run: |
+          tar --exclude='backend/node_modules' --exclude='backend/.env' --exclude='backend/*.log' \
+            -czf backend-release.tgz backend
+
+      - name: Upload production release
+        if: github.ref == 'refs/heads/master'
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          test -n "$DEPLOY_HOST"
+          test -n "$DEPLOY_USER"
+          test -n "$DEPLOY_SSH_KEY"
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/eximinq.pem
+          chmod 600 ~/.ssh/eximinq.pem
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          scp -i ~/.ssh/eximinq.pem frontend-build.tgz backend-release.tgz \
+            "$DEPLOY_USER@$DEPLOY_HOST:/home/$DEPLOY_USER/"
+
+      - name: Activate production release
+        if: github.ref == 'refs/heads/master'
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          ssh -i ~/.ssh/eximinq.pem "$DEPLOY_USER@$DEPLOY_HOST" 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          cd "$HOME"
+
+          rm -rf app-next backend-next
+          mkdir -p app-next backend-next
+          tar -xzf frontend-build.tgz -C app-next
+          tar -xzf backend-release.tgz -C backend-next --strip-components=1
+
+          if [ -f backend/.env ]; then cp backend/.env backend-next/.env; fi
+          cd backend-next
+          npm ci --omit=dev
+          cd "$HOME"
+
+          rm -rf app-previous backend-previous
+          if [ -d app ]; then mv app app-previous; fi
+          if [ -d backend ]; then mv backend backend-previous; fi
+          mv app-next app
+          mv backend-next backend
+
+          pm2 restart backend --update-env
+          pm2 save
+          sudo nginx -t
+          sudo systemctl reload nginx
+
+          curl --fail --silent --show-error http://127.0.0.1:5000/api/health >/dev/null
+          rm -rf app-previous backend-previous frontend-build.tgz backend-release.tgz
+          REMOTE
+
+      - name: Verify production
+        if: github.ref == 'refs/heads/master'
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          curl --fail --retry 5 --retry-delay 3 "https://eximinq.in/api/data-sync/status"
+          curl --fail --retry 5 --retry-delay 3 "https://eximinq.in/api/exchange-rates?_fresh=$(date +%s)"

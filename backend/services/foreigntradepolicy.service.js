@@ -93,6 +93,8 @@ let rodtepData = [];
 let scometExportData = [];
 let scometImportData = [];
 let scometOnlyData = [];
+let sourceSignature = "";
+let reloadTimer = null;
 
 if (!fs.existsSync(EXCEL_FOLDER)) {
   fs.mkdirSync(EXCEL_FOLDER, { recursive: true });
@@ -445,27 +447,50 @@ function loadAllExcelFiles() {
       processExcel(path.join(EXCEL_FOLDER, fileName));
     }
   });
+  sourceSignature = getSourceSignature();
+}
+
+function getSourceSignature() {
+  return fs.readdirSync(EXCEL_FOLDER, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && isValidExcelFile(entry.name))
+    .map((entry) => {
+      const filePath = path.join(EXCEL_FOLDER, entry.name);
+      const stats = fs.statSync(filePath);
+      return `${filePath}:${stats.size}:${stats.mtimeMs}`;
+    })
+    .sort()
+    .join("|");
+}
+
+function scheduleReload() {
+  clearTimeout(reloadTimer);
+  reloadTimer = setTimeout(loadAllExcelFiles, 250);
 }
 
 function startWatcher() {
   console.log(`Watching FTP folder: ${EXCEL_FOLDER}`);
   loadAllExcelFiles();
 
-  const watcher = chokidar.watch(EXCEL_FOLDER, { persistent: true });
+  const watcher = chokidar.watch(EXCEL_FOLDER, {
+    persistent: true,
+    ignoreInitial: true,
+    awaitWriteFinish: { stabilityThreshold: 1000, pollInterval: 100 },
+  });
   watcher.on("ready", () => console.log("FTP Watcher is ready"));
   watcher.on("add", (filePath) => {
-    if (isValidExcelFile(filePath)) loadAllExcelFiles();
+    if (isValidExcelFile(filePath)) scheduleReload();
   });
   watcher.on("change", (filePath) => {
-    if (isValidExcelFile(filePath)) loadAllExcelFiles();
+    if (isValidExcelFile(filePath)) scheduleReload();
   });
   watcher.on("unlink", (filePath) => {
-    if (isValidExcelFile(filePath)) loadAllExcelFiles();
+    if (isValidExcelFile(filePath)) scheduleReload();
   });
   watcher.on("error", (error) => console.error("FTP Watcher error:", error));
 }
 
 function getEnrichedCategoryData(category) {
+  if (getSourceSignature() !== sourceSignature) loadAllExcelFiles();
   if (
     !anfData.length &&
     !appendicesData.length &&
@@ -530,6 +555,7 @@ function getCategoryData(category) {
 }
 
 function getExcelData() {
+  if (getSourceSignature() !== sourceSignature) loadAllExcelFiles();
   return {
     filename: "",
     count:

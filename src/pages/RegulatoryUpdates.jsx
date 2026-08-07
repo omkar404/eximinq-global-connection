@@ -10,7 +10,11 @@ import {
 } from "lucide-react";
 import { Navbar } from "../components/CloudDeskForeignTrade/Navbar";
 import { Footer } from "../components/CloudDeskForeignTrade/Footer";
-import { fetchRegulatoryData, SNAPSHOT_EVENT } from "../features/regulatory-updates/api/requests";
+import {
+  fetchRegulatoryData,
+  SNAPSHOT_EVENT,
+  subscribeToDataSync,
+} from "../features/regulatory-updates/api/requests";
 import { CBIC_NAV } from "../features/regulatory-updates/config/cbic";
 import { DGFT_DEFAULT_TAB, DGFT_FTP_TABS, DGFT_NAV } from "../features/regulatory-updates/config/dgft";
 import { FINANCIAL_YEARS } from "../features/regulatory-updates/config/financialYears";
@@ -1520,6 +1524,11 @@ export default function RegulatoryUpdates() {
       window.removeEventListener("focus", refresh);
       document.removeEventListener("visibilitychange", refresh);
     };
+  }, [activeTab, loadData]);
+
+  useEffect(() => {
+    if (PARENT_ONLY_KEYS.has(activeTab)) return undefined;
+    return subscribeToDataSync(() => loadData(true));
   }, [activeTab, loadData]);
 
   useEffect(() => {

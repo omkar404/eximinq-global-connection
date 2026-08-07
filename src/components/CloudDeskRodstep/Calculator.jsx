@@ -15,6 +15,7 @@ const currency = (value) =>
   new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
+    minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(Number(value) || 0);
 const rateText = (value) => `${Number(value || 0).toFixed(2)}%`;

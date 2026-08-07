@@ -283,6 +283,12 @@ const getAllYears = (rates) => {
 };
 
 const getDownloadHref = (rate) => {
+  if (rate.pdfUrl) {
+    return rate.pdfUrl.startsWith("http")
+      ? rate.pdfUrl
+      : `${API_BASE_URL}${rate.pdfUrl}`;
+  }
+
   if (rate.downloadUrl) {
     return rate.downloadUrl.startsWith("http")
       ? rate.downloadUrl
@@ -293,10 +299,6 @@ const getDownloadHref = (rate) => {
     return `${API_BASE_URL}/api/exchange-rates/download?notification=${encodeURIComponent(
       rate.notification
     )}`;
-  }
-
-  if (rate.pdfUrl) {
-    return rate.pdfUrl.startsWith("http") ? rate.pdfUrl : `/pdfs/${rate.pdfUrl}`;
   }
 
   return null;
@@ -377,9 +379,11 @@ export default function ExchangeRates() {
     };
 
     loadExchangeRates();
+    const intervalId = window.setInterval(loadExchangeRates, 5000);
 
     return () => {
       isMounted = false;
+      window.clearInterval(intervalId);
     };
   }, []);
 
@@ -469,6 +473,7 @@ export default function ExchangeRates() {
       export: r.exportRate,
       trend: getTrend(r.importRate, prev?.importRate),
       pdfUrl: r.pdfUrl,
+      hasPdf: r.hasPdf,
       downloadUrl: r.downloadUrl,
       unit: r.unit,
       currencyName: r.currencyName,
@@ -1097,7 +1102,17 @@ export default function ExchangeRates() {
                   {tableRates.map((r, i) => (
                     <tr key={i} className="hover:bg-blue-50">
                       <td className="px-6 py-4 font-medium">
-                        {r.notificationDate ? formatToDDMMYYYY(r.notificationDate) : "-"}
+                        {r.notificationDate && r.pdfUrl ? (
+                          <a
+                            href={getDownloadHref(r)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-700 hover:underline"
+                            aria-label={`Open exchange rate notification PDF dated ${formatToDDMMYYYY(r.notificationDate)}`}
+                          >
+                            {formatToDDMMYYYY(r.notificationDate)}
+                          </a>
+                        ) : r.notificationDate ? formatToDDMMYYYY(r.notificationDate) : "-"}
                       </td>
                       <td className="px-6 py-4 font-medium">
                         {formatToDDMMYYYY(r.date)}

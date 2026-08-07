@@ -2,8 +2,23 @@
 
 This repo has two deployment options:
 
+- Automatic deployment from GitHub
 - One-click deploy using PowerShell
 - Manual deploy using `scp`, `ssh`, `nginx`, and `pm2`
+
+## Automatic GitHub Deployment
+
+The workflow in `.github/workflows/validate-and-deploy.yml` validates every branch with Node.js 18. A push to `master` additionally builds and synchronizes the complete frontend and backend, including `backend/PDF_DOC`, before restarting PM2 and reloading Nginx.
+
+Create these GitHub repository secrets under **Settings > Secrets and variables > Actions**:
+
+- `DEPLOY_HOST`: production server hostname or IP
+- `DEPLOY_USER`: production SSH user, normally `ubuntu`
+- `DEPLOY_SSH_KEY`: the complete contents of the production PEM private key
+
+Do not commit the PEM file or backend `.env`. The workflow preserves the existing server `.env` during each atomic release.
+
+Changes on non-`master` branches are built and validated but are not sent to production. Merge the completed branch into `master` to publish it.
 
 Server details used here:
 

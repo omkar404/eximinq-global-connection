@@ -3,14 +3,21 @@ const XLSX = require("xlsx");
 const path = require("path");
 const fs = require("fs");
 
-const DGFT_BASE_FOLDER = path.join(__dirname, "../PDF_DOC/DGFT");
-const EXCHANGE_RATES_FOLDER = path.join(DGFT_BASE_FOLDER, "EXCHANGE_RATES");
-const EXCHANGE_RATES_FILE = path.join(EXCHANGE_RATES_FOLDER, "Exchange Rates.xlsx");
+const PDF_DOC_FOLDER = path.join(__dirname, "../PDF_DOC");
+const EXCHANGE_RATES_FOLDERS = [
+  path.join(PDF_DOC_FOLDER, "EXCHANGE_RATES"),
+  path.join(PDF_DOC_FOLDER, "DGFT", "EXCHANGE_RATES"),
+];
+const EXCHANGE_RATE_NOTIFICATION_FOLDERS = EXCHANGE_RATES_FOLDERS.flatMap((folderPath) => [
+  path.join(folderPath, "Exchange Rate Notifications"),
+  path.join(folderPath, "Exchange Rate Notification"),
+]);
 
 let exchangeRatesData = [];
 let notificationSummaries = [];
 let lastUpdated = "";
 let lastFileName = "";
+let sourceSignature = "";
 
 const MANUAL_EXCHANGE_RATE_OVERRIDES = [
   ["AED", "UAE Dirham", 1, 26.2, 24.7],
@@ -51,9 +58,7 @@ const MANUAL_EXCHANGE_RATE_OVERRIDES = [
 }));
 
 function ensureFolder() {
-  if (!fs.existsSync(EXCHANGE_RATES_FOLDER)) {
-    fs.mkdirSync(EXCHANGE_RATES_FOLDER, { recursive: true });
-  }
+  EXCHANGE_RATES_FOLDERS.forEach((folderPath) => fs.mkdirSync(folderPath, { recursive: true }));
 }
 
 function formatDate(value) {
@@ -104,6 +109,64 @@ function normalizeNotification(value) {
     .replace(/\s+/g, "");
 }
 
+function normalizeNotificationKey(value) {
+  const match = String(value || "").match(/(\d{1,3})\D+(\d{4})/);
+  return match ? `${Number(match[1])}/${match[2]}` : "";
+}
+
+function normalizeDateKey(value) {
+  const match = String(value || "").match(/(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})/);
+  if (!match) return "";
+  return `${match[1].padStart(2, "0")}-${match[2].padStart(2, "0")}-${match[3]}`;
+}
+
+function getNotificationPdfEntries() {
+  return EXCHANGE_RATE_NOTIFICATION_FOLDERS.flatMap((folderPath) => {
+    if (!fs.existsSync(folderPath)) return [];
+
+    return fs.readdirSync(folderPath, { withFileTypes: true })
+      .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === ".pdf")
+      .map((entry) => {
+        const notificationMatch = entry.name.match(/Notification\s*No\s*-\s*(\d{1,3})-(\d{4})/i);
+        const notificationDateMatch = entry.name.match(/dated\s+(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4})/i);
+        const effectiveDateMatch = entry.name.match(/w\.?e\.?f\.?\s+(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4})/i);
+
+        return {
+          fileName: entry.name,
+          filePath: path.join(folderPath, entry.name),
+          notification: notificationMatch
+            ? `${Number(notificationMatch[1])}/${notificationMatch[2]}`
+            : "",
+          notificationDate: normalizeDateKey(notificationDateMatch?.[1]),
+          effectiveDate: normalizeDateKey(effectiveDateMatch?.[1]),
+        };
+      });
+  });
+}
+
+function findNotificationPdf(
+  { notification, notificationDate, effectiveDate },
+  entries = getNotificationPdfEntries()
+) {
+  const notificationKey = normalizeNotificationKey(notification);
+  const notificationDateKey = normalizeDateKey(notificationDate);
+  const effectiveDateKey = normalizeDateKey(effectiveDate);
+  return entries.find((entry) => notificationKey && entry.notification === notificationKey)
+    || entries.find((entry) => notificationDateKey && entry.notificationDate === notificationDateKey)
+    || entries.find((entry) => effectiveDateKey && entry.effectiveDate === effectiveDateKey)
+    || null;
+}
+
+function getNotificationPdfUrl(record, entries) {
+  const match = findNotificationPdf(record, entries);
+  if (!match) return "";
+
+  const params = new URLSearchParams({ notification: record.notification || match.notification });
+  if (record.notificationDate) params.set("notificationDate", record.notificationDate);
+  if (record.effectiveDate) params.set("effectiveDate", record.effectiveDate);
+  return `/api/exchange-rates/pdf?${params.toString()}`;
+}
+
 function detectHeaderRow(rows) {
   return rows.findIndex((row) => {
     const normalizedRow = row.map(normalizeHeader);
@@ -149,23 +212,25 @@ function applyManualFallbacks(parsedRows) {
 }
 
 function findPrimaryExchangeRatesFile() {
-  if (fs.existsSync(EXCHANGE_RATES_FILE)) {
-    return EXCHANGE_RATES_FILE;
-  }
-
-  const xlsxFiles = fs
-    .readdirSync(EXCHANGE_RATES_FOLDER, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === ".xlsx")
-    .map((entry) => {
-      const fullPath = path.join(EXCHANGE_RATES_FOLDER, entry.name);
-      return {
-        fullPath,
-        mtimeMs: fs.statSync(fullPath).mtimeMs,
-      };
-    })
+  const xlsxFiles = EXCHANGE_RATES_FOLDERS.flatMap((folderPath) =>
+    fs.readdirSync(folderPath, { withFileTypes: true })
+      .filter((entry) => entry.isFile() && /\.xlsx?$/i.test(entry.name) && !entry.name.startsWith("~$"))
+      .map((entry) => {
+        const fullPath = path.join(folderPath, entry.name);
+        const stats = fs.statSync(fullPath);
+        return { fullPath, mtimeMs: stats.mtimeMs };
+      })
+  )
     .sort((left, right) => right.mtimeMs - left.mtimeMs);
 
-  return xlsxFiles[0]?.fullPath || EXCHANGE_RATES_FILE;
+  return xlsxFiles[0]?.fullPath || path.join(EXCHANGE_RATES_FOLDERS[0], "Exchange Rates.xlsx");
+}
+
+function getSourceSignature() {
+  const filePath = findPrimaryExchangeRatesFile();
+  if (!fs.existsSync(filePath)) return "";
+  const stats = fs.statSync(filePath);
+  return `${filePath}:${stats.size}:${stats.mtimeMs}`;
 }
 
 function processExchangeRatesFile(filePath) {
@@ -177,7 +242,9 @@ function processExchangeRatesFile(filePath) {
     return;
   }
 
-  const workbook = XLSX.readFile(filePath, { cellDates: true });
+  // Keep date cells as Excel serials. Converting them to JavaScript Date first
+  // can shift legal notification dates across a timezone boundary.
+  const workbook = XLSX.readFile(filePath, { cellDates: false });
   const sheetName = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheetName];
   const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
@@ -304,6 +371,7 @@ function processExchangeRatesFile(filePath) {
   notificationSummaries = sortByLatestDate(Array.from(mergedSummaryMap.values()), "notificationDate");
   lastUpdated = new Date().toISOString();
   lastFileName = path.basename(filePath);
+  sourceSignature = getSourceSignature();
 }
 
 function loadExchangeRates() {
@@ -315,21 +383,16 @@ function startWatcher() {
   ensureFolder();
   loadExchangeRates();
 
-  const watcher = chokidar.watch(EXCHANGE_RATES_FOLDER, {
+  const watcher = chokidar.watch(EXCHANGE_RATES_FOLDERS, {
     persistent: true,
     ignoreInitial: true,
+    awaitWriteFinish: { stabilityThreshold: 1000, pollInterval: 100 },
   });
 
-  watcher.on("add", (filePath) => {
-    if (path.extname(filePath).toLowerCase() === ".xlsx") {
-      processExchangeRatesFile(filePath);
-    }
-  });
-
-  watcher.on("change", (filePath) => {
-    if (path.extname(filePath).toLowerCase() === ".xlsx") {
-      processExchangeRatesFile(filePath);
-    }
+  ["add", "change", "unlink"].forEach((eventName) => {
+    watcher.on(eventName, (filePath) => {
+      if (/\.xlsx?$/i.test(filePath)) loadExchangeRates();
+    });
   });
 
   watcher.on("error", (error) => {
@@ -338,17 +401,32 @@ function startWatcher() {
 }
 
 function getExchangeRatesData() {
+  if (getSourceSignature() !== sourceSignature) loadExchangeRates();
+  const pdfEntries = getNotificationPdfEntries();
+  const data = exchangeRatesData.map((record) => {
+    const pdfUrl = getNotificationPdfUrl(record, pdfEntries);
+    return { ...record, pdfUrl, hasPdf: Boolean(pdfUrl) };
+  });
+  const notifications = notificationSummaries.map((record) => {
+    const pdfUrl = getNotificationPdfUrl(record, pdfEntries);
+    return { ...record, pdfUrl, hasPdf: Boolean(pdfUrl) };
+  });
   return {
     success: true,
     filename: lastFileName,
     lastUpdated,
-    count: exchangeRatesData.length,
-    notifications: notificationSummaries,
-    data: exchangeRatesData,
+    count: data.length,
+    notifications,
+    data,
   };
 }
 
+function getExchangeRateNotificationPdf(criteria) {
+  return findNotificationPdf(criteria);
+}
+
 function getExchangeRatesByNotification(notification) {
+  if (getSourceSignature() !== sourceSignature) loadExchangeRates();
   const normalizedNotification = normalizeNotification(notification);
   return exchangeRatesData.filter((item) => item.notification === normalizedNotification);
 }
@@ -383,5 +461,6 @@ module.exports = {
   loadExchangeRates,
   getExchangeRatesData,
   getExchangeRatesByNotification,
+  getExchangeRateNotificationPdf,
   buildNotificationWorkbook,
 };

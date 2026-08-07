@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Coins,
   DollarSign,
@@ -6,8 +6,52 @@ import {
   PoundSterling,
   JapaneseYen,
 } from "lucide-react";
+import { getRegulatoryApiBase } from "../../features/regulatory-updates/utils/apiBase";
 
 export function ExchangeRates() {
+  const [rates, setRates] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    const apiBase = getRegulatoryApiBase();
+
+    const loadRates = async () => {
+      try {
+        const response = await fetch(`${apiBase}/api/exchange-rates?_fresh=${Date.now()}`, {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache" },
+        });
+        const payload = await response.json();
+        if (mounted && response.ok && Array.isArray(payload.data)) setRates(payload.data);
+      } catch (_error) {
+        // Keep the compact widget available while the next refresh retries.
+      }
+    };
+
+    loadRates();
+    const intervalId = window.setInterval(loadRates, 5000);
+    return () => {
+      mounted = false;
+      window.clearInterval(intervalId);
+    };
+  }, []);
+
+  const latestRates = useMemo(() => {
+    const latestNotification = rates[0]?.notification;
+    if (!latestNotification) return [];
+    const wantedCurrencies = new Set(["USD", "EUR", "GBP", "JPY"]);
+    return rates.filter(
+      (rate) => rate.notification === latestNotification && wantedCurrencies.has(rate.currency)
+    );
+  }, [rates]);
+
+  const latestRecord = latestRates[0] || rates[0];
+  const monthLabel = latestRecord?.effectiveDate
+    ? new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(
+        new Date(latestRecord.effectiveDate.split("-").reverse().join("-"))
+      )
+    : "Latest";
+
   return (
     <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
       {/* Header */}
@@ -17,7 +61,7 @@ export function ExchangeRates() {
           Exchange Rates
         </h3>
         <span className="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded border border-slate-600">
-          Jul 2026
+          {monthLabel}
         </span>
       </div>
 
@@ -31,40 +75,25 @@ export function ExchangeRates() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
-          <RateRow
-            icon={DollarSign}
-            code="USD"
-            importRate="96.05"
-            exportRate="94.3"
-          />
-          <RateRow
-            icon={Euro}
-            code="EUR"
-            importRate="111.8"
-            exportRate="108.5"
-          />
-          <RateRow
-            icon={PoundSterling}
-            code="GBP"
-            importRate="130.15"
-            exportRate="126.1"
-          />
-          <RateRow
-            icon={JapaneseYen}
-            code="JPY"
-            importRate="61.3"
-            exportRate="59.4"
-          />
+          {latestRates.map((rate) => (
+            <RateRow
+              key={`${rate.notification}-${rate.currency}`}
+              icon={RATE_ICONS[rate.currency] || DollarSign}
+              code={rate.currency}
+              importRate={rate.importRate}
+              exportRate={rate.exportRate}
+            />
+          ))}
         </tbody>
       </table>
-      <div class="px-4 py-2 bg-gray-50 text-[10px] text-gray-400 text-center border-t border-gray-100 flex justify-between items-center">
+      <div className="px-4 py-2 bg-gray-50 text-[10px] text-gray-400 text-center border-t border-gray-100 flex justify-between items-center">
         <span>
-          <i class="fas fa-info-circle mr-1"></i>Notification 22/2026
+          <i className="fas fa-info-circle mr-1"></i>Notification {latestRecord?.notification || "-"}
         </span>
         <a
           href="https://eximinq.in/foreign-trade-policy/Customsrates/"
           target="_blank"
-          class="text-blue-600 hover:underline"
+          className="text-blue-600 hover:underline"
         >
           View All
         </a>
@@ -72,6 +101,13 @@ export function ExchangeRates() {
     </div>
   );
 }
+
+const RATE_ICONS = {
+  USD: DollarSign,
+  EUR: Euro,
+  GBP: PoundSterling,
+  JPY: JapaneseYen,
+};
 
 /* ---------------- Helpers ---------------- */
 
