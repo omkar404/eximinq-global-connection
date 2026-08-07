@@ -76,9 +76,9 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "05 Aug 2026",
-    title: "Trade Notice 15/2026-27",
-    desc: "Availability of License-wise Voluntary Duty Payment Details for processing of Export Obligation Discharge Certificate (EODC) applications under Advance Authorisation (AA) and Export Promotion Capital Goods (EPCG) Schemes – reg",
+    date: "07 Aug 2026",
+    title: "Trade Notice 17/2026-27",
+    desc: "Institutional Transition of Implementing Agency from the Reserve Bank of India (RBI) to the Export-Import Bank of India (EXIM Bank) for the Interest Subvention Support for Pre- and Post-Shipment Export Credit under Export Promotion Mission (EPM) – Niryat Prothsahan – reg.",
     color: "purple",
   },
   {
