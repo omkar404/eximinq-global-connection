@@ -34,26 +34,26 @@ export function ExchangeRates() {
           <RateRow
             icon={DollarSign}
             code="USD"
-            importRate="97.2"
-            exportRate="95.45"
+            importRate="96.05"
+            exportRate="94.3"
           />
           <RateRow
             icon={Euro}
             code="EUR"
-            importRate="112.35"
-            exportRate="108.6"
+            importRate="111.8"
+            exportRate="108.5"
           />
           <RateRow
             icon={PoundSterling}
             code="GBP"
-            importRate="132.45"
-            exportRate="128.3"
+            importRate="130.15"
+            exportRate="126.1"
           />
           <RateRow
             icon={JapaneseYen}
             code="JPY"
-            importRate="60.35"
-            exportRate="58.5"
+            importRate="61.3"
+            exportRate="59.4"
           />
         </tbody>
       </table>
