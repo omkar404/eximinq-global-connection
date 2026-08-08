@@ -41,9 +41,9 @@ const NOTICES = [
   },
   {
     type: "Customs",
-    date: "03 Jul 2026",
-    title: "Instruction No. 13/2026-Customs",
-    desc: "Provisional assessment and furnishing of guarantee in respect of imports of “Glufosinate and its salt” originating in or exported from China PR.",
+    date: "07 Aug 2026",
+    title: "Instruction No. 14/2026-Customs",
+    desc: "Implementation of MeitY Notification S.O. 4182(E) regarding extension of implementation timeline for compliance of IS 18112:2022 for Television Sets under Electronics and Information Technology Goods (Requirements for Compulsory Registration) Order, 2021",
     color: "green",
   },
   // {
