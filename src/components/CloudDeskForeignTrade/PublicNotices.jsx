@@ -76,9 +76,9 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "07 Aug 2026",
-    title: "Trade Notice 17/2026-27",
-    desc: "Institutional Transition of Implementing Agency from the Reserve Bank of India (RBI) to the Export-Import Bank of India (EXIM Bank) for the Interest Subvention Support for Pre- and Post-Shipment Export Credit under Export Promotion Mission (EPM) – Niryat Prothsahan – reg.",
+    date: "10 Aug 2026",
+    title: "Trade Notice 18/2026-27",
+    desc: "Review and re-allocation of allocated Export Quota of Wheat under HS Codes 10011900 and 10019910- reg.",
     color: "purple",
   },
   {
