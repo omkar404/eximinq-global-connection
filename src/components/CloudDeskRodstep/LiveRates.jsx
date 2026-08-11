@@ -1,6 +1,6 @@
 import React from "react";
-import { RefreshCw } from "lucide-react";
-import { SLABS } from "./slabs";
+import { CalendarDays } from "lucide-react";
+import { RATES_AS_OF, SLABS } from "./slabs";
 
 const formatRange = (slab) => {
   return slab?.label ?? "";
@@ -77,13 +77,7 @@ const RateCard = ({
 
 const LiveRates = ({ onSellClick }) => {
   const [selectedSlab, setSelectedSlab] = React.useState(SLABS[0]);
-  const [lastUpdated, setLastUpdated] = React.useState(new Date());
   const [actionType] = React.useState("SELL");
-
-  const handleRefresh = () => {
-    setSelectedSlab(SLABS[0]);
-    setLastUpdated(new Date());
-  };
 
   return (
     <section
@@ -120,13 +114,10 @@ const LiveRates = ({ onSellClick }) => {
               ))}
             </select>
 
-            <button
-              onClick={handleRefresh}
-              className="text-sm text-slate-500 flex items-center gap-1 hover:text-slate-700 transition"
-            >
-              <RefreshCw size={14} />
-              Updated {lastUpdated.toLocaleTimeString()}
-            </button>
+            <span className="flex items-center gap-1 text-sm text-slate-500">
+              <CalendarDays size={14} />
+              As on {RATES_AS_OF}
+            </span>
           </div>
         </div>
 
