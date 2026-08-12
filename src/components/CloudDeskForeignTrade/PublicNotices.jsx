@@ -76,9 +76,9 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "10 Aug 2026",
-    title: "Trade Notice 18/2026-27",
-    desc: "Review and re-allocation of allocated Export Quota of Wheat under HS Codes 10011900 and 10019910- reg.",
+    date: "11 Aug 2026",
+    title: "Trade Notice 19/2026-27",
+    desc: "Advisory against 2 Bhutanese firms as per para 8.07 (d) of Foreign Trade Policy- 2023– reg",
     color: "purple",
   },
   {
