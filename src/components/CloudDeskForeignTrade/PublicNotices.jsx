@@ -76,9 +76,9 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "11 Aug 2026",
-    title: "Trade Notice 19/2026-27",
-    desc: "Advisory against 2 Bhutanese firms as per para 8.07 (d) of Foreign Trade Policy- 2023– reg",
+    date: "12 Aug 2026",
+    title: "Trade Notice 20/2026-27",
+    desc: "Inviting comments/suggestions on Draft Standard Operating Procedure (SOP) for reporting of Inward Remittance Messages pertaining to NBFC Factors.",
     color: "purple",
   },
   {
