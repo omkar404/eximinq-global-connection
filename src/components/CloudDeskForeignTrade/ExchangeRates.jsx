@@ -17,12 +17,16 @@ export function ExchangeRates() {
 
     const loadRates = async () => {
       try {
-        const response = await fetch(`${apiBase}/api/exchange-rates?_fresh=${Date.now()}`, {
-          cache: "no-store",
-          headers: { "Cache-Control": "no-cache" },
-        });
+        const response = await fetch(
+          `${apiBase}/api/exchange-rates?_fresh=${Date.now()}`,
+          {
+            cache: "no-store",
+            headers: { "Cache-Control": "no-cache" },
+          },
+        );
         const payload = await response.json();
-        if (mounted && response.ok && Array.isArray(payload.data)) setRates(payload.data);
+        if (mounted && response.ok && Array.isArray(payload.data))
+          setRates(payload.data);
       } catch (_error) {
         // Keep the compact widget available while the next refresh retries.
       }
@@ -41,14 +45,19 @@ export function ExchangeRates() {
     if (!latestNotification) return [];
     const wantedCurrencies = new Set(["USD", "EUR", "GBP", "JPY"]);
     return rates.filter(
-      (rate) => rate.notification === latestNotification && wantedCurrencies.has(rate.currency)
+      (rate) =>
+        rate.notification === latestNotification &&
+        wantedCurrencies.has(rate.currency),
     );
   }, [rates]);
 
   const latestRecord = latestRates[0] || rates[0];
   const monthLabel = latestRecord?.effectiveDate
-    ? new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(
-        new Date(latestRecord.effectiveDate.split("-").reverse().join("-"))
+    ? new Intl.DateTimeFormat("en-US", {
+        month: "short",
+        year: "numeric",
+      }).format(
+        new Date(latestRecord.effectiveDate.split("-").reverse().join("-")),
       )
     : "Latest";
 
@@ -88,7 +97,8 @@ export function ExchangeRates() {
       </table>
       <div className="px-4 py-2 bg-gray-50 text-[10px] text-gray-400 text-center border-t border-gray-100 flex justify-between items-center">
         <span>
-          <i className="fas fa-info-circle mr-1"></i>Notification {latestRecord?.notification || "-"}
+          <i className="fas fa-info-circle mr-1"></i>Notification{" "}
+          {latestRecord?.notification || "-"}
         </span>
         <a
           href="https://eximinq.in/foreign-trade-policy/Customsrates/"
