@@ -76,16 +76,16 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "12 Aug 2026",
-    title: "Trade Notice 20/2026-27",
-    desc: "Inviting comments/suggestions on Draft Standard Operating Procedure (SOP) for reporting of Inward Remittance Messages pertaining to NBFC Factors.",
+    date: "21 Aug 2026",
+    title: "Trade Notice 21/2026-27",
+    desc: "Introduction of Automated Facility for Grant of Export Obligation Extension through PRC/EPCG Committee – Ease of Doing Business",
     color: "purple",
   },
   {
     type: "Public Notice",
-    date: "05 Aug 2026",
-    title: "Public Notice 26/2026-27",
-    desc: "Extension of Last Date for Submission of TRQ Applications under the India–United Kingdom Comprehensive Economic and Trade Agreement (CETA) for FY 2026–27 – reg.",
+    date: "20 Aug 2026",
+    title: "Public Notice 27/2026-27",
+    desc: "Modalities for Application and Distribution of TRQ for Import of 10 Lakh MT of Raw Sugar and one-time conversion from Advance Authorisation (AA) Scheme to Tariff Rate Quota (TRQ) Scheme-reg.",
     color: "gray",
   },
 ];
