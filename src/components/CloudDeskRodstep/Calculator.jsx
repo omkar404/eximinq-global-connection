@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import { getSlabByAmount } from "./slabs";
 import InfoSection from "./InfoSection";
-import ContactCTA from "./ContactCTA";
 
 const currency = (value) =>
   new Intl.NumberFormat("en-IN", {
@@ -31,41 +30,37 @@ const readApiResponse = async (response) => {
 
   return {
     success: false,
-    error: response.status === 404
-      ? "This form service is not available on the server yet."
-      : "The server returned an unexpected response. Please try again.",
+    error:
+      response.status === 404
+        ? "This form service is not available on the server yet."
+        : "The server returned an unexpected response. Please try again.",
   };
 };
 
-const Calculator = ({ requestedTrade, onSendQuote, quoteDetails, onCloseQuote }) => {
-  const [sellDraft, setSellDraft] = useState({
-    action: "Sell to EXIMINQ",
-    scheme: "RODTEP",
-    rows: [{ id: 1, scripNo: "", scripDate: "", port: "", scripValue: 127000, rate: 95.1, quoteValue: 120777 }],
-    totalFaceValue: currency(127000),
-    totalQuoteValue: currency(120777),
-  });
-
-  return <div id="calculator">
-    <SellCalculator requestedTrade={requestedTrade} onSendQuote={onSendQuote} onDetailsChange={setSellDraft} />
-    <ContactCTA
-        inline
-        selectedWorkflow="sell"
-        selectedScheme={(sellDraft || quoteDetails)?.scheme || "RODTEP"}
-        quoteDetails={sellDraft || quoteDetails}
-        onClose={onCloseQuote}
-      />
+const Calculator = ({ requestedTrade }) => (
+  <div id="calculator">
+    <SellCalculator requestedTrade={requestedTrade} />
     <InfoSection />
-    <BuyCalculator requestedTrade={requestedTrade} onSendQuote={onSendQuote} />
-  </div>;
-};
+    <BuyCalculator requestedTrade={requestedTrade} />
+  </div>
+);
 
-function SellCalculator({ requestedTrade, onSendQuote, onDetailsChange }) {
+function SellCalculator({ requestedTrade }) {
   const [scheme, setScheme] = useState("rodtep");
   const [rows, setRows] = useState([
-    { id: 1, scripNo: "", scripDate: "", port: "", scripValue: 127000 },
+    { id: 1, scripNo: "", scripDate: "", port: "", scripValue: "" },
   ]);
+  const [seller, setSeller] = useState({
+    name: "",
+    companyName: "",
+    mobile: "",
+    email: "",
+    icegateId: "",
+    iecNo: "",
+  });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
 
   useEffect(() => {
     if (requestedTrade?.workflow === "sell") setScheme(requestedTrade.scheme);
@@ -86,20 +81,6 @@ function SellCalculator({ requestedTrade, onSendQuote, onDetailsChange }) {
     [rows, scheme],
   );
 
-  useEffect(() => {
-    onDetailsChange({
-      action: "Sell to EXIMINQ",
-      scheme: schemeLabel(scheme),
-      rows: rows.map((row) => ({
-        ...row,
-        rate: rowRate(row.scripValue),
-        quoteValue: rowQuote(row.scripValue),
-      })),
-      totalFaceValue: currency(totals.face),
-      totalQuoteValue: currency(totals.quote),
-    });
-  }, [rows, scheme, totals.face, totals.quote, onDetailsChange]);
-
   const updateRow = (id, field, value) => {
     const nextValue =
       field === "scripNo"
@@ -112,29 +93,92 @@ function SellCalculator({ requestedTrade, onSendQuote, onDetailsChange }) {
     );
   };
 
-  const submit = () => {
+  const updateSeller = (event) => {
+    const { name, value } = event.target;
+    setSeller((previous) => ({ ...previous, [name]: value }));
+  };
+
+  const submit = async (event) => {
+    event.preventDefault();
     const nextErrors = {};
     rows.forEach((row, index) => {
       if (!(Number(row.scripValue) > 0)) {
-        nextErrors[row.id] = `Enter a valid Scrip Value for Scrip Entry ${index + 1}`;
+        nextErrors[row.id] =
+          `Enter a valid Scrip Value for Scrip Entry ${index + 1}`;
       }
     });
+    if (!seller.name.trim()) nextErrors.name = "Contact name is required";
+    if (!seller.companyName.trim())
+      nextErrors.companyName = "Company name is required";
+    const mobile = String(seller.mobile).replace(/\D/g, "");
+    if (mobile.length < 10 || mobile.length > 15)
+      nextErrors.mobile = "Enter a valid mobile number";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(seller.email.trim()))
+      nextErrors.email = "Enter a valid email address";
+    if (!seller.icegateId.trim())
+      nextErrors.icegateId = "ICEGATE ID is required to sell scrips";
+    if (!seller.iecNo.trim()) nextErrors.iecNo = "IEC number is required";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
-    onSendQuote?.(
-      {
-        action: "Sell to EXIMINQ",
-        scheme: schemeLabel(scheme),
-        rows: rows.map((row) => ({
-          ...row,
-          rate: rowRate(row.scripValue),
-          quoteValue: rowQuote(row.scripValue),
-        })),
-        totalFaceValue: currency(totals.face),
-        totalQuoteValue: currency(totals.quote),
-      },
-      "sell",
-    );
+
+    const quoteDetails = {
+      action: "Sell to EXIMINQ",
+      scheme: schemeLabel(scheme),
+      rows: rows.map((row) => ({
+        ...row,
+        rate: rowRate(row.scripValue),
+        quoteValue: rowQuote(row.scripValue),
+      })),
+      totalFaceValue: currency(totals.face),
+      totalQuoteValue: currency(totals.quote),
+    };
+    const requestBody = {
+      ...seller,
+      mobile,
+      scheme: schemeLabel(scheme),
+      quoteDetails,
+    };
+
+    setLoading(true);
+    setResult(null);
+    try {
+      let response = await fetch(
+        `${getApiBase()}/api/rodtep-rosctl-trading/sell-request`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestBody),
+        },
+      );
+
+      if (response.status === 404) {
+        response = await fetch(`${getApiBase()}/api/rodtep-rosctl-trading`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...requestBody,
+            action: "Selling",
+          }),
+        });
+      }
+
+      const data = await readApiResponse(response);
+      if (!response.ok || !data.success)
+        throw new Error(data.error || "Sell request failed");
+      setResult(data.data);
+      setSeller({
+        name: "",
+        companyName: "",
+        mobile: "",
+        email: "",
+        icegateId: "",
+        iecNo: "",
+      });
+    } catch (error) {
+      setErrors({ submit: error.message || "Unable to submit sell request" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -150,7 +194,12 @@ function SellCalculator({ requestedTrade, onSendQuote, onDetailsChange }) {
           title="Sell Scrips to EXIMINQ"
           text="Enter the exact scrips in your ICEGATE ledger and receive an estimated payout before official verification."
         />
-        <div className="rounded-[2rem] border border-white/50 bg-white/95 p-6 text-slate-800 shadow-2xl sm:p-8">
+        <form
+          id="contact"
+          onSubmit={submit}
+          className="rounded-[2rem] border border-white/50 bg-white/95 p-6 text-slate-800 shadow-2xl sm:p-8"
+          noValidate
+        >
           <SchemeSelector scheme={scheme} setScheme={setScheme} accent="blue" />
           <div className="mt-6 space-y-4">
             {rows.map((row, index) => (
@@ -172,42 +221,128 @@ function SellCalculator({ requestedTrade, onSendQuote, onDetailsChange }) {
               />
             ))}
           </div>
-          <div className="mt-5 grid gap-3 rounded-2xl bg-slate-100 p-4 sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={() =>
+              setRows((previous) => [
+                ...previous,
+                {
+                  id: Date.now(),
+                  scripNo: "",
+                  scripDate: "",
+                  port: "",
+                  scripValue: "",
+                },
+              ])
+            }
+            className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 font-semibold text-blue-700 hover:border-blue-300 hover:bg-blue-100"
+          >
+            <Plus size={16} /> Add Another Scrip
+          </button>
+          {/* <div className="mt-5 grid gap-3 rounded-2xl bg-slate-100 p-4 sm:grid-cols-2">
             <Total label="Total Face Value" value={currency(totals.face)} />
             <Total
               label="Estimated Payout"
               value={currency(totals.quote)}
               featured
             />
+          </div> */}
+          <div className="my-6 border-t border-slate-200" />
+          <div>
+            <h3 className="text-2xl font-bold text-slate-900">
+              Request Official Sell Quote
+            </h3>
+            <p className="mt-2 text-sm text-slate-500">
+              Enter your contact and ownership details to submit the calculated
+              scrip quote for verification.
+            </p>
           </div>
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-between">
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <BuyField
+              label="Contact Name"
+              name="name"
+              value={seller.name}
+              onChange={updateSeller}
+              error={errors.name}
+              placeholder="Enter contact name"
+            />
+            <BuyField
+              label="Company Name"
+              name="companyName"
+              value={seller.companyName}
+              onChange={updateSeller}
+              error={errors.companyName}
+              placeholder="Enter company name"
+            />
+            <BuyField
+              label="Mobile Number"
+              name="mobile"
+              value={seller.mobile}
+              onChange={updateSeller}
+              error={errors.mobile}
+              placeholder="Enter mobile number"
+            />
+            <BuyField
+              label="Email ID"
+              name="email"
+              type="email"
+              value={seller.email}
+              onChange={updateSeller}
+              error={errors.email}
+              placeholder="Enter email address"
+            />
+            <BuyField
+              label="ICEGATE ID"
+              name="icegateId"
+              value={seller.icegateId}
+              onChange={updateSeller}
+              error={errors.icegateId}
+              placeholder="Enter ICEGATE ID"
+            />
+            <BuyField
+              label="IEC No"
+              name="iecNo"
+              value={seller.iecNo}
+              onChange={updateSeller}
+              error={errors.iecNo}
+              placeholder="Enter IEC number"
+            />
+          </div>
+          <div className="mt-4">
+            <label className="block text-sm font-semibold text-slate-700">
+              Selected Scrip Type
+            </label>
+            <input
+              value={schemeLabel(scheme)}
+              readOnly
+              className="mt-2 w-full rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 font-semibold text-blue-800"
+            />
+          </div>
+          {errors.submit && (
+            <p className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-700">
+              {errors.submit}
+            </p>
+          )}
+          {result && (
+            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+              <p className="font-bold text-emerald-800">
+                Sell request received
+              </p>
+              <p className="text-sm text-emerald-700">
+                Request ID: {result.id}
+              </p>
+            </div>
+          )}
+          <div className="mt-5 flex justify-end">
             <button
-              type="button"
-              onClick={() =>
-                setRows((previous) => [
-                  ...previous,
-                  {
-                    id: Date.now(),
-                    scripNo: "",
-                    scripDate: "",
-                    port: "",
-                    scripValue: "",
-                  },
-                ])
-              }
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 font-semibold text-blue-700"
+              type="submit"
+              disabled={loading}
+              className="rounded-xl bg-slate-900 px-6 py-3.5 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
             >
-              <Plus size={16} /> Add Another Scrip
-            </button>
-            <button
-              type="button"
-              onClick={submit}
-              className="rounded-xl bg-slate-900 px-6 py-3.5 font-semibold text-white"
-            >
-              Continue to Sell Request
+              {loading ? "Submitting..." : "Submit Sell Request"}
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </section>
   );
@@ -459,6 +594,8 @@ function SchemeSelector({ scheme, setScheme, accent }) {
 }
 
 function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
+  const hasScripValue = Number(row.scripValue) > 0;
+
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
@@ -477,7 +614,7 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
           <Trash2 size={16} />
         </button>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <Field
           label="Scrip No"
           optional
@@ -509,28 +646,50 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
           onChange={(event) =>
             updateRow(row.id, "scripValue", event.target.value)
           }
+          placeholder="Enter value"
+        />
+        <InlineMetric
+          label="Applied Buying Rate"
+          value={hasScripValue ? rateText(rate) : ""}
+        />
+        <InlineMetric
+          label="Estimated Amount"
+          value={currency(quote)}
+          featured
         />
       </div>
       {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <Total label="Applied Buying Rate" value={rateText(rate)} />
-        <Total label="Estimated Payout" value={currency(quote)} featured />
-      </div>
     </div>
   );
 }
 
-function Field({ label, value, onChange, type = "text", placeholder, optional = false, required = false }) {
+function Field({
+  label,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  optional = false,
+  required = false,
+}) {
   return (
     <label className="block text-xs font-semibold text-slate-600">
-      {label}{optional && <span className="ml-1 font-normal text-slate-400">(Optional)</span>}{required && <span className="ml-1 text-red-500">*</span>}
+      <span className="flex min-h-[2.5rem] items-end leading-tight">
+        <span>
+          {label}
+          {optional && (
+            <span className="ml-1 font-normal text-slate-400">(Optional)</span>
+          )}
+          {required && <span className="ml-1 text-red-500">*</span>}
+        </span>
+      </span>
       <input
         type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 text-base font-normal text-slate-900 outline-none focus:ring-2 focus:ring-blue-500"
+        className="mt-2 h-[50px] w-full rounded-xl border border-slate-200 px-4 text-base font-normal text-slate-900 outline-none focus:ring-2 focus:ring-blue-500"
       />
     </label>
   );
@@ -570,6 +729,25 @@ function Total({ label, value, featured = false }) {
         {label}
       </p>
       <p className="mt-2 text-2xl font-extrabold text-slate-900">{value}</p>
+    </div>
+  );
+}
+
+function InlineMetric({ label, value, featured = false }) {
+  return (
+    <div>
+      <p className="flex min-h-[2.5rem] items-end text-xs font-semibold leading-tight text-slate-600">
+        {label}
+      </p>
+      <output
+        className={`mt-2 flex h-[50px] w-full items-center rounded-xl border px-4 text-base font-bold ${
+          featured
+            ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+            : "border-blue-200 bg-blue-50 text-blue-800"
+        }`}
+      >
+        {value}
+      </output>
     </div>
   );
 }

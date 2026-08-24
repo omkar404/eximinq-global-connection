@@ -23,8 +23,6 @@ const IMPORTANT_UPDATE_SESSION_KEY =
 
 const CloudDeskRodstep = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [quoteDetails, setQuoteDetails] = useState(null);
-  const [selectedWorkflow, setSelectedWorkflow] = useState("sell");
   const [calculatorRequest, setCalculatorRequest] = useState({ workflow: "sell", scheme: "rodtep" });
   const [showImportantUpdate, setShowImportantUpdate] = useState(false);
 
@@ -63,14 +61,6 @@ const CloudDeskRodstep = () => {
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleQuoteRequest = (details, workflow) => {
-    setSelectedWorkflow(workflow);
-    setQuoteDetails(details);
-    if (workflow === "sell") {
-      window.setTimeout(() => scrollToSection("contact"), 0);
-    }
   };
 
   const handleLiveRateAction = (scheme, actionType) => {
@@ -229,14 +219,7 @@ const CloudDeskRodstep = () => {
       <LiveRates rates={rates} onSellClick={handleLiveRateAction} />
       <ProcessSteps />
       <Features />
-      <Calculator
-        rates={rates}
-        requestedTrade={calculatorRequest}
-        onSendQuote={handleQuoteRequest}
-        selectedWorkflow={selectedWorkflow}
-        quoteDetails={quoteDetails}
-        onCloseQuote={() => setQuoteDetails(null)}
-      />
+      <Calculator requestedTrade={calculatorRequest} />
 
 
         {/* --- WHY CLOUDDESK SECTION (ADD BEFORE FAQ) --- */}
