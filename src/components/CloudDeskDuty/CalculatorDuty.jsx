@@ -69,13 +69,13 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row backdrop-blur-xl" style={{ background: '#0a1628' }}>
+    <div className="max-w-6xl mx-auto border border-gray-200 rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row bg-white">
 
       {/* LEFT: Input Panel */}
-      <div className="w-full lg:w-5/12 p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-slate-800 relative" style={{ background: '#0a1628' }}>
+      <div className="w-full lg:w-5/12 p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-gray-200 relative bg-white">
         <button
           onClick={() => setActiveTab("finder")}
-          className="absolute top-6 left-6 text-slate-400 hover:text-white text-xs font-bold uppercase tracking-wider flex items-center transition-colors"
+          className="absolute top-6 left-6 text-gray-500 hover:text-gray-900 text-xs font-bold uppercase tracking-wider flex items-center transition-colors"
         >
           ← Return to Directory
         </button>
@@ -83,16 +83,16 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
         <div className="mt-12 space-y-8">
           {/* Selected HSN */}
           <div>
-            <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-2">Selected Asset</label>
+            <label className="block text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2">Selected Asset</label>
             {!selectedHSN ? (
-              <div className="p-6 rounded-xl border border-dashed border-slate-700 bg-slate-900/50 text-slate-500 text-center text-sm font-mono">
+              <div className="p-6 rounded-xl border border-dashed border-gray-300 bg-gray-50 text-gray-500 text-center text-sm font-mono">
                 AWAITING HSN SELECTION...
               </div>
             ) : (
-              <div className="p-5 rounded-xl border border-slate-700 bg-slate-800/50 shadow-inner">
-                <div className="font-black text-3xl text-white font-mono tracking-tight mb-2">{selectedHSN.hsn}</div>
-                <div className="text-sm text-slate-400 leading-relaxed mb-4">{selectedHSN.description}</div>
-                <span className="px-2 py-1 text-[10px] font-bold uppercase rounded bg-slate-950 border border-slate-800 text-slate-400">
+              <div className="p-5 rounded-xl border border-gray-200 bg-gray-50 shadow-inner">
+                <div className="font-black text-3xl text-gray-900 font-mono tracking-tight mb-2">{selectedHSN.hsn}</div>
+                <div className="text-sm text-gray-600 leading-relaxed mb-4">{selectedHSN.description}</div>
+                <span className="px-2 py-1 text-[10px] font-bold uppercase rounded bg-white border border-gray-300 text-gray-600">
                   Unit: {selectedHSN.uqc}
                 </span>
               </div>
@@ -101,7 +101,7 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
 
           {/* Value Input */}
           <div className={!selectedHSN ? "opacity-50 pointer-events-none" : ""}>
-            <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-2">
+            <label className="block text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2">
               {activeTab === "import" ? "Assessable Value (CIF - INR)" : "FOB Value (INR)"}
             </label>
             <div className="relative">
@@ -109,7 +109,7 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
               <input
                 type="number"
                 placeholder="0.00"
-                className={`w-full pl-12 pr-4 py-4 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono font-bold text-xl focus:outline-none focus:ring-1 transition-all ${activeTab === "import" ? "focus:border-blue-500 focus:ring-blue-500" : "focus:border-cyan-500 focus:ring-cyan-500"}`}
+                className={`w-full pl-12 pr-4 py-4 bg-white border border-gray-300 rounded-xl text-gray-900 font-mono font-bold text-xl focus:outline-none focus:ring-1 transition-all ${activeTab === "import" ? "focus:border-blue-500 focus:ring-blue-500" : "focus:border-cyan-500 focus:ring-cyan-500"}`}
                 value={inputValue}
                 onChange={(e) => { setInputValue(e.target.value ? Number(e.target.value) : ""); if (e.target.value) triggerAnalysis(); }}
                 disabled={!selectedHSN}
@@ -119,15 +119,15 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
 
           {/* Quantity for export cap */}
           {activeTab === "export" && selectedHSN && (selectedHSN.export.dbkCap || selectedHSN.export.rodtepCap) && (
-            <div className="bg-amber-950/20 border border-amber-900/50 p-5 rounded-xl shadow-inner">
-              <label className="block text-[10px] uppercase tracking-widest font-bold text-amber-500 mb-2 flex items-center justify-between">
+            <div className="bg-amber-50 border border-amber-300 p-5 rounded-xl shadow-inner">
+              <label className="block text-[10px] uppercase tracking-widest font-bold text-amber-600 mb-2 flex items-center justify-between">
                 <span>Total Volume ({selectedHSN.uqc})</span>
-                <span className="bg-amber-900/50 px-2 py-0.5 rounded text-amber-200">Cap Calculation</span>
+                <span className="bg-amber-100 px-2 py-0.5 rounded text-amber-700">Cap Calculation</span>
               </label>
               <input
                 type="number"
                 placeholder={`Qty in ${selectedHSN.uqc}`}
-                className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all font-mono font-bold text-lg"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all font-mono font-bold text-lg"
                 value={quantity}
                 onChange={(e) => { setQuantity(e.target.value ? Number(e.target.value) : ""); if (e.target.value) triggerAnalysis(); }}
               />
@@ -137,22 +137,22 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
       </div>
 
       {/* RIGHT: Results Panel */}
-      <div className="w-full lg:w-7/12 p-8 lg:p-10 relative bg-[#0b1120]">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
-          <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 flex items-center">
+      <div className="w-full lg:w-7/12 p-8 lg:p-10 relative bg-gray-50">
+        <div className="flex items-center justify-between border-b border-gray-200 pb-4 mb-6">
+          <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 flex items-center">
             <LineChart className="w-4 h-4 mr-2" />
             {activeTab === "import" ? "Customs Duty Matrix" : "Incentive Scrip Projection"}
           </h3>
           {analyzing && (
-            <span className="flex items-center text-[10px] text-cyan-400 uppercase font-bold tracking-widest">
+            <span className="flex items-center text-[10px] text-cyan-600 uppercase font-bold tracking-widest">
               <Activity className="w-3 h-3 mr-1 animate-spin" /> Processing
             </span>
           )}
         </div>
 
         {!selectedHSN || !inputValue ? (
-          <div className="h-64 flex flex-col items-center justify-center text-slate-600 text-center font-mono text-sm">
-            <div className="w-16 h-16 border border-slate-700 rounded-full flex items-center justify-center mb-4 bg-slate-900">
+          <div className="h-64 flex flex-col items-center justify-center text-gray-400 text-center font-mono text-sm">
+            <div className="w-16 h-16 border border-gray-300 rounded-full flex items-center justify-center mb-4 bg-white">
               <Calculator className="w-6 h-6 opacity-50" />
             </div>
             <p>AWAITING DATA INPUT TO GENERATE MATRIX...</p>
@@ -165,35 +165,35 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
               <>
                 <div className="space-y-3 font-mono text-sm">
                   {[
-                    { label: "BASE CIF VALUE", val: Number(inputValue), color: "text-slate-400", valColor: "text-white" },
-                    { label: `BCD (${selectedHSN.import.bcd}%)`, val: bcdAmount, color: "text-slate-400", valColor: "text-white" },
-                    ...(selectedHSN.import.aidc > 0 ? [{ label: `AIDC (${selectedHSN.import.aidc}%)`, val: aidcAmount, color: "text-amber-400", valColor: "text-amber-400" }] : []),
-                    { label: "SWS (10% OF BCD)", val: swsAmount, color: "text-slate-400", valColor: "text-white" },
-                    { label: `IGST (${selectedHSN.import.igst}%)`, val: igstAmount, color: "text-slate-400", valColor: "text-white", border: true },
+                    { label: "BASE CIF VALUE", val: Number(inputValue), color: "text-gray-500", valColor: "text-gray-900" },
+                    { label: `BCD (${selectedHSN.import.bcd}%)`, val: bcdAmount, color: "text-gray-500", valColor: "text-gray-900" },
+                    ...(selectedHSN.import.aidc > 0 ? [{ label: `AIDC (${selectedHSN.import.aidc}%)`, val: aidcAmount, color: "text-amber-600", valColor: "text-amber-600" }] : []),
+                    { label: "SWS (10% OF BCD)", val: swsAmount, color: "text-gray-500", valColor: "text-gray-900" },
+                    { label: `IGST (${selectedHSN.import.igst}%)`, val: igstAmount, color: "text-gray-500", valColor: "text-gray-900", border: true },
                   ].map(({ label, val, color, valColor, border }) => (
-                    <div key={label} className={`flex justify-between items-center ${color} ${border ? "border-b border-dashed border-slate-700 pb-3" : ""}`}>
+                    <div key={label} className={`flex justify-between items-center ${color} ${border ? "border-b border-dashed border-gray-300 pb-3" : ""}`}>
                       <span>{label}</span>
                       <span className={valColor}>₹ {val.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
                     </div>
                   ))}
-                  <div className="flex justify-between items-center font-bold text-blue-400 pt-1 text-base">
+                  <div className="flex justify-between items-center font-bold text-blue-600 pt-1 text-base">
                     <span>TOTAL DUTY LEVY</span>
                     <span>₹ {totalImportDuty.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
                   </div>
                 </div>
 
-                <div className="bg-blue-950/20 border border-blue-900/50 rounded-xl p-6 shadow-[inset_0_0_20px_rgba(37,99,235,0.1)]">
-                  <div className="text-[10px] text-blue-400 uppercase tracking-widest mb-2 font-bold">Projected Landed Cost</div>
-                  <div className="text-4xl lg:text-5xl font-black text-white font-mono tracking-tighter mb-4">
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                  <div className="text-[10px] text-blue-600 uppercase tracking-widest mb-2 font-bold">Projected Landed Cost</div>
+                  <div className="text-4xl lg:text-5xl font-black text-gray-900 font-mono tracking-tighter mb-4">
                     ₹ {landedCost.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                   </div>
-                  <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden flex">
-                    <div className="bg-slate-500 h-full" style={{ width: `${(Number(inputValue) / landedCost) * 100}%` }} />
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden flex">
+                    <div className="bg-gray-400 h-full" style={{ width: `${(Number(inputValue) / landedCost) * 100}%` }} />
                     <div className="bg-blue-500 h-full" style={{ width: `${(totalImportDuty / landedCost) * 100}%` }} />
                   </div>
-                  <div className="flex justify-between mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                  <div className="flex justify-between mt-2 text-[10px] font-bold text-gray-500 uppercase tracking-wider">
                     <span>Base Val: {((Number(inputValue) / landedCost) * 100).toFixed(0)}%</span>
-                    <span className="text-blue-400">Effective Tax: {effectiveImportRate}%</span>
+                    <span className="text-blue-600">Effective Tax: {effectiveImportRate}%</span>
                   </div>
                 </div>
               </>
@@ -203,57 +203,57 @@ const CalculatorDuty = ({ activeTab, setActiveTab, selectedHSN }) => {
             {activeTab === "export" && (
               <>
                 <div className="space-y-3 font-mono text-sm">
-                  <div className="flex justify-between items-center text-slate-400">
+                  <div className="flex justify-between items-center text-gray-500">
                     <span>BASE FOB VALUE</span>
-                    <span className="text-white">₹ {(Number(inputValue) || 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
+                    <span className="text-gray-900">₹ {(Number(inputValue) || 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
                   </div>
-                  <div className="flex justify-between items-center text-slate-400">
+                  <div className="flex justify-between items-center text-gray-500">
                     <div className="flex items-center gap-2">
                       <span>DUTY DRAWBACK ({selectedHSN.export.dbkRate}%)</span>
-                      {dbkCapped && <span className="bg-amber-500/20 text-amber-500 text-[9px] px-1.5 py-0.5 rounded uppercase">Capped</span>}
+                      {dbkCapped && <span className="bg-amber-100 text-amber-700 text-[9px] px-1.5 py-0.5 rounded uppercase">Capped</span>}
                     </div>
-                    <span className={dbkCapped ? "text-amber-400" : "text-white"}>₹ {dbkAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
+                    <span className={dbkCapped ? "text-amber-600" : "text-gray-900"}>₹ {dbkAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
                   </div>
-                  <div className="flex justify-between items-center text-slate-400 border-b border-dashed border-slate-700 pb-3">
+                  <div className="flex justify-between items-center text-gray-500 border-b border-dashed border-gray-300 pb-3">
                     <div className="flex items-center gap-2">
                       <span>RoDTEP SCRIP ({selectedHSN.export.rodtepRate}%)</span>
-                      {rodtepCapped && <span className="bg-amber-500/20 text-amber-500 text-[9px] px-1.5 py-0.5 rounded uppercase">Capped</span>}
+                      {rodtepCapped && <span className="bg-amber-100 text-amber-700 text-[9px] px-1.5 py-0.5 rounded uppercase">Capped</span>}
                     </div>
-                    <span className={rodtepCapped ? "text-amber-400" : "text-white"}>₹ {rodtepAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
+                    <span className={rodtepCapped ? "text-amber-600" : "text-gray-900"}>₹ {rodtepAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
                   </div>
-                  <div className="flex justify-between items-center font-bold text-cyan-400 pt-1 text-base">
+                  <div className="flex justify-between items-center font-bold text-cyan-600 pt-1 text-base">
                     <span>GROSS INCENTIVE YIELD</span>
                     <span>₹ {totalIncentive.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
                   </div>
                 </div>
 
-                <div className="bg-cyan-950/20 border border-cyan-900/50 rounded-xl p-6 shadow-[inset_0_0_20px_rgba(6,182,212,0.1)]">
-                  <div className="text-[10px] text-cyan-400 uppercase tracking-widest mb-2 font-bold">Total Export Realization</div>
-                  <div className="text-4xl lg:text-5xl font-black text-white font-mono tracking-tighter mb-4">
+                <div className="bg-cyan-50 border border-cyan-200 rounded-xl p-6">
+                  <div className="text-[10px] text-cyan-600 uppercase tracking-widest mb-2 font-bold">Total Export Realization</div>
+                  <div className="text-4xl lg:text-5xl font-black text-gray-900 font-mono tracking-tighter mb-4">
                     ₹ {(Number(inputValue) + totalIncentive).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                   </div>
-                  <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="bg-slate-500 h-full w-full" />
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="bg-gray-400 h-full w-full" />
                   </div>
                   <div className="flex justify-end mt-2 text-[10px] font-bold uppercase tracking-wider">
-                    <span className="text-cyan-400">Margin Boost: +{effectiveExportMargin}%</span>
+                    <span className="text-cyan-600">Margin Boost: +{effectiveExportMargin}%</span>
                   </div>
                 </div>
               </>
             )}
 
             {/* Intelligence Panel */}
-            <div className="mt-8 border-t border-slate-800 pt-6">
-              <div className="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest text-slate-500">
+            <div className="mt-8 border-t border-gray-200 pt-6">
+              <div className="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest text-gray-500">
                 <BrainCircuit className="w-4 h-4 text-purple-500" /> Intelligence Analysis
               </div>
               <div className="space-y-3">
                 {generateInsights()?.map((insight, idx) => {
                   const colors = {
-                    danger: "bg-red-950/40 border-red-900/50 text-red-300",
-                    warning: "bg-amber-950/40 border-amber-900/50 text-amber-300",
-                    info: "bg-blue-950/40 border-blue-900/50 text-blue-300",
-                    success: "bg-emerald-950/40 border-emerald-900/50 text-emerald-300",
+                    danger: "bg-red-50 border-red-300 text-red-700",
+                    warning: "bg-amber-50 border-amber-300 text-amber-700",
+                    info: "bg-blue-50 border-blue-300 text-blue-700",
+                    success: "bg-emerald-50 border-emerald-300 text-emerald-700",
                   }[insight.type];
                   const Icon = insight.icon;
                   return (

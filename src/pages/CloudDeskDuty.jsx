@@ -59,8 +59,8 @@ const TrendGraph = ({ data, title, colorClass, bgClass }) => {
   const years = ["2019", "2020", "2021", "2022", "2023"];
   return (
     <div className="flex-1 mt-4">
-      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-4">{title}</div>
-      <div className="flex items-end gap-2 h-32 border-b border-slate-700/50 pb-2">
+      <div className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-4">{title}</div>
+      <div className="flex items-end gap-2 h-32 border-b border-gray-200 pb-2">
         {data.map((val, idx) => (
           <div key={idx} className="flex-1 flex flex-col items-center justify-end group">
             <div
@@ -71,7 +71,7 @@ const TrendGraph = ({ data, title, colorClass, bgClass }) => {
                 ${val}B
               </div>
             </div>
-            <div className="text-[9px] text-slate-500 mt-2">{years[idx]}</div>
+            <div className="text-[9px] text-gray-400 mt-2">{years[idx]}</div>
           </div>
         ))}
       </div>
@@ -100,12 +100,12 @@ export default function CloudDeskDuty() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-cyan-500 selection:text-white">
 
       {/* Background blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-900/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-900/20 rounded-full blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-100/40 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-100/40 rounded-full blur-[120px]" />
       </div>
 
       <MainNavbar
@@ -125,7 +125,7 @@ export default function CloudDeskDuty() {
       <HeroDuty activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Tool Section */}
-      <section className="py-16 bg-slate-950 relative z-10">
+      <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-6">
           {activeTab === "finder" && (
             <HSNFinderDuty
