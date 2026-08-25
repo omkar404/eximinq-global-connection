@@ -187,7 +187,7 @@ function SellCalculator({ requestedTrade }) {
       className="relative overflow-hidden bg-blue-900 py-20 text-white"
     >
       <div className="absolute right-0 top-0 h-full w-1/2 translate-x-20 -skew-x-12 bg-blue-800/30" />
-      <div className="relative z-10 mx-auto grid max-w-[1500px] items-start gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.4fr] lg:px-8">
+      <div className="relative z-10 mx-auto grid max-w-[1400px] items-start gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(220px,0.4fr)_minmax(0,2fr)] lg:px-8">
         <CalculatorIntro
           icon={ArrowDownToLine}
           eyebrow="Dedicated seller workflow"
@@ -197,7 +197,7 @@ function SellCalculator({ requestedTrade }) {
         <form
           id="contact"
           onSubmit={submit}
-          className="rounded-[2rem] border border-white/50 bg-white/95 p-6 text-slate-800 shadow-2xl sm:p-8"
+          className="min-w-0 rounded-[2rem] border border-white/50 bg-white/95 p-6 text-slate-800 shadow-2xl sm:p-8"
           noValidate
         >
           <SchemeSelector scheme={scheme} setScheme={setScheme} accent="blue" />
@@ -597,10 +597,10 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
   const hasScripValue = Number(row.scripValue) > 0;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="font-bold">Scrip Entry {index + 1}</p>
+          <p className="text-lg font-bold">Scrip Entry {index + 1}</p>
           <p className="text-xs text-slate-500">
             Enter the scrip value. The remaining details are optional.
           </p>
@@ -614,7 +614,7 @@ function SellRow({ row, index, error, updateRow, rate, quote, remove }) {
           <Trash2 size={16} />
         </button>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[0.95fr_1.2fr_0.95fr_1.05fr_1.15fr_1.2fr]">
         <Field
           label="Scrip No"
           optional
@@ -673,7 +673,7 @@ function Field({
   required = false,
 }) {
   return (
-    <label className="block text-xs font-semibold text-slate-600">
+    <label className="block min-w-0 text-sm font-semibold text-slate-600">
       <span className="flex min-h-[2.5rem] items-end leading-tight">
         <span>
           {label}
@@ -689,7 +689,7 @@ function Field({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className="mt-2 h-[50px] w-full rounded-xl border border-slate-200 px-4 text-base font-normal text-slate-900 outline-none focus:ring-2 focus:ring-blue-500"
+        className="mt-2 h-[52px] min-w-0 w-full rounded-xl border border-slate-200 px-4 text-base font-normal text-slate-900 outline-none focus:ring-2 focus:ring-blue-500"
       />
     </label>
   );
@@ -735,12 +735,12 @@ function Total({ label, value, featured = false }) {
 
 function InlineMetric({ label, value, featured = false }) {
   return (
-    <div>
-      <p className="flex min-h-[2.5rem] items-end text-xs font-semibold leading-tight text-slate-600">
+    <div className="min-w-0">
+      <p className="flex min-h-[2.5rem] items-end text-sm font-semibold leading-tight text-slate-600">
         {label}
       </p>
       <output
-        className={`mt-2 flex h-[50px] w-full items-center rounded-xl border px-4 text-base font-bold ${
+        className={`mt-2 flex h-[52px] min-w-0 w-full items-center whitespace-nowrap rounded-xl border px-4 text-lg font-bold ${
           featured
             ? "border-emerald-200 bg-emerald-50 text-emerald-800"
             : "border-blue-200 bg-blue-50 text-blue-800"
