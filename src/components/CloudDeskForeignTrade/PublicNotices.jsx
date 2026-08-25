@@ -76,16 +76,16 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "21 Aug 2026",
-    title: "Trade Notice 21/2026-27",
-    desc: "Introduction of Automated Facility for Grant of Export Obligation Extension through PRC/EPCG Committee – Ease of Doing Business",
+    date: "25 Aug 2026",
+    title: "Trade Notice 22/2026-27",
+    desc: "Enhancements in the Pre-Shipment Inspection Agency (PSIA)/Pre-Shipment Inspection Certificate (PSIC) process – reg.",
     color: "purple",
   },
   {
     type: "Public Notice",
     date: "20 Aug 2026",
-    title: "Public Notice 27/2026-27",
-    desc: "Modalities for Application and Distribution of TRQ for Import of 10 Lakh MT of Raw Sugar and one-time conversion from Advance Authorisation (AA) Scheme to Tariff Rate Quota (TRQ) Scheme-reg.",
+    title: "Corrigendum to Public Notice No. 27/2026-2027 dated 20.08.2026",
+    desc: "Corrigendum to Public Notice No. 27/2026-2027 dated 20.08.2026 regarding Modalities for Application and Distribution of TRQ for Import of 10 Lakh MT of Raw Sugar and one-time conversion from Advance Authorisation (AA) Scheme to Tariff Rate Quota (TRQ) Scheme-reg.",
     color: "gray",
   },
 ];
