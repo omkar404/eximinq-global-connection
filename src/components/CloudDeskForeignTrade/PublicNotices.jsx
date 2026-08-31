@@ -76,9 +76,9 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "25 Aug 2026",
-    title: "Trade Notice 22/2026-27",
-    desc: "Enhancements in the Pre-Shipment Inspection Agency (PSIA)/Pre-Shipment Inspection Certificate (PSIC) process – reg.",
+    date: "28 Aug 2026",
+    title: "Trade Notice 23/2026-27",
+    desc: "Introduction of new features in the Bank Guarantee (BG) Repository Module on DGFT Portal - regarding",
     color: "purple",
   },
   {
