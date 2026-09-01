@@ -76,9 +76,9 @@ const NOTICES = [
   // },
   {
     type: "Trade Notice",
-    date: "28 Aug 2026",
-    title: "Trade Notice 23/2026-27",
-    desc: "Introduction of new features in the Bank Guarantee (BG) Repository Module on DGFT Portal - regarding",
+    date: "31 Aug 2026",
+    title: "Trade Notice 24/2026-27",
+    desc: "Automated Issuance of Free Sale and Commerce Certificates (FSC) – regarding",
     color: "purple",
   },
   {
