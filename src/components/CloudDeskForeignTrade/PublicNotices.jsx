@@ -83,9 +83,9 @@ const NOTICES = [
   },
   {
     type: "Public Notice",
-    date: "20 Aug 2026",
-    title: "Corrigendum to Public Notice No. 27/2026-2027 dated 20.08.2026",
-    desc: "Corrigendum to Public Notice No. 27/2026-2027 dated 20.08.2026 regarding Modalities for Application and Distribution of TRQ for Import of 10 Lakh MT of Raw Sugar and one-time conversion from Advance Authorisation (AA) Scheme to Tariff Rate Quota (TRQ) Scheme-reg.",
+    date: "01 Sep 2026",
+    title: "PUBLIC NOTICE- 28/2026-27",
+    desc: "Modalities for Application and Allocation of Balance Quantity under TRQ Scheme for Import of 10 Lakh MT of Raw Sugar–reg.",
     color: "gray",
   },
 ];
