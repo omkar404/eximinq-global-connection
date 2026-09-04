@@ -83,9 +83,9 @@ const NOTICES = [
   },
   {
     type: "Public Notice",
-    date: "01 Sep 2026",
-    title: "PUBLIC NOTICE- 28/2026-27",
-    desc: "Modalities for Application and Allocation of Balance Quantity under TRQ Scheme for Import of 10 Lakh MT of Raw Sugar–reg.",
+    date: "03 Sep 2026",
+    title: "PUBLIC NOTICE- 29/2026-27",
+    desc: "Extension of timeline for one-time conversion of Advance Authorisation under SION E-52 to TRQ for import of Raw Sugar-reg.",
     color: "gray",
   },
 ];
