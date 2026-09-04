@@ -129,6 +129,7 @@ function getNotificationPdfEntries() {
       .map((entry) => {
         const notificationMatch = entry.name.match(/Notification\s*No\s*-\s*(\d{1,3})-(\d{4})/i);
         const notificationDateMatch = entry.name.match(/dated\s+(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4})/i);
+        const dateOnlyFileMatch = entry.name.match(/Notification\s*No\s*-\s*(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4})\.pdf$/i);
         const effectiveDateMatch = entry.name.match(/w\.?e\.?f\.?\s+(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4})/i);
 
         return {
@@ -137,7 +138,7 @@ function getNotificationPdfEntries() {
           notification: notificationMatch
             ? `${Number(notificationMatch[1])}/${notificationMatch[2]}`
             : "",
-          notificationDate: normalizeDateKey(notificationDateMatch?.[1]),
+          notificationDate: normalizeDateKey(notificationDateMatch?.[1] || dateOnlyFileMatch?.[1]),
           effectiveDate: normalizeDateKey(effectiveDateMatch?.[1]),
         };
       });
