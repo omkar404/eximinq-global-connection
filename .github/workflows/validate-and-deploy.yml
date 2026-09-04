@@ -56,25 +56,43 @@ jobs:
       - name: Upload production release
         if: github.ref == 'refs/heads/master'
         env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST || '43.204.101.72' }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER || 'ubuntu' }}
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
         run: |
-          test -n "$DEPLOY_HOST"
-          test -n "$DEPLOY_USER"
-          test -n "$DEPLOY_SSH_KEY"
+          if [ -z "${DEPLOY_SSH_KEY:-}" ]; then
+            echo "::error title=Missing deployment key::Add DEPLOY_SSH_KEY under Settings > Secrets and variables > Actions. Paste the complete production PEM private key."
+            exit 1
+          fi
+
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/eximinq.pem
+          printf '%s\n' "$DEPLOY_SSH_KEY" | tr -d '\r' > ~/.ssh/eximinq.pem
           chmod 600 ~/.ssh/eximinq.pem
-          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
-          scp -i ~/.ssh/eximinq.pem frontend-build.tgz backend-release.tgz \
+
+          if ! ssh-keygen -y -f ~/.ssh/eximinq.pem >/dev/null 2>&1; then
+            echo "::error title=Invalid deployment key::DEPLOY_SSH_KEY is not a valid private key. Paste the full PEM file, including its BEGIN and END lines."
+            exit 1
+          fi
+
+          if ! timeout 15s ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null; then
+            echo "::error title=Production server unreachable::Could not reach $DEPLOY_HOST on SSH port 22. Check the host address, EC2 status, security group, and firewall."
+            exit 1
+          fi
+
+          SSH_OPTIONS="-o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes"
+          if ! ssh $SSH_OPTIONS -i ~/.ssh/eximinq.pem "$DEPLOY_USER@$DEPLOY_HOST" true; then
+            echo "::error title=SSH authentication failed::The server rejected DEPLOY_SSH_KEY for $DEPLOY_USER@$DEPLOY_HOST. Confirm the matching public key is in the server user's authorized_keys file."
+            exit 1
+          fi
+
+          scp $SSH_OPTIONS -i ~/.ssh/eximinq.pem frontend-build.tgz backend-release.tgz \
             "$DEPLOY_USER@$DEPLOY_HOST:/home/$DEPLOY_USER/"
 
       - name: Activate production release
         if: github.ref == 'refs/heads/master'
         env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST || '43.204.101.72' }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER || 'ubuntu' }}
         run: |
           ssh -i ~/.ssh/eximinq.pem "$DEPLOY_USER@$DEPLOY_HOST" 'bash -s' <<'REMOTE'
           set -euo pipefail
