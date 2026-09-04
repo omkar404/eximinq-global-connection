@@ -125,7 +125,11 @@ function getNotificationPdfEntries() {
     if (!fs.existsSync(folderPath)) return [];
 
     return fs.readdirSync(folderPath, { withFileTypes: true })
-      .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === ".pdf")
+      .filter((entry) => (
+        entry.isFile()
+        && !entry.name.startsWith(".")
+        && path.extname(entry.name).toLowerCase() === ".pdf"
+      ))
       .map((entry) => {
         const notificationMatch = entry.name.match(/Notification\s*No\s*-\s*(\d{1,3})-(\d{4})/i);
         const notificationDateMatch = entry.name.match(/dated\s+(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4})/i);
