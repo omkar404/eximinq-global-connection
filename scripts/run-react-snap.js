@@ -11,16 +11,49 @@ const CRITICAL_ROUTE_FILE = path.join(
 );
 const REQUIRED_MARKERS = [
   "Advance Authorisation Redemption & EODC Closure | EXIMINQ",
-  'href="https://eximinq.in/advance-authorization-redemption"',
-  'type="application/ld+json"',
+  'href="https://eximinq.in/advance-authorization-redemption/"',
   "ANF 4F",
 ];
 
-const reactSnap = spawnSync("npx.cmd", ["react-snap"], {
+const browserCandidates =
+  process.platform === "darwin"
+    ? [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "/Applications/Chromium.app/Contents/MacOS/Chromium",
+      ]
+    : [
+        "/usr/bin/google-chrome",
+        "/usr/bin/google-chrome-stable",
+        "/usr/bin/chromium",
+        "/usr/bin/chromium-browser",
+      ];
+
+const browserPath =
+  process.env.PUPPETEER_EXECUTABLE_PATH ||
+  browserCandidates.find((candidate) => fs.existsSync(candidate));
+
+if (!browserPath) {
+  console.error(
+    "Chrome or Chromium was not found. Install Google Chrome or set PUPPETEER_EXECUTABLE_PATH before running the build."
+  );
+  process.exit(1);
+}
+
+const reactSnapCli = require.resolve("react-snap/run.js");
+const reactSnap = spawnSync(process.execPath, [reactSnapCli], {
   cwd: ROOT_DIR,
   stdio: "inherit",
-  shell: false,
+  env: {
+    ...process.env,
+    PUPPETEER_EXECUTABLE_PATH: browserPath,
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true",
+  },
 });
+
+if (reactSnap.error) {
+  console.error(`Unable to start react-snap: ${reactSnap.error.message}`);
+  process.exit(1);
+}
 
 if (!fs.existsSync(CRITICAL_ROUTE_FILE)) {
   console.error(

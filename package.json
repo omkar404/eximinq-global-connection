@@ -34,7 +34,7 @@
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "build": "react-scripts build",
     "prebuild": "npm run generate:sitemap",
-    "postbuild": "npx react-snap",
+    "postbuild": "node scripts/run-react-snap.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
